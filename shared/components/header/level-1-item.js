@@ -89,7 +89,7 @@ export default function LevelOneItem(props) {
         <nav className="navbar">
             <div className={navContainerClass}>
                 <ul className="navbar-nav nav">
-                    {rootCatagories.map((item, i) => renderLevel1Item(item, i))}
+                    {rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
                     {/* { navObj.forEach(function(item, index) { renderLevel1Item(item, index)}) } */}
                 </ul>
             </div>
