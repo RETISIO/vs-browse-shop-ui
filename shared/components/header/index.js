@@ -3,11 +3,9 @@
  --------------------------------------------------------------------------------------------------------*/
 import React, { useEffect } from 'react';
 import HomeHeader from './homeHeader';
-import NormalHeader from './normalHeader';
 
 export default function NewHeader(props) {
     const homePageHeader = () => <HomeHeader {...props} />;
-    const nonHomePageHeader = () => <NormalHeader />;
     const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, "show");
     const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, "hide");
 
@@ -37,8 +35,5 @@ export default function NewHeader(props) {
         });
     }, []);
 
-    if (props.currentRouterPath === "/") {
-        return homePageHeader();
-    }
-    return nonHomePageHeader();
+    return homePageHeader();
 }
