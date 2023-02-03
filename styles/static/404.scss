@@ -1,0 +1,33 @@
+.btn{border-width:2px;}
+.btn-action{border-width:1px;font-size:18px;line-height:30px;}
+.btn-action-default{background:transparent;border-color:#949494;color:#949494;}
+.btn-action-default:focus,.btn-action-default:hover{color:#949494;}
+.btn-action-primary{background-color:#DB7900;border-color:#DB7900;color:#ffffff;font-weight:bold;text-shadow:0 1px 1px rgba(0, 0, 0, 0.5);}
+.btn-action-primary:active,.btn-action-primary:focus,.btn-action-primary:hover{background-color:#c26b00;border-color:#c26b00;color:#ffffff;}
+.btn-action-md{min-width:160px;text-transform:uppercase;}
+h1{color:#1E4783;font-size:24px;font-weight:500;line-height:32px;}
+p{color:#4A4A4A;font-size:15px;font-weight:300;line-height:21px;}
+a{color:#1E4783;}
+a:hover{color:#102545;}
+.d-flex{display:-webkit-box;display:-ms-flexbox;display:flex;}
+.justify-content-center{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;}
+.align-items-center{-webkit-box-align:center;-ms-flex-align:center;align-items:center;}
+.error-page{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;margin-bottom: 50px;}
+.error-page .container{max-width:600px;}
+.error-title{font-size:74px;font-weight:700;margin:30px 0 0;line-height:1.4;}
+.error-description{font-size:24px;line-height:1.4;text-transform:uppercase;}
+.error-action{-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch;-webkit-box-orient:vertical;-webkit-box-direction:reverse;-ms-flex-direction:column-reverse;flex-direction:column-reverse;}
+.error-action .btn{margin:10px 0 0 0;}
+@media screen and (min-width: 768px){
+.error-action{-webkit-box-align:baseline;-ms-flex-align:baseline;align-items:baseline;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin-top:80px;}
+.error-action .btn + .btn{margin:0 0 0 15px;}
+}
+@media print{
+.btn{display:none!important;}
+}
+.error-action .btn-action-primary {
+    color: #ffffff;
+}
+.error-action .btn-action-default {
+    color: #949494;
+}

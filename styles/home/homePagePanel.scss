@@ -1,0 +1,97 @@
+// For Homepage oc-panel:
+
+    .cc-rich-text {
+        padding: 0px;
+    }
+
+    .cc-rich-text .footer-logos {
+        background: url(https://www.allenbrothers.com/media/texture.jpeg) repeat;
+        padding: 17px 0 13px 0;
+    }
+
+    .row-full {
+        position: relative;
+        width: 100vw;
+        margin-left: -50vw;
+        left: 50%;
+    }
+
+    #webContent_v2-wi2700006 .title-logos {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        text-align: center;
+    }
+
+    // @media (min-width: 992px) {
+    //     .container {
+    //         width: 970px;
+    //     }
+    // }
+    
+    // @media (min-width: 768px) {
+    //     .container {
+    //         width: 750px;
+    //     }
+    // }
+     
+    #webContent_v2-wi2700006 .logos {
+        display: flex;
+    }
+
+    @media screen and (max-width: 767px) {
+        .logos {
+            display: block;
+        }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 991px) {
+        .logos {
+            display: flex;
+        }
+    }
+
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+        .logos {
+            display: flex;
+        }
+    }
+
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+        .logos {
+            display: flex;
+        }
+    }    
+
+    .footer-logos .logos div {
+        height: 72px;
+        width: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 1199px) {
+        .footer-logos .logos a {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .footer-logos .logos img {
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    img {
+        border: 0;
+    }

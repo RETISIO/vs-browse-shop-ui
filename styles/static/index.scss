@@ -1,0 +1,165 @@
+@import './refund-return-policy.scss';
+@import './accessibility.scss';
+@import './covid-19-statement.scss';
+@import './gift-card/gifting/gc-10001.scss';
+@import './content/blog.scss';
+@import './404.scss';
+@import './content/cooking-guides.scss';
+@import './holiday.scss';
+@import './catalogrequest.scss';
+
+.static-main-container {
+    // width: 1170px;
+    // margin: 0 auto;
+    // padding: 0 15px;
+
+    h1 {
+        color: #1e4783;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 32px;
+    }
+    p {
+        color: #4a4a4a;
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 21px;
+    }
+    .product-card {
+        height: 367.5px;
+    }
+    // From the OCC code base
+    .related-products-section {
+        background-color: #F5F5F5;
+        padding-bottom: 20px;
+        .product-image{
+          img{
+            width: 100%;
+            height: 100%;
+          }
+        }
+    }
+
+    .image-pos {
+      display: flex;
+      height: 262px;
+      img{
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .product-card {
+      background-color: #ffffff;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      margin-bottom: 30px;
+      position: relative;
+      -webkit-transition: all 0.2s;
+      transition: all 0.2s;
+    }
+    .product-card:hover {
+      -webkit-box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.7);
+      box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.7);
+      cursor: pointer;
+    }
+    .product-card:hover .product-card-inner {
+      border-color: #ffffff;
+    }
+    .product-card-inner {
+      border: 1px solid #DFE3E9;
+      border-top: none;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      padding: 15px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+    }
+    .product-card-desc {
+      font-weight: 400;
+    }
+    .product-card-price {
+      font-weight: 300;
+    }
+    .product-card-price b {
+      color: #1E4783;
+      font-size: 16px;
+    }
+    .product-card p {
+      color: #354052;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .product-card a {
+      color: inherit;
+    }
+    .product-badge {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      border-bottom-right-radius: 50px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 50px;
+      width: 50px;
+    }
+    .product-badge-text {
+      color: #ffffff;
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 32px;
+      margin-left: 2px;
+      text-transform: uppercase;
+      -webkit-transform: rotate(-38deg);
+      transform: rotate(-38deg);
+    }
+    .product-badge.sale {
+      background-color: #F8971D;
+      img{
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .product-badge.usda {
+      margin: 10px;
+      right: 0;
+      left: auto;
+      img{
+        width: 55px;
+        height: 45px;
+      }
+    }
+    .cc-image {
+        text-align: left;
+    }
+    .panel-main-image {
+        border-width: 0px;
+        border-color: rgb(0, 0, 0);
+        border-style: solid;
+        padding: 0px;
+    }
+    .cc-rich-text {
+        padding: 0px;
+    }
+}

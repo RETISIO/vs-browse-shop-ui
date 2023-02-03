@@ -1,0 +1,337 @@
+// For Why Choose Allen Brothers:
+
+    .title-section {
+      padding-top: 25px;
+      border-top: 1px solid black;
+      padding-bottom: 15px;
+      font-size: 30px;
+      font-weight: 400;
+      line-height: 28px;
+    }
+
+    .hpcontent-1-carousel-container {
+      margin-left: 110px;
+    }
+
+    .widgets_div {
+    padding: 22.85px 0;
+    display: inline-flex;
+    }
+    
+    .widgets_div .icon_div {
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align:middle;
+    }
+    
+    .widgets_div .icon_div span image {
+    font-size: 24px;
+    }
+    
+    
+    @media screen and (max-width: 480px) {
+    .widgets_div .text_div {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    margin-top: 16px;
+    }
+    }
+    
+    @media screen and (max-width: 480px) {
+    .widgets_div .icon_div {
+      display: inline-block;
+      margin-left: 0px;
+      vertical-align:middle;
+    }
+    }
+    @media screen and (max-width: 480px) {
+    .img1 {
+      width: 67px;
+    }
+    }
+    
+    //21-10 start
+    @media (min-width: 517px) and (max-width: 767px) {
+    .img1 {
+      width: 67px;
+    }
+    }
+    
+    @media (min-width: 517px) and (max-width: 767px) {
+    .text_div {
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+      margin-top: 16px;
+    }
+    }
+    //21-10 end
+    
+    
+    @media screen and (max-width: 480px) {
+    .widgets_div .text_div span {
+    color: #58666e;
+    font-size: 20px;
+    }
+    }
+    
+    .widgets_div .text_div span+span {
+    color: #747F85;
+    font-size: 11px;
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .content-ab {
+    width: 1226px;
+    }
+    }
+    
+    //21-10 start
+    @media (min-width: 992px) and (max-width: 1199px) {
+    .content-ab {
+      width: 946px;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+    .content-ab {
+      width: 756px;
+      }
+    }
+    
+    // @media screen and (min-width: 992px) and (max-width: 1200px) {
+    //   .content-ab {
+    //     width: 1226px;
+    //     }
+    // }
+    // @media screen and (min-width: 768px) and (max-width: 992px) {
+    //   .content-ab {
+    //     width: 726px;
+    //     }
+    // }
+    
+    //21-10 end
+    
+    
+    
+    @media screen and (min-width: 1200px) {
+    .content-ab {
+      width: 1226px;
+      }
+    }
+    
+    @media screen and (min-width: 768px) {
+    // width: 30%;
+    }
+    // @media screen and (min-width: 992px) and (max-width: 1200px) {
+    // .ab-carousel {
+    //   width: 107vw;
+    //   margin-left: -53vw;
+    //   left: 50%;
+    // }
+    // }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .ab-carousel {
+      width: 108vw;
+      margin-left: -9vw;
+      left: 50%;
+    }
+    }
+    
+    //21-10 start
+    // @media screen and (min-width: 768px) {
+    //   .ab-carousel {
+    //     width: 100vw;
+    //     margin-left: -9vw;
+    //     left: 50%;
+    //   }
+    // }
+    @media (min-width: 992px) and (max-width: 1072px) {
+      #whychooseabcarousel_v1-wi2800006 .ab-carousel {
+          width: 100vw;
+          margin-left: -5vw;
+          left: 50%;
+        }
+    }
+    @media (min-width: 1073px) and (max-width: 1130px) {
+    .ab-carousel {
+          width: 100vw;
+          margin-left: -8.7vw;
+          left: 50%;
+        }
+    }
+    @media (min-width: 1131px) and (max-width: 1199px) {
+    .ab-carousel {
+      width: 102vw;
+      margin-left: -11.7vw;
+      left: 50%;
+        }
+    }
+    @media screen and (min-width: 1200px) {
+    .ab-carousel {
+      width: 102vw;
+      margin-left: -5.7vw;
+      left: 50%;
+        }
+    }
+    @media (min-width: 1201px) and (max-width: 1265px) {
+    .ab-carousel {
+    width: 102vw;
+    margin-left: -5.7vw;
+    left: 50%;
+      }
+    }
+    @media (min-width: 1265px) and (max-width: 1334px) {
+    .ab-carousel {
+      width: 102vw;
+      margin-left: -7.7vw;
+      left: 50%;
+        }
+    }
+    
+    @media (min-width: 1335px) and (max-width: 1447px) {
+    .ab-carousel {
+      width: 102vw;
+      margin-left: -10.7vw;
+      left: 50%;
+        }
+    }
+    
+    @media (min-width: 1448px) and (max-width: 1807px) {
+    .ab-carousel {
+      width: 102vw;
+      margin-left: -12.7vw;
+      left: 50%;
+        }
+    }
+    @media (min-width: 1808px) and (max-width: 1920px) {
+    .ab-carousel {
+      width: 83vw;
+      margin-left: -6.7vw;
+      left: 50%;
+        }
+    }
+    
+    //21-10 end
+    
+    @media screen and (min-width: 768px) {
+    .widgets_div .text_div span {
+    color: #58666e;
+    font-size: 18px;
+    }
+    .img1 {
+      width: 90px;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .widgets_div .text_div span {
+      color: #58666e;
+      font-size: 18px;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .widgets_div .text_div {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    margin-top: 36px;
+    }
+    }
+    
+    @media screen and (min-width: 768px) {
+    .widgets_div .text_div {
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+      margin-top: 36px;
+    }
+    }
+    
+    .carousel-control {
+    background-image: none;
+    }
+    
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+    .carousel-control .glyphicon-chevron-left {
+      left: 30%;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .carousel-control .glyphicon-chevron-left {
+      left: 30%;
+    }
+    }
+    
+    @media screen and (min-width: 768px) {
+    .carousel-control .glyphicon-chevron-left {
+      left: 30%;
+    }
+    }
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+    .carousel-control .glyphicon-chevron-right {
+      right: 10%;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+      .carousel-control .glyphicon-chevron-right {
+        right: 10%;
+      }
+    }
+    
+    
+    
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+    .expert-select {
+    padding-left: 58px;
+    }
+    }
+    
+    @media screen and (min-width: 768px) {
+    .expert-select {
+      padding-left: 58px;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .expert-select {
+      padding-left: 58px;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .precision-cutting {
+    padding-left: 120px;
+    }
+    }
+    
+    @media screen and (min-width: 768px) {
+    .precision-cutting {
+      padding-left: 120px;
+    }
+    #whychooseabcarousel_v1-wi2800006 {
+      width: 30%;
+    }
+    }
+    
+    @media screen and (min-width: 992px) and (max-width: 1200px) {
+    .img1 {
+    width: 90px;
+    }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .img1 {
+      width: 90px;
+    }
+    }
+    
+    @media screen and (min-width: 768px) {
+      .img1 {
+        width: 90px;
+      }
+    }

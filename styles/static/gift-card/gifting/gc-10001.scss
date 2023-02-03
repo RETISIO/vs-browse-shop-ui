@@ -1,0 +1,30 @@
+// From the OCC code base
+
+#ALLN-Gift-Card-PDP_v2-wi1800002 {
+    .gift-card-tyle-list li {
+        margin-right: 18px;
+    }
+    .gift-card-section {
+        margin-bottom: 30px;
+    }
+    @media screen and (min-width: 768px) {
+        .gift-card-section {
+            margin-bottom: 80px;
+        }
+    }
+    .gift-card-image {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    @media screen and (min-width: 992px) {
+        .gift-card-image {
+            margin-bottom: 0;
+        }
+    }
+    
+    
+    }
+
+    .product-card.pcheight {
+        height: 373px !important;
+    }

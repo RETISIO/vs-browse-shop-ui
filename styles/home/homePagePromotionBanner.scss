@@ -1,0 +1,162 @@
+//For HomePage Promotion Banner:
+
+.homepagePromotionBanner {
+    .promotions-row {
+        margin-bottom: 15px;
+      }
+    
+    .promotions-row {
+        margin-bottom: 15px;
+    }
+    @media screen and (min-width: 992px) {
+        .promotions-row {
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+    }
+    .promotion-banner {
+        background-color: #f0f3f9;
+        color: #ffffff;
+        padding: 24px 16px 20px 19px;
+        height: 400px;
+    }
+    @media screen and (min-width: 992px) {
+        .promotion-banner {
+            padding: 49px 35px 40px 40px;
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .promotion-banner {
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            height: auto;
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .promotion-banner-inner {
+            -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                    flex-grow: 1;
+        }
+    }
+    .promotion-title {
+    color: #1e4783;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    margin: 0 0 6px 0;
+    }
+    @media screen and (min-width: 992px) {
+        .promotion-title {
+            font-size: 26px;
+            letter-spacing: 0.52px;
+            line-height: 34px;
+            margin-bottom: 15px;
+        }
+    }
+    .promotion-description {
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.49px;
+    line-height: 23px;
+    margin-bottom: 0px;
+    }
+    @media screen and (min-width: 992px) {
+    .promotion-description {
+        font-size: 15px;
+        letter-spacing: 0.53px;
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+    }
+    .promotion-price {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.35px;
+    line-height: 39px;
+    margin-bottom: 10px;
+    }
+    @media screen and (min-width: 992px) {
+        .promotion-price {
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+    }
+    
+    // Product Image
+    .product-image {
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        display: block;
+        height: 400px;
+    }
+    .featured-products .product-image {
+        margin-bottom: 25px;
+    } 
+    .btn-secondary {
+        background-color: #1e4783;
+        border-color: #1e4783;
+        color: #fff;
+    }
+    .btn-secondary:hover {
+        background-color: #0f3368;
+        border-color: #0f3368;
+        color: #fff;
+    }
+    
+    @media (min-width: 320px) and (max-width: 480px) {
+        .promo-banner {
+            padding-left: 0px; 
+            padding-right: 0px; 
+            margin-top: 0px;
+        }
+    }
+    
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+        .promo-banner {
+            padding-left: 0px; 
+            padding-right: 0px; 
+            margin-top: -28px;
+        }
+    }
+    
+    @media (min-width: 1200px) {
+        .promo-banner {
+            padding-left: 0px; 
+            padding-right: 0px; 
+            margin-top: -28px;
+        }
+    }
+
+    .col-sm-6 {
+        padding-left: 0px; 
+        padding-right: 0px;
+        margin-top: -28px;
+    }
+    
+    .promotion-price-one {
+        color: black; 
+        font-weight: 400;
+    }
+    
+    .promotion-price-two {
+        color: black; 
+        font-weight: 600;
+    }
+    
+    .col-sm-6 promo-banner promotion-image product-image { 
+        height: 268px;
+    }
+
+}

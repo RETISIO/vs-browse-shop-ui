@@ -1,0 +1,107 @@
+#overlay {
+    position: absolute;
+    background-color: rgba(34,32,32,0.35);
+    z-index: 2;
+    height: 100%;
+}
+a {
+    overflow-wrap: normal;
+    white-space: normal;
+}
+#banner_main {
+    background-repeat: no-repeat;
+    background-position: center top 31%;
+    background-size: cover;
+    position: relative;
+    min-height: 250px;
+}
+@media screen and (min-width: 768px) {
+    #banner_main {
+        min-height: 372px;
+    }
+}
+@media screen and (min-width: 992px) {
+    #banner_main {
+        min-height: 564px;
+    }
+}
+#banner_main:before,
+#banner_main:after {
+    display: table;
+    content: " ";
+    width: 100%;
+}
+.banner-content {
+    padding: 20px 0 15px 0;
+    position: relative;
+    z-index: 10;
+}
+@media screen and (min-width: 768px) {
+    .banner-content {
+        padding: 76px 0 0 0;
+    }
+}
+@media screen and (min-width: 992px) {
+    .banner-content {
+        padding: 143px 0 0 0;
+    }
+}
+.banner-title {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1.21px;
+    line-height: 1.4;
+    margin-top: 0;
+}
+@media screen and (min-width: 768px) {
+    .banner-title {
+        font-size: 60px;
+        line-height: 73px;
+    }
+}
+.banner-text {
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0.54px;
+    line-height: 20px;
+    font-weight: 400;
+}
+.banner-actions {
+    font-size: 0;
+    margin-top: 16px;
+}
+@media screen and (min-width: 768px) {
+    .banner-actions {
+        margin-top: 36px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .banner-actions {
+        margin-top: 56px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .banner-actions .btn {
+        display: block;
+        width: 100%;
+    }
+}
+.banner-actions .btn + .btn {
+margin: 15px 0 0 0;
+}
+@media screen and (min-width: 768px) {
+    .banner-actions .btn + .btn {
+        margin: 0 0 0 28px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .featured-products {
+        margin-bottom: 55px;
+    }
+}
+
+a.link-text {
+    color: #ffffff;
+    text-decoration: none;
+}

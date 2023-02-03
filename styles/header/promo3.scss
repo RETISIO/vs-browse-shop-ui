@@ -1,0 +1,32 @@
+.promo3 {
+    //A360 #11 start
+        .skip-link {
+            position: absolute;
+            top: -3em;
+            left: 0;
+            padding: 6px;
+            background: #000;
+            color: #FFF;
+            font-weight: bold;
+            text-decoration: none;
+          }
+          
+          .skip-link:focus {
+            position: static;
+            left: 0;
+            top: 0;
+        
+          }
+          //A360 #11 end
+          .header-alert-main{
+            // background-color: #000 !important;
+            background-color: #771e14 !important;
+             color: #FFF;
+         }
+         
+         .header-alert a{
+             color: #FFF !important;
+             text-decoration: underline !important;
+         }
+    }
+    

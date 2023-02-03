@@ -1,0 +1,28 @@
+.cookingGuidesContainer {
+    .panel-default>.panel-heading span {
+        display: block;
+        padding: 8px 40px 8px 9px;
+        color: inherit;
+        line-height: 22px;
+        text-decoration: none;
+    }
+    .page-title-container {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .product-card a {
+        color: inherit;
+        text-indent: 100%;
+        overflow: hidden;
+    }
+    .product-image {
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        display: block;
+        padding-bottom: 100%;
+        line-height: 0;
+        font-size: 0;
+        color: transparent;
+    }
+}
