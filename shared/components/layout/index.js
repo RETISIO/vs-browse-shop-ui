@@ -7,10 +7,10 @@ import Header from '../header/index';
 import { usePageDataContext } from '../../context/pageData-context';
 import { requestContructor } from '../../helpers/api';
 
-export default function Layout({ children }) {
+export default function Layout({ data, children }) {
   const [sticky, setSticky] = useState('');
   const { pageData, setPageData } = usePageDataContext();
-  const pageDataContent = pageData;
+  const pageDataContent = data || pageData;
   const headerContent = pageDataContent?.page?.globalTemplate?.siteHeader;
   const footerContent = pageDataContent && pageDataContent.page && pageDataContent.page.globalTemplate
     && pageDataContent.page.globalTemplate.siteFooter;

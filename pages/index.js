@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import Head from 'next/head';
 // eslint-disable-next-line import/named
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
 // import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import PageBuilder from '../shared/components/layout/pageBuilder';
+import MainLayout from './layout';
 
 export default function Home({ data }) {
   // const i18n = useI18n();
@@ -29,37 +29,12 @@ export default function Home({ data }) {
     // getData();
   }, []);
   return (
-    <>
-      <Head>
-        {data && data?.payload?.page?.seo?.title ? (
-          <title>{data.payload.page.seo.title}</title>
-        ) : (
-          <title>Retisio Page</title>
-        )}
-        {data && data?.payload?.page?.seo?.description ? (
-          <meta
-            name="description"
-            content={data.payload.page.seo.description}
-          />
-        ) : (
-          <meta name="description" content="restisio home" />
-        )}
-        {data && data?.payload?.page?.seo?.keywords
-          ? <meta name="keywords" content={data.payload.page.seo.keywords} />
-          : <meta name="keywords" content="" />}
-        {data && data?.payload?.page?.seo?.canonicalUrl ? (
-          <link rel="canonical" href={data.payload.page.seo.canonicalUrl} />
-        ) : (
-          <link rel="canonical" href="restisio home" />
-        )}
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-
+    <MainLayout data={data}>
       <main>
         {/* {i18n.t('title')} */}
         <PageBuilder pageContent={pageContent} />
       </main>
-    </>
+    </MainLayout>
   );
 }
 
