@@ -4,7 +4,6 @@ import Head from 'next/head';
 // eslint-disable-next-line import/named
 // import { useI18n } from 'next-localization';
 import { requestContructor } from '../shared/helpers/api';
-import HomePage from './home';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import PageBuilder from '../shared/components/layout/pageBuilder';
 
@@ -25,7 +24,6 @@ function Static({ data, isAie }) {
       </Head>
       <main>
         {/* {i18n.t('title')} */}
-        <HomePage pageContent={pageContent} />
         <PageBuilder pageContent={pageContent} />
       </main>
     </>
