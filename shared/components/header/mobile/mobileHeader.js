@@ -18,7 +18,7 @@ export function mobileNav() {
         <div class="">
           <div class="navbar-header navbar-mobile">
             <div class="d-flex justify-space-between align-items-center">
-              <button data-bind="click: openMobileNavigation" class="navbar-toggle js-mobile-menu-toggle navdrawer" data-target="#mobileNav">
+              <button class="navbar-toggle js-mobile-menu-toggle navdrawer" id="mobile-nav-menu-toggle">
                 <span class="sr-only" data-bind="widgetLocaleText: 'toggleNavigation'">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>

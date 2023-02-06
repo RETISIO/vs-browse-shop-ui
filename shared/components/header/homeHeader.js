@@ -4,9 +4,11 @@ import { Template } from '@retisio/sf-ui';
 import LevelOneItem from './level-1-item';
 import mobileHeaderLogo, { mobileNav } from './mobile/mobileHeader';
 import HeaderAccountActionLinks from './dropdown';
+import MobileNav from './mobile/mobileNav';
 
 export default function HomeHeader(props) {
     const [sticky, setSticky] = useState(false);
+    const [mobileNavMenu, setMobileNavMenu] = useState(false);
 
     function setStick() {
         if (window.scrollY >= 50) {
@@ -16,8 +18,16 @@ export default function HomeHeader(props) {
         }
     }
 
+    function mobileNavMenuHandler() {
+        console.log("In header HomeHeader:::::::::::::function triggered", mobileNavMenu);
+        setMobileNavMenu(!mobileNavMenu);
+    }
+    const mobileNavObj = {mobileNavMenu, mobileNavMenuHandler};
+
     useEffect(() => {
         window.addEventListener('scroll', setStick);
+        const mobileNavMenuEl = document.querySelector("#mobile-nav-menu-toggle");
+        mobileNavMenuEl.addEventListener('click', mobileNavMenuHandler);
     }, []);
 
     return (
@@ -152,6 +162,7 @@ export default function HomeHeader(props) {
                                 </div>
                             </div>
                         </div>
+                        <MobileNav mobileNavObj={mobileNavObj}/>
                     </div>
                 </div>
             </main>
