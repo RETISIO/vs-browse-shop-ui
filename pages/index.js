@@ -7,14 +7,14 @@ import { Stack, Button } from 'react-bootstrap';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
 import { useI18n } from 'next-localization';
-import HomePage from './home';
 import { usePageDataContext } from '../shared/context/pageData-context';
+import PageBuilder from '../shared/components/layout/pageBuilder';
 
 
 export default function Home({ data }) {
   const i18n = useI18n();
   const { setPageData } = usePageDataContext();
-  const homePageContent = data && data.page && data.page.segmentsMap;
+  const pageContent = data && data.page && data.page.segmentsMap;
   const getData = async() => {
     const res = await requestContructor('getChannelDetails', '', {}, false);
     const homePage = await requestContructor('static/home', '', {}, false);
@@ -54,7 +54,7 @@ export default function Home({ data }) {
           </Button>
         </Stack>
         <Link href="/About">About</Link> */}
-        <HomePage homePageContent={homePageContent} />
+        <PageBuilder pageContent={pageContent}/>
       </main>
     </>
   );
