@@ -1,18 +1,16 @@
+/* eslint-disable no-unused-expressions */
 import { useEffect, useState, useContext } from 'react';
 import Head from 'next/head';
-// eslint-disable-next-line import/named
-// eslint-disable-next-line import/named
-// import { useI18n } from 'next-localization';
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import PageBuilder from '../shared/components/layout/pageBuilder';
 
-function Static({ data, isAie }) {
+function Static({ data }) {
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext();
   const pageContent = data && data.page && data.page.segmentsMap;
   useEffect(() => {
-    setPageData(data);
+    data && setPageData(data);
   }, []);
   return (
     <>
@@ -31,28 +29,17 @@ function Static({ data, isAie }) {
 }
 
 Static.getInitialProps = async(context) => {
-  const { req, query, res } = context; 
-  // const headers = {};
-  try{
-    console.log('request req:::', req);
-    console.log('request query:::', query);
-    console.log('request query join:::', query.id.join('/'));
-    const { data, error } = await requestContructor(query.id.join('/'), '', {}, true);
-    return {
-      data,
-      // isAie:req.headers.host.endsWith('aienterprise.com')?true:false
-    };
-  }catch(e) {
-    if(e?.response?.data?.status === 404) {
-      // console.log('e?.response?.data',e?.response?.data);
-      // res.writeHead(302, { Location: '/' });
-      // res.end();
-    }
-
-    return {
-      data: '',
-    };
+  const { query } = context;
+  let res;
+  try {
+    res = await requestContructor(`static/${query.id.join('/')}`, '', {}, true);
+  } catch (e) {
+    res = {};
   }
+  return {
+    // Passed to the page component as props
+    props: { data: res },
+  };
 };
 
 export default Static;

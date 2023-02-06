@@ -1,17 +1,15 @@
+/* eslint-disable import/named */
 /* eslint-disable import/no-unresolved */
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 // eslint-disable-next-line import/no-unresolved
-import { useI18n } from 'next-localization';
 import Footer from '../footer';
 import Header from '../header/index';
-// import PageLoader from '../common/pageLoader';
 import { usePageDataContext } from '../../context/pageData-context';
+import { requestContructor } from '../../helpers/api';
 
 export default function Layout({ children }) {
-  const i18n = useI18n();
   const [sticky, setSticky] = useState('');
-  const { pageData } = usePageDataContext();
+  const { pageData, setPageData } = usePageDataContext();
   const pageDataContent = pageData;
   const headerContent = pageDataContent?.page?.globalTemplate?.siteHeader;
   const footerContent = pageDataContent && pageDataContent.page && pageDataContent.page.globalTemplate
@@ -23,29 +21,21 @@ export default function Layout({ children }) {
     const stickyClass = scrollTop >= 140 ? 'is-sticky' : '';
     setSticky(stickyClass);
   };
-
+  const getChannelData = async() => {
+    const res = await requestContructor('getChannelDetails', '', {}, false);
+    return res;
+  };
   // on render, set listener
   useEffect(() => {
+    const channelData = getChannelData();
+    setPageData({ ...pageData, channelData });
+
     window.addEventListener('scroll', isSticky);
     return () => {
       window.removeEventListener('scroll', isSticky);
     };
   }, []);
 
-  const router = useRouter();
-
-  useEffect(() => {
-    async function changeLocale() {
-      if (router.locale === 'en-US') {
-        i18n.set('en-US', await import('../../../locales/en.json'));
-        i18n.locale('en-US');
-      } else if (router.locale === 'de') {
-        i18n.set('de', await import('../../../locales/de.json'));
-        i18n.locale('de');
-      }
-    }
-    changeLocale();
-  }, [router.locale]);
 
   return (
     <>

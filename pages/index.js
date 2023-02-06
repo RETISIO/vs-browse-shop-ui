@@ -1,25 +1,22 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect } from 'react';
 import Head from 'next/head';
-import { Navigation } from '@retisio/sf-ui';
-import Link from 'next/link';
 // eslint-disable-next-line import/named
-import { Stack, Button } from 'react-bootstrap';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
-import { useI18n } from 'next-localization';
+// import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import PageBuilder from '../shared/components/layout/pageBuilder';
 
 
 export default function Home({ data }) {
-  const i18n = useI18n();
+  // const i18n = useI18n();
   const { setPageData } = usePageDataContext();
   const pageContent = data && data.page && data.page.segmentsMap;
-  const getData = async() => {
-    const res = await requestContructor('getChannelDetails', '', {}, false);
-    const homePage = await requestContructor('static/home', '', {}, false);
-    return res;
-  };
+  // const getData = async() => {
+  //   const res = await requestContructor('getChannelDetails', '', {}, false);
+  //   const homePage = await requestContructor('static/home', '', {}, false);
+  //   return res;
+  // };
   
 
   // console.log(data);
@@ -31,7 +28,6 @@ export default function Home({ data }) {
   // };
   useEffect(() => {
     setPageData(data);
-    //console.log(getData());
     // getData();
   }, []);
   return (
@@ -43,18 +39,8 @@ export default function Home({ data }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* {i18n.t('title')}
-        <Navigation />
-        <Stack direction="horizontal" gap={2}>
-          <Button as="a" variant="primary">
-            Button as link
-          </Button>
-          <Button as="a" variant="success">
-            Button as link
-          </Button>
-        </Stack>
-        <Link href="/About">About</Link> */}
-        <PageBuilder pageContent={pageContent}/>
+        {/* {i18n.t('title')} */}
+        <PageBuilder pageContent={pageContent} />
       </main>
     </>
   );
