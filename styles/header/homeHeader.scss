@@ -3885,4 +3885,25 @@
 		box-shadow: none;
 		width: 380px;
 	}
+	.headerDropdown {
+		button#headerAccnt-dropdown {
+			padding: 0;
+			margin: 0;
+			background-color: transparent;
+			width: auto;
+			border-color: transparent;
+			border-width: 2px;
+			height: auto;
+		}
+
+		.dropdown-item {
+			display: block;
+			width: 100%;
+			clear: both;
+			padding: 3px 20px;
+			color: #354052;
+			font-weight: 300;
+			line-height: 21px;
+		}
+	}
 }

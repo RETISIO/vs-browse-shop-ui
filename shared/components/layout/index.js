@@ -33,9 +33,6 @@ export default function Layout({ children }) {
   }, []);
 
   const router = useRouter();
-  const showHeader = !(router.pathname === '/clubuserregistration' || router.pathname === '/MyAllenBrothersClub');
-  const showFooter = !(router.pathname === '/clubuserregistration' || router.pathname === '/MyAllenBrothersClub');
-  const currentRouterPath = router.pathname;
 
   useEffect(() => {
     async function changeLocale() {
@@ -54,19 +51,15 @@ export default function Layout({ children }) {
     <>
       {/* <PageLoader /> */}
       <div className="">
-        {showHeader && (
-          <div>
-            <Header
-              currentRouterPath={currentRouterPath}
-              headerContent={headerContent}
-            />
-          </div>
-        )}
+        <div>
+          <Header
+            headerContent={headerContent}
+          />
+        </div>
         <div className={`main-content-${sticky}`}>
           <main className="page-row page-row-expanded">{children}</main>
         </div>
-
-        {showFooter && <Footer footerContent={footerContent} />}
+        <Footer footerContent={footerContent} />
       </div>
     </>
   );

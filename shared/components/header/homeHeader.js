@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Template } from '@retisio/sf-ui';
 import LevelOneItem from './level-1-item';
 import mobileHeaderLogo, { mobileNav } from './mobile/mobileHeader';
+import HeaderAccountActionLinks from './dropdown';
 
 export default function HomeHeader(props) {
     const [sticky, setSticky] = useState(false);
@@ -31,9 +32,9 @@ export default function HomeHeader(props) {
                                     <div className="page-overlay js-overlay"></div>
                                     <div className="page-main row-full">
                                         <div id="header" style={{ width: '100%' }}>
-                                            { mobileHeaderLogo() }
+                                            {mobileHeaderLogo()}
                                             <div className={sticky ? 'header-sticky js-sticky-menu is_stuck' : 'header-sticky js-sticky-menu'}>
-                                                { mobileNav() }
+                                                {mobileNav()}
                                                 <div className="header-content hidden-xs">
                                                     <div className="container-navmenubar">
                                                         <div className="header-content-inner d-flex flex-row ab-flex-row">
@@ -47,18 +48,8 @@ export default function HomeHeader(props) {
                                                             <LevelOneItem headerType="home" />
                                                             <div className="align-self-center hidden-print">
                                                                 <ul className="list-inline header-actions d-flex flex-no-wrap head-actn">
-                                                                    <li className="list-inline-item dropdown header-actions-account">
-                                                                        <a className="dropdown-toggle outline-change aria-expand" id="accountlink" href="#" data-target="dropdown" data-toggle="dropdown" role="button" aria-label="User" aria-haspopup="true" aria-expanded="false">
-                                                                            <i className="icon icon-user fas fa-user-circle"></i>
-                                                                        </a>
-                                                                        <ul className="dropdown-menu dropdown-menu-center dropdown-menu-arrow">
-                                                                            <li>
-                                                                                <a href="/registration">Register</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="#" data-toggle="modal" data-target="#loginModal" data-backdrop="static">Log In</a>
-                                                                            </li>
-                                                                        </ul>
+                                                                    <li className="list-inline-item dropdown header-actions-account headerDropdown">
+                                                                        <HeaderAccountActionLinks />
                                                                     </li>
                                                                     <li className="list-inline-item header-actions-cart dropdown fast-order js-minicart-toggle">
                                                                         <a className="dropdown-toggle outline-change" id="cartlink" href="#" data-target="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-label="Cart 0 items" aria-expanded="false">

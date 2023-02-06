@@ -1,6 +1,5 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import LevelTwoItem from './level-2-item';
-import NavJson from './navJSON';
 import { requestContructor } from '../../helpers/api';
 
 export default function LevelOneItem(props) {
@@ -17,9 +16,8 @@ export default function LevelOneItem(props) {
 
     const navContainerClass = props.headerType === "nonHome" ? "container" : "";
     let headerDropdownMenuClass = "header-dropdown-menu dropdown-menu js-dropdown__body";
-    headerDropdownMenuClass = props.headerType === "home" ? headerDropdownMenuClass + " homeDropdownMenu" : headerDropdownMenuClass;
-
-    const navObj = JSON.parse(NavJson);
+    headerDropdownMenuClass = props.headerType === "home"
+    ? headerDropdownMenuClass + " homeDropdownMenu" : headerDropdownMenuClass;
 
     const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, "show");
     const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, "hide");
@@ -90,7 +88,6 @@ export default function LevelOneItem(props) {
             <div className={navContainerClass}>
                 <ul className="navbar-nav nav">
                     {rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
-                    {/* { navObj.forEach(function(item, index) { renderLevel1Item(item, index)}) } */}
                 </ul>
             </div>
         </nav>
