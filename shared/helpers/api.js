@@ -13,6 +13,7 @@ const requestContructor = async(URL, params = '', customHeaders = {}, req = null
   }else{
     tempURI = `arc/${URL}${params}`;
   }
+  console.log('tempURI', tempURI);
   return Service.request(tempURI, { header: finalHeaders });
 };
 

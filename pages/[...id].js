@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
