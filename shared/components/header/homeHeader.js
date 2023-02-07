@@ -12,13 +12,51 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Template } from '@retisio/sf-ui';
 import LevelOneItem from './level-1-item';
-import mobileHeaderLogo, { mobileNav } from './mobile/mobileHeader';
+import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
 import HeaderAccountActionLinks from './dropdown';
-import MobileNav from './mobile/mobileNav';
+import MobileNavLevelOneItem from './mobile/mobileNav-level-1-item';
+import { requestContructor } from '../../helpers/api';
 
 export default function HomeHeader(props) {
-    const [sticky, setSticky] = useState(false);
-    const [mobileNavMenu, setMobileNavMenu] = useState(false);
+  const [sticky, setSticky] = useState(false);
+  const [mobileNavMenu, setMobileNavMenu] = useState(false);
+  const [rootCatagories, setRootCatagories] = useState([]);
+  const getData = async() => {
+    const res = await requestContructor('getCategoryList', '', {}, false);
+    setRootCatagories(res?.payLoad?.categories);
+    return res?.payLoad?.categories;
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', setStick);
+    getData();
+  }, []);
+  const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, 'show');
+  const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, 'hide');
+
+  const toggleHeaderDropdownMenu = (event, displayHeaderMenu) => {
+    const navEl = event.target.querySelector('.header-dropdown-menu.dropdown-menu');
+    if (displayHeaderMenu === 'show') {
+      navEl.classList.add('open');
+    } else {
+      navEl.classList.remove('open');
+    }
+  };
+  const navElementsCloseBtnHandler = () => {
+    const openNav = document.querySelector('.header-dropdown-menu.dropdown-menu.open');
+    openNav.classList.remove('open');
+  };
+  useEffect(() => {
+    const navElements = document.querySelectorAll('.nav-item.js-dropdown');
+    const navElementsCloseBtns = document.querySelectorAll('.nav-item.js-dropdown .close-button');
+    navElementsCloseBtns.forEach((navElementsCloseBtn) => {
+      navElementsCloseBtn.addEventListener('click', navElementsCloseBtnHandler);
+    });
+    navElements.forEach((navElement) => {
+      navElement.addEventListener('mouseenter', mouseOverOnNav);
+      navElement.addEventListener('mouseleave', mouseOutOnNav);
+    });
+  }, [rootCatagories]);
 
   function setStick() {
     if (window.scrollY >= 50) {
@@ -27,18 +65,14 @@ export default function HomeHeader(props) {
       setSticky(false);
     }
   }
+  const mobileNavMenuHandler = () => {
+    setMobileNavMenu(!mobileNavMenu);
+  };
 
-    function mobileNavMenuHandler() {
-        console.log("In header HomeHeader:::::::::::::function triggered", mobileNavMenu);
-        setMobileNavMenu(!mobileNavMenu);
-    }
-    const mobileNavObj = {mobileNavMenu, mobileNavMenuHandler};
-
-    useEffect(() => {
-        window.addEventListener('scroll', setStick);
-        const mobileNavMenuEl = document.querySelector("#mobile-nav-menu-toggle");
-        mobileNavMenuEl.addEventListener('click', mobileNavMenuHandler);
-    }, []);
+  useEffect(() => {
+    const mobileNavMenuEl = document.querySelector('#mobile-nav-menu-toggle');
+    mobileNavMenuEl.addEventListener('click', mobileNavMenuHandler);
+  }, [mobileNavMenu]);
 
   return (
     <div className="home-header-container">
@@ -52,9 +86,9 @@ export default function HomeHeader(props) {
                   <div className="page-overlay js-overlay"></div>
                   <div className="page-main row-full">
                     <div id="header" style={{ width: '100%' }}>
-                      {mobileHeaderLogo()}
+                      <MobileHeaderLogo />
                       <div className={sticky ? 'header-sticky js-sticky-menu is_stuck' : 'header-sticky js-sticky-menu'}>
-                        {mobileNav()}
+                        <MobileNavBar />
                         <div className="header-content hidden-xs">
                           <div className="container-navmenubar">
                             <div className="header-content-inner d-flex flex-row ab-flex-row">
@@ -169,13 +203,17 @@ export default function HomeHeader(props) {
                             </button>
                           </form>
                         </div>
-                        <MobileNav mobileNavObj={mobileNavObj}/>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <MobileNavLevelOneItem
+              mobileNavMenu={mobileNavMenu}
+              setMobileNavMenu={setMobileNavMenu}
+              rootCatagories={rootCatagories}
+            />
           </div>
         </div>
       </main>
