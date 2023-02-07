@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 export default function MobileNavLevelTwoItem(props) {
   const renderSubCategories = (subCategory, i) => (
@@ -47,10 +47,6 @@ export default function MobileNavLevelTwoItem(props) {
       </div>
     );
   };
-  useEffect(() => {
-    // const mobileMenuBackBtn = document.querySelector('.mobileSubMenuBackBtn');
-    // mobileNavMenuEl.addEventListener('click', mobileNavCloseHandler);
-  }, []);
   return (
     <div className="mobile-menu__level js-mobile-menu-level" data-level="1">
       {props.rootCatagories?.map((item, i) => renderL1Items(item, i))}
