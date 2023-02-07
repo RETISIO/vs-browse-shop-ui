@@ -20,7 +20,7 @@ export default function LevelTwoItem(props) {
     }
     return (
       <li key={`nav-${i}`} className="category-list-item">
-        <a href={navItem.srcURL}>{navItem.name}</a>
+        <a href={`/plp/${navItem.id}`}>{navItem.name}</a>
       </li>
     );
   };
