@@ -5,12 +5,14 @@ import React, { useState, useEffect } from 'react';
 import Footer from '../footer';
 import Header from '../header/index';
 import { usePageDataContext } from '../../context/pageData-context';
-import { requestContructor } from '../../helpers/api';
+import { useAppContext } from '../../context/appContext';
 
-export default function Layout({ data, children }) {
+export default function Layout({ data, children, appData }) {
   const [sticky, setSticky] = useState('');
-  const { pageData, setPageData } = usePageDataContext();
+  const { pageData } = usePageDataContext();
+  const { state } = useAppContext();
   const pageDataContent = data || pageData;
+  const applicationData = appData || state;
   const headerContent = pageDataContent?.page?.globalTemplate?.siteHeader;
   const footerContent = pageDataContent && pageDataContent.page && pageDataContent.page.globalTemplate
     && pageDataContent.page.globalTemplate.siteFooter;
@@ -21,15 +23,8 @@ export default function Layout({ data, children }) {
     const stickyClass = scrollTop >= 140 ? 'is-sticky' : '';
     setSticky(stickyClass);
   };
-  const getChannelData = async() => {
-    const res = await requestContructor('getChannelDetails', '', {}, false);
-    return res;
-  };
   // on render, set listener
   useEffect(() => {
-    const channelData = getChannelData();
-    setPageData({ ...pageData, channelData });
-
     window.addEventListener('scroll', isSticky);
     return () => {
       window.removeEventListener('scroll', isSticky);
@@ -44,6 +39,7 @@ export default function Layout({ data, children }) {
         <div>
           <Header
             headerContent={headerContent}
+            appData={applicationData}
           />
         </div>
         <div className={`main-content-${sticky}`}>

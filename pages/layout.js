@@ -1,8 +1,24 @@
-import React from 'react';
+/* eslint-disable import/named */
+/* eslint-disable no-unused-vars */
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import Layout from '../shared/components/layout/index';
+// eslint-disable-next-line import/named
+import { useAppContext } from '../shared/context/appContext';
+import { requestContructor } from '../shared/helpers/api';
 
 export default function MainLayout({ data, children }) {
+  const { state, updateState } = useAppContext();
+
+  useEffect(() => {
+    if(!state.channelData) {
+      (async() => {
+        let channelData = await requestContructor('getChannelDetails', '', {}, false);
+        channelData = channelData[process.env.NEXT_PUBLIC_CHANNELDOMAIN];
+        updateState({ ...state, channelData });
+      })();
+    }
+  }, []);
   return (
     <>
       <Head>
@@ -29,7 +45,7 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout data={data}>
+      <Layout data={data} appData={state}>
         {children}
       </Layout>
     </>
