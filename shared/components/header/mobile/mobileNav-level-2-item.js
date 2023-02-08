@@ -30,7 +30,7 @@ export default function MobileNavLevelTwoItem(props) {
     }
     const closeLevel2Menu = () => {
         props.setActiveLevel2Item("");
-        props.setIsMobileLevelOneItem(!props.isMobileLevelOneItemOpen);
+        props.toggleMobileLevelOneItem();
     }
     return (
       <div className={subMenuClass} key={`l1-${i}`}>
