@@ -76,7 +76,6 @@ export default function HomeHeader(props) {
 
   return (
     <div className="home-header-container">
-      {props.headerContent ? <Template templateData={props.headerContent} /> : null}
       <main className="page-row page-row-expanded">
         <div id="main" className="">
           <div className="row">
