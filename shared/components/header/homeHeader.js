@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-has-content */
@@ -10,26 +11,17 @@
 /* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Template } from '@retisio/sf-ui';
 import LevelOneItem from './level-1-item';
 import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
 import HeaderAccountActionLinks from './dropdown';
 import MobileNavLevelOneItem from './mobile/mobileNav-level-1-item';
-import { requestContructor } from '../../helpers/api';
 
 export default function HomeHeader(props) {
   const [sticky, setSticky] = useState(false);
   const [mobileNavMenu, setMobileNavMenu] = useState(false);
-  const [rootCatagories, setRootCatagories] = useState([]);
-  const getData = async() => {
-    const res = await requestContructor('getCategoryList', '', {}, false);
-    setRootCatagories(res?.payLoad?.categories);
-    return res?.payLoad?.categories;
-  };
 
   useEffect(() => {
     window.addEventListener('scroll', setStick);
-    getData();
   }, []);
   const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, 'show');
   const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, 'hide');
@@ -56,7 +48,7 @@ export default function HomeHeader(props) {
       navElement.addEventListener('mouseenter', mouseOverOnNav);
       navElement.addEventListener('mouseleave', mouseOutOnNav);
     });
-  }, [rootCatagories]);
+  }, [props.rootCatagories]);
 
   function setStick() {
     if (window.scrollY >= 50) {
@@ -103,7 +95,7 @@ export default function HomeHeader(props) {
                               </div>
                               <LevelOneItem
                                 headerType="home"
-                                rootCatagories={rootCatagories}
+                                rootCatagories={props.rootCatagories}
                               />
                               <div className="align-self-center hidden-print">
                                 <ul className="list-inline header-actions d-flex flex-no-wrap head-actn">
@@ -214,7 +206,7 @@ export default function HomeHeader(props) {
             <MobileNavLevelOneItem
               mobileNavMenu={mobileNavMenu}
               setMobileNavMenu={setMobileNavMenu}
-              rootCatagories={rootCatagories}
+              rootCatagories={props.rootCatagories}
             />
           </div>
         </div>
