@@ -11,19 +11,16 @@ export default function MobileNavLevelOneItem(props) {
   };
   const mobileLevelOneItemBtnHandler = (event) => {
     event.preventDefault();
-    console.log('Event Target child::::', event.target);
+    // console.log('Event Target child::::', event.target);
     const li = event.target.closest('.mobileMenuLevelOneItems');
     const nodes = Array.from(li.closest('ul').children);
     const index = nodes.indexOf(li);
-    console.log(`index of li${index}`);
     setActiveLevel2Item(index);
     setIsMobileLevelOneItem(!isMobileLevelOneItemOpen);
   };
   const mobileMenuLevelOneClass = isMobileLevelOneItemOpen ? 'closed' : '';
   useEffect(() => {
-    console.log('useEffect executed::::');
     const mobileMenuElements = document.querySelectorAll('.mobileMenuLevelOneItems');
-    console.log('useEffect executed::mobileMenuElements:::::::', mobileMenuElements);
     mobileMenuElements.forEach((mobileLevelOneItem) => {
       mobileLevelOneItem.addEventListener('click', mobileLevelOneItemBtnHandler);
     });

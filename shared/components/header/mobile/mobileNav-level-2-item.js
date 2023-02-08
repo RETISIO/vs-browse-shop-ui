@@ -24,7 +24,6 @@ export default function MobileNavLevelTwoItem(props) {
     );
   };
   const renderL1Items = (item, i) => {
-    console.log('MobileNavLevelTwoItem:::::', item);
     let subMenuClass = "mobile-submenu js-mobile-submenu";
     if (i === props.activeLevel2Item) {
         subMenuClass = "mobile-submenu js-mobile-submenu active";
