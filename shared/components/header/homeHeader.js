@@ -102,7 +102,10 @@ export default function HomeHeader(props) {
                                   </a>
                                 </Link>
                               </div>
-                              <LevelOneItem headerType="home" />
+                              <LevelOneItem
+                                headerType="home"
+                                rootCatagories={rootCatagories}
+                              />
                               <div className="align-self-center hidden-print">
                                 <ul className="list-inline header-actions d-flex flex-no-wrap head-actn">
                                   <li className="list-inline-item dropdown header-actions-account headerDropdown">
