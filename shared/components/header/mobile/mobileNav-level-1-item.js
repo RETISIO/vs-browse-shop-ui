@@ -7,7 +7,7 @@ export default function MobileNavLevelOneItem(props) {
   const isMobileMenuOpen = props.mobileNavMenu === true ? 'open' : '';
   const mobileMenuClass = `mobile-menu mobile-menu-left js-mobile-menu ${isMobileMenuOpen}`;
   const mobileNavCloseHandler = () => {
-    props.setMobileNavMenu(false);
+    props.setMobileNavMenu();
   };
   const mobileLevelOneItemBtnHandler = (event) => {
     event.preventDefault();

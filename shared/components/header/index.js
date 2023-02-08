@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import Template from '../footer/template';
@@ -16,7 +17,8 @@ function NewHeader(props) {
   }, []);
   return (
     <>
-      {props.headerContent ? <Template templateData={props.headerContent} rootCatagories={rootCatagories} /> : null}
+      {props.headerContent
+        ? <Template templateData={props.headerContent} rootCatagories={rootCatagories} /> : null}
     </>
   );
 }
