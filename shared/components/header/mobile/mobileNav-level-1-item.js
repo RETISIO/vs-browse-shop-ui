@@ -12,6 +12,8 @@ class MobileNavLevelOneItem extends Component {
 
   mobileNavCloseHandler = () => {
     this.props.setMobileNavMenu();
+    // this.setActiveLevel2Item('');
+    // this.toggleMobileLevelOneItem();
   };
 
   toggleMobileLevelOneItem = () => {
@@ -39,9 +41,13 @@ class MobileNavLevelOneItem extends Component {
       <li
         key={`item-${i}`}
         className="mobileMenuLevelOneItems"
-        onClick={(e) => this.mobileLevelOneItemBtnHandler(e)}
       >
-        <a tabIndex="0" className="dropdown-toggle mobile-menu__btn js-mobile-menu-btn" href="#">
+        <a
+          tabIndex="0"
+          className="dropdown-toggle mobile-menu__btn js-mobile-menu-btn"
+          onClick={(e) => this.mobileLevelOneItemBtnHandler(e)}
+          href="#"
+        >
           <span className="navbar-title text-elipsis">{navItem}</span>
           <span className="i fas fa-chevron-right icon icon-chevron-right"></span>
         </a>
