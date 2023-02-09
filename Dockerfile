@@ -4,9 +4,9 @@ FROM node:10-alpine as builder
 COPY package.json package-lock.json next.config.js config.js .eslintrc.json e2e nginx ./
 
 RUN echo -e "\
-NEXT_PUBLIC_APIURL=http://ab-aggregator/
-NEXT_PUBLIC_CHANNELID=AB
-NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com
+NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
+NEXT_PUBLIC_CHANNELID=AB\n\
+NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
 " > .env
 
 RUN npm install && mkdir /frontend && mv ./node_modules ./frontend
