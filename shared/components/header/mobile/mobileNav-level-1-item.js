@@ -10,26 +10,13 @@ class MobileNavLevelOneItem extends Component {
     };
   }
 
-  componentDidMount() {
-    const mobileMenuElements = document.querySelectorAll('.mobileMenuLevelOneItems');
-    mobileMenuElements.forEach((mobileLevelOneItem) => {
-      mobileLevelOneItem.addEventListener('click', this.mobileLevelOneItemBtnHandler);
-    });
-  }
-
-  componentWillUnmount() {
-    const mobileMenuElements = document.querySelectorAll('.mobileMenuLevelOneItems');
-    mobileMenuElements.forEach((mobileLevelOneItem) => {
-      mobileLevelOneItem.removeEventListener('click', this.mobileLevelOneItemBtnHandler);
-    });
-  }
-  
   mobileNavCloseHandler = () => {
     this.props.setMobileNavMenu();
   };
 
   toggleMobileLevelOneItem = () => {
-    this.setState({ isMobileLevelOneItemOpen: !this.state.isMobileLevelOneItemOpen });
+    const { isMobileLevelOneItemOpen } = this.state;
+    this.setState({ isMobileLevelOneItemOpen: !isMobileLevelOneItemOpen });
   };
 
   setActiveLevel2Item = (index) => {
@@ -49,7 +36,11 @@ class MobileNavLevelOneItem extends Component {
   renderLevel1Item = (item, i) => {
     const navItem = item.name;
     return (
-      <li key={`item-${i}`} className="mobileMenuLevelOneItems">
+      <li
+        key={`item-${i}`}
+        className="mobileMenuLevelOneItems"
+        onClick={(e) => this.mobileLevelOneItemBtnHandler(e)}
+      >
         <a tabIndex="0" className="dropdown-toggle mobile-menu__btn js-mobile-menu-btn" href="#">
           <span className="navbar-title text-elipsis">{navItem}</span>
           <span className="i fas fa-chevron-right icon icon-chevron-right"></span>
@@ -59,9 +50,11 @@ class MobileNavLevelOneItem extends Component {
   };
 
   render() {
-    const isMobileMenuOpen = this.props.mobileNavMenu === true ? 'open' : '';
+    const { mobileNavMenu, rootCatagories } = this.props;
+    const { isMobileLevelOneItemOpen, activeLevel2Item } = this.state;
+    const isMobileMenuOpen = mobileNavMenu === true ? 'open' : '';
     const mobileMenuClass = `mobile-menu mobile-menu-left js-mobile-menu ${isMobileMenuOpen}`;
-    const mobileMenuLevelOneClass = this.state.isMobileLevelOneItemOpen ? 'closed' : '';
+    const mobileMenuLevelOneClass = isMobileLevelOneItemOpen ? 'closed' : '';
     return (
       <div className={mobileMenuClass} id="mobileNav">
         <div role="dialog" aria-modal="true" aria-labelledby="heading-nav" id="dgbox">
@@ -86,7 +79,7 @@ class MobileNavLevelOneItem extends Component {
                   </div>
                 </div>
                 <ul className="aside-nav">
-                  {this.props.rootCatagories?.map((item, i) => this.renderLevel1Item(item, i))}
+                  {rootCatagories?.map((item, i) => this.renderLevel1Item(item, i))}
                 </ul>
                 <ul className="aside-bottom-nav list-unstyled">
                   <li>
@@ -117,10 +110,10 @@ class MobileNavLevelOneItem extends Component {
               </div>
             </div>
             <MobileNavLevelTwoItem
-              rootCatagories={this.props.rootCatagories}
-              toggleMobileLevelOneItem={this.state.toggleMobileLevelOneItem}
-              activeLevel2Item={this.state.activeLevel2Item}
-              setActiveLevel2Item={setActiveLevel2Item}
+              rootCatagories={rootCatagories}
+              toggleMobileLevelOneItem={this.toggleMobileLevelOneItem}
+              activeLevel2Item={activeLevel2Item}
+              setActiveLevel2Item={this.setActiveLevel2Item}
             />
           </nav>
         </div>

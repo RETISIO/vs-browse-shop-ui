@@ -2,16 +2,38 @@ import React from 'react';
 import LevelTwoItem from './level-2-item';
 
 export default function LevelOneItem(props) {
-  const navContainerClass = props.headerType === 'nonHome' ? 'container' : '';
+  const { headerType, rootCatagories } = props;
+  const navContainerClass = headerType === 'nonHome' ? 'container' : '';
   let headerDropdownMenuClass = 'header-dropdown-menu dropdown-menu js-dropdown__body';
-  headerDropdownMenuClass = props.headerType === 'home'
+  headerDropdownMenuClass = headerType === 'home'
     ? `${headerDropdownMenuClass} homeDropdownMenu` : headerDropdownMenuClass;
+
+  const toggleHeaderDropdownMenu = (event, displayHeaderMenu) => {
+    const navEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
+    if (displayHeaderMenu === 'show') {
+      navEl.classList.add('open');
+    } else {
+      navEl.classList.remove('open');
+    }
+  };
+  const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, 'show');
+  const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, 'hide');
+
+  const navElementsCloseBtnHandler = () => {
+    const openNav = document.querySelector('.header-dropdown-menu.dropdown-menu.open');
+    openNav.classList.remove('open');
+  };
 
   const renderLevel1Item = (item, i) => {
     const navItem = item.name;
     return (
-      <li key={i} className="nav-item js-dropdown">
-        {props.headerType === 'nonHome'
+      <li
+        key={`navEl-${i}`}
+        className="nav-item js-dropdown navListItems"
+        onMouseEnter={(e) => mouseOverOnNav(e)}
+        onMouseLeave={(e) => mouseOutOnNav(e)}
+      >
+        {headerType === 'nonHome'
           ? <a className="js-dropdown__btn" href="/category/shop-beef" id={`header-nav-${navItem}`}>{navItem}</a>
           : (
             <button className="js-dropdown__btn" aria-expanded="false" id="header-nav-beef">
@@ -19,10 +41,12 @@ export default function LevelOneItem(props) {
             </button>
           )}
         <div className={headerDropdownMenuClass} id="header-navbar">
-          {props.headerType === 'home'
+          {headerType === 'home'
             ? (
               <button
+                onClick={() => navElementsCloseBtnHandler()}
                 className="close-button"
+                type="button"
                 style={{
                   position: 'absolute',
                   top: '1px',
@@ -41,7 +65,7 @@ export default function LevelOneItem(props) {
             : null}
           <LevelTwoItem
             catItem={item}
-            headerType={props.headerType}
+            headerType={headerType}
           />
         </div>
       </li>
@@ -51,7 +75,7 @@ export default function LevelOneItem(props) {
     <nav className="navbar">
       <div className={navContainerClass}>
         <ul className="navbar-nav nav">
-          {props.rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
+          {rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
         </ul>
       </div>
     </nav>

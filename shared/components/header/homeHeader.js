@@ -28,50 +28,15 @@ class HomeHeader extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.setStick);
-    const navElements = document.querySelectorAll('.nav-item.js-dropdown');
-    const navElementsCloseBtns = document.querySelectorAll('.nav-item.js-dropdown .close-button');
-    navElementsCloseBtns.forEach((navElementsCloseBtn) => {
-      navElementsCloseBtn.addEventListener('click', this.navElementsCloseBtnHandler);
-    });
-    navElements.forEach((navElement) => {
-      navElement.addEventListener('mouseenter', this.mouseOverOnNav);
-      navElement.addEventListener('mouseleave', this.mouseOutOnNav);
-    });
     const mobileNavMenuEl = document.querySelector('#mobile-nav-menu-toggle');
     mobileNavMenuEl.addEventListener('click', this.mobileNavMenuHandler);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.setStick);
-    const navElements = document.querySelectorAll('.nav-item.js-dropdown');
-    const navElementsCloseBtns = document.querySelectorAll('.nav-item.js-dropdown .close-button');
-    navElementsCloseBtns.forEach((navElementsCloseBtn) => {
-      navElementsCloseBtn.removeEventListener('click', this.navElementsCloseBtnHandler);
-    });
-    navElements.forEach((navElement) => {
-      navElement.removeEventListener('mouseenter', this.mouseOverOnNav);
-      navElement.removeEventListener('mouseleave', this.mouseOutOnNav);
-    });
     const mobileNavMenuEl = document.querySelector('#mobile-nav-menu-toggle');
     mobileNavMenuEl.removeEventListener('click', this.mobileNavMenuHandler);
   }
-
-  mouseOverOnNav = (event) => this.toggleHeaderDropdownMenu(event, 'show');
-  mouseOutOnNav = (event) => this.toggleHeaderDropdownMenu(event, 'hide');
-
-  toggleHeaderDropdownMenu = (event, displayHeaderMenu) => {
-    const navEl = event.target.querySelector('.header-dropdown-menu.dropdown-menu');
-    if (displayHeaderMenu === 'show') {
-      navEl.classList.add('open');
-    } else {
-      navEl.classList.remove('open');
-    }
-  };
-
-  navElementsCloseBtnHandler = () => {
-    const openNav = document.querySelector('.header-dropdown-menu.dropdown-menu.open');
-    openNav.classList.remove('open');
-  };
 
   setStick() {
     if (window.scrollY >= 50) {
@@ -82,7 +47,8 @@ class HomeHeader extends Component {
   }
 
   mobileNavMenuHandler = () => {
-    this.setState({ mobileNavMenu: !this.state.mobileNavMenu });
+    const { mobileNavMenu } = this.state;
+    this.setState({ mobileNavMenu: !mobileNavMenu });
   };
 
   render() {
