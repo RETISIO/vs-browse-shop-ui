@@ -1,7 +1,7 @@
 FROM node:10-alpine as builder
 
 # install and cache app dependencies
-COPY package.json package-lock.json next.config.js config.js .eslintrc.json nginx ./
+COPY package.json package-lock.json next.config.js config.js .eslintrc.json .npmrc nginx ./
 
 RUN echo -e "\
 NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
