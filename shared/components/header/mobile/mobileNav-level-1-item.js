@@ -12,8 +12,8 @@ class MobileNavLevelOneItem extends Component {
 
   mobileNavCloseHandler = () => {
     this.props.setMobileNavMenu();
-    // this.setActiveLevel2Item('');
-    // this.toggleMobileLevelOneItem();
+    this.setActiveLevel2Item('');
+    this.setState({ isMobileLevelOneItemOpen: false });
   };
 
   toggleMobileLevelOneItem = () => {
