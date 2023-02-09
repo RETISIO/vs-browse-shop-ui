@@ -1,4 +1,4 @@
-FROM node:10-alpine as builder
+FROM node:14.19.3-alpine as builder
 
 # install and cache app dependencies
 COPY package.json package-lock.json next.config.js config.js .eslintrc.json .npmrc nginx ./
