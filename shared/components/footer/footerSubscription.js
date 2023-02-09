@@ -14,6 +14,7 @@ class FooterSubscriptionForm extends Component {
     this.state = {
       values: initialValues,
       formerrors: {},
+      isSubmit: false,
     };
   }
 
@@ -22,24 +23,35 @@ class FooterSubscriptionForm extends Component {
     this.setState({ values: { [name]: value } });
   };
 
-  validate = (values) => {
-    const errors = validator(values);
-    this.setState({ formerrors: errors }, this.setFormError);
+  handleBlur = () => {
+    const { isSubmit, values } = this.state;
+    if (isSubmit) {
+      this.validate({ ...values });
+    }
   };
 
-  setFormError = () => {
-    const { formerrors } = this.state;
-    if ('email' in formerrors) {
-      return true;
+  validate = (values) => {
+    const errors = validator(values);
+    this.setState({ formerrors: errors });
+    if ('email' in errors) {
+      return false;
     }
-    return false;
+    return true;
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ isSubmit: true });
     const { values } = this.state;
-    this.validate(values);
+    const isValidForm = this.validate(values);
+    if (isValidForm) {
+      this.submitData();
+    }
   };
+
+  submitData = () => {
+    console.log("Form Submit with values:::", this.state.values);
+  }
 
   render() {
     const { email, formerrors } = this.state;
@@ -82,6 +94,7 @@ class FooterSubscriptionForm extends Component {
                                   type="email"
                                   name="email"
                                   maxLength="128"
+                                  onBlur={this.handleBlur}
                                   onChange={this.handleChange}
                                   isInvalid={!!formerrors.email}
                                   id="footerEmailSignup"
@@ -89,9 +102,19 @@ class FooterSubscriptionForm extends Component {
                                   placeholder="Email Address"
                                 />
                                 <Form.Label className="formGroup-label"><span>Email Address</span></Form.Label>
-                                <Form.Control.Feedback className="text-danger" type="invalid" role="alert">{formerrors.email}</Form.Control.Feedback>
+                                <Form.Control.Feedback
+                                  className="text-danger"
+                                  type="invalid"
+                                  role="alert"
+                                >
+                                  {formerrors.email}
+                                </Form.Control.Feedback>
                               </Form.Group>
-                              <Button id="footerSignupButton" className="btn btn-action btn-action-primary" type="submit">
+                              <Button
+                                id="footerSignupButton"
+                                className="btn btn-action btn-action-primary"
+                                type="submit"
+                              >
                                 SIGN UP
                               </Button>
                             </Form>
