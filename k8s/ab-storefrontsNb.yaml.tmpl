@@ -3,22 +3,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ab-storefrontsNb
-  name: ab-storefrontsNb
+    app: ab-storefrontsnb
+  name: ab-storefrontsnb
 spec:
   replicas: ${STOREFRONTREPLICA}
   selector:
     matchLabels:
-      app: ab-storefrontsNb
+      app: ab-storefrontsnb
   template:
     metadata:
       labels:
-        app: ab-storefrontsNb
+        app: ab-storefrontsnb
     spec:
       containers:
         -
           image: "${IMAGE}:${IMAGETAG}"
-          name: ab-storefrontsNb
+          name: ab-storefrontsnb
           volumeMounts:
             - name: staticfiles
               mountPath: "/usr/share/nginx/html/medias"
@@ -56,12 +56,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ab-storefrontsNb
+  name: ab-storefrontsnb
 spec:
   ports:
   - port: 80
     targetPort: 80
-    name: ab-storefrontsNb
+    name: ab-storefrontsnb
   selector:
     app: ab-storefrontsNb
   type: NodePort
