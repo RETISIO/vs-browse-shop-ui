@@ -1,0 +1,13 @@
+/*
+Pipeline: AA Storefront CI/CD Pipeline
+Author: Venu Rachakonda <venu.rachakonda@rackspace.com>
+Description: A simple pipeline that provides info to build, publish and deploy to Kubernetes Clusters
+*/
+
+@Library('arc-dev') _
+
+abwebstoreDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/SF-browse-shop.git',
+                         bitbucketCredentialsId: 'cicdadminaie',
+                         appName: 'ab-storefrontsNb', dockerDirectory: env.WORKSPACE,
+                         dockerImage: 'gcr.io/retisio-tools/ab-storefrontsNb',
+                         dockerCredentialsId: 'retisio-tools' )

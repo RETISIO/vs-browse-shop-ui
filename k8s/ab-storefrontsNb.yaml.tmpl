@@ -1,0 +1,69 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ab-storefrontsNb
+  name: ab-storefrontsNb
+spec:
+  replicas: ${STOREFRONTREPLICA}
+  selector:
+    matchLabels:
+      app: ab-storefrontsNb
+  template:
+    metadata:
+      labels:
+        app: ab-storefrontsNb
+    spec:
+      containers:
+        -
+          image: "${IMAGE}:${IMAGETAG}"
+          name: ab-storefrontsNb
+          volumeMounts:
+            - name: staticfiles
+              mountPath: "/usr/share/nginx/html/medias"
+              readOnly: true
+          ports:
+            -
+              containerPort: 80
+
+          livenessProbe:
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            periodSeconds: 60
+            timeoutSeconds: 2
+            httpGet:
+              path: /nginx-health
+              port: 80
+          readinessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 60
+            httpGet:
+              path: /nginx-health
+              port: 80
+          resources:
+            limits:
+              memory: ${LIMITS_MEMORY}
+              cpu: ${LIMITS_CPU}
+            requests:
+              cpu: ${REQUEST_CPU}
+              memory: ${REQUEST_MEMORY}
+          volumes:
+            - name: staticfiles
+              persistentVolumeClaim:
+              claimName: static-files-nfs-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ab-storefrontsNb
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: ab-storefrontsNb
+  selector:
+    app: ab-storefrontsNb
+  type: NodePort
+
+
