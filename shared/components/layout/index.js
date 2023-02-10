@@ -31,7 +31,7 @@ export default function Layout({ data, children, appData }) {
     };
   }, []);
 
-  const isHomePage = pageDataContent?.page?.pageName === "Home" ? pageDataContent.page.pageName : "";
+  const isHomePage = pageDataContent?.page?.pageName === 'Home' ? pageDataContent.page.pageName : '';
   return (
     <>
       {/* <PageLoader /> */}
