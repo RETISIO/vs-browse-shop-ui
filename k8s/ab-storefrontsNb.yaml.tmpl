@@ -6,7 +6,7 @@ metadata:
     app: ab-storefrontsnb
   name: ab-storefrontsnb
 spec:
-  replicas: ${STOREFRONTREPLICA}
+  replicas: ${RETISIOFRONTREPLICA}
   selector:
     matchLabels:
       app: ab-storefrontsnb
@@ -17,53 +17,57 @@ spec:
     spec:
       containers:
         -
-          image: "${IMAGE}:${IMAGETAG}"
-          name: ab-storefrontsnb
+          image: "${IMAGE}/abbe:${IMAGETAG}"
+          name: ab-be
+          ports:
+            -
+              containerPort: 3000
+        -
+          image: "${IMAGE}/abweb:${IMAGETAG}"
+          name: abweb
           volumeMounts:
             - name: staticfiles
               mountPath: "/usr/share/nginx/html/medias"
-              readOnly: true
+              readOnly: false
           ports:
             -
               containerPort: 80
-
-          livenessProbe:
-            initialDelaySeconds: 30
-            failureThreshold: 3
-            periodSeconds: 60
-            timeoutSeconds: 2
-            httpGet:
-              path: /nginx-health
-              port: 80
-          readinessProbe:
-            initialDelaySeconds: 30
-            periodSeconds: 60
-            httpGet:
-              path: /nginx-health
-              port: 80
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
-              cpu: ${LIMITS_CPU}
             requests:
               cpu: ${REQUEST_CPU}
               memory: ${REQUEST_MEMORY}
-          volumes:
-            - name: staticfiles
-              persistentVolumeClaim:
-              claimName: static-files-nfs-pvc
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /nginx-health
+              scheme: HTTP
+          livenessProbe:
+            httpGet:
+              port: 80
+              path: /nginx-health
+              scheme: HTTP
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: static-files-nfs-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+  labels:
   name: ab-storefrontsnb
 spec:
   ports:
   - port: 80
     targetPort: 80
-    name: ab-storefrontsnb
+    name: ab-be
+  - port: 3000
+    targetPort: 3000
+    name: ab-web
   selector:
-    app: ab-storefrontsNb
+    app: ab-storefrontsnb
   type: NodePort
-
-
