@@ -1,13 +1,13 @@
 /* eslint-disable import/named */
 /* eslint-disable import/no-unresolved */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import Footer from '../footer';
 import Header from '../header/index';
 import { usePageDataContext } from '../../context/pageData-context';
 import { useAppContext } from '../../context/appContext';
 
-export default function Layout({ data, children, appData }) {
+export default function Layout({ data, children, appData, transformText }) {
   const { pageData } = usePageDataContext();
   const { state } = useAppContext();
   const pageDataContent = data || pageData;
@@ -16,6 +16,10 @@ export default function Layout({ data, children, appData }) {
   const footerContent = pageDataContent && pageDataContent.page && pageDataContent.page.globalTemplate
     && pageDataContent.page.globalTemplate.siteFooter;
 
+  const transformTexttoi18 = (text) => {
+    const translatedText = typeof transformText === 'function' ? transformText(text) : text;
+    return translatedText;
+  }
   const isHomePage = pageDataContent?.page?.pageName === 'Home' ? pageDataContent.page.pageName : '';
   return (
     <>
@@ -26,6 +30,7 @@ export default function Layout({ data, children, appData }) {
             headerContent={headerContent}
             appData={applicationData}
             isHomePage={isHomePage}
+            transformText={transformTexttoi18}
           />
         </div>
         <div className="main-content-">

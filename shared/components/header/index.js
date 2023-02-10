@@ -22,6 +22,7 @@ function NewHeader(props) {
           <Template
             templateData={props.headerContent}
             isHomePage={props.isHomePage}
+            transformText={props.transformText}
             rootCatagories={rootCatagories}
           />
         ) : null}

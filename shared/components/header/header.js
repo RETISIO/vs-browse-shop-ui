@@ -52,7 +52,7 @@ class HomeHeader extends Component {
   };
 
   render() {
-    const { isHomePage } = this.props;
+    const { isHomePage, transformText } = this.props;
     const isHomePageContainer = isHomePage === 'Home' ? 'homePageHeader' : 'nonHomePageHeader';
     return (
       <div className="home-header-container">
@@ -93,7 +93,7 @@ class HomeHeader extends Component {
                                       <a className="dropdown-toggle outline-change" id="cartlink" href="#" data-target="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-label="Cart 0 items" aria-expanded="false">
                                         <i aria-hidden="true" className="icon icon-cart fas fa-shopping-cart" tabIndex="0">
                                           <span className="cart-val">
-                                            <span className="sr-only">quantity of items in your cart: 0</span>
+                                            <span className="sr-only">{transformText("quantity of items in your cart: 0")}</span>
                                             <div
                                               aria-hidden="true"
                                               className="cart-counter"
