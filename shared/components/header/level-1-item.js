@@ -2,7 +2,7 @@ import React from 'react';
 import LevelTwoItem from './level-2-item';
 
 export default function LevelOneItem(props) {
-  const { headerType, rootCatagories } = props;
+  const { rootCatagories } = props;
   const headerDropdownMenuClass = 'header-dropdown-menu dropdown-menu js-dropdown__body homeDropdownMenu';
 
   const toggleHeaderDropdownMenu = (event, displayHeaderMenu) => {
@@ -44,7 +44,6 @@ export default function LevelOneItem(props) {
           </button>
           <LevelTwoItem
             catItem={item}
-            headerType={headerType}
           />
         </div>
       </li>
