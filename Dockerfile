@@ -17,5 +17,6 @@ NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
 COPY . .
 
 RUN npm run build
-RUN npm run start
+#RUN npm run start
+CMD ["npm", "start"]
 
