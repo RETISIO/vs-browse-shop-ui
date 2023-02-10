@@ -52,9 +52,11 @@ class HomeHeader extends Component {
   };
 
   render() {
+    const { isHomePage } = this.props;
+    const isHomePageContainer = isHomePage === 'Home' ? 'homePageHeader' : 'nonHomePageHeader';
     return (
       <div className="home-header-container">
-        <main className="page-row page-row-expanded">
+        <main className={`page-row page-row-expanded ${isHomePageContainer}`}>
           <div id="main" className="">
             <div className="row">
               <div className="redBox">
@@ -80,7 +82,6 @@ class HomeHeader extends Component {
                                   </Link>
                                 </div>
                                 <LevelOneItem
-                                  headerType="home"
                                   rootCatagories={this.props.rootCatagories}
                                 />
                                 <div className="align-self-center hidden-print">
@@ -96,16 +97,8 @@ class HomeHeader extends Component {
                                             <div
                                               aria-hidden="true"
                                               className="cart-counter"
-                                              style={{
-                                                fontSize: '14px',
-                                                border: 'none',
-                                                cursor: 'pointer',
-                                                outline: 'none',
-                                                                                            /* display: block; */
-                                              }}
                                             >
                                               0
-
                                             </div>
                                           </span>
                                         </i>

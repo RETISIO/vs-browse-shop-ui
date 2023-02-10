@@ -3916,4 +3916,14 @@
 		font-size: 18px;
 		cursor: pointer;
 	}
+	.nonHomePageHeader #header {
+		background-color: #00466a;
+		position: relative;
+	}
+	.cart-counter {
+		font-size: 14px;
+		border: none;
+		cursor: pointer;
+		outline: none;
+	}
 }
