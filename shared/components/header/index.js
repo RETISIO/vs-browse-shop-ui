@@ -18,7 +18,13 @@ function NewHeader(props) {
   return (
     <>
       {props.headerContent
-        ? <Template templateData={props.headerContent} rootCatagories={rootCatagories} /> : null}
+        ? (
+          <Template
+            templateData={props.headerContent}
+            isHomePage={props.isHomePage}
+            rootCatagories={rootCatagories}
+          />
+        ) : null}
     </>
   );
 }

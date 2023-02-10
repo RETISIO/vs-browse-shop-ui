@@ -31,7 +31,7 @@ export default function Layout({ data, children, appData }) {
     };
   }, []);
 
-
+  const isHomePage = pageDataContent?.page?.pageName === "Home" ? pageDataContent.page.pageName : "";
   return (
     <>
       {/* <PageLoader /> */}
@@ -40,6 +40,7 @@ export default function Layout({ data, children, appData }) {
           <Header
             headerContent={headerContent}
             appData={applicationData}
+            isHomePage={isHomePage}
           />
         </div>
         <div className={`main-content-${sticky}`}>
