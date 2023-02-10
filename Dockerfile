@@ -28,10 +28,10 @@ FROM nginx:1.22.0-alpine
 
 RUN apk add --no-cache --update \
       apache2-utils
-COPY --from=builder /app/web-react/build /usr/share/nginx/html
-RUN rm /etc/nginx/conf.d/default.conf /etc/nginx/nginx.conf
-
-COPY nginx/appconfig.conf /etc/nginx/conf.d
+COPY --from=builder /frontend/dist /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf /etc/nginx/nginx.conf && mkdir /usr/share/nginx/html/medias
+COPY nginx/appnginx.conf /etc/nginx/conf.d
 COPY nginx/nginx.conf /etc/nginx/
+COPY robots.txt /usr/share/nginx/html/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
