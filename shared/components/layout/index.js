@@ -7,7 +7,7 @@ import Header from '../header/index';
 import { usePageDataContext } from '../../context/pageData-context';
 import { useAppContext } from '../../context/appContext';
 
-export default function Layout({ data, children, appData, transformText }) {
+export default function Layout({ data, children, appData, transformText, rootCatagories }) {
   const { pageData } = usePageDataContext();
   const { state } = useAppContext();
   const pageDataContent = data || pageData;
@@ -30,13 +30,14 @@ export default function Layout({ data, children, appData, transformText }) {
             headerContent={headerContent}
             appData={applicationData}
             isHomePage={isHomePage}
+            rootCatagories={rootCatagories}
             transformText={transformTexttoi18}
           />
         </div>
         <div className="main-content-">
           <main className="page-row page-row-expanded">{children}</main>
         </div>
-        <Footer footerContent={footerContent} />
+        <Footer footerContent={footerContent} transformText={transformTexttoi18} />
       </div>
     </>
   );

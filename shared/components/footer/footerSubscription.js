@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { validator } from './validator';
+import { validator } from '../validator';
 
 class FooterSubscriptionForm extends Component {
   constructor() {
@@ -50,11 +50,12 @@ class FooterSubscriptionForm extends Component {
   };
 
   submitData = () => {
-    console.log("Form Submit with values:::", this.state.values);
-  }
+    console.log('Form Submit with values:::', this.state.values);
+  };
 
   render() {
     const { email, formerrors } = this.state;
+    const { transformText } = this.props;
     return (
       <div className="page-row footerContainer">
         <div className="row">
@@ -101,7 +102,9 @@ class FooterSubscriptionForm extends Component {
                                   required="required"
                                   placeholder="Email Address"
                                 />
-                                <Form.Label className="formGroup-label"><span>Email Address</span></Form.Label>
+                                <Form.Label className="formGroup-label">
+                                  <span>{transformText('Email Address')}</span>
+                                </Form.Label>
                                 <Form.Control.Feedback
                                   className="text-danger"
                                   type="invalid"

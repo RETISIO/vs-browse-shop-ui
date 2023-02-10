@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
@@ -13,6 +13,12 @@ export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
   const router = useRouter();
   const i18n = useI18n();
+  const [rootCatagories, setRootCatagories] = useState([]);
+  const getData = async() => {
+    const res = await requestContructor('getCategoryList', '', {}, false);
+    setRootCatagories(res?.payLoad?.categories);
+    return res?.payLoad?.categories;
+  };
 
   useEffect(() => {
     if(!state.channelData) {
@@ -22,6 +28,9 @@ export default function MainLayout({ data, children }) {
         updateState({ ...state, channelData });
       })();
     }
+  }, []);
+  useEffect(() => {
+    getData();
   }, []);
   useEffect(() => {
     async function changeLocale() {
@@ -61,7 +70,7 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout data={data} appData={state} transformText={i18n.t}>
+      <Layout data={data} appData={state} transformText={i18n.t} rootCatagories={rootCatagories}>
         {children}
       </Layout>
     </>
