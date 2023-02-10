@@ -7,7 +7,7 @@ RUN echo -e "\
 NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
 NEXT_PUBLIC_CHANNELID=AB\n\
 NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
-" > .env
+" > .env.production
 
 RUN npm install && mkdir /frontend && mv ./node_modules ./frontend
 
