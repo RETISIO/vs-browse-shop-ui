@@ -2,9 +2,9 @@
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 import Router from 'next/router';
+import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
-import PageBuilder from '../shared/components/layout/pageBuilder';
 import MainLayout from './layout';
 
 function Static({ data }) {

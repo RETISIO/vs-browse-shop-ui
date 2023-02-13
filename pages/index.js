@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 // eslint-disable-next-line import/named
+import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
 // import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
-import PageBuilder from '../shared/components/layout/pageBuilder';
 import MainLayout from './layout';
 
 export default function Home({ data }) {
