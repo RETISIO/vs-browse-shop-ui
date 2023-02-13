@@ -1,12 +1,11 @@
 import React from 'react';
 
 export default function LevelTwoItem(props) {
-  const categoryHeadingClass = props.headerType === 'nonHome' ? 'col-sm-3' : 'col-sm-2';
   const renderCategoryContainers = (categoryItem, i) => {
     const variantType = categoryItem.name;
     if (categoryItem?.hasCategories) {
       return (
-        <div key={i} className={categoryHeadingClass}>
+        <div key={i} className="col-sm-2">
           <div className="category-heading">{variantType}</div>
           { getCategoryItemList(categoryItem.subCategories) }
         </div>
@@ -31,8 +30,8 @@ export default function LevelTwoItem(props) {
   );
   const renderCategoryNavList = (categoryItem, variantType = '') => {
     const categoryContainerClass = variantType === 'variantsNav'
-      ? 'col-sm-2 testTwo'
-      : 'col-sm-3 testTwo';
+      ? 'col-sm-2'
+      : 'col-sm-3';
     return (
       <div className={categoryContainerClass}>
         {getCategoryItemList(categoryItem)}
