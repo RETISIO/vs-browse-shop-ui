@@ -4,15 +4,6 @@ import React from 'react';
 import Template from '../template';
 
 function NewHeader(props) {
-  // const [rootCatagories, setRootCatagories] = useState([]);
-  // const getData = async() => {
-  //   const res = await requestContructor('getCategoryList', '', {}, false);
-  //   setRootCatagories(res?.payLoad?.categories);
-  //   return res?.payLoad?.categories;
-  // };
-  // useEffect(() => {
-  //   getData();
-  // }, []);
   return (
     <>
       {props.headerContent
