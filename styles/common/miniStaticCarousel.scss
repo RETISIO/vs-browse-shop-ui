@@ -1,0 +1,100 @@
+miniStaticCarousel {
+    .carousel-control.right,
+    .carousel-control.left {
+        background-image: none;
+    }
+    .carousel-item {
+        position: relative;
+        display: none;
+        float: left;
+        width: 100%;
+        margin-right: -100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transition: -webkit-transform .6s ease-in-out;
+        transition: transform .6s ease-in-out;
+        transition: transform .6s ease-in-out, -webkit-transform .6s ease-in-out;
+    }
+    .carousel-item-next,
+    .carousel-item-prev,
+    .carousel-item.active {
+        display: block;
+    }
+    .carousel-indicators {
+        display: none;
+    }
+    .carousel-control-next,
+    .carousel-control-prev {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10%;
+        padding: 0;
+        color: #fff;
+        text-align: center;
+        background: 0 0;
+        border: 0;
+        opacity: .5;
+        transition: opacity .15s ease;
+        outline: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+    .carousel-control-prev {
+        left: 0;
+
+        .carousel-control-prev-icon {
+            left: 45%;
+        }
+    }
+    .carousel-control-next {
+        right: 0;
+
+        .carousel-control-next-icon {
+            right: 15%;
+        }
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-size: 100% 100%;
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        position: absolute;
+        top: 50%;
+        z-index: 5;
+        display: inline-block;
+        font-family: "Glyphicons Halflings";
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+    }
+    .carousel-control-prev-icon:before {
+        content: "\e079";
+    }
+    .carousel-control-next-icon:before {
+        content: "\e080";
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        margin-left: -15px;
+        font-size: 30px;
+    }
+    .visually-hidden {
+        display: none;
+    }
+}
