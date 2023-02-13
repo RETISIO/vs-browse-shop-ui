@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 // eslint-disable-next-line import/named
+import Router from 'next/router';
+import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
-import PageBuilder from '../shared/components/layout/pageBuilder';
 import MainLayout from './layout';
 
 function Static({ data }) {
@@ -12,6 +13,9 @@ function Static({ data }) {
   const pageContent = data && data.page && data.page.segmentsMap;
   useEffect(() => {
     data && setPageData(data);
+    if(!data) {
+      Router.push('/404');
+    }
   }, []);
   return (
     <MainLayout data={data}>
@@ -29,7 +33,7 @@ Static.getInitialProps = async(context) => {
   try {
     res = await requestContructor(`static/${query.id.join('/')}`, '', {}, true);
   } catch (e) {
-    res = {};
+    res = '';
   }
   return {
     data: res,

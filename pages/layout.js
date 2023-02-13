@@ -1,14 +1,25 @@
 /* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Layout from '../shared/components/layout/index';
+import { useI18n } from 'next-localization';
+import { useRouter } from 'next/router';
+// import Layout from '../shared/components/layout/index';
+import { Layout } from '@retisio/sf-ui';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../shared/context/appContext';
 import { requestContructor } from '../shared/helpers/api';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
+  const router = useRouter();
+  const i18n = useI18n();
+  const [rootCatagories, setRootCatagories] = useState([]);
+  const getData = async() => {
+    const res = await requestContructor('getCategoryList', '', {}, false);
+    setRootCatagories(res?.payLoad?.categories);
+    return res?.payLoad?.categories;
+  };
 
   useEffect(() => {
     if(!state.channelData) {
@@ -19,6 +30,21 @@ export default function MainLayout({ data, children }) {
       })();
     }
   }, []);
+  useEffect(() => {
+    getData();
+  }, []);
+  useEffect(() => {
+    async function changeLocale() {
+      if (router.locale === 'en-US') {
+        i18n.set('en-US', await import('../locales/en.json'));
+        i18n.locale('en-US');
+      } else if (router.locale === 'de') {
+        i18n.set('de', await import('../locales/de.json'));
+        i18n.locale('de');
+      }
+    }
+    changeLocale();
+  }, [router.locale]);
   return (
     <>
       <Head>
@@ -45,7 +71,7 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout data={data} appData={state}>
+      <Layout data={data} appData={state} transformText={i18n.t} rootCatagories={rootCatagories}>
         {children}
       </Layout>
     </>
