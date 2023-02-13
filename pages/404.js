@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
+import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
-import PageBuilder from '../shared/components/layout/pageBuilder';
 import MainLayout from './layout';
 
 function Error() {
