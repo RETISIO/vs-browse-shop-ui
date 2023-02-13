@@ -1,12 +1,6 @@
-FROM node:14.19.3-alpine as builder
+FROM node:16-alpine
 
-# install and cache app dependencies
-COPY package.json package-lock.json next.config.js config.js .eslintrc.json .npmrc nginx ./
-
-
-RUN npm install && mkdir /frontend && mv ./node_modules ./frontend
-
-WORKDIR /frontend
+WORKDIR /usr/src/app
 
 RUN echo -e "\
 NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
@@ -15,8 +9,8 @@ NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
 " > .env.production
 
 COPY . .
+RUN npm install
+RUN npm build
 
-RUN npm run build
-#RUN npm run start
-CMD ["npm", "start"]
 
+CMD [ "npm", "start"]
