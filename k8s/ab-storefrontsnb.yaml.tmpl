@@ -64,10 +64,10 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    name: ab-be
+    name: ab-web
   - port: 3000
     targetPort: 3000
-    name: ab-web
+    name: ab-be
   selector:
     app: ab-storefrontsnb
   type: NodePort
