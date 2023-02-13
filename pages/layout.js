@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
-import Layout from '../shared/components/layout/index';
+// import Layout from '../shared/components/layout/index';
+import { Layout } from '@retisio/sf-ui';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../shared/context/appContext';
 import { requestContructor } from '../shared/helpers/api';

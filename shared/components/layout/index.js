@@ -4,14 +4,10 @@ import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import Footer from '../footer';
 import Header from '../header/index';
-import { usePageDataContext } from '../../context/pageData-context';
-import { useAppContext } from '../../context/appContext';
 
 export default function Layout({ data, children, appData, transformText, rootCatagories }) {
-  const { pageData } = usePageDataContext();
-  const { state } = useAppContext();
-  const pageDataContent = data || pageData;
-  const applicationData = appData || state;
+  const pageDataContent = data;
+  const applicationData = appData;
   const headerContent = pageDataContent?.page?.globalTemplate?.siteHeader;
   const footerContent = pageDataContent && pageDataContent.page && pageDataContent.page.globalTemplate
     && pageDataContent.page.globalTemplate.siteFooter;
