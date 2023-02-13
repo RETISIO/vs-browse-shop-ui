@@ -41,12 +41,12 @@ spec:
           readinessProbe:
             httpGet:
               port: 80
-              path: /nginx-health
+              path: /api/health
               scheme: HTTP
           livenessProbe:
             httpGet:
               port: 80
-              path: /nginx-health
+              path: /api/health
               scheme: HTTP
       volumes:
         - name: staticfiles
