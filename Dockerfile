@@ -10,7 +10,7 @@ NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
 
 COPY . .
 RUN npm install
-RUN npm build
+RUN npm run build
 
 
 CMD [ "npm", "start"]
