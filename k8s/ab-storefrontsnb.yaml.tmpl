@@ -1,0 +1,73 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ab-storefrontsnb
+  name: ab-storefrontsnb
+spec:
+  replicas: ${RETISIOFRONTREPLICA}
+  selector:
+    matchLabels:
+      app: ab-storefrontsnb
+  template:
+    metadata:
+      labels:
+        app: ab-storefrontsnb
+    spec:
+      containers:
+        -
+          image: "${IMAGE}/abbe:${IMAGETAG}"
+          name: ab-be
+          ports:
+            -
+              containerPort: 3000
+        -
+          image: "${IMAGE}/abweb:${IMAGETAG}"
+          name: abweb
+          volumeMounts:
+            - name: staticfiles
+              mountPath: "/usr/share/nginx/html/medias"
+              readOnly: false
+          ports:
+            -
+              containerPort: 80
+          resources:
+            limits:
+              memory: ${LIMITS_MEMORY}
+            requests:
+              cpu: ${REQUEST_CPU}
+              memory: ${REQUEST_MEMORY}
+          readinessProbe:
+            httpGet:
+              port: 80
+              path: /api/health
+              scheme: HTTP
+          livenessProbe:
+            httpGet:
+              port: 80
+              path: /api/health
+              scheme: HTTP
+      volumes:
+        - name: staticfiles
+          persistentVolumeClaim:
+            claimName: static-files-nfs-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+  labels:
+  name: ab-storefrontsnb
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+    name: ab-web
+  - port: 3000
+    targetPort: 3000
+    name: ab-be
+  selector:
+    app: ab-storefrontsnb
+  type: NodePort
