@@ -75,6 +75,6 @@ export default function DeliveryStorageThawing() {
                     <div className="redBox"></div>
                 </div>
             </div>
-            <div id="loadingModal" className="hide loadingIndicator"></div>
+            // <div id="loadingModal" className="hide loadingIndicator"></div>
     )
 }
