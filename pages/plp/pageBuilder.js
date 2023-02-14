@@ -1,31 +1,30 @@
-import React from "react";
-import { Template } from "./template/template";
-import { usePageDataContext } from "../../shared/context/pageData-context";
+import React from 'react';
+import { Template } from '../../shared/template/template';
+import { usePageDataContext } from '../../shared/context/pageData-context';
 
 export default function PageBuilder(props) {
   const { pageData } = usePageDataContext();
   const pageContent = pageData?.payLoad?.page;
   return (
-    <>
-      <div id="main" className="static-main-container holidayContainer">
-        <div className="row">
-          <div className="redBox">
-            <div className="col-sm-12" id="region-megaMenuRegionCatPage">
-              <div id="allnProductLisitingPage_v10-wi1400005">
-                <div className="page-overlay js-overlay"></div>
-                <div className="page-main-inner">
-                  <div className="container">
-                    {pageContent?.segmentsMap?.top ? (
-                      <Template templateData={pageContent?.segmentsMap?.top} />
-                    ) : (
-                      ""
-                    )}
-                    <div className="product-listing-container">
-                      <div className="row">
-                        <aside className="col-md-3 col-sm-4 hidden-xs">
-                          <div className="catalog-aside">
-                            <div className="catalog-filter__top">
-                              {/* <div className="panel panel-default">
+    <div id="main" className="static-main-container holidayContainer">
+      <div className="row">
+        <div className="redBox">
+          <div className="col-sm-12" id="region-megaMenuRegionCatPage">
+            <div id="allnProductLisitingPage_v10-wi1400005">
+              <div className="page-overlay js-overlay"></div>
+              <div className="page-main-inner">
+                <div className="container">
+                  {pageContent?.segmentsMap?.top ? (
+                    <Template templateData={pageContent?.segmentsMap?.top} />
+                  ) : (
+                    ''
+                  )}
+                  <div className="product-listing-container">
+                    <div className="row">
+                      <aside className="col-md-3 col-sm-4 hidden-xs">
+                        <div className="catalog-aside">
+                          <div className="catalog-filter__top">
+                            {/* <div className="panel panel-default">
                                 <div className="panel-heading">
                                   <div className="panel-title">
                                     <a>Categories</a>
@@ -68,72 +67,74 @@ export default function PageBuilder(props) {
                                   </div>
                                 </div>
                               </div> */}
-                              <div className="catalog-filter__clear">
-                                <strong>Filters: </strong>
-                              </div>
-                              <ul className="catalog-filter__selected list-unstyled"></ul>
+                            <div className="catalog-filter__clear">
+                              <strong>Filters: </strong>
                             </div>
-                            <div className="catalog-filter__block">
-                              {pageContent?.segmentsMap?.left ? (
-                                <Template
-                                  templateData={pageContent?.segmentsMap?.left}
-                                />
-                              ) : (
-                                ""
-                              )}
-                            </div>
+                            <ul className="catalog-filter__selected list-unstyled"></ul>
                           </div>
-                        </aside>
-                        <div className="col-md-9 col-sm-8">
-                          <div className="page-title-container d-flex justify-space-between align-items-top">
-                            <h1>
-                              <span className="result-title-count">
-                                Holiday Food Gifts
+                          <div className="catalog-filter__block">
+                            {pageContent?.segmentsMap?.left ? (
+                              <Template
+                                templateData={pageContent?.segmentsMap?.left}
+                              />
+                            ) : (
+                              ''
+                            )}
+                          </div>
+                        </div>
+                      </aside>
+                      <div className="col-md-9 col-sm-8">
+                        <div className="page-title-container d-flex justify-space-between align-items-top">
+                          <h1>
+                            <span className="result-title-count">
+                              Holiday Food Gifts
+                            </span>
+
+                            <small className="results-count countOne">
+                              (
+                              {pageData?.payLoad?.productCount}
+                            </small>
+                            <small className="results-count">Results)</small>
+                          </h1>
+                          <button
+                            className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
+                            data-target="#mobileFilter"
+                          >
+                            Filter
+                          </button>
+
+                          <form className="form-inline sort-by">
+                            <div className="form-group">
+                              <label htmlFor="cc-sort">Sort By:</label>
+                              <select id="cc-sort" className="form-control">
+                                <option value="">Recommended</option>
+                                <option value="">Price: Low to High</option>
+                                <option value="">Price: High to low</option>
+                                <option value="">Name</option>
+                              </select>
+                              <span
+                                className="text-danger"
+                                role="alert"
+                              >
                               </span>
-
-                              <small className="results-count countOne">
-                                ({pageData?.payLoad?.productCount}
-                              </small>
-                              <small className="results-count">Results)</small>
-                            </h1>
-                            <button
-                              className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
-                              data-target="#mobileFilter"
-                            >
-                              Filter
-                            </button>
-
-                            <form className="form-inline sort-by">
-                              <div className="form-group">
-                                <label for="cc-sort">Sort By:</label>
-                                <select id="cc-sort" className="form-control">
-                                  <option value="">Recommended</option>
-                                  <option value="">Price: Low to High</option>
-                                  <option value="">Price: High to low</option>
-                                  <option value="">Name</option>
-                                </select>
-                                <span
-                                  className="text-danger"
-                                  role="alert"
-                                ></span>
-                              </div>
-                            </form>
-                          </div>
-                          <p className="page-description">
-                            Are you looking for the best gift idea that will
-                            stand out this holiday season? Get your friends and
-                            loved ones a gourmet food gift from Allen Brothers.
-                            Our selection of high-quality meats makes the
-                            perfect gift for the foodie in your life!
-                          </p>
-                          <div id="product-grid">
-                            <div className="row row-gutter-sm-15">
+                            </div>
+                          </form>
+                        </div>
+                        <p className="page-description">
+                          Are you looking for the best gift idea that will
+                          stand out this holiday season? Get your friends and
+                          loved ones a gourmet food gift from Allen Brothers.
+                          Our selection of high-quality meats makes the
+                          perfect gift for the foodie in your life!
+                        </p>
+                        <div id="product-grid">
+                          <div className="row row-gutter-sm-15">
                             {pageContent?.segmentsMap?.middle ? (
                               <Template templateData={pageContent?.segmentsMap?.middle} />
                             ) : (
-                              ""
+                              ''
                             )}
-                              {/* <div className="col-md-4 col-sm-6 col-xs-12">
+                            {/* <div className="col-md-4 col-sm-6 col-xs-12">
                                 <div
                                   className="product-card"
                                   data-mh="product-card"
@@ -424,7 +425,6 @@ export default function PageBuilder(props) {
                                   </div>
                                 </div>
                               </div> */}
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -436,6 +436,6 @@ export default function PageBuilder(props) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

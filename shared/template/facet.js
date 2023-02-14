@@ -1,5 +1,5 @@
 import React from "react";
-import { usePageDataContext } from "../../../shared/context/pageData-context";
+import { usePageDataContext } from "../context/pageData-context";
 
 export function Facet() {
   const { pageData } = usePageDataContext();
