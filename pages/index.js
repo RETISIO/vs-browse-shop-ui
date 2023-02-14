@@ -7,7 +7,7 @@ import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import MainLayout from './layout';
 
-export default function Home({ data }) {
+function Home({ data }) {
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext();
   const pageContent = data && data.page && data.page.segmentsMap;
@@ -38,7 +38,7 @@ export default function Home({ data }) {
   );
 }
 
-export async function getStaticProps() {
+Home.getInitialProps = async() => {
   let res;
   try {
     res = await requestContructor('static/home', '', {}, true);
@@ -46,7 +46,8 @@ export async function getStaticProps() {
     res = {};
   }
   return {
-    // Passed to the page component as props
-    props: { data: res },
+    data: res,
   };
-}
+};
+
+export default Home;

@@ -31,7 +31,16 @@ Static.getInitialProps = async(context) => {
   const { query } = context;
   let res;
   try {
-    res = await requestContructor(`static/${query.id.join('/')}`, '', {}, true);
+    if (!query.id.includes('nginx-health')) {
+      res = await requestContructor(
+        `static/${query.id.join('/')}`,
+        '',
+        {},
+        true,
+      );
+    } else {
+      res = '';
+    }
   } catch (e) {
     res = '';
   }
