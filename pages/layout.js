@@ -49,23 +49,23 @@ export default function MainLayout({ data, children }) {
     <>
       <Head>
         {data && data?.page?.seo?.title ? (
-          <title>{data.payload.page.seo.title}</title>
+          <title>{data.page.seo.title}</title>
         ) : (
           <title>Retisio Page</title>
         )}
         {data && data?.page?.seo?.description ? (
           <meta
             name="description"
-            content={data.payload.page.seo.description}
+            content={data.page.seo.description}
           />
         ) : (
           <meta name="description" content="restisio home" />
         )}
         {data && data?.page?.seo?.keywords
-          ? <meta name="keywords" content={data.payload.page.seo.keywords} />
+          ? <meta name="keywords" content={data.page.seo.keywords} />
           : <meta name="keywords" content="" />}
         {data && data?.page?.seo?.canonicalUrl ? (
-          <link rel="canonical" href={data.payload.page.seo.canonicalUrl} />
+          <link rel="canonical" href={data.page.seo.canonicalUrl} />
         ) : (
           <link rel="canonical" href="restisio home" />
         )}

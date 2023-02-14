@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-unused-expressions */
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 import Router from 'next/router';
 import { PageBuilder } from '@retisio/sf-ui';
+import DefaultErrorPage from 'next/error';
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import MainLayout from './layout';
@@ -18,12 +20,16 @@ function Static({ data }) {
     }
   }, []);
   return (
-    <MainLayout data={data}>
-      <main>
-        {/* {i18n.t('title')} */}
-        <PageBuilder pageContent={pageContent} />
-      </main>
-    </MainLayout>
+    <>
+      {data ? (
+        <MainLayout data={data}>
+          <main>
+            {/* {i18n.t('title')} */}
+            <PageBuilder pageContent={pageContent} />
+          </main>
+        </MainLayout>
+      ) : <DefaultErrorPage statusCode={404} /> }
+    </>
   );
 }
 
@@ -39,10 +45,14 @@ Static.getInitialProps = async(context) => {
         true,
       );
     } else {
-      res = '';
+      return {
+        notFound: true,
+      };
     }
   } catch (e) {
-    res = '';
+    return {
+      notFound: true,
+    };
   }
   return {
     data: res,
