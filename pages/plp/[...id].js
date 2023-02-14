@@ -1,25 +1,24 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
-import Router from 'next/router';
-import { PageBuilder } from '@retisio/sf-ui';
-import { requestContructor } from '../shared/helpers/api';
-import { usePageDataContext } from '../shared/context/pageData-context';
-import MainLayout from './layout';
+import { requestContructor } from '../../shared/helpers/api';
+import { usePageDataContext } from '../../shared/context/pageData-context';
+import PageBuilder from './pageBuilder';
+import MainLayout from '../layout';
 
 function Static({ data }) {
+  console.log('ress', data);
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext();
-  const pageContent = data && data.page && data.page.segmentsMap;
+  const pageContent = data?.payLoad?.page?.segmentsMap;
+  data.page = data?.payLoad?.page;
   useEffect(() => {
     data && setPageData(data);
-    if(!data) {
-      Router.push('/404');
-    }
   }, []);
   return (
     <MainLayout data={data}>
-      <main>
+      <main style={{ minHeight: '300px' }}>
         {/* {i18n.t('title')} */}
         <PageBuilder pageContent={pageContent} />
       </main>
@@ -31,18 +30,10 @@ Static.getInitialProps = async(context) => {
   const { query } = context;
   let res;
   try {
-    if (!query.id.includes('nginx-health')) {
-      res = await requestContructor(
-        `static/${query.id.join('/')}`,
-        '',
-        {},
-        true,
-      );
-    } else {
-      res = '';
-    }
+    res = await requestContructor(`getProductsList?CategoryId=${query.id}`, '', {}, true);
+    console.log('ress', res);
   } catch (e) {
-    res = '';
+    res = {};
   }
   return {
     data: res,

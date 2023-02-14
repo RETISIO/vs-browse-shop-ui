@@ -12,7 +12,7 @@ const requestContructor = async(URL, params = '', customHeaders = {}, req = null
   if(req) {
     tempURI = process.env.NEXT_PUBLIC_APIURL + URL + params;
   }else{
-    tempURI = `arc/${URL}${params}`;
+    tempURI = `/arc/${URL}${params}`;
   }
   console.log('tempURI', tempURI);
   return Service.request(tempURI, { header: finalHeaders });
