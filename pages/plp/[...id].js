@@ -1,9 +1,10 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../../shared/helpers/api';
 import { usePageDataContext } from '../../shared/context/pageData-context';
-import  PageBuilder  from './pageBuilder';
+import PageBuilder from './pageBuilder';
 import MainLayout from '../layout';
 
 function Static({ data }) {
@@ -11,11 +12,12 @@ function Static({ data }) {
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext();
   const pageContent = data?.payLoad?.page?.segmentsMap;
+  data.page = data?.payLoad?.page;
   useEffect(() => {
     data && setPageData(data);
   }, []);
   return (
-    <MainLayout data={data?.payLoad}>
+    <MainLayout data={data}>
       <main style={{ minHeight: '300px' }}>
         {/* {i18n.t('title')} */}
         <PageBuilder pageContent={pageContent} />
