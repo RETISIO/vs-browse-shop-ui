@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../../shared/helpers/api';
 import { usePageDataContext } from '../../shared/context/pageData-context';
-import PageBuilder from '../../shared/components/layout/pageBuilder';
+import  PageBuilder  from './pageBuilder';
 import MainLayout from '../layout';
 
 function Static({ data }) {
@@ -28,7 +28,7 @@ Static.getInitialProps = async(context) => {
   const { query } = context;
   let res;
   try {
-    res = await requestContructor('getProductsList', '', {}, true);
+    res = await requestContructor(`getProductsList?CategoryId=${query.id}`, '', {}, true);
     console.log('ress', res);
   } catch (e) {
     res = {};
