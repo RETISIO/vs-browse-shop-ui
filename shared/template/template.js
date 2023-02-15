@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Bredcrumb } from "./bredcrumb";
+import { Breadcrumb } from "./breadcrumb";
 import { Facet } from "./facet";
 import { ResultList } from "./resultList";
 
@@ -12,7 +12,7 @@ export function Template(props) {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
-            <Bredcrumb />
+            <Breadcrumb />
           </ol>
         </nav>
       );

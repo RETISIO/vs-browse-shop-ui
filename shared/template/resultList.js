@@ -64,8 +64,8 @@ export function ResultList() {
                     className="item-thumb img-responsive"
                     alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
                     id="CC-product-list-image-10916-00"
-                    onerror="https://www.allenbrothers.com/img/no-image.jpg"
-                    //onerror="this.onerror=null;this.src='https://www.allenbrothers.com/img/no-image.jpg';"
+                    onError="https://www.allenbrothers.com/img/no-image.jpg"
+                    //onError="this.onerror=null;this.src='https://www.allenbrothers.com/img/no-image.jpg';"
                     //src={value?.skus?.[value?.defaultSkuId]?.media?.smallImg}
                     src="https://www.allenbrothers.com/img/no-image.jpg"
                   />

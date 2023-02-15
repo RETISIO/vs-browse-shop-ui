@@ -2,7 +2,7 @@ import React from "react";
 import { usePageDataContext } from "../context/pageData-context";
 import Link from 'next/link';
 
-export function Bredcrumb() {    
+export function Breadcrumb() {    
   const { pageData } = usePageDataContext();
 
   return (
@@ -14,7 +14,7 @@ export function Bredcrumb() {
         return (
           <li className={!item?.isRootCategory ? "active" : ""}>
             {pageData?.payLoad?.navigationPath?.length-1 !== index ? (
-              <Link href={item.id}>{item?.name}</Link>
+              <Link href={`${item.id}?id=${item.id}`}>{item?.name}</Link>
             ) : (
               <span>{item?.name}</span>
             )}

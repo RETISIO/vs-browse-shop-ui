@@ -1,6 +1,7 @@
 import React from 'react';
 import { Template } from '../../shared/template/template';
 import { usePageDataContext } from '../../shared/context/pageData-context';
+import { SortVO } from '../../shared/template/sortVO';
 
 export default function PageBuilder(props) {
   const { pageData } = usePageDataContext();
@@ -102,11 +103,12 @@ export default function PageBuilder(props) {
                           >
                             Filter
                           </button>
-
-                          <form className="form-inline sort-by">
+                            <SortVO />
+                          {/* <form className="form-inline sort-by">
                             <div className="form-group">
                               <label htmlFor="cc-sort">Sort By:</label>
                               <select id="cc-sort" className="form-control">
+                                {}
                                 <option value="">Recommended</option>
                                 <option value="">Price: Low to High</option>
                                 <option value="">Price: High to low</option>
@@ -118,7 +120,7 @@ export default function PageBuilder(props) {
                               >
                               </span>
                             </div>
-                          </form>
+                          </form> */}
                         </div>
                         <p className="page-description">
                           Are you looking for the best gift idea that will

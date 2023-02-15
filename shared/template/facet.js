@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePageDataContext } from "../context/pageData-context";
+import { useParams, useNavigate } from "react-router-dom";
+import { useRouter } from 'next/router';
 
 export function Facet() {
   const { pageData } = usePageDataContext();
+//   const { id } = useParams();
+  let navigate = useRouter();
+//console.log("object", navigate.query);
+const [urlIds, setUrlIds] = useState("");
+
+const handleFacet = (id , checked) => {
+  let urlArr = [];
+  if(checked){
+    urlArr = [...urlIds, id]
+  } else {
+    
+  }
+  setUrlIds(urlArr);
+}
+
+console.log("urlIds",urlIds);
 
   return (
     <div className="panel-group">
@@ -32,7 +50,7 @@ export function Facet() {
                   {value?.facetValues?.map((val, index) => {
                     return (
                       <li>
-                        <a href="#">
+                        <a href="#" onClick={()=> handleFacet(val.facetLabel, true)}>
                           {val.facetLabel} ({val.facetValueCount})
                         </a>
                       </li>
