@@ -1,8 +1,15 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable comma-dangle */
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
+/* eslint-disable space-before-function-paren */
+/* eslint-disable linebreak-style */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
 import { useEffect } from 'react';
 // eslint-disable-next-line import/named
 import { useRouter } from 'next/router';
+// eslint-disable-next-line import/named
 import { requestContructor } from '../../shared/helpers/api';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import PageBuilder from './pageBuilder';
@@ -14,15 +21,11 @@ function Static({ data }) {
   const { setPageData } = usePageDataContext();
   const pageContent = data?.payLoad?.page?.segmentsMap;
   data.page = data?.payLoad?.page;
+
   useEffect(() => {
     data && setPageData(data);
-    // const m = getData();
-    // console.log('navigate.query', m);
-  //  (async() => {
-  //   let res = await requestContructor(`getProductsList?CategoryId=${navigate.query.id.join("+")}`, '', {}, false);
-  //  console.log("ressss",res)
- // })
   }, [navigate.query.id]);
+
   return (
     <MainLayout data={data}>
       <main>
@@ -33,11 +36,16 @@ function Static({ data }) {
   );
 }
 
-Static.getInitialProps = async(context) => {
+Static.getInitialProps = async (context) => {
   const { query, req } = context;
   let res;
   try {
-    res = await requestContructor(`getProductsList?CategoryId=${query.id}`, '', {}, !!req);
+    res = await requestContructor(
+      `getProductsList?CategoryId=${query.id}`,
+      '',
+      {},
+      !!req
+    );
   } catch (e) {
     res = {};
   }
