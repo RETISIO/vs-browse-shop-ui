@@ -45,6 +45,9 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
+  const searchAheadChangeHandler = (text) => {
+    console.log('In Layout.js file text is :::::::', text);
+  };
   return (
     <>
       <Head>
@@ -71,7 +74,13 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout data={data} appData={state} transformText={i18n.t} rootCatagories={rootCatagories}>
+      <Layout
+        data={data}
+        appData={state}
+        transformText={i18n.t}
+        rootCatagories={rootCatagories}
+        searchAheadChangeHandler={searchAheadChangeHandler}
+      >
         {children}
       </Layout>
     </>
