@@ -1,31 +1,34 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable linebreak-style */
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 import { usePageDataContext } from '../context/pageData-context';
 
-export function ResultList() {
+function ResultList() {
   const { pageData } = usePageDataContext();
 
   return (
     <>
-      {pageData?.payLoad?.products?.map((value, index) => (
+      {pageData?.payLoad?.products?.map((value) => (
         <div className="col-md-4 col-sm-6 col-xs-12">
           <div className="product-card" data-mh="product-card">
             {!value?.productPrice?.onSale ? (
               <div className="product-badge sale">
                 <div id="cc_img__resize_wrapper-sale-badge" className="">
+                  {/* <Image
+                    alt="sale"
+                    src="https://www.allenbrothers.com/file/general/sale-badge.png"
+                    width={50}
+                    height={50}
+                    loading="lazy"
+                  /> */}
                   <img
                     alt="sale"
-                    data-error-src="/file/v1375487262462743897/general/missing-image.jpg"
-                    data-default-error-src="/img/no-image.jpg"
                     className="ccLazyLoaded"
-                    data-lazy-loading-image-className="ccLazyLoad"
-                    data-lazy-loaded-image-className="ccLazyLoaded"
-                    data-lazy-loading-parent-className="ccLazyLoad-background"
-                    data-src="/file/general/sale-badge.png"
-                    data-lazy-loading="false"
                     src="https://www.allenbrothers.com/file/general/sale-badge.png"
                     data-srcset="/ccstore/v1/images/?source=/file/general/sale-badge.png&amp;height=50&amp;width=50 50w"
-                    data-sizes="(max-width:480px) 50px,(min-width:481px) and (max-width:768px) 50px,(min-width:769px) and (max-width:979px) 50px,(min-width:980px) 50px"
                     srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/sale-badge.png&amp;height=50&amp;width=50 50w"
                     sizes="(max-width:480px) 50px,(min-width:481px) and (max-width:768px) 50px,(min-width:769px) and (max-width:979px) 50px,(min-width:980px) 50px"
                   />
@@ -34,33 +37,38 @@ export function ResultList() {
             ) : null}
             {value?.additionalDetails?.isPrimeProduct ? (
               <div className="product-badge usda">
-              <div id="cc_img__resize_wrapper-usda-badge" className="">
-                <img alt="usda"
-                  data-error-src="/file/v1375487262462743897/general/missing-image.jpg" data-default-error-src="/img/no-image.jpg"
-                  className="ccLazyLoaded" data-lazy-loading-image-className="ccLazyLoad" data-lazy-loaded-image-className="ccLazyLoaded"
-                  data-lazy-loading-parent-className="ccLazyLoad-background"
-                  data-src="/file/general/usda-badge.png" data-lazy-loading="false"
-                  src="https://www.allenbrothers.com/file/general/usda-badge.png" data-srcset="/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
-                  data-sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px"
-                  srcset="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
-                  sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px" />
+                <div id="cc_img__resize_wrapper-usda-badge" className="">
+                  <img
+                    alt="usda"
+                    className="ccLazyLoaded"
+                    src="https://www.allenbrothers.com/file/general/usda-badge.png" 
+                    data-srcset="/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
+                    data-sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px"
+                    srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
+                    sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px" />
+                </div>
               </div>
-            </div>
             ) : null}
             <a
               className="product-image"
               href="/products/month-plan-duo/10916"
             >
               <div className="image-pos">
-                <img
+                <Image
+                  className="item-thumb img-responsive"
+                  alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
+                  src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
+                  width={262}
+                  height={262}
+                  loading="lazy"
+                />
+                {/* <img
                   className="item-thumb img-responsive"
                   alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
                   id="CC-product-list-image-10916-00"
                   onError="https://www.allenbrothers.com/img/no-image.jpg"
-                    // onerror="this.onerror=null;this.src='https://www.allenbrothers.com/img/no-image.jpg';"
                   src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog/${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
-                    // src="https://www.allenbrothers.com/img/no-image.jpg"
-                />
+                /> */}
               </div>
             </a>
             <div className="product-card-inner">
@@ -120,3 +128,5 @@ export function ResultList() {
     </>
   );
 }
+
+export default ResultList;

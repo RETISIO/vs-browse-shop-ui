@@ -7,25 +7,16 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable quotes */
 import React from "react";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import Link from 'next/link';
 import { usePageDataContext } from "../context/pageData-context";
 
 function Facet() {
   const { pageData } = usePageDataContext();
   const navigate = useRouter();
-  // const [urlIds, setUrlIds] = useState("");
 
-  // const handleFacet = (id, checked) => {
-  //   let urlArr = [];
-  //   if (checked) {
-  //     urlArr = [...urlIds, id];
-  //   } else {
-  //   }
-  //   setUrlIds(urlArr);
-  // };
-
-  console.log("urlIds", navigate.asPath);
+  const path = navigate.asPath.split("?")[0];
+  const newId = navigate.query.id.join("+");
 
   return (
     <div className="panel-group">
@@ -54,9 +45,10 @@ function Facet() {
                 {value?.facetValues?.map((val, index) => (
                   <li>
                     <Link
-                      // href={`${navigate.asPath}+${val.facetLabel}`}
-                      // eslint-disable-next-line max-len
-                      href={`/plp/${pageData?.payLoad?.incomingUrl}?id=${pageData?.payLoad?.incomingUrl}+${val.facetLabel}`}
+                      href={{
+                      pathname: path,
+                      query: { id: encodeURI(`${newId}+${val.facetValueCount}`) },
+                    }}
                     >
                       {val.facetLabel}
                       {' '}

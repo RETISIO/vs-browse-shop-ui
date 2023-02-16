@@ -10,7 +10,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Breadcrumb } from './breadcrumb';
 import Facet from './facet';
-import { ResultList } from './resultList';
+import ResultList from './resultList';
 
 export function Template(props) {
   const renderContentData = (contentItemObj) => {

@@ -26,6 +26,8 @@ function Static({ data }) {
     data && setPageData(data);
   }, [navigate.query.id]);
 
+ 
+
   return (
     <MainLayout data={data}>
       <main>
@@ -36,12 +38,24 @@ function Static({ data }) {
   );
 }
 
+const getParameterByName=(name, url) => {
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
 Static.getInitialProps = async (context) => {
-  const { query, req } = context;
+  const { query, req, asPath } = context;
+
+  let p = getParameterByName("id", asPath);
+  console.log("ppppppp",p,context, asPath);
   let res;
   try {
     res = await requestContructor(
-      `getProductsList?CategoryId=${query.id}`,
+      `getProductsList?CategoryId=${!!req  ? query.id : p}`,
       '',
       {},
       !!req

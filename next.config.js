@@ -21,6 +21,13 @@ module.exports = {
   //     modifyVars: themeVariables,
   //   },
   // },
+  images: {
+    remotePatterns: [
+      {
+        hostname: '192.168.23.87',
+      },
+    ],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
