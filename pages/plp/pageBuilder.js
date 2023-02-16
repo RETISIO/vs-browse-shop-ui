@@ -6,7 +6,7 @@ import { SortVO } from '../../shared/template/sortVO';
 
 export default function PageBuilder(props) {
  const { pageContent, data } = props;
-  const [pageContentData, setPageContent] = useState(data.page);
+  const [pageContentData, setPageContent] = useState(data?.page);
   const { pageData } = usePageDataContext();
   console.log("propsss",data);
   useEffect(()=>{
@@ -52,7 +52,7 @@ export default function PageBuilder(props) {
 
                             <small className="results-count countOne">
                               (
-                              {pageData?.payLoad?.productCount}
+                              {pageContentData?.payLoad?.productCount}
                             </small>
                             <small className="results-count">Results)</small>
                           </h1>
