@@ -18,7 +18,7 @@ export function Breadcrumb(props) {
       </li>
       {pageContentData?.payLoad?.navigationPath?.map((item, index) => (
         <li className={!item?.isRootCategory ? 'active' : ''}>
-          {pageContentData?.payLoad?.navigationPath?.length-1 !== index ? (
+          {pageContentData?.payLoad?.navigationPath?.length - 1 !== index ? (
             <Link href={`${item.id}?id=${item.id}`}>{item?.name}</Link>
           ) : (
             <span>{item?.name}</span>

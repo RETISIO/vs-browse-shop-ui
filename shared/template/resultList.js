@@ -3,9 +3,9 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 import { usePageDataContext } from '../context/pageData-context';
-import NewBadge from '../../public/static/assets/New.jpg';
+import { DisplayImage } from './displayImage';
 
 function ResultList(props) {
   const { data } = props;
@@ -23,20 +23,12 @@ function ResultList(props) {
             {value?.productPrice?.onSale ? (
               <div className="product-badge sale">
                 <div id="cc_img__resize_wrapper-sale-badge" className="">
-                  {/* <Image
-                    alt="sale"
-                    src="https://www.allenbrothers.com/file/general/sale-badge.png"
-                    width={50}
-                    height={50}
-                    loading="lazy"
-                  /> */}
-                  <img
+                  <DisplayImage
                     alt="sale"
                     className="ccLazyLoaded"
-                    src="https://www.allenbrothers.com/file/general/sale-badge.png"
-                    data-srcset="/ccstore/v1/images/?source=/file/general/sale-badge.png&amp;height=50&amp;width=50 50w"
-                    srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/sale-badge.png&amp;height=50&amp;width=50 50w"
-                    sizes="(max-width:480px) 50px,(min-width:481px) and (max-width:768px) 50px,(min-width:769px) and (max-width:979px) 50px,(min-width:980px) 50px"
+                    src="/static/assets/sale-badge.png"
+                    height={50}
+                    width={50}
                   />
                 </div>
               </div>
@@ -44,53 +36,51 @@ function ResultList(props) {
             {value?.additionalDetails?.isPrimeProduct ? (
               <div className="product-badge usda">
                 <div id="cc_img__resize_wrapper-usda-badge" className="">
-                  <img
+                  <DisplayImage
                     alt="usda"
                     className="ccLazyLoaded"
-                    src="https://www.allenbrothers.com/file/general/usda-badge.png" 
-                    data-srcset="/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
-                    data-sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px"
-                    srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/usda-badge.png&amp;height=45&amp;width=55 55w"
-                    sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px" />
+                    src="/static/assets/usda-badge.png"
+                    height={55}
+                    width={55}
+                  />
                 </div>
               </div>
             ) : null}
-            <a
+            <Link
               className="product-image"
-              href="/products/month-plan-duo/10916"
+              href={`/products/month-plan-duo/${value?.productId}`}
             >
               <div className="image-pos">
-                <Image
-                  className="item-thumb img-responsive"
+                <DisplayImage
                   alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
+                  className="item-thumb img-responsive"
                   src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
-                  width={262}
                   height={262}
-                  loading="lazy"
+                  width={262}
                 />
               </div>
-            </a>
+            </Link>
             <div className="product-card-inner">
               <p className="product-card-desc">
-                <a href="/products/month-plan-duo/10916">
+                <Link href={`/products/month-plan-duo/${value?.productId}`}>
                   {value.displayName}
-                </a>
-                {value?.additionalDetails?.isNewProduct ? (
-                  <div
-                    id="cc_img__resize_wrapper-new-badge"
-                    className=""
-                    style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
-                  >
-                    <Image
-                      className="image-badge ccLazyLoaded"
-                      alt="New"
-                      src={NewBadge}
-                      width={50}
-                      height={23}
-                      loading="lazy"
-                    />
-                  </div>
-                ) : null}
+                </Link>
+                {(value?.additionalDetails?.isNewProduct || value?.additionalDetails?.isNeverFrozen)
+                  ? (
+                    <div
+                      id="cc_img__resize_wrapper-new-badge"
+                      className=""
+                      style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
+                    >
+                      <DisplayImage
+                        alt={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? 'fresh' : 'new'}
+                        className="image-badge ccLazyLoaded"
+                        src={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? '/static/assets/fresh.png' : '/static/assets/new.png'}
+                        height={50}
+                        width={23}
+                      />
+                    </div>
+                  ) : null}
               </p>
               {/* <div
                   for="reviewsection"
@@ -133,11 +123,16 @@ function ResultList(props) {
                   </div>
                 </div> */}
               <p className="product-card-price">
-                <span>Starting At: </span>
-                <b>
-                  $
-                  {value?.productPrice?.minListPrice}
-                </b>
+                {value?.productPrice?.minListPrice === 0 ? null
+                  : (
+                    <>
+                      <span>Starting At: </span>
+                      <b>
+                        $
+                        {value?.productPrice?.minListPrice}
+                      </b>
+                    </>
+                  )}
               </p>
             </div>
           </div>
