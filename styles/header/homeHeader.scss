@@ -3872,7 +3872,7 @@
 	.header-sticky.js-sticky-menu.is_stuck {
 		position: fixed;
 		top: 0;
-		width: 100%;
+		width: 101%;
 		transition: .1s ease-in-out;
 	}
 	.homeDropdownMenu {
@@ -3926,5 +3926,8 @@
 		border: none;
 		cursor: pointer;
 		outline: none;
+	}
+	.dropdown-menu-search.show {
+		display: block;
 	}
 }

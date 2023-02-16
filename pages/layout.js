@@ -45,7 +45,7 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
-  const [searchAheadData, setSearchAheadData] = useState([]);
+  const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}`, {}, false);
     return res;
@@ -54,6 +54,8 @@ export default function MainLayout({ data, children }) {
     if (text.trim().length > 2) {
       const result = getSearchAheadData(text);
       setSearchAheadData(result);
+    } else {
+      setSearchAheadData(null);
     }
   };
   return (
