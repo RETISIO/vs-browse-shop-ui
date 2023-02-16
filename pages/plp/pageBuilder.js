@@ -51,7 +51,7 @@ export default function PageBuilder(props) {
 
                             <small className="results-count countOne">
                               (
-                              {pageContentData?.payLoad?.productCount}
+                              {pageData?.payLoad?.productCount}
                             </small>
                             <small className="results-count">Results)</small>
                           </h1>
