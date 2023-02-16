@@ -6,63 +6,120 @@
 /* eslint-disable no-empty */
 /* eslint-disable linebreak-style */
 /* eslint-disable quotes */
-import React from "react";
-import { useRouter, Router } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Link from 'next/link';
 import { usePageDataContext } from "../context/pageData-context";
 
-function Facet() {
+function Facet(props) {
+  const { data } = props;
+  const [pageContentData, setPageContent] = useState(data);
   const { pageData } = usePageDataContext();
+  useEffect(() => {
+    setPageContent(pageData);
+  }, [pageData]);
+
   const navigate = useRouter();
+  const [selectedFacets, setSelectedFacets] = useState(navigate.query.id.join("+"));
 
   const path = navigate.asPath.split("?")[0];
-  const newId = navigate.query.id.join("+");
+
+  useEffect(() => {
+    setSelectedFacets(pageContentData?.payLoad?.incomingUrl.split(' ').join('+'));
+  }, [pageContentData?.payLoad?.incomingUrl]);
 
   return (
-    <div className="panel-group">
-      {pageData?.payLoad?.facets?.map((value, _key) => (
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <div className="panel-title">
-              <a
-                role="button"
-                data-toggle="collapse"
-                href="#collapse_0"
-                d="heading_0"
-              >
-                {value.displayName}
-                <i className="icon fas fa-chevron-down"></i>
-              </a>
-            </div>
-          </div>
-          <div
-            className="panel-collapse in"
-            data-collapse="xs"
-            id="collapse_0"
-          >
-            <div className="panel-body">
-              <ul className="catalog-filter__category-list list-unstyled">
-                {value?.facetValues?.map((val, index) => (
-                  <li>
+    <div className="catalog-aside">
+      <div className="catalog-filter__top">
+        <div className="catalog-filter__clear">
+          <b>Filters: </b>
+          {pageContentData?.payLoad?.selectedFacets?.length > 0 && (
+            <Link
+              className="link-underline"
+              href={{
+                pathname: path,
+                query: { id: navigate.query.id[0] },
+              }}
+            >
+              Clear All
+            </Link>
+          )}
+          
+        </div>
+        <ul className="catalog-filter__selected list-unstyled">
+          {pageContentData?.payLoad?.selectedFacets?.map((val) => (
+            <>
+              {
+                val.facetValues.map((item) => (
+                  <li
+                    className="js-detach-row"
+                  >
                     <Link
+                      className="js-detach-row-btn"
                       href={{
-                      pathname: path,
-                      query: { id: encodeURI(`${newId}+${val.facetValueCount}`) },
-                    }}
+                        pathname: path,
+                        // eslint-disable-next-line max-len
+                        query: { id: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`) },
+                      }}
+                      title="removeRefinement"
                     >
-                      {val.facetLabel}
-                      {' '}
-                      (
-                      {val.facetValueCount}
-                      )
+                      {item.facetLabel}
+                      <i className="icon fas fa-times-circle"></i>
                     </Link>
                   </li>
-              ))}
-              </ul>
+                  ))
+              }
+            </>
+          ))}
+        </ul>
+      </div>
+      <div className="catalog-filter__block">
+        <div className="panel-group">
+          {pageContentData?.payLoad?.facets?.map((value, _key) => (
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <div className="panel-title">
+                  <a
+                    role="button"
+                    data-toggle="collapse"
+                    href="#collapse_0"
+                    d="heading_0"
+                  >
+                    {value.displayName}
+                    <i className="icon fas fa-chevron-down"></i>
+                  </a>
+                </div>
+              </div>
+              <div
+                className="panel-collapse in"
+                data-collapse="xs"
+                id="collapse_0"
+              >
+                <div className="panel-body">
+                  <ul className="catalog-filter__category-list list-unstyled">
+                    {value?.facetValues?.map((val, index) => (
+                      <li>
+                        <Link
+                          href={{
+                          pathname: path,
+                          query: { id: encodeURI(`${selectedFacets}+${val.facetId}`) },
+                        }}
+                        >
+                          {val.facetLabel}
+                          {' '}
+                          (
+                          {val.facetValueCount}
+                          )
+                        </Link>
+                      </li>
+                  ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

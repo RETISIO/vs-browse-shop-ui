@@ -18,16 +18,16 @@ export function Template(props) {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
-            <Breadcrumb />
+            <Breadcrumb {...props} />
           </ol>
         </nav>
       );
     }
     if (contentItemObj.contentTypeId === 'Facet') {
-      return <Facet />;
+      return <Facet {...props} />;
     }
     if (contentItemObj.contentTypeId === 'Result List') {
-      return <ResultList />;
+      return <ResultList {...props} />;
     }
   };
 

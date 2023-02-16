@@ -2,19 +2,25 @@
 /* eslint-disable max-len */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable linebreak-style */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePageDataContext } from '../context/pageData-context';
+import NewBadge from '../../public/static/assets/New.jpg';
 
-function ResultList() {
+function ResultList(props) {
+  const { data } = props;
+  const [pageContentData, setPageContent] = useState(data);
   const { pageData } = usePageDataContext();
+  useEffect(() => {
+    setPageContent(pageData);
+  }, [pageData]);
 
   return (
     <>
-      {pageData?.payLoad?.products?.map((value) => (
+      {pageContentData?.payLoad?.products?.map((value) => (
         <div className="col-md-4 col-sm-6 col-xs-12">
           <div className="product-card" data-mh="product-card">
-            {!value?.productPrice?.onSale ? (
+            {value?.productPrice?.onSale ? (
               <div className="product-badge sale">
                 <div id="cc_img__resize_wrapper-sale-badge" className="">
                   {/* <Image
@@ -62,13 +68,6 @@ function ResultList() {
                   height={262}
                   loading="lazy"
                 />
-                {/* <img
-                  className="item-thumb img-responsive"
-                  alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
-                  id="CC-product-list-image-10916-00"
-                  onError="https://www.allenbrothers.com/img/no-image.jpg"
-                  src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog/${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
-                /> */}
               </div>
             </a>
             <div className="product-card-inner">
@@ -76,6 +75,22 @@ function ResultList() {
                 <a href="/products/month-plan-duo/10916">
                   {value.displayName}
                 </a>
+                {value?.additionalDetails?.isNewProduct ? (
+                  <div
+                    id="cc_img__resize_wrapper-new-badge"
+                    className=""
+                    style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
+                  >
+                    <Image
+                      className="image-badge ccLazyLoaded"
+                      alt="New"
+                      src={NewBadge}
+                      width={50}
+                      height={23}
+                      loading="lazy"
+                    />
+                  </div>
+                ) : null}
               </p>
               {/* <div
                   for="reviewsection"
@@ -119,7 +134,10 @@ function ResultList() {
                 </div> */}
               <p className="product-card-price">
                 <span>Starting At: </span>
-                <b>{value?.productPrice?.minListPrice}</b>
+                <b>
+                  $
+                  {value?.productPrice?.minListPrice}
+                </b>
               </p>
             </div>
           </div>

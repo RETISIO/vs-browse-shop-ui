@@ -19,7 +19,7 @@ function Static({ data }) {
   // const i18n = useI18n();
   const navigate = useRouter();
   const { setPageData } = usePageDataContext();
-  const pageContent = data?.payLoad?.page?.segmentsMap;
+  const pageContent = data?.payLoad?.page;
   data.page = data?.payLoad?.page;
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function Static({ data }) {
     <MainLayout data={data}>
       <main>
         {/* {i18n.t('title')} */}
-        <PageBuilder pageContent={pageContent} />
+        <PageBuilder pageContent={pageContent} data={data} />
       </main>
     </MainLayout>
   );
@@ -48,11 +48,11 @@ const getParameterByName=(name, url) => {
 Static.getInitialProps = async (context) => {
   const { query, req, asPath } = context;
 
-  let p = getParameterByName('id', asPath);
+  const newPath = getParameterByName('id', asPath);
   let res;
   try {
     res = await requestContructor(
-      `getProductsList?CategoryId=${!!req ? query.id : p}`,
+      `getProductsList?CategoryId=${!!req ? query.id : newPath}`,
       '',
       {},
       !!req
