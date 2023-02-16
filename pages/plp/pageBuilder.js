@@ -5,14 +5,13 @@ import { usePageDataContext } from '../../shared/context/pageData-context';
 import { SortVO } from '../../shared/template/sortVO';
 
 export default function PageBuilder(props) {
- const { pageContent, data } = props;
+  const { data } = props;
   const [pageContentData, setPageContent] = useState(data?.page);
   const { pageData } = usePageDataContext();
-  console.log("propsss",data);
-  useEffect(()=>{
+  useEffect(() => {
     setPageContent(pageData?.payLoad?.page);
-  },[pageData]);
-  //const pageContentData = pageData?.payLoad?.page;
+  }, [pageData]);
+  // const pageContentData = pageData?.payLoad?.page;
   
   return (
     <div id="main" className="static-main-container holidayContainer">
