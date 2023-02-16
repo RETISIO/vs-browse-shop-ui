@@ -45,8 +45,16 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
+  const [searchAheadData, setSearchAheadData] = useState([]);
+  const getSearchAheadData = async(text) => {
+    const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}`, {}, false);
+    return res;
+  };
   const searchAheadChangeHandler = (text) => {
-    console.log('In Layout.js file text is :::::::', text);
+    if (text.trim().length > 2) {
+      const result = getSearchAheadData(text);
+      setSearchAheadData(result);
+    }
   };
   return (
     <>
@@ -80,6 +88,7 @@ export default function MainLayout({ data, children }) {
         transformText={i18n.t}
         rootCatagories={rootCatagories}
         searchAheadChangeHandler={searchAheadChangeHandler}
+        searchAheadData={searchAheadData}
       >
         {children}
       </Layout>
