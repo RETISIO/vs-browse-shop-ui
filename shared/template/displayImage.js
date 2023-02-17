@@ -14,7 +14,7 @@ export function DisplayImage(props) {
       className={className}
       src={srcImg}
       loading="lazy"
-      placeholder="blur"
+      // placeholder="blur"
       blurDataURL="/static/assets/blur.png"
       onError={() => setSrc(NoImage)}
     />

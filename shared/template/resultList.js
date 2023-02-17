@@ -61,7 +61,7 @@ function ResultList(props) {
               </div>
             </Link>
             <div className="product-card-inner">
-              <p className="product-card-desc">
+              <div className="product-card-desc">
                 <Link href={`/products/month-plan-duo/${value?.productId}`}>
                   {value.displayName}
                 </Link>
@@ -81,7 +81,7 @@ function ResultList(props) {
                       />
                     </div>
                   ) : null}
-              </p>
+              </div>
               {/* <div
                   for="reviewsection"
                   className="yotpo bottomLine yotpo-small"
