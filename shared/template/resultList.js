@@ -75,7 +75,7 @@ function ResultList(props) {
                       <DisplayImage
                         alt={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? 'fresh' : 'new'}
                         className="image-badge ccLazyLoaded"
-                        src={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? '/static/assets/fresh.png' : '/static/assets/new.png'}
+                        src={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? '/static/assets/Fresh.png' : '/static/assets/new.png'}
                         height={50}
                         width={23}
                       />
