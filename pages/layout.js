@@ -45,6 +45,19 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
+  const [searchAheadData, setSearchAheadData] = useState(null);
+  const getSearchAheadData = async(text) => {
+    const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}`, {}, false);
+    return res;
+  };
+  const searchAheadChangeHandler = (text) => {
+    if (text.trim().length > 2) {
+      const result = getSearchAheadData(text);
+      setSearchAheadData(result);
+    } else {
+      setSearchAheadData(null);
+    }
+  };
   return (
     <>
       <Head>
@@ -71,7 +84,14 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <Layout data={data} appData={state} transformText={i18n.t} rootCatagories={rootCatagories}>
+      <Layout
+        data={data}
+        appData={state}
+        transformText={i18n.t}
+        rootCatagories={rootCatagories}
+        searchAheadChangeHandler={searchAheadChangeHandler}
+        searchAheadData={searchAheadData}
+      >
         {children}
       </Layout>
     </>
