@@ -11,7 +11,6 @@ export default function PageBuilder(props) {
   useEffect(() => {
     setPageContent(pageData?.payLoad?.page);
   }, [pageData]);
-  // const pageContentData = pageData?.payLoad?.page;
   
   return (
     <div id="main" className="static-main-container holidayContainer">
@@ -44,17 +43,15 @@ export default function PageBuilder(props) {
                       </aside>
                       <div className="col-md-9 col-sm-8">
                         <div className="page-title-container d-flex justify-space-between align-items-top">
-                          <h1>
-                            <span className="result-title-count">
-                              Holiday Food Gifts
-                            </span>
-
-                            <small className="results-count countOne">
-                              (
-                              {pageData?.payLoad?.productCount}
-                            </small>
-                            <small className="results-count">Results)</small>
-                          </h1>
+                          {pageContentData?.segmentsMap?.middle ? (
+                            <Template
+                              templateData={pageContentData?.segmentsMap?.middle}
+                              type="resultCount"
+                              {...props}
+                            />
+                          ) : (
+                            ''
+                          )}
                           <button
                             className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
                             data-target="#mobileFilter"
@@ -62,42 +59,32 @@ export default function PageBuilder(props) {
                             Filter
                           </button>
                           <SortVO />
-                          {/* <form className="form-inline sort-by">
-                            <div className="form-group">
-                              <label htmlFor="cc-sort">Sort By:</label>
-                              <select id="cc-sort" className="form-control">
-                                {}
-                                <option value="">Recommended</option>
-                                <option value="">Price: Low to High</option>
-                                <option value="">Price: High to low</option>
-                                <option value="">Name</option>
-                              </select>
-                              <span
-                                className="text-danger"
-                                role="alert"
-                              >
-                              </span>
-                            </div>
-                          </form> */}
                         </div>
                         <p className="page-description">
-                          Are you looking for the best gift idea that will
-                          stand out this holiday season? Get your friends and
-                          loved ones a gourmet food gift from Allen Brothers.
-                          Our selection of high-quality meats makes the
-                          perfect gift for the foodie in your life!
+                          {data?.categories?.[0]?.description || pageData?.categories?.[0]?.description}
                         </p>
                         <div id="product-grid">
                           <div className="row row-gutter-sm-15">
                             {pageContentData?.segmentsMap?.middle ? (
                               <Template
                                 templateData={pageContentData?.segmentsMap?.middle}
+                                type="resultList"
                                 {...props}
                               />
                             ) : (
                               ''
                             )}
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-md-9 col-md-offset-3">
+                        <div
+                          className="hidden-xs"
+                          // eslint-disable-next-line max-len
+                          dangerouslySetInnerHTML={{__html: data?.categories?.[0]?.longDescription || pageData?.categories?.[0]?.longDescription }}
+                        >
                         </div>
                       </div>
                     </div>
