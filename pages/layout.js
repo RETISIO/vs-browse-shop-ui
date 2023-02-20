@@ -9,6 +9,7 @@ import { Layout } from '@retisio/sf-ui';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../shared/context/appContext';
 import { requestContructor } from '../shared/helpers/api';
+import ComponentMap from '../shared/helpers/componentMap';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
@@ -47,17 +48,18 @@ export default function MainLayout({ data, children }) {
   }, [router.locale]);
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
-    const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}`, {}, false);
+    const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}&size=4`, {}, false);
+    setSearchAheadData(res);
     return res;
   };
   const searchAheadChangeHandler = (text) => {
     if (text.trim().length > 2) {
-      const result = getSearchAheadData(text);
-      setSearchAheadData(result);
+      getSearchAheadData(text);
     } else {
       setSearchAheadData(null);
     }
   };
+  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
   return (
     <>
       <Head>
@@ -91,6 +93,8 @@ export default function MainLayout({ data, children }) {
         rootCatagories={rootCatagories}
         searchAheadChangeHandler={searchAheadChangeHandler}
         searchAheadData={searchAheadData}
+        componentMap={ComponentMap}
+        damPath={damPath}
       >
         {children}
       </Layout>
