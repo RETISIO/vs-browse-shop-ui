@@ -40,16 +40,16 @@ function Static({ data }) {
 Static.getInitialProps = async (context) => {
   const { query, req, asPath } = context;
   
+  const reqURI = req ? req?.url : asPath;
+  const categoryIds = URLHandler('id', reqURI);
+  const facetIds = URLHandler('fs', reqURI) || '';
+  const sort = URLHandler('so', reqURI) || '';
 
-  const categoryIds = URLHandler('id', asPath);
-  const facetIds = URLHandler('fs', asPath) || '';
-  const sort = URLHandler('so', asPath) || '';
-  
   let res;
   try {
     res = await requestContructor(
       // eslint-disable-next-line max-len
-      `getProductsList?CategoryId=${!!req ? query.id : categoryIds}${facetIds !== "" ? `&FacetId=${!!req ? query.fs : facetIds}` : ''}${sort !== '' ? `&SortOrder=${!!req ? query.so : sort}` : ''}
+      `getProductsList?CategoryId=${categoryIds}${facetIds !== '' ? `&FacetId=${facetIds}` : ''}${sort !== '' ? `&SortOrder=${sort}` : ''}
       `,
       '',
       {},
