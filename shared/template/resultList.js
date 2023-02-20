@@ -5,7 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePageDataContext } from '../context/pageData-context';
-import { DisplayImage } from './displayImage';
+import { NextImage } from './nextImage';
 
 function ResultList(props) {
   const { data } = props;
@@ -23,7 +23,7 @@ function ResultList(props) {
             {value?.productPrice?.onSale ? (
               <div className="product-badge sale">
                 <div id="cc_img__resize_wrapper-sale-badge" className="">
-                  <DisplayImage
+                  <NextImage
                     alt="sale"
                     className="ccLazyLoaded"
                     src="/static/assets/sale-badge.png"
@@ -36,7 +36,7 @@ function ResultList(props) {
             {value?.additionalDetails?.isPrimeProduct ? (
               <div className="product-badge usda">
                 <div id="cc_img__resize_wrapper-usda-badge" className="">
-                  <DisplayImage
+                  <NextImage
                     alt="usda"
                     className="ccLazyLoaded"
                     src="/static/assets/usda-badge.png"
@@ -51,7 +51,7 @@ function ResultList(props) {
               href={`/products/month-plan-duo/${value?.productId}`}
             >
               <div className="image-pos">
-                <DisplayImage
+                <NextImage
                   alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
                   className="item-thumb img-responsive"
                   src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
@@ -72,7 +72,7 @@ function ResultList(props) {
                       className=""
                       style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
                     >
-                      <DisplayImage
+                      <NextImage
                         alt={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? 'fresh' : 'new'}
                         className="image-badge ccLazyLoaded"
                         src={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? '/static/assets/Fresh.png' : '/static/assets/new.png'}

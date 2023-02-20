@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import { usePageDataContext } from "../context/pageData-context";
+import URLHandler from '../helpers/urlHandler';
 
 function Facet(props) {
   const { data } = props;
@@ -20,17 +21,51 @@ function Facet(props) {
   }, [pageData]);
 
   const navigate = useRouter();
-  const [selectedFacets, setSelectedFacets] = useState(navigate.query.id.join("+"));
+  const [selectedCategories, setSelectedCategories] = useState(navigate.query.id.join("+"));
+  const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.fs?.concat("+") || "");
 
   const path = navigate.asPath.split("?")[0];
 
+  const categoryIds = URLHandler('id', navigate.asPath);
+  const facetIds = URLHandler('fs', navigate.asPath) || "";
+
   useEffect(() => {
-    setSelectedFacets(pageContentData?.payLoad?.incomingUrl.split(' ').join('+'));
-  }, [pageContentData?.payLoad?.incomingUrl]);
+    setSelectedCategories(categoryIds);
+    setSelectedFacets(facetIds);
+  }, [categoryIds, facetIds]);
 
   return (
     <div className="catalog-aside">
       <div className="catalog-filter__top">
+        {(pageContentData?.payLoad?.categories && pageContentData?.payLoad?.categories?.length > 0)
+        ? (
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <div className="panel-title">
+                <a>Categories</a>
+              </div>
+            </div>
+            <div className="panel-collapse">
+              <div className="panel-body">
+                <ul className="catalog-filter__category-list list-unstyled">
+                  {pageContentData?.payLoad?.categories?.map((item, i) => (
+                    <li key={i}>
+                      <Link
+                        href={{
+                          pathname: path,
+                          query: { id: encodeURI(`${selectedCategories}+${item.id}`) },
+                        }}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+      ) : null}
         <div className="catalog-filter__clear">
           <b>Filters: </b>
           {pageContentData?.payLoad?.selectedFacets?.length > 0 && (
@@ -102,7 +137,11 @@ function Facet(props) {
                         <Link
                           href={{
                           pathname: path,
-                          query: { id: encodeURI(`${selectedFacets}+${val.facetId}`) },
+                          query:
+                          {
+                            id: encodeURI(`${selectedCategories}`),
+                            fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
+                          },
                         }}
                         >
                           {val.facetLabel}

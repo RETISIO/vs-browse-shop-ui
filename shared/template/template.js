@@ -11,6 +11,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Breadcrumb } from './breadcrumb';
 import Facet from './facet';
 import ResultList from './resultList';
+import { ResultCount } from './resultCount';
 
 export function Template(props) {
   const renderContentData = (contentItemObj) => {
@@ -26,8 +27,11 @@ export function Template(props) {
     if (contentItemObj.contentTypeId === 'Facet') {
       return <Facet {...props} />;
     }
-    if (contentItemObj.contentTypeId === 'Result List') {
+    if ((contentItemObj.contentTypeId === 'Result List' && props.type === 'resultList')) {
       return <ResultList {...props} />;
+    }
+    if ((contentItemObj.contentTypeId === 'Result Count' && props.type === 'resultCount')) {
+      return <ResultCount {...props} />;
     }
   };
 
