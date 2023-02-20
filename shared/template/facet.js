@@ -73,7 +73,9 @@ function Facet(props) {
               className="link-underline"
               href={{
                 pathname: path,
-                query: { id: navigate.query.id[0] },
+                query: {
+                  id: encodeURI(`${selectedCategories}`),
+                },
               }}
             >
               Clear All
@@ -93,8 +95,11 @@ function Facet(props) {
                       className="js-detach-row-btn"
                       href={{
                         pathname: path,
-                        // eslint-disable-next-line max-len
-                        query: { id: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`) },
+                        query: {
+                          id: encodeURI(`${selectedCategories}`),
+                          // eslint-disable-next-line max-len
+                          fs: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
+                        },
                       }}
                       title="removeRefinement"
                     >

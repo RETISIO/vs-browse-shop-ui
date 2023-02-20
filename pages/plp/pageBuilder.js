@@ -58,11 +58,19 @@ export default function PageBuilder(props) {
                           >
                             Filter
                           </button>
-                          <SortVO />
+                          <SortVO {...props} />
                         </div>
-                        <p className="page-description">
-                          {data?.categories?.[0]?.description || pageData?.categories?.[0]?.description}
-                        </p>
+                        <div className="page-description">
+                          {pageContentData?.segmentsMap?.middle ? (
+                            <Template
+                              templateData={pageContentData?.segmentsMap?.middle}
+                              type="categoryDescription"
+                              {...props}
+                            />
+                          ) : (
+                            ''
+                          )}
+                        </div>
                         <div id="product-grid">
                           <div className="row row-gutter-sm-15">
                             {pageContentData?.segmentsMap?.middle ? (
@@ -80,12 +88,15 @@ export default function PageBuilder(props) {
                     </div>
                     <div className="row">
                       <div className="col-md-9 col-md-offset-3">
-                        <div
-                          className="hidden-xs"
-                          // eslint-disable-next-line max-len
-                          dangerouslySetInnerHTML={{__html: data?.categories?.[0]?.longDescription || pageData?.categories?.[0]?.longDescription }}
-                        >
-                        </div>
+                        {pageContentData?.segmentsMap?.middle ? (
+                          <Template
+                            templateData={pageContentData?.segmentsMap?.middle}
+                            type="categoryLongDescription"
+                            {...props}
+                          />
+                        ) : (
+                          ''
+                        )}
                       </div>
                     </div>
                   </div>
