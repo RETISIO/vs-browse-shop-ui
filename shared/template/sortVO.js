@@ -10,7 +10,7 @@ function SortVO(props) {
   const [pageContentData, setPageContent] = useState(data);
   const { pageData } = usePageDataContext();
 
-  const [selectedCategories, setSelectedCategories] = useState(router.query.id.join('+'));
+  const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+'));
   const [selectedFacets, setSelectedFacets] = useState(router?.query?.fs?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
 
