@@ -14,6 +14,7 @@ import { requestContructor } from '../../shared/helpers/api';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import PageBuilder from './pageBuilder';
 import MainLayout from '../layout';
+import URLHandler from '../../shared/helpers/urlHandler';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -36,23 +37,17 @@ function Static({ data }) {
   );
 }
 
-const getParameterByName=(name, url) => {
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-  results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
-};
-
 Static.getInitialProps = async (context) => {
   const { query, req, asPath } = context;
 
-  const newPath = getParameterByName('id', asPath);
+  const categoryIds = URLHandler('id', asPath);
+  const facetIds = URLHandler('fs', asPath) || '';
   let res;
   try {
     res = await requestContructor(
-      `getProductsList?CategoryId=${!!req ? query.id : newPath}`,
+      // eslint-disable-next-line max-len
+      `getProductsList?CategoryId=${!!req ? query.id : categoryIds}${facetIds !== "" ? `&FacetId=${!!req ? query.fs : facetIds}` : ""}
+      `,
       '',
       {},
       !!req
