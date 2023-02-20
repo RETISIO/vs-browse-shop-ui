@@ -48,12 +48,12 @@ export default function MainLayout({ data, children }) {
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}&size=4`, {}, false);
+    setSearchAheadData(res);
     return res;
   };
   const searchAheadChangeHandler = (text) => {
     if (text.trim().length > 2) {
-      const result = getSearchAheadData(text);
-      setSearchAheadData(result);
+      getSearchAheadData(text);
     } else {
       setSearchAheadData(null);
     }
