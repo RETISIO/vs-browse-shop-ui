@@ -45,7 +45,7 @@ function Static({ data }) {
         const categoryIds = URLHandler('id', navigate.asPath);
         const facetIds = URLHandler('fs', navigate.asPath) || '';
         const sort = URLHandler('so', navigate.asPath) || '';
-        if (Math.ceil(productCount / 12) >= offset) {
+        if (Math.floor(productCount / 12) >= offset) {
           // eslint-disable-next-line max-len
           const res = await requestContructor(
             `getProductsList?CategoryId=${categoryIds}${
