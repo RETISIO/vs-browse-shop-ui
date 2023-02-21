@@ -9,6 +9,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
+import Accordion from 'react-bootstrap/Accordion';
 import { usePageDataContext } from "../context/pageData-context";
 import URLHandler from '../helpers/urlHandler';
 
@@ -113,9 +114,9 @@ function Facet(props) {
           ))}
         </ul>
       </div>
-      <div className="catalog-filter__block">
+      <div className="catalog-filter__block ab-accordion-container">
         <div className="panel-group">
-          {pageContentData?.payLoad?.facets?.map((value, _key) => (
+          {/* {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <div className="panel panel-default">
               <div className="panel-heading">
                 <div className="panel-title">
@@ -126,7 +127,7 @@ function Facet(props) {
                     d="heading_0"
                   >
                     {value.displayName}
-                    <i className="icon fas fa-chevron-down"></i>
+                    cc
                   </a>
                 </div>
               </div>
@@ -141,13 +142,12 @@ function Facet(props) {
                       <li>
                         <Link
                           href={{
-                          pathname: path,
-                          query:
-                          {
-                            id: encodeURI(`${selectedCategories}`),
-                            fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
-                          },
-                        }}
+                            pathname: path,
+                            query: {
+                              id: encodeURI(`${selectedCategories}`),
+                              fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
+                            },
+                          }}
                         >
                           {val.facetLabel}
                           {' '}
@@ -156,11 +156,40 @@ function Facet(props) {
                           )
                         </Link>
                       </li>
-                  ))}
+                    ))}
                   </ul>
                 </div>
               </div>
             </div>
+          ))} */}
+          {pageContentData?.payLoad?.facets?.map((value, _key) => (
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey={_key < 2 ? "0" : "1"}>
+                <Accordion.Header>
+                  {value.displayName}
+                  <i className="icon fas fa-chevron-down"></i>
+                </Accordion.Header>
+                {value?.facetValues?.map((val, index) => (
+                  <Accordion.Body>
+                    <Link
+                      href={{
+                        pathname: path,
+                        query: {
+                          id: encodeURI(`${selectedCategories}`),
+                          fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
+                        },
+                      }}
+                    >
+                      {val.facetLabel}
+                      {' '}
+                      (
+                      {val.facetValueCount}
+                      )
+                    </Link>
+                  </Accordion.Body>
+                      ))}
+              </Accordion.Item>
+            </Accordion>
           ))}
         </div>
       </div>
