@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePageDataContext } from '../context/pageData-context';
+import { usePageDataContext } from '../../context/pageData-context';
 
 export function Breadcrumb(props) {
   const { data } = props;

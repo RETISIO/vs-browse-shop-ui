@@ -12,6 +12,7 @@ import '../styles/fonts/montserratFont.css';
 import '../styles/styles.scss';
 // eslint-disable-next-line import/named
 import { PageDataContextWrapper } from '../shared/context/pageData-context';
+import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -21,9 +22,11 @@ export default function App({ Component, pageProps }) {
       <I18nProvider lngDict={lngDict} locale={router.locale}>
         <AppWrapper>
           <PageDataContextWrapper>
-            {/* <Layout> */}
-            <Component {...pageProps} />
-            {/* </Layout> */}
+            <PLPDataContextWrapper>
+              {/* <Layout> */}
+              <Component {...pageProps} />
+              {/* </Layout> */}
+            </PLPDataContextWrapper>
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>

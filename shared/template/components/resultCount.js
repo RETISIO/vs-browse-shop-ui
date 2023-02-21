@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
-import { usePageDataContext } from '../context/pageData-context';
+import { usePageDataContext } from '../../context/pageData-context';
 
 export function ResultCount(props) {
   const { data } = props;

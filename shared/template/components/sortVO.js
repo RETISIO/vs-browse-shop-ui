@@ -1,8 +1,8 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePageDataContext } from '../context/pageData-context';
-import URLHandler from '../helpers/urlHandler';
+import { usePageDataContext } from '../../context/pageData-context';
+import URLHandler from '../../helpers/urlHandler';
 
 function SortVO(props) {
   const router = useRouter();

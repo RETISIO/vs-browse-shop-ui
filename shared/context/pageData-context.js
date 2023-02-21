@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { createContext, useContext, useState } from 'react';
 
 const PageDataContext = createContext();

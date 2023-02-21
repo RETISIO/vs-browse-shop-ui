@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Template } from './template';
 import { usePageDataContext } from '../context/pageData-context';
-import SortVO from './sortVO';
+import SortVO from './components/sortVO';
 
 export default function PageBuilder(props) {
   const { data } = props;

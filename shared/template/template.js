@@ -8,11 +8,11 @@
 /* eslint-disable linebreak-style */
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { Breadcrumb } from './breadcrumb';
-import Facet from './facet';
-import ResultList from './resultList';
-import { ResultCount } from './resultCount';
-import { CategoryDescription, CategoryLongDescription } from './categoryDescription';
+import { Breadcrumb } from './components/breadcrumb';
+import Facet from './components/facet';
+import ResultList from './components/resultList';
+import { ResultCount } from './components/resultCount';
+import { CategoryDescription, CategoryLongDescription } from './components/categoryDescription';
 
 export function Template(props) {
   const renderContentData = (contentItemObj) => {

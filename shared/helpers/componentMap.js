@@ -1,5 +1,5 @@
 import React from "react";
-import NextImage from "../template/nextImage";
+import NextImage from '../template/components/nextImage';
 
 const ComponentMap = {
     "nextImage": NextImage
