@@ -12,7 +12,7 @@ import { useRouter } from 'next/router';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../../shared/helpers/api';
 import { usePageDataContext } from '../../shared/context/pageData-context';
-import PageBuilder from './pageBuilder';
+import PageBuilder from '../../shared/template/pageBuilder';
 import MainLayout from '../layout';
 import URLHandler from '../../shared/helpers/urlHandler';
 
