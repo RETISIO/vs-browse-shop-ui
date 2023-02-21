@@ -1,0 +1,86 @@
+.loadingIndicator {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    opacity: .8;
+    z-index: 10000;
+
+    .cc-spinner-css div {
+        width: 5%;
+        height: 13%;
+        top: 42%;
+        background: #fff;
+        position: absolute;
+        left: 47%;
+        opacity: 0;
+        -webkit-animation: cc-fade 1s linear infinite;
+        -moz-animation: cc-fade 1s linear infinite;
+        -ms-animation: cc-fade 1s linear infinite;
+        -o-animation: cc-fade 1s linear infinite;
+        animation: cc-fade 1s linear infinite;
+        border-radius: 50px;
+        box-shadow: 0 0 3px rgb(0 0 0 / 20%);
+    }
+    
+    #loadingModal .cc-spinner-css div {
+        background: #fff;
+    }
+    
+    .ie-show {
+        display: none;
+    }
+    
+    .cc-spinner-css {
+        background-color: #808080;
+        width: 90px;
+        height: 90px;
+        border-radius: 6px;
+        position: relative;
+    }
+    
+    #loadingModal .cc-spinner {
+        background-color: transparent;
+        top: 25%;
+    }
+    .cc-spinner {
+        position: fixed;
+        z-index: 1500;
+    }
+    .cc-spinner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(255,255,255,0.8);
+        z-index: 0;
+        text-align: center;
+    }
+    .cc-spinner-css .cc-spinner-css-1 {
+        transform: rotate(0deg) translate(0, -142%);
+        -webkit-transform: rotate(0deg) translate(0, -142%);
+        -moz-transform: rotate(0deg) translate(0, -142%);
+        -ms-transform: rotate(0deg) translate(0, -142%);
+        -o-transform: rotate(0deg) translate(0, -142%);
+        animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -ms-animation-delay: 0s;
+        -o-animation-delay: 0s;
+    }
+    .loadingIndicator .cc-spinner-css .cc-spinner-css-1 {
+        transform: rotate(0deg) translate(0, -142%);
+        -webkit-transform: rotate(0deg) translate(0, -142%);
+        -moz-transform: rotate(0deg) translate(0, -142%);
+        -ms-transform: rotate(0deg) translate(0, -142%);
+        -o-transform: rotate(0deg) translate(0, -142%);
+        animation-delay: 0s;
+        -webkit-animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -ms-animation-delay: 0s;
+        -o-animation-delay: 0s;
+    }
+}
