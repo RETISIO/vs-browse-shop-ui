@@ -114,7 +114,7 @@ function Facet(props) {
           ))}
         </ul>
       </div>
-      <div className="catalog-filter__block">
+      <div className="catalog-filter__block ab-accordion-container">
         <div className="panel-group">
           {/* {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <div className="panel panel-default">
@@ -165,8 +165,10 @@ function Facet(props) {
           {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey={_key < 2 ? "0" : "1"}>
-                <Accordion.Header>{value.displayName}
-                <i className="icon fas fa-chevron-down"></i></Accordion.Header>
+                <Accordion.Header>
+                  {value.displayName}
+                  <i className="icon fas fa-chevron-down"></i>
+                </Accordion.Header>
                 {value?.facetValues?.map((val, index) => (
                   <Accordion.Body>
                     <Link
