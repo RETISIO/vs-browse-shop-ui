@@ -3,85 +3,63 @@ $background-color_1: transparent;
 $background-color_2: #fff;
 $background-color_3: rgba(255, 255, 255, 0.8);
 $background-color_4: #808080;
+$spinner: 12;
+// $animation: 1;
+
+@mixin animate-rotation-from {
+	transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+}
+
+@mixin animate-rotation-to {
+	transform: rotate(359deg);
+	-webkit-transform: rotate(359deg);
+	-moz-transform: rotate(359deg);
+	-ms-transform: rotate(359deg);
+	-o-transform: rotate(359deg);
+}
 
 @-webkit-keyframes cc-rotation {
 	from {
-		transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		-moz-transform: rotate(0deg);
-		-ms-transform: rotate(0deg);
-		-o-transform: rotate(0deg);
+		@include animate-rotation-from;
 	}
 	to {
-		transform: rotate(359deg);
-		-webkit-transform: rotate(359deg);
-		-moz-transform: rotate(359deg);
-		-ms-transform: rotate(359deg);
-		-o-transform: rotate(359deg);
+		@include animate-rotation-to;
 	}
 }
 @-moz-keyframes cc-rotation {
 	from {
-		transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		-moz-transform: rotate(0deg);
-		-ms-transform: rotate(0deg);
-		-o-transform: rotate(0deg);
+		@include animate-rotation-from;
 	}
 	to {
-		transform: rotate(359deg);
-		-webkit-transform: rotate(359deg);
-		-moz-transform: rotate(359deg);
-		-ms-transform: rotate(359deg);
-		-o-transform: rotate(359deg);
+		@include animate-rotation-to;
 	}
 }
 @-ms-keyframes cc-rotation {
 	from {
-		transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		-moz-transform: rotate(0deg);
-		-ms-transform: rotate(0deg);
-		-o-transform: rotate(0deg);
+		@include animate-rotation-from;
 	}
 	to {
-		transform: rotate(359deg);
-		-webkit-transform: rotate(359deg);
-		-moz-transform: rotate(359deg);
-		-ms-transform: rotate(359deg);
-		-o-transform: rotate(359deg);
+		@include animate-rotation-to;
 	}
 }
 @-o-keyframes cc-rotation {
 	from {
-		transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		-moz-transform: rotate(0deg);
-		-ms-transform: rotate(0deg);
-		-o-transform: rotate(0deg);
+		@include animate-rotation-from;
 	}
 	to {
-		transform: rotate(359deg);
-		-webkit-transform: rotate(359deg);
-		-moz-transform: rotate(359deg);
-		-ms-transform: rotate(359deg);
-		-o-transform: rotate(359deg);
+		@include animate-rotation-to;
 	}
 }
 @keyframes cc-rotation {
 	from {
-		transform: rotate(0deg);
-		-webkit-transform: rotate(0deg);
-		-moz-transform: rotate(0deg);
-		-ms-transform: rotate(0deg);
-		-o-transform: rotate(0deg);
+		@include animate-rotation-from;
 	}
 	to {
-		transform: rotate(359deg);
-		-webkit-transform: rotate(359deg);
-		-moz-transform: rotate(359deg);
-		-ms-transform: rotate(359deg);
-		-o-transform: rotate(359deg);
+		@include animate-rotation-to;
 	}
 }
 @-webkit-keyframes cc-fade {
@@ -186,12 +164,16 @@ $background-color_4: #808080;
 		border-radius: 50px;
 		box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 	}
+	@for $i from 1 through $spinner {
+        .cc-spinner-css-#{$i} {
+			transform: rotate(#{(($i)-1)*30}deg) translate(0, -142%);
+            -webkit-transform: rotate(#{(($i)-1)*30}deg) translate(0, -142%);
+            -moz-transform: rotate(0deg) translate(0, -142%);
+            -ms-transform: rotate(0deg) translate(0, -142%);
+            -o-transform: rotate(0deg) translate(0, -142%);
+        }
+    }
 	.cc-spinner-css-1 {
-		transform: rotate(0deg) translate(0, -142%);
-		-webkit-transform: rotate(0deg) translate(0, -142%);
-		-moz-transform: rotate(0deg) translate(0, -142%);
-		-ms-transform: rotate(0deg) translate(0, -142%);
-		-o-transform: rotate(0deg) translate(0, -142%);
 		animation-delay: 0s;
 		-webkit-animation-delay: 0s;
 		-moz-animation-delay: 0s;
@@ -199,11 +181,6 @@ $background-color_4: #808080;
 		-o-animation-delay: 0s;
 	}
 	.cc-spinner-css-2 {
-		transform: rotate(30deg) translate(0, -142%);
-		-webkit-transform: rotate(30deg) translate(0, -142%);
-		-moz-transform: rotate(30deg) translate(0, -142%);
-		-ms-transform: rotate(30deg) translate(0, -142%);
-		-o-transform: rotate(30deg) translate(0, -142%);
 		animation-delay: -0.9167s;
 		-webkit-animation-delay: -0.9167s;
 		-moz-animation-delay: -0.9167s;
@@ -211,11 +188,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.9167s;
 	}
 	.cc-spinner-css-3 {
-		transform: rotate(60deg) translate(0, -142%);
-		-webkit-transform: rotate(60deg) translate(0, -142%);
-		-moz-transform: rotate(60deg) translate(0, -142%);
-		-ms-transform: rotate(60deg) translate(0, -142%);
-		-o-transform: rotate(60deg) translate(0, -142%);
 		animation-delay: -0.833s;
 		-webkit-animation-delay: -0.833s;
 		-moz-animation-delay: -0.833s;
@@ -223,11 +195,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.833s;
 	}
 	.cc-spinner-css-4 {
-		transform: rotate(90deg) translate(0, -142%);
-		-webkit-transform: rotate(90deg) translate(0, -142%);
-		-moz-transform: rotate(90deg) translate(0, -142%);
-		-ms-transform: rotate(90deg) translate(0, -142%);
-		-o-transform: rotate(90deg) translate(0, -142%);
 		animation-delay: -0.75s;
 		-webkit-animation-delay: -0.75s;
 		-moz-animation-delay: -0.75s;
@@ -235,11 +202,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.75s;
 	}
 	.cc-spinner-css-5 {
-		transform: rotate(120deg) translate(0, -142%);
-		-webkit-transform: rotate(120deg) translate(0, -142%);
-		-moz-transform: rotate(120deg) translate(0, -142%);
-		-ms-transform: rotate(120deg) translate(0, -142%);
-		-o-transform: rotate(120deg) translate(0, -142%);
 		animation-delay: -0.667s;
 		-webkit-animation-delay: -0.667s;
 		-moz-animation-delay: -0.667s;
@@ -247,11 +209,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.667s;
 	}
 	.cc-spinner-css-6 {
-		transform: rotate(150deg) translate(0, -142%);
-		-webkit-transform: rotate(150deg) translate(0, -142%);
-		-moz-transform: rotate(150deg) translate(0, -142%);
-		-ms-transform: rotate(150deg) translate(0, -142%);
-		-o-transform: rotate(150deg) translate(0, -142%);
 		animation-delay: -0.5833s;
 		-webkit-animation-delay: -0.5833s;
 		-moz-animation-delay: -0.5833s;
@@ -259,11 +216,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.5833s;
 	}
 	.cc-spinner-css-7 {
-		transform: rotate(180deg) translate(0, -142%);
-		-webkit-transform: rotate(180deg) translate(0, -142%);
-		-moz-transform: rotate(180deg) translate(0, -142%);
-		-ms-transform: rotate(180deg) translate(0, -142%);
-		-o-transform: rotate(180deg) translate(0, -142%);
 		animation-delay: -0.5s;
 		-webkit-animation-delay: -0.5s;
 		-moz-animation-delay: -0.5s;
@@ -271,11 +223,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.5s;
 	}
 	.cc-spinner-css-8 {
-		transform: rotate(210deg) translate(0, -142%);
-		-webkit-transform: rotate(210deg) translate(0, -142%);
-		-moz-transform: rotate(210deg) translate(0, -142%);
-		-ms-transform: rotate(210deg) translate(0, -142%);
-		-o-transform: rotate(210deg) translate(0, -142%);
 		animation-delay: -0.41667s;
 		-webkit-animation-delay: -0.41667s;
 		-moz-animation-delay: -0.41667s;
@@ -283,11 +230,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.41667s;
 	}
 	.cc-spinner-css-9 {
-		transform: rotate(240deg) translate(0, -142%);
-		-webkit-transform: rotate(240deg) translate(0, -142%);
-		-moz-transform: rotate(240deg) translate(0, -142%);
-		-ms-transform: rotate(240deg) translate(0, -142%);
-		-o-transform: rotate(240deg) translate(0, -142%);
 		animation-delay: -0.333s;
 		-webkit-animation-delay: -0.333s;
 		-moz-animation-delay: -0.333s;
@@ -295,11 +237,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.333s;
 	}
 	.cc-spinner-css-10 {
-		transform: rotate(270deg) translate(0, -142%);
-		-webkit-transform: rotate(270deg) translate(0, -142%);
-		-moz-transform: rotate(270deg) translate(0, -142%);
-		-ms-transform: rotate(270deg) translate(0, -142%);
-		-o-transform: rotate(270deg) translate(0, -142%);
 		animation-delay: -0.25s;
 		-webkit-animation-delay: -0.25s;
 		-moz-animation-delay: -0.25s;
@@ -307,11 +244,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.25s;
 	}
 	.cc-spinner-css-11 {
-		transform: rotate(300deg) translate(0, -142%);
-		-webkit-transform: rotate(300deg) translate(0, -142%);
-		-moz-transform: rotate(300deg) translate(0, -142%);
-		-ms-transform: rotate(300deg) translate(0, -142%);
-		-o-transform: rotate(300deg) translate(0, -142%);
 		animation-delay: -0.1667s;
 		-webkit-animation-delay: -0.1667s;
 		-moz-animation-delay: -0.1667s;
@@ -319,11 +251,6 @@ $background-color_4: #808080;
 		-o-animation-delay: -0.1667s;
 	}
 	.cc-spinner-css-12 {
-		transform: rotate(330deg) translate(0, -142%);
-		-webkit-transform: rotate(330deg) translate(0, -142%);
-		-moz-transform: rotate(330deg) translate(0, -142%);
-		-ms-transform: rotate(330deg) translate(0, -142%);
-		-o-transform: rotate(330deg) translate(0, -142%);
 		animation-delay: -0.0833s;
 		-webkit-animation-delay: -0.0833s;
 		-moz-animation-delay: -0.0833s;
