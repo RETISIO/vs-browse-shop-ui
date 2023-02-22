@@ -24,6 +24,7 @@ function Static({ data }) {
   const { setPageData } = usePageDataContext();
   const {
     offset,
+    setOffset,
     products,
     setProducts,
     productCount,
@@ -51,7 +52,7 @@ function Static({ data }) {
             `getProductsList?CategoryId=${categoryIds}${
               facetIds !== '' ? `&FacetId=${facetIds}` : ''
             }${sort !== '' ? `&SortOrder=${sort}` : ''}${
-              offset > 0 ? `&Offset=${offset * 10}` : ''
+              offset > 0 ? `&Offset=${offset * 12}` : ''
             }
         `,
             '',
@@ -68,6 +69,10 @@ function Static({ data }) {
       })();
     }
   }, [offset]);
+
+  useEffect(() => {
+    setOffset(0);
+  }, [navigate.asPath]);
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
