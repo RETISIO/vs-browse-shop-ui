@@ -6,7 +6,7 @@ const PLPDataContext = createContext();
 export function PLPDataContextWrapper({ children }) {
   const [offset, setOffset] = useState(0);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [productCount, setProductCount] = useState(0);
 
   return (

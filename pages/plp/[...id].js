@@ -17,11 +17,13 @@ import PageBuilder from '../../shared/template/pageBuilder';
 import MainLayout from '../layout';
 import URLHandler from '../../shared/helpers/urlHandler';
 import { Loader } from '../../shared/common/loader';
+import getPLPData from '../../shared/common/getPLPData';
 
 function Static({ data }) {
   // const i18n = useI18n();
   const navigate = useRouter();
   const { setPageData } = usePageDataContext();
+  let response;
   const {
     offset,
     setOffset,
@@ -30,15 +32,27 @@ function Static({ data }) {
     productCount,
     setProductCount,
     loading,
-   // setLoading,
+    setLoading,
   } = usePLPDataContext();
-  const pageContent = data?.payLoad?.page;
-  data.page = data?.payLoad?.page;
 
   useEffect(() => {
-    data && setPageData(data);
-    // data && setLoading(false);
-  }, [navigate.query.id]);
+    async function fetchData() {
+      setLoading(true);
+      response = await getPLPData(navigate);
+      if(response) {
+        setPageData(response);
+        setLoading(false);
+      }
+    }
+    fetchData();
+    
+    return () => {
+      console.log('This will be logged on unmount');
+    };
+  }, [navigate.asPath]);
+
+  const pageContent = data?.payLoad?.page;
+  data.page = data?.payLoad?.page;
 
   useEffect(() => {
     if (offset > 0) {
@@ -75,48 +89,25 @@ function Static({ data }) {
   }, [navigate.asPath]);
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
     <MainLayout data={data}>
-      {loading ? (
-        <Loader />
-      ) : (
-        <main>
-          {/* {i18n.t('title')} */}
+     
+      <main>
+        {/* {i18n.t('title')} */}
+        {loading ? (
+          <Loader />
+        ) : (
           <PageBuilder pageContent={pageContent} data={data} />
-        </main>
-      )}
+        )}
+      </main>
     </MainLayout>
-    // </Suspense>
   );
 }
 
-Static.getInitialProps = async (context) => {
-  const { req, asPath } = context;
-
-  const reqURI = req ? req?.url : asPath;
-  const categoryIds = URLHandler('id', reqURI);
-  const facetIds = URLHandler('fs', reqURI) || '';
-  const sort = URLHandler('so', reqURI) || '';
-
-  let res;
-
-  try {
-    res = await requestContructor(
-      // eslint-disable-next-line max-len
-      `getProductsList?CategoryId=${categoryIds}${
-        facetIds !== '' ? `&FacetId=${facetIds}` : ''
-      }${sort !== '' ? `&SortOrder=${sort}` : ''}
-      `,
-      '',
-      {},
-      !!req
-    );
-  } catch (e) {
-    res = {};
-  }
+export async function getServerSideProps(context) {
+  const data = await getPLPData(context);
   return {
-    data: res,
+    props: { data }, // will be passed to the page component as props
   };
-};
+}
 
 export default Static;
