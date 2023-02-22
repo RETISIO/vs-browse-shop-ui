@@ -24,6 +24,7 @@ export default function PageBuilder(props) {
                   {pageContentData?.segmentsMap?.top ? (
                     <Template
                       templateData={pageContentData?.segmentsMap?.top}
+                      type="breeadcrumb"
                       {...props}
                     />
                   ) : (
@@ -35,6 +36,7 @@ export default function PageBuilder(props) {
                         {pageContentData?.segmentsMap?.left ? (
                           <Template
                             templateData={pageContentData?.segmentsMap?.left}
+                            type="facets"
                             {...props}
                           />
                         ) : (
