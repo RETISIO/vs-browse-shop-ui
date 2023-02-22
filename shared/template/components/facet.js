@@ -116,55 +116,9 @@ function Facet(props) {
       </div>
       <div className="catalog-filter__block ab-accordion-container">
         <div className="panel-group">
-          {/* {pageContentData?.payLoad?.facets?.map((value, _key) => (
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <div className="panel-title">
-                  <a
-                    role="button"
-                    data-toggle="collapse"
-                    href="#collapse_0"
-                    d="heading_0"
-                  >
-                    {value.displayName}
-                    cc
-                  </a>
-                </div>
-              </div>
-              <div
-                className="panel-collapse in"
-                data-collapse="xs"
-                id="collapse_0"
-              >
-                <div className="panel-body">
-                  <ul className="catalog-filter__category-list list-unstyled">
-                    {value?.facetValues?.map((val, index) => (
-                      <li>
-                        <Link
-                          href={{
-                            pathname: path,
-                            query: {
-                              id: encodeURI(`${selectedCategories}`),
-                              fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
-                            },
-                          }}
-                        >
-                          {val.facetLabel}
-                          {' '}
-                          (
-                          {val.facetValueCount}
-                          )
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          ))} */}
           {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey={_key < 2 ? "0" : "1"}>
+              <Accordion.Item eventKey={_key < 3 ? "0" : "1"}>
                 <Accordion.Header>
                   {value.displayName}
                   <i className="icon fas fa-chevron-down"></i>
