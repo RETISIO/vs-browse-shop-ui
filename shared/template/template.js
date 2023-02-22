@@ -16,7 +16,7 @@ import { CategoryDescription, CategoryLongDescription } from './components/categ
 
 export function Template(props) {
   const renderContentData = (contentItemObj) => {
-    if (contentItemObj.contentTypeId === 'Breadcrumb') {
+    if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breeadcrumb') {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
@@ -25,7 +25,7 @@ export function Template(props) {
         </nav>
       );
     }
-    if (contentItemObj.contentTypeId === 'Facet') {
+    if (contentItemObj.contentTypeId === 'Facet' && props.type === 'facets') {
       return <Facet {...props} />;
     }
     if ((contentItemObj.contentTypeId === 'Result List' && props.type === 'resultList')) {
