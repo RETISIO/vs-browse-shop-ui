@@ -1,16 +1,17 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { Template } from './template';
-import { usePageDataContext } from '../context/pageData-context';
+// import { usePageDataContext } from '../context/pageData-context';
 import SortVO from './components/sortVO';
 
 export default function PageBuilder(props) {
   const { data } = props;
   const [pageContentData, setPageContent] = useState(data?.page);
-  const { pageData } = usePageDataContext();
+  // const { pageData } = usePageDataContext();
   useEffect(() => {
-    setPageContent(pageData?.payLoad?.page);
-  }, [pageData]);
+    setPageContent(props?.data?.page);
+  }, [props]);
   
   return (
     <div id="main" className="static-main-container holidayContainer">

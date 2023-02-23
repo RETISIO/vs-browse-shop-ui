@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
@@ -15,11 +16,11 @@ import URLHandler from '../../helpers/urlHandler';
 
 function Facet(props) {
   const { data } = props;
-  const [pageContentData, setPageContent] = useState(data);
+  const [pageContentData, setPageContent] = useState(props.data);
   const { pageData } = usePageDataContext();
   useEffect(() => {
-    setPageContent(pageData);
-  }, [pageData]);
+    setPageContent(props?.data);
+  }, [props]);
 
   const navigate = useRouter();
   const [selectedCategories, setSelectedCategories] = useState(navigate.query.id.join("+"));

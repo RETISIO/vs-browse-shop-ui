@@ -1,22 +1,23 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { usePageDataContext } from '../../context/pageData-context';
+// import { usePageDataContext } from '../../context/pageData-context';
 import URLHandler from '../../helpers/urlHandler';
 
 function SortVO(props) {
   const router = useRouter();
   const { data } = props;
   const [pageContentData, setPageContent] = useState(data);
-  const { pageData } = usePageDataContext();
+  // const { pageData } = usePageDataContext();
 
   const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+'));
   const [selectedFacets, setSelectedFacets] = useState(router?.query?.fs?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
 
   useEffect(() => {
-    setPageContent(pageData);
-  }, [pageData]);
+    setPageContent(props?.data);
+  }, [props]);
 
   const path = router.asPath.split('?')[0];
   const categoryIds = URLHandler('id', router.asPath) || '';
