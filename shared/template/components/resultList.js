@@ -5,7 +5,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-// import { usePageDataContext } from '../../context/pageData-context';
+import { usePageDataContext } from '../../context/pageData-context';
 import { usePLPDataContext } from '../../context/plpDatacontext';
 import ProductCard from './productCard';
 import URLHandler from '../../helpers/urlHandler';
@@ -16,12 +16,23 @@ function ResultList(props) {
   const { data } = props;
   // eslint-disable-next-line no-unused-vars
   const [pageContentData, setPageContent] = useState(data);
-  // const { pageData } = usePageDataContext();
+  const { pageData } = usePageDataContext();
   const router = useRouter();
 
   const {
     offset, setOffset, products, setProducts, setProductCount, productCount,
   } = usePLPDataContext();
+
+  useEffect(() => {
+    setPageContent(props?.data);
+  }, []);
+
+  useEffect(() => {
+    if(offset === 0) {
+      setProducts(props?.data?.payLoad?.products);
+      setProductCount(props?.data?.payLoad?.productCount);
+    }
+  }, [props]);
 
   useEffect(() => {
     if (offset > 0) {
@@ -49,12 +60,6 @@ function ResultList(props) {
       })();
     }
   }, [offset]);
-
-  useEffect(() => {
-    setPageContent(props?.data);
-    setProducts(props?.data?.payLoad?.products);
-    setProductCount(props?.data?.payLoad?.productCount);
-  }, []);
 
   return (
     <>
