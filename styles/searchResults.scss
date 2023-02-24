@@ -160,6 +160,9 @@
       margin-bottom: 30px;
       position: relative;
       transition: all 0.2s;
+      .product-card-inner {
+        border: 1px solid #dfe3e9;
+      }
       &:hover {
         box-shadow: 0 0 10px 1px rgba(101,110,119,0.7);
         cursor: pointer;
