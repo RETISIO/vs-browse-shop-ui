@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
-import Layout from '../shared/components/layout/index';
-// import { Layout } from '@retisio/sf-ui';
+import { Layout } from '@retisio/sf-ui';
+import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../shared/context/appContext';
 import { requestContructor } from '../shared/helpers/api';
@@ -72,6 +72,9 @@ export default function MainLayout({ data, children }) {
   };
   return (
     <>
+      {/* {show ? 'tue' : 'false sdf'}
+      <button onClick={()=>{setShow(!show)}}>click</button> */}
+      <Login />
       <Head>
         {data && data?.page?.seo?.title ? (
           <title>{data.page.seo.title}</title>
