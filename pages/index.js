@@ -38,10 +38,11 @@ function Home({ data }) {
   );
 }
 
-Home.getInitialProps = async() => {
+Home.getInitialProps = async(context) => {
+  const { req } = context;
   let res;
   try {
-    res = await requestContructor('static/home', '', {}, true);
+    res = await requestContructor('static/home', '', {}, !!req);
   } catch (e) {
     res = {};
   }
