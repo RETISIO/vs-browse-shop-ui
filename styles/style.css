@@ -8397,3 +8397,6 @@ button.close {
   overflow: visible;
   clip: auto;
 }
+.w-100 {
+  width: 100%;
+}

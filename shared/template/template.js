@@ -44,22 +44,23 @@ export function Template(props) {
 
   const getColumnItems = (data, contentItemObj) => {
     const contentItemArr = Object.values(contentItemObj);
-    return contentItemArr.map((item, i) => {
-      const gridColumnClass = data.gridColFormat[i];
-      return (
-        <Col xs={12} md={gridColumnClass} key={`col-${i}`}>
-          {renderContentData(item)}
-        </Col>
-      );
-    });
+    return contentItemArr.map((item, i) =>
+      // const gridColumnClass = data.gridColFormat[i];
+      (
+        // <Col xs={12} md={gridColumnClass} key={`col-${i}`}>
+        //   {renderContentData(item)}
+        // </Col>
+        <>{renderContentData(item)}</>
+      ));
   };
 
   const renderColumnContentItems = (data, index) => {
     const contentItemObj = data.columnContentItemMap;
     return (
       // <Container key={`container-${index}`}>
-      <Row key={`row-${index}`}>{getColumnItems(data, contentItemObj)}</Row>
+      // <Row key={`row-${index}`}>{getColumnItems(data, contentItemObj)}</Row>
       // </Container>
+      <>{getColumnItems(data, contentItemObj)}</>
     );
   };
 

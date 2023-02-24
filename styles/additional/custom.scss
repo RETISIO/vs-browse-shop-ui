@@ -2141,6 +2141,11 @@ h2.page-subtitle {
 	@media screen and (min-width: $screen-sm-min) {
 		margin: 0 0 30px;
 	}
+	@media screen and (max-width: $screen-sm) {
+		.sort-by {
+			width: 100%;
+		}
+	}
 
 	h1,
 	h2 {
@@ -2150,7 +2155,7 @@ h2.page-subtitle {
 	}
 
 	.btn {
-		margin: 15px 0 0 0;
+		margin: 15px 0 15px 0;
 
 		@media screen and (min-width: $screen-sm-min) {
 			margin: 0 0 0 20px;
