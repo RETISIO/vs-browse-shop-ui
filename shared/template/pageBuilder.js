@@ -17,7 +17,7 @@ export default function PageBuilder(props) {
   const [isMobile, setIsMobile] = useState(false);
   
   return (
-    <div id="main" className="static-main-container holidayContainer">
+    <div id="main" className="container">
       <div className="row">
         <div className="redBox">
           <div className="col-sm-12" id="region-megaMenuRegionCatPage">

@@ -12,15 +12,16 @@ export function ResultCount(props) {
   }, [props]);
 
   return (
-    <h1>
+    <h1 className="w-100">
       <span className="result-title-count">
         {pageContentData?.categories?.[0]?.additionalDetails?.title || pageContentData?.categories?.[0]?.name}
       </span>
       <small className="results-count countOne">
+        {' '}
         (
         {pageContentData?.payLoad?.productCount}
       </small>
-      <small className="results-count">Results)</small>
+      <small className="results-count"> Results)</small>
     </h1>
   );
 }

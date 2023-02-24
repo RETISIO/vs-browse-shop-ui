@@ -15,11 +15,17 @@ import { usePageDataContext } from "../../context/pageData-context";
 import URLHandler from '../../helpers/urlHandler';
 
 function Facet(props) {
-  const { mobileView } = props;
+  const { mobileView, closeToggle } = props;
   const [pageContentData, setPageContent] = useState(props.data);
   const { pageData } = usePageDataContext();
+  const [isClick, setIsClicked] = useState(false);
+  
   useEffect(() => {
     setPageContent(props?.data);
+    if(isClick && mobileView) {
+       closeToggle();
+       setIsClicked(false);
+    }
   }, [props]);
 
   const navigate = useRouter();
@@ -35,6 +41,12 @@ function Facet(props) {
     setSelectedCategories(categoryIds);
     setSelectedFacets(facetIds);
   }, [categoryIds, facetIds]);
+
+  const clickFilter = () => {
+    setTimeout(() => {
+      setIsClicked(true);
+    }, 100);
+  };
 
   return (
     <>
@@ -57,6 +69,7 @@ function Facet(props) {
                           pathname: path,
                           query: { id: encodeURI(`${selectedCategories}+${item.id}`) },
                         }}
+                        onClick={() => clickFilter()}
                       >
                         {item.name}
                       </Link>
@@ -69,7 +82,7 @@ function Facet(props) {
           </div>
       ) : null}
         <div className="catalog-filter__clear">
-          <b>Filters: </b>
+          <b>Your Selections: </b>
           {pageContentData?.payLoad?.selectedFacets?.length > 0 && (
           <Link
             className="link-underline"
@@ -79,6 +92,7 @@ function Facet(props) {
                   id: encodeURI(`${selectedCategories}`),
                 },
               }}
+            onClick={() => clickFilter()}
           >
             Clear All
           </Link>
@@ -105,6 +119,7 @@ function Facet(props) {
                         },
                       }}
                       title="removeRefinement"
+                      onClick={() => clickFilter()}
                     >
                       {item.facetLabel}
                       <i className="icon fas fa-times-circle"></i>
@@ -135,6 +150,7 @@ function Facet(props) {
                           fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                         },
                       }}
+                      onClick={() => clickFilter()}
                     >
                       {val.facetLabel}
                       {' '}
