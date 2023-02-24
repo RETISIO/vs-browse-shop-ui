@@ -2436,11 +2436,11 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%;
 }
-.fade {
+/* .fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
-}
+} */
 .fade.in {
   opacity: 1;
 }
@@ -5360,7 +5360,7 @@ button.close {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
-.modal.fade .modal-dialog {
+/* .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform 0.3s ease-out;
   -moz-transition: -moz-transform 0.3s ease-out;
   -o-transition: -o-transform 0.3s ease-out;
@@ -5368,7 +5368,7 @@ button.close {
   -webkit-transform: translate(0, -25%);
   -ms-transform: translate(0, -25%);
   transform: translate(0, -25%);
-}
+} */
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -5401,7 +5401,7 @@ button.close {
 }
 .modal-backdrop.fade {
   filter: alpha(opacity=0);
-  opacity: 0;
+  opacity: 0.5;
 }
 .modal-backdrop.in {
   filter: alpha(opacity=50);

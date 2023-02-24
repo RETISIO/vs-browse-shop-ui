@@ -1,10 +1,12 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/named */
 import { useState, useEffect } from 'react';
-// import { LoginModel } from '@retisio/sf-ui';
+import { LoginModel } from '@retisio/sf-ui';
 
 import { Modal } from 'react-bootstrap';
 import { getCookie } from '@retisio/sf-api';
-import { LoginModel } from '../loginModel';
+// import { LoginModel } from '../loginModel';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor }from '../../helpers/api';
 import ResetPassword from '../ResetPassword';
