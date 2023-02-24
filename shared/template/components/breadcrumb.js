@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
@@ -14,12 +15,12 @@ export function Breadcrumb(props) {
 
   return (
     <>
-      <li>
+      <li key={1}>
         <Link href="/">Home</Link>
       </li>
-      {pageContentData?.payLoad?.navigationPath?.map((item, index) => (
-        <li className={!item?.isRootCategory ? 'active' : ''}>
-          {pageContentData?.payLoad?.navigationPath?.length - 1 !== index ? (
+      {pageContentData?.payLoad?.navigationPath?.map((item, _key) => (
+        <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
+          {pageContentData?.payLoad?.navigationPath?.length - 1 !== _key ? (
             <Link href={`${item.id}?id=${item.id}`}>{item?.name}</Link>
           ) : (
             <span>{item?.name}</span>

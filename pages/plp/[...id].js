@@ -59,11 +59,19 @@ function Static({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
+Static.getInitialProps = async (context) => {
   const data = await getPLPData(context);
   return {
-    props: { data }, // will be passed to the page component as props
+    data,
   };
-}
+};
+
+// export async function getServerSideProps(context) {
+//   const data = await getPLPData(context);
+//   console.log("coming hewre", data);
+//   return {
+//     props: { data }, // will be passed to the page component as props
+//   };
+// }
 
 export default Static;

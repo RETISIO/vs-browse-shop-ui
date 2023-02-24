@@ -68,6 +68,7 @@ function ResultList(props) {
           value={value}
           isLast={index === products.length - 1}
           newLimit={() => setOffset(offset + 1)}
+          index={index}
         />
       ))}
     </>
