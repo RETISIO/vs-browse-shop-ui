@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { NextImage } from './nextImage';
 
 export default function ProductCard({
-  value, isLast, newLimit,
+  value, isLast, newLimit, index,
 }) {
   /**
    * Select the Card component with useRef
@@ -31,7 +31,7 @@ export default function ProductCard({
   }, [isLast]);
   return (
     <>
-      <div className="col-md-4 col-sm-6 col-xs-12" ref={cardRef}>
+      <div className="col-md-4 col-sm-6 col-xs-12" ref={cardRef} key={index}>
         <div className="product-card" data-mh="product-card">
           {value?.productPrice?.onSale ? (
             <div className="product-badge sale">

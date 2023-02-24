@@ -89,9 +89,10 @@ function Facet(props) {
           {pageContentData?.payLoad?.selectedFacets?.map((val) => (
             <>
               {
-                val.facetValues.map((item) => (
+                val.facetValues.map((item, _key) => (
                   <li
                     className="js-detach-row"
+                    key={_key}
                   >
                     <Link
                       className="js-detach-row-btn"
