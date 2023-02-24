@@ -13,7 +13,10 @@ export function CategoryDescription(props) {
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>{pageContentData?.categories?.[0]?.description}</>
+    <div
+      dangerouslySetInnerHTML={{__html: pageContentData?.categories?.[0]?.description}}
+    >
+    </div>
   );
 }
 

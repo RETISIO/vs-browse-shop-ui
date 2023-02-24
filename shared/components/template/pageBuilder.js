@@ -80,6 +80,7 @@ export default function PageBuilder(props) {
                             ''
                           )}
                         </div>
+                        <br />
                         <div id="product-grid">
                           <div className="row row-gutter-sm-15">
                             {pageContentData?.segmentsMap?.middle ? (
