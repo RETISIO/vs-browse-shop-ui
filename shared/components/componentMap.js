@@ -1,6 +1,6 @@
 import React from 'react';
-import NextImage from '../template/components/nextImage';
-import Login from '../components/Login';
+import NextImage from './template/components/nextImage';
+import Login from './Login';
 
 const ComponentMap = {
   "nextImage": NextImage,

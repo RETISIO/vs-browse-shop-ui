@@ -50,17 +50,17 @@ export function Template(props) {
         // <Col xs={12} md={gridColumnClass} key={`col-${i}`}>
         //   {renderContentData(item)}
         // </Col>
-        <>{renderContentData(item)}</>
+        <React.Fragment key={i}>{renderContentData(item)}</React.Fragment>
       ));
   };
 
-  const renderColumnContentItems = (data, index) => {
+  const renderColumnContentItems = (data, i) => {
     const contentItemObj = data.columnContentItemMap;
     return (
       // <Container key={`container-${index}`}>
       // <Row key={`row-${index}`}>{getColumnItems(data, contentItemObj)}</Row>
       // </Container>
-      <>{getColumnItems(data, contentItemObj)}</>
+      <React.Fragment key={i}>{getColumnItems(data, contentItemObj)}</React.Fragment>
     );
   };
 

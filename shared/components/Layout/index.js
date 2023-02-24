@@ -7,9 +7,9 @@ import { useRouter } from 'next/router';
 import { Layout } from '@retisio/sf-ui';
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
-import { useAppContext } from '../shared/context/appContext';
-import { requestContructor } from '../shared/helpers/api';
-import ComponentMap from '../shared/helpers/componentMap';
+import { useAppContext } from '../../context/appContext';
+import { requestContructor } from '../../helpers/api';
+import ComponentMap from '../componentMap';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
@@ -39,10 +39,10 @@ export default function MainLayout({ data, children }) {
   useEffect(() => {
     async function changeLocale() {
       if (router.locale === 'en-US') {
-        i18n.set('en-US', await import('../locales/en.json'));
+        i18n.set('en-US', await import('../../../locales/en.json'));
         i18n.locale('en-US');
       } else if (router.locale === 'de') {
-        i18n.set('de', await import('../locales/de.json'));
+        i18n.set('de', await import('../../../locales/de.json'));
         i18n.locale('de');
       }
     }

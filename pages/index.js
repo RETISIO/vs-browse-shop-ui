@@ -5,7 +5,7 @@ import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
 // import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
-import MainLayout from './layout';
+import MainLayout from '../shared/components/Layout';
 
 function Home({ data }) {
   // const i18n = useI18n();

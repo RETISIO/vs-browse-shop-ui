@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
 import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
-import MainLayout from './layout';
+import MainLayout from '../shared/components/Layout';
 
 function Error() {
   // const i18n = useI18n();

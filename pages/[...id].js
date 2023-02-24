@@ -7,7 +7,7 @@ import { PageBuilder } from '@retisio/sf-ui';
 import DefaultErrorPage from 'next/error';
 import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
-import MainLayout from './layout';
+import MainLayout from '../shared/components/Layout';
 
 function Static({ data }) {
   // const i18n = useI18n();

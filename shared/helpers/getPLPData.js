@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line import/named
-import { requestContructor } from '../helpers/api';
-import URLHandler from '../helpers/urlHandler';
+import { requestContructor } from './api';
+import URLHandler from './urlHandler';
 
 export default async function getPLPData(context) {
   const { req, asPath } = context;

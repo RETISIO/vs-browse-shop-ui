@@ -11,8 +11,8 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import Accordion from 'react-bootstrap/Accordion';
-import { usePageDataContext } from "../../context/pageData-context";
-import URLHandler from '../../helpers/urlHandler';
+import { usePageDataContext } from "../../../context/pageData-context";
+import URLHandler from '../../../helpers/urlHandler';
 
 function Facet(props) {
   const { mobileView, closeToggle } = props;

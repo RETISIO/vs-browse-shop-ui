@@ -12,10 +12,10 @@ import { useRouter, Router } from 'next/router';
 // eslint-disable-next-line import/named
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import { usePLPDataContext } from '../../shared/context/plpDatacontext';
-import PageBuilder from '../../shared/template/pageBuilder';
-import MainLayout from '../layout';
-import { Loader } from '../../shared/common/loader';
-import getPLPData from '../../shared/common/getPLPData';
+import PageBuilder from '../../shared/components/template/pageBuilder';
+import MainLayout from '../../shared/components/Layout';
+import { Loader } from '../../shared/components/loader';
+import getPLPData from '../../shared/helpers/getPLPData';
 
 function Static({ data }) {
   // const i18n = useI18n();

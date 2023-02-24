@@ -5,12 +5,12 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { usePageDataContext } from '../../context/pageData-context';
-import { usePLPDataContext } from '../../context/plpDatacontext';
+import { usePageDataContext } from '../../../context/pageData-context';
+import { usePLPDataContext } from '../../../context/plpDatacontext';
 import ProductCard from './productCard';
-import URLHandler from '../../helpers/urlHandler';
+import URLHandler from '../../../helpers/urlHandler';
 // eslint-disable-next-line import/named
-import { requestContructor } from '../../helpers/api';
+import { requestContructor } from '../../../helpers/api';
 
 function ResultList(props) {
   const { data } = props;
