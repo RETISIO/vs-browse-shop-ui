@@ -11,6 +11,8 @@ const AppContext = createContext();
 
 export function AppWrapper({ children }) {
   const [state, updateState] = useState(globalState, '', {}, false);
+  const [show, setShow] = useState(false);
+  const [isLogged, setisLogged] = useState(false);
   useEffect(() => {
     (async() => {
       if(!getCookie('x-anyms-id')) {
@@ -19,7 +21,10 @@ export function AppWrapper({ children }) {
     })();
   }, []);
   return (
-    <AppContext.Provider value={{ state, updateState }}>
+    <AppContext.Provider value={{
+      state, updateState, show, setShow, isLogged, setisLogged,
+    }}
+    >
       {children}
     </AppContext.Provider>
   );
