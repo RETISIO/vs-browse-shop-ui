@@ -16,6 +16,7 @@ import PageBuilder from '../../shared/components/template/pageBuilder';
 import MainLayout from '../../shared/components/Layout';
 import { Loader } from '../../shared/components/loader';
 import getPLPData from '../../shared/helpers/getPLPData';
+import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -49,7 +50,7 @@ function Static({ data }) {
 
   return (
     <MainLayout data={data}>
-     
+      <Yotpo />
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
