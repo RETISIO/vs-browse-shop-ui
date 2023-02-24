@@ -6,13 +6,12 @@ const PLPDataContext = createContext();
 export function PLPDataContextWrapper({ children }) {
   const [offset, setOffset] = useState(0);
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [productCount, setProductCount] = useState(0);
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <PLPDataContext.Provider value={{
-      offset, setOffset, products, setProducts, loading, setLoading, productCount, setProductCount,
+      offset, setOffset, products, setProducts, productCount, setProductCount,
     }}
     >
       {children}

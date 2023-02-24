@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
@@ -14,12 +15,12 @@ import { usePageDataContext } from "../../context/pageData-context";
 import URLHandler from '../../helpers/urlHandler';
 
 function Facet(props) {
-  const { data } = props;
-  const [pageContentData, setPageContent] = useState(data);
+  const { mobileView } = props;
+  const [pageContentData, setPageContent] = useState(props.data);
   const { pageData } = usePageDataContext();
   useEffect(() => {
-    setPageContent(pageData);
-  }, [pageData]);
+    setPageContent(props?.data);
+  }, [props]);
 
   const navigate = useRouter();
   const [selectedCategories, setSelectedCategories] = useState(navigate.query.id.join("+"));
@@ -36,7 +37,7 @@ function Facet(props) {
   }, [categoryIds, facetIds]);
 
   return (
-    <div className="catalog-aside">
+    <>
       <div className="catalog-filter__top">
         {(pageContentData?.payLoad?.categories && pageContentData?.payLoad?.categories?.length > 0)
         ? (
@@ -70,17 +71,17 @@ function Facet(props) {
         <div className="catalog-filter__clear">
           <b>Filters: </b>
           {pageContentData?.payLoad?.selectedFacets?.length > 0 && (
-            <Link
-              className="link-underline"
-              href={{
+          <Link
+            className="link-underline"
+            href={{
                 pathname: path,
                 query: {
                   id: encodeURI(`${selectedCategories}`),
                 },
               }}
-            >
-              Clear All
-            </Link>
+          >
+            Clear All
+          </Link>
           )}
           
         </div>
@@ -118,7 +119,7 @@ function Facet(props) {
         <div className="panel-group">
           {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey={_key < 3 ? "0" : "1"}>
+              <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
                 <Accordion.Header>
                   {value.displayName}
                   <i className="icon fas fa-chevron-down"></i>
@@ -147,7 +148,7 @@ function Facet(props) {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

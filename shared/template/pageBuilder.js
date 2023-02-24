@@ -1,16 +1,20 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { Template } from './template';
-import { usePageDataContext } from '../context/pageData-context';
+// import { usePageDataContext } from '../context/pageData-context';
 import SortVO from './components/sortVO';
+import FacetsMobile from './components/facetsMobile';
 
 export default function PageBuilder(props) {
   const { data } = props;
   const [pageContentData, setPageContent] = useState(data?.page);
-  const { pageData } = usePageDataContext();
+  // const { pageData } = usePageDataContext();
   useEffect(() => {
-    setPageContent(pageData?.payLoad?.page);
-  }, [pageData]);
+    setPageContent(props?.data?.page);
+  }, [props]);
+
+  const [isMobile, setIsMobile] = useState(false);
   
   return (
     <div id="main" className="static-main-container holidayContainer">
@@ -33,15 +37,17 @@ export default function PageBuilder(props) {
                   <div className="product-listing-container">
                     <div className="row">
                       <aside className="col-md-3 col-sm-4 hidden-xs">
-                        {pageContentData?.segmentsMap?.left ? (
-                          <Template
-                            templateData={pageContentData?.segmentsMap?.left}
-                            type="facets"
-                            {...props}
-                          />
-                        ) : (
-                          ''
-                        )}
+                        <div className="catalog-aside">
+                          {pageContentData?.segmentsMap?.left ? (
+                            <Template
+                              templateData={pageContentData?.segmentsMap?.left}
+                              type="facets"
+                              {...props}
+                            />
+                          ) : (
+                            ''
+                          )}
+                        </div>
                       </aside>
                       <div className="col-md-9 col-sm-8">
                         <div className="page-title-container d-flex justify-space-between align-items-top">
@@ -56,10 +62,11 @@ export default function PageBuilder(props) {
                           )}
                           <button
                             className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
-                            data-target="#mobileFilter"
+                            onClick={() => setIsMobile(true)}
                           >
                             Filter
                           </button>
+                          {isMobile && <FacetsMobile closeToggle={() => setIsMobile(false)} {...props} /> }
                           <SortVO {...props} />
                         </div>
                         <div className="page-description">

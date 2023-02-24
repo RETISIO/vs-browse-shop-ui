@@ -96,13 +96,13 @@ export default function ProductCard({
                 ) : null}
             </div>
             <p className="product-card-price">
-              {value?.productPrice?.minSalePrice === 0 ? null
+              {(value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice) === 0 ? null
                 : (
                   <>
                     <span>Starting At: </span>
                     <b>
                       $
-                      {value?.productPrice?.minSalePrice}
+                      {value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice}
                     </b>
                   </>
                 )}
