@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
-// import Layout from '../shared/components/layout/index';
 import { Layout } from '@retisio/sf-ui';
+// import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../shared/context/appContext';
 import { requestContructor } from '../shared/helpers/api';
@@ -13,6 +13,8 @@ import ComponentMap from '../shared/helpers/componentMap';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
+  const { show, setShow } = useAppContext();
+  const { isLogged } = useAppContext();
   const router = useRouter();
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
@@ -60,8 +62,19 @@ export default function MainLayout({ data, children }) {
     }
   };
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const signout = async() => {
+    const res = await requestContructor('signout', '', {}, false).then((data) => {
+      if(data) {
+        window.location.href = '/';
+      }
+    });
+    return res;
+  };
   return (
     <>
+      {/* {show ? 'tue' : 'false sdf'}
+      <button onClick={()=>{setShow(!show)}}>click</button> */}
+      {/* <Login /> */}
       <Head>
         {data && data?.page?.seo?.title ? (
           <title>{data.page.seo.title}</title>
@@ -95,6 +108,10 @@ export default function MainLayout({ data, children }) {
         searchAheadData={searchAheadData}
         componentMap={ComponentMap}
         damPath={damPath}
+        setshowLogin={setShow}
+        showLogin={show}
+        isLogged={isLogged}
+        signout={() => signout()}
       >
         {children}
       </Layout>
