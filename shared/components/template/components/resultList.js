@@ -20,7 +20,12 @@ function ResultList(props) {
   const router = useRouter();
 
   const {
-    offset, setOffset, products, setProducts, setProductCount, productCount,
+    offset,
+    setOffset,
+    products,
+    setProducts,
+    setProductCount,
+    productCount,
   } = usePLPDataContext();
 
   useEffect(() => {
@@ -28,7 +33,7 @@ function ResultList(props) {
   }, []);
 
   useEffect(() => {
-    if(offset === 0) {
+    if (offset === 0) {
       setProducts(props?.data?.payLoad?.products);
       setProductCount(props?.data?.payLoad?.productCount);
     }
@@ -37,17 +42,19 @@ function ResultList(props) {
   useEffect(() => {
     if (offset > 0) {
       (async() => {
-        const categoryIds = URLHandler('id', router.asPath);
+        const categoryIds = URLHandler('id', router.asPath) || '';
         const facetIds = URLHandler('fs', router.asPath) || '';
         const sort = URLHandler('so', router.asPath) || '';
+        const searchTerm = URLHandler('st', router.asPath) || '';
         if (Math.floor(productCount / 12) >= offset) {
           // eslint-disable-next-line max-len
           const res = await requestContructor(
             `getProductsList?CategoryId=${categoryIds}${
-              facetIds !== '' ? `&FacetId=${facetIds}` : ''
-            }${sort !== '' ? `&SortOrder=${sort}` : ''}${
-              offset > 0 ? `&Offset=${offset * 12}` : ''
-            }
+              facetIds !== '' ? `&FacetId=${facetIds}` : ''}${
+            searchTerm !== '' ? `&SearchKey=${searchTerm}` : ''}${
+            sort !== '' ? `&SortOrder=${sort}` : ''}${
+            offset > 0 ? `&Offset=${offset * 12}` : ''
+          }
         `,
             '',
             {},
