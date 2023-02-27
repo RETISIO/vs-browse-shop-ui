@@ -9,6 +9,7 @@ import URLHandler from '../../../helpers/urlHandler';
 export function CategoryDescription(props) {
   const { data } = props;
   const [pageContentData, setPageContent] = useState(data);
+  const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
   const searchTerm = URLHandler('st', router.asPath) || '';
   // const { pageData } = usePageDataContext();
@@ -19,17 +20,22 @@ export function CategoryDescription(props) {
   return (
     <>
       {pageContentData?.page?.pageType?.id === 'search:default'
-      && pageContentData?.payLoad?.hasOwnProperty('autoCorrectTerm') ? (
-        <div className="alert alert-dismissible hidden-print alert-info" role="alert">
-            <button className="close" type="button" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-            <strong>
-              <span>
-                {`Corrected from "${pageContentData?.payLoad?.searchTerm}"`}
-              </span>
-            </strong>
-          </div>
+      && pageContentData?.payLoad?.autoCorrectTerm ? (
+          <>
+            {!closeFlyout && (
+              <div
+                className="alert alert-dismissible hidden-print alert-info"
+                role="alert"
+              >
+                <button className="close" type="button" aria-label="Close">
+                  <span aria-hidden="true" onClick={() => setCloseFlyout(true)}>×</span>
+                </button>
+                <strong>
+                  <span>{`Corrected from "${searchTerm}"`}</span>
+                </strong>
+              </div>
+            )}
+          </>
         ) : (
           <div
             dangerouslySetInnerHTML={{
