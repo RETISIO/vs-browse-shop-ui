@@ -29,6 +29,9 @@ function Home({ data }) {
   useEffect(() => {
     setPageData(data);
     // getData();
+    if(window && window.yotpo) {
+      window.yotpo.refreshWidgets();
+    }
   }, []);
   return (
     <MainLayout data={data}>
