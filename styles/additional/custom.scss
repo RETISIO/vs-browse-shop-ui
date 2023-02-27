@@ -800,6 +800,7 @@ a {
 
 .link-underline {
 	text-decoration: underline;
+	cursor: pointer;
 
 	&:hover {
 		text-decoration: none;
@@ -2141,6 +2142,7 @@ h2.page-subtitle {
 	@media screen and (min-width: $screen-sm-min) {
 		margin: 0 0 30px;
 	}
+
 	@media screen and (max-width: $screen-sm) {
 		.sort-by {
 			width: 100%;
