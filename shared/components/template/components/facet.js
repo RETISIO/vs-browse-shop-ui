@@ -32,6 +32,7 @@ function Facet(props) {
   // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
   const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.concat("+") || "");
   const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.fs?.concat("+") || "");
+  const [searchKey, setSearchKey] = useState(navigate?.query?.st?.concat("+") || "");
 
   const path = navigate.asPath.split("?")[0];
 
@@ -42,7 +43,8 @@ function Facet(props) {
   useEffect(() => {
     setSelectedCategories(categoryIds);
     setSelectedFacets(facetIds);
-  }, [categoryIds, facetIds]);
+    setSearchKey(searchTerm);
+  }, [categoryIds, facetIds, searchTerm]);
 
   const clickFilter = () => {
     setTimeout(() => {
@@ -70,7 +72,7 @@ function Facet(props) {
                         href={{
                           pathname: path,
                           query: {
-                            st: encodeURI(`${searchTerm}`),
+                            st: encodeURI(`${searchKey}`),
                             id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
                             fs: encodeURI(`${selectedFacets}`),
                           },
@@ -96,7 +98,7 @@ function Facet(props) {
                 pathname: path,
                 query: {
                   id: encodeURI(`${selectedCategories}`),
-                  st: encodeURI(`${searchTerm}`),
+                  st: encodeURI(`${searchKey}`),
                 },
               }}
             onClick={() => clickFilter()}
@@ -121,6 +123,7 @@ function Facet(props) {
                         pathname: path,
                         query: {
                           id: encodeURI(`${selectedCategories}`),
+                          st: encodeURI(`${searchKey}`),
                           // eslint-disable-next-line max-len
                           fs: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
                         },
