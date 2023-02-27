@@ -35,6 +35,9 @@ function Static({ data }) {
     });
     Router.events.on('routeChangeComplete', (url) => {
       setLoading(false);
+      if(window && window.yotpo) {
+        window.yotpo.refreshWidgets();
+      }
     });
     Router.events.on('routeChangeError', (url) => {
       setLoading(false);
@@ -50,12 +53,12 @@ function Static({ data }) {
 
   return (
     <MainLayout data={data}>
-      <Yotpo />
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
         <PageBuilder pageContent={pageContent} data={data} />
       </main>
+      <Yotpo />
     </MainLayout>
   );
 }

@@ -70,7 +70,7 @@ Home.getInitialProps = async(context) => {
   const { req } = context;
   let res;
   try {
-    res = await requestContructor('static/home', '', {}, !!req);
+    res = await requestContructor('static/home', '', {}, req);
   } catch (e) {
     res = {};
   }
