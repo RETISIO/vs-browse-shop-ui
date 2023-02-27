@@ -55,10 +55,8 @@ export function Index(props) {
 
   const handleSubmitForm = async(data) => {
     const loginData = await requestContructor(
-      'signIn',
-      { method: 'POST', data },
-      '',
-    ).then((data) => {
+      'signIn', '',
+      { method: 'POST', data }).then((data) => {
       if(data) {
         setShow(false);
         if (getCookie('X-Auth-Token')) {
