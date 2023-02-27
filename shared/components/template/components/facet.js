@@ -29,13 +29,15 @@ function Facet(props) {
   }, [props]);
 
   const navigate = useRouter();
-  const [selectedCategories, setSelectedCategories] = useState(navigate.query.id.join("+"));
+  // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
+  const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.concat("+") || "");
   const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.fs?.concat("+") || "");
 
   const path = navigate.asPath.split("?")[0];
 
-  const categoryIds = URLHandler('id', navigate.asPath);
+  const categoryIds = URLHandler('id', navigate.asPath) || "";
   const facetIds = URLHandler('fs', navigate.asPath) || "";
+  const searchTerm = URLHandler('st', navigate.asPath) || '';
 
   useEffect(() => {
     setSelectedCategories(categoryIds);
@@ -67,7 +69,11 @@ function Facet(props) {
                       <Link
                         href={{
                           pathname: path,
-                          query: { id: encodeURI(`${selectedCategories}+${item.id}`) },
+                          query: {
+                            st: encodeURI(`${searchTerm}`),
+                            id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
+                            fs: encodeURI(`${selectedFacets}`),
+                          },
                         }}
                         onClick={() => clickFilter()}
                       >
@@ -90,6 +96,7 @@ function Facet(props) {
                 pathname: path,
                 query: {
                   id: encodeURI(`${selectedCategories}`),
+                  st: encodeURI(`${searchTerm}`),
                 },
               }}
             onClick={() => clickFilter()}
@@ -146,6 +153,7 @@ function Facet(props) {
                       href={{
                         pathname: path,
                         query: {
+                          st: encodeURI(`${searchTerm}`),
                           id: encodeURI(`${selectedCategories}`),
                           fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                         },

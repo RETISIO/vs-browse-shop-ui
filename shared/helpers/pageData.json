@@ -1,0 +1,281 @@
+{
+    "pageId": "page:ba79c547-0cc8-4570-a757-dd4cf2912474",
+    "pageName": "Default Category Listing page",
+    "pageType": {
+        "id": "search:default",
+        "name": "Search",
+        "subType": "Default",
+        "creationTime": "2022-12-12T03:50:14",
+        "lastModified": "2022-12-12T08:54:32",
+        "createdBy": "Super Admin",
+        "modifiedBy": "Super Admin",
+        "deleted": false
+    },
+    "customUrl": "clp",
+    "breadcrumb": "clp",
+    "globalTemplate": {
+        "id": "template:06dd2601-2566-4f71-9141-32acb9000350",
+        "siteHeader": [
+            {
+                "segmentId": "seg1674641226565",
+                "type": "header",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "HTML Content:8259e2f7-6acc-4d5a-949b-897d054a7e69",
+                        "name": "AB-Promotion Header ",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "HTML Content",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "content": "{\"htmlContent\":\"<div class=\\\"row\\\"><div class=\\\"redBox\\\"><div class=\\\"col-sm-12\\\" id=\\\"region-re1700007\\\"><div id=\\\"allnclubuserheaderpromo1_v1-wi2300006\\\"><div class=\\\"row\\\"><div class=\\\"oc-panel col-md-12\\\" data-oc-id=\\\"panel-0-0\\\"><span id=\\\"wi2300006-rich-text-190001\\\"><div class=\\\"cc-rich-text\\\" style=\\\"{{\\\" padding:=\\\"\\\" '0px'=\\\"\\\" }}=\\\"\\\"><div class=\\\"row-full header-alert header-alert-main hidden-print promo-normal-header\\\" style=\\\"{{\\\" zindex:=\\\"\\\" '1020'=\\\"\\\" }}=\\\"\\\"><div class=\\\"container\\\"><div class=\\\"text-center\\\"><span class=\\\"promotion-text\\\"><strong>FREE </strong>2&nbsp;Prime Strip Steaks w/orders $199+ and code                                                                         <strong>NYSTEAKS22&nbsp;</strong><a href=\\\"/promotion-codes\\\">exclusions apply*</a></span></div></div></div></div></span></div></div></div></div></div></div>\"}",
+                        "startDate": "2023-02-22T06:58:34"
+                    }
+                }
+            },
+            {
+                "segmentId": "seg1675850254932",
+                "type": "header",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Header:072e7e1d-bb45-4234-abd7-cd40d4aae1cc",
+                        "name": "Header",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Header",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "configValue": "{\"placeholder\":\"PLACEHOLDER\"}",
+                        "startDate": "2023-02-01T06:35:08"
+                    }
+                }
+            }
+        ],
+        "siteFooter": [
+            {
+                "segmentId": "seg1675767291966",
+                "type": "footer",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Footer form:c3e3cef4-3fd3-4114-98aa-3a03b1616f3b",
+                        "name": "Footer form",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Footer form",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "configValue": "{\"placeholder\":\"PLACEHOLDER\"}",
+                        "startDate": "2023-02-01T10:29:42"
+                    }
+                }
+            },
+            {
+                "segmentId": "seg1674540241056",
+                "type": "footer",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "HTML Content:26ffd600-5142-48ad-a6b9-252a39b733f5",
+                        "name": "Site Footer v2 New",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "HTML Content",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "content": "{\"htmlContent\":\"<div class=\\\"container\\\"><div class=\\\"row\\\"><div class=\\\"col-md-12 col-12\\\"><section><footer id=\\\"footerBar\\\" class=\\\"page-row footerContainer\\\"><div><div class=\\\"row\\\"><div class=\\\"redBox\\\"><div class=\\\"col-sm-12 hpFooter\\\" id=\\\"region-re1700016\\\"><div id=\\\"allnFooterV1_v1-wi2700011\\\"><div class=\\\"container hidden-print\\\"><div class=\\\"row\\\"><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-0\\\"><div id=\\\"wi2700011-allnFooterV1-menu-230009\\\"><div class=\\\"footer-content\\\"><div data-bind=\\\"html: config.richText.content\\\"><ul class=\\\"footer-list list-unstyled\\\"><li class=\\\"footer-list-title\\\"><a href=\\\"/gift-info\\\">Gift Center</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/gift-card/gifting/gc-10001\\\">Gift Cards</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/gifts-bundles/gifts-of-the-month\\\">Monthly Subscriptions</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/corporate-gifting\\\">Corporate Gifting</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"https://www.allenbrothers.com/holiday\\\">Holiday Gifts</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/gift-info\\\">Gift Info</a></li></ul></div></div></div></div><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-1\\\"><div id=\\\"wi2700011-allnFooterV1-menu-230010\\\"><div class=\\\"footer-content\\\"><div data-bind=\\\"html: config.richText.content\\\"><ul class=\\\"footer-list list-unstyled\\\"><li class=\\\"footer-list-title\\\"><a href=\\\"#\\\">Resources</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/content/cooking-guides\\\">Cooking Guide</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/article/grilling-guide/cg10003\\\">Grilling Guide</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/content/blog\\\">ABsteaks Insider</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/shop-our-gallery\\\">Shop Our Gallery</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/article/delivery-storage-thawing/cg10001\\\">Storage &amp; Thawing</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/catalog-request\\\">Catalog Request</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/promotion-codes\\\">Promotions</a></li></ul></div></div></div></div><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-2\\\"><div id=\\\"wi2700011-allnFooterV1-menu-230011\\\"><div class=\\\"footer-content\\\"><div data-bind=\\\"html: config.richText.content\\\"><ul class=\\\"footer-list list-unstyled\\\"><li class=\\\"footer-list-title\\\"><a href=\\\"#\\\">Corporate</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/about-us\\\">About Us</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/restaurant-partners\\\">Restaurant Partners</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/wholesale-inquiries\\\">Wholesale Inquiries</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"https://recruiting.adp.com/srccar/public/RTI.home?c=1124341&amp;d=ExternalCareerSite\\\" rel=\\\"noreferrer\\\" target=\\\"_blank\\\">                                    Careers                                  </a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/accessibility\\\">Accessibility Statement</a></li></ul></div></div></div></div><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-3\\\"><div id=\\\"wi2700011-allnFooterV1-menu-230012\\\"><div class=\\\"footer-content\\\"><div data-bind=\\\"html: config.richText.content\\\"><ul class=\\\"footer-list list-unstyled\\\"><li class=\\\"footer-list-title\\\"><a href=\\\"#\\\">Customer Service</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/faq\\\">FAQ’s</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/shipping\\\">Shipping</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"https://www.ups.com/tracking/tracking.html\\\">Order Tracking</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/refund-return-policy\\\">Refund &amp; Return Policy</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/guarantee\\\">Guarantee</a></li><li class=\\\"footer-list-item\\\"><a href=\\\"/contact-us\\\">Contact Us</a></li></ul></div></div></div></div><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-4\\\"><div id=\\\"wi2700011-allnFooterV1-shareThis-id\\\"><div class=\\\"footer-content hidden\\\"><ul class=\\\"footer-social list-inline\\\"><li><a rel=\\\"noreferrer\\\" aria-label=\\\"facebook\\\" href=\\\"https://www.facebook.com/absteaks/\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-facebook fab fa-facebook-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"twitter\\\" href=\\\"https://twitter.com/absteaks\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-twitter fab fa-twitter-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"youtube\\\" href=\\\"https://www.youtube.com/user/absteaks\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-youtube fab fa-youtube-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"instagram\\\" href=\\\"https://www.instagram.com/absteaks/\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-instagram fab fa-instagram\\\"></i></a></li></ul></div></div></div><div class=\\\"oc-panel col-md-2\\\" data-oc-id=\\\"panel-0-5\\\"><div id=\\\"wi2700011-allnFooterV1-sslSafeAndSecure-id\\\"><div class=\\\"footer-content\\\"><div class=\\\"footer-secure d-flex align-items-center footer-secure-container\\\"><i class=\\\"icon icon-lock fas fa-lock ab-fa-lock\\\"></i><p class=\\\"ab-fa-textSSL\\\">100% Safe &amp; SSL Secure Ordering</p></div></div><div class=\\\"footer-content\\\"><ul class=\\\"footer-social list-inline\\\"><li><a rel=\\\"noreferrer\\\" aria-label=\\\"facebook\\\" href=\\\"https://www.facebook.com/absteaks/\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-facebook fab fa-facebook-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"twitter\\\" href=\\\"https://twitter.com/absteaks\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-twitter fab fa-twitter-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"youtube\\\" href=\\\"https://www.youtube.com/user/absteaks\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-youtube fab fa-youtube-square\\\"></i></a></li><li><a rel=\\\"noreferrer\\\" aria-label=\\\"instagram\\\" href=\\\"https://www.instagram.com/absteaks/\\\" target=\\\"_blank\\\"><i class=\\\"icon icon-instagram fab fa-instagram\\\"></i></a></li></ul></div></div></div></div><div class=\\\"row\\\"><div class=\\\"oc-panel col-md-12\\\" data-oc-id=\\\"panel-1-0\\\"><div data-bind=\\\"element: 'allnFooterV1-copyright'\\\" id=\\\"wi2700011-allnFooterV1-copyright-id\\\"><div class=\\\"footer-copyright footer-copyright-container\\\"><div class=\\\"footer-copyright-inner\\\"><p>© 2022 Allen Brothers. All Rights Reserved.</p><ul class=\\\"footer-copyright-links list-inline\\\"><li><a href=\\\"/privacy-policy\\\"><span data-bind=\\\"text: textPrivacyPolicy\\\">Privacy Policy</span></a></li><li class=\\\"divider pp-separator\\\">                                  |                                </li><li><a href=\\\"/terms-of-service\\\"><span data-bind=\\\"text: textTermsOfService\\\">Terms of Service</span></a></li></ul></div></div></div></div></div></div></div></div></div></div></div></footer></section></div></div></div>\"}",
+                        "startDate": "2023-02-12T11:17:20"
+                    }
+                }
+            }
+        ],
+        "creationTime": "2022-12-12T03:58:14",
+        "lastModified": "2023-02-22T07:01:41",
+        "createdBy": "Super Admin Admin",
+        "modifiedBy": "Mallikarjun k",
+        "channelId": "AB",
+        "deleted": false
+    },
+    "seo": {
+        "title": "",
+        "description": "",
+        "keywords": "",
+        "canonicalUrl": "",
+        "pageHeading": ""
+    },
+    "layout": {
+        "layoutId": "layout:two_column_layout",
+        "layoutName": "Two Column Layout",
+        "imageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABRCAYAAAB430BuAAAABHNCSVQICAgIfAhkiAAAAeBJREFUeF7t3LFKw2AUhuFzRMRdh24quOrs6GV4Ge0deAfp4gU5uukdODqJbiLCkZRW6JS8ySAhb6F0+U7bPP2aQv6kuV6vK7z1Eqiqx2zBlstl9pqYcahpmtuIuBesZwkE6wm1iwkmGBSAcRsmGBSAcRsmGBSAcRsmGBSAcRsmGBSAcRs2BiwiPuB8G//a3geMTm8kM4+r6nNztKKqXuAmLCLiLSKe4dyU44vMPB10eKdpmvt2y1er1eZxDrdR+zDB4BFXwQTr3Kv4lewk2g8IJhgUgHEbJhgUgHEbJhgUgHEbJhgUgHEbJhgUgHEbJhgUgHEbJhgUgHEb9g9gBxHxBF93svGqusrMuzGLIEcRcT1ZAfjGM/MkIs7GgLlq1BfdRRAXQTq74q9kJ5GLIJBIMMFGCcBh92GCQQEYt2GCQQEYt2GCQQEYt2GCQQEYt2GCQQEYt2GCQQEYt2GCQQEYt2GCQQEYt2GCQQEY32tYRPzA+fY0ge85XWAaEYfthbi7C0wfIFgbf9/eB4xOcuQyM28GnSowyc0d+aZH7fRHvvYkxwWDH5tggkEBGLdhgkEBGLdhgkEBGLdhgkEBGLdhgkEBGN9rWGbO5l+aoNNfvKrOq+oid+fcD32imc29/gKmj8glQIVlyQAAAABJRU5ErkJggg==",
+        "segments": [
+            {
+                "type": "top",
+                "label": "Top Section"
+            },
+            {
+                "type": "middle",
+                "label": "Middle Section"
+            },
+            {
+                "type": "left",
+                "label": "Left Section"
+            },
+            {
+                "type": "bottom",
+                "label": "Bottom Section"
+            }
+        ]
+    },
+    "priority": 100,
+    "isEnabled": true,
+    "locations": [
+        null
+    ],
+    "startDate": "2023-02-07T06:08:00",
+    "creationTime": "2023-02-20T07:55:06",
+    "createdBy": "Harish KJ",
+    "modifiedBy": "Harish KJ",
+    "lastModified": "2023-02-20T02:55:06",
+    "deleted": false,
+    "segmentsMap": {
+        "middle": [
+            {
+                "segmentId": "segment:dbd77b9a-c568-48ab-829c-555f5e0b7544",
+                "type": "middle",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "segmentContentType": "",
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Result Count:e51d512f-1509-46bf-a562-f49a5f264e74",
+                        "name": "Result Count",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Result Count",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "configValue": "{\"resultCount\":\"RESULT_COUNT\"}",
+                        "startDate": "2023-02-05T11:24:36"
+                    }
+                }
+            },
+            {
+                "segmentId": "segment:9f7db4dd-5710-407c-9efc-e42a093605d5",
+                "type": "middle",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "segmentContentType": "",
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Category Description:12dd0583-1e2c-482a-9a87-08905846cf3c",
+                        "name": "PLP - Category Description",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Category Description",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "startDate": "2023-02-19T07:50:31"
+                    }
+                }
+            },
+            {
+                "segmentId": "segment:5bf1d3d2-e775-4db9-9607-637d0ea01101",
+                "type": "middle",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "segmentContentType": "",
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Result List:bf84e2c0-7018-4928-8953-47d9d11d3517",
+                        "name": "Result List",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Result List",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "startDate": "2023-02-06T04:38:08"
+                    }
+                }
+            }
+        ],
+        "top": [
+            {
+                "segmentId": "segment:2c58bc60-58c5-499d-9ca3-9b243245d326",
+                "type": "top",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "segmentContentType": "",
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Breadcrumb:0efef288-1d65-402f-930d-d952869b1248",
+                        "name": "Breadcrumb",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Breadcrumb",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "startDate": "2023-02-06T04:38:34"
+                    }
+                }
+            }
+        ],
+        "left": [
+            {
+                "segmentId": "segment:3f221a49-0650-49df-872e-2d9861b37230",
+                "type": "left",
+                "noOfColumns": 1,
+                "gridColFormat": [
+                    12
+                ],
+                "segmentContentType": "",
+                "deleted": false,
+                "columnContentItemMap": {
+                    "1": {
+                        "contentItemId": "Facet:04072602-5782-492d-8816-d5f0f9c55960",
+                        "name": "Facets",
+                        "displayNameOnStoreFront": true,
+                        "contentTypeId": "Facet",
+                        "priority": 100,
+                        "isEnabled": true,
+                        "startDate": "2023-02-06T04:36:56"
+                    }
+                }
+            }
+        ]
+    },
+    "allProductCarouselProductIds": [],
+    "allProductCarouselServiceDriveUrls": [],
+    "channelId": "AB",
+    "aiDrivenProductCarouselConfiguration": [],
+    "localization": {
+        "en_US": {
+            "seoTitle": "",
+            "seoPageHeading": "",
+            "seoCanonicalUrl": "",
+            "seoDescription": "",
+            "seoKeywords": []
+        }
+    }
+}

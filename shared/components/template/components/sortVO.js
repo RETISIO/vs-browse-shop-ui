@@ -11,7 +11,8 @@ function SortVO(props) {
   const [pageContentData, setPageContent] = useState(data);
   // const { pageData } = usePageDataContext();
 
-  const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+'));
+  // const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+') || '');
+  const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.concat('+') || '');
   const [selectedFacets, setSelectedFacets] = useState(router?.query?.fs?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
 
@@ -23,6 +24,7 @@ function SortVO(props) {
   const categoryIds = URLHandler('id', router.asPath) || '';
   const facetIds = URLHandler('fs', router.asPath) || '';
   const sortId = URLHandler('so', router.asPath) || '';
+  const searchTerm = URLHandler('st', router.asPath) || '';
 
   useEffect(() => {
     setSelectedCategories(categoryIds);
@@ -39,6 +41,7 @@ function SortVO(props) {
         id: encodeURI(`${selectedCategories}`),
         fs: encodeURI(`${selectedFacets}`),
         so: encodeURI(`${(id)}`),
+        st: encodeURI(`${searchTerm}`),
       },
     });
   };
