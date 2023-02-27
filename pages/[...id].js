@@ -34,7 +34,7 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async(context) => {
-  const { query } = context;
+  const { query, req } = context;
   let res;
   try {
     if (!query.id.includes('nginx-health')) {
@@ -42,7 +42,7 @@ Static.getInitialProps = async(context) => {
         `static/${query.id.join('/')}`,
         '',
         {},
-        true,
+        req,
       );
     } else {
       return {

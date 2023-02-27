@@ -10,7 +10,7 @@ function Error() {
   const [pageData, setPageData] = useState();
   useEffect(() => {
     (async() => {
-      const res = await requestContructor('static/404', '', {}, false);
+      const res = await requestContructor('static/404', '', {});
       setPageData(res);
     })();
   }, []);

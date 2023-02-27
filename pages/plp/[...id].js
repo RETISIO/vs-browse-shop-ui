@@ -16,6 +16,7 @@ import PageBuilder from '../../shared/components/template/pageBuilder';
 import MainLayout from '../../shared/components/Layout';
 import { Loader } from '../../shared/components/loader';
 import getPLPData from '../../shared/helpers/getPLPData';
+import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -34,6 +35,9 @@ function Static({ data }) {
     });
     Router.events.on('routeChangeComplete', (url) => {
       setLoading(false);
+      if(window && window.yotpo) {
+        window.yotpo.refreshWidgets();
+      }
     });
     Router.events.on('routeChangeError', (url) => {
       setLoading(false);
@@ -49,12 +53,12 @@ function Static({ data }) {
 
   return (
     <MainLayout data={data}>
-     
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
         <PageBuilder pageContent={pageContent} data={data} />
       </main>
+      <Yotpo />
     </MainLayout>
   );
 }

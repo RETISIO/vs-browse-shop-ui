@@ -95,6 +95,12 @@ export default function ProductCard({
                   </div>
                 ) : null}
             </div>
+            <div
+              className="yotpo bottomLine yotpo-small"
+              data-yotpo-product-id={value?.productId}
+              data-currency="USD"
+            >
+            </div>
             <p className="product-card-price">
               {(value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice) === 0 ? null
                 : (
