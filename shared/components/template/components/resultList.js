@@ -63,6 +63,11 @@ function ResultList(props) {
           // eslint-disable-next-line no-unsafe-optional-chaining
           setProducts([...products, ...res?.payLoad?.products]);
           setProductCount(res?.payLoad?.productCount);
+          if(window && window.yotpo) {
+            setTimeout(() => {
+              window.yotpo.refreshWidgets();
+            }, 10);
+          }
         }
       })();
     }

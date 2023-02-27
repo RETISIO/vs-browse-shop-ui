@@ -98,6 +98,7 @@ export default function ProductCard({
             <div
               className="yotpo bottomLine yotpo-small"
               data-yotpo-product-id={value?.productId}
+              // data-yotpo-product-id="10660"
               data-currency="USD"
             >
             </div>
