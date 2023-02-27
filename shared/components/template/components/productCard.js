@@ -109,7 +109,7 @@ export default function ProductCard({
                     <span>Starting At: </span>
                     <b>
                       $
-                      {value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice}
+                      {value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice : value?.productPrice?.minListPrice}
                     </b>
                   </>
                 )}
