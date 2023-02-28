@@ -3,6 +3,7 @@
 /* eslint-disable import/named */
 import { useState, useEffect } from 'react';
 import { LoginModel } from '@retisio/sf-ui';
+import { useRouter } from 'next/router';
 
 import { Modal } from 'react-bootstrap';
 import { getCookie } from '@retisio/sf-api';
@@ -18,6 +19,8 @@ export function Index(props) {
   const [errorBanner, setErrorBanner] = useState(false);
   const [passwordRegex, setPasswordRegex] = useState([]);
   const [passwordErrors, setPasswordErrors] = useState([]);
+  const router = useRouter();
+  const { page } = router.query;
 
   const getData = async() => {
     const res = await requestContructor('getPasswordPolicy', '', {}, false);
@@ -55,13 +58,19 @@ export function Index(props) {
 
   const handleSubmitForm = async(data) => {
     const loginData = await requestContructor(
-      'signIn', '',
-      { method: 'POST', data }).then((data) => {
+      'signIn',
+      '',
+      { method: 'POST', data },
+    ).then((data) => {
       if(data) {
         setShow(false);
         if (getCookie('X-Auth-Token')) {
           setisLogged(true);
-          window.location.href = '/';
+          if(page) {
+            window.location.href = page;
+          }else{
+            window.location.href = '/';
+          }
         }
       }
     }, (error) => {

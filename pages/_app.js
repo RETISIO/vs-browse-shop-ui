@@ -13,6 +13,8 @@ import '../styles/styles.scss';
 // eslint-disable-next-line import/named
 import { PageDataContextWrapper } from '../shared/context/pageData-context';
 import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
+import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
+
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -30,6 +32,7 @@ export default function App({ Component, pageProps }) {
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>
+      <GoogleAnalytics />
     </SSRProvider>
   );
 }

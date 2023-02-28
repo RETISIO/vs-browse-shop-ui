@@ -16,6 +16,7 @@ export default function MainLayout({ data, children }) {
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
+
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {

@@ -23,7 +23,7 @@ const requestContructor = async(URL, params = '', options = {}, req = null) => {
   }else{
     tempURI = `/arc/${URL}${params}`;
   }
-  console.log('final headers URI', finalHeaders, tempURI);
+  console.log('final request data', options, finalHeaders, tempURI);
   return Service.request(tempURI, { ...options, header: finalHeaders });
 };
 
