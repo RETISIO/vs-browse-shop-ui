@@ -80,6 +80,10 @@ function Facet(props) {
                         onClick={() => clickFilter()}
                       >
                         {item.name}
+                        {' '}
+                        (
+                        {item.productCount}
+                        )
                       </Link>
                     </li>
                   ))}

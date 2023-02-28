@@ -41,7 +41,6 @@ function Static({ data }) {
     });
   }, []);
 
-  console.log("inmcoming data", data);
   const pageContent = PageJson;
   data.page = PageJson;
 
@@ -51,7 +50,6 @@ function Static({ data }) {
 
   return (
     <MainLayout data={data}>
-     
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
