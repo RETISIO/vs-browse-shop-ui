@@ -16,6 +16,8 @@ export default function MainLayout({ data, children }) {
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
+  const { page } = router.query;
+
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {
@@ -110,6 +112,7 @@ export default function MainLayout({ data, children }) {
         damPath={damPath}
         setshowLogin={setShow}
         showLogin={show}
+        redirectionPage={page}
         isLogged={isLogged}
         signout={() => signout()}
       >

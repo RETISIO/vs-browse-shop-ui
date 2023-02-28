@@ -7,6 +7,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="preconnect" href="https://staticw2.yotpo.com" />
+        <link rel="preconnect" href="//www.google-analytics.com" />
       </Head>
       <body>
         <Main />
