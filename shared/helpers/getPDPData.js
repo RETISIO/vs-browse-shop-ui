@@ -15,3 +15,14 @@ export default async function getPDPData(context) {
   }
   return data;
 }
+
+export async function addToBagDetails(addToBagItems) {
+  let data;
+
+  try {
+    data = await requestContructor('addToCartArc', '', { method: 'POST', data: addToBagItems }, false);
+  } catch (e) {
+    data = {};
+  }
+  return data;
+}

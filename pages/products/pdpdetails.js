@@ -1,11 +1,27 @@
 import React from 'react';
 import { Breadcrumb } from '../../shared/components/template/components/breadcrumb';
-import NextImage from '../../shared/components/template/components/nextImage';
+import { NextImage } from '../../shared/components/template/components/nextImage';
+import { addToBagDetails } from '../../shared/helpers/getPDPData';
 
-export default function Details(props) {
+export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad;
   const productSkus = Object.values(pdpData.products[0].skus);
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const addToBagHandler = (event) => {
+    event.preventDefault();
+    const pdp = {
+      items: [
+        {
+          variantId: '98340',
+          productId: '10775',
+          quantity: '1',
+          productType: 'product'
+        }
+      ]
+    };
+    console.log("The Pdp details :::::::: pdp::::::", pdp);
+    addToBagDetails(pdp);
+  };
   const renderSkuItems = (item, index) => {
     const itemPrice = item.skuDetails?.price?.salePrice?.price || item.skuDetails?.price?.listPrice?.price;
     const pieces = item.skuDetails?.additionalDetails?.pieces || '';
@@ -50,7 +66,14 @@ export default function Details(props) {
                       <i className="fa fa-minus" aria-hidden="true"></i>
                     </button>
                   </span>
-                  <input className="form-control js-counter__input" type="number" min="0" max="999" value="1" maxLength="3" />
+                  <input
+                    className="form-control js-counter__input"
+                    type="number"
+                    min="0"
+                    max="999"
+                    value="1"
+                    maxLength="3"
+                  />
                   <span className="input-group-btn">
                     <button className="btn js-counter__btn" type="button" data-counter="increment">
                       <i className="fa fa-plus" aria-hidden="true"></i>
@@ -61,7 +84,15 @@ export default function Details(props) {
             </div>
           </td>
           <td className="v-middle hidden-xs">
-            <button className="btn btn-secondary btn-md add-to-cart pull-right" style={{ minWidth: '170px' }} id="0" disabled="">ADD TO CART</button>
+            <button
+              className="btn btn-secondary btn-md add-to-cart pull-right"
+              style={{ minWidth: '170px' }}
+              id="0"
+              disabled=""
+              onClick={(e) => addToBagHandler(e)}
+            >
+              ADD TO CART
+            </button>
             <div className="cell-content text-center">
             </div>
           </td>

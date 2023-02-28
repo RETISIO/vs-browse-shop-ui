@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import MainLayout from '../../shared/components/Layout';
 import getPDPData from '../../shared/helpers/getPDPData';
-import Details from './pdpdetails';
+import ProductDescription from './pdpdetails';
 
-export default function Products({ data }) {
+export default function ProductDetails({ data }) {
   const { setPageData } = usePageDataContext();
 
   useEffect(() => {
@@ -16,13 +16,13 @@ export default function Products({ data }) {
       {/* <Yotpo /> */}
       <main>
         {/* {i18n.t('title')} */}
-        <Details pdpData={data} />
+        <ProductDescription pdpData={data} />
       </main>
     </MainLayout>
   );
 }
 
-Products.getInitialProps = async (context) => {
+ProductDetails.getInitialProps = async (context) => {
   const data = await getPDPData(context);
   return {
     data,
