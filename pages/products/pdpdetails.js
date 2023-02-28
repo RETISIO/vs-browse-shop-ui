@@ -1,0 +1,259 @@
+import React from 'react';
+import { Breadcrumb } from '../../shared/components/template/components/breadcrumb';
+import { NextImage } from '../../shared/components/template/components/nextImage';
+import { addToBagDetails } from '../../shared/helpers/getPDPData';
+
+export default function ProductDescription(props) {
+  const pdpData = props?.pdpData?.payLoad;
+  const productSkus = Object.values(pdpData.products[0].skus);
+  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const addToBagHandler = (event) => {
+    event.preventDefault();
+    const pdp = {
+      items: [
+        {
+          variantId: '98340',
+          productId: '10775',
+          quantity: '1',
+          productType: 'product'
+        }
+      ]
+    };
+    console.log("The Pdp details :::::::: pdp::::::", pdp);
+    addToBagDetails(pdp);
+  };
+  const renderSkuItems = (item, index) => {
+    const itemPrice = item.skuDetails?.price?.salePrice?.price || item.skuDetails?.price?.listPrice?.price;
+    const pieces = item.skuDetails?.additionalDetails?.pieces || '';
+    const weight = item.skuDetails?.additionalDetails?.weight || '';
+    const thickness = item.skuDetails?.additionalDetails?.thickness || '';
+    const options = `${pieces} ${weight} ${thickness}`;
+    if (item.skuDetails?.inventory[0].inventoryStatusLabel === 'In Stock') {
+      return (
+        <tr key={`tr-${index}`}>
+          <td>
+            <span className="caption" style={{ width: 'auto' }}>Item #</span>
+            <div className="cell-content testing">{item.skuId}</div>
+          </td>
+          <td>
+            <div className="cell-content">
+              <p>{options}</p>
+            </div>
+          </td>
+          <td>
+            <div className="cell-content">
+              <div className="cell-content-price">
+                <b
+                  className="product-price"
+                >
+                  {itemPrice}
+                </b>
+              </div>
+            </div>
+          </td>
+
+          {/* <td className="v-middle hidden-xs">
+            <div className="cell-content">
+              <a href="#" data-toggle="modal" data-backdrop="static" data-target="#backInStockNotificationModal" style={{ fontSize: '13px', marginBottom: '10px' }}>Notify Me When In Stock</a>
+            </div>
+          </td> */}
+          <td className="v-middle hidden-xs">
+            <div className="cell-content">
+              <div className="product-cart__counter counter js-counter">
+                <div className="input-group">
+                  <span className="input-group-btn">
+                    <button className="btn js-counter__btn" type="button" data-counter="decrement">
+                      <i className="fa fa-minus" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                  <input
+                    className="form-control js-counter__input"
+                    type="number"
+                    min="0"
+                    max="999"
+                    value="1"
+                    maxLength="3"
+                  />
+                  <span className="input-group-btn">
+                    <button className="btn js-counter__btn" type="button" data-counter="increment">
+                      <i className="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td className="v-middle hidden-xs">
+            <button
+              className="btn btn-secondary btn-md add-to-cart pull-right"
+              style={{ minWidth: '170px' }}
+              id="0"
+              disabled=""
+              onClick={(e) => addToBagHandler(e)}
+            >
+              ADD TO CART
+            </button>
+            <div className="cell-content text-center">
+            </div>
+          </td>
+          <td className="v-middle visible-xs hidden-md hidden-sm hidden-lg">
+            <div className="col-xs-4 visible-xs hidden-md hidden-sm hidden-lg" style={{ paddingLeft: '0px' }}>
+              <a className="visible-xs hidden-md hidden-sm hidden-lg" data-bind="click: $parent.selectNotifyProduct.bind($parent, $data), widgetLocaleText: 'notifyStockLink'" href="#" data-toggle="modal" data-backdrop="static" data-target="#backInStockNotificationModal" id="backInStockPopup" style={{ fontSize: '13px', marginBottom: '10px' }}>Notify Me When In Stock</a>
+            </div>
+            <div className="col-xs-8 visible-xs hidden-md hidden-sm hidden-lg" style={{ paddingRight: '0px', paddingLeft: '22px' }}>
+              <button className="btn btn-secondary btn-md add-to-cart visible-xs hidden-md hidden-sm hidden-lg" data-bind="attr: {id: $index()}, enable: ($data.quantity() > 0 &amp;&amp; $data.stockStatus() &amp;&amp;  $data.quantity() <= $data.stockStatus().inStockQuantity) , click: $parent.handleAddToCart.bind($parent, $data), widgetLocaleText: 'addToCartBtn'" style={{ width: '160px', minWidth: 'auto' }} id="0" disabled="">ADD TO CART</button>
+              <div className="cell-content text-center visible-xs hidden-md hidden-sm hidden-lg">
+              </div>
+            </div>
+          </td>
+          <td className="v-middle visible-xs hidden-md hidden-sm hidden-lg">
+          </td>
+        </tr>
+      );
+    }
+    return null;
+  };
+  const renderGalleryImage = () => {
+    const defaultSkuId = pdpData?.products[0]?.defaultSkuId;
+    const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media;
+    const thumbnailHeight = 475;
+    const thumbnailWidth = 475;
+    return (
+      <aside className="col-md-5">
+        <div className="product-gallery app-figure" id="zoom-fig">
+          <div id="cc_img__resize_wrapper-badge-usda-prime" style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}>
+            {/* <img
+              id="usda-logo"
+              className="usda-prime-logo"
+              alt="USDA Prime"
+              src="https://www.allenbrothers.com/file/general/usda.png"
+              srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/usda.png&amp;height=45&amp;width=55 55w"
+              sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px"
+            /> */}
+
+            <NextImage
+              alt={mediaObj?.altText}
+              src={`${damPath}catalog${mediaObj?.thumbnailImg}`}
+              height={thumbnailHeight}
+              width={thumbnailWidth}
+              id="usda-logo"
+              className="usda-prime-logo hidden"
+            />
+
+          </div>
+          <div className="product-gallery__main">
+            <a
+              className="MagicZoom js-product-gallery-zoom"
+              id="zoom"
+              href="/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg"
+            >
+              <figure className="mz-figure mz-hover-zoom mz-ready">
+                {/* <img
+                  id="zoom-image"
+                  loading="lazy"
+                  alt="Dry-Aged USDA Prime Boneless Sirloin Strip Steaks"
+                  src="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg&amp;height=475&amp;width=475"
+                  style={{ maxWidth: '475px', maxHeight: '475px' }}
+                /> */}
+                <NextImage
+                  alt={mediaObj?.altText}
+                  src={`${damPath}catalog${mediaObj?.thumbnailImg}`}
+                  height={thumbnailHeight}
+                  width={thumbnailWidth}
+                  id="zoom-image"
+                />
+                <div
+                  className="mz-lens"
+                  style={{
+                    top: '0px', transform: 'translate(-10000px, -10000px)', width: '255px', height: '255px',
+                  }}
+                >
+                  <img
+                    src="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg&amp;height=475&amp;width=475"
+                    style={{
+                      position: 'absolute', top: '0px', left: '0px', width: '458px', height: '458px', transform: 'translate(-204px, -1px)',
+                    }}
+                  />
+                </div>
+              </figure>
+
+            </a>
+          </div>
+          <div className="MagicScroll js-product-gallery-scroll" id="productThumb" data-magic-zoom-id="zoom" data-target-id="pdp-slider-desktop" data-options="orientation: horizontal;" data-bind="mainGallery: mainGallery"></div>
+          <div className="MagicScroll" id="pdp-slider-desktop" data-options="orientation: horizontal;"></div>
+        </div>
+      </aside>
+    );
+  };
+  return (
+    <section>
+      <div className="container pdpMainContainer">
+        <nav className="breadcrumbs-block hidden-print">
+          <ol className="breadcrumb">
+            <Breadcrumb data={props.pdpData} />
+          </ol>
+        </nav>
+        <div>
+          <div className="hidden-lg hidden-md visible-sm visible-xs">
+            <div className="alert alert-dismissible hidden-print alert-success undefined" role="alert" style={{ display: 'none' }}>
+              <button className="close" type="button" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+          </div>
+          <div className="alert alert-dismissible hidden-print alert-success undefined" role="alert" style={{ display: 'none' }}>
+            <button data-bind="click: $data.clearSuccessMessages" className="close" type="button" aria-label="Close"><span aria-hidden="true">×</span></button>
+          </div>
+          <div className="alert alert-dismissible hidden-print alert-danger undefined" role="alert" style={{ display: 'none' }}>
+            <button data-bind="click: $data.clearErrorMessages" className="close" type="button" aria-label="Close"><span aria-hidden="true">×</span></button>
+          </div>
+        </div>
+        <div className="product-title-wrapper">
+          <h1 className="page-title">
+            <span>{pdpData.products[0].displayName}</span>
+            <div>
+              {/* <div htmlFor="reviewsection" className="yotpo bottomLine yotpo-medium" data-bind=" attr:{ 'data-yotpo-product-id':$data.product().id()}" data-yotpo-product-id="10032" data-yotpo-element-id="2">
+                <div className="yotpo-display-wrapper">
+                  <div className="standalone-bottomline" data-source="default" tabIndex="-1">
+                    <div className="yotpo-bottomline pull-left  star-clickable" tabIndex="0">
+                      <span className="yotpo-stars">
+                        <span className="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                        <span className="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                        <span className="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                        <span className="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                        <span className="yotpo-icon yotpo-icon-star rating-star pull-left"></span>
+                        <span className="sr-only">4.8 star rating</span>
+                      </span>
+                      <a href="javascript:void(0)" className="text-m" aria-label="20 reviews" tabIndex="-1">20 Reviews</a>
+                      <div className="yotpo-clr"></div>
+                    </div>
+                    <div className="yotpo-clr"></div>
+                  </div>
+                  <div className="yotpo-clr"></div>
+                </div>
+              </div> */}
+            </div>
+          </h1>
+          <p className="page-short-description">{pdpData.products[0].description}</p>
+        </div>
+        <div className="row product-gallery-wrapper">
+          {renderGalleryImage()}
+          <div className="col-md-7">
+            <table className="table table-striped table-responsive-sm product-table">
+              <thead>
+                <tr>
+                  <th>Item #</th>
+                  <th width="160">Options</th>
+                  <th>Price</th>
+                  <th>QTY</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productSkus?.map((item, i) => renderSkuItems(item, i))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
