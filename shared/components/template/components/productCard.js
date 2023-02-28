@@ -29,6 +29,7 @@ export default function ProductCard({
  
     observer.observe(cardRef.current);
   }, [isLast]);
+
   return (
     <>
       <div className="col-md-4 col-sm-6 col-xs-12" ref={cardRef} key={index}>
@@ -61,7 +62,7 @@ export default function ProductCard({
           ) : null}
           <Link
             className="product-image"
-            href={`/products/month-plan-duo/${value?.productId}`}
+            href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
           >
             <div className="image-pos">
               <NextImage
@@ -75,7 +76,7 @@ export default function ProductCard({
           </Link>
           <div className="product-card-inner">
             <div className="product-card-desc">
-              <Link href={`/products/month-plan-duo/${value?.productId}`}>
+              <Link href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}>
                 {value.displayName}
               </Link>
               {(value?.additionalDetails?.isNewProduct || value?.additionalDetails?.isNeverFrozen)
