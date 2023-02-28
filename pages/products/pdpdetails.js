@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Breadcrumb } from '../../shared/components/template/components/breadcrumb';
 import { NextImage } from '../../shared/components/template/components/nextImage';
 import { addToBagDetails } from '../../shared/helpers/getPDPData';
@@ -7,6 +7,12 @@ export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad;
   const productSkus = Object.values(pdpData.products[0].skus);
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const skuQtyObj = {};
+  const [initialQtyObj, setQtyObj] = useState({});
+  useEffect(() => {
+    console.log("In useEffect::skuQtyObj::",skuQtyObj);
+    setQtyObj(skuQtyObj);
+  }, []);
   const addToBagHandler = (event) => {
     event.preventDefault();
     const pdp = {
@@ -22,12 +28,41 @@ export default function ProductDescription(props) {
     console.log("The Pdp details :::::::: pdp::::::", pdp);
     addToBagDetails(pdp);
   };
+  const updateQntyObj = (name, value) => {
+    if (value > 0) {
+      setQtyObj({
+        ...initialQtyObj,
+        [name]: value,
+      });
+    }
+  }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    updateQntyObj(name, value);
+  };
+  const handleIncrementalClick = (event) => {
+    event.preventDefault();
+    const itemSkuId = event.target.closest(".qntyChangeBtn").getAttribute("data-sku-id");
+    console.log("The handleIncrementalClick :::::::: handleIncrementalClick::::::", itemSkuId);
+    const updatedQnty = initialQtyObj[itemSkuId] + 1;
+    updateQntyObj(itemSkuId, updatedQnty);
+  }
+  const handleDecrementClick = (event) => {
+    event.preventDefault();
+    const itemSkuId = event.target.closest(".qntyChangeBtn").getAttribute("data-sku-id");
+    console.log("The handleDecrementClick :::::::: handleDecrementClick::::::", itemSkuId);
+    const updatedQnty = initialQtyObj[itemSkuId] - 1;
+    updateQntyObj(itemSkuId, updatedQnty);
+  }
   const renderSkuItems = (item, index) => {
     const itemPrice = item.skuDetails?.price?.salePrice?.price || item.skuDetails?.price?.listPrice?.price;
     const pieces = item.skuDetails?.additionalDetails?.pieces || '';
     const weight = item.skuDetails?.additionalDetails?.weight || '';
     const thickness = item.skuDetails?.additionalDetails?.thickness || '';
     const options = `${pieces} ${weight} ${thickness}`;
+    skuQtyObj[item.skuId] = 1;
+    const qnty = initialQtyObj[item.skuId] || '';
+    console.log("In renderSkuItems::::");
     if (item.skuDetails?.inventory[0].inventoryStatusLabel === 'In Stock') {
       return (
         <tr key={`tr-${index}`}>
@@ -62,7 +97,7 @@ export default function ProductDescription(props) {
               <div className="product-cart__counter counter js-counter">
                 <div className="input-group">
                   <span className="input-group-btn">
-                    <button className="btn js-counter__btn" type="button" data-counter="decrement">
+                    <button className="btn js-counter__btn qntyChangeBtn" type="button" data-sku-id={item.skuId} onClick={(e)=> handleDecrementClick(e)}>
                       <i className="fa fa-minus" aria-hidden="true"></i>
                     </button>
                   </span>
@@ -71,11 +106,13 @@ export default function ProductDescription(props) {
                     type="number"
                     min="0"
                     max="999"
-                    value="1"
+                    value={qnty}
+                    onChange={handleChange}
                     maxLength="3"
+                    name={item.skuId}
                   />
                   <span className="input-group-btn">
-                    <button className="btn js-counter__btn" type="button" data-counter="increment">
+                    <button className="btn js-counter__btn qntyChangeBtn" type="button" data-sku-id={item.skuId} onClick={(e)=> handleIncrementalClick(e)}>
                       <i className="fa fa-plus" aria-hidden="true"></i>
                     </button>
                   </span>
