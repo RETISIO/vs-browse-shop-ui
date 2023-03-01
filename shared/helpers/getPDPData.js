@@ -26,3 +26,15 @@ export async function addToBagDetails(addToBagItems) {
   }
   return data;
 }
+
+
+export async function addToWishList(wishlistItem) {
+  let data;
+
+  try {
+    data = await requestContructor('addToWishListArc', '', { method: 'POST', data: wishlistItem }, false);
+  } catch (e) {
+    data = {};
+  }
+  return data;
+}

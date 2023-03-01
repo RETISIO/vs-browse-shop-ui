@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addToBagDetails } from '../../shared/helpers/getPDPData';
+import { addToBagDetails, addToWishList } from '../../shared/helpers/getPDPData';
 
 export default function SkuLineItem(props) {
   const { skuItem, productId } = props;
@@ -22,6 +22,14 @@ export default function SkuLineItem(props) {
       ],
     };
     addToBagDetails(pdp);
+  };
+
+  const addToWishLisrHandler = (e) => {
+    addToWishList({
+      skuId: skuItem.skuId,
+      productId,
+      quantity: '1',
+    });
   };
   const updateQntyObj = (value) => {
     if (value > 0) {
@@ -117,6 +125,10 @@ export default function SkuLineItem(props) {
           ADD TO CART
         </button>
         <div className="cell-content text-center">
+          <button className="btn btn-primary btn-sm hidden-xs pdp-btn-wishlist" onClick={(e) => addToWishLisrHandler(e)}>
+            Add to Wishlist
+          </button>
+          <p className="visible-xs"><a className="link" href="#">Add to Wishlist</a></p>
         </div>
       </td>
       <td className="v-middle visible-xs hidden-md hidden-sm hidden-lg">
