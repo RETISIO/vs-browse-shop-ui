@@ -9,7 +9,7 @@ import URLHandler from '../../../helpers/urlHandler';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function Breadcrumb(props) {
-  const { data } = props;
+  const { data, pageType } = props;
   const [pageContentData, setPageContent] = useState(data);
   const router = useRouter();
   const searchTerm = URLHandler('st', router.asPath) || '';
@@ -24,7 +24,7 @@ export function Breadcrumb(props) {
         <Link href="/">Home</Link>
       </li>
       
-      {pageContentData?.page?.pageType?.id === 'search:default'
+      {pageType === 'search'
         ? (
           <li>
             <span>{`YOUR SEARCH RESULTS FOR "${pageContentData?.payLoad?.autoCorrectTerm ? pageContentData?.payLoad?.autoCorrectTerm : searchTerm}"`}</span>

@@ -41,10 +41,11 @@ function Static({ data }) {
       
       if(res?.payLoad?.productCount === 0) {
         Router.push('/noresult');
+      } else {
+        res.page = PageJson;
+        setSearchPageData(res);
+        setLoading(false);
       }
-      res.page = PageJson;
-      setSearchPageData(res);
-      setLoading(false);
     })();
   }, [router.asPath]);
 
