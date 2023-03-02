@@ -15,7 +15,7 @@ import { usePageDataContext } from "../../../context/pageData-context";
 import URLHandler from '../../../helpers/urlHandler';
 
 function Facet(props) {
-  const { mobileView, closeToggle } = props;
+  const { mobileView, closeToggle, pageType } = props;
   const [pageContentData, setPageContent] = useState(props.data);
   const { pageData } = usePageDataContext();
   const [isClick, setIsClicked] = useState(false);
@@ -55,7 +55,8 @@ function Facet(props) {
   return (
     <>
       <div className="catalog-filter__top">
-        {(pageContentData?.payLoad?.categories && pageContentData?.payLoad?.categories?.length > 0)
+        {(pageContentData?.payLoad?.categories && pageContentData?.payLoad?.categories?.length > 0
+        && pageType !== "search")
         ? (
           <div className="panel panel-default">
             <div className="panel-heading">
@@ -95,13 +96,27 @@ function Facet(props) {
       ) : null}
         <div className="catalog-filter__clear">
           <b>Your Selections: </b>
-          {pageContentData?.payLoad?.selectedFacets?.length > 0 && (
+          {pageType !== "search" && pageContentData?.payLoad?.selectedFacets?.length > 0 && (
           <Link
             className="link-underline"
             href={{
                 pathname: path,
                 query: {
                   id: encodeURI(`${selectedCategories}`),
+                },
+              }}
+            onClick={() => clickFilter()}
+          >
+            Clear All
+          </Link>
+          )}
+          {pageType === "search" && (pageContentData?.payLoad?.categoriesSelected?.length > 0 ||
+          pageContentData?.payLoad?.selectedFacets?.length > 0) && (
+          <Link
+            className="link-underline"
+            href={{
+                pathname: path,
+                query: {
                   st: encodeURI(`${searchKey}`),
                 },
               }}
@@ -113,6 +128,36 @@ function Facet(props) {
           
         </div>
         <ul className="catalog-filter__selected list-unstyled">
+          {pageType === "search" && pageContentData?.payLoad?.categoriesSelected?.map((val) => (
+            <>
+              {
+                val.facetValues.map((item, _key) => (
+                  <li
+                    className="js-detach-row"
+                    key={_key}
+                  >
+                    <Link
+                      className="js-detach-row-btn"
+                      href={{
+                        pathname: path,
+                        query: {
+                          fs: encodeURI(`${selectedFacets}`),
+                          st: encodeURI(`${searchKey}`),
+                          // eslint-disable-next-line max-len
+                          id: encodeURI(`${selectedCategories.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
+                        },
+                      }}
+                      title="removeRefinement"
+                      onClick={() => clickFilter()}
+                    >
+                      {item.facetLabel}
+                      <i className="icon fas fa-times-circle"></i>
+                    </Link>
+                  </li>
+                  ))
+              }
+            </>
+          ))}
           {pageContentData?.payLoad?.selectedFacets?.map((val) => (
             <>
               {
@@ -147,6 +192,39 @@ function Facet(props) {
       </div>
       <div className="catalog-filter__block ab-accordion-container">
         <div className="panel-group">
+          {pageType === "search"
+          && (
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                Categories
+                <i className="icon fas fa-chevron-down"></i>
+              </Accordion.Header>
+              {pageContentData?.payLoad?.categories?.map((val, index) => (
+                <Accordion.Body>
+                  <Link
+                    href={{
+                          pathname: path,
+                          query: {
+                            st: encodeURI(`${searchTerm}`),
+                            fs: encodeURI(`${selectedFacets}`),
+                            id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${val.id}`),
+                          },
+                        }}
+                    onClick={() => clickFilter()}
+                  >
+                    {val.name}
+                    {' '}
+                    (
+                    {val.productCount}
+                    )
+                  </Link>
+                </Accordion.Body>
+                        ))}
+            </Accordion.Item>
+          </Accordion>
+          )}
+         
           {pageContentData?.payLoad?.facets?.map((value, _key) => (
             <Accordion defaultActiveKey="0">
               <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>

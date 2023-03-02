@@ -15,8 +15,10 @@ import { ResultCount } from './components/resultCount';
 import { CategoryDescription, CategoryLongDescription } from './components/categoryDescription';
 
 export function Template(props) {
+  const createMarkup = (data) => ({ __html: JSON.parse(data).htmlContent });
+  
   const renderContentData = (contentItemObj) => {
-    if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breeadcrumb') {
+    if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breadcrumb') {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
@@ -39,6 +41,12 @@ export function Template(props) {
     }
     if ((contentItemObj.contentTypeId === 'Category Long Description' && props.type === 'categoryLongDescription')) {
       return <CategoryLongDescription {...props} />;
+    }
+    if (contentItemObj.contentTypeId === 'HTML Content') {
+      const data = contentItemObj.content;
+      return (
+        <section dangerouslySetInnerHTML={createMarkup(data)}></section>
+      );
     }
   };
 

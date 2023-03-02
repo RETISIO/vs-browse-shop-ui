@@ -7,7 +7,7 @@ import URLHandler from '../../../helpers/urlHandler';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function CategoryDescription(props) {
-  const { data } = props;
+  const { data, pageType } = props;
   const [pageContentData, setPageContent] = useState(data);
   const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
@@ -19,31 +19,39 @@ export function CategoryDescription(props) {
 
   return (
     <>
-      {pageContentData?.page?.pageType?.id === 'search:default'
-      && pageContentData?.payLoad?.autoCorrectTerm ? (
-          <>
-            {!closeFlyout && (
-              <div
-                className="alert alert-dismissible hidden-print alert-info"
-                role="alert"
-              >
-                <button className="close" type="button" aria-label="Close">
-                  <span aria-hidden="true" onClick={() => setCloseFlyout(true)}>×</span>
-                </button>
-                <strong>
-                  <span>{`Corrected from "${searchTerm}"`}</span>
-                </strong>
-              </div>
-            )}
-          </>
-        ) : (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: pageContentData?.categories?.[0]?.description,
-            }}
-          >
-          </div>
-        )}
+      {pageType === 'search' ? (
+        <>
+          {pageContentData?.payLoad?.autoCorrectTerm ? (
+            <>
+              {!closeFlyout && (
+                <div
+                  className="alert alert-dismissible hidden-print alert-info"
+                  role="alert"
+                >
+                  <button className="close" type="button" aria-label="Close">
+                    <span
+                      aria-hidden="true"
+                      onClick={() => setCloseFlyout(true)}
+                    >
+                      ×
+                    </span>
+                  </button>
+                  <strong>
+                    <span>{`Corrected from "${searchTerm}"`}</span>
+                  </strong>
+                </div>
+              )}
+            </>
+          ) : null}
+        </>
+      ) : (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: pageContentData?.categories?.[0]?.description,
+          }}
+        >
+        </div>
+      )}
     </>
   );
 }

@@ -28,7 +28,7 @@ export default function PageBuilder(props) {
                   {pageContentData?.segmentsMap?.top ? (
                     <Template
                       templateData={pageContentData?.segmentsMap?.top}
-                      type="breeadcrumb"
+                      type="breadcrumb"
                       {...props}
                     />
                   ) : (

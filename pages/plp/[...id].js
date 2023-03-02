@@ -56,7 +56,7 @@ function Static({ data }) {
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
-        <PageBuilder pageContent={pageContent} data={data} />
+        <PageBuilder pageContent={pageContent} data={data} pageType="productListing" />
       </main>
       <Yotpo />
     </MainLayout>
@@ -69,13 +69,5 @@ Static.getInitialProps = async (context) => {
     data,
   };
 };
-
-// export async function getServerSideProps(context) {
-//   const data = await getPLPData(context);
-//   console.log("coming hewre", data);
-//   return {
-//     props: { data }, // will be passed to the page component as props
-//   };
-// }
 
 export default Static;
