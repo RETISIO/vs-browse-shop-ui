@@ -37,7 +37,6 @@ export default function NoResult ({ data }) {
 
 NoResult.getInitialProps = async (context) => {
   const data = await requestContructor('static/noresult', '', {});
-  //const data = { page: PageJson };
   return {
     data,
   };
