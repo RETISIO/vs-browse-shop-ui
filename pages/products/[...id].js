@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import MainLayout from '../../shared/components/Layout';
 import getPDPData from '../../shared/helpers/getPDPData';
-import ProductDescription from './pdpdetails';
+import ProductDescription from '../../shared/components/pdp/pdpdetails';
 
 export default function ProductDetails({ data }) {
   const { setPageData } = usePageDataContext();

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Breadcrumb } from '../../shared/components/template/components/breadcrumb';
-import { NextImage } from '../../shared/components/template/components/nextImage';
+import { Breadcrumb } from '../template/components/breadcrumb';
+import { NextImage } from '../template/components/nextImage';
 import SkuLineItem from './skuLineItem';
 
 export default function ProductDescription(props) {

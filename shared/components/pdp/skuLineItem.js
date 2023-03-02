@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addToBagDetails, addToWishList } from '../../shared/helpers/getPDPData';
+import { addToBagDetails, addToWishList } from '../../helpers/getPDPData';
 
 export default function SkuLineItem(props) {
   const { skuItem, productId } = props;
