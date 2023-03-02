@@ -1,118 +1,13 @@
 import React from 'react';
-import { Breadcrumb } from '../../shared/components/template/components/breadcrumb';
-import { NextImage } from '../../shared/components/template/components/nextImage';
-import { addToBagDetails } from '../../shared/helpers/getPDPData';
+import { Breadcrumb } from '../template/components/breadcrumb';
+import { NextImage } from '../template/components/nextImage';
+import SkuLineItem from './skuLineItem';
 
 export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad;
   const productSkus = Object.values(pdpData.products[0].skus);
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
-  const addToBagHandler = (event) => {
-    event.preventDefault();
-    const pdp = {
-      items: [
-        {
-          variantId: '98340',
-          productId: '10775',
-          quantity: '1',
-          productType: 'product'
-        }
-      ]
-    };
-    console.log("The Pdp details :::::::: pdp::::::", pdp);
-    addToBagDetails(pdp);
-  };
-  const renderSkuItems = (item, index) => {
-    const itemPrice = item.skuDetails?.price?.salePrice?.price || item.skuDetails?.price?.listPrice?.price;
-    const pieces = item.skuDetails?.additionalDetails?.pieces || '';
-    const weight = item.skuDetails?.additionalDetails?.weight || '';
-    const thickness = item.skuDetails?.additionalDetails?.thickness || '';
-    const options = `${pieces} ${weight} ${thickness}`;
-    if (item.skuDetails?.inventory[0].inventoryStatusLabel === 'In Stock') {
-      return (
-        <tr key={`tr-${index}`}>
-          <td>
-            <span className="caption" style={{ width: 'auto' }}>Item #</span>
-            <div className="cell-content testing">{item.skuId}</div>
-          </td>
-          <td>
-            <div className="cell-content">
-              <p>{options}</p>
-            </div>
-          </td>
-          <td>
-            <div className="cell-content">
-              <div className="cell-content-price">
-                <b
-                  className="product-price"
-                >
-                  {itemPrice}
-                </b>
-              </div>
-            </div>
-          </td>
-
-          {/* <td className="v-middle hidden-xs">
-            <div className="cell-content">
-              <a href="#" data-toggle="modal" data-backdrop="static" data-target="#backInStockNotificationModal" style={{ fontSize: '13px', marginBottom: '10px' }}>Notify Me When In Stock</a>
-            </div>
-          </td> */}
-          <td className="v-middle hidden-xs">
-            <div className="cell-content">
-              <div className="product-cart__counter counter js-counter">
-                <div className="input-group">
-                  <span className="input-group-btn">
-                    <button className="btn js-counter__btn" type="button" data-counter="decrement">
-                      <i className="fa fa-minus" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                  <input
-                    className="form-control js-counter__input"
-                    type="number"
-                    min="0"
-                    max="999"
-                    value="1"
-                    maxLength="3"
-                  />
-                  <span className="input-group-btn">
-                    <button className="btn js-counter__btn" type="button" data-counter="increment">
-                      <i className="fa fa-plus" aria-hidden="true"></i>
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td className="v-middle hidden-xs">
-            <button
-              className="btn btn-secondary btn-md add-to-cart pull-right"
-              style={{ minWidth: '170px' }}
-              id="0"
-              disabled=""
-              onClick={(e) => addToBagHandler(e)}
-            >
-              ADD TO CART
-            </button>
-            <div className="cell-content text-center">
-            </div>
-          </td>
-          <td className="v-middle visible-xs hidden-md hidden-sm hidden-lg">
-            <div className="col-xs-4 visible-xs hidden-md hidden-sm hidden-lg" style={{ paddingLeft: '0px' }}>
-              <a className="visible-xs hidden-md hidden-sm hidden-lg" data-bind="click: $parent.selectNotifyProduct.bind($parent, $data), widgetLocaleText: 'notifyStockLink'" href="#" data-toggle="modal" data-backdrop="static" data-target="#backInStockNotificationModal" id="backInStockPopup" style={{ fontSize: '13px', marginBottom: '10px' }}>Notify Me When In Stock</a>
-            </div>
-            <div className="col-xs-8 visible-xs hidden-md hidden-sm hidden-lg" style={{ paddingRight: '0px', paddingLeft: '22px' }}>
-              <button className="btn btn-secondary btn-md add-to-cart visible-xs hidden-md hidden-sm hidden-lg" data-bind="attr: {id: $index()}, enable: ($data.quantity() > 0 &amp;&amp; $data.stockStatus() &amp;&amp;  $data.quantity() <= $data.stockStatus().inStockQuantity) , click: $parent.handleAddToCart.bind($parent, $data), widgetLocaleText: 'addToCartBtn'" style={{ width: '160px', minWidth: 'auto' }} id="0" disabled="">ADD TO CART</button>
-              <div className="cell-content text-center visible-xs hidden-md hidden-sm hidden-lg">
-              </div>
-            </div>
-          </td>
-          <td className="v-middle visible-xs hidden-md hidden-sm hidden-lg">
-          </td>
-        </tr>
-      );
-    }
-    return null;
-  };
+  const productId = pdpData?.products[0]?.productId;
   const renderGalleryImage = () => {
     const defaultSkuId = pdpData?.products[0]?.defaultSkuId;
     const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media;
@@ -248,7 +143,7 @@ export default function ProductDescription(props) {
                 </tr>
               </thead>
               <tbody>
-                {productSkus?.map((item, i) => renderSkuItems(item, i))}
+                {productSkus?.map((item, i) => <SkuLineItem key={`sku-${i}`} skuItem={item} productId={productId} />)}
               </tbody>
             </table>
           </div>
