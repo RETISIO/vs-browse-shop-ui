@@ -40,7 +40,7 @@ function Static({ data }) {
       const res = await getSearchData(router);
       
       if(res?.payLoad?.productCount === 0) {
-        Router.push('/noresult');
+        Router.push(`/noresult?st=${res.payLoad.searchTerm}`);
       } else {
         res.page = PageJson;
         setSearchPageData(res);
