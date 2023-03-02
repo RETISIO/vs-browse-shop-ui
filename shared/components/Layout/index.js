@@ -66,7 +66,7 @@ export default function MainLayout({ data, children }) {
   const signout = async() => {
     const res = await requestContructor('signout', '', {}, false).then((data) => {
       if(data) {
-        window.location.href = '/';
+        window.location.reload();
       }
     });
     return res;
