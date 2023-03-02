@@ -10,6 +10,7 @@ import { requestContructor } from '../shared/helpers/api';
 import { usePageDataContext } from '../shared/context/pageData-context';
 import { useAppContext } from '../shared/context/appContext';
 import MainLayout from '../shared/components/Layout';
+import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -37,6 +38,7 @@ function Static({ data }) {
           </main>
         </MainLayout>
       ) : <DefaultErrorPage statusCode={404} /> }
+      <Yotpo />
     </>
   );
 }
