@@ -39,6 +39,13 @@ function ResultList(props) {
     }
   }, [props]);
 
+  // const isServer = typeof window === 'undefined';
+  // const isServer = process.browser;
+  // let productArr = [];
+  // if(!isServer) {
+  //   productArr = props?.data?.payLoad?.products;
+  // }
+
   useEffect(() => {
     if (offset > 0) {
       (async() => {
@@ -75,6 +82,31 @@ function ResultList(props) {
 
   return (
     <>
+      {/* {isServer
+        ? (
+          <>
+            {products?.map((value, index) => (
+              <ProductCard
+                value={value}
+                isLast={index === products.length - 1}
+                newLimit={() => setOffset(offset + 1)}
+                index={index}
+              />
+            ))}
+          </>
+        )
+        : (
+          <>
+            {productArr?.map((value, index) => (
+              <ProductCard
+                value={value}
+                isLast={index === productArr.length - 1}
+                newLimit={() => setOffset(offset + 1)}
+                index={index}
+              />
+            ))}
+          </>
+        )} */}
       {products?.map((value, index) => (
         <ProductCard
           value={value}

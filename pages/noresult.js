@@ -6,6 +6,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
+import Head from 'next/head';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
 import MainLayout from '../shared/components/Layout';
@@ -25,6 +26,9 @@ export default function NoResult ({ data }) {
 
   return (
     <MainLayout data={data}>
+      <Head>
+        <meta name="robots" content="noindex, nofollow" />
+      </Head>
       <main>
         {!data && <Loader /> }
         {/* {i18n.t('title')} */}
@@ -35,7 +39,7 @@ export default function NoResult ({ data }) {
   );
 }
 
-NoResult.getInitialProps = async (context) => {
+NoResult.getInitialProps = async () => {
   const data = await requestContructor('static/noresult', '', {});
   return {
     data,
