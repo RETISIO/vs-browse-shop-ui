@@ -11,6 +11,7 @@ import { Layout } from '@retisio/sf-ui';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ComponentMap from '../componentMap';
+import { useMiniCartDataContext } from '../../context/miniCartcontext';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
@@ -51,16 +52,17 @@ export default function MainLayout({ data, children }) {
     changeLocale();
   }, [router.locale]);
   // const miniCartDataObj = {miniCartData: {}, showMiniCart: false};
-  const [miniCartDetails, setMiniCartDetails] = useState({});
+  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const getMiniCartData = async() => {
     const cartData = await requestContructor('getCartArc', '', {});
-    setMiniCartDetails(cartData);
+    setMiniCartDetails({...miniCartDetails, itemAdded: false, miniCartData: cartData});
   };
   useEffect(() => {
     if (isLogged || getCookie('arcCartId')) {
+      console.log("IN Layout file:::useEffect:::miniCartDetails:::::", miniCartDetails);
       getMiniCartData();
     }
-  }, []);
+  }, [miniCartDetails.itemAdded === true]);
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}&size=4`, {}, false);
@@ -126,6 +128,7 @@ export default function MainLayout({ data, children }) {
         isLogged={isLogged}
         signout={() => signout()}
         miniCartDetails={miniCartDetails}
+        setMiniCartDetails={setMiniCartDetails}
       >
         {children}
       </Layout>
