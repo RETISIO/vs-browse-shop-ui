@@ -17,6 +17,7 @@ import MainLayout from '../shared/components/Layout';
 import { Loader } from '../shared/components/loader';
 import getSearchData from '../shared/helpers/getSearchData';
 import PageJson from '../shared/helpers/pageData.json';
+import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -45,6 +46,9 @@ function Static({ data }) {
         res.page = PageJson;
         setSearchPageData(res);
         setLoading(false);
+        if(window && window.yotpo) {
+          window.yotpo.refreshWidgets();
+        }
       }
     })();
   }, [router.asPath]);
@@ -65,6 +69,7 @@ function Static({ data }) {
           />
         )}
       </main>
+      <Yotpo />
     </MainLayout>
   );
 }

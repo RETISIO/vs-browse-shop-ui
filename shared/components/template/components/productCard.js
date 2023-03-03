@@ -103,7 +103,7 @@ export default function ProductCard({
               data-currency="USD"
             >
             </div>
-            <p className="product-card-price">
+            <div className="product-card-price">
               {(value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice) === 0 ? null
                 : (
                   <>
@@ -114,7 +114,7 @@ export default function ProductCard({
                     </b>
                   </>
                 )}
-            </p>
+            </div>
           </div>
         </div>
       </div>
