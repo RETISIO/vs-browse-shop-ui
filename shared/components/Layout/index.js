@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
+import { getCookie } from '@retisio/sf-api';
 import { Layout } from '@retisio/sf-ui';
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
@@ -49,6 +50,17 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
+  // const miniCartDataObj = {miniCartData: {}, showMiniCart: false};
+  const [miniCartDetails, setMiniCartDetails] = useState({});
+  const getMiniCartData = async() => {
+    const cartData = await requestContructor('getCartArc', '', {});
+    setMiniCartDetails(cartData);
+  };
+  useEffect(() => {
+    if (isLogged || getCookie('arcCartId')) {
+      getMiniCartData();
+    }
+  }, []);
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}&size=4`, {}, false);
@@ -113,6 +125,7 @@ export default function MainLayout({ data, children }) {
         showLogin={show}
         isLogged={isLogged}
         signout={() => signout()}
+        miniCartDetails={miniCartDetails}
       >
         {children}
       </Layout>
