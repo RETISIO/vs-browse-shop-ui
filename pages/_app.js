@@ -14,7 +14,7 @@ import '../styles/styles.scss';
 import { PageDataContextWrapper } from '../shared/context/pageData-context';
 import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
-
+import { MiniCartContextWrapper } from '../shared/context/miniCartcontext';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -25,9 +25,11 @@ export default function App({ Component, pageProps }) {
         <AppWrapper>
           <PageDataContextWrapper>
             <PLPDataContextWrapper>
-              {/* <Layout> */}
-              <Component {...pageProps} />
-              {/* </Layout> */}
+              <MiniCartContextWrapper>
+                {/* <Layout> */}
+                <Component {...pageProps} />
+                {/* </Layout> */}
+              </MiniCartContextWrapper>
             </PLPDataContextWrapper>
           </PageDataContextWrapper>
         </AppWrapper>
