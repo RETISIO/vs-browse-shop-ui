@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData';
+import { useMiniCartDataContext } from '../../context/miniCartcontext';
 
 export default function SkuLineItem(props) {
   const { skuItem, productId } = props;
+  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const itemPrice = skuItem.skuDetails?.price?.salePrice?.price || skuItem.skuDetails?.price?.listPrice?.price;
   const pieces = skuItem.skuDetails?.additionalDetails?.pieces || '';
   const weight = skuItem.skuDetails?.additionalDetails?.weight || '';
@@ -21,7 +23,10 @@ export default function SkuLineItem(props) {
         },
       ],
     };
-    addToBagDetails(pdp);
+    const result = addToBagDetails(pdp);
+    result.then( (data) => {
+      setMiniCartDetails({...miniCartDetails, itemAdded: true});
+    });
   };
 
   const addToWishLisrHandler = (e) => {
