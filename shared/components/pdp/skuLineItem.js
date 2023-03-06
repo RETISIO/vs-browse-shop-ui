@@ -25,8 +25,7 @@ export default function SkuLineItem(props) {
     };
     const result = addToBagDetails(pdp);
     result.then( (data) => {
-      console.log("Result::::::", data);
-      setMiniCartDetails({...miniCartDetails, itemAdded: true, showMiniCart: true});
+      setMiniCartDetails({...miniCartDetails, itemAdded: true});
     });
   };
 

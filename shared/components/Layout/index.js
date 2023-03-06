@@ -51,18 +51,32 @@ export default function MainLayout({ data, children }) {
     }
     changeLocale();
   }, [router.locale]);
-  // const miniCartDataObj = {miniCartData: {}, showMiniCart: false};
+  /* *************Mini Cart functionality starts here ***************** */
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const getMiniCartData = async() => {
     const cartData = await requestContructor('getCartArc', '', {});
-    setMiniCartDetails({...miniCartDetails, itemAdded: false, miniCartData: cartData});
+    if (miniCartDetails.itemAdded === true) {
+      setMiniCartDetails({
+        ...miniCartDetails, itemAdded: false, miniCartData: cartData, showMiniCart: true,
+      });
+    } else {
+      setMiniCartDetails({ ...miniCartDetails, itemAdded: false, miniCartData: cartData });
+    }
   };
   useEffect(() => {
-    if (isLogged || getCookie('arcCartId')) {
-      console.log("IN Layout file:::useEffect:::miniCartDetails:::::", miniCartDetails);
+    if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
+    && (miniCartDetails.itemAdded === false)) {
       getMiniCartData();
     }
-  }, [miniCartDetails.itemAdded === true]);
+  }, []);
+  /** ********************* The below useEffect is for triggering the cart api
+   after adding the new item in Cart from PDP page ************************ */
+  useEffect(() => {
+    if (miniCartDetails.itemAdded === true) {
+      getMiniCartData();
+    }
+  }, [miniCartDetails.itemAdded]);
+  /* *************Mini Cart functionality ends here *********************** */
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor('getTypeAheadArc', `?searchKey=${text}&size=4`, {}, false);
