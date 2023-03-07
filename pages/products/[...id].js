@@ -3,12 +3,14 @@ import { usePageDataContext } from '../../shared/context/pageData-context';
 import MainLayout from '../../shared/components/Layout';
 import getPDPData from '../../shared/helpers/getPDPData';
 import ProductDescription from '../../shared/components/pdp/pdpdetails';
+import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag';
 
 export default function ProductDetails({ data }) {
   const { setPageData } = usePageDataContext();
 
   useEffect(() => {
     setPageData(data);
+    viewItem(data);
   }, []);
 
   return (

@@ -369,6 +369,8 @@ input[type=number] {
 @import './footer/index.scss';
 @import './category/index.scss';
 @import "./additional/index.scss";
+@import "./sliders/react-slick.scss";
+@import "./sliders/react-slick-theme.scss";
 
 .overlay {
 	position: absolute;

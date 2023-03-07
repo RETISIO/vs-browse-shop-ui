@@ -12,6 +12,8 @@ import { useAppContext } from '../shared/context/appContext';
 
 import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
+// import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
+import ComponentMap from '../shared/components/componentMap';
 
 function Home({ data }) {
   // const i18n = useI18n();
@@ -47,30 +49,9 @@ function Home({ data }) {
     <MainLayout data={data}>
       <main>
         {/* {i18n.t('title')} */}
-        <PageBuilder pageContent={pageContent} />
+        <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
+        {/* <ImageCarousel /> */}
       </main>
-      {/* <div className="container">
-            <div className="row ab-rating">
-              <div
-                className="yotpo yotpo-reviews-carousel"
-                data-background-color="transparent"
-                data-mode="manual"
-                data-type="both"
-                data-count="3"
-                data-show-bottomline="1"
-                data-autoplay-enabled="1"
-                data-autoplay-speed="3000"
-                data-show-navigation="1"
-                data-testimonials-page-enabled="1"
-                data-testimonials-page-text="See All Reviews"
-                data-review-ids="290913911,290612342,290897289"
-                data-testimonials-page-link="https://a7353428c1tst-store.occa.ocs.oraclecloud.com/ratings-and-reviews"
-              >
-            &nbsp;
-              </div>
-            </div>
-          </div> */}
-      {/* <Yotpo /> */}
       <Yotpo />
     </MainLayout>
   );
