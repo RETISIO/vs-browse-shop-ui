@@ -1,5 +1,29 @@
 .home-header-container {
-
+	.header {
+		.ab-searchProducts {
+			width: 40px;
+			height: 34px;
+			// border: 2px solid white;
+			// background: white;
+			text-align: center;
+			color: #fff;
+			border-radius: 0 5px 5px 0;
+			cursor: pointer;
+			font-size: 20px;
+			padding: 0px;
+			.icon {
+				color: white !important;
+			}
+		}
+		.input-group {
+			display: flex;
+			.input-group-btn {
+				display: none;
+				right: 18px;
+				top: 3px;
+			}
+		}
+	}
 
 	.input-group-btn:last-child>.btn {
 		z-index: 2;
@@ -2636,50 +2660,29 @@
 		}
 	}
 
-	@media screen and (min-width: 992px) {
-		.ab-searchProducts {
-			width: 40px;
-			height: 34px;
-			border: 2px solid black;
-			background: white;
-			text-align: center;
-			color: #fff;
-			border-radius: 0 5px 5px 0;
-			cursor: pointer;
-			font-size: 20px;
-			padding: 0px;
-		}
-	}
+	// @media screen and (min-width: 992px) {
+	// 	.ab-searchProducts {
+			
+	// 		border: 2px solid black;
+		
+	// 	}
+	// }
 
-	@media screen and (min-width: 768px) {
-		.ab-searchProducts {
-			width: 40px;
-			height: 34px;
-			border: 2px solid black;
-			background: white;
-			text-align: center;
-			color: #fff;
-			border-radius: 0 5px 5px 0;
-			cursor: pointer;
-			font-size: 20px;
-			padding: 0px;
-		}
-	}
+	// @media screen and (min-width: 768px) {
+	// 	.ab-searchProducts {
+			
+	// 		border: 2px solid black;
+			
+	// 	}
+	// }
 
-	@media screen and (min-width: 1201px) and (max-width: 1366px) {
-		.ab-searchProducts {
-			width: 40px;
-			height: 34px;
-			border: 2px solid white;
-			background: white;
-			text-align: center;
-			color: #fff;
-			border-radius: 0 5px 5px 0;
-			cursor: pointer;
-			font-size: 20px;
-			padding: 0px;
-		}
-	}
+	// @media screen and (min-width: 1201px) and (max-width: 1366px) {
+	// 	.ab-searchProducts {
+			
+	// 		border: 2px solid white;
+			
+	// 	}
+	// }
 
 	@media screen and (min-width: 992px) {
 		.icon-search {

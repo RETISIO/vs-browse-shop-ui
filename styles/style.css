@@ -8400,3 +8400,6 @@ button.close {
 .w-100 {
   width: 100%;
 }
+.home-header-container .header.show .input-group-btn {
+  display: block !important;
+}
