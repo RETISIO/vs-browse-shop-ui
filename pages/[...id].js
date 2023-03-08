@@ -11,6 +11,8 @@ import { usePageDataContext } from '../shared/context/pageData-context';
 import { useAppContext } from '../shared/context/appContext';
 import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
+import ComponentMap from '../shared/components/componentMap';
+
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -34,7 +36,7 @@ function Static({ data }) {
         <MainLayout data={data}>
           <main>
             {/* {i18n.t('title')} */}
-            <PageBuilder pageContent={pageContent} />
+            <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
           </main>
         </MainLayout>
       ) : <DefaultErrorPage statusCode={404} /> }

@@ -13,6 +13,7 @@ const requestContructor = async(URL, params = '', options = {}, req = null) => {
   let finalHeaders = { originurl: finalOriginURl }; let tempURI;
   if(options.customHeaders) {
     finalHeaders = {
+      ...finalHeaders,
       ...options.customHeaders,
     };
   }
