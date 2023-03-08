@@ -42,7 +42,11 @@ function Static({ data }) {
       
       if(res?.payLoad?.productCount === 0) {
         Router.push(`/noresult?st=${res.payLoad.searchTerm}`);
-      } else {
+      } else if(res?.payLoad?.productCount === 1) {
+        const product = res?.payLoad?.products[0];
+        Router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);
+      }
+      else {
         res.page = PageJson;
         setSearchPageData(res);
         setLoading(false);
