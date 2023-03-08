@@ -21,6 +21,7 @@ export function Index(props) {
   const [passwordErrors, setPasswordErrors] = useState([]);
   const router = useRouter();
   const { page } = router.query;
+  const { asPath } = useRouter();
 
   const getData = async() => {
     const res = await requestContructor('getPasswordPolicy', '', {}, false);
@@ -69,7 +70,7 @@ export function Index(props) {
           if(page) {
             window.location.href = page;
           }else{
-            window.location.href = '/';
+            window.location.href = asPath;
           }
         }
       }
