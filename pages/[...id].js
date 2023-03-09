@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-unused-expressions */
 import { useEffect } from 'react';
@@ -12,7 +13,6 @@ import { useAppContext } from '../shared/context/appContext';
 import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 import ComponentMap from '../shared/components/componentMap';
-
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -34,10 +34,8 @@ function Static({ data }) {
     <>
       {data ? (
         <MainLayout data={data}>
-          <main>
-            {/* {i18n.t('title')} */}
-            <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
-          </main>
+          {/* {i18n.t('title')} */}
+          <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
         </MainLayout>
       ) : <DefaultErrorPage statusCode={404} /> }
       <Yotpo />
