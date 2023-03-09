@@ -14,6 +14,7 @@ import '../styles/styles.scss';
 import { PageDataContextWrapper } from '../shared/context/pageData-context';
 import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
+import Listract from '../shared/components/ThirdPartyScripts/Listract';
 import { MiniCartContextWrapper } from '../shared/context/miniCartcontext';
 
 export default function App({ Component, pageProps }) {
@@ -35,6 +36,7 @@ export default function App({ Component, pageProps }) {
         </AppWrapper>
       </I18nProvider>
       <GoogleAnalytics />
+      <Listract />
     </SSRProvider>
   );
 }
