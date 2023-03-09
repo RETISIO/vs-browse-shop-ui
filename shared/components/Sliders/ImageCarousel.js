@@ -41,7 +41,7 @@ export default function ImageCarousel(props) {
     ],
   };
   return (
-    <div className="container">
+    <>
       <h2 className="row category-container__title">{props.name}</h2>
       <Slider {...settings}>
         {content.map((item) => (
@@ -59,6 +59,6 @@ export default function ImageCarousel(props) {
           </div>
         ))}
       </Slider>
-    </div>
+    </>
   );
 }

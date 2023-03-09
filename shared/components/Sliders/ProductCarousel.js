@@ -68,30 +68,18 @@ export default function ProductCarousel(props) {
   return (
     <>
       {load && (
-        <div className="container">
-          <h2 className="row category-container__title">{props.name}</h2>
+        <>
+          <h1 className="row align-left">{props.name}</h1>
           <Slider {...productsData.settings}>
             {productsData.configValues.customProductSelector.products.map((value, index) => (
-            //   <div>
-            //     <div style={{ margin: '7px' }}>
-            //       <a href={item.refinementPageLink}>
-            //         <NextImage alt={item.displayName} className="img-responsive category-list__image" src="/set/sdf.jpg" width="184" height="184" />
-            //         <div className="category-list__text">
-            //           <section>
-            //             <span className="category-list-text col-xs-8 col-md-12">{item.displayName}</span>
-            //           </section>
-            //         </div>
-            //       </a>
-            //     </div>
-            //   </div>
               <div key={index}>
-                <div style={{ margin: '7px' }}>
+                <div style={{ margin: '15px' }}>
                   <ProductTile value={value} />
                 </div>
               </div>
             ))}
           </Slider>
-        </div>
+        </>
       )}
     </>
   );
