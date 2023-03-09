@@ -44,6 +44,12 @@ function Static({ data }) {
     });
   }, []);
 
+  useEffect(() => {
+    if(data?.payLoad?.page === undefined) {
+      router?.push('/404');
+    }
+  }, []);
+
   const pageContent = data?.payLoad?.page;
   data.page = data?.payLoad?.page;
 

@@ -16,6 +16,7 @@ import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
 import Listract from '../shared/components/ThirdPartyScripts/Listract';
 import { MiniCartContextWrapper } from '../shared/context/miniCartcontext';
+import { FormDataContextWrapper } from '../shared/context/formDataContext';
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -26,11 +27,13 @@ export default function App({ Component, pageProps }) {
         <AppWrapper>
           <PageDataContextWrapper>
             <PLPDataContextWrapper>
-              <MiniCartContextWrapper>
-                {/* <Layout> */}
-                <Component {...pageProps} />
-                {/* </Layout> */}
-              </MiniCartContextWrapper>
+              <FormDataContextWrapper>
+                <MiniCartContextWrapper>
+                  {/* <Layout> */}
+                  <Component {...pageProps} />
+                  {/* </Layout> */}
+                </MiniCartContextWrapper>
+              </FormDataContextWrapper>
             </PLPDataContextWrapper>
           </PageDataContextWrapper>
         </AppWrapper>
