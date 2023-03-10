@@ -5,6 +5,7 @@ import { Template } from './template';
 // import { usePageDataContext } from '../context/pageData-context';
 import SortVO from './components/sortVO';
 import FacetsMobile from './components/facetsMobile';
+import { EllipseLoader } from '../loader';
 
 export default function PageBuilder(props) {
   const { data } = props;
@@ -15,6 +16,7 @@ export default function PageBuilder(props) {
   }, [props]);
 
   const [isMobile, setIsMobile] = useState(false);
+  const [loader, setLoader] = useState(false);
   
   return (
     <div id="main" className="container">
@@ -87,6 +89,7 @@ export default function PageBuilder(props) {
                               <Template
                                 templateData={pageContentData?.segmentsMap?.middle}
                                 type="resultList"
+                                setLoader={setLoader}
                                 {...props}
                               />
                             ) : (
@@ -94,6 +97,7 @@ export default function PageBuilder(props) {
                             )}
                           </div>
                         </div>
+                        {loader && <EllipseLoader /> }
                       </div>
                     </div>
                     <div className="row">

@@ -24,4 +24,14 @@ export function Loader() {
     </div>
   );
 }
-export default Loader;
+// export default Loader;
+
+export function EllipseLoader() {
+  return (
+    <div className="lds-ellipsis">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  );
+}
