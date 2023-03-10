@@ -13,9 +13,10 @@ import URLHandler from '../../../helpers/urlHandler';
 import { requestContructor } from '../../../helpers/api';
 
 function ResultList(props) {
-  const { data } = props;
+  const { data, setLoader } = props;
   // eslint-disable-next-line no-unused-vars
   const [pageContentData, setPageContent] = useState(data);
+  
   const { pageData } = usePageDataContext();
   const router = useRouter();
 
@@ -54,6 +55,7 @@ function ResultList(props) {
         const sort = URLHandler('so', router.asPath) || '';
         const searchTerm = URLHandler('st', router.asPath) || '';
         if (Math.floor(productCount / 12) >= offset) {
+          setLoader(true);
           // eslint-disable-next-line max-len
           const res = await requestContructor(
             `getProductsList?CategoryId=${categoryIds}${
@@ -70,6 +72,7 @@ function ResultList(props) {
           // eslint-disable-next-line no-unsafe-optional-chaining
           setProducts([...products, ...res?.payLoad?.products]);
           setProductCount(res?.payLoad?.productCount);
+          setLoader(false);
           if(window && window.yotpo) {
             setTimeout(() => {
               window.yotpo.refreshWidgets();
