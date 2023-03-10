@@ -59,6 +59,7 @@ export default function MainLayout({ data, children }) {
       setMiniCartDetails({
         ...miniCartDetails, itemAdded: false, miniCartData: cartData, showMiniCart: true,
       });
+      document.querySelector('.ab-miniCart-Icon>i')?.focus();
     } else {
       setMiniCartDetails({ ...miniCartDetails, itemAdded: false, miniCartData: cartData });
     }
