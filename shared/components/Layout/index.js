@@ -69,6 +69,9 @@ export default function MainLayout({ data, children }) {
     && (miniCartDetails.itemAdded === false)) {
       getMiniCartData();
     }
+    if (miniCartDetails?.showMiniCart) {
+      setMiniCartDetails({ ...miniCartDetails, showMiniCart: false });
+    }
   }, []);
   /** ********************* The below useEffect is for triggering the cart api
    after adding the new item in Cart from PDP page ************************ */
