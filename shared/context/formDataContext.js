@@ -7,7 +7,6 @@ export function FormDataContextWrapper({ children }) {
   const initialValues = {
     firstName: '',
     lastName: '',
-    companyName: '',
     email: '',
     comments: '',
     address1: '',
@@ -17,8 +16,6 @@ export function FormDataContextWrapper({ children }) {
     state: '',
     postalCode: '',
     phone: '',
-    defaultBilling: false,
-    defaultShipping: false,
   };
   const [values, setValues] = useState(initialValues);
 

@@ -5,7 +5,7 @@ import ABForm from '../Form';
 import { formSubmitData } from '../../helpers/utils';
 import AlertMessage from '../../helpers/AlertMessage';
 
-export default function ContactUs(props) {
+export default function RequestCatalog(props) {
   // Form context values
   const { values, setValues, clearForm } = useFormDataContext();
 
@@ -18,8 +18,14 @@ export default function ContactUs(props) {
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email',
-    comments: 'comments',
-    submitForm: 'addressSubmit',
+    phone: 'phone',
+    address1: 'address1',
+    address2: 'address2',
+    city: 'city',
+    state: 'state',
+    postalCode: 'postalCode',
+    country: 'country',
+    submitForm: 'requestCatalog',
     isTooltipVisible: false,
   };
 
@@ -50,8 +56,7 @@ export default function ContactUs(props) {
     const body = { ...values };
     // eslint-disable-next-line no-unused-vars
     const {
-      address1, address2, country, city, state, postalCode, phone,
-      ...payload
+      comments, ...payload
     } = body;
     return payload;
   };
@@ -86,16 +91,12 @@ export default function ContactUs(props) {
         />
       )}
     
-      <div className="col-md-offset-2">
-        <span id="wi400014-rich-text-30005">
-          <div className="cc-rich-text" style={{ padding: '0px' }}>
-            <div dangerouslySetInnerHTML={createMarkup(configValue)}></div>
-          </div>
-        </span>
+      <div className="col-md-offset-1">
+        <div dangerouslySetInnerHTML={createMarkup(configValue)}></div>
         <div className="form-fields-container">
           <ABForm
             {...{ formData, submitData, handleClose }}
-            formType="contactForm"
+            formType="catalogForm"
           />
         </div>
       </div>
