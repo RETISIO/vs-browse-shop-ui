@@ -5,6 +5,7 @@ import Login from './Login';
 import ImageCarousel from './Sliders/ImageCarousel';
 import ProductCarousel from './Sliders/ProductCarousel';
 import ContactUs from './contactUs';
+import RequestCatalog from './requestCatalog';
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -12,5 +13,6 @@ const ComponentMap = {
   'Image carousel': ImageCarousel,
   'product carousel': ProductCarousel,
   'contact us form': ContactUs,
+  'Catalog Request Form': RequestCatalog
 };
 export default ComponentMap;
