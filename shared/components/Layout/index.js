@@ -59,6 +59,7 @@ export default function MainLayout({ data, children }) {
       setMiniCartDetails({
         ...miniCartDetails, itemAdded: false, miniCartData: cartData, showMiniCart: true,
       });
+      document.querySelector('.ab-miniCart-Icon>i')?.focus();
     } else {
       setMiniCartDetails({ ...miniCartDetails, itemAdded: false, miniCartData: cartData });
     }
@@ -67,6 +68,9 @@ export default function MainLayout({ data, children }) {
     if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
     && (miniCartDetails.itemAdded === false)) {
       getMiniCartData();
+    }
+    if (miniCartDetails?.showMiniCart) {
+      setMiniCartDetails({ ...miniCartDetails, showMiniCart: false });
     }
   }, []);
   /** ********************* The below useEffect is for triggering the cart api
