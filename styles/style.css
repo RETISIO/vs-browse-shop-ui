@@ -8403,3 +8403,21 @@ button.close {
 .home-header-container .header.show .input-group-btn {
   display: block !important;
 }
+.auto-suggest-word:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.token-container {
+  margin-top: 5px;
+}
+.breadcrumb-token {
+  display: flex;
+  align-items: center;
+  border: 1px solid #bce8f1;
+  background-color: #d9edf7;
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin-right: 10px;
+  color: #31708f;
+  font-weight: 600;
+}
