@@ -40,7 +40,7 @@ export default function ProductTile({value}) {
           <NextImage
             alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
             className="item-thumb img-responsive"
-            src={`${process.env.NEXT_PUBLIC_IMAGEPATH}catalog${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
+            src={`${process.env.NEXT_PUBLIC_IMAGEPATH}${value?.skus?.[value?.defaultSkuId]?.media?.smallImg}`}
             height={262}
             width={262}
           />

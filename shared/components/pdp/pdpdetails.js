@@ -28,7 +28,7 @@ export default function ProductDescription(props) {
 
             <NextImage
               alt={mediaObj?.altText}
-              src={`${damPath}catalog${mediaObj?.thumbnailImg}`}
+              src={`${damPath}${mediaObj?.thumbnailImg}`}
               height={thumbnailHeight}
               width={thumbnailWidth}
               id="usda-logo"
@@ -52,7 +52,7 @@ export default function ProductDescription(props) {
                 /> */}
                 <NextImage
                   alt={mediaObj?.altText}
-                  src={`${damPath}catalog${mediaObj?.thumbnailImg}`}
+                  src={`${damPath}${mediaObj?.thumbnailImg}`}
                   height={thumbnailHeight}
                   width={thumbnailWidth}
                   id="zoom-image"
