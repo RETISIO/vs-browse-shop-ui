@@ -58,6 +58,16 @@ export default function GcDetailsPage(props) {
       </div>
     );
   };
+  const initialValues = {
+    recipientsName: '',
+    recipientsEmail: '',
+    message: ''
+  };
+  const [values, setValues] = useState(initialValues);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues({ values: { [name]: value } });
+  };
   const submitGCData = (event) => {
     event.stopPropagation();
     const skuId = document.getElementById('gc-select-box')?.value;
@@ -73,7 +83,7 @@ export default function GcDetailsPage(props) {
         },
       ],
     };
-    if (selectedGC === "electronicGC") {
+    if (selectedGC === 'electronicGC') {
       gcData.items[0].recipientName = 'testName';
       gcData.items[0].recipientEmail = 'testEmail';
     }
@@ -135,10 +145,13 @@ export default function GcDetailsPage(props) {
                       type="text"
                       maxLength="50"
                       placeholder="Recipients Name *"
+                      id="recipientsName"
+                      value={values.recipientsName}
+                      onChange={handleChange}
                     />
                     <label
                       className="formGroup-label"
-                      data-bind="widgetLocaleText: 'recipientNameLabel', css: { 'label-visible' : recipientName().length > 0 }"
+                      htmlFor="recipientsName"
                     >
                       Recipients Name *
                     </label>
@@ -151,10 +164,13 @@ export default function GcDetailsPage(props) {
                       maxLength="128"
                       data-bind="textInput: recipientEmail, widgetLocaleText: {attr: 'placeholder', value: 'recipientEmailLabel'}"
                       placeholder="Recipients Email Address *"
+                      id="recipientsEmail"
+                      value={values.recipientsEmail}
+                      onChange={handleChange}
                     />
                     <label
                       className="formGroup-label"
-                      data-bind="widgetLocaleText: 'recipientEmailLabel', css: { 'label-visible' : recipientEmail().length > 0 }"
+                      htmlFor="recipientsEmail"
                     >
                       Recipients Email Address *
                     </label>
@@ -164,30 +180,6 @@ export default function GcDetailsPage(props) {
               </div>
             ) : ''}
         </div>
-        {/* <div className="js-tabs__tab hidden">
-                <h3 data-bind="widgetLocaleText: 'giftCardAmount'">Select a Gift Card Amount</h3>
-                <div className="row">
-                  <div className="col-sm-3">
-                    <div className="form-group">
-                      <select className="form-control formControl-select" data-bind="options: $data.physicalCardSkus, optionsText: 'selectDisplayName', value: $data.selectedPhysicalSku">
-                        <option value="">$50</option>
-                        <option value="">$75</option>
-                        <option value="">$100</option>
-                        <option value="">$125</option>
-                        <option value="">$150</option>
-                        <option value="">$175</option>
-                        <option value="">$200</option>
-                        <option value="">$225</option>
-                        <option value="">$250</option>
-                        <option value="">$275</option>
-                        <option value="">$300</option>
-                        <option value="">$500</option>
-                        <option value="">$1000</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
         <div className="form-group">
           <textarea
             className="form-control formControl-input noresize"
@@ -196,10 +188,14 @@ export default function GcDetailsPage(props) {
             maxLength="250"
             spellCheck="true"
             placeholder="Message"
+            id="message"
+            value={values.message}
+            onChange={handleChange}
           >
           </textarea>
           <label
             className="formGroup-label"
+            htmlFor="message"
           >
             Message
           </label>
