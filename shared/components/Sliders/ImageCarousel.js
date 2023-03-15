@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -44,8 +45,8 @@ export default function ImageCarousel(props) {
     <>
       <h2 className="row category-container__title">{props.name}</h2>
       <Slider {...settings}>
-        {content.map((item) => (
-          <div>
+        {content.map((item, i) => (
+          <div key={i}>
             <div style={{ margin: '7px' }}>
               <a href={item.refinementPageLink}>
                 <NextImage alt={item.name} className="img-responsive category-list__image" src={`${item.refinementImageUrl}`} width="184" height="184" />

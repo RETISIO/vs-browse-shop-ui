@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 // eslint-disable-next-line import/named
 // eslint-disable-next-line import/named
 import { PageBuilder } from '@retisio/sf-ui';
+import Script from 'next/script';
 import { requestContructor } from '../shared/helpers/api';
 // import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
@@ -53,6 +54,7 @@ function Home({ data }) {
         {/* <ImageCarousel /> */}
       </main>
       <Yotpo />
+      <Script src="/js/listrack.js" />
     </MainLayout>
   );
 }
