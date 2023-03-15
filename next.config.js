@@ -33,6 +33,9 @@ module.exports = {
       {
         hostname: 'ab.qa.retisio.io',
       },
+      {
+        hostname: 'us.ab-dev.retisio.com',
+      },
     ],
   },
   eslint: {
