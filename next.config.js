@@ -22,7 +22,7 @@ module.exports = {
   //   },
   // },
   images: {
-    // unoptimized: true,
+    unoptimized: true,
     remotePatterns: [
       // {
       //   hostname: '192.168.23.87',
