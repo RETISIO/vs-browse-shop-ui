@@ -22,9 +22,13 @@ module.exports = {
   //   },
   // },
   images: {
+    // unoptimized: true,
     remotePatterns: [
       {
         hostname: '192.168.23.87',
+      },
+      {
+        hostname: 'ab.qa.retisio.io',
       },
     ],
   },
