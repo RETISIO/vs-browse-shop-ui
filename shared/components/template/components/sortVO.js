@@ -11,8 +11,7 @@ function SortVO(props) {
   const [pageContentData, setPageContent] = useState(data);
   // const { pageData } = usePageDataContext();
 
-  // const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+') || '');
-  const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.concat('+') || '');
+  const [selectedCategories, setSelectedCategories] = useState(router?.query?.N?.concat('+') || '');
   const [selectedFacets, setSelectedFacets] = useState(router?.query?.t?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
 
@@ -21,7 +20,7 @@ function SortVO(props) {
   }, [props]);
 
   const path = router.asPath.split('?')[0];
-  const categoryIds = URLHandler('id', router.asPath) || '';
+  const categoryIds = URLHandler('N', router.asPath) || '';
   const facetIds = URLHandler('t', router.asPath) || '';
   const sortId = URLHandler('so', router.asPath) || '';
   const searchTerm = URLHandler('submit-search', router.asPath) || '';
@@ -38,7 +37,7 @@ function SortVO(props) {
     router.push({
       pathname: path,
       query: {
-        id: encodeURI(`${selectedCategories}`),
+        N: encodeURI(`${selectedCategories}`),
         t: encodeURI(`${selectedFacets}`),
         so: encodeURI(`${(id)}`),
         'submit-search': encodeURI(`${searchTerm}`),

@@ -50,7 +50,7 @@ function ResultList(props) {
   useEffect(() => {
     if (offset > 0) {
       (async() => {
-        const categoryIds = URLHandler('id', router.asPath) || '';
+        const categoryIds = URLHandler('N', router.asPath) || '';
         const facetIds = URLHandler('t', router.asPath) || '';
         const sort = URLHandler('so', router.asPath) || '';
         const searchTerm = URLHandler('submit-search', router.asPath) || '';
