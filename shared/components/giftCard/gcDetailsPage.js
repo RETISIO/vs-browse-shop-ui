@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import { validator } from '@retisio/sf-ui';
 import { addToBagDetails } from '../../helpers/getPDPData';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
 
 export default function GcDetailsPage(props) {
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const giftCartData = props?.pdpData?.payLoad;
-  console.log('Hello in Gift Card=====>', giftCartData);
   const gcSkus = giftCartData?.products[0]?.skus && Object.values(giftCartData?.products[0]?.skus);
   const physicalGCskuArr = [];
   const electronicGCskuArr = [];
@@ -27,15 +28,10 @@ export default function GcDetailsPage(props) {
       electronicGCskuArr.push(item);
     }
   });
-  console.log("sku'sssssssssssss=>>>>>>>>>", giftCartData?.products[0]?.skus);
-  console.log('gcSkus===gcSkus=====gcSkus====>', gcSkus);
-  console.log('electronicGCskuArr============>', electronicGCskuArr);
-  console.log('physicalGCskuArr============>', physicalGCskuArr);
   const isAvailableGC = electronicGCskuArr.length > 0 ? 'electronicGC' : 'physicalGC';
   const [selectedGC, setSelectedGC] = useState(isAvailableGC);
   const handleGCTypeClick = (event) => {
     const { value } = event.target;
-    console.log('Value=>>>>>>>>', value);
     setSelectedGC(value);
   };
   const renderSelectOptions = (item, i) => {
@@ -61,15 +57,29 @@ export default function GcDetailsPage(props) {
   const initialValues = {
     recipientsName: '',
     recipientsEmail: '',
-    message: ''
+    message: '',
   };
   const [values, setValues] = useState(initialValues);
+  const [formerrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setValues({ values: { [name]: value } });
+    setValues({ ...values, [name]: value });
   };
-  const submitGCData = (event) => {
-    event.stopPropagation();
+  const validate = (valuesObj) => {
+    const errors = validator(valuesObj);
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      return true;
+    }
+    return false;
+  };
+  const handleBlur = () => {
+    if (isSubmit) {
+      validate({ ...values });
+    }
+  };
+  const submitGCData = () => {
     const skuId = document.getElementById('gc-select-box')?.value;
     const productType = giftCartData?.products[0]?.productType;
     const gcData = {
@@ -79,136 +89,163 @@ export default function GcDetailsPage(props) {
           productId,
           quantity: 1,
           productType,
-          message: 'Hi enjoy the Gift Item..',
         },
       ],
     };
     if (selectedGC === 'electronicGC') {
-      gcData.items[0].recipientName = 'testName';
-      gcData.items[0].recipientEmail = 'testEmail';
+      gcData.items[0].recipientName = values.recipientsName;
+      gcData.items[0].recipientEmail = values.recipientsEmail;
     }
+    if (values.message) { gcData.items[0].message = values.message; }
     const result = addToBagDetails(gcData);
-    result.then((data) => {
-      setMiniCartDetails({ ...miniCartDetails, itemAdded: true });
+    result.then((res) => {
+      if (res.status === 200) {
+        setMiniCartDetails({ ...miniCartDetails, itemAdded: true });
+      }
     });
+  };
+  const handleSubmit = (event) => {
+    event.stopPropagation();
+    if (selectedGC === 'electronicGC') {
+      setIsSubmit(true);
+      const validated = validate(values);
+      if (validated) {
+        submitGCData();
+      }
+    } else {
+      submitGCData();
+    }
   };
   return (
     <div className="col-md-7 col-sm-12">
-      <h1 className="page-title" data-bind="text: product().displayName()">Gift Card</h1>
-      <p className="page-short-description">Give the gift of a delicious, unforgettable meal with an Allen Brothers gift card. Choose either an e-gift card or a physical gift card sent by mail.</p>
-      <h3 className="mb-0">Select a Gift Card Type</h3>
-      <div className="js-tabs">
-        <ul className="list-inline gift-card-tyle-list">
-          <li>
-            <div className="radio">
-              <label className="radio__label">
-                <input
-                  className="js-alt-tab-controller"
-                  checked={selectedGC === 'electronicGC'}
-                  type="radio"
-                  value="electronicGC"
-                  name="type"
-                  onClick={(e) => handleGCTypeClick(e)}
-                />
-                <span className="radio__text">Email Gift Card</span>
-                <span className="radio__visual"></span>
-              </label>
-            </div>
-          </li>
-          <li>
-            <div className="radio">
-              <label className="radio__label">
-                <input
-                  className="js-alt-tab-controller"
-                  checked={selectedGC === 'physicalGC'}
-                  type="radio"
-                  value="physicalGC"
-                  name="type"
-                  onClick={(e) => handleGCTypeClick(e)}
-                />
-                <span className="radio__text">Physical Gift Card</span>
-                <span className="radio__visual"></span>
-              </label>
-            </div>
-          </li>
-        </ul>
-        <div className="js-tabs__tab">
-          <h3 data-bind="widgetLocaleText: 'giftCardAmount'">Select a Gift Card Amount</h3>
-          {renderGCSelect()}
-          {selectedGC === 'electronicGC'
-            ? (
-              <div className="row">
-                <div className="col-sm-7">
-                  <div className="form-group">
-                    <input
-                      className="form-control formControl-input"
-                      type="text"
-                      maxLength="50"
-                      placeholder="Recipients Name *"
-                      id="recipientsName"
-                      value={values.recipientsName}
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="formGroup-label"
-                      htmlFor="recipientsName"
-                    >
-                      Recipients Name *
-                    </label>
-                    <span className="text-danger hidden" role="alert" data-bind="validationMessage: recipientName"></span>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="form-control formControl-input"
-                      type="email"
-                      maxLength="128"
-                      data-bind="textInput: recipientEmail, widgetLocaleText: {attr: 'placeholder', value: 'recipientEmailLabel'}"
-                      placeholder="Recipients Email Address *"
-                      id="recipientsEmail"
-                      value={values.recipientsEmail}
-                      onChange={handleChange}
-                    />
-                    <label
-                      className="formGroup-label"
-                      htmlFor="recipientsEmail"
-                    >
-                      Recipients Email Address *
-                    </label>
-                    <span className="text-danger hidden" role="alert" data-bind="validationMessage: recipientEmail"></span>
+      <Form noValidate autoComplete="off">
+        <h1 className="page-title">Gift Card</h1>
+        <p className="page-short-description">Give the gift of a delicious, unforgettable meal with an Allen Brothers gift card. Choose either an e-gift card or a physical gift card sent by mail.</p>
+        <h3 className="mb-0">Select a Gift Card Type</h3>
+        <div className="js-tabs">
+          <ul className="list-inline gift-card-tyle-list">
+            <li>
+              <div className="radio">
+                <label className="radio__label">
+                  <input
+                    className="js-alt-tab-controller"
+                    checked={selectedGC === 'electronicGC'}
+                    type="radio"
+                    value="electronicGC"
+                    name="type"
+                    onChange={(e) => handleGCTypeClick(e)}
+                  />
+                  <span className="radio__text">Email Gift Card</span>
+                  <span className="radio__visual"></span>
+                </label>
+              </div>
+            </li>
+            <li>
+              <div className="radio">
+                <label className="radio__label">
+                  <input
+                    className="js-alt-tab-controller"
+                    checked={selectedGC === 'physicalGC'}
+                    type="radio"
+                    value="physicalGC"
+                    name="type"
+                    onChange={(e) => handleGCTypeClick(e)}
+                  />
+                  <span className="radio__text">Physical Gift Card</span>
+                  <span className="radio__visual"></span>
+                </label>
+              </div>
+            </li>
+          </ul>
+          <div className="js-tabs__tab">
+            <h3 data-bind="widgetLocaleText: 'giftCardAmount'">Select a Gift Card Amount</h3>
+            {renderGCSelect()}
+            {selectedGC === 'electronicGC'
+              ? (
+                <div className="row">
+                  <div className="col-sm-7">
+                    <Form.Group>
+                      <div className="form-group">
+                        <Form.Control
+                          className="form-control formControl-input"
+                          type="text"
+                          required
+                          maxLength="50"
+                          placeholder="Recipients Name *"
+                          id="recipientsName"
+                          name="recipientsName"
+                          value={values.recipientsName}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={!!formerrors.recipientsName}
+                        />
+                        <Form.Label
+                          className="formGroup-label"
+                          htmlFor="recipientsName"
+                        >
+                          Recipients Name *
+                        </Form.Label>
+                        <Form.Control.Feedback className="text-danger" type="invalid" role="alert">{formerrors.recipientsName}</Form.Control.Feedback>
+                      </div>
+                    </Form.Group>
+                    <Form.Group>
+                      <div className="form-group">
+                        <Form.Control
+                          className="form-control formControl-input"
+                          type="email"
+                          maxLength="128"
+                          placeholder="Recipients Email Address *"
+                          id="recipientsEmail"
+                          name="recipientsEmail"
+                          value={values.recipientsEmail}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isInvalid={!!formerrors.recipientsEmail}
+                        />
+                        <Form.Label
+                          className="formGroup-label"
+                          htmlFor="recipientsEmail"
+                        >
+                          Recipients Email Address *
+                        </Form.Label>
+                        <Form.Control.Feedback className="text-danger" type="invalid" role="alert">{formerrors.recipientsEmail}</Form.Control.Feedback>
+                      </div>
+                    </Form.Group>
                   </div>
                 </div>
-              </div>
-            ) : ''}
+              ) : ''}
+          </div>
+          <div className="form-group">
+            <textarea
+              className="form-control formControl-input noresize"
+              rows="4"
+              type="text"
+              maxLength="250"
+              spellCheck="true"
+              placeholder="Message"
+              id="message"
+              name="message"
+              value={values.message}
+              onChange={handleChange}
+            >
+            </textarea>
+            <label
+              className="formGroup-label"
+              htmlFor="message"
+            >
+              Message
+            </label>
+            <span className="text-danger hidden" role="alert"></span>
+          </div>
         </div>
-        <div className="form-group">
-          <textarea
-            className="form-control formControl-input noresize"
-            rows="4"
-            type="text"
-            maxLength="250"
-            spellCheck="true"
-            placeholder="Message"
-            id="message"
-            value={values.message}
-            onChange={handleChange}
-          >
-          </textarea>
-          <label
-            className="formGroup-label"
-            htmlFor="message"
-          >
-            Message
-          </label>
-          <span className="text-danger hidden" role="alert"></span>
-        </div>
-      </div>
-      <button
-        className="btn btn-secondary btn-md btn-action"
-        type="button"
-        onClick={(e) => submitGCData(e)}
-      >
-        ADD TO CART
-      </button>
+        <button
+          className="btn btn-secondary btn-md btn-action"
+          type="button"
+          onClick={(e) => handleSubmit(e)}
+        >
+          ADD TO CART
+        </button>
+      </Form>
     </div>
 
   );
