@@ -51,7 +51,7 @@ function ResultList(props) {
     if (offset > 0) {
       (async() => {
         const categoryIds = URLHandler('id', router.asPath) || '';
-        const facetIds = URLHandler('fs', router.asPath) || '';
+        const facetIds = URLHandler('t', router.asPath) || '';
         const sort = URLHandler('so', router.asPath) || '';
         const searchTerm = URLHandler('st', router.asPath) || '';
 

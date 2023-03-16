@@ -41,7 +41,7 @@ export function Index(props) {
   }, []);
 
   const getPasswordPattern = (data) => {
-    const policy = data && data.passwordPolicies[0].rules;
+    const policy = data && data?.passwordPolicies[0]?.rules;
     let regex = [];
     let errors = [];
     policy.map((policy) => {

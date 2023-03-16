@@ -2,7 +2,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import URLHandler from '../../../helpers/urlHandler';
 // import { usePageDataContext } from '../../context/pageData-context';
 
@@ -11,11 +11,16 @@ export function CategoryDescription(props) {
   const [pageContentData, setPageContent] = useState(data);
   const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
+
   const searchTerm = URLHandler('st', router.asPath) || '';
   // const { pageData } = usePageDataContext();
   useEffect(() => {
     setPageContent(props?.data);
   }, [props]);
+
+  const navigatePage = () => {
+    Router.push(`/noresult?st=${searchTerm}`);
+  };
 
   return (
     <>
@@ -37,7 +42,16 @@ export function CategoryDescription(props) {
                     </span>
                   </button>
                   <strong>
-                    <span>{`Corrected from "${searchTerm}"`}</span>
+                    <span>
+                      Search instead for
+                      {' '}
+                      <span
+                        className="auto-suggest-word"
+                        onClick={() => navigatePage()}
+                      >
+                        {searchTerm}
+                      </span>
+                    </span>
                   </strong>
                 </div>
               )}
