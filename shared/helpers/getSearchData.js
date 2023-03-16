@@ -8,7 +8,7 @@ export default async function getSearchData(context) {
 
   const reqURI = req ? req?.url : asPath;
   const searchTerm = URLHandler('submit-search', reqURI) || '';
-  const categoryIds = URLHandler('id', reqURI) || '';
+  const categoryIds = URLHandler('N', reqURI) || '';
   const facetIds = URLHandler('t', reqURI) || '';
   const sort = URLHandler('so', reqURI) || '';
   let data;
