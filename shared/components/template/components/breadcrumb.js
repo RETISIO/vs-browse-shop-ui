@@ -27,7 +27,10 @@ export function Breadcrumb(props) {
       {pageType === 'search'
         ? (
           <li>
-            <span>{`YOUR SEARCH RESULTS FOR "${pageContentData?.payLoad?.autoCorrectTerm ? pageContentData?.payLoad?.autoCorrectTerm : searchTerm}"`}</span>
+            <span>
+              {`YOUR SEARCH RESULTS FOR "${pageContentData?.payLoad?.autoCorrectTerm ? pageContentData?.payLoad?.autoCorrectTerm : pageContentData?.payLoad?.searchTerm || searchTerm}"`}
+
+            </span>
           </li>
         ) : (
           // eslint-disable-next-line react/jsx-no-useless-fragment

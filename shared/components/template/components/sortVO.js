@@ -13,7 +13,7 @@ function SortVO(props) {
 
   // const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.join('+') || '');
   const [selectedCategories, setSelectedCategories] = useState(router?.query?.id?.concat('+') || '');
-  const [selectedFacets, setSelectedFacets] = useState(router?.query?.fs?.concat('+') || '');
+  const [selectedFacets, setSelectedFacets] = useState(router?.query?.t?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function SortVO(props) {
 
   const path = router.asPath.split('?')[0];
   const categoryIds = URLHandler('id', router.asPath) || '';
-  const facetIds = URLHandler('fs', router.asPath) || '';
+  const facetIds = URLHandler('t', router.asPath) || '';
   const sortId = URLHandler('so', router.asPath) || '';
   const searchTerm = URLHandler('st', router.asPath) || '';
 
@@ -39,7 +39,7 @@ function SortVO(props) {
       pathname: path,
       query: {
         id: encodeURI(`${selectedCategories}`),
-        fs: encodeURI(`${selectedFacets}`),
+        t: encodeURI(`${selectedFacets}`),
         so: encodeURI(`${(id)}`),
         st: encodeURI(`${searchTerm}`),
       },

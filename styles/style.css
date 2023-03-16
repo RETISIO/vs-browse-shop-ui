@@ -8421,3 +8421,6 @@ button.close {
   color: #31708f;
   font-weight: 600;
 }
+.remove-token {
+  cursor: pointer;
+}
