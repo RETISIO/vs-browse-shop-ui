@@ -18,9 +18,12 @@ import { Loader } from '../shared/components/loader';
 import getSearchData from '../shared/helpers/getSearchData';
 import PageJson from '../shared/helpers/pageData.json';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
+// eslint-disable-next-line import/named
+import { requestContructor } from '../shared/helpers/api';
 
 function Static({ data }) {
   // const i18n = useI18n();
+  console.log("datatatat",data);
   const router = useRouter();
   const {
     setOffset,
@@ -29,7 +32,7 @@ function Static({ data }) {
   const [loading, setLoading] = useState(false);
   const [searchData, setSearchPageData] = useState();
 
-  const pageContent = PageJson;
+  const pageContent = data;
 
   useEffect(() => {
     setOffset(0);
@@ -39,15 +42,15 @@ function Static({ data }) {
     setLoading(true);
     (async() => {
       const res = await getSearchData(router);
-      
-      if(res?.payLoad?.productCount === 0) {
+      if(res?.payLoad?.productCount === 0 && !res?.payLoad?.redirectURL) {
         Router.push(`/noresult?st=${res.payLoad.searchTerm}`);
       } else if(res?.payLoad?.productCount === 1) {
         const product = res?.payLoad?.products[0];
         Router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);
-      }
-      else {
-        res.page = PageJson;
+      } else if(res?.payLoad?.redirect) {
+        Router.push(res?.payLoad?.redirectURL);
+      } else {
+        res.page = res?.payLoad?.page;
         setSearchPageData(res);
         setLoading(false);
         if(window && window.yotpo) {
@@ -79,8 +82,8 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async (context) => {
-  // const data = await getSearchData(context);
-  const data = { page: PageJson };
+  const { req } = context;
+  const data = await requestContructor('static/search', '', {}, req);
   return {
     data,
   };

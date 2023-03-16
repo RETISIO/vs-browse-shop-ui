@@ -31,13 +31,13 @@ function Facet(props) {
   const navigate = useRouter();
   // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
   const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.concat("+") || "");
-  const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.fs?.concat("+") || "");
+  const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.t?.concat("+") || "");
   const [searchKey, setSearchKey] = useState(navigate?.query?.st?.concat("+") || "");
 
   const path = navigate.asPath.split("?")[0];
 
   const categoryIds = URLHandler('id', navigate.asPath) || "";
-  const facetIds = URLHandler('fs', navigate.asPath) || "";
+  const facetIds = URLHandler('t', navigate.asPath) || "";
   const searchTerm = URLHandler('st', navigate.asPath) || '';
 
   useEffect(() => {
@@ -75,7 +75,7 @@ function Facet(props) {
                           query: {
                             st: encodeURI(`${searchKey}`),
                             id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
-                            fs: encodeURI(`${selectedFacets}`),
+                            t: encodeURI(`${selectedFacets}`),
                           },
                         }}
                         onClick={() => clickFilter()}
@@ -141,7 +141,7 @@ function Facet(props) {
                       href={{
                         pathname: path,
                         query: {
-                          fs: encodeURI(`${selectedFacets}`),
+                          t: encodeURI(`${selectedFacets}`),
                           st: encodeURI(`${searchKey}`),
                           // eslint-disable-next-line max-len
                           id: encodeURI(`${selectedCategories.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
@@ -174,7 +174,7 @@ function Facet(props) {
                           id: encodeURI(`${selectedCategories}`),
                           st: encodeURI(`${searchKey}`),
                           // eslint-disable-next-line max-len
-                          fs: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
+                          t: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
                         },
                       }}
                       title="removeRefinement"
@@ -207,7 +207,7 @@ function Facet(props) {
                           pathname: path,
                           query: {
                             st: encodeURI(`${searchTerm}`),
-                            fs: encodeURI(`${selectedFacets}`),
+                            t: encodeURI(`${selectedFacets}`),
                             id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${val.id}`),
                           },
                         }}
@@ -240,7 +240,7 @@ function Facet(props) {
                         query: {
                           st: encodeURI(`${searchTerm}`),
                           id: encodeURI(`${selectedCategories}`),
-                          fs: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
+                          t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                         },
                       }}
                       onClick={() => clickFilter()}

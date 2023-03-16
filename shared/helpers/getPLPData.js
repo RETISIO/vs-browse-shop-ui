@@ -8,7 +8,7 @@ export default async function getPLPData(context) {
 
   const reqURI = req ? req?.url : asPath;
   const categoryIds = URLHandler('id', reqURI);
-  const facetIds = URLHandler('fs', reqURI) || '';
+  const facetIds = URLHandler('t', reqURI) || '';
   const sort = URLHandler('so', reqURI) || '';
   let data;
 
