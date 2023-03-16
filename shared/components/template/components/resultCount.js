@@ -9,13 +9,13 @@ import URLHandler from '../../../helpers/urlHandler';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function ResultCount(props) {
-  const { data } = props;
+  const { data, pageType } = props;
   const [pageContentData, setPageContent] = useState(data);
   const router = useRouter();
 
-  const [searchKey, setSearchKey] = useState(router?.query?.st?.concat('+') || '');
+  const [searchKey, setSearchKey] = useState(router?.query?.['submit-search']?.concat('+') || '');
 
-  const searchTerm = URLHandler('st', router.asPath) || '';
+  const searchTerm = URLHandler('submit-search', router.asPath) || '';
 
   useEffect(() => {
     setSearchKey(searchTerm);
@@ -35,14 +35,14 @@ export function ResultCount(props) {
       router.push({
         pathname: path,
         query: {
-          st: encodeURI(`${searchKey.split(' ').filter((ele) => ele !== val).join('+')}`),
+          'submit-search': encodeURI(`${searchKey.split(' ').filter((ele) => ele !== val).join('+')}`),
         },
       });
     } else {
       router.push({
         pathname: path,
         query: {
-          st: encodeURI(`${searchKey.split('+').filter((ele) => ele !== val).join('+')}`),
+          'submit-search': encodeURI(`${searchKey.split('+').filter((ele) => ele !== val).join('+')}`),
         },
       });
     }
@@ -69,7 +69,7 @@ export function ResultCount(props) {
         </small>
         <small className="results-count"> Results)</small>
       </h1>
-      {pageContentData?.payLoad?.altSuggestedSearchTerms?.length > 1
+      {pageType === 'search' && pageContentData?.payLoad?.altSuggestedSearchTerms?.length > 1
         && (
           <div className="d-flex token-container">
             {pageContentData?.payLoad?.altSuggestedSearchTerms?.map((val, key) => (
