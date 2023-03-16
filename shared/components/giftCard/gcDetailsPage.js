@@ -81,21 +81,22 @@ export default function GcDetailsPage(props) {
   };
   const submitGCData = () => {
     const skuId = document.getElementById('gc-select-box')?.value;
-    const productType = giftCartData?.products[0]?.productType;
+    let productType = 'giftcard';
     const gcData = {
       items: [
         {
           variantId: skuId,
           productId,
           quantity: 1,
-          productType,
         },
       ],
     };
     if (selectedGC === 'electronicGC') {
+      productType = 'egiftcard';
       gcData.items[0].recipientName = values.recipientsName;
       gcData.items[0].recipientEmail = values.recipientsEmail;
     }
+    gcData.items[0].productType = productType;
     if (values.message) { gcData.items[0].message = values.message; }
     const result = addToBagDetails(gcData);
     result.then((res) => {
