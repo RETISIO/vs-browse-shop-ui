@@ -24,7 +24,7 @@ function SortVO(props) {
   const categoryIds = URLHandler('id', router.asPath) || '';
   const facetIds = URLHandler('t', router.asPath) || '';
   const sortId = URLHandler('so', router.asPath) || '';
-  const searchTerm = URLHandler('st', router.asPath) || '';
+  const searchTerm = URLHandler('submit-search', router.asPath) || '';
 
   useEffect(() => {
     setSelectedCategories(categoryIds);
@@ -41,7 +41,7 @@ function SortVO(props) {
         id: encodeURI(`${selectedCategories}`),
         t: encodeURI(`${selectedFacets}`),
         so: encodeURI(`${(id)}`),
-        st: encodeURI(`${searchTerm}`),
+        'submit-search': encodeURI(`${searchTerm}`),
       },
     });
   };

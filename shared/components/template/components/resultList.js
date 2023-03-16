@@ -53,7 +53,7 @@ function ResultList(props) {
         const categoryIds = URLHandler('id', router.asPath) || '';
         const facetIds = URLHandler('t', router.asPath) || '';
         const sort = URLHandler('so', router.asPath) || '';
-        const searchTerm = URLHandler('st', router.asPath) || '';
+        const searchTerm = URLHandler('submit-search', router.asPath) || '';
 
         const pageDivider = productCount % 12;
 

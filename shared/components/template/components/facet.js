@@ -32,13 +32,13 @@ function Facet(props) {
   // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
   const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.concat("+") || "");
   const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.t?.concat("+") || "");
-  const [searchKey, setSearchKey] = useState(navigate?.query?.st?.concat("+") || "");
+  const [searchKey, setSearchKey] = useState(navigate?.query?.['submit-search']?.concat("+") || "");
 
   const path = navigate.asPath.split("?")[0];
 
   const categoryIds = URLHandler('id', navigate.asPath) || "";
   const facetIds = URLHandler('t', navigate.asPath) || "";
-  const searchTerm = URLHandler('st', navigate.asPath) || '';
+  const searchTerm = URLHandler('submit-search', navigate.asPath) || '';
 
   useEffect(() => {
     setSelectedCategories(categoryIds);
@@ -73,7 +73,7 @@ function Facet(props) {
                         href={{
                           pathname: path,
                           query: {
-                            st: encodeURI(`${searchKey}`),
+                            'submit-search': encodeURI(`${searchKey}`),
                             id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
                             t: encodeURI(`${selectedFacets}`),
                           },
@@ -117,7 +117,7 @@ function Facet(props) {
             href={{
                 pathname: path,
                 query: {
-                  st: encodeURI(`${searchKey}`),
+                  'submit-search': encodeURI(`${searchKey}`),
                 },
               }}
             onClick={() => clickFilter()}
@@ -142,7 +142,7 @@ function Facet(props) {
                         pathname: path,
                         query: {
                           t: encodeURI(`${selectedFacets}`),
-                          st: encodeURI(`${searchKey}`),
+                          'submit-search': encodeURI(`${searchKey}`),
                           // eslint-disable-next-line max-len
                           id: encodeURI(`${selectedCategories.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
                         },
@@ -172,7 +172,7 @@ function Facet(props) {
                         pathname: path,
                         query: {
                           id: encodeURI(`${selectedCategories}`),
-                          st: encodeURI(`${searchKey}`),
+                          'submit-search': encodeURI(`${searchKey}`),
                           // eslint-disable-next-line max-len
                           t: encodeURI(`${selectedFacets.split("+").filter((ele) => ele !== item.facetId).join('+')}`),
                         },
@@ -206,7 +206,7 @@ function Facet(props) {
                     href={{
                           pathname: path,
                           query: {
-                            st: encodeURI(`${searchTerm}`),
+                          'submit-search': encodeURI(`${searchTerm}`),
                             t: encodeURI(`${selectedFacets}`),
                             id: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${val.id}`),
                           },
@@ -238,7 +238,7 @@ function Facet(props) {
                       href={{
                         pathname: path,
                         query: {
-                          st: encodeURI(`${searchTerm}`),
+                          'submit-search': encodeURI(`${searchTerm}`),
                           id: encodeURI(`${selectedCategories}`),
                           t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                         },
