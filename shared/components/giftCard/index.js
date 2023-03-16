@@ -1,8 +1,15 @@
 import React from 'react';
 import Breadcrumb from '../template/components/breadcrumb';
+import { NextImage } from '../template/components/nextImage';
 import GcDetailsPage from './gcDetailsPage';
 
 export default function GiftCard(props) {
+  const pdpData = props?.pdpData?.payLoad;
+  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const defaultSkuId = pdpData?.products[0]?.defaultSkuId;
+  const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media;
+  const thumbnailHeight = 475;
+  const thumbnailWidth = 475;
   return (
     <div className="container giftCardConainer">
       <nav className="breadcrumbs-block hidden-print">
@@ -23,10 +30,12 @@ export default function GiftCard(props) {
             <div className="product-gallery__main">
               <a className="MagicZoom js-product-gallery-zoom" id="zoom" href="/ccstore/v1/images/?source=/file/v1303352350604370651/products/ABI-GiftCard_sm_2.jpg" data-options="zoomDistance: 30; hint: off;">
                 <figure className="mz-figure mz-hover-zoom mz-ready">
-                  <img
-                    className="gift-card-image"
-                    alt="Gift Card"
-                    src="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/v1303352350604370651/products/ABI-GiftCard_sm_2.jpg&amp;height=475&amp;width=475"
+                  <NextImage
+                    alt={mediaObj?.altText}
+                    src={`${damPath}${mediaObj?.thumbnailImg}`}
+                    height={thumbnailHeight}
+                    width={thumbnailWidth}
+                    id="zoom-image"
                   />
                 </figure>
               </a>
