@@ -43,7 +43,7 @@ function Static({ data }) {
     (async() => {
       const res = await getSearchData(router);
       if(res?.payLoad?.productCount === 0 && !res?.payLoad?.redirectURL) {
-        Router.push(`/noresult?st=${res.payLoad.searchTerm}`);
+        Router.push(`/noresult?submit-search=${res.payLoad.searchTerm}`);
       } else if(res?.payLoad?.productCount === 1) {
         const product = res?.payLoad?.products[0];
         Router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);

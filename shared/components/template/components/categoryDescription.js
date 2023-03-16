@@ -12,14 +12,14 @@ export function CategoryDescription(props) {
   const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
 
-  const searchTerm = URLHandler('st', router.asPath) || '';
+  const searchTerm = URLHandler('submit-search', router.asPath) || '';
   // const { pageData } = usePageDataContext();
   useEffect(() => {
     setPageContent(props?.data);
   }, [props]);
 
   const navigatePage = () => {
-    Router.push(`/noresult?st=${searchTerm}`);
+    Router.push(`/noresult?submit-search=${searchTerm}`);
   };
 
   return (

@@ -12,7 +12,7 @@ export function Breadcrumb(props) {
   const { data, pageType } = props;
   const [pageContentData, setPageContent] = useState(data);
   const router = useRouter();
-  const searchTerm = URLHandler('st', router.asPath) || '';
+  const searchTerm = URLHandler('submit-search', router.asPath) || '';
   // const { pageData } = usePageDataContext();
   useEffect(() => {
     setPageContent(props?.data);
