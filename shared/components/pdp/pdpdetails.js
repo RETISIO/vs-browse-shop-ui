@@ -2,10 +2,17 @@ import React from 'react';
 import { Breadcrumb } from '../template/components/breadcrumb';
 import { NextImage } from '../template/components/nextImage';
 import SkuLineItem from './skuLineItem';
+import GiftCard from '../giftCard';
 
 export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad;
   const productSkus = Object.values(pdpData.products[0].skus);
+  const productType = pdpData.products[0]?.productType;
+  if (productType === 'giftcard') {
+    return (
+      <GiftCard {...props} />
+    );
+  }
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
   const productId = pdpData?.products[0]?.productId;
   const renderGalleryImage = () => {
