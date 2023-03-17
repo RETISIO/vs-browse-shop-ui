@@ -21,6 +21,28 @@ module.exports = {
   //     modifyVars: themeVariables,
   //   },
   // },
+  async headers() {
+    return [
+      {
+        source: '/', // automatically handles all locales
+        headers: [
+          {
+            key: 'max-age',
+            value: '86400',
+          },
+        ],
+      },
+      {
+        source: '/:path*', // automatically handles all locales
+        headers: [
+          {
+            key: 'max-age',
+            value: '86400',
+          },
+        ],
+      },
+    ]
+  },
   images: {
     unoptimized: true,
     remotePatterns: [
