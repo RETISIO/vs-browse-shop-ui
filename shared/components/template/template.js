@@ -18,37 +18,7 @@ export function Template(props) {
   const createMarkup = (data) => ({ __html: Object.values(JSON.parse(data))[0] });
   
   const renderContentData = (contentItemObj) => {
-    // if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breadcrumb') {
-    //   return (
-    //     <nav className="breadcrumbs-block hidden-print">
-    //       <ol className="breadcrumb">
-    //         <Breadcrumb {...props} />
-    //       </ol>
-    //     </nav>
-    //   );
-    // }
-    // if (contentItemObj.contentTypeId === 'Facet' && props.type === 'facets') {
-    //   return <Facet {...props} />;
-    // }
-    // if ((contentItemObj.contentTypeId === 'Result List' && props.type === 'resultList')) {
-    //   return <ResultList {...props} />;
-    // }
-    // if ((contentItemObj.contentTypeId === 'Result Count' && props.type === 'resultCount')) {
-    //   return <ResultCount {...props} />;
-    // }
-    // if ((contentItemObj.contentTypeId === 'Category Description' && props.type === 'categoryDescription')) {
-    //   return <CategoryDescription {...props} />;
-    // }
-    // if ((contentItemObj.contentTypeId === 'Category Long Description' && props.type === 'categoryLongDescription')) {
-    //   return <CategoryLongDescription {...props} />;
-    // }
-    // if (contentItemObj.contentTypeId === 'HTML Content') {
-    //   const data = contentItemObj.content;
-    //   return (
-    //     <section dangerouslySetInnerHTML={createMarkup(data)}></section>
-    //   );
-    // }
-    if (props.type === 'breadcrumb') {
+    if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breadcrumb') {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
@@ -57,19 +27,19 @@ export function Template(props) {
         </nav>
       );
     }
-    if (props.type === 'facets') {
+    if (contentItemObj.contentTypeId === 'Facet' && props.type === 'facets') {
       return <Facet {...props} />;
     }
-    if ((props.type === 'resultList')) {
+    if ((contentItemObj.contentTypeId === 'Result List' && props.type === 'resultList')) {
       return <ResultList {...props} />;
     }
-    if ((props.type === 'resultCount')) {
+    if ((contentItemObj.contentTypeId === 'Result Count' && props.type === 'resultCount')) {
       return <ResultCount {...props} />;
     }
-    if ((props.type === 'categoryDescription')) {
+    if ((contentItemObj.contentTypeId === 'Category Description' && props.type === 'categoryDescription')) {
       return <CategoryDescription {...props} />;
     }
-    if ((props.type === 'categoryLongDescription')) {
+    if ((contentItemObj.contentTypeId === 'Category Long Description' && props.type === 'categoryLongDescription')) {
       return <CategoryLongDescription {...props} />;
     }
     if (contentItemObj.contentTypeId === 'HTML Content') {
@@ -78,6 +48,36 @@ export function Template(props) {
         <section dangerouslySetInnerHTML={createMarkup(data)}></section>
       );
     }
+    // if (props.type === 'breadcrumb') {
+    //   return (
+    //     <nav className="breadcrumbs-block hidden-print">
+    //       <ol className="breadcrumb">
+    //         <Breadcrumb {...props} />
+    //       </ol>
+    //     </nav>
+    //   );
+    // }
+    // if (props.type === 'facets') {
+    //   return <Facet {...props} />;
+    // }
+    // if ((props.type === 'resultList')) {
+    //   return <ResultList {...props} />;
+    // }
+    // if ((props.type === 'resultCount')) {
+    //   return <ResultCount {...props} />;
+    // }
+    // if ((props.type === 'categoryDescription')) {
+    //   return <CategoryDescription {...props} />;
+    // }
+    // if ((props.type === 'categoryLongDescription')) {
+    //   return <CategoryLongDescription {...props} />;
+    // }
+    // if (contentItemObj.contentTypeId === 'HTML Content') {
+    //   const data = contentItemObj.content;
+    //   return (
+    //     <section dangerouslySetInnerHTML={createMarkup(data)}></section>
+    //   );
+    // }
   };
 
   const getColumnItems = (data, contentItemObj) => {
