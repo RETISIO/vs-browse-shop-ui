@@ -4,9 +4,11 @@ WORKDIR /usr/src/app
 
 RUN echo -e "\
 NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
-NEXT_PUBLIC_CHANNELDOMAIN=http://us.ab-dev.retisio.com\n\
-NEXT_PUBLIC_IMAGEPATH=http://192.168.23.105/dam/AB/\n\
-NEXT_PUBLIC_YOTPO_KEY=JWXESIrV1bhkPhis174zbf5DPrL3oCEPNer43pBI\n\
+NEXT_PUBLIC_CHANNELDOMAIN=https://us.ab-dev.retisio.com\n\
+NEXT_PUBLIC_IMAGEPATH=/dam/AB\n\
+NEXT_PUBLIC_YOTPO_KEY=Xzwy9124YJ6LKTkJdWTSfw6Vij93GMnCjDzxdi9t\n\
+NEXT_PUBLIC_GA_KEY=GTM-NLXT83\n\
+NEXT_PUBLIC_LISTRACK_MID=LhfaAOez5ttd\n\
 " > .env.production
 
 COPY . .
