@@ -6,7 +6,7 @@ Description: A simple pipeline that provides info to build, publish and deploy t
 
 @Library('arc-dev') _
 
-abwebstoreDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/SF-browse-shop.git',
+abaggregatorDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/SF-browse-shop.git',
                          bitbucketCredentialsId: 'cicdadminaie',
                          appName: 'ab-storefrontsnb', dockerDirectory: env.WORKSPACE,
                          dockerImage: 'gcr.io/retisio-tools/ab-storefrontsnb',
