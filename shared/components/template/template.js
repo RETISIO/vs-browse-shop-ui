@@ -18,7 +18,7 @@ export function Template(props) {
   const createMarkup = (data) => ({ __html: Object.values(JSON.parse(data))[0] });
   
   const renderContentData = (contentItemObj) => {
-    if (contentItemObj.contentTypeId === 'Breadcrumb' && props.type === 'breadcrumb') {
+    if (contentItemObj.contentTypeId === 'breadcrumb:default' && props.type === 'breadcrumb') {
       return (
         <nav className="breadcrumbs-block hidden-print">
           <ol className="breadcrumb">
@@ -27,22 +27,22 @@ export function Template(props) {
         </nav>
       );
     }
-    if (contentItemObj.contentTypeId === 'Facet' && props.type === 'facets') {
+    if (contentItemObj.contentTypeId === 'facet:default' && props.type === 'facets') {
       return <Facet {...props} />;
     }
-    if ((contentItemObj.contentTypeId === 'Result List' && props.type === 'resultList')) {
+    if ((contentItemObj.contentTypeId === 'resultList:default' && props.type === 'resultList')) {
       return <ResultList {...props} />;
     }
-    if ((contentItemObj.contentTypeId === 'Result Count' && props.type === 'resultCount')) {
+    if ((contentItemObj.contentTypeId === 'resultCount:default' && props.type === 'resultCount')) {
       return <ResultCount {...props} />;
     }
-    if ((contentItemObj.contentTypeId === 'Category Description' && props.type === 'categoryDescription')) {
+    if ((contentItemObj.contentTypeId === 'categoryDescription:custom' && props.type === 'categoryDescription')) {
       return <CategoryDescription {...props} />;
     }
-    if ((contentItemObj.contentTypeId === 'Category Long Description' && props.type === 'categoryLongDescription')) {
+    if ((contentItemObj.contentTypeId === 'categoryLongDescription:custom' && props.type === 'categoryLongDescription')) {
       return <CategoryLongDescription {...props} />;
     }
-    if (contentItemObj.contentTypeId === 'HTML Content') {
+    if (contentItemObj.contentTypeId === 'htmlContent:default') {
       const data = contentItemObj.content;
       return (
         <section dangerouslySetInnerHTML={createMarkup(data)}></section>
