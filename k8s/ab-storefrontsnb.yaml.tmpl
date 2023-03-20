@@ -17,21 +17,11 @@ spec:
     spec:
       containers:
         -
-          image: "${IMAGE}/abbe:${IMAGETAG}"
+          image: "${IMAGE}:${IMAGETAG}"
           name: ab-be
           ports:
             -
               containerPort: 3000
-        -
-          image: "${IMAGE}/abweb:${IMAGETAG}"
-          name: abweb
-          volumeMounts:
-            - name: staticfiles
-              mountPath: "/usr/share/nginx/html/medias"
-              readOnly: false
-          ports:
-            -
-              containerPort: 80
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
@@ -39,34 +29,32 @@ spec:
               cpu: ${REQUEST_CPU}
               memory: ${REQUEST_MEMORY}
           readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
             httpGet:
-              port: 80
+              port: 3000
               path: /api/health
               scheme: HTTP
           livenessProbe:
+            initialDelaySeconds: 10
+            failureThreshold: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
             httpGet:
-              port: 80
+              port: 3000
               path: /api/health
               scheme: HTTP
-      volumes:
-        - name: staticfiles
-          persistentVolumeClaim:
-            claimName: static-files-nfs-pvc
 ---
 apiVersion: v1
 kind: Service
 metadata:
   annotations:
     cloud.google.com/neg: '{"ingress": true}'
-    #cloud.google.com/backend-config: '{"default": "ab-backendconfig"}'
   labels:
   name: ab-storefrontsnb
 spec:
   ports:
   - port: 80
-    targetPort: 80
-    name: ab-web
-  - port: 3000
     targetPort: 3000
     name: ab-be
   selector:
