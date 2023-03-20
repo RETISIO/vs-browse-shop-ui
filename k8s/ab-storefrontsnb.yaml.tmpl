@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         -
-          image: "${IMAGE}/abbe:${IMAGETAG}"
+          image: "${IMAGE}:${IMAGETAG}"
           name: ab-be
           ports:
             -
@@ -29,11 +29,17 @@ spec:
               cpu: ${REQUEST_CPU}
               memory: ${REQUEST_MEMORY}
           readinessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
             httpGet:
               port: 3000
               path: /api/health
               scheme: HTTP
           livenessProbe:
+            initialDelaySeconds: 10
+            failureThreshold: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
             httpGet:
               port: 3000
               path: /api/health
