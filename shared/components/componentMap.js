@@ -10,9 +10,9 @@ import RequestCatalog from './requestCatalog';
 const ComponentMap = {
   nextImage: NextImage,
   login: Login,
-  'Image carousel': ImageCarousel,
+  'imageCarousel:default': ImageCarousel,
   'product carousel': ProductCarousel,
-  'contact us form': ContactUs,
+  'contactUsForm:custom': ContactUs,
   'Catalog Request Form': RequestCatalog
 };
 export default ComponentMap;
