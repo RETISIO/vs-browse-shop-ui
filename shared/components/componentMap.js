@@ -11,8 +11,8 @@ const ComponentMap = {
   nextImage: NextImage,
   login: Login,
   'imageCarousel:default': ImageCarousel,
-  'product carousel': ProductCarousel,
+  'productCarousel:default': ProductCarousel,
   'contactUsForm:custom': ContactUs,
-  'Catalog Request Form': RequestCatalog
+  'catalogRequestForm:custom': RequestCatalog
 };
 export default ComponentMap;
