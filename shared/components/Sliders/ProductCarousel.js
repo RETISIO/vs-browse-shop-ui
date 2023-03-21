@@ -19,17 +19,18 @@ export default function ProductCarousel(props) {
   const [productsData, setProductsData] = useState({});
   useEffect(() => {
     const configValues = Props.configValue ? JSON.parse(Props.configValue) : { noOfRecords: 6 };
+    const noOfRecords = configValues?.defaultProductSelector?.noOfRecords || 4;
     const settings = {
       dots: false,
-      slidesToShow: configValues.customProductSelector.noOfRecords,
-      slidesToScroll: configValues.customProductSelector.noOfRecords,
+      slidesToShow: noOfRecords,
+      slidesToScroll: noOfRecords,
       infinite: false,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: configValues.customProductSelector.noOfRecords,
-            slidesToScroll: configValues.customProductSelector.noOfRecords,
+            slidesToShow: noOfRecords,
+            slidesToScroll: noOfRecords,
             infinite: true,
             dots: true,
           },
@@ -51,10 +52,10 @@ export default function ProductCarousel(props) {
         },
       ],
     };
-    const productIds = configValues.customProductSelector.products.map((item) => item.productId);
+    const productIds = configValues?.defaultProductSelector?.products.map((item) => item.productId);
     requestContructor('getProductsData', '', { method: 'POST', data: { productIds } }).then((res) => {
-      if(res.payLoad && res.payLoad.products) {
-        configValues.customProductSelector.products = res.payLoad.products;
+      if(configValues.defaultProductSelector && res.payLoad && res.payLoad.products) {
+        configValues.defaultProductSelector.products = res.payLoad.products;
         setProductsData({
           configValues,
           settings,
@@ -71,7 +72,7 @@ export default function ProductCarousel(props) {
         <>
           <h1 className="row align-left">{props.name}</h1>
           <Slider {...productsData.settings}>
-            {productsData.configValues.customProductSelector.products.map((value, index) => (
+            {productsData?.configValues?.defaultProductSelector?.products.map((value, index) => (
               <div key={index}>
                 <div style={{ margin: '15px' }}>
                   <ProductTile value={value} />
