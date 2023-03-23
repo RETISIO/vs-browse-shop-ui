@@ -4,13 +4,16 @@
 import { Service } from '@retisio/sf-api';
 
 const requestContructor = async(URL, params = '', options = {}, req = null) => {
-  let finalOriginURl = '';
+  let finalOriginURl = ''; let
+    relativeurl;
   if(req) {
     finalOriginURl = req && req.headers.host.indexOf('localhost') < 0 && req.headers['x-forwarded-proto'] ? `${req.headers['x-forwarded-proto']}://${req.headers.host}` : 'https://us.ab-dev.retisio.com';
+    relativeurl = req.originalUrl ? req.originalUrl.split('?')[req.originalUrl.split('?').length - 1] : '';
   }else if(window) {
     finalOriginURl = window && window.location.origin.indexOf('localhost') < 0 ? window.location.origin : 'https://us.ab-dev.retisio.com';
+    relativeurl = window.location.pathname;
   }
-  let finalHeaders = { originurl: finalOriginURl }; let tempURI;
+  let finalHeaders = { originurl: finalOriginURl, relativeurl }; let tempURI;
   if(options.customHeaders) {
     finalHeaders = {
       ...finalHeaders,
