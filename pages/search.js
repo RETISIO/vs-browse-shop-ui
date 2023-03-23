@@ -23,7 +23,6 @@ import { requestContructor } from '../shared/helpers/api';
 
 function Static({ data }) {
   // const i18n = useI18n();
-  console.log("datatatat",data);
   const router = useRouter();
   const {
     setOffset,

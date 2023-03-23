@@ -36,12 +36,16 @@ export function Template(props) {
     if ((contentItemObj.contentTypeId === 'resultCount:default' && props.type === 'resultCount')) {
       return <ResultCount {...props} />;
     }
-    if ((contentItemObj.contentTypeId === 'categoryDescription:custom' && props.type === 'categoryDescription')) {
+    if ((contentItemObj.contentTypeId === 'categoryDescription:custom' && props.type === 'categoryDescription')
+    || (contentItemObj.contentTypeId === 'didyoumean:custom' && props.type === 'didyoumean')) {
       return <CategoryDescription {...props} />;
     }
     if ((contentItemObj.contentTypeId === 'categoryLongDescription:custom' && props.type === 'categoryLongDescription')) {
       return <CategoryLongDescription {...props} />;
     }
+    // if ((contentItemObj.contentTypeId === 'categoryLongDescription:custom' && props.type === 'didyoumean')) {
+    //   return <CategoryLongDescription {...props} />;
+    // }
     if (contentItemObj.contentTypeId === 'htmlContent:default') {
       const data = contentItemObj.content;
       return (
