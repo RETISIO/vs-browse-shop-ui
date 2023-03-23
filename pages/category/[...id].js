@@ -55,6 +55,12 @@ function Static({ data }) {
 
   useEffect(() => {
     setOffset(0);
+    if(data?.payLoad?.productCount === 1) {
+      const product = data?.payLoad?.products[0];
+      router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);
+    } else if(data?.payLoad?.redirect) {
+      router.push(data?.payLoad?.redirectURL);
+    }
   }, [router.asPath]);
 
   return (

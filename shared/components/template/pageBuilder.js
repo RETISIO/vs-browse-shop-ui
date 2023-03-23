@@ -8,7 +8,7 @@ import FacetsMobile from './components/facetsMobile';
 import { EllipseLoader } from '../loader';
 
 export default function PageBuilder(props) {
-  const { data } = props;
+  const { data, pageType } = props;
   const [pageContentData, setPageContent] = useState(data?.page);
   // const { pageData } = usePageDataContext();
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function PageBuilder(props) {
                           {pageContentData?.segmentsMap?.middle ? (
                             <Template
                               templateData={pageContentData?.segmentsMap?.middle}
-                              type="categoryDescription"
+                              type={pageType === 'search' ? 'didyoumean' : 'categoryDescription'}
                               {...props}
                             />
                           ) : (

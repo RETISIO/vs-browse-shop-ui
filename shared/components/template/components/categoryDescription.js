@@ -49,7 +49,7 @@ export function CategoryDescription(props) {
                         className="auto-suggest-word"
                         onClick={() => navigatePage()}
                       >
-                        {searchTerm}
+                        {searchTerm?.toLocaleLowerCase()}
                       </span>
                     </span>
                   </strong>

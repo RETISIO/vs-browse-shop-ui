@@ -80,11 +80,11 @@ function Facet(props) {
                         }}
                         onClick={() => clickFilter()}
                       >
-                        {item.name}
+                        {item?.name}
                         {' '}
-                        (
-                        {item.productCount}
-                        )
+                        {item?.productCount && `(
+                        ${item?.productCount}
+                        )`}
                       </Link>
                     </li>
                   ))}
@@ -128,8 +128,8 @@ function Facet(props) {
           
         </div>
         <ul className="catalog-filter__selected list-unstyled">
-          {pageType === "search" && pageContentData?.payLoad?.categoriesSelected?.map((val) => (
-            <>
+          {pageType === "search" && pageContentData?.payLoad?.categoriesSelected?.map((val,i) => (
+            <React.Fragment key={i}>
               {
                 val.facetValues.map((item, _key) => (
                   <li
@@ -156,10 +156,10 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </>
+            </React.Fragment>
           ))}
-          {pageContentData?.payLoad?.selectedFacets?.map((val) => (
-            <>
+          {pageContentData?.payLoad?.selectedFacets?.map((val,i) => (
+            <React.Fragment key={i}>
               {
                 val.facetValues.map((item, _key) => (
                   <li
@@ -186,7 +186,7 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </>
+            </React.Fragment>
           ))}
         </ul>
       </div>
@@ -201,60 +201,65 @@ function Facet(props) {
                 <i className="icon fas fa-chevron-down"></i>
               </Accordion.Header>
               {pageContentData?.payLoad?.categories?.map((val, index) => (
-                <Accordion.Body>
-                  <Link
-                    href={{
-                          pathname: path,
-                          query: {
-                          'submit-search': encodeURI(`${searchTerm}`),
-                            t: encodeURI(`${selectedFacets}`),
-                            N: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${val.id}`),
-                          },
-                        }}
-                    onClick={() => clickFilter()}
-                  >
-                    {val.name}
-                    {' '}
-                    (
-                    {val.productCount}
-                    )
-                  </Link>
-                </Accordion.Body>
+                <React.Fragment key={index}>
+                  <Accordion.Body>
+                    <Link
+                      href={{
+                            pathname: path,
+                            query: {
+                            'submit-search': encodeURI(`${searchTerm}`),
+                              t: encodeURI(`${selectedFacets}`),
+                              N: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${val.id}`),
+                            },
+                          }}
+                      onClick={() => clickFilter()}
+                    >
+                      {val?.name}
+                      {' '}
+                      {val?.productCount && `(
+                      ${val?.productCount}
+                      )`}
+                      
+                    </Link>
+                  </Accordion.Body>
+                </React.Fragment>
                         ))}
             </Accordion.Item>
           </Accordion>
           )}
          
           {pageContentData?.payLoad?.facets?.map((value, _key) => (
-            <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
-                <Accordion.Header>
-                  {value.displayName}
-                  <i className="icon fas fa-chevron-down"></i>
-                </Accordion.Header>
-                {value?.facetValues?.map((val, index) => (
-                  <Accordion.Body>
-                    <Link
-                      href={{
-                        pathname: path,
-                        query: {
-                          'submit-search': encodeURI(`${searchTerm}`),
-                          N: encodeURI(`${selectedCategories}`),
-                          t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
-                        },
-                      }}
-                      onClick={() => clickFilter()}
-                    >
-                      {val.facetLabel}
-                      {' '}
-                      (
-                      {val.facetValueCount}
-                      )
-                    </Link>
-                  </Accordion.Body>
-                      ))}
-              </Accordion.Item>
-            </Accordion>
+            <React.Fragment key={_key}>
+              <Accordion defaultActiveKey="0">
+                <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
+                  <Accordion.Header>
+                    {value.displayName}
+                    <i className="icon fas fa-chevron-down"></i>
+                  </Accordion.Header>
+                  {value?.facetValues?.map((val, index) => (
+                    <Accordion.Body>
+                      <Link
+                        href={{
+                          pathname: path,
+                          query: {
+                            'submit-search': encodeURI(`${searchTerm}`),
+                            N: encodeURI(`${selectedCategories}`),
+                            t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
+                          },
+                        }}
+                        onClick={() => clickFilter()}
+                      >
+                        {val.facetLabel}
+                        {' '}
+                        (
+                        {val.facetValueCount}
+                        )
+                      </Link>
+                    </Accordion.Body>
+                        ))}
+                </Accordion.Item>
+              </Accordion>
+            </React.Fragment>
           ))}
         </div>
       </div>
