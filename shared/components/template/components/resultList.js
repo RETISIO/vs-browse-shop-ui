@@ -145,6 +145,8 @@ function ResultList(props) {
           isLast={index === products.length - 1}
           newLimit={() => setOffset(offset + 1)}
           index={index}
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
         />
       ))}
     </>
