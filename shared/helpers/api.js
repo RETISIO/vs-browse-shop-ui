@@ -14,6 +14,9 @@ const requestContructor = async(URL, params = '', options = {}, req = null) => {
     relativeurl = window.location.pathname;
   }
   let finalHeaders = { originurl: finalOriginURl, relativeurl }; let tempURI;
+  if(req && req.headers.correlationid) {
+    finalHeaders.correlationid = req.headers.correlationid;
+  }
   if(options.customHeaders) {
     finalHeaders = {
       ...finalHeaders,
