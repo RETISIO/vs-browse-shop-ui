@@ -22,6 +22,7 @@ export default async function getPLPData(context) {
     '',
     {},
     req,
+    asPath,
     );
   } catch (e) {
     data = {};
