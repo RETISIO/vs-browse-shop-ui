@@ -35,7 +35,7 @@ export function Index(props) {
   }, []);
 
   useEffect(() => {
-    if (getCookie('X-Auth-Token')) {
+    if (getCookie('lu')) {
       setisLogged(true);
     }
   }, []);
@@ -65,7 +65,7 @@ export function Index(props) {
     ).then((data) => {
       if(data) {
         setShow(false);
-        if (getCookie('X-Auth-Token')) {
+        if (getCookie('lu')) {
           setisLogged(true);
           if(page) {
             window.location.href = page;
