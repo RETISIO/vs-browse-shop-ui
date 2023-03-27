@@ -1,13 +1,14 @@
-import requestContructor from './api';
+/* eslint-disable import/named */
+import { requestContructor } from './api';
 
-export const formSubmitData = async (values, apiType, apiMethod, handleSuccess, handleMsg) => {
-    const res = await requestContructor.request(apiType, { method: apiMethod, data: values }).then((data) => {
-      if (data) {
-        handleSuccess(data);
-        //navigate('/');
-      }
-    }, (error) => {
-        handleMsg(true, {errorStatus: error?.status , error : error?.errors});
+export const formSubmitData = async(values, apiType, apiMethod, handleSuccess, handleMsg) => {
+  const res = await requestContructor.request(apiType, { method: apiMethod, data: values }).then((data) => {
+    if (data) {
+      handleSuccess(data);
+        // navigate('/');
+    }
+  }, (error) => {
+    handleMsg(true, { errorStatus: error?.status, error: error?.errors });
     //   error.errors.map((item) => {
     //     //let errorMsgArr = [];
     //     if (item.code) {
@@ -19,6 +20,17 @@ export const formSubmitData = async (values, apiType, apiMethod, handleSuccess, 
     //       //return setMessage(true);
     //     }
     //   });
-    });
-    return res;
-  };
+  });
+  return res;
+};
+
+export default async function getPersonalization() {
+  let data;
+  
+  try {
+    data = await requestContructor('getPersonalisation', '', {});
+  } catch (e) {
+    data = {};
+  }
+  return data;
+}

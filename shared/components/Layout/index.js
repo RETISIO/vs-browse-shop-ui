@@ -12,6 +12,7 @@ import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ComponentMap from '../componentMap';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
+import getPersonalization from '../../helpers/utils';
 
 export default function MainLayout({ data, children }) {
   const { state, updateState } = useAppContext();
@@ -23,6 +24,7 @@ export default function MainLayout({ data, children }) {
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {
     const res = await requestContructor('getCategoryList', '', {}, false);
+
     setRootCatagories(res?.payLoad?.categories);
     return res?.payLoad?.categories;
   };
@@ -33,6 +35,7 @@ export default function MainLayout({ data, children }) {
         let channelData = await requestContructor('getChannelDetails', '', {}, false);
         channelData = channelData[process.env.NEXT_PUBLIC_CHANNELDOMAIN];
         updateState({ ...state, channelData });
+        await getPersonalization();
       })();
     }
   }, []);
