@@ -6,8 +6,8 @@ import GiftCard from '../giftCard';
 
 export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad;
-  const productSkus = Object.values(pdpData.products[0].skus);
-  const productType = pdpData.products[0]?.productType;
+  const productSkus = pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus);
+  const productType = pdpData?.products[0]?.productType;
   if (productType === 'giftcard') {
     return (
       <GiftCard {...props} />
@@ -110,7 +110,7 @@ export default function ProductDescription(props) {
         </div>
         <div className="product-title-wrapper">
           <h1 className="page-title">
-            <span>{pdpData.products[0].displayName}</span>
+            <span>{pdpData?.products[0]?.displayName}</span>
             <div>
               {/* <div htmlFor="reviewsection" className="yotpo bottomLine yotpo-medium" data-bind=" attr:{ 'data-yotpo-product-id':$data.product().id()}" data-yotpo-product-id="10032" data-yotpo-element-id="2">
                 <div className="yotpo-display-wrapper">
@@ -134,7 +134,7 @@ export default function ProductDescription(props) {
               </div> */}
             </div>
           </h1>
-          <p className="page-short-description">{pdpData.products[0].description}</p>
+          <p className="page-short-description">{pdpData?.products[0]?.description}</p>
         </div>
         <div className="row product-gallery-wrapper">
           {renderGalleryImage()}
