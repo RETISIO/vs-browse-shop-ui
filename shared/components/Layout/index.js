@@ -68,10 +68,11 @@ export default function MainLayout({ data, children }) {
     }
   };
   useEffect(() => {
-    if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
-    && (miniCartDetails.itemAdded === false)) {
-      getMiniCartData();
-    }
+    // if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
+    // && (miniCartDetails.itemAdded === false)) {
+      // to get cart details on load of the module.
+    getMiniCartData();
+    // }
     if (miniCartDetails?.showMiniCart) {
       setMiniCartDetails({ ...miniCartDetails, showMiniCart: false });
     }
