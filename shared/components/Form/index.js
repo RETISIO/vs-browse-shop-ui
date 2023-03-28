@@ -28,9 +28,17 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const handleChange = event => {
     const { name, value, checked, type } = event.target
     let obj = { ...values }
-    obj = {
-      ...values,
-      [name]: type === 'checkbox' ? checked : value
+    if (name === 'postalCode') {
+      if (value.length === 6 && !value.includes('-')) {
+        obj[name] = `${value.slice(0, 5)}-${value[value.length - 1]}`
+      } else if (value.length <= 10) {
+        obj[name] = value
+      }
+    } else {
+      obj = {
+        ...values,
+        [name]: type === 'checkbox' ? checked : value
+      }
     }
     setValues(obj)
   }
