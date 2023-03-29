@@ -24,10 +24,8 @@ import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import NextImage from '../template/components/nextImage'
 import { requestContructor } from '../../helpers/api'
-import ProductTile from '../template/components/ProductTile'
 
 export default function Article(props) {
-  console.log('from Article.....props...', props)
   const Props = props
   const [load, setLoad] = useState(false)
   const [productsData, setProductsData] = useState({})
@@ -42,20 +40,27 @@ export default function Article(props) {
       method: 'POST',
       data: { productIds: [productId] }
     }).then(res => {
-      console.log('productId..,res.', productId, res)
-
+      //   console.log('productId..,res.', productId, res)
       if (configValues.buyProduct && res.payLoad && res.payLoad.products) {
         configValues.products = res.payLoad.products
         setProductsData({
           configValues
-          //   settings
         })
         setLoad(true)
       }
     })
-
-    // console.log(configValues)
   }, [])
+
+  const handlePrint = () => {
+    const backupContent = document.body.innerHTML
+    const printContent = document.getElementsByClassName(
+      'cooking-instruction'
+    )[0].innerHTML
+    document.body.innerHTML = printContent
+    window.print()
+    document.body.innerHTML = backupContent
+  }
+
   return (
     <>
       {load && (
@@ -66,21 +71,26 @@ export default function Article(props) {
                 alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
                 className='item-thumb img-responsive'
                 src={`${process.env.NEXT_PUBLIC_IMAGEPATH}${
-                  value?.skus?.[value?.defaultSkuId]?.media?.smallImg
+                  value?.skus?.[value?.defaultSkuId]?.media?.largeImg
                 }`}
                 height={262}
                 width={262}
               />
-
-              <a
+              <Link
                 className='btn btn-primary btn-block btn-buy'
                 id='btnBuyNow'
-                href='/products/quail-bacon-appetizers/10203'
+                href={`/products/${value?.displayName
+                  ?.toLowerCase()
+                  ?.replace(/ /g, '-')}/${value?.productId}`}
               >
                 Buy Now
-              </a>
-              <button className='btn btn-primary btn-inverse btn-print'>
+              </Link>
+              <button
+                className='btn btn-primary btn-inverse btn-print'
+                onClick={handlePrint}
+              >
                 <i className='icon icon-left fas fa-print'></i>
+                Print
               </button>
               <div className='btn-group'>
                 <a
@@ -88,6 +98,7 @@ export default function Article(props) {
                   href='mailto:?subject=Bacon Wrapped Quail Appetizers&amp;body=Check out these cooking instructions from Allen Brothers: https://www.allenbrothers.com/article/bacon-wrapped-quail-appetizers/9'
                 >
                   <i className='icon icon-left fas fa-share-square'></i>
+                  Share
                 </a>
               </div>
             </div>
