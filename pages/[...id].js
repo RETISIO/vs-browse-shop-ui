@@ -24,7 +24,6 @@ import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../shared/components/componentMap'
 
 function Static({ data }) {
-  console.log('data....', data)
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext()
   const { setShow } = useAppContext()

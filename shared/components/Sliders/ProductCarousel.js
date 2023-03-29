@@ -25,7 +25,6 @@ import { requestContructor } from '../../helpers/api'
 import ProductTile from '../template/components/ProductTile'
 
 export default function ProductCarousel(props) {
-  console.log('from ProductCarousel.....props...', props)
   const Props = props
   const [load, setLoad] = useState(false)
   const [productsData, setProductsData] = useState({})
@@ -86,8 +85,6 @@ export default function ProductCarousel(props) {
         setLoad(true)
       }
     })
-
-    console.log(configValues)
   }, [])
   return (
     <>
