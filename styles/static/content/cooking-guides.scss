@@ -26,3 +26,159 @@
         color: transparent;
     }
 // }
+
+
+.related-products-section {
+	background-color: #F5F5F5;
+	padding-bottom: 20px;
+
+	h1 {
+		margin: 40px 0 35px;
+	}
+}
+
+.add-to-cart.btn {
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 0.63px;
+	line-height: 28px;
+
+	@media screen and (max-width: $screen-xs-max) {
+		display: block;
+		width: 100%;
+	}
+}
+
+.panel-group .panel {
+	margin-bottom: 16px;
+}
+
+
+/*Added for ALLN-3713-1969 starts here*/
+.cooking-instruction-caption{
+    width:70%;    
+}
+/*Added for ALLN-3713-1969 ends here*/
+
+
+
+@media screen and (min-width: 992px) {
+	h1 {
+		max-width: 700px;
+	}
+	
+}
+@media screen and (min-width: 1200px) {
+	h1 {
+		max-width: 900px;
+	}
+}
+.cooking-instruction-buttons {
+	position:absolute;
+    right:0px;
+    top:0px;
+    #btnBuyNow{
+        margin-top:15px;
+    }
+}
+.cooking-instruction-buttons .btn-group {
+	margin-left: 15px;
+	position: static;
+}
+.cooking-instruction-buttons .btn-print,
+.cooking-instruction-buttons .btn-share {
+	border-width: 1px;
+	font-weight: 400;
+	min-width: 92px;
+	padding: 4px 10px;
+}
+.cooking-instruction-buttons .btn-buy {
+	font-size: 15px;
+	line-height: 30px;
+	margin-bottom: 20px;
+	color: #fff;
+}
+
+.special-price {
+	color: #A41F1F;
+	font-weight: 500;
+	white-space: nowrap;
+}
+.badge {
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 400;
+}
+.badge-new {
+	background-color: #D3A964;
+}
+.usda-prime-logo {
+	position: absolute;
+	z-index: 10;
+}
+
+/*Added for ALLN-3713-1969 starts here*/
+
+.cooking-description{
+    width:72%;
+}
+
+.cooking-instruction{
+	position:relative;
+	margin-bottom:15%;
+}
+
+@media (min-width: 768px) {
+	.cooking-instruction {
+		min-height: 300px;
+	}
+}
+
+@media (min-width: 1024px) 
+  and (max-width: 1199px)  {
+       .cooking-instruction-caption{
+           width: 65%;
+       }
+       .cooking-instruction{
+           position:relative;
+           margin-bottom: 25%;
+       }
+       .cooking-instruction-buttons{
+           top:0px;
+       }
+      
+       .cooking-description{
+            width:65%;
+        }
+}
+
+@media (min-width:768px) and (max-width:1023px){
+	.cooking-instruction-caption{
+		width:97%;
+	}
+	
+	.cooking-description{
+		width:100%;
+	}
+	.cooking-instruction-buttons{
+		position:unset;
+		img{
+			width:100%;
+		}
+	}
+	
+}
+    @media(max-width:767px){
+        .cooking-instruction-caption{
+            width:100%;
+        }
+        .cooking-description{
+            width:100%;
+        }
+        .cooking-instruction-buttons{
+            position:unset;
+            img{
+                width:100%;
+            }
+        }
+    }
