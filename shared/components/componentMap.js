@@ -13,6 +13,6 @@ const ComponentMap = {
   'imageCarousel:default': ImageCarousel,
   'productCarousel:default': ProductCarousel,
   'contactUsForm:custom': ContactUs,
-  'catalogRequestForm:custom': RequestCatalog
+  'catalogRequestForm:custom': RequestCatalog,
 };
 export default ComponentMap;

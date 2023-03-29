@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <Listract />
     </SSRProvider>
   );
