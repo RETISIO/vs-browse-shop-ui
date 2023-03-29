@@ -39,8 +39,15 @@ export default function NoResult ({ data }) {
   );
 }
 
-NoResult.getInitialProps = async () => {
-  const data = await requestContructor('static/noresult', '', {});
+NoResult.getInitialProps = async (context) => {
+  const { req, asPath } = context;
+  const data = await requestContructor(
+    'static/noresult',
+    '',
+    {},
+    req,
+    asPath,
+  );
   return {
     data,
   };
