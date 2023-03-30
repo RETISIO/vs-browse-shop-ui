@@ -1,0 +1,207 @@
+.home-header-container #header {
+  .header-content-redesign {
+    .container-navmenubar-redesign {
+      .header-content-inner-redesign {
+        background-color: #575756;
+      }
+    }
+  }
+  
+  #header-1-redesign {
+    .search-box-redesign {
+      .header-search-form-redesign {
+        height: 10px;
+      }
+  
+      .input-group {
+        width: 100%;
+        padding: 5px 15px;
+        line-height: 10px;
+        background-color: $colorWhite;
+        background-position: 100% center;
+        border-radius: 50px;
+        border: 1px solid #575756;
+        margin: 10px;
+  
+        &::placeholder {
+          color: color(#575756 a(0.8));
+          letter-spacing: 1.5px;
+        }
+  
+        .ab-search-redesign {
+          width: 100%;
+          border: none;
+          border-right: none;
+          padding: 15px;
+          height: 5px;
+          border-radius: 5px 0 0 5px;
+          outline: none;
+          color: #9dbfaf;
+        }
+      }
+    }
+  }
+  
+  .ab-searchProducts-redesign {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: #771e14;
+    padding: 1px;
+    border-radius: 0 50px 50px 0;
+  
+    .icon.icon-search.fa.fa-search {
+      padding: 1rem;
+      color: $colorWhite;
+    }
+  }
+  
+  .icon-redesign {
+    margin: 10px;
+    .header-actions-redesign {
+      .icon {
+        font-size: 16px;
+      }
+  
+      .label-redesign {
+        padding: 10px;
+  
+        span {
+          color: $colorWhite;
+        }
+      }
+  
+      .btn-primary {
+        background-color: none !important;
+        border-color: none !important;
+      }
+  
+      .icon {
+        color: $colorWhite;
+        background-color: none;
+      }
+    }
+  }
+   
+  @media screen and (min-width: 992px) {
+    .home-header-container .head-actn {
+      font-size: 12px;
+      margin: 5px 5px 5px 5px;
+      align-items: center;
+      float: right;
+    }
+  }
+  
+  // @media (min-width: 1200px) {
+  //   #logoMain {
+  //     margin-right: 8px;
+  //   }
+  // }
+  
+  // @media screen and (min-width: 1201px) and (max-width: 1366px) {
+  //   #logoMain {
+  //     margin-right: 8px;
+  //   }
+  // }
+  
+  // @media (min-width: 1200px) {
+  //   .header-sticky.is_stuck {
+  //     #logoMain {
+  //       margin-right: 8px;
+  //     }
+  //   }
+  // }
+  
+  // @media screen and (min-width: 1201px) and (max-width: 1366px) {
+  //   .header-sticky.is_stuck {
+  //     #logoMain {
+  //       margin-right: 8px;
+  //     }
+  //   }
+  // }
+  
+  #logo-redesign {
+    img {
+      margin: 10px 15px 15px 25px;
+  
+      @media screen and (min-width: $screen-md-min) {
+        height: 33px;
+        // width: 308px;
+      }
+  
+      @media screen and (min-width: 768px) {
+        height: 33px;
+        // width: 308px;
+      }
+      @media (min-width: 320px) and (max-width: 480px) {
+        height: 42px;
+        width: 70%;
+      }
+  
+      @media (min-width: 500px) and (max-width: 516px) {
+        height: auto;
+        width: 86%;
+      }
+    }
+  }
+  
+  .home-header-container {
+    @media (min-width: 320px) and (max-width: 480px) {
+      .header {
+        &-sticky {
+          background-color: $colorWhite;
+          ;
+          z-index: $zindex-navbar;
+        }
+      }
+    }
+  
+    @media (min-width: 500px) and (max-width: 516px) {
+      .header {
+        &-sticky {
+          background-color: $colorWhite;
+          ;
+          z-index: $zindex-navbar;
+        }
+      }
+    }
+  
+    @media screen and (min-width: 992px) {
+      .header {
+        &-sticky {
+          background-color: transparent;
+          z-index: $zindex-navbar;
+        }
+      }
+    }
+  
+    @media screen and (min-width: 768px) {
+      .header {
+        &-sticky {
+          background-color: transparent;
+          z-index: $zindex-navbar;
+        }
+      }
+    }
+  
+    @media screen and (min-width: 1201px) and (max-width: 1366px) {
+      .header {
+        &-sticky {
+          background-color: transparent;
+          z-index: $zindex-navbar;
+        }
+      }
+    }
+  }
+  
+  // @media screen and (min-width: 1201px) and (max-width: 1366px) {
+  //   .home-header-container #header {
+  //     background-color: transparent;
+  //     display: block;
+  //     position: absolute;
+  //     width: 100%;
+  //   }
+  // }
+  
+}
