@@ -1,6 +1,8 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable operator-linebreak */
 /* eslint-disable space-before-function-paren */
-/* eslint-disable linebreak-style */
 /* eslint-disable no-unused-vars */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-shadow */
@@ -11,7 +13,6 @@
 /* eslint-disable jsx-quotes */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable max-len */
-/* eslint-disable linebreak-style */
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -34,6 +35,26 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
       } else if (value.length <= 10) {
         obj[name] = value
       }
+    } else if (name === 'phone') {
+      let val = value
+      if (value.length > 12) {
+        val = value.slice(0, 12)
+      }
+      if (value.length > 10 && value.length <= 12) {
+        if (val.charAt(0) !== '(') {
+          val = `(${value.slice(0, 3)}${value.slice(3, value.length)}`
+        }
+        if (val.charAt(4) !== ')') {
+          if (value.charAt(0) === '(') {
+            val = `${value.slice(0, 4)})${value.slice(4, value.length)}`
+          } else {
+            val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
+          }
+        }
+        obj[name] = val.slice(0, 12)
+      } else {
+        obj[name] = val
+      }
     } else {
       obj = {
         ...values,
@@ -46,6 +67,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const validate = values => {
     let errors = {}
     errors = validator(values, formType, [], [])
+    console.log('from validate.....errors...', errors)
     setFormErrors(errors)
     if (Object.keys(errors).length === 0) {
       return true
@@ -344,7 +366,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
               className='btn btn-action btn-action-md btn-action-primary'
               type='submit'
             >
-              <Trans>Submit</Trans>
+              <Trans>Submit....</Trans>
             </button>
           </div>
         )}
