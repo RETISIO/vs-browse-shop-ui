@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import MobileHeaderLogo, { MobileNavBar } from '../header/mobile/mobileHeader';
+import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
 import MiniCartIcon from '../header/miniCartIcon';
 
 class RedesignHeader extends Component {
     constructor(props) {
         super(props);
+        this.setStick = this.setStick.bind(this);
         this.state = {
             sticky: '',
             mobileNavMenu: false,
@@ -14,6 +15,33 @@ class RedesignHeader extends Component {
             mobileSearchMenu: false,
         };
     }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.setStick);
+        const mobileNavMenuEl = document.querySelector('#mobile-nav-menu-toggle');
+        mobileNavMenuEl.addEventListener('click', this.mobileNavMenuHandler);
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.setStick);
+        const mobileNavMenuEl = document.querySelector('#mobile-nav-menu-toggle');
+        mobileNavMenuEl.removeEventListener('click', this.mobileNavMenuHandler);
+    }
+    
+    setStick() {
+    if (window.scrollY >= 50) {
+        if (!this.state.sticky) {
+        this.setState({ sticky: true });
+        }
+    } else if (this.state.sticky) {
+        this.setState({ sticky: false });
+        }
+    }
+    
+    mobileNavMenuHandler = () => {
+    const { mobileNavMenu } = this.state;
+    this.setState({ mobileNavMenu: !mobileNavMenu });
+    };
 
     toggleMobileSearchBox = (event) => {
         event.preventDefault();
