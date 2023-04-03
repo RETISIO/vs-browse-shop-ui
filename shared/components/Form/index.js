@@ -67,7 +67,6 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const validate = values => {
     let errors = {}
     errors = validator(values, formType, [], [])
-    console.log('from validate.....errors...', errors)
     setFormErrors(errors)
     if (Object.keys(errors).length === 0) {
       return true
@@ -366,7 +365,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
               className='btn btn-action btn-action-md btn-action-primary'
               type='submit'
             >
-              <Trans>Submit....</Trans>
+              <Trans>Submit</Trans>
             </button>
           </div>
         )}
