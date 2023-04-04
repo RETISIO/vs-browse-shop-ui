@@ -65,25 +65,6 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
           fieldsObj[name] = newVal.join('')
         }
       }
-      // let val = value
-      // if (value.length > 12) {
-      //   val = value.slice(0, 12)
-      // }
-      // if (value.length > 10 && value.length <= 12) {
-      //   if (val.charAt(0) !== '(') {
-      //     val = `(${value.slice(0, 3)}${value.slice(3, value.length)}`
-      //   }
-      //   if (val.charAt(4) !== ')') {
-      //     if (value.charAt(0) === '(') {
-      //       val = `${value.slice(0, 4)})${value.slice(4, value.length)}`
-      //     } else {
-      //       val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
-      //     }
-      //   }
-      //   fieldsObj[name] = val.slice(0, 12)
-      // } else {
-      //   fieldsObj[name] = val
-      // }
     } else if (name === 'city') {
       const regEx = /^[a-zA-Z~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
       if (regEx.test(value)) {
