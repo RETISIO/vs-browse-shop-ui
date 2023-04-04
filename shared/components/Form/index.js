@@ -46,9 +46,9 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
         })
       }
       let newVal = []
-      if (regEx.test(filteredVal.join(''))) {
+      if (filteredVal.length > 0 && regEx.test(filteredVal.join(''))) {
         if (filteredVal.length < 10) {
-          fieldsObj[name] = value
+          fieldsObj[name] = filteredVal.join('')
         } else {
           newVal = filteredVal.map((ch, index) => {
             if (index === 0) {
