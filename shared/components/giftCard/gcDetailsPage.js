@@ -28,6 +28,12 @@ export default function GcDetailsPage(props) {
       electronicGCskuArr.push(item);
     }
   });
+  if (physicalGCskuArr.length > 0) {
+    physicalGCskuArr.sort((a, b) => a.skuId.replace(/[^\d.]/g, '') - b.skuId.replace(/[^\d.]/g, ''));
+  }
+  if (electronicGCskuArr.length > 0) {
+    electronicGCskuArr.sort((a, b) => a.skuId.replace(/[^\d.]/g, '') - b.skuId.replace(/[^\d.]/g, ''));
+  }
   const isAvailableGC = electronicGCskuArr.length > 0 ? 'electronicGC' : 'physicalGC';
   const [selectedGC, setSelectedGC] = useState(isAvailableGC);
   const handleGCTypeClick = (event) => {
