@@ -35,25 +35,55 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
         fieldsObj[name] = value
       }
     } else if (name === 'phone') {
-      let val = value
-      if (value.length > 12) {
-        val = value.slice(0, 12)
-      }
-      if (value.length > 10 && value.length <= 12) {
-        if (val.charAt(0) !== '(') {
-          val = `(${value.slice(0, 3)}${value.slice(3, value.length)}`
-        }
-        if (val.charAt(4) !== ')') {
-          if (value.charAt(0) === '(') {
-            val = `${value.slice(0, 4)})${value.slice(4, value.length)}`
-          } else {
-            val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
+      const regEx = /^[\d]{0,10}$/
+      // const regEx = /^[\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})]{0,10}$/
+      const filteredVal = []
+      if (value.length > 0) {
+        value.split('').forEach(ch => {
+          if (ch !== '(' && ch !== ')' && ch !== '-') {
+            filteredVal.push(ch)
           }
-        }
-        fieldsObj[name] = val.slice(0, 12)
-      } else {
-        fieldsObj[name] = val
+        })
       }
+      let newVal = []
+      if (regEx.test(filteredVal.join(''))) {
+        if (filteredVal.length < 10) {
+          fieldsObj[name] = value
+        } else {
+          newVal = filteredVal.map((ch, index) => {
+            if (index === 0) {
+              newVal = `(${ch}`
+            } else if (index > 1 && index < 3) {
+              newVal = `${ch})`
+            } else if (index > 4 && index < 6) {
+              newVal = `${ch}-`
+            } else {
+              newVal = ch
+            }
+            return newVal
+          })
+          fieldsObj[name] = newVal.join('')
+        }
+      }
+      // let val = value
+      // if (value.length > 12) {
+      //   val = value.slice(0, 12)
+      // }
+      // if (value.length > 10 && value.length <= 12) {
+      //   if (val.charAt(0) !== '(') {
+      //     val = `(${value.slice(0, 3)}${value.slice(3, value.length)}`
+      //   }
+      //   if (val.charAt(4) !== ')') {
+      //     if (value.charAt(0) === '(') {
+      //       val = `${value.slice(0, 4)})${value.slice(4, value.length)}`
+      //     } else {
+      //       val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
+      //     }
+      //   }
+      //   fieldsObj[name] = val.slice(0, 12)
+      // } else {
+      //   fieldsObj[name] = val
+      // }
     } else if (name === 'city') {
       const regEx = /^[a-zA-Z~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
       if (regEx.test(value)) {
