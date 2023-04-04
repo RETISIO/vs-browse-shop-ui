@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { getCookie } from '@retisio/sf-api';
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
+import { useAppContext } from '../../context/appContext';
 
 export default function SkuLineItem(props) {
   const { skuItem, productId } = props;
@@ -10,6 +12,8 @@ export default function SkuLineItem(props) {
   const weight = skuItem.skuDetails?.additionalDetails?.weight || '';
   const thickness = skuItem.skuDetails?.additionalDetails?.thickness || '';
   const options = `${pieces} ${weight} ${thickness}`;
+  const { setShow } = useAppContext();
+
   const [initialQnty, setInitialQnty] = useState(1);
   const addToBagHandler = (event) => {
     event.preventDefault();
@@ -24,17 +28,21 @@ export default function SkuLineItem(props) {
       ],
     };
     const result = addToBagDetails(pdp);
-    result.then( (data) => {
-      setMiniCartDetails({...miniCartDetails, itemAdded: true});
+    result.then((data) => {
+      setMiniCartDetails({ ...miniCartDetails, itemAdded: true });
     });
   };
 
   const addToWishLisrHandler = (e) => {
-    addToWishList({
-      skuId: skuItem.skuId,
-      productId,
-      quantity: '1',
-    });
+    if (getCookie('lu')) {
+      addToWishList({
+        skuId: skuItem.skuId,
+        productId,
+        quantity: '1',
+      });
+    }else{
+      setShow(true);
+    }
   };
   const updateQntyObj = (value) => {
     if (value > 0) {
