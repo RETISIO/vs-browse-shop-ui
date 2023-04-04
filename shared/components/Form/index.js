@@ -26,14 +26,13 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const [formerrors, setFormErrors] = useState({})
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const handleChange = event => {
-    const { name, value, checked, type } = event.target
-    let obj = { ...values }
+  const validateFields = (name, value, checked, type, obj) => {
+    let fieldsObj = obj
     if (name === 'postalCode') {
       if (value.length === 6 && !value.includes('-')) {
-        obj[name] = `${value.slice(0, 5)}-${value[value.length - 1]}`
+        fieldsObj[name] = `${value.slice(0, 5)}-${value[value.length - 1]}`
       } else if (value.length <= 10) {
-        obj[name] = value
+        fieldsObj[name] = value
       }
     } else if (name === 'phone') {
       let val = value
@@ -51,16 +50,28 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
             val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
           }
         }
-        obj[name] = val.slice(0, 12)
+        fieldsObj[name] = val.slice(0, 12)
       } else {
-        obj[name] = val
+        fieldsObj[name] = val
+      }
+    } else if (name === 'city') {
+      const regEx = /^[a-zA-Z~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
+      if (regEx.test(value)) {
+        fieldsObj[name] = value
       }
     } else {
-      obj = {
+      fieldsObj = {
         ...values,
         [name]: type === 'checkbox' ? checked : value
       }
     }
+    return fieldsObj
+  }
+  const handleChange = event => {
+    const { name, value, checked, type } = event.target
+    let obj = { ...values }
+    // console.log('from handleChange.....obj...', obj)
+    obj = validateFields(name, value, checked, type, obj)
     setValues(obj)
   }
 
