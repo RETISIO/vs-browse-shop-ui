@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
-import MiniCartIcon from './miniCartIcon';
+import MiniCartIcon from '../header/miniCartIcon';
 import Navbar from './navbar';
 // import SearchAheadResults from './searchAheadResults';
 // import HeaderAccountActionLinks from './headerAccountActionLinks';
@@ -41,11 +41,11 @@ class RedesignHeader extends Component {
         }
     }
 
-    searchHandleChange = (event) => {
-        const { value } = event.target;
-        this.setState({ searchText: value });
-        this.props.searchAheadChangeHandler(value);
-      };
+    // searchHandleChange = (event) => {
+    //     const { value } = event.target;
+    //     this.setState({ searchText: value });
+    //     this.props.searchAheadChangeHandler(value);
+    //   };
 
     mobileNavMenuHandler = () => {
         const { mobileNavMenu } = this.state;
@@ -111,8 +111,8 @@ class RedesignHeader extends Component {
                                                                                             data-search-min="1"
                                                                                             autoComplete="off"
                                                                                             placeholder="Type your desired meat or dish to find the best"
-                                                                                            onChange={this.searchHandleChange}
-                                                                                            value={searchText}
+                                                                                            // onChange={this.searchHandleChange}
+                                                                                            // value={searchText}
                                                                                             name="submit-search"
                                                                                         />
                                                                                         <div className="btn-new searchProducts ab-searchProducts-redesign">
