@@ -3,7 +3,7 @@ import React from 'react';
 export default function MobileHeaderLogo() {
   return (
     <div className="header-logo-mobile visible-xs mobile-header">
-      <div className="header-content text-center" style={{ backgroundColor: '#575756' }}>
+      <div className="header-content text-center" style={{ backgroundColor: '#363636' }}>
         <a id="logo" href="/">
           <img alt="Allen Brothers" src="https://www.allenbrothers.com/file/v4970033961931790421/general/Allen-Brothers-Logo-white-528x72.png" />
         </a>
@@ -15,7 +15,7 @@ export default function MobileHeaderLogo() {
 export function MobileNavBar(props) {
   const { toggleMobileSearchBox, mobileSearchMenu } = props;
   return (
-    <nav className="navbar visible-xs mobile-header" style={{ backgroundColor: '#575756' }}>
+    <nav className="navbar visible-xs mobile-header" style={{ backgroundColor: '#363636' }}>
       <div className="">
         <div className="navbar-header navbar-mobile">
           <div className="d-flex justify-space-between align-items-center">
@@ -26,7 +26,7 @@ export function MobileNavBar(props) {
               <span className="icon-bar"></span>
             </button>
             <ul className="header-actions-redesign-mobile d-flex flex-no-wrap align-items-center">
-              <li>
+              <li style={{listStyleType: 'none'}}>
                 <a id="accountlink" data-bind="click: openMobileAccountNav" className="js-mobile-menu-toggle outline-change" href="#" data-target="#myAccountNav">
                   <i className="icon icon-user fas fa-user-circle"></i>
                 </a>

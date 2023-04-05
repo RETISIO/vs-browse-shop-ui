@@ -18,6 +18,7 @@ import MobileNavLevelOneItem from './mobile/mobileNav-level-1-item';
 import SearchAheadResults from './searchAheadResults';
 import MiniCartIcon from './miniCartIcon';
 import RedesignHeader from '../redesignHeader';
+import PromoBanner from '../promoBanner';
 
 class HomeHeader extends Component {
   constructor(props) {
@@ -112,10 +113,17 @@ class HomeHeader extends Component {
       showSearchAheadDataMenu = 'show';
     }
     const isphoneNumOpen = phoneNumMenu ? 'open' : '';
-    const newHeader = true;
-    if(newHeader){
+    
+    const redesignHeader = true;
+    if(redesignHeader){
       return <RedesignHeader {...this.props}/>
     }
+
+    const promoBanner = true;
+    if(PromoBanner){
+      return <PromoBanner {...this.props}/>
+    }
+
     return (
       <div className="home-header-container">
         <main className={`page-row page-row-expanded ${isHomePageContainer}`}>

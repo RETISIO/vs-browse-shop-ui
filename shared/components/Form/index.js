@@ -26,41 +26,69 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const [formerrors, setFormErrors] = useState({})
   const [isSubmit, setIsSubmit] = useState(false)
 
-  const handleChange = event => {
-    const { name, value, checked, type } = event.target
-    let obj = { ...values }
+  const validateFields = (name, value, checked, type, obj) => {
+    let fieldsObj = obj
     if (name === 'postalCode') {
       if (value.length === 6 && !value.includes('-')) {
-        obj[name] = `${value.slice(0, 5)}-${value[value.length - 1]}`
+        fieldsObj[name] = `${value.slice(0, 5)}-${value[value.length - 1]}`
       } else if (value.length <= 10) {
-        obj[name] = value
+        fieldsObj[name] = value
       }
     } else if (name === 'phone') {
-      let val = value
-      if (value.length > 12) {
-        val = value.slice(0, 12)
-      }
-      if (value.length > 10 && value.length <= 12) {
-        if (val.charAt(0) !== '(') {
-          val = `(${value.slice(0, 3)}${value.slice(3, value.length)}`
-        }
-        if (val.charAt(4) !== ')') {
-          if (value.charAt(0) === '(') {
-            val = `${value.slice(0, 4)})${value.slice(4, value.length)}`
-          } else {
-            val = `(${value.slice(0, 3)})${value.slice(3, value.length)}`
+      const regEx = /^[\d]{0,10}$/
+      // const regEx = /^[\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})]{0,10}$/
+      const filteredVal = []
+      if (value.length > 0) {
+        value.split('').forEach(ch => {
+          if (ch !== '(' && ch !== ')' && ch !== '-') {
+            filteredVal.push(ch)
           }
-        }
-        obj[name] = val.slice(0, 12)
+        })
       } else {
-        obj[name] = val
+        fieldsObj[name] = value.trim()
+      }
+      let newVal = []
+      if (filteredVal.length > 0 && regEx.test(filteredVal.join(''))) {
+        if (filteredVal.length < 10) {
+          fieldsObj[name] = filteredVal.join('')
+        } else {
+          newVal = filteredVal.map((ch, index) => {
+            if (index === 0) {
+              newVal = `(${ch}`
+            } else if (index > 1 && index < 3) {
+              newVal = `${ch})`
+            } else if (index > 4 && index < 6) {
+              newVal = `${ch}-`
+            } else {
+              newVal = ch
+            }
+            return newVal
+          })
+          fieldsObj[name] = newVal.join('')
+        }
+      }
+    } else if (name === 'city') {
+      const regEx = /^[a-zA-Z~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
+      if (regEx.test(value)) {
+        fieldsObj[name] = value
+      }
+    } else if (name === 'address1' || name === 'address2') {
+      const regEx = /^[a-zA-Z0-9~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,35}$/
+      if (regEx.test(value)) {
+        fieldsObj[name] = value
       }
     } else {
-      obj = {
+      fieldsObj = {
         ...values,
         [name]: type === 'checkbox' ? checked : value
       }
     }
+    return fieldsObj
+  }
+  const handleChange = event => {
+    const { name, value, checked, type } = event.target
+    let obj = { ...values }
+    obj = validateFields(name, value.trim(), checked, type, obj)
     setValues(obj)
   }
 

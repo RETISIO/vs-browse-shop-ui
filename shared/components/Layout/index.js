@@ -2,7 +2,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useI18n } from 'next-localization';
@@ -10,14 +9,6 @@ import { useRouter } from 'next/router';
 import { getCookie } from '@retisio/sf-api';
 // import { Layout } from '@retisio/sf-ui';
 import LayoutShared from '../layoutShared/index';
-=======
-import React, { useState, useEffect } from 'react'
-import Head from 'next/head'
-import { useI18n } from 'next-localization'
-import { useRouter } from 'next/router'
-import { getCookie } from '@retisio/sf-api'
-import { Layout } from '@retisio/sf-ui'
->>>>>>> origin/ab-dev
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../../context/appContext'

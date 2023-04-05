@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { getCookie } from '@retisio/sf-api';
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
+import { useAppContext } from '../../context/appContext';
 
 export default function SkuLineItem(props) {
   const { skuItem, productId } = props;
@@ -10,6 +12,8 @@ export default function SkuLineItem(props) {
   const weight = skuItem.skuDetails?.additionalDetails?.weight || '';
   const thickness = skuItem.skuDetails?.additionalDetails?.thickness || '';
   const options = `${pieces} ${weight} ${thickness}`;
+  const { setShow } = useAppContext();
+
   const [initialQnty, setInitialQnty] = useState(1);
   const addToBagHandler = (event) => {
     event.preventDefault();
@@ -24,17 +28,21 @@ export default function SkuLineItem(props) {
       ],
     };
     const result = addToBagDetails(pdp);
-    result.then( (data) => {
-      setMiniCartDetails({...miniCartDetails, itemAdded: true});
+    result.then((data) => {
+      setMiniCartDetails({ ...miniCartDetails, itemAdded: true });
     });
   };
 
   const addToWishLisrHandler = (e) => {
-    addToWishList({
-      skuId: skuItem.skuId,
-      productId,
-      quantity: '1',
-    });
+    if (getCookie('lu')) {
+      addToWishList({
+        skuId: skuItem.skuId,
+        productId,
+        quantity: '1',
+      });
+    }else{
+      setShow(true);
+    }
   };
   const updateQntyObj = (value) => {
     if (value > 0) {
@@ -55,6 +63,47 @@ export default function SkuLineItem(props) {
     }
     updateQntyObj(updatedQnty);
   };
+  const renderQtyContent = () => {
+    if (skuItem?.skuDetails?.hasStock && skuItem?.skuDetails?.inventoryStatusLabel !== "Out Of Stock") {
+      return (
+        <div className="input-group">
+          <span className="input-group-btn">
+            <button
+              className="btn js-counter__btn qntyChangeBtn"
+              type="button"
+              onClick={(e) => handleQntyClick(e, 'decrement')}
+            >
+              <i className="fa fa-minus" aria-hidden="true"></i>
+            </button>
+          </span>
+          <input
+            className="form-control js-counter__input"
+            type="number"
+            min="0"
+            max="999"
+            value={initialQnty}
+            onChange={handleChange}
+            maxLength="3"
+            name="skuqntyItem"
+          />
+          <span className="input-group-btn">
+            <button
+              className="btn js-counter__btn qntyChangeBtn"
+              type="button"
+              onClick={(e) => handleQntyClick(e, 'increment')}
+            >
+              <i className="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      )
+    }
+    return (
+      <div className="input-group">
+        <span className="text-danger">Out of Stock</span>
+      </div>
+    )
+  }
   return (
     <tr>
       <td>
@@ -83,39 +132,10 @@ export default function SkuLineItem(props) {
               <a href="#" data-toggle="modal" data-backdrop="static" data-target="#backInStockNotificationModal" style={{ fontSize: '13px', marginBottom: '10px' }}>Notify Me When In Stock</a>
             </div>
           </td> */}
-      <td className="v-middle hidden-xs">
+      <td className="hidden-xs">
         <div className="cell-content">
           <div className="product-cart__counter counter js-counter">
-            <div className="input-group">
-              <span className="input-group-btn">
-                <button
-                  className="btn js-counter__btn qntyChangeBtn"
-                  type="button"
-                  onClick={(e) => handleQntyClick(e, 'decrement')}
-                >
-                  <i className="fa fa-minus" aria-hidden="true"></i>
-                </button>
-              </span>
-              <input
-                className="form-control js-counter__input"
-                type="number"
-                min="0"
-                max="999"
-                value={initialQnty}
-                onChange={handleChange}
-                maxLength="3"
-                name="skuqntyItem"
-              />
-              <span className="input-group-btn">
-                <button
-                  className="btn js-counter__btn qntyChangeBtn"
-                  type="button"
-                  onClick={(e) => handleQntyClick(e, 'increment')}
-                >
-                  <i className="fa fa-plus" aria-hidden="true"></i>
-                </button>
-              </span>
-            </div>
+            {renderQtyContent()}
           </div>
         </div>
       </td>
