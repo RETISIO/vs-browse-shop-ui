@@ -84,12 +84,15 @@ export function Index(props) {
         if (getCookie('lu')) {
           setisLogged(true);
           const isMergeCart = !!getCookie('arcCartId');
+          console.log('isMergeCart================================>', isMergeCart);
           if (isMergeCart) {
+            console.log('In merge cart if conditino================================>', isMergeCart);
             const result = triggerMergeCart();
             result.then((res) => {
               if (res.status == 200) { reloadToPath(); }
             });
           } else {
+            console.log('In merge cart else conditino================================>', isMergeCart);
             reloadToPath();
           }
         }
