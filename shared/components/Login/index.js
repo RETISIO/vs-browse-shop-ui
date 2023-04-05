@@ -73,31 +73,25 @@ export function Index(props) {
     }
   };
 
-  const initializeMergeCart = () => {
-    const isMergeCart = !!getCookie('arcCartId');
-    console.log('isMergeCart================================>', isMergeCart);
-    if (isMergeCart) {
-      console.log('In merge cart if conditino================================>', isMergeCart);
-      const result = triggerMergeCart();
-      result.then((res) => {
-        if (res.status == 200) { reloadToPath(); }
-      });
-    }
-  }
-
   const handleSubmitForm = async(data) => {
     const loginData = await requestContructor(
       'signIn',
       '',
       { method: 'POST', data },
     ).then((data) => {
-      initializeMergeCart();
       if(data) {
         setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
-          console.log('In merge cart else conditino================================>');
-          reloadToPath();
+          const isMergeCart = !!getCookie('arcCartId');
+          if (isMergeCart) {
+            const result = triggerMergeCart();
+            result.then((res) => {
+              if (res.status == 200) { reloadToPath(); }
+            });
+          } else {
+            reloadToPath();
+          }
         }
       }
     }, (error) => {
