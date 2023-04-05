@@ -44,6 +44,8 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
             filteredVal.push(ch)
           }
         })
+      } else {
+        fieldsObj[name] = value.trim()
       }
       let newVal = []
       if (filteredVal.length > 0 && regEx.test(filteredVal.join(''))) {
@@ -86,8 +88,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const handleChange = event => {
     const { name, value, checked, type } = event.target
     let obj = { ...values }
-    // console.log('from handleChange.....obj...', obj)
-    obj = validateFields(name, value, checked, type, obj)
+    obj = validateFields(name, value.trim(), checked, type, obj)
     setValues(obj)
   }
 
