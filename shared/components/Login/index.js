@@ -11,6 +11,7 @@ import { getCookie } from '@retisio/sf-api';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor }from '../../helpers/api';
 import ResetPassword from '../ResetPassword';
+import { useMiniCartDataContext } from '../../context/miniCartcontext';
 
 export function Index(props) {
   const { show, setShow } = useAppContext();
@@ -57,6 +58,21 @@ export function Index(props) {
     setPasswordErrors(errors);
   };
 
+  const { miniCartDetails } = useMiniCartDataContext();
+  const cartID = miniCartDetails?.miniCartData?.cartId;
+  const triggerMergeCart = async() => {
+    const data = await requestContructor('mergeCart', '', { method: 'POST', data: { anonymousCartId: cartID } });
+    return data;
+  };
+
+  const reloadToPath = () => {
+    if(page) {
+      window.location.href = page;
+    }else{
+      window.location.href = asPath;
+    }
+  };
+
   const handleSubmitForm = async(data) => {
     const loginData = await requestContructor(
       'signIn',
@@ -64,13 +80,18 @@ export function Index(props) {
       { method: 'POST', data },
     ).then((data) => {
       if(data) {
+        debugger;
         setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
-          if(page) {
-            window.location.href = page;
-          }else{
-            window.location.href = asPath;
+          const isMergeCart = !!getCookie('arcCartId');
+          if (isMergeCart) {
+            const result = triggerMergeCart();
+            result.then((res) => {
+              if (res.status == 200) { reloadToPath(); }
+            });
+          } else {
+            reloadToPath();
           }
         }
       }
