@@ -88,7 +88,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const handleChange = event => {
     const { name, value, checked, type } = event.target
     let obj = { ...values }
-    obj = validateFields(name, value.trim(), checked, type, obj)
+    obj = validateFields(name, value, checked, type, obj)
     setValues(obj)
   }
 
@@ -103,6 +103,10 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   }
 
   const handleBlur = () => {
+    // trim fields
+    for (const key in values) {
+      values[key] = values[key].trim()
+    }
     if (isSubmit) {
       validate({ ...values })
     }
