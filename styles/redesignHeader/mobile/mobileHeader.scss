@@ -1,4 +1,15 @@
  .mobile-header {
+    .navdrawer {
+        transition: all .1s linear;
+    }
+
+    @media (min-width: 517px) and (max-width: 767px) {
+        .home-header-container .navbar-toggle {
+            float: left;
+            margin: 0;
+        }
+    }
+ 
     .header-actions-redesign-mobile {
         .icon {
             color: $colorWhite;
@@ -6,6 +17,16 @@
             font-size: 32px;
         }
     }
- }
+
+    @media (min-width: 517px) and (max-width: 767px) {
+        .navbar-toggle {
+            .icon-bar {
+                width: 27px;
+                height: 3px;
+                background: #fff;
+            }
+        }
+    }
+}
 
 

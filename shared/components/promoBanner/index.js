@@ -3,8 +3,7 @@ import PromoCarousel from './promoCarousel';
 
 export default function PromoBanner() {
   return (
-    <div className="container promo-banner">
-      <div className="row">
+    <div className="promo-banner">
         <div className="col-md-12 col-12">
           <section>
             <div className="row">
@@ -44,6 +43,5 @@ export default function PromoBanner() {
           </section>
         </div>
       </div>
-    </div>
   );
 }

@@ -13,7 +13,6 @@ export default function MobileHeaderLogo() {
 }
 
 export function MobileNavBar(props) {
-  const { toggleMobileSearchBox, mobileSearchMenu } = props;
   return (
     <nav className="navbar visible-xs mobile-header" style={{ backgroundColor: '#363636' }}>
       <div className="">

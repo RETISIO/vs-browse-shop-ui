@@ -40,7 +40,7 @@ export default function Navbar(props) {
         <a
           className="js-dropdown__btn"
           href={`/category/${item.id}?N=${item.id}`}
-          style={{textDecoration: 'none'}}
+          style={{textDecoration: 'none', textTransform: 'uppercase'}}
         >
           {navItem}
         </a>

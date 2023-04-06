@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Collapse from 'react-bootstrap/Collapse';
 import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
 import MiniCartIcon from '../header/miniCartIcon';
 import Navbar from './navbar';
+import MobileNavLevelOneItem from './mobile/mobileNav-level-1-item';
 // import SearchAheadResults from './searchAheadResults';
-// import HeaderAccountActionLinks from './headerAccountActionLinks';
+//  import HeaderAccountActionLinks from './headerAccountActionLinks';
 
 class RedesignHeader extends Component {
     constructor(props) {
@@ -154,23 +156,42 @@ class RedesignHeader extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <Collapse in={mobileSearchMenu}>
+                                                            <div className="" id="page-header__search-box">
+                                                                <form className="mobile-search-box d-flex justify-space-between align-items-center">
+                                                                    <div className="form-group" tabIndex="0">
+                                                                        <input className="form-control formControl-input form-control-search js-search-mobile-input" type="text" id="search_mobile" aria-label="Search" aria-autocomplete="list" aria-controls="productresults" aria-haspopup="listbox" aria-activedescendant="instructions" aria-describedby="instructions" aria-expanded="false" autoComplete="off" placeholder="Search" />
+                                                                        <div id="instructions" style={{ display: 'none' }}>
+                                                                            Begin typing to search, use tab key to navigate, Enter to select
+                                                                        </div>
+                                                                        <span className="text-danger" id="search_mobile-error" role="alert" style={{ display: 'none' }}></span>
+                                                                    </div>
+                                                                    <button className="btn btn-icon" type="reset">
+                                                                        <i className="icon icon-search fa fa-search" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </Collapse>
                                                     </div>
-                                                </div>
-                                                <div>
+                                                    <Navbar
+                                                        rootCatagories={this.props.rootCatagories}
+                                                        miniCartDetails={miniCartDetails}
+                                                        setMiniCartDetails={setMiniCartDetails}
+                                                    />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <MobileNavLevelOneItem
+                                    mobileNavMenu={this.state.mobileNavMenu}
+                                    setMobileNavMenu={this.mobileNavMenuHandler}
+                                    rootCatagories={this.props.rootCatagories}
+                                />
                             </div>
                         </div>
                     </main>
-                </div>
-                <Navbar
-                    rootCatagories={this.props.rootCatagories}
-                    miniCartDetails={miniCartDetails}
-                    setMiniCartDetails={setMiniCartDetails}
-                />
+                </div>           
             </>
         );
     }
