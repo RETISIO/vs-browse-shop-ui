@@ -80,6 +80,7 @@ export function Index(props) {
       { method: 'POST', data },
     ).then((data) => {
       if(data) {
+        debugger;
         setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
