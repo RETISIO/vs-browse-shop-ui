@@ -1,18 +1,27 @@
 /* eslint-disable linebreak-style */
-import React, { useState } from 'react';
-import { useFormDataContext } from '../../context/formDataContext';
-import ABForm from '../Form';
-import { formSubmitData } from '../../helpers/utils';
-import AlertMessage from '../../helpers/AlertMessage';
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-undef */
+/* eslint-disable jsx-quotes */
+/* eslint-disable comma-dangle */
+/* eslint-disable arrow-parens */
+/* eslint-disable space-before-function-paren */
+/* eslint-disable no-unused-vars */
+/* eslint-disable semi */
+import React, { useState } from 'react'
+import { useFormDataContext } from '../../context/formDataContext'
+import ABForm from '../Form'
+import { formSubmitData } from '../../helpers/utils'
+import AlertMessage from '../../helpers/AlertMessage'
 
 export default function RequestCatalog(props) {
   // Form context values
-  const { values, setValues, clearForm } = useFormDataContext();
+  const { values, setValues, clearForm } = useFormDataContext()
 
-  const [show, setShow] = useState(false);
-  const [isAlert, setIsAlert] = useState(false);
-  const [codeType, setCodeType] = useState('');
-  const [alertMsg, setAlertMsg] = useState('');
+  const [show, setShow] = useState(false)
+  const [isAlert, setIsAlert] = useState(false)
+  const [codeType, setCodeType] = useState('')
+  const [alertMsg, setAlertMsg] = useState('')
 
   const formData = {
     firstName: 'firstName',
@@ -26,18 +35,18 @@ export default function RequestCatalog(props) {
     postalCode: 'postalCode',
     country: 'country',
     submitForm: 'requestCatalog',
-    isTooltipVisible: false,
-  };
+    isTooltipVisible: false
+  }
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const handleAlertClose = (val) => setIsAlert(val);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const handleAlertClose = val => setIsAlert(val)
 
-  const handleSuccess = async(addressData) => {
+  const handleSuccess = async addressData => {
     // updateSuggestedAddresses(addressData);
     // setModalType("verifyAddress");
     // await addNewAddress()
-  };
+  }
 
   //   const handleAddAddressSuccess = async () => {
   //     await getAddresses();
@@ -48,23 +57,25 @@ export default function RequestCatalog(props) {
   //   }
 
   const handleErrorMsg = () => {
-    handleClose();
-  };
+    handleClose()
+  }
 
   // Method to handle the payload for Contact Us Form
   const handlePayloadData = () => {
-    const body = { ...values };
+    const body = { ...values }
     // eslint-disable-next-line no-unused-vars
-    const {
-      comments, ...payload
-    } = body;
-    return payload;
-  };
+    const { comments, ...payload } = body
+    // trim fields
+    for (const key in payload) {
+      payload[key] = payload[key].trim()
+    }
+    return payload
+  }
 
-  const submitData = async() => {
-    const payloadData = handlePayloadData();
-    console.log('bodyyyy', payloadData);
-    const res = {};
+  const submitData = async () => {
+    const payloadData = handlePayloadData()
+    console.log('bodyyyy', payloadData)
+    const res = {}
     // const res = await formSubmitData(
     //   payloadData,
     //   "accountVerifyAddress",
@@ -72,14 +83,14 @@ export default function RequestCatalog(props) {
     //   handleSuccess,
     //   handleErrorMsg
     // );
-    return res;
-  };
+    return res
+  }
 
   // To display Content on top of Form
-  const { configValue } = props;
-  const createMarkup = (data) => ({
-    __html: Object.values(JSON.parse(data))[0],
-  });
+  const { configValue } = props
+  const createMarkup = data => ({
+    __html: Object.values(JSON.parse(data))[0]
+  })
 
   return (
     <>
@@ -90,16 +101,16 @@ export default function RequestCatalog(props) {
           message={alertMsg}
         />
       )}
-    
-      <div className="col-md-offset-1">
+
+      <div className='col-md-offset-1'>
         <div dangerouslySetInnerHTML={createMarkup(configValue)}></div>
-        <div className="form-fields-container">
+        <div className='form-fields-container'>
           <ABForm
             {...{ formData, submitData, handleClose }}
-            formType="catalogForm"
+            formType='catalogForm'
           />
         </div>
       </div>
     </>
-  );
+  )
 }

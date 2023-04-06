@@ -88,7 +88,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   const handleChange = event => {
     const { name, value, checked, type } = event.target
     let obj = { ...values }
-    obj = validateFields(name, value.trim(), checked, type, obj)
+    obj = validateFields(name, value, checked, type, obj)
     setValues(obj)
   }
 
