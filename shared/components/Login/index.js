@@ -78,17 +78,16 @@ export function Index(props) {
       'signIn',
       '',
       { method: 'POST', data },
-    ).then((data) => {
-      if(data) {
-        debugger;
+    ).then((res) => {
+      if(res) {
         setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
           const isMergeCart = !!getCookie('arcCartId');
           if (isMergeCart) {
             const result = triggerMergeCart();
-            result.then((res) => {
-              if (res.status == 200) { reloadToPath(); }
+            result.then((mergeRes) => {
+              if (mergeRes.status === 200) { reloadToPath(); }
             });
           } else {
             reloadToPath();
