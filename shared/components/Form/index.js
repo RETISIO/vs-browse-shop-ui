@@ -103,6 +103,10 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
   }
 
   const handleBlur = () => {
+    // trim fields
+    for (const key in values) {
+      values[key] = values[key].trim()
+    }
     if (isSubmit) {
       validate({ ...values })
     }
