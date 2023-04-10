@@ -13,7 +13,7 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-unused-vars */
 /* eslint-disable semi */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useFormDataContext } from '../../context/formDataContext'
 import ABForm from '../Form'
 import { formSubmitData } from '../../helpers/utils'
@@ -23,14 +23,6 @@ import { requestContructor } from '../../helpers/api'
 export default function RequestCatalog(props) {
   // Form context values
   const { values, setValues, clearForm } = useFormDataContext()
-
-  const [show, setShow] = useState(false)
-  const [isAlert, setIsAlert] = useState(false)
-  const [codeType, setCodeType] = useState('')
-  const [alertMsg, setAlertMsg] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
-  const [successMsg, setSuccessMsg] = useState('')
-  const [messageBanner, setMessageBanner] = useState('')
 
   const formData = {
     firstName: 'firstName',
@@ -46,6 +38,13 @@ export default function RequestCatalog(props) {
     submitForm: 'requestCatalog',
     isTooltipVisible: false
   }
+
+  const [show, setShow] = useState(false)
+  const [isAlert, setIsAlert] = useState(false)
+  const [codeType, setCodeType] = useState('')
+  const [alertMsg, setAlertMsg] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
+  const [successMsg, setSuccessMsg] = useState('')
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -97,18 +96,18 @@ export default function RequestCatalog(props) {
       data
     })
       .then(res => {
-        setMessageBanner(true)
         if (res.status === 202) {
-          setMessageBanner(true)
           setErrorMsg('')
           setSuccessMsg(res.statusMessage)
+          // setClearFormData(true)
+          setValues('')
+          clearForm()
         } else if (res.status === 400) {
           setSuccessMsg('')
           setErrorMsg(res.errors[0].message)
         }
       })
       .catch(error => {
-        setMessageBanner(true)
         setSuccessMsg('')
         setErrorMsg(error)
       })
