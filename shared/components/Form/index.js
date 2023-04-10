@@ -13,7 +13,7 @@
 /* eslint-disable jsx-quotes */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable max-len */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Trans, withTranslation } from 'react-i18next'
