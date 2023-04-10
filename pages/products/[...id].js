@@ -4,6 +4,7 @@ import MainLayout from '../../shared/components/Layout';
 import getPDPData from '../../shared/helpers/getPDPData';
 import ProductDescription from '../../shared/components/pdp/pdpdetails';
 import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag';
+import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 
 export default function ProductDetails({ data }) {
   const { setPageData } = usePageDataContext();
@@ -20,6 +21,7 @@ export default function ProductDetails({ data }) {
         {/* {i18n.t('title')} */}
         <ProductDescription pdpData={data} />
       </main>
+      <Yotpo />
     </MainLayout>
   );
 }
