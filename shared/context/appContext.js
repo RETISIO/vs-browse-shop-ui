@@ -13,7 +13,8 @@ export function AppWrapper({ children }) {
   const [state, updateState] = useState(globalState, '', {}, false);
   const [show, setShow] = useState(false);
   const [isLogged, setisLogged] = useState(false);
-  const [ openReset, updateOpenReset ] = useState(false);
+  const [openReset, updateOpenReset] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     (async() => {
@@ -24,7 +25,7 @@ export function AppWrapper({ children }) {
   }, []);
   return (
     <AppContext.Provider value={{
-      state, updateState, show, setShow, isLogged, setisLogged, openReset, updateOpenReset
+      state, updateState, show, setShow, isLogged, setisLogged, openReset, updateOpenReset, loader, setLoader,
     }}
     >
       {children}
