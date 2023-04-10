@@ -18,6 +18,9 @@ export default function ProductDescription(props) {
   }
   useEffect(() => {
     setShowWidget(true);
+    setTimeout(() => {
+      window.yotpo.refreshWidgets();
+    }, 10);
   }, []);
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
   const productId = pdpData?.products[0]?.productId;
