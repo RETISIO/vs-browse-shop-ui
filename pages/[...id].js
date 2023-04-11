@@ -22,11 +22,11 @@ import { useAppContext } from '../shared/context/appContext'
 import MainLayout from '../shared/components/Layout'
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../shared/components/componentMap'
-
+import { Loader } from '../shared/components/loader'
 function Static({ data }) {
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext()
-  const { setShow } = useAppContext()
+  const { setShow, loader } = useAppContext()
   const router = useRouter()
   const { loggedInPopUp, page } = router.query
   const pageContent = data && data.page && data.page.segmentsMap
@@ -41,6 +41,7 @@ function Static({ data }) {
   }, [])
   return (
     <>
+      {loader && <Loader />}
       {data ? (
         <MainLayout data={data}>
           {/* {i18n.t('title')} */}

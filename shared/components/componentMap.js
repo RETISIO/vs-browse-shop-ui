@@ -20,7 +20,8 @@ const ComponentMap = {
   'productCarousel:default': ProductCarousel,
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
-  'article-detail-prodcutid:custom': Article,
+  'article:custom': Article,
+  // 'article-detail-prodcutid:custom': Article,
   'miniStaticCarousel:custom': MiniStaticCarousel
 }
 export default ComponentMap

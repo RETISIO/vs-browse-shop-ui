@@ -13,7 +13,7 @@
 /* eslint-disable jsx-quotes */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable max-len */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Trans, withTranslation } from 'react-i18next'
@@ -148,7 +148,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     }`}
                     className='formControl-input'
                     name='firstName'
-                    value={values.firstName}
+                    defaultValue={values.firstName}
                     onChange={handleChange}
                     isInvalid={!!formerrors.firstName}
                     maxLength='40'
@@ -182,7 +182,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     }`}
                     className='formControl-input'
                     name='lastName'
-                    value={values.lastName}
+                    defaultValue={values.lastName}
                     onChange={handleChange}
                     isInvalid={!!formerrors.lastName}
                     maxLength='40'
@@ -212,7 +212,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     required
                     placeholder='Email Address *'
                     name='email'
-                    value={values.email}
+                    defaultValue={values.email}
                     onChange={handleChange}
                     isInvalid={!!formerrors.email}
                     onBlur={handleBlur}
@@ -232,6 +232,57 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
               <Form.Group>
                 <div className='form-group'>
                   <Form.Control
+                    id={formData?.phone}
+                    type='text'
+                    placeholder='Phone'
+                    className='formControl-input'
+                    name='phone'
+                    value={values?.phone}
+                    onChange={handleChange}
+                    isInvalid={!!formerrors?.phone}
+                    onBlur={handleBlur}
+                  />
+                  <Form.Label className='formGroup-label'>
+                    <Trans> Phone</Trans>
+                  </Form.Label>
+                  <Form.Control.Feedback
+                    className='text-danger'
+                    type='invalid'
+                    role='alert'
+                  >
+                    {formerrors.phone}
+                  </Form.Control.Feedback>
+                </div>
+              </Form.Group>
+              <Form.Group>
+                <div className='form-group'>
+                  <Form.Control
+                    id={formData?.orderNumber}
+                    type='text'
+                    placeholder='order Number'
+                    className='formControl-input'
+                    name='orderNumber'
+                    defaultValue={values?.orderNumber}
+                    maxLength='10'
+                    onChange={handleChange}
+                    isInvalid={!!formerrors?.orderNumber}
+                    onBlur={handleBlur}
+                  />
+                  <Form.Label className='formGroup-label'>
+                    <Trans> Order Number</Trans>
+                  </Form.Label>
+                  <Form.Control.Feedback
+                    className='text-danger'
+                    type='invalid'
+                    role='alert'
+                  >
+                    {formerrors.orderNumber}
+                  </Form.Control.Feedback>
+                </div>
+              </Form.Group>
+              <Form.Group>
+                <div className='form-group'>
+                  <Form.Control
                     id={formData?.email}
                     className='formControl-input'
                     as='textarea'
@@ -239,7 +290,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     maxLength='1000'
                     placeholder='Enter your question/comment here'
                     name='comments'
-                    value={values.comments}
+                    defaultValue={values.comments}
                     onChange={handleChange}
                     isInvalid={!!formerrors.comments}
                     onBlur={handleBlur}
