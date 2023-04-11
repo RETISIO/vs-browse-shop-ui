@@ -5221,6 +5221,10 @@ a.list-group-item-danger.active:focus {
   background-color: #f5f5f5;
   border-color: #ddd;
 }
+.accordion-button.collapsed  .panel-default > .panel-heading{
+  background-color: #f2f2f2;
+  color: #1e4783;
+}
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ddd;
 }
