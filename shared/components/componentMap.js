@@ -24,5 +24,7 @@ const ComponentMap = {
   'article-detail-prodcutid:custom': Article,
   'miniStaticCarousel:custom': MiniStaticCarousel,
   'imagelist:custom': CookingGuide,
+  'article:custom': Article,
+  // 'article-detail-prodcutid:custom': Article,
 }
 export default ComponentMap
