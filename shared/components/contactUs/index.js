@@ -49,7 +49,7 @@ export default function ContactUs(props) {
     payload.phoneNumber = phone;
     // console.log('bodyyyy........', payload)
     const data = {
-      templateId: 'catalogRequest',
+      templateId: 'contactUs',
       data: payload,
     };
     setLoader(true);
