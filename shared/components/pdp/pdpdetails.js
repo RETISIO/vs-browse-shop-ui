@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
@@ -19,7 +20,7 @@ export default function ProductDescription(props) {
   useEffect(() => {
     setShowWidget(true);
     setTimeout(() => {
-      window.yotpo.refreshWidgets();
+      window.yotpo && window.yotpo.refreshWidgets();
     }, 10);
   }, []);
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;

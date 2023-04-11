@@ -237,7 +237,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     placeholder='Phone'
                     className='formControl-input'
                     name='phone'
-                    defaultValue={values?.phone}
+                    value={values?.phone}
                     onChange={handleChange}
                     isInvalid={!!formerrors?.phone}
                     onBlur={handleBlur}
