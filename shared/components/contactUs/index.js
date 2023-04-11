@@ -43,7 +43,7 @@ export default function ContactUs(props) {
     return payload;
   };
 
-  const submitData = async(formRef) => {
+  const submitData = async() => {
     const { email, phone, ...payload } = handlePayloadData();
     payload.emailAddress = email;
     payload.phoneNumber = phone;
@@ -67,7 +67,6 @@ export default function ContactUs(props) {
         }
         setIsAlert(true);
         setLoader(false);
-        formRef.current.reset();
       })
       .catch((error) => {
         setCodeType('err');
