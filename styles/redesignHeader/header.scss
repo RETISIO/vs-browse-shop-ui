@@ -1,24 +1,17 @@
  .home-header-container #header {
 
     @media screen and (min-width: 992px) {
-      .home-header-container #header {
         background-color: transparent;
         display: block;
-        position: absolute;
         margin: 0;
-      }
       #header {
         z-index: 1030;
       }
     }
 
-    @media screen and (max-width: 992px) {
-      .home-header-container #header {
+    @media (min-width: 992px) and (max-width: 1199px) {
         background-color: transparent;
         display: block;
-        position: absolute;
-        margin: 0;
-      }
     }
 
     .header-content-redesign {
@@ -96,7 +89,6 @@
     
         .btn-primary {
           background-color: none !important;
-          // background-color: transparent;
           border-color: none !important;
         }
     
@@ -115,34 +107,6 @@
         float: right;
       }
     }
-    
-    // @media (min-width: 1200px) {
-    //   #logoMain {
-    //     margin-right: 8px;
-    //   }
-    // }
-    
-    // @media screen and (min-width: 1201px) and (max-width: 1366px) {
-    //   #logoMain {
-    //     margin-right: 8px;
-    //   }
-    // }
-    
-    // @media (min-width: 1200px) {
-    //   .header-sticky.is_stuck {
-    //     #logoMain {
-    //       margin-right: 8px;
-    //     }
-    //   }
-    // }
-    
-    // @media screen and (min-width: 1201px) and (max-width: 1366px) {
-    //   .header-sticky.is_stuck {
-    //     #logoMain {
-    //       margin-right: 8px;
-    //     }
-    //   }
-    // }
     
     #logo-redesign {
       img {
@@ -217,15 +181,6 @@
         }
       }
     }
-    
-    // @media screen and (min-width: 1201px) and (max-width: 1366px) {
-    //   .home-header-container #header {
-    //     background-color: transparent;
-    //     display: block;
-    //     position: absolute;
-    //     width: 100%;
-    //   }
-    // }
   }
 
   .home-header-container .nonHomePageHeader #header {
@@ -255,4 +210,45 @@
       padding-bottom: 35px;
       padding-left: 10px;
     }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .navbar.redesign-navbar .header-dropdown-menu-first {
+      background-color: #00466a;
+    }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .navbar.redesign-navbar .header-dropdown-menu-first {
+      .js-dropdown__btn:hover {  
+        background-color: #016a9e;
+      }
+    }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .category-list-item-navbar {
+      background-color: #016a9e;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .home-header-container .navbar {
+      background-color: transparent;
+    }
+  }
+
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .allenmainherobanner #overlay{
+      position: absolute;
+      background-color: rgba(95,118,118,0);
+      z-index: 2;
+      height: 100%;
+      background-image: linear-gradient(180deg, #2c2828 4%, transparent 30%);
+    }
+  }
+
+  main.page-row.page-row-expanded.nonHomePageHeader {
+    margin-bottom: 50px;
   }

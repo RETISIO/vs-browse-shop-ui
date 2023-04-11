@@ -1,61 +1,61 @@
 .promo-carousel {
-    // .carousel-control-next-icon,
-    // .carousel-control-prev-icon {
-    //     background-image: none;
-    // }
-    // .carousel-control-next,
-    // .carousel-control-prev {
-    //     width: 10%;
-    //     outline: none;
-    //     text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
-    //     filter: alpha(opacity=50);
-    //     opacity: .5;
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        background-image: none;
+    }
+    .carousel-control-next,
+    .carousel-control-prev {
+        width: 10%;
+        outline: none;
+        text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
+        filter: alpha(opacity=50);
+        opacity: .5;
 
-    //     &:focus {
-    //         outline: none;
-    //     }
-    // }
-    // .carousel-control-next-icon,
-    // .carousel-control-prev-icon {
-    //     position: absolute;
-    //     top: 50%;
-    //     z-index: 5;
-    //     display: inline-block;
-    //     font-family: "Glyphicons Halflings";
-    //     font-style: normal;
-    //     font-weight: normal;
-    //     line-height: 1;
-    // }
-    // @media screen and (min-width: $screen-lg) {
-    //     .carousel-control-next-icon {
-    //         right: 37.25rem;
-    //     }
-    // }
-    // @media screen and (min-width: 992px ) and (max-width: 1199px) {
-    //     .carousel-control-prev-icon {
-    //         left: 0;
-    //     }
-    //     .carousel-control-next-icon {
-    //         right: 20rem;
-    //     }
-    // }
-    // .carousel-control-prev-icon:before {
-    //     content: "\e079";
-    // }
-    // .carousel-control-next-icon:before {
-    //     content: "\e080";
-    // }
-    // .carousel-control-next-icon,
-    // .carousel-control-prev-icon {
-    //     width: 30px;
-    //     height: 30px;
-    //     margin-top: -10px;
-    //     font-size: 13px;
-    //     color: $colorWhite;
-    // }
-    // .visually-hidden {
-    //     display: none;
-    // }
+        &:focus {
+            outline: none;
+        }
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        position: absolute;
+        top: 50%;
+        z-index: 5;
+        display: inline-block;
+        font-family: "Glyphicons Halflings";
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+    }
+    @media screen and (min-width: $screen-lg) {
+        .carousel-control-next-icon {
+            right: 37.25rem;
+        }
+    }
+    @media screen and (min-width: 992px ) and (max-width: 1199px) {
+        .carousel-control-prev-icon {
+            left: 0;
+        }
+        .carousel-control-next-icon {
+            right: 20rem;
+        }
+    }
+    .carousel-control-prev-icon:before {
+        content: "\e079";
+    }
+    .carousel-control-next-icon:before {
+        content: "\e080";
+    }
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        width: 30px;
+        height: 30px;
+        margin-top: -10px;
+        font-size: 13px;
+        color: $colorWhite;
+    }
+    .visually-hidden {
+        display: none;
+    }
 
 
     .content-ab.promo-carousel {

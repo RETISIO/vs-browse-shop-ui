@@ -1308,11 +1308,24 @@ a {
 	font-size: 27px;
 	margin-right: 13px;
 }
+.collapsed {
+	.panel {
+		.icon {
+			transform: rotate(0deg);
+		}
+	}
+}
+.product-info-section {
+	button.accordion-button{
+		padding: 0px;
+	}
+}
 
 .panel {
 	border-radius: 0;
 	border: 0;
 	box-shadow: none;
+	width: 100%;
 
 	&-title {
 		font-size: 18px;
@@ -1329,10 +1342,9 @@ a {
 			transition: 250ms;
 		}
 
-		.collapsed>.icon {
-			transform: rotate(0deg);
-		}
+		
 	}
+
 
 	&-body {
 		border: 0 !important;

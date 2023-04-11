@@ -85,7 +85,7 @@ class RedesignHeader extends Component {
                                         <div id="ALLN-Header_v4-wi2700015">
                                             <div className="page-overlay js-overlay"></div>
                                             <div className="page-main row-full">
-                                                <div id="header" className="home-header" style={{ width: '100%' }}>
+                                                <div id="header" style={{ width: '100%' }}>
                                                     <MobileHeaderLogo />
                                                     <div className={this.state.sticky ? 'header-sticky js-sticky-menu is_stuck' : 'header-sticky js-sticky-menu'}>
                                                         <MobileNavBar toggleMobileSearchBox={this.toggleMobileSearchBox} mobileSearchMenu={mobileSearchMenu} />
@@ -173,11 +173,11 @@ class RedesignHeader extends Component {
                                                             </div>
                                                         </Collapse>
                                                     </div>
-                                                    <Navbar
-                                                        rootCatagories={this.props.rootCatagories}
-                                                        miniCartDetails={miniCartDetails}
-                                                        setMiniCartDetails={setMiniCartDetails}
-                                                    />
+                                                     <Navbar 
+                                                     rootCatagories={this.props.rootCatagories}
+                                                     miniCartDetails={miniCartDetails}
+                                                     setMiniCartDetails={setMiniCartDetails}
+                                                     />                                         
                                                 </div>
                                             </div>
                                         </div>
