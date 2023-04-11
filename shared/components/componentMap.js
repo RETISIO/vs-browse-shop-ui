@@ -12,6 +12,7 @@ import ContactUs from './contactUs'
 import RequestCatalog from './requestCatalog'
 import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
+import CookingGuide from './cookingGuide'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -21,6 +22,7 @@ const ComponentMap = {
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
   'article-detail-prodcutid:custom': Article,
-  'miniStaticCarousel:custom': MiniStaticCarousel
+  'miniStaticCarousel:custom': MiniStaticCarousel,
+  'imagelist:custom': CookingGuide,
 }
 export default ComponentMap
