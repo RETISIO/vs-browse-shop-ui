@@ -43,7 +43,7 @@ export default function ContactUs(props) {
     return payload;
   };
 
-  const submitData = async() => {
+  const submitData = async(formRef) => {
     const { email, phone, ...payload } = handlePayloadData();
     payload.emailAddress = email;
     payload.phoneNumber = phone;
@@ -67,6 +67,7 @@ export default function ContactUs(props) {
         }
         setIsAlert(true);
         setLoader(false);
+        formRef.current.reset();
       })
       .catch((error) => {
         setCodeType('err');
@@ -100,6 +101,7 @@ export default function ContactUs(props) {
         <ABForm
           {...{ formData, submitData, handleClose }}
           formType="contactForm"
+          formRef
         />
       </div>
     </div>
