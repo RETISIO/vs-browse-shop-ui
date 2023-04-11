@@ -22,6 +22,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
+import { HtmlContent } from '@retisio/sf-ui'
 import NextImage from '../template/components/nextImage'
 import { requestContructor } from '../../helpers/api'
 
@@ -61,6 +62,7 @@ export default function Article(props) {
     document.body.innerHTML = backupContent
   }
 
+<<<<<<< Updated upstream
   return (
     <>
       {load && (
@@ -105,6 +107,13 @@ export default function Article(props) {
           ))}
         </>
       )}
+=======
+  console.log('from Article.....props..', props)
+
+  return (
+    <>
+      <HtmlContent />
+>>>>>>> Stashed changes
     </>
   )
 }
