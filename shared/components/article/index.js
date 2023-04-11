@@ -20,7 +20,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Slider from 'react-slick'
 import { HtmlContent } from '@retisio/sf-ui'
 import NextImage from '../template/components/nextImage'
 import { requestContructor } from '../../helpers/api'
@@ -47,7 +46,6 @@ export default function Article(props) {
       method: 'POST',
       data: { productIds: [productId] }
     }).then(res => {
-      //   console.log('productId..,res.', productId, res)
       if (configValues.buyProduct && res.payLoad && res.payLoad.products) {
         configValues.products = res.payLoad.products
         setProductsData({
@@ -58,36 +56,43 @@ export default function Article(props) {
     })
   }, [])
 
+  const contentData = JSON.parse(props.content)
+  const description = {
+    content: JSON.stringify([contentData.cookingInstruction])
+  }
   const handlePrint = () => {
     const backupContent = document.body.innerHTML
-    const printContent = document.getElementsByClassName(
-      'cooking-instruction'
+
+    const headingContent = document.getElementsByClassName(
+      'cooking-instruction-heading'
     )[0].innerHTML
-    document.body.innerHTML = printContent
+    const descContent = document.getElementsByClassName(
+      'cooking-description'
+    )[0].innerHTML
+    document.body.innerHTML = headingContent + descContent
     window.print()
     document.body.innerHTML = backupContent
+    const printBtn = document.getElementById('print-btn')
+    printBtn.addEventListener('click', handlePrint)
   }
-
-  console.log('from Article.....props..', props)
 
   return (
     <>
-      <HtmlContent contentItemObj={props} />
       {content && (
         <div className='cooking-instruction' id='11'>
           <div className='cooking-instruction-caption'>
-            <div>
+            <div className='cooking-instruction-heading'>
               <h1>
-                {/* <span className='text-slim'>Bacon-wrapped Filets....</span> */}
-                {content.servingSize.length && 'Cooking Instructions: '}
+                {content.servingSize.length ? 'Cooking Instructions: ' : ''}
                 <span className='text-slim'>{content.name}</span>
               </h1>
-              {content.servingSize.length && (
+              {content.servingSize.length ? (
                 <p className='serving-size'>
-                  <strong>Serving Size:</strong>
-                  {/* <strong></strong> */}
+                  <strong>{'Serving Size: '}</strong>
                   <span className='text-slim'>{content.servingSize}</span>
                 </p>
+              ) : (
+                ''
               )}
             </div>
             {load && (
@@ -113,8 +118,9 @@ export default function Article(props) {
                       Buy Now
                     </Link>
                     <button
+                      id='print-btn'
                       className='btn btn-primary btn-inverse btn-print'
-                      onClick={handlePrint}
+                      onClick={() => handlePrint()}
                     >
                       <i className='icon icon-left fas fa-print'></i>
                       Print
@@ -132,108 +138,10 @@ export default function Article(props) {
                 ))}
               </>
             )}
-            {/* <img
-              src='/ccstore/v1/images/?source=/file/v7112668396619829489/products/ab_c1_2018_024_0140_cover_baconwrappedfilets_680.jpg&amp;height=300&amp;width=300'
-              alt='Bacon-wrapped Filets'
-            />
-            <a
-              className='btn btn-primary btn-block btn-buy'
-              id='btnBuyNow'
-              href='/products/bacon-wrapped-filet-mignon/10373'
-            >
-              Buy Now
-            </a>
-            <button className='btn btn-primary btn-inverse btn-print'>
-              <i className='icon icon-left fas fa-print'></i>
-            </button>
-            <div className='btn-group'>
-              <a
-                className='btn btn-primary btn-inverse btn-share dropdown-toggle'
-                href='mailto:?subject=Bacon-wrapped Filets&amp;body=Check out these cooking instructions from Allen Brothers: https://www.allenbrothers.com/article/bacon-wrapped-filets/11'
-              >
-                <i className='icon icon-left fas fa-share-square'></i>
-              </a>
-            </div> */}
-            {/* </div> */}
           </div>
           <br />
           <div className='cooking-description'>
-            {/* {content.cookingInstruction} */}
-            <div className='dot-divider' style={{ margin: '10px 0 16px 0' }}>
-              &nbsp;
-            </div>
-
-            <div className='recipe-products'>
-              <h4>Products included in this recipe</h4>
-
-              <ul>
-                <li>
-                  <a href='/products/bacon-wrapped-filet-mignon/10373'>
-                    Bacon Wrapped Filet Mignon
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className='dot-divider' style={{ margin: '14px 0 30px 0' }}>
-              &nbsp;
-            </div>
-
-            <p>8 OUNCE FILET</p>
-
-            <p>Thaw* product on a dish in the refrigerator.</p>
-
-            <p>&nbsp;</p>
-
-            <h3>SEAR &amp; ROAST</h3>
-
-            <ol>
-              <li>
-                Preheat oven to 400°F. Season filets with salt and pepper.
-              </li>
-              <li>
-                In skillet, heat 2 teaspoon olive oil on medium heat until
-                almost smoking. Sear filets 1 minute on each side. Then turn
-                filet on the bacon side and roll it in hot pan for a minute
-                more.
-              </li>
-              <li>
-                Roast in oven 4-6 minutes each side for medium rare. Adjust
-                cooking time for desired doneness.
-              </li>
-            </ol>
-
-            <p>&nbsp;</p>
-
-            <h3>GRILL</h3>
-
-            <ol>
-              <li>Heat grill to medium high.</li>
-              <li>
-                Lightly brush filet with olive oil and season with salt and
-                pepper.
-              </li>
-              <li>Grill 6-8 minutes on each side for medium rare.</li>
-            </ol>
-
-            <p>&nbsp;</p>
-
-            <h3>FOR BEST RESULTS</h3>
-
-            <p>
-              *See
-              <a href='/article/delivery-storage-thawing/cg10001'>
-                Delivery Storage and Thawing
-              </a>
-              for thawing details.
-            </p>
-
-            <p>
-              Remove thawed product from the refrigerator 30 minutes before
-              cooking.
-            </p>
-
-            <p>Let rest for 5 minutes before serving.</p>
+            <HtmlContent contentItemObj={description} isNextJs={true} />
           </div>
         </div>
       )}
