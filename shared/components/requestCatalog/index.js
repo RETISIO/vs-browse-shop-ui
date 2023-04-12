@@ -98,7 +98,7 @@ export default function RequestCatalog(props) {
       .then(res => {
         if (res.status === 202) {
           setErrorMsg('')
-          setSuccessMsg(res.statusMessage)
+          setSuccessMsg('Your catalog request has been received. Thank You! ')
           // setClearFormData(true)
           setValues('')
           clearForm()
