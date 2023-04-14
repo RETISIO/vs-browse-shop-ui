@@ -96,7 +96,7 @@ export default function ArticleDetails({ props }) {
                 </p>
               </div>
             ) : (
-              ''
+              <div className='cooking-instruction-caption-nodata'></div>
             )}
 
             {load && (
