@@ -6,8 +6,8 @@ export default function NavbarList(props) {
     if (categoryItem?.hasCategories) {
       return (
         <div key={i} className="col-sm-2">
-          <div className="category-heading">{variantType}</div>
-          { getCategoryItemList(categoryItem.subCategories) }
+          <div className="category-heading sub-nav1 list-heading">{variantType}</div>
+          {getCategoryItemList(categoryItem.subCategories)}
         </div>
       );
     }
@@ -24,7 +24,7 @@ export default function NavbarList(props) {
     );
   };
   const getCategoryItemList = (categoryItem) => (
-    <ul className="category-list list-unstyled">
+    <ul className="category-list list-unstyled sub-nav1 background-color">
       {categoryItem?.map((navItem, i) => renderCategoryNavItems(navItem, i))}
     </ul>
   );
@@ -46,10 +46,11 @@ export default function NavbarList(props) {
         {props.catItem.hasCategories
           ? props.catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i))
           : null}
+          {renderCategoryNav(props.catItem)}
       </div>
-      <div className="row">
-        {renderCategoryNav(props.catItem)}
-      </div>
+      {/* <div className="row">
+        
+      </div> */}
     </div>
   );
 }

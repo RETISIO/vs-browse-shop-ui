@@ -9,13 +9,6 @@ export default function Navbar(props) {
     const navEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
     if (displayHeaderMenu === 'show') {
       navEl.classList.add('open');
-      //   const { miniCartDetails, setMiniCartDetails } = props;
-      //   if (miniCartDetails.showMiniCart) {
-      //     setMiniCartDetails({ ...miniCartDetails, showMiniCart: false })
-      //   }
-      // } else {
-      //   navEl.classList.remove('open');
-      // }
     };
   }
   const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, 'show');
@@ -45,44 +38,45 @@ export default function Navbar(props) {
     );
   };
 
-  const mouseOverOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'show');
-  const mouseOutOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'hide');
+  // const mouseOverOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'show');
+  // const mouseOutOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'hide');
 
-  const toggleHeaderMainDropdownMenu = (event, displayHeaderMainMenu) => {
-    const navMainEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
-    if (displayHeaderMainMenu === 'show') {
-      navMainEl.classList.add('open');
-    };
-  }
+  // const toggleHeaderMainDropdownMenu = (event, displayHeaderMainMenu) => {
+  //   const navMainEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
+  //   if (displayHeaderMainMenu === 'show') {
+  //     navMainEl.classList.add('open');
+  //   };
+  // }
 
-  const renderMainDropdown = () => {
-    return (
-      <li
-        key={`navMainEl`}
-        className="nav-item js-dropdown navListItems"
-        onMouseEnter={(e) => mouseOverOnMainNav(e)}
-        onMouseLeave={(e) => mouseOutOnMainNav(e)}
-      >
-        <a
-          className="first-dropdown"
-          href="#"
-          style={{ textDecoration: 'none', textTransform: 'uppercase' }}
-        >
-          Shop All
-        </a>
-      </li>
-    );
-  };
+  // const renderMainDropdown = () => {
+  //   return (
+  //     <li
+  //       key={`navMainEl`}
+  //       className="nav-item js-dropdown navListItems"
+  //       onMouseEnter={(e) => mouseOverOnMainNav(e)}
+  //       onMouseLeave={(e) => mouseOutOnMainNav(e)}
+  //     >
+  //       <a
+  //         className="first-dropdown"
+  //         href="#"
+  //         style={{ textDecoration: 'none', textTransform: 'uppercase' }}
+  //       >
+  //         Shop All
+  //       </a>
+  //     </li>
+  //   );
+  // };
 
   return (
     <nav className="navbar redesign-navbar">
       <div>
         <ul className="navbar-nav nav nav-list">
-          {renderMainDropdown(i)}
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Shop All</a>
             <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
-              {rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
+              <ul className="category-list list-unstyled c-list">
+                {rootCatagories?.map((item, i) => renderLevel1Item(item, i))}
+              </ul>
             </div>
             <button className="header-menu" type="button" data-target="" aria-label="">
               <i className="fa fa-chevron-down"></i>
@@ -90,7 +84,7 @@ export default function Navbar(props) {
           </li>
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Best Sellers</a>
-            <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
+            <div className="header-dropdown-menu dropdown-menu nav-redesign" id="header-navbar">
               <ul className="category-list list-unstyled">
                 <li className="category-list-item">
                   <a href="#">Weekly Deals</a>
@@ -110,7 +104,7 @@ export default function Navbar(props) {
 
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Deals</a>
-            <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
+            <div className="header-dropdown-menu dropdown-menu nav-redesign" id="header-navbar">
               <ul className="category-list list-unstyled">
                 <li className="category-list-item">
                   <a href="#">Weekly Deals</a>
@@ -130,7 +124,7 @@ export default function Navbar(props) {
 
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Gift & Bundles</a>
-            <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
+            <div className="header-dropdown-menu dropdown-menu nav-redesign" id="header-navbar">
               <ul className="category-list list-unstyled">
                 <li className="category-list-item">
                   <a href="/products/gift-card/gc-10001">Gift Cards</a>
@@ -153,7 +147,7 @@ export default function Navbar(props) {
 
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Cooking</a>
-            <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
+            <div className="header-dropdown-menu dropdown-menu nav-redesign" id="header-navbar">
               <ul className="category-list list-unstyled">
                 <li className="category-list-item">
                   <a href="#">Recipes</a>
@@ -176,7 +170,7 @@ export default function Navbar(props) {
 
           <li className="nav-item js-dropdown navListItems">
             <a className="first-dropdown" href="#" style={{ textDecoration: 'none', textTransform: 'uppercase' }}>Subscribe & Save</a>
-            <div className="header-dropdown-menu dropdown-menu" id="header-navbar">
+            <div className="header-dropdown-menu dropdown-menu nav-redesign" id="header-navbar">
               <ul className="category-list list-unstyled">
                 <li className="category-list-item">
                   <a href="/category/assortments-gifts-of-the-month?N=assortments-gifts-of-the-month">Steak of the Month Subscriptions</a>

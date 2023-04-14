@@ -172,12 +172,12 @@ class RedesignHeader extends Component {
                                                                 </form>
                                                             </div>
                                                         </Collapse>
+                                                        <Navbar
+                                                            rootCatagories={this.props.rootCatagories}
+                                                            miniCartDetails={miniCartDetails}
+                                                            setMiniCartDetails={setMiniCartDetails}
+                                                        />
                                                     </div>
-                                                     <Navbar 
-                                                     rootCatagories={this.props.rootCatagories}
-                                                     miniCartDetails={miniCartDetails}
-                                                     setMiniCartDetails={setMiniCartDetails}
-                                                     />                                         
                                                 </div>
                                             </div>
                                         </div>
@@ -191,7 +191,7 @@ class RedesignHeader extends Component {
                             </div>
                         </div>
                     </main>
-                </div>           
+                </div>
             </>
         );
     }
