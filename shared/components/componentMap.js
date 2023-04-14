@@ -12,6 +12,8 @@ import ContactUs from './contactUs'
 import RequestCatalog from './requestCatalog'
 import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
+import CookingGuide from './cookingGuide'
+import ArticleTitle from './article/articleTitle'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -20,8 +22,11 @@ const ComponentMap = {
   'productCarousel:default': ProductCarousel,
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
+  'article-detail-prodcutid:custom': Article,
+  'miniStaticCarousel:custom': MiniStaticCarousel,
+  'imagelist:custom': CookingGuide,
   'article:custom': Article,
+  'articletile:custom': ArticleTitle
   // 'article-detail-prodcutid:custom': Article,
-  'miniStaticCarousel:custom': MiniStaticCarousel
 }
 export default ComponentMap

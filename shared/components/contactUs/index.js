@@ -38,7 +38,6 @@ export default function ContactUs(props) {
     const body = { ...values };
     // eslint-disable-next-line no-unused-vars
     const {
-      address1, address2, country, city, state, postalCode, phone,
       ...payload
     } = body;
     return payload;
@@ -46,15 +45,21 @@ export default function ContactUs(props) {
 
   const submitData = async() => {
     const {
-      email, phone, orderNumber, ...payload
+      email, orderNumber, comments, phone, firstName, lastName,
     } = handlePayloadData();
-    payload.emailAddress = email;
-    payload.phoneNumber = phone;
-    payload.orderId = orderNumber;
+    const finalData = {
+      firstName,
+      lastName,
+      emailAddress: email,
+      phoneNumber: phone,
+      orderId: orderNumber,
+      comment: comments,
+    };
+
     // console.log('bodyyyy........', payload)
     const data = {
       templateId: 'contactUs',
-      data: payload,
+      data: finalData,
     };
     setLoader(true);
     requestContructor('sendRequestFormEmail', '', {
