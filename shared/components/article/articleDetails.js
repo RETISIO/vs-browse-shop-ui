@@ -58,9 +58,11 @@ export default function ArticleDetails({ props }) {
   }, [])
 
   const contentData = JSON.parse(props.content)
+
   const description = {
     content: JSON.stringify([contentData.cookingInstruction])
   }
+
   const handlePrint = () => {
     const backupContent = document.body.innerHTML
 
@@ -82,20 +84,21 @@ export default function ArticleDetails({ props }) {
       {content && (
         <div className='cooking-instruction' id='11'>
           <div className='cooking-instruction-caption'>
-            <div className='cooking-instruction-heading'>
-              <h1>
-                {content.servingSize.length ? 'Cooking Instructions: ' : ''}
-                <span className='text-slim'>{content.name}</span>
-              </h1>
-              {content.servingSize.length ? (
+            {content.servingSize.length ? (
+              <div className='cooking-instruction-heading'>
+                <h1>
+                  {'Cooking Instructions: '}
+                  <span className='text-slim'>{content.name}</span>
+                </h1>
                 <p className='serving-size'>
                   <strong>{'Serving Size: '}</strong>
                   <span className='text-slim'>{content.servingSize}</span>
                 </p>
-              ) : (
-                ''
-              )}
-            </div>
+              </div>
+            ) : (
+              ''
+            )}
+
             {load && (
               <>
                 {productsData?.configValues?.products.map((value, index) => (
