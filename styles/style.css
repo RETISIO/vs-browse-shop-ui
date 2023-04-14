@@ -2091,7 +2091,7 @@ select[multiple].input-lg {
   user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 .btn:focus,
 .btn:active:focus,
@@ -3532,7 +3532,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .btn-group {
-  margin-right: -1px;
+  margin-right: 3px;
 }
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {

@@ -78,7 +78,6 @@ body {
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 21px;
-	height: 45px;
 
 	&::placeholder {
 		//color: #9B9B9B;
@@ -435,7 +434,7 @@ body {
 	font-weight: bold;
 	letter-spacing: 0.84px;
 	line-height: 31px;
-	min-width: 200px;
+	min-width: 180px;
 	text-transform: uppercase;
 }
 
@@ -523,7 +522,7 @@ body {
 }
 
 h1 {
-	color: $colorPrimary;
+	color: $colorBlack;
 	font-size: 24px;
 	font-weight: 600;
 	line-height: 32px;
@@ -544,7 +543,7 @@ h3 {
 }
 
 p {
-	color: #4A4A4A;
+	color: #000000;
 	font-size: 15px;
 	font-weight: 300;
 	line-height: 21px;
@@ -1811,20 +1810,22 @@ a {
 	margin: 20px 0;
 
 	@media screen and (min-width: $screen-md-min) {
-		margin: 20px 0 50px;
+		margin: 20px 0 40px;
 	}
 
 	.breadcrumb {
 		margin: 0;
-		padding: 0;
+		padding: 30px 0 0 0;
 		background: none;
 		font-size: 0;
+		display: inline-block;
 
 		li {
 			font-size: 14px;
 			font-weight: 400;
 			line-height: 21px;
 			color: #B0B0B1;
+
 
 			a {
 				color: #626262;
