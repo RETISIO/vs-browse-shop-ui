@@ -69,7 +69,7 @@ export default function ContactUs(props) {
       .then((res) => {
         if (res.status === 202) {
           setCodeType('success');
-          setAlertMsg(res.statusMessage);
+          setAlertMsg('Thank you for contacting us. A representative will get back to you shortly.');
         } else if (res.status === 400) {
           setCodeType('err');
           setAlertMsg(res.errors[0].message);
