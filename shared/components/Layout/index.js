@@ -7,8 +7,7 @@ import Head from 'next/head';
 import { useI18n } from 'next-localization';
 import { useRouter } from 'next/router';
 import { getCookie } from '@retisio/sf-api';
-// import { Layout } from '@retisio/sf-ui';
-import LayoutShared from '../layoutShared/index';
+import { Layout } from '@retisio/sf-ui';
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
 import { useAppContext } from '../../context/appContext';
@@ -155,7 +154,7 @@ export default function MainLayout({ data, children }) {
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <LayoutShared
+      <Layout
         data={data}
         appData={state}
         transformText={i18n.t}
@@ -173,7 +172,7 @@ export default function MainLayout({ data, children }) {
         setMiniCartDetails={setMiniCartDetails}
       >
         {children}
-      </LayoutShared>
+      </Layout>
     </>
   );
 }
