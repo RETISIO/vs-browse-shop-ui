@@ -43,9 +43,14 @@ import React, { useState, useEffect } from 'react'
 
 function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
   const [countSelected, setCountSelected] = useState()
+  const [itemQuantity, setItemQuantity] = useState()
+  const [disablePlusCounter, setDisablePlusCounter] = useState(false)
+  const [disableMinusCounter, setDisableMinusCounter] = useState(false)
+  //   const [disableCounter, setDisableCounter] = useState(false)
 
   useEffect(() => {
     setCountSelected({ ...selectedSku.count[0] })
+    setItemQuantity(1)
     handleShowOnSaleBadge(selectedSku.count[0].onSale)
   }, [selectedSku])
 
@@ -55,6 +60,29 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
     console.log('handleSelected...skuCount.onSale...', skuCount.onSale)
     handleShowOnSaleBadge(skuCount.onSale)
     setCountSelected(skuCount)
+  }
+
+  const addItemQuantity = qty => {
+    console.log('from handleItemQuantity....qty..', qty)
+    const { availableStock } = countSelected
+    if (itemQuantity < availableStock) {
+      setItemQuantity(itemQuantity + 1)
+    }
+    if (itemQuantity + 1 >= availableStock) {
+      setDisablePlusCounter(true)
+    }
+    setDisableMinusCounter(false)
+  }
+
+  const reduceItemQuantity = qty => {
+    console.log('from handleItemQuantity....qty..', qty)
+    if (itemQuantity > 0) {
+      setItemQuantity(itemQuantity - 1)
+    }
+    if (itemQuantity - 1 <= 0) {
+      setDisableMinusCounter(true)
+    }
+    setDisablePlusCounter(false)
   }
 
   return (
@@ -126,21 +154,29 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
             <span className='panel1'>
               <div className='input-group'>
                 <span className='input-group-btn'>
-                  <button className='btn js-counter__btn rd' type='button'>
+                  <button
+                    className={`btn js-counter__btn rdrt ${
+                      disableMinusCounter ? 'disabled' : ''
+                    }`}
+                    type='button'
+                    onClick={reduceItemQuantity}
+                  >
                     <i className='fa fa-minus' aria-hidden='true'></i>
                   </button>
                 </span>
-                {/* <input
-                  data-bind='textInput: $data.quantity, event: { input: $parent.handleQuantityInputEvent }'
-                  className='form-control js-counter__input brnone'
-                  type='number'
-                  min='0'
-                  max='999'
-                  maxLength='3'
-                  onKeyUp="if (event.srcElement.value.charAt(0) == '0') { event.srcElement.value = event.srcElement.value.slice(1); }"
-                /> */}
+                <span className=''>
+                  <button className='sku-item-qty disabled'>
+                    {itemQuantity}
+                  </button>
+                </span>
                 <span className='input-group-btn'>
-                  <button className='btn js-counter__btn rdrt' type='button'>
+                  <button
+                    className={`btn js-counter__btn rdrt ${
+                      disablePlusCounter ? 'disabled' : ''
+                    }`}
+                    type='button'
+                    onClick={addItemQuantity}
+                  >
                     <i className='fa fa-plus' aria-hidden='true'></i>
                   </button>
                 </span>
