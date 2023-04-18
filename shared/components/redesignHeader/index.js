@@ -151,10 +151,10 @@ class RedesignHeader extends Component {
                                 <div className="align-self-center hidden-print icon-redesign col-xs-4 col-md-3">
                                   <ul className="list-inline header-actions-redesign d-flex flex-no-wrap head-actn">
                                     <li className="list-inline-item dropdown header-actions-account headerDropdown" style={{ top: '12px' }}>
-                                      <i className="icon icon-user fas fa-user-circle"></i>
+                                      <HeaderAccountActionLinks {...this.props} />
                                     </li>
                                     <div className="label-redesign">
-                                      <HeaderAccountActionLinks {...this.props} />
+                                      <span>My Account</span>
                                     </div>
 
                                     <div className="label-redesign">

@@ -11,7 +11,7 @@ function HeaderAccountActionLinks(props) {
     <>
     <Dropdown>
       <Dropdown.Toggle id="accountDropdown-button">
-        <span>My Account</span>
+      <i className="icon icon-user fas fa-user-circle"></i>
       </Dropdown.Toggle>
       { props.isLogged ?
       <Dropdown.Menu>
