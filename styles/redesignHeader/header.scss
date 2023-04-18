@@ -87,11 +87,6 @@
           }
         }
     
-        .btn-primary {
-          background-color: none !important;
-          border-color: none !important;
-        }
-    
         .icon {
           color: $colorWhite;
           background-color: none;
@@ -319,6 +314,14 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
       background-color: #00466a;
+    }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .navbar.redesign-navbar .header-dropdown-menu {
+      .js-dropdown__btn {  
+        background-color: #00466a;
+      }
     }
   }
 

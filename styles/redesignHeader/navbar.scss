@@ -26,6 +26,8 @@
         display: block;
         padding: 10px;
         margin-left: 10px;
+        background-color: #363636;
+        text-align: left;
     }
 
     .sub-nav:hover .js-dropdown__btn  {
@@ -36,7 +38,7 @@
     }
     
     .sub-nav1 {
-        transform: translate(185px,-420px);
+        transform: translate(185px,-442px);
         background-color: #3F3F3F;
         padding: 10px;    
         line-height: 2.5;
@@ -70,12 +72,12 @@
         text-decoration: underline;
         text-underline-offset: 12px;
         padding: 3px;
-        min-width: 200px;
+        min-width: 225px;
     }
 
     .header-dropdown-menu .background-color {
         min-height: 450px;
-        min-width: 200px;
+        min-width: 225px;
     }
 
     .nav-list li:hover {
