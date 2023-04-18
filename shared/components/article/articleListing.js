@@ -51,7 +51,7 @@ export default function ArticleListing({ props }) {
               className='product-image'
               href={productsData?.configValues.navigationUrl}
               style={{
-                backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGEPATH}${
+                backgroundImage: `url(${
                   product?.skus?.[product?.defaultSkuId]?.media?.largeImg
                 })`
               }}
