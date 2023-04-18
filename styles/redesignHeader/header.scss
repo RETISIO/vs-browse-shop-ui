@@ -364,3 +364,37 @@
   main.page-row.page-row-expanded.nonHomePageHeader {
     margin-bottom: 75px;
   }
+
+  .mini-cart-img {
+	  width: 75px;
+	  height: 75px;
+	}
+  
+	a.mini-cart-btn {
+	  color: #fff;
+	  text-align: center;
+	  vertical-align: middle;
+	  cursor: pointer;
+	  background-image: none;
+    background-color: #f89b00;
+	  border: 1px solid transparent;
+	  white-space: nowrap;
+	  padding: 6px 12px;
+	  border-radius: 4px;
+	  user-select: none;
+	  text-decoration: none;
+  
+	  &-header {
+		margin-bottom: 27px;
+		text-align: center;
+		vertical-align: middle;
+		cursor: pointer;
+		background-image: none;
+		border: 1px solid transparent;
+		white-space: nowrap;
+		padding: 6px 12px;
+		border-radius: 4px;
+		user-select: none;
+		text-decoration: none;
+	  }
+	}

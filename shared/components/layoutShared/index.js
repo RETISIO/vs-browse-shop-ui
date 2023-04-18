@@ -4,7 +4,6 @@ import React from 'react';
 // eslint-disable-next-line import/no-unresolved
 import Footer from '../footer';
 import Header from '../header/index';
-import PromoBanner from '../promoBanner';
 
 export default function LayoutShared(props) {
   const { data, appData, transformText } = props;
@@ -23,7 +22,6 @@ export default function LayoutShared(props) {
     <>
       {/* <PageLoader /> */}
       <div className="">
-        <PromoBanner />
         <div>
           <Header
             headerContent={headerContent}
