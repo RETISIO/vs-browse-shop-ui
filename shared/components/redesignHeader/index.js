@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-// import Collapse from 'react-bootstrap/Collapse';
+import Collapse from 'react-bootstrap/Collapse';
 import MobileHeaderLogo, { MobileNavBar } from './mobileNew/mobileHeader';
 import MiniCartIcon from './miniCartIcon';
 import Navbar from './navbar';
-// import MobileNavLevelOneItem from './mobileNew/mobileNav-level-1-item';
+import MobileNavLevelOneItem from './mobileNew/mobileNav-level-1-item';
 
 class RedesignHeader extends Component {
     constructor(props) {
@@ -137,7 +137,7 @@ class RedesignHeader extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {/* <Collapse in={mobileSearchMenu}>
+                                                        <Collapse in={mobileSearchMenu}>
                                                             <div className="" id="page-header__search-box">
                                                                 <form className="mobile-search-box d-flex justify-space-between align-items-center">
                                                                     <div className="form-group" tabIndex="0">
@@ -152,7 +152,7 @@ class RedesignHeader extends Component {
                                                                     </button>
                                                                 </form>
                                                             </div>
-                                                        </Collapse> */}
+                                                        </Collapse>
                                                         <Navbar
                                                             rootCatagories={this.props.rootCatagories}
                                                             miniCartDetails={miniCartDetails}
@@ -164,11 +164,11 @@ class RedesignHeader extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <MobileNavLevelOneItem
+                                <MobileNavLevelOneItem
                                     mobileNavMenu={this.state.mobileNavMenu}
                                     setMobileNavMenu={this.mobileNavMenuHandler}
                                     rootCatagories={this.props.rootCatagories}
-                                /> */}
+                                />
                             </div>
                         </div>
                     </main>
