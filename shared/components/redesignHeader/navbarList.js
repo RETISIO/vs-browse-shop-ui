@@ -1,18 +1,7 @@
 import React from 'react';
 
 export default function NavbarList(props) {
-  const renderCategoryContainers = (categoryItem, i) => {
-    const variantType = categoryItem.name;
-    if (categoryItem?.hasCategories) {
-      return (
-        <div key={i} className="col-sm-2">
-          <div className="category-heading sub-nav1 list-heading">{variantType}</div>
-          {getCategoryItemList(categoryItem.subCategories)}
-        </div>
-      );
-    }
-  };
-
+  const { catItem } = props;
   const renderCategoryNavItems = (navItem, i) => {
     if (navItem.hasCategories) {
       return null;
@@ -28,35 +17,35 @@ export default function NavbarList(props) {
       {categoryItem?.map((navItem, i) => renderCategoryNavItems(navItem, i))}
     </ul>
   );
-  const renderCategoryNavList = (categoryItem, variantType = '') => {
-    // const categoryContainerClass = variantType === 'variantsNav'
-    //   ? 'col-sm-2'
-    //   : 'col-sm-3';
-    // console.log("Sampletext", categoryItem);
-    return (
-      // <div className={categoryContainerClass}>
-      <div className="col-sm-2 new-class">
-        {getCategoryItemList(categoryItem)}
-      </div>
-    );
+  const renderCategoryNavList = (categoryItem) => (
+    <div className="col-sm-2">
+      {getCategoryItemList(categoryItem)}
+    </div>
+  );
+  const renderCategoryWithoutHeader = () => {
+    const isCategoryHeaderAvail = catItem?.subCategories?.filter((el) => el.hasCategories === true);
+    if (isCategoryHeaderAvail?.length !== catItem?.subCategories?.length) {
+      return renderCategoryNavList(catItem.subCategories);
+    }
   };
-  const renderCategoryNav = (catItem) => renderCategoryNavList(catItem.subCategories);
-  // const renderAllCategories = () => {
-  //   // console.log("text", props.catItem.hasCategories);
-  //   if(!props.catItem.hasCategories){
-  //     return props.catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i));
-  //   }
-  //      return renderCategoryNav(props.catItem);
-  // }
-
+  const renderCategoryContainers = (categoryItem, i) => {
+    const variantType = categoryItem.name;
+    if (categoryItem?.hasCategories) {
+      return (
+        <div key={i} className="col-sm-2">
+          <div className="category-heading sub-nav1 list-heading">{variantType}</div>
+          {getCategoryItemList(categoryItem.subCategories)}
+        </div>
+      );
+    }
+  };
   return (
     <div className="container">
       <div className="row">
-        {props.catItem.hasCategories
-          ? props.catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i))
+        {catItem.hasCategories
+          ? catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i))
           : null}
-          {renderCategoryNav(props.catItem)}
-          {/* {renderAllCategories()} */}
+        {renderCategoryWithoutHeader()}
       </div>
     </div>
   );
