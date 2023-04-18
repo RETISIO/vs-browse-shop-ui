@@ -64,7 +64,7 @@ class MobileNavLevelOneItem extends Component {
     return (
       <div className={mobileMenuClass} id="mobileNav">
         <div role="dialog" aria-modal="true" aria-labelledby="heading-nav" id="dgbox">
-          <nav className="navbar-mobile-menu">
+          <nav className="navbar-mobile-menu mobileNavLevel1Item">
             <button
               className="navbar-toggle js-mobile-menu-toggle mobileNavMenuCloseBtn outline-change first-focusable-element"
               id="firstFElement"

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Collapse from 'react-bootstrap/Collapse';
-import MobileHeaderLogo, { MobileNavBar } from './mobile/mobileHeader';
-import MiniCartIcon from '../header/miniCartIcon';
+// import Collapse from 'react-bootstrap/Collapse';
+import MobileHeaderLogo, { MobileNavBar } from './mobileNew/mobileHeader';
+import MiniCartIcon from './miniCartIcon';
 import Navbar from './navbar';
-import MobileNavLevelOneItem from './mobile/mobileNav-level-1-item';
-// import SearchAheadResults from './searchAheadResults';
-//  import HeaderAccountActionLinks from './headerAccountActionLinks';
+// import MobileNavLevelOneItem from './mobileNew/mobileNav-level-1-item';
 
 class RedesignHeader extends Component {
     constructor(props) {
@@ -43,12 +41,6 @@ class RedesignHeader extends Component {
         }
     }
 
-    // searchHandleChange = (event) => {
-    //     const { value } = event.target;
-    //     this.setState({ searchText: value });
-    //     this.props.searchAheadChangeHandler(value);
-    //   };
-
     mobileNavMenuHandler = () => {
         const { mobileNavMenu } = this.state;
         this.setState({ mobileNavMenu: !mobileNavMenu });
@@ -66,7 +58,7 @@ class RedesignHeader extends Component {
         } = this.props;
         const isHomePageContainer = isHomePage === 'Home' ? 'homePageHeader' : 'nonHomePageHeader';
         const {
-            isSearchBoxOpen, searchText, phoneNumMenu, mobileSearchMenu,
+            isSearchBoxOpen, searchText,mobileSearchMenu,
         } = this.state;
         const searchBoxClassName = isSearchBoxOpen ? 'show' : '';
         const searchBoxActive = isSearchBoxOpen ? 'active' : '';
@@ -113,21 +105,11 @@ class RedesignHeader extends Component {
                                                                                             data-search-min="1"
                                                                                             autoComplete="off"
                                                                                             placeholder="Type your desired meat or dish to find the best"
-                                                                                            // onChange={this.searchHandleChange}
-                                                                                            // value={searchText}
                                                                                             name="submit-search"
                                                                                         />
                                                                                         <div className="btn-new searchProducts ab-searchProducts-redesign">
                                                                                             <i className="icon icon-search fa fa-search" aria-hidden="true"></i>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div className={`dropdown-menu dropdown-menu-center dropdown-menu-arrow dropdown-menu-search js-custom-height js-search__body ${showSearchAheadDataMenu}`} id="results" role="listbox" aria-labelledby="label">
-                                                                                        {/* <SearchAheadResults
-                                                                                            searchAheadData={searchAheadData}
-                                                                                            transformText={transformText}
-                                                                                            componentMap={componentMap}
-                                                                                            damPath={damPath}
-                                                                                        /> */}
                                                                                     </div>
                                                                                 </form>
                                                                             </div>
@@ -137,7 +119,6 @@ class RedesignHeader extends Component {
                                                                         <ul className="list-inline header-actions-redesign d-flex flex-no-wrap head-actn">
                                                                             <li className="list-inline-item dropdown header-actions-account headerDropdown" style={{ top: '12px' }}>
                                                                                 <i className="icon icon-user fas fa-user-circle"></i>
-                                                                                {/* <HeaderAccountActionLinks {...this.props} /> */}
                                                                             </li>
                                                                             <div className="label-redesign">
                                                                                 <span>My Account</span>
@@ -156,7 +137,7 @@ class RedesignHeader extends Component {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <Collapse in={mobileSearchMenu}>
+                                                        {/* <Collapse in={mobileSearchMenu}>
                                                             <div className="" id="page-header__search-box">
                                                                 <form className="mobile-search-box d-flex justify-space-between align-items-center">
                                                                     <div className="form-group" tabIndex="0">
@@ -171,7 +152,7 @@ class RedesignHeader extends Component {
                                                                     </button>
                                                                 </form>
                                                             </div>
-                                                        </Collapse>
+                                                        </Collapse> */}
                                                         <Navbar
                                                             rootCatagories={this.props.rootCatagories}
                                                             miniCartDetails={miniCartDetails}
@@ -183,11 +164,11 @@ class RedesignHeader extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <MobileNavLevelOneItem
+                                {/* <MobileNavLevelOneItem
                                     mobileNavMenu={this.state.mobileNavMenu}
                                     setMobileNavMenu={this.mobileNavMenuHandler}
                                     rootCatagories={this.props.rootCatagories}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </main>

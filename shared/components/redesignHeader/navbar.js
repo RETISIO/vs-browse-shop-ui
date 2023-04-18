@@ -38,35 +38,6 @@ export default function Navbar(props) {
     );
   };
 
-  // const mouseOverOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'show');
-  // const mouseOutOnMainNav = (event) => toggleHeaderMainDropdownMenu(event, 'hide');
-
-  // const toggleHeaderMainDropdownMenu = (event, displayHeaderMainMenu) => {
-  //   const navMainEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
-  //   if (displayHeaderMainMenu === 'show') {
-  //     navMainEl.classList.add('open');
-  //   };
-  // }
-
-  // const renderMainDropdown = () => {
-  //   return (
-  //     <li
-  //       key={`navMainEl`}
-  //       className="nav-item js-dropdown navListItems"
-  //       onMouseEnter={(e) => mouseOverOnMainNav(e)}
-  //       onMouseLeave={(e) => mouseOutOnMainNav(e)}
-  //     >
-  //       <a
-  //         className="first-dropdown"
-  //         href="#"
-  //         style={{ textDecoration: 'none', textTransform: 'uppercase' }}
-  //       >
-  //         Shop All
-  //       </a>
-  //     </li>
-  //   );
-  // };
-
   return (
     <nav className="navbar redesign-navbar">
       <div>

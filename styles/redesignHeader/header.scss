@@ -111,9 +111,61 @@
     .header-sticky.js-sticky-menu.is_stuck {
       position: fixed;
       top: 0;
-      width: 1366px;
+      width: 100%;
       transition: .1s ease-in-out;
     }
+
+    @media screen and (max-width: 768px) {
+      .header-sticky.js-sticky-menu.is_stuck {
+        position: inherit;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      .home-header-container .header-sticky {
+        z-index: 1000;
+      }
+    }
+
+  @media screen and (min-width: 768px) {
+    .header-sticky.is_stuck {
+      .navbar {
+        &-nav {
+          width: 100%;
+          
+
+          .nav-item {
+            //A360 #51 start
+            display: block;
+            //A360 #51 end
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1366px) {
+    .header-sticky.js-sticky-menu.is_stuck {
+      .navbar.redesign-navbar {
+        .header-menu {
+          position: absolute;
+          right: 0;
+          bottom: 20px;
+        }
+      }
+    }
+  }
+  @media (min-width: 1366px) {
+    .header-sticky.js-sticky-menu.is_stuck {
+      .navbar.redesign-navbar {
+        .header-menu {
+          position: absolute;
+          right: 0;
+          bottom: 20px;
+        }
+      }
+    }
+  }
     
     #logo-redesign {
       img {
@@ -121,12 +173,10 @@
     
         @media screen and (min-width: $screen-md-min) {
           height: 33px;
-          // width: 308px;
         }
     
         @media screen and (min-width: 768px) {
           height: 33px;
-          // width: 308px;
         }
         @media (min-width: 320px) and (max-width: 480px) {
           height: 42px;
@@ -189,11 +239,45 @@
       }
     }
   }
-    .home-header-container #header {
+
+  .home-header-container #header {
+    .header-sticky.js-sticky-menu.is_stuck {
       .navbar.redesign-navbar {
         background: #2c2828;
+        // margin-left: 8px;
       }
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    .home-header-container #header {
+      .header-sticky.js-sticky-menu.is_stuck {
+        .navbar.redesign-navbar {
+          background: none;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .home-header-container #header {
+      .header-sticky.js-sticky-menu.is_stuck {
+        .navbar.redesign-navbar {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1366px) {
+    .home-header-container #header {
+      .header-sticky.js-sticky-menu.is_stuck {
+        .navbar.redesign-navbar {
+          margin-left: 8px;
+        }
+      }
+    }
+  }
 
   .home-header-container .nonHomePageHeader #header {
     .header-content-redesign {
@@ -211,6 +295,18 @@
       background-color: #00466a;
       width: 100%;
       position: absolute;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .home-header-container .nonHomePageHeader #header {
+      .header-sticky.is_stuck {
+        .navbar {
+          &-nav {
+            background-color: #00466a;
+          }
+        }
+      }
     }
   }
 

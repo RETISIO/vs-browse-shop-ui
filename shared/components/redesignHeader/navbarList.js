@@ -29,16 +29,25 @@ export default function NavbarList(props) {
     </ul>
   );
   const renderCategoryNavList = (categoryItem, variantType = '') => {
-    const categoryContainerClass = variantType === 'variantsNav'
-      ? 'col-sm-2'
-      : 'col-sm-3';
+    // const categoryContainerClass = variantType === 'variantsNav'
+    //   ? 'col-sm-2'
+    //   : 'col-sm-3';
+    // console.log("Sampletext", categoryItem);
     return (
-      <div className={categoryContainerClass}>
+      // <div className={categoryContainerClass}>
+      <div className="col-sm-2 new-class">
         {getCategoryItemList(categoryItem)}
       </div>
     );
   };
   const renderCategoryNav = (catItem) => renderCategoryNavList(catItem.subCategories);
+  // const renderAllCategories = () => {
+  //   // console.log("text", props.catItem.hasCategories);
+  //   if(!props.catItem.hasCategories){
+  //     return props.catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i));
+  //   }
+  //      return renderCategoryNav(props.catItem);
+  // }
 
   return (
     <div className="container">
@@ -47,10 +56,8 @@ export default function NavbarList(props) {
           ? props.catItem.subCategories.map((categoryItem, i) => renderCategoryContainers(categoryItem, i))
           : null}
           {renderCategoryNav(props.catItem)}
+          {/* {renderAllCategories()} */}
       </div>
-      {/* <div className="row">
-        
-      </div> */}
     </div>
   );
 }
