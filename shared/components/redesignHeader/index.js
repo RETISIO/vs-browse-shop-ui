@@ -150,21 +150,21 @@ class RedesignHeader extends Component {
                                 </div>
                                 <div className="align-self-center hidden-print icon-redesign col-xs-4 col-md-3">
                                   <ul className="list-inline header-actions-redesign d-flex flex-no-wrap head-actn">
-                                    <li className="list-inline-item dropdown header-actions-account headerDropdown" style={{ top: '12px' }}>
+                                    <li className="list-inline-item dropdown header-actions-account headerDropdown" style={{ top: '9px' }}>
                                       <HeaderAccountActionLinks {...this.props} />
                                     </li>
-                                    <div className="label-redesign">
+                                    <li className="label-redesign">
                                       <span>My Account</span>
-                                    </div>
+                                    </li>
 
-                                    <div className="label-redesign">
+                                    <li className="label-redesign">
                                       <span>|</span>
-                                    </div>
+                                    </li>
 
                                     <MiniCartIcon {...this.props} />
-                                    <div className="label-redesign">
+                                    <li className="label-redesign">
                                       <span>My Cart</span>
-                                    </div>
+                                    </li>
                                   </ul>
                                 </div>
                               </div>
