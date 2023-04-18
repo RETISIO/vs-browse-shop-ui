@@ -378,6 +378,7 @@
 	  background-image: none;
     background-color: #f89b00;
 	  border: 1px solid transparent;
+
 	  white-space: nowrap;
 	  padding: 6px 12px;
 	  border-radius: 4px;
@@ -396,5 +397,26 @@
 		border-radius: 4px;
 		user-select: none;
 		text-decoration: none;
+	  }
+	}
+.label-redesign {
+	  button#headerAccnt-dropdown {
+		padding: 0;
+		margin: 0;
+		background-color: transparent;
+		width: auto;
+		border-color: transparent;
+		border-width: 2px;
+		height: auto;
+	  }
+  
+	  .dropdown-item {
+		display: block;
+		width: 100%;
+		clear: both;
+		padding: 3px 20px;
+		color: #354052;
+		font-weight: 300;
+		line-height: 21px;
 	  }
 	}
