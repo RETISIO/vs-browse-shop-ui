@@ -5,23 +5,12 @@ export default function Navbar(props) {
   const { rootCatagories } = props;
   const headerDropdownMenuClass = 'header-dropdown-menu dropdown-menu js-dropdown__body homeDropdownMenu';
 
-  const toggleHeaderDropdownMenu = (event, displayHeaderMenu) => {
-    const navEl = event.target.closest('.navListItems').querySelector('.header-dropdown-menu.dropdown-menu');
-    if (displayHeaderMenu === 'show') {
-      navEl.classList.add('open');
-    };
-  }
-  const mouseOverOnNav = (event) => toggleHeaderDropdownMenu(event, 'show');
-  const mouseOutOnNav = (event) => toggleHeaderDropdownMenu(event, 'hide');
-
   const renderLevel1Item = (item, i) => {
     const navItem = item.name;
     return (
       <li
         key={`navEl-${i}`}
         className="nav-item js-dropdown sub-nav"
-        onMouseEnter={(e) => mouseOverOnNav(e)}
-        onMouseLeave={(e) => mouseOutOnNav(e)}
       >
         <a
           className="js-dropdown__btn"
