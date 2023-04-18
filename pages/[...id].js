@@ -56,7 +56,7 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async context => {
-  const { query, req, asPath } = context
+  const { query, req, asPath } = context;
   let res
   try {
     if (!query.id.includes('nginx-health')) {
