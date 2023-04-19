@@ -45,7 +45,7 @@ function Static({ data }) {
       {data ? (
         <MainLayout data={data}>
           {/* {i18n.t('title')} */}
-          <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
+          <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />
         </MainLayout>
       ) : (
         <DefaultErrorPage statusCode={404} />

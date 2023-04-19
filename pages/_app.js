@@ -15,6 +15,7 @@ import { PageDataContextWrapper } from '../shared/context/pageData-context';
 import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
 import Listract from '../shared/components/ThirdPartyScripts/Listract';
+import RetisioSDK from '../shared/components/ThirdPartyScripts/RetisioSDK';
 import { MiniCartContextWrapper } from '../shared/context/miniCartcontext';
 import { FormDataContextWrapper } from '../shared/context/formDataContext';
 
@@ -38,8 +39,9 @@ export default function App({ Component, pageProps }) {
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>
-      {/* <GoogleAnalytics /> */}
+      <GoogleAnalytics />
       <Listract />
+      <RetisioSDK />
     </SSRProvider>
   );
 }
