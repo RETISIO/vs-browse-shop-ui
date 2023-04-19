@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { I18nProvider } from 'next-localization';
 import { useRouter } from 'next/router';
 import { SSRProvider } from 'react-bootstrap';
+import Script from 'next/script';
 import { AppWrapper } from '../shared/context/appContext';
 // import Layout from '../shared/components/layout';
 import '../styles/style.css';
@@ -39,6 +40,7 @@ export default function App({ Component, pageProps }) {
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>
+      <Script src="/js/listrack.js" strategy="beforeInteractive" />
       <GoogleAnalytics />
       <Listract />
       <RetisioSDK />

@@ -54,7 +54,6 @@ function Home({ data }) {
         {/* <ImageCarousel /> */}
       </main>
       <Yotpo />
-      <Script src="/js/listrack.js" />
     </MainLayout>
   );
 }
