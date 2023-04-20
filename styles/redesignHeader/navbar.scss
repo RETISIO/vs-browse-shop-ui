@@ -32,13 +32,13 @@
 
     .sub-nav:hover .js-dropdown__btn  {
         background-color: #3F3F3F; 
-        border-left: 15px solid #771e14;  
-        font-size: 18px;
+        border-left: 7px solid #771e14;
+        font-size: 16px;
         margin-left: 0;
     }
     
     .sub-nav1 {
-        transform: translate(185px,-442px);
+        transform: translate(184px,-443px);
         background-color: #3F3F3F;
         padding: 10px;    
         line-height: 2.5;
@@ -75,15 +75,18 @@
         min-width: 225px;
     }
 
-    .header-dropdown-menu .background-color {
-        min-height: 505px;
+    .header-dropdown-menu .bg-color {
         min-width: 225px;
+        height: 100vh;
     }
 
     .nav-list li:hover {
         .category-list, .dropdown-menu {
             display: block;
         }
+    }
+    .firstDropDownMegaMenu {
+        left: -6px;
     }
 
     .c-list li {
