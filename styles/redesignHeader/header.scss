@@ -275,6 +275,16 @@
     }
   }
 
+  .home-header-container #header {
+    .header-sticky.js-sticky-menu.is_stuck {
+      .navbar.redesign-navbar {
+        .firstDropDownMegaMenu {
+          left: -15px;
+        }
+      }
+    }
+  }
+
   // @media screen and (min-width: 768px) {
   //   .home-header-container #header {
   //     .header-sticky.js-sticky-menu.is_stuck {
@@ -317,6 +327,24 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
       background-color: #00466a;
+    }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .header-sticky.js-sticky-menu.is_stuck {
+      .navbar.redesign-navbar {
+        .firstDropDownMegaMenu {
+          left: -15px;
+        }
+      }
+    }
+  }
+
+  .home-header-container .nonHomePageHeader #header {
+    .navbar.redesign-navbar{
+      .firstDropDownMegaMenu {
+        left: -6px;
+      }
     }
   }
 
