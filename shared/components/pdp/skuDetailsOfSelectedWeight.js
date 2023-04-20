@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/click-events-have-key-events */

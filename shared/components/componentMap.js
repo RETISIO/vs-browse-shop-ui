@@ -13,7 +13,7 @@ import RequestCatalog from './requestCatalog'
 import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
-import ProductDescription from './pdp'
+import ProductDescription from './pdp/pdpdetails'
 
 const ComponentMap = {
   nextImage: NextImage,

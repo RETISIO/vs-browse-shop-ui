@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable linebreak-style */
 /* eslint-disable arrow-parens */
 /* eslint-disable @next/next/no-html-link-for-pages */
@@ -17,7 +18,7 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { Breadcrumb } from '../template/components/breadcrumb'
-import { NextImage } from '../template/components/nextImage'
+import NextImage from '../template/components/nextImage'
 // import SkuLineItem from './skuLineItem';
 import GiftCard from '../giftCard'
 import SkuSelection from './skuSelection'
@@ -52,6 +53,7 @@ export default function ProductDescription(props) {
   }
 
   const renderGalleryImage = () => {
+    console.log('pdpData....', pdpData)
     const defaultSkuId = pdpData?.products[0]?.defaultSkuId
     const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media
     const thumbnailHeight = 475

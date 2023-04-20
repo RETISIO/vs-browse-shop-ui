@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable linebreak-style */
 /* eslint-disable arrow-parens */
 /* eslint-disable @next/next/no-html-link-for-pages */
@@ -14,20 +15,21 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
-import Accordion from 'react-bootstrap/Accordion';
-import { Breadcrumb } from '../template/components/breadcrumb';
-import NextImage from '../template/components/nextImage';
+import React, { useEffect, useState } from 'react'
+import Accordion from 'react-bootstrap/Accordion'
+import { Breadcrumb } from '../template/components/breadcrumb'
+import NextImage from '../template/components/nextImage'
 // import SkuLineItem from './skuLineItem';
-import GiftCard from '../giftCard';
-import SkuSelection from './skuSelection';
-import NewBadge from '../../../public/static/assets/new.png';
-import FreshBadge from '../../../public/static/assets/Fresh.png';
-import ImageCarousel from '../ImageCarousel';
-import ProductSkus from './productSkus';
+import GiftCard from '../giftCard'
+import SkuSelection from './skuSelection'
+import NewBadge from '../../../public/static/assets/new.png'
+import FreshBadge from '../../../public/static/assets/Fresh.png'
+import ImageCarousel from '../ImageCarousel'
+import ProductSkus from './productSkus'
 
 export default function ProductDescription(props) {
-  const pdpData = props?.pdpData?.payLoad
+  const pdpData = props?.payLoad
+  // const pdpData = props?.pdpData?.payLoad
   console.log('from ProductDescription111111111....props...', props)
   const productSkus =
     pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
@@ -42,22 +44,22 @@ export default function ProductDescription(props) {
   useEffect(() => {
     setShowWidget(true)
     setTimeout(() => {
-      window.yotpo && window.yotpo.refreshWidgets();
-    }, 10);
-  }, []);
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
-//  const productId = pdpData?.products[0]?.productId;
-  const productAdditionDetails = pdpData?.products[0]?.additionalDetails;
+      window.yotpo && window.yotpo.refreshWidgets()
+    }, 10)
+  }, [])
+  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
+  //  const productId = pdpData?.products[0]?.productId;
+  const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   const handleShowOnSaleBadge = showBadge => {
     console.log('from handleShowOnSaleBadge...showBadge...', showBadge)
     setShowSaleWidget(showBadge)
   }
-    
+
   const renderGalleryImage = () => (
-    <aside className="col-md-5">
-      <div className="product-gallery app-figure" id="zoom-fig">
-        <div className="product-gallery__main">
+    <aside className='col-md-5'>
+      <div className='product-gallery app-figure' id='zoom-fig'>
+        <div className='product-gallery__main'>
           <ImageCarousel
             data={pdpData?.products[0]?.productDetails?.productMedia?.default}
             additionalDetails={productAdditionDetails}
@@ -66,13 +68,14 @@ export default function ProductDescription(props) {
         </div>
       </div>
     </aside>
-  );
+  )
   return (
     <section>
       <div className='container pdpMainContainer'>
         <nav className='breadcrumbs-block hidden-print'>
           <ol className='breadcrumb'>
-            <Breadcrumb data={props.pdpData} />
+            <Breadcrumb data={props} />
+            {/* <Breadcrumb data={props.pdpData} /> */}
           </ol>
         </nav>
         <div>
@@ -127,29 +130,36 @@ export default function ProductDescription(props) {
               ></div>
             </div>
             {productAdditionDetails?.isNeverFrozen && (
-              <div id="cc_img__resize_wrapper-badge-new" style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}>
+              <div
+                id='cc_img__resize_wrapper-badge-new'
+                style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
+              >
                 <NextImage
-                  alt="New"
+                  alt='New'
                   src={FreshBadge}
-                  height="20"
-                  width="44"
-                  id="new-logo"
-                  className="new-logo"
+                  height='20'
+                  width='44'
+                  id='new-logo'
+                  className='new-logo'
                 />
               </div>
             )}
-            {!productAdditionDetails?.isNeverFrozen && productAdditionDetails?.isNewProduct && (
-              <div id="cc_img__resize_wrapper-badge-new" style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}>
-                <NextImage
-                  alt="New"
-                  src={NewBadge}
-                  height="20"
-                  width="44"
-                  id="new-logo"
-                  className="new-logo"
-                />
-              </div>
-            )}
+            {!productAdditionDetails?.isNeverFrozen &&
+              productAdditionDetails?.isNewProduct && (
+                <div
+                  id='cc_img__resize_wrapper-badge-new'
+                  style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
+                >
+                  <NextImage
+                    alt='New'
+                    src={NewBadge}
+                    height='20'
+                    width='44'
+                    id='new-logo'
+                    className='new-logo'
+                  />
+                </div>
+              )}
           </h1>
           <p className='page-short-description'>
             {pdpData?.products[0]?.description}
@@ -162,20 +172,6 @@ export default function ProductDescription(props) {
               props={props}
               handleShowOnSaleBadge={handleShowOnSaleBadge}
             />
-            {/* <table className="table table-striped table-responsive-sm product-table">
-              <thead>
-                <tr>
-                  <th>Item #</th>
-                  <th width="160">Options</th>
-                  <th>Price</th>
-                  <th>QTY</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productSkus?.map((item, i) => <SkuSelection key={`sku-${i}`} skuItem={item} productId={productId} />)}
-              </tbody>
-            </table> */}
             {/* <SkuSelection data={props} /> */}
           </div>
         </div>
