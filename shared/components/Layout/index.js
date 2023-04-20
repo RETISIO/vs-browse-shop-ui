@@ -22,7 +22,7 @@ export default function MainLayout({ data, children }) {
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
-  if(data.payLoad && data.payLoad.webEnabledAttr) {
+  if(data && data.payLoad && data.payLoad.webEnabledAttr) {
     seoData = data.payLoad.webEnabledAttr;
   }
   const i18n = useI18n();
@@ -135,23 +135,23 @@ export default function MainLayout({ data, children }) {
       <button onClick={()=>{setShow(!show)}}>click</button> */}
       {/* <Login /> */}
       <Head>
-        {seoData.title ? (
-          <title>{seoData.title}</title>
+        {seoData?.title ? (
+          <title>{seoData?.title}</title>
         ) : (
           <title>Retisio Page</title>
         )}
-        {seoData.description ? (
-          <meta name="description" content={seoData.description} />
+        {seoData?.description ? (
+          <meta name="description" content={seoData?.description} />
         ) : (
           <meta name="description" content="restisio home" />
         )}
-        {seoData.keywords ? (
-          <meta name="keywords" content={seoData.keywords} />
+        {seoData?.keywords ? (
+          <meta name="keywords" content={seoData?.keywords} />
         ) : (
           <meta name="keywords" content="" />
         )}
-        {seoData.canonicalUrl ? (
-          <link rel="canonical" href={seoData.canonicalUrl} />
+        {seoData?.canonicalUrl ? (
+          <link rel="canonical" href={seoData?.canonicalUrl} />
         ) : (
           <link rel="canonical" href="restisio home" />
         )}
