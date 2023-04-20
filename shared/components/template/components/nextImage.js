@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import NoImage from '../../../../public/static/assets/no-image.png';
 
-export function NextImage(props) {
+function NextImage(props) {
   const { src, alt, className } = props;
   const [srcImg, setSrc] = useState(src);
 
