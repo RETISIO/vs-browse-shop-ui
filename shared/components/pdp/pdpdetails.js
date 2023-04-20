@@ -14,14 +14,17 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react'
-import Accordion from 'react-bootstrap/Accordion'
-import { Breadcrumb } from '../template/components/breadcrumb'
-import { NextImage } from '../template/components/nextImage'
+import React, { useEffect, useState } from 'react';
+import Accordion from 'react-bootstrap/Accordion';
+import { Breadcrumb } from '../template/components/breadcrumb';
+import NextImage from '../template/components/nextImage';
 // import SkuLineItem from './skuLineItem';
-import GiftCard from '../giftCard'
-import SkuSelection from './skuSelection'
-import ProductSkus from './productSkus'
+import GiftCard from '../giftCard';
+import SkuSelection from './skuSelection';
+import NewBadge from '../../../public/static/assets/new.png';
+import FreshBadge from '../../../public/static/assets/Fresh.png';
+import ImageCarousel from '../ImageCarousel';
+import ProductSkus from './productSkus';
 
 export default function ProductDescription(props) {
   const pdpData = props?.pdpData?.payLoad
@@ -39,112 +42,31 @@ export default function ProductDescription(props) {
   useEffect(() => {
     setShowWidget(true)
     setTimeout(() => {
-      window.yotpo && window.yotpo.refreshWidgets()
-    }, 10)
-  }, [])
-
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productId = pdpData?.products[0]?.productId
+      window.yotpo && window.yotpo.refreshWidgets();
+    }, 10);
+  }, []);
+  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+//  const productId = pdpData?.products[0]?.productId;
+  const productAdditionDetails = pdpData?.products[0]?.additionalDetails;
 
   const handleShowOnSaleBadge = showBadge => {
     console.log('from handleShowOnSaleBadge...showBadge...', showBadge)
     setShowSaleWidget(showBadge)
   }
-
-  const renderGalleryImage = () => {
-    const defaultSkuId = pdpData?.products[0]?.defaultSkuId
-    const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media
-    const thumbnailHeight = 475
-    const thumbnailWidth = 475
-    return (
-      <aside className='col-md-5'>
-        <div className='product-gallery app-figure' id='zoom-fig'>
-          <div
-            id='cc_img__resize_wrapper-badge-usda-prime'
-            style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
-          >
-            {/* <img
-              id="usda-logo"
-              className="usda-prime-logo"
-              alt="USDA Prime"
-              src="https://www.allenbrothers.com/file/general/usda.png"
-              srcSet="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/general/usda.png&amp;height=45&amp;width=55 55w"
-              sizes="(max-width:480px) 55px,(min-width:481px) and (max-width:768px) 55px,(min-width:769px) and (max-width:979px) 55px,(min-width:980px) 55px"
-            /> */}
-
-            <NextImage
-              alt={mediaObj?.altText}
-              src={`${damPath}${mediaObj?.thumbnailImg}`}
-              height={thumbnailHeight}
-              width={thumbnailWidth}
-              id='usda-logo'
-              className='usda-prime-logo hidden'
-            />
-          </div>
-          <div className='product-gallery__main'>
-            <a
-              className='MagicZoom js-product-gallery-zoom'
-              id='zoom'
-              href='/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg'
-            >
-              <figure className='mz-figure mz-hover-zoom mz-ready'>
-                {/* <img
-                  id="zoom-image"
-                  loading="lazy"
-                  alt="Dry-Aged USDA Prime Boneless Sirloin Strip Steaks"
-                  src="https://www.allenbrothers.com/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg&amp;height=475&amp;width=475"
-                  style={{ maxWidth: '475px', maxHeight: '475px' }}
-                /> */}
-                <NextImage
-                  alt={mediaObj?.altText}
-                  src={`${damPath}${mediaObj?.thumbnailImg}`}
-                  height={thumbnailHeight}
-                  width={thumbnailWidth}
-                  id='zoom-image'
-                />
-                <div
-                  className='mz-lens'
-                  style={{
-                    top: '0px',
-                    transform: 'translate(-10000px, -10000px)',
-                    width: '255px',
-                    height: '255px'
-                  }}
-                >
-                  <img
-                    src='https://www.allenbrothers.com/ccstore/v1/images/?source=/file/v4671930468835559977/products/10032.jpg&amp;height=475&amp;width=475'
-                    style={{
-                      position: 'absolute',
-                      top: '0px',
-                      left: '0px',
-                      width: '458px',
-                      height: '458px',
-                      transform: 'translate(-204px, -1px)'
-                    }}
-                  />
-                </div>
-              </figure>
-            </a>
-          </div>
-          <div
-            className='MagicScroll js-product-gallery-scroll'
-            id='productThumb'
-            data-magic-zoom-id='zoom'
-            data-target-id='pdp-slider-desktop'
-            data-options='orientation: horizontal;'
-            data-bind='mainGallery: mainGallery'
-          ></div>
-          <div
-            className='MagicScroll'
-            id='pdp-slider-desktop'
-            data-options='orientation: horizontal;'
-          ></div>
+    
+  const renderGalleryImage = () => (
+    <aside className="col-md-5">
+      <div className="product-gallery app-figure" id="zoom-fig">
+        <div className="product-gallery__main">
+          <ImageCarousel
+            data={pdpData?.products[0]?.productDetails?.productMedia?.default}
+            additionalDetails={productAdditionDetails}
+            onSale={showSaleWidget}
+          />
         </div>
-      </aside>
-    )
-  }
-
-  console.log('from pdpDetails...showSaleWidget..', showSaleWidget)
+      </div>
+    </aside>
+  );
   return (
     <section>
       <div className='container pdpMainContainer'>
@@ -204,6 +126,30 @@ export default function ProductDescription(props) {
                 data-yotpo-product-id={pdpData?.products[0]?.productId}
               ></div>
             </div>
+            {productAdditionDetails?.isNeverFrozen && (
+              <div id="cc_img__resize_wrapper-badge-new" style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}>
+                <NextImage
+                  alt="New"
+                  src={FreshBadge}
+                  height="20"
+                  width="44"
+                  id="new-logo"
+                  className="new-logo"
+                />
+              </div>
+            )}
+            {!productAdditionDetails?.isNeverFrozen && productAdditionDetails?.isNewProduct && (
+              <div id="cc_img__resize_wrapper-badge-new" style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}>
+                <NextImage
+                  alt="New"
+                  src={NewBadge}
+                  height="20"
+                  width="44"
+                  id="new-logo"
+                  className="new-logo"
+                />
+              </div>
+            )}
           </h1>
           <p className='page-short-description'>
             {pdpData?.products[0]?.description}
