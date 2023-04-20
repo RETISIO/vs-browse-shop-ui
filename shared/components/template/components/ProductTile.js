@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Link from 'next/link';
-import { NextImage } from './nextImage';
+import NextImage from './nextImage';
 
-export default function ProductTile({value}) {
+export default function ProductTile({ value }) {
   return (
     <div className="product-card" data-mh="product-card">
       {value?.productPrice?.onSale ? (

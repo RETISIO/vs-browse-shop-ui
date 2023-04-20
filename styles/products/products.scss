@@ -47,10 +47,10 @@
     width: 120px;
     display: grid;
     align-items: center;
-    flex: 18%;
-    .slick-slider {
-        text-align: -webkit-center !important;
-    }
+    flex: 15%;
+    // .slick-slider {
+    //     text-align: -webkit-center !important;
+    // }
     .slick-prev {
         position: initial !important;
         width: 100% !important;
@@ -86,7 +86,7 @@
 }
 
 .picture-section {
-    flex: 82%;
+    flex: 85%;
     padding-left: 0.5rem;
 }
 
