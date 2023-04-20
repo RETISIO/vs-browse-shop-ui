@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
@@ -102,6 +103,7 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
         <ul className='list-inline'>
           {selectedSku &&
             selectedSku.count.map(skuCount => {
+              console.log('line106...skucount...', skuCount)
               if (!skuCount.hasStock) {
                 // out of stock
                 return (
@@ -110,6 +112,11 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                       <span className='Countb'>{skuCount.pieces}</span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
+                    {countSelected && !countSelected.hasStock && (
+                      <div className='notifytxt'>
+                        <a href='#'>NOTIFY ME</a>
+                      </div>
+                    )}
                   </li>
                 )
               }
@@ -123,6 +130,14 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                     }
                     onClick={() => handleSelected(skuCount)}
                   >
+                    {countSelected &&
+                    countSelected.pieces === skuCount.pieces ? (
+                      <span className='selected'>
+                        <i className='icon fas fa-check'></i>
+                      </span>
+                    ) : (
+                      ''
+                    )}
                     <span className='Countb'>{skuCount.pieces}</span>
                   </div>
                 </li>
@@ -130,11 +145,11 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
             })}
         </ul>
       </div>
-      {countSelected && !countSelected.hasStock && (
+      {/* {countSelected && !countSelected.hasStock && (
         <div className='notifytxt'>
           <a href='#'>NOTIFY ME</a>
         </div>
-      )}
+      )} */}
 
       {/* Desktop view  */}
 
