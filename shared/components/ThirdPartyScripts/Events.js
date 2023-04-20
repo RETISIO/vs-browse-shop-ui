@@ -4,9 +4,14 @@ import { RviewItem } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
   viewItem(itemData);
-  if(window.lstImplement) {
-    window.lstImplement.browsedProduct(itemData);
+  try{
+    if(window && window.lstImplement) {
+      window.lstImplement.browsedProduct(itemData);
+    }
+  }catch(e) {
+    console.log(e);
   }
+
   RviewItem(itemData);
 };
 
