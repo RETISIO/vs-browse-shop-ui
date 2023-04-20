@@ -28,7 +28,8 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
   const [defaultSkuId, setDefaultSkuId] = useState()
 
   useEffect(() => {
-    const defSkuId = props?.pdpData?.payLoad?.products[0]?.defaultSkuId || ''
+    const defSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
+    // const defSkuId = props?.pdpData?.payLoad?.products[0]?.defaultSkuId || ''
     setDefaultSkuId(defSkuId)
     prepareSkusData()
   }, [props])
@@ -38,38 +39,27 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
   }
 
   function prepareSkusData() {
-    const { pdpData } = props
-    const product = pdpData.payLoad.products[0]
+    const { payLoad } = props
+    const product = payLoad.products[0]
     const { skus } = product
-    console.log('from SkuSelection....product....', product)
-    console.log('from SkuSelection....skus....', skus)
-    // const skuObj = { weight: '', thickness: '', count: [] }
-    // const skuWeightObj = { id: '', weight: '', thickness: '' }
-    // const skusWeightsArr = []
-    // const skusArr = []
     const skusObj = {}
     for (const key in skus) {
       const { weight, thickness } = skus[key].skuDetails.additionalDetails
-      const skusObjKey = `${weight}__${thickness}`
+      const skusObjKey = `${weight}`
+      //   const skusObjKey = `${weight}__${thickness}`
       if (!skusObj[skusObjKey]) {
         skusObj[skusObjKey] = { weight, thickness, count: [] }
       }
       skusObj[skusObjKey].id = skus[key].skuId
       //   skusObj[weight].thickness =
       //     skus[key].skuDetails.additionalDetails.thickness
-      //   skusObj[weight].count = []
-      //   skuWeightObj = {
-      //     id: skus[key].skuId,
-      //     weight: skus[key].skuDetails.additionalDetails.weight,
-      //     thickness: skus[key].skuDetails.additionalDetails.thickness
-      //   }
-      //   skusWeightsArr.push(skuWeightObj)
       const countObj = {}
       countObj.pieces = skus[key].skuDetails.additionalDetails.pieces
       countObj.availableStock = skus[key].skuDetails.inventory[0].availableStock
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel = skus[key].skuDetails.inventoryStatusLabel
-      countObj.hasPrice = skus[key].skuDetails.hasPrice
+      //   countObj.hasPrice = skus[key].skuDetails.hasPrice
+      //   countObj.hasStock = false
       countObj.hasStock = skus[key].skuDetails.hasStock
       countObj.onSale = skus[key].skuDetails.onSale
       countObj.salePrice = skus[key].skuDetails.price.salePrice
@@ -115,7 +105,6 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
     }
     setSkusData({ ...skusObj })
     // setSkusWeights(skusWeightsArr)
-    console.log('skusObj...', skusObj)
   }
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unreachable-loop */
 /* eslint-disable no-use-before-define */
@@ -102,14 +103,15 @@ function SkusBasedOnWeights({
               <li className='list-inline-item me-2 mb-2'>
                 <div
                   className={
-                    skuSelected &&
-                    skuSelected.weight === skusObj[key].weight &&
-                    skuSelected.thickness === skusObj[key].thickness
+                    skuSelected && skuSelected.weight === skusObj[key].weight
                       ? 'tag-selected'
                       : 'tag'
                   }
                   onClick={() => handleSkuSelected(skusObj[key])}
                 >
+                  <input type='checkbox' className='fa-solid fa-circle-check'>
+                    {/* <i style={{ color: '#ea1f3d' }}></i> */}
+                  </input>
                   <span className='txttagb'>{skusObj[key].weight}</span>
                   <span className='txttagz'>
                     {formatThickness(skusObj[key].thickness)}

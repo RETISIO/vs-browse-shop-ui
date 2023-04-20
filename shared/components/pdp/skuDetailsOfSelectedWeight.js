@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -46,24 +47,31 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
+  const [disableAddToCart, setDisableAddToCart] = useState(false)
   //   const [disableCounter, setDisableCounter] = useState(false)
 
   useEffect(() => {
     setCountSelected({ ...selectedSku.count[0] })
-    setItemQuantity(1)
+    if (!selectedSku.count[0].hasStock) {
+      setDisableMinusCounter(true)
+      setDisablePlusCounter(true)
+      setDisableAddToCart(true)
+      setItemQuantity(0)
+    } else {
+      setDisableMinusCounter(false)
+      setDisablePlusCounter(false)
+      setDisableAddToCart(false)
+      setItemQuantity(1)
+    }
     handleShowOnSaleBadge(selectedSku.count[0].onSale)
   }, [selectedSku])
 
-  console.log('selectedSku,countSelected....', selectedSku, countSelected)
-
   const handleSelected = skuCount => {
-    console.log('handleSelected...skuCount.onSale...', skuCount.onSale)
     handleShowOnSaleBadge(skuCount.onSale)
     setCountSelected(skuCount)
   }
 
   const addItemQuantity = qty => {
-    console.log('from handleItemQuantity....qty..', qty)
     const { availableStock } = countSelected
     if (itemQuantity < availableStock) {
       setItemQuantity(itemQuantity + 1)
@@ -72,15 +80,16 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
       setDisablePlusCounter(true)
     }
     setDisableMinusCounter(false)
+    setDisableAddToCart(false)
   }
 
   const reduceItemQuantity = qty => {
-    console.log('from handleItemQuantity....qty..', qty)
     if (itemQuantity > 0) {
       setItemQuantity(itemQuantity - 1)
     }
     if (itemQuantity - 1 <= 0) {
       setDisableMinusCounter(true)
+      setDisableAddToCart(true)
     }
     setDisablePlusCounter(false)
   }
@@ -149,6 +158,7 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
           )}
         </div>
 
+        {/* counter section */}
         <div className=''>
           <div className=''>
             <span className='panel1'>
@@ -183,7 +193,12 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
               </div>
             </span>
             <span className='sp-20'>
-              <button className='btn btn-secondary btn-md add-to-cart' id='0'>
+              <button
+                className={`btn btn-secondary btn-md add-to-cart ${
+                  disableAddToCart ? 'disabled' : ''
+                }`}
+                id='0'
+              >
                 ADD TO CART
               </button>
             </span>

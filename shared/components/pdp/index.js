@@ -22,10 +22,11 @@ import { NextImage } from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import SkuSelection from './skuSelection'
 import ProductSkus from './productSkus'
+import getPDPData from '../../helpers/getPDPData'
 
 export default function ProductDescription(props) {
-  const pdpData = props?.pdpData?.payLoad
-  console.log('from ProductDescription111111111....props...', props)
+  const pdpData = props?.payLoad
+  //   const pdpData = props?.pdpData?.payLoad
   const productSkus =
     pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
   const productType = pdpData?.products[0]?.productType
@@ -47,7 +48,6 @@ export default function ProductDescription(props) {
   const productId = pdpData?.products[0]?.productId
 
   const handleShowOnSaleBadge = showBadge => {
-    console.log('from handleShowOnSaleBadge...showBadge...', showBadge)
     setShowSaleWidget(showBadge)
   }
 
@@ -144,13 +144,13 @@ export default function ProductDescription(props) {
     )
   }
 
-  console.log('from pdpDetails...showSaleWidget..', showSaleWidget)
+  //   console.log('from pdpDetails...showSaleWidget..', showSaleWidget)
   return (
     <section>
       <div className='container pdpMainContainer'>
         <nav className='breadcrumbs-block hidden-print'>
           <ol className='breadcrumb'>
-            <Breadcrumb data={props.pdpData} />
+            <Breadcrumb data={props} />
           </ol>
         </nav>
         <div>
