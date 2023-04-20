@@ -65,5 +65,8 @@ window.lstImplement = {
       }
     }
   },
+  browsedProduct: (item)=>{
+    console.log(item);
+  }
   
 };

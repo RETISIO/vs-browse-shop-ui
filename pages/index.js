@@ -50,11 +50,10 @@ function Home({ data }) {
     <MainLayout data={data}>
       <main>
         {/* {i18n.t('title')} */}
-        <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
+        <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />
         {/* <ImageCarousel /> */}
       </main>
       <Yotpo />
-      <Script src="/js/listrack.js" />
     </MainLayout>
   );
 }

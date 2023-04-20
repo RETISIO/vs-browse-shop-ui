@@ -3,7 +3,7 @@ import { usePageDataContext } from '../../shared/context/pageData-context';
 import MainLayout from '../../shared/components/Layout';
 import getPDPData from '../../shared/helpers/getPDPData';
 import ProductDescription from '../../shared/components/pdp/pdpdetails';
-import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag';
+import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events';
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 
 export default function ProductDetails({ data }) {
@@ -11,7 +11,7 @@ export default function ProductDetails({ data }) {
 
   useEffect(() => {
     setPageData(data);
-    viewItem(data);
+    visitPDP(data);
   }, []);
 
   return (
@@ -26,7 +26,7 @@ export default function ProductDetails({ data }) {
   );
 }
 
-ProductDetails.getInitialProps = async (context) => {
+ProductDetails.getInitialProps = async(context) => {
   const data = await getPDPData(context);
   return {
     data,

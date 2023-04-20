@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { I18nProvider } from 'next-localization';
 import { useRouter } from 'next/router';
 import { SSRProvider } from 'react-bootstrap';
+import Script from 'next/script';
 import { AppWrapper } from '../shared/context/appContext';
 // import Layout from '../shared/components/layout';
 import '../styles/style.css';
@@ -15,6 +16,7 @@ import { PageDataContextWrapper } from '../shared/context/pageData-context';
 import { PLPDataContextWrapper } from '../shared/context/plpDatacontext';
 import GoogleAnalytics from '../shared/components/ThirdPartyScripts/GoogleAnalytics';
 import Listract from '../shared/components/ThirdPartyScripts/Listract';
+import RetisioSDK from '../shared/components/ThirdPartyScripts/RetisioSDK';
 import { MiniCartContextWrapper } from '../shared/context/miniCartcontext';
 import { FormDataContextWrapper } from '../shared/context/formDataContext';
 
@@ -38,8 +40,10 @@ export default function App({ Component, pageProps }) {
           </PageDataContextWrapper>
         </AppWrapper>
       </I18nProvider>
-      {/* <GoogleAnalytics /> */}
+      <Script src="/js/listrack.js" strategy="beforeInteractive" />
+      <GoogleAnalytics />
       <Listract />
+      <RetisioSDK />
     </SSRProvider>
   );
 }

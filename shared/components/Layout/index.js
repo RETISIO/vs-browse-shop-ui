@@ -21,7 +21,10 @@ export default function MainLayout({ data, children }) {
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
-
+  let seoData = data?.page?.seo;
+  if(data.payLoad && data.payLoad.webEnabledAttr) {
+    seoData = data.payLoad.webEnabledAttr;
+  }
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {
@@ -132,23 +135,23 @@ export default function MainLayout({ data, children }) {
       <button onClick={()=>{setShow(!show)}}>click</button> */}
       {/* <Login /> */}
       <Head>
-        {data && data?.page?.seo?.title ? (
-          <title>{data.page.seo.title}</title>
+        {seoData.title ? (
+          <title>{seoData.title}</title>
         ) : (
           <title>Retisio Page</title>
         )}
-        {data && data?.page?.seo?.description ? (
-          <meta name="description" content={data.page.seo.description} />
+        {seoData.description ? (
+          <meta name="description" content={seoData.description} />
         ) : (
           <meta name="description" content="restisio home" />
         )}
-        {data && data?.page?.seo?.keywords ? (
-          <meta name="keywords" content={data.page.seo.keywords} />
+        {seoData.keywords ? (
+          <meta name="keywords" content={seoData.keywords} />
         ) : (
           <meta name="keywords" content="" />
         )}
-        {data && data?.page?.seo?.canonicalUrl ? (
-          <link rel="canonical" href={data.page.seo.canonicalUrl} />
+        {seoData.canonicalUrl ? (
+          <link rel="canonical" href={seoData.canonicalUrl} />
         ) : (
           <link rel="canonical" href="restisio home" />
         )}
