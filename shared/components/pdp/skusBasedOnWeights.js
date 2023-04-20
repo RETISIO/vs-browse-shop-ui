@@ -55,7 +55,8 @@ function SkusBasedOnWeights({
   skuWeightSelected,
   setSkuWeightSelected,
   defaultSkuId,
-  handleShowOnSaleBadge //   handleSkuSelected
+  handleShowOnSaleBadge, //   handleSkuSelected
+  productId
 }) {
   const [skuSelected, setSkuSelected] = useState()
 
@@ -130,6 +131,7 @@ function SkusBasedOnWeights({
         <SkuDetailsOfSelectedWeight
           selectedSku={skuSelected}
           handleShowOnSaleBadge={handleShowOnSaleBadge}
+          productId={productId}
         />
       )}
     </>

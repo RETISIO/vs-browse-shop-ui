@@ -17,6 +17,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-quotes */
 import React, { useState, useEffect } from 'react'
+import { getCookie } from '@retisio/sf-api'
+import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
+import { useMiniCartDataContext } from '../../context/miniCartcontext'
+import { useAppContext } from '../../context/appContext'
 
 // skuObj = {
 // id:''
@@ -44,13 +48,19 @@ import React, { useState, useEffect } from 'react'
 //    notifyMe: ()=>{}
 //   },
 
-function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
+function SkuDetailsOfSelectedWeight({
+  selectedSku,
+  handleShowOnSaleBadge,
+  productId
+}) {
   const [countSelected, setCountSelected] = useState()
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   //   const [disableCounter, setDisableCounter] = useState(false)
+  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
+  const { setShow } = useAppContext()
 
   useEffect(() => {
     setCountSelected({ ...selectedSku.count[0] })
@@ -94,6 +104,37 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
       setDisableAddToCart(true)
     }
     setDisablePlusCounter(false)
+  }
+
+  const addToBagHandler = event => {
+    event.preventDefault()
+    const pdp = {
+      items: [
+        {
+          variantId: countSelected.itemCode,
+          productId,
+          quantity: itemQuantity,
+          productType: 'product'
+        }
+      ]
+    }
+    const result = addToBagDetails(pdp)
+    console.log('addToCart...', result, pdp)
+    result.then(data => {
+      setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+    })
+  }
+
+  const addToWishLisrHandler = e => {
+    if (getCookie('lu')) {
+      addToWishList({
+        skuId: countSelected.itemCode,
+        productId,
+        quantity: '1'
+      })
+    } else {
+      setShow(true)
+    }
   }
 
   return (
@@ -214,12 +255,17 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                   disableAddToCart ? 'disabled' : ''
                 }`}
                 id='0'
+                onClick={e => addToBagHandler(e)}
               >
                 ADD TO CART
               </button>
             </span>
             <span>
-              <button className='btn btn-primary btn-md add-to-cart' id='1'>
+              <button
+                className='btn btn-primary btn-md add-to-cart'
+                id='1'
+                onClick={e => addToWishLisrHandler(e)}
+              >
                 ADD TO WISHLIST
               </button>
             </span>
