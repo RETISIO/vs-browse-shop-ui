@@ -20,10 +20,14 @@ import PageJson from '../shared/helpers/pageData.json';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
+import { Search } from '../shared/components/ThirdPartyScripts/Events';
+import { useAppContext } from '../shared/context/appContext';
 
 function Static({ data }) {
   // const i18n = useI18n();
   const router = useRouter();
+  const { state } = useAppContext();
+
   const {
     setOffset,
   } = usePLPDataContext();
@@ -37,6 +41,11 @@ function Static({ data }) {
     setOffset(0);
   }, [router.asPath]);
  
+  useEffect(() => {
+    if(searchData && state.userData && state.channelData) {
+      Search({ ...searchData, userData: state?.userData, channelData: state?.channelData });
+    }
+  }, [searchData, state]);
   useEffect(() => {
     setLoading(true);
     (async() => {

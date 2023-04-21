@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag';
-import { RviewItem } from './RetisioEvents';
+import { RviewItem, SearchProd } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
   viewItem(itemData);
@@ -15,6 +15,11 @@ const visitPDP = (itemData) => {
   RviewItem(itemData);
 };
 
+const Search = (obj) => {
+  SearchProd(obj);
+};
+
 export {
   visitPDP,
+  Search,
 };
