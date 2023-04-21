@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-function PDPBreadcrumb(props) {
+function Customreadcrumb(props) {
   const { payLoad } = props;
   const [pageContentData, setPageContent] = useState(payLoad);
 
@@ -29,4 +29,4 @@ function PDPBreadcrumb(props) {
   );
 }
 
-export default PDPBreadcrumb;
+export default Customreadcrumb;
