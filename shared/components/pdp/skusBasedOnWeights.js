@@ -111,13 +111,22 @@ function SkusBasedOnWeights({
                   }
                   onClick={() => handleSkuSelected(skusObj[key])}
                 >
-                  {skuSelected && skuSelected.weight === skusObj[key].weight ? (
+                  {/* {skuSelected && skuSelected.weight === skusObj[key].weight ? (
                     <span className='selected'>
                       <i className='icon fas fa-check'></i>
                     </span>
                   ) : (
                     ''
-                  )}
+                  )} */}
+                  <span
+                    className={`${
+                      skuSelected && skuSelected.weight === skusObj[key].weight
+                        ? 'sku-selected'
+                        : 'sku-not-selected'
+                    }`}
+                  >
+                    <i className='icon fas fa-check'></i>
+                  </span>
                   <span className='txttagb'>{skusObj[key].weight}</span>
                   <span className='txttagz'>
                     {formatThickness(skusObj[key].thickness)}

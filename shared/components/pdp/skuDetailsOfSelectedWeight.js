@@ -171,14 +171,24 @@ function SkuDetailsOfSelectedWeight({
                     }
                     onClick={() => handleSelected(skuCount)}
                   >
-                    {countSelected &&
+                    <span
+                      className={`${
+                        countSelected &&
+                        countSelected.pieces === skuCount.pieces
+                          ? 'sku-selected'
+                          : 'sku-not-selected'
+                      }`}
+                    >
+                      <i className='icon fas fa-check'></i>
+                    </span>
+                    {/* {countSelected &&
                     countSelected.pieces === skuCount.pieces ? (
-                      <span className='selected'>
+                      <span className='sku-selected'>
                         <i className='icon fas fa-check'></i>
                       </span>
                     ) : (
                       ''
-                    )}
+                    )} */}
                     <span className='Countb'>{skuCount.pieces}</span>
                   </div>
                 </li>
