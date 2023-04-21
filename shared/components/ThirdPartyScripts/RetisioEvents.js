@@ -21,6 +21,16 @@ const SearchProd = (obj) => {
     resultFound: true,
     profileId: loggedInUserData,
   });
+  window.retisioSDK.event('integration', 'viewEvent', '1.0', {
+    siteId,
+    profileId: loggedInUserData,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    eventType: 'recommendation',
+    recommendationType: 'view_view',
+    searchQuerykey: obj?.payLoad?.searchTerm,
+    productIdList: obj?.payLoad?.products?.map((val) => val.productId),
+    pageUrl: window.location.href,
+  });
 };
 
 export {
