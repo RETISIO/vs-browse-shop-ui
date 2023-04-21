@@ -1,6 +1,6 @@
 import React from 'react';
 import Breadcrumb from '../template/components/breadcrumb';
-import { NextImage } from '../template/components/nextImage';
+import NextImage from '../template/components/nextImage';
 import GcDetailsPage from './gcDetailsPage';
 
 export default function GiftCard(props) {

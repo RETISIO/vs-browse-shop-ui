@@ -17,7 +17,6 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
-import { Breadcrumb } from '../template/components/breadcrumb'
 import NextImage from '../template/components/nextImage'
 // import SkuLineItem from './skuLineItem';
 import GiftCard from '../giftCard'
@@ -52,7 +51,6 @@ export default function ProductDescription(props) {
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   const handleShowOnSaleBadge = showBadge => {
-    console.log('from handleShowOnSaleBadge...showBadge...', showBadge)
     setShowSaleWidget(showBadge)
   }
 
@@ -72,12 +70,6 @@ export default function ProductDescription(props) {
   return (
     <section>
       <div className='container pdpMainContainer'>
-        <nav className='breadcrumbs-block hidden-print'>
-          <ol className='breadcrumb'>
-            <Breadcrumb data={props} />
-            {/* <Breadcrumb data={props.pdpData} /> */}
-          </ol>
-        </nav>
         <div>
           <div className='hidden-lg hidden-md visible-sm visible-xs'>
             <div
