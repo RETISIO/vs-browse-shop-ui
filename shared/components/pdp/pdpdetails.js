@@ -25,7 +25,6 @@ import NewBadge from '../../../public/static/assets/new.png'
 import FreshBadge from '../../../public/static/assets/Fresh.png'
 import ImageCarousel from '../ImageCarousel'
 import ProductSkus from './productSkus'
-import Breadcrumb from '../breadcrumb'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad

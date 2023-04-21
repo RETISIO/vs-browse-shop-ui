@@ -14,7 +14,8 @@ import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
 import ProductDescription from './pdp/pdpdetails'
-import Breadcrumb from './breadcrumb'
+import PDPBreadcrumb from './pdpbreadcrumb'
+import ProductInfo from './productinfo'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -29,6 +30,7 @@ const ComponentMap = {
   'article:custom': Article,
   'pdp-product-block:custom': ProductDescription,
   // 'article-detail-prodcutid:custom': Article,
-  'breadcrumb:default': Breadcrumb
+  'breadcrumb:default': PDPBreadcrumb,
+  'classification:custom': ProductInfo
 }
 export default ComponentMap
