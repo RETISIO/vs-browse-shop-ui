@@ -175,8 +175,8 @@ function SkuDetailsOfSelectedWeight({
                       className={`${
                         countSelected &&
                         countSelected.pieces === skuCount.pieces
-                          ? 'sku-selected'
-                          : 'sku-not-selected'
+                          ? 'count-sku-selected'
+                          : 'count-sku-not-selected'
                       }`}
                     >
                       <i className='icon fas fa-check'></i>
