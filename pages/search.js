@@ -82,7 +82,13 @@ function Static({ data }) {
 
 Static.getInitialProps = async (context) => {
   const { req } = context;
-  const data = await requestContructor('static/search', '', {}, req);
+  let data;
+  try{
+    data = await requestContructor('static/search', '', {}, req);
+  }catch(e) {
+    data = '';
+  }
+  
   return {
     data,
   };

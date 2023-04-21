@@ -360,7 +360,8 @@ input[type=number] {
     }
 }
 
-@import './header/index.scss';
+// @import './header/index.scss';
+@import './redesignHeader/index.scss';
 @import './common/index.scss';
 @import './searchResults.scss';
 @import './static/index.scss';
