@@ -55,7 +55,8 @@ function SkusBasedOnWeights({
   skuWeightSelected,
   setSkuWeightSelected,
   defaultSkuId,
-  handleShowOnSaleBadge //   handleSkuSelected
+  handleShowOnSaleBadge, //   handleSkuSelected
+  productId
 }) {
   const [skuSelected, setSkuSelected] = useState()
 
@@ -110,9 +111,13 @@ function SkusBasedOnWeights({
                   }
                   onClick={() => handleSkuSelected(skusObj[key])}
                 >
-                  <input type='checkbox' className='fa-solid fa-circle-check'>
-                    {/* <i style={{ color: '#ea1f3d' }}></i> */}
-                  </input>
+                  {skuSelected && skuSelected.weight === skusObj[key].weight ? (
+                    <span className='selected'>
+                      <i className='icon fas fa-check'></i>
+                    </span>
+                  ) : (
+                    ''
+                  )}
                   <span className='txttagb'>{skusObj[key].weight}</span>
                   <span className='txttagz'>
                     {formatThickness(skusObj[key].thickness)}
@@ -126,6 +131,7 @@ function SkusBasedOnWeights({
         <SkuDetailsOfSelectedWeight
           selectedSku={skuSelected}
           handleShowOnSaleBadge={handleShowOnSaleBadge}
+          productId={productId}
         />
       )}
     </>

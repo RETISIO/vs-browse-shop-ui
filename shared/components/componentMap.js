@@ -16,6 +16,7 @@ import CookingGuide from './cookingGuide'
 import ProductDescription from './pdp/pdpdetails'
 import PDPBreadcrumb from './pdpbreadcrumb'
 import ProductInfo from './productinfo'
+import ArticleTitle from './article/articleTitle'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -29,6 +30,7 @@ const ComponentMap = {
   'imagelist:custom': CookingGuide,
   'article:custom': Article,
   'pdp-product-block:custom': ProductDescription,
+  'articletile:custom': ArticleTitle,
   // 'article-detail-prodcutid:custom': Article,
   'breadcrumb:default': PDPBreadcrumb,
   'classification:custom': ProductInfo

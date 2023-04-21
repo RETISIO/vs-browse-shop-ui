@@ -45,7 +45,7 @@ function Static({ data }) {
       {data ? (
         <MainLayout data={data}>
           {/* {i18n.t('title')} */}
-          <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} />
+          <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />
         </MainLayout>
       ) : (
         <DefaultErrorPage statusCode={404} />
@@ -56,7 +56,7 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async context => {
-  const { query, req, asPath } = context
+  const { query, req, asPath } = context;
   let res
   try {
     if (!query.id.includes('nginx-health')) {

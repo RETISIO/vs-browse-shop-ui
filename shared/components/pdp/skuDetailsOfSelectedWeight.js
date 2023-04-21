@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
@@ -16,6 +17,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-quotes */
 import React, { useState, useEffect } from 'react'
+import { getCookie } from '@retisio/sf-api'
+import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
+import { useMiniCartDataContext } from '../../context/miniCartcontext'
+import { useAppContext } from '../../context/appContext'
 
 // skuObj = {
 // id:''
@@ -43,13 +48,19 @@ import React, { useState, useEffect } from 'react'
 //    notifyMe: ()=>{}
 //   },
 
-function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
+function SkuDetailsOfSelectedWeight({
+  selectedSku,
+  handleShowOnSaleBadge,
+  productId
+}) {
   const [countSelected, setCountSelected] = useState()
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   //   const [disableCounter, setDisableCounter] = useState(false)
+  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
+  const { setShow } = useAppContext()
 
   useEffect(() => {
     setCountSelected({ ...selectedSku.count[0] })
@@ -95,6 +106,37 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
     setDisablePlusCounter(false)
   }
 
+  const addToBagHandler = event => {
+    event.preventDefault()
+    const pdp = {
+      items: [
+        {
+          variantId: countSelected.itemCode,
+          productId,
+          quantity: itemQuantity,
+          productType: 'product'
+        }
+      ]
+    }
+    const result = addToBagDetails(pdp)
+    console.log('addToCart...', result, pdp)
+    result.then(data => {
+      setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+    })
+  }
+
+  const addToWishLisrHandler = e => {
+    if (getCookie('lu')) {
+      addToWishList({
+        skuId: countSelected.itemCode,
+        productId,
+        quantity: '1'
+      })
+    } else {
+      setShow(true)
+    }
+  }
+
   return (
     <>
       <div className='sukhead'> Count: </div>
@@ -102,6 +144,7 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
         <ul className='list-inline'>
           {selectedSku &&
             selectedSku.count.map(skuCount => {
+              console.log('line106...skucount...', skuCount)
               if (!skuCount.hasStock) {
                 // out of stock
                 return (
@@ -110,6 +153,11 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                       <span className='Countb'>{skuCount.pieces}</span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
+                    {countSelected && !countSelected.hasStock && (
+                      <div className='notifytxt'>
+                        <a href='#'>NOTIFY ME</a>
+                      </div>
+                    )}
                   </li>
                 )
               }
@@ -123,6 +171,14 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                     }
                     onClick={() => handleSelected(skuCount)}
                   >
+                    {countSelected &&
+                    countSelected.pieces === skuCount.pieces ? (
+                      <span className='selected'>
+                        <i className='icon fas fa-check'></i>
+                      </span>
+                    ) : (
+                      ''
+                    )}
                     <span className='Countb'>{skuCount.pieces}</span>
                   </div>
                 </li>
@@ -130,11 +186,11 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
             })}
         </ul>
       </div>
-      {countSelected && !countSelected.hasStock && (
+      {/* {countSelected && !countSelected.hasStock && (
         <div className='notifytxt'>
           <a href='#'>NOTIFY ME</a>
         </div>
-      )}
+      )} */}
 
       {/* Desktop view  */}
 
@@ -199,12 +255,17 @@ function SkuDetailsOfSelectedWeight({ selectedSku, handleShowOnSaleBadge }) {
                   disableAddToCart ? 'disabled' : ''
                 }`}
                 id='0'
+                onClick={e => addToBagHandler(e)}
               >
                 ADD TO CART
               </button>
             </span>
             <span>
-              <button className='btn btn-primary btn-md add-to-cart' id='1'>
+              <button
+                className='btn btn-primary btn-md add-to-cart'
+                id='1'
+                onClick={e => addToWishLisrHandler(e)}
+              >
                 ADD TO WISHLIST
               </button>
             </span>

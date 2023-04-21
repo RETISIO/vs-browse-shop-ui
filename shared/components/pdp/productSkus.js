@@ -24,15 +24,18 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
   const [skuWeightSelected, setSkuWeightSelected] = useState() // {id:'', weight:'', thickness:'' }
   const [skuSelected, setSkuSelected] = useState() // [skuObj1, ....]
   const [skusWeights, setSkusWeights] = useState() // [{id:'', weight:'', thickness:''}, {},..]
-  const [skusData, setSkusData] = useState()
-  const [defaultSkuId, setDefaultSkuId] = useState()
+  // const [skusData, setSkusData] = useState()
+  // const [defaultSkuId, setDefaultSkuId] = useState()
+  const productId = props?.payLoad?.products[0]?.productId || ''
+  const defaultSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
+  const skusData = prepareSkusData()
 
-  useEffect(() => {
-    const defSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
-    // const defSkuId = props?.pdpData?.payLoad?.products[0]?.defaultSkuId || ''
-    setDefaultSkuId(defSkuId)
-    prepareSkusData()
-  }, [props])
+  // useEffect(() => {
+  //   const defSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
+  //   // const defSkuId = props?.pdpData?.payLoad?.products[0]?.defaultSkuId || ''
+  //   setDefaultSkuId(defSkuId)
+  //   prepareSkusData()
+  // }, [props])
 
   const handleSkuSelected = skuWeight => {
     setSkuWeightSelected(skuWeight)
@@ -103,7 +106,8 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
       //    notifyMe: ()=>{}
       //   },
     }
-    setSkusData({ ...skusObj })
+    // setSkusData({ ...skusObj })
+    return { ...skusObj }
     // setSkusWeights(skusWeightsArr)
   }
 
@@ -118,6 +122,7 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
         handleSkuSelected={handleSkuSelected}
         defaultSkuId={defaultSkuId}
         handleShowOnSaleBadge={handleShowOnSaleBadge}
+        productId={productId}
       />
     </>
   )

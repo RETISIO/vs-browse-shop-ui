@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable comma-dangle */
 /* eslint-disable arrow-parens */
 /* eslint-disable semi */
