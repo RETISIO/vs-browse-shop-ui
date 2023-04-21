@@ -1810,12 +1810,12 @@ a {
 	margin: 20px 0;
 
 	@media screen and (min-width: $screen-md-min) {
-		margin: 20px 0 40px;
+		margin: 0px 0 50px;
 	}
 
 	.breadcrumb {
 		margin: 0;
-		padding: 30px 0 0 0;
+		padding: 15px 0 0 15px;
 		background: none;
 		font-size: 0;
 		display: inline-block;

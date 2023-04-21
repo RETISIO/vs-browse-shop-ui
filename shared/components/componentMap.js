@@ -14,6 +14,8 @@ import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
 import ProductDescription from './pdp/pdpdetails'
+import Customreadcrumb from './custombreadcrumb'
+import ProductInfo from './productinfo'
 import ArticleTitle from './article/articleTitle'
 
 const ComponentMap = {
@@ -28,7 +30,9 @@ const ComponentMap = {
   'imagelist:custom': CookingGuide,
   'article:custom': Article,
   'pdp-product-block:custom': ProductDescription,
-  'articletile:custom': ArticleTitle
+  'articletile:custom': ArticleTitle,
   // 'article-detail-prodcutid:custom': Article,
+  'breadcrumb:default': Customreadcrumb,
+  'classification:custom': ProductInfo
 }
 export default ComponentMap
