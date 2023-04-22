@@ -547,15 +547,18 @@
         color: #747474;
         font-weight: 600;
         font-size: 14px;
-        padding: 0px 0 30px 0px;
+        padding: 0px 0 10px 0px;
     }
 
-    .itemtxt {
-        color: #747474;
-        font-weight: 600;
-        font-size: 14px;
-        padding: 0px 0 30px 0px;
+    .price-section {
+        margin-bottom: 10px;
     }
+    // .itemtxt {
+    //     color: #747474;
+    //     font-weight: 600;
+    //     font-size: 14px;
+    //     padding: 0px 0 30px 0px;
+    // }
 
     .prpanel {
         padding: 0 0 30px 0;
@@ -564,22 +567,22 @@
     .priceb {
         color: #000000;
         font-weight: 700;
-        font-size: 28px;
+        font-size: 22px;
         padding: 0px 15px 0px 0px;
     }
 
     .pricebstik {
         color: #575757;
         font-weight: 700;
-        font-size: 24px;
+        font-size: 22px;
         padding: 0px 15px 0px 0px;
         text-decoration: line-through;
     }
 
     .pricenred {
-        color: #df143b;
+        color: #e75d78;
         font-weight: 700;
-        font-size: 16px;
+        font-size: 15px;
         padding: 0px 0 0px 0px;
     }
 
