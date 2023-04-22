@@ -81,7 +81,7 @@ function SKUCounts({
   )
 
   useEffect(() => {
-    if (!countSelected.hasStock) {
+    if (countSelected && !countSelected.hasStock) {
       setItemQuantity(0)
       setDisablePlusCounter(true)
       setDisableMinusCounter(true)

@@ -77,10 +77,6 @@ export default function ProductDescription(props) {
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [skusData, setSkusData] = useState()
-  // const [weightSelected, setWeightSelected] = useState()
-  // const [countSelected, setCountSelected] = useState()
-  // const [weightSelected, setDefaultWeight] = useState()
-  // const [defaultCount, setDefaultCount] = useState()
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -97,7 +93,7 @@ export default function ProductDescription(props) {
   }, [])
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  //  const productId = pdpData?.products[0]?.productId;
+  const productId = pdpData?.products[0]?.productId
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}
@@ -169,11 +165,6 @@ export default function ProductDescription(props) {
     setSkusData({ ...skusObj })
   }
 
-  // function selectDefaultCount(weight) {
-  //   const countObj = skusObj.skus[weight].count[0]
-  //   setDefaultCount({ ...countObj })
-  // }
-
   // const handleShowOnSaleBadge = showBadge => {
   //   setShowSaleWidget(showBadge)
   // }
@@ -193,8 +184,6 @@ export default function ProductDescription(props) {
   )
 
   const handleWeightSelected = weightObj => {
-    // setWeightSelected(weightObj)
-    // selectDefaultCount(weight)
     const skusObj = { ...skusData }
     const weight = weightObj.weight
     skusObj.selectedWeight = weightObj
@@ -340,6 +329,7 @@ export default function ProductDescription(props) {
                     ? skusData.defaultCount
                     : skusData.selectedCount)
                 }
+                productId={productId}
               />
             </div>
           </div>
