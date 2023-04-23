@@ -153,12 +153,27 @@ export default function ProductDescription(props) {
     for (const key in skusObj.skus) {
       if (skusObj.skus[key].skuId === defaultSkuId) {
         skusObj.defaultWeight = skusObj.skus[key]
-        skusObj.defaultCount = skusObj.skus[key].count[0]
+        for (const countObj of skusObj.skus[key].count) {
+          // select default count whose stock should be available
+          if (countObj.hasStock) {
+            skusObj.defaultCount = countObj
+            setShowSaleWidget(countObj.onSale) // set onSale badge based on selected weight
+            break
+          }
+        }
         break
       } else {
         const firstKey = Object.keys(skusObj.skus)[0]
         skusObj.defaultWeight = skusObj.skus[firstKey]
-        skusObj.defaultCount = skusObj.skus[firstKey].count[0]
+        for (const countObj of skusObj.skus[firstKey].count) {
+          if (countObj.hasStock) {
+            skusObj.defaultCount = countObj
+            setShowSaleWidget(countObj.onSale) // set onSale badge based on selected weight
+            break
+          }
+        }
+        // skusObj.defaultCount = skusObj.skus[firstKey].count[0]
+        // setShowSaleWidget(skusObj.skus[firstKey].count[0].onSale) // set onSale badge based on selected weight
         break
       }
     }
@@ -190,6 +205,7 @@ export default function ProductDescription(props) {
     skusObj.defaultWeight = ''
     skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
     setSkusData(skusObj)
+    setShowSaleWidget(skusObj.skus[weight].count[0].onSale) // set onSale badge based on selected weight
   }
 
   const handleCountSelected = (weightObj, countObj) => {
@@ -203,6 +219,7 @@ export default function ProductDescription(props) {
     )
     skusObj.selectedCount = countArr.length ? countArr[0] : ''
     setSkusData(skusObj)
+    setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
   }
 
   return (
@@ -330,6 +347,7 @@ export default function ProductDescription(props) {
                     : skusData.selectedCount)
                 }
                 productId={productId}
+                handleShowOnSaleBadge={handleShowOnSaleBadge}
               />
             </div>
           </div>

@@ -261,6 +261,7 @@ function SKUCounts({
             <span className='panel1'>
               <div className='input-group'>
                 <span className='input-group-btn'>
+                  {/* minus button */}
                   <button
                     className={`btn js-counter__btn rdrt ${
                       disableMinusCounter ||
@@ -274,16 +275,34 @@ function SKUCounts({
                     <i className='fa fa-minus' aria-hidden='true'></i>
                   </button>
                 </span>
-                <span className=''>
+                <input
+                  className='sku-item-qty'
+                  //   className='sku-item-qty disabled'
+                  value={
+                    (countSelected && !countSelected.hasStock) ||
+                    itemQuantity === 0
+                      ? 0
+                      : itemQuantity
+                  }
+                  min={
+                    (countSelected && !countSelected.hasStock) ||
+                    itemQuantity === 0
+                      ? 0
+                      : 1
+                  }
+                  max={countSelected.availableStock}
+                />
+                {/* <span className=''>
                   <button className='sku-item-qty disabled'>
                     {(countSelected && !countSelected.hasStock) ||
                     itemQuantity === 0
                       ? 0
                       : itemQuantity}
                     {/* {displayItemQty(itemQuantity)} */}
-                  </button>
-                </span>
+                {/* </button> */}
+                {/* </span> */}
                 <span className='input-group-btn'>
+                  {/* plus button */}
                   <button
                     className={`btn js-counter__btn rdrt ${
                       disablePlusCounter ||
