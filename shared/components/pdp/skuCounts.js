@@ -255,9 +255,9 @@ function SKUCounts({
       <div className='itempanel'>
         <div className='itemtxt'>
           ITEM CODE: <span>{countSelected && countSelected.itemCode}</span>
-          <span>
+          {/* <span>
             {`  (in stock: ${countSelected && countSelected.availableStock})`}
-          </span>
+          </span> */}
         </div>
 
         <div className='price-section'>
