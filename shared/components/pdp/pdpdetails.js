@@ -117,7 +117,8 @@ export default function ProductDescription(props) {
       selectedCount: '',
       skus: {}
     }
-    for (const key in skus) {
+    const keysArr = Object.keys(skus)
+    keysArr.forEach((key, index) => {
       const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
       const thickness =
         skus[key]?.skuDetails?.additionalDetails?.thickness || ''
@@ -134,8 +135,14 @@ export default function ProductDescription(props) {
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel =
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
-      // countObj.hasStock = false
-      countObj.hasStock = skus[key]?.skuDetails?.hasStock
+      if (index === 0) {
+        countObj.hasStock = false
+        // countObj.hasStock = skus[key]?.skuDetails?.hasStock
+      } else {
+        // countObj.hasStock = false
+        countObj.hasStock = skus[key]?.skuDetails?.hasStock
+      }
+
       countObj.onSale = skus[key]?.skuDetails?.onSale
       countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
         ? skus[key].skuDetails.price.salePrice.price
@@ -148,7 +155,7 @@ export default function ProductDescription(props) {
         : ''
       countObj.itemCode = skus[key].skuId
       skusObj.skus[skusObjKey].count.push(countObj)
-    }
+    })
     // select default weight, default count
     for (const key in skusObj.skus) {
       if (skusObj.skus[key].skuId === defaultSkuId) {
@@ -198,12 +205,28 @@ export default function ProductDescription(props) {
     </aside>
   )
 
+  const selectDefaultCount = weightObj => {
+    // select default count whose hasStock is true
+    console.log('from selectDefaultCount.....weightObj...', weightObj)
+    const countArr = weightObj.count
+    let defObj = {}
+    countArr.every(obj => {
+      if (obj.hasStock) {
+        defObj = obj
+        return false
+      }
+      return true
+    })
+    return defObj
+  }
+
   const handleWeightSelected = weightObj => {
     const skusObj = { ...skusData }
     const weight = weightObj.weight
     skusObj.selectedWeight = weightObj
     skusObj.defaultWeight = ''
-    skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
+    skusObj.defaultCount = selectDefaultCount(weightObj) // default count of selected weight
+    // skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
     setSkusData(skusObj)
     setShowSaleWidget(skusObj.skus[weight].count[0].onSale) // set onSale badge based on selected weight
   }

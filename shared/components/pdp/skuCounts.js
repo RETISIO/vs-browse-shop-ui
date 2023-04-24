@@ -65,7 +65,7 @@ function SKUCounts({
   countSelected
 }) {
   //   const [countSelected, setCountSelected] = useState()
-  const [itemQuantity, setItemQuantity] = useState(1)
+  const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
@@ -82,12 +82,13 @@ function SKUCounts({
   )
 
   useEffect(() => {
-    if (countSelected && !countSelected.hasStock) {
+    if ((countSelected && !countSelected.hasStock) || !countSelected) {
       //   setItemQuantity(0)
       //   setDisablePlusCounter(true)
       //   setDisableMinusCounter(true)
       setDisableAddToCart(true)
     } else {
+      console.log('from else.......')
       setItemQuantity(1)
       setDisablePlusCounter(false)
       setDisableMinusCounter(false)
@@ -165,9 +166,9 @@ function SKUCounts({
   }
 
   const handleQtyChange = e => {
-    const val = e.target.value
+    const val = parseInt(e.target.value)
     const maxQty = countSelected.availableStock || 0
-    if (val <= 0) {
+    if (val <= 0 || val === '' || Number.isNaN(val)) {
       setItemQuantity(1)
       return
     }
@@ -184,6 +185,7 @@ function SKUCounts({
   }
 
   const displayQtyErrorMsg = () => {
+    console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
     const qty = parseInt(itemQuantity)
     const maxQty = (countSelected && countSelected.availableStock) || 0
     if (qty > maxQty) {
@@ -195,6 +197,7 @@ function SKUCounts({
   const displayPricePanel = () => {
     const hasStock = countSelected && countSelected.hasStock
     if (!hasStock) {
+      //   setDisableAddToCart(true)
       return 'hide-panel1'
     }
     return 'panel1'
@@ -215,7 +218,7 @@ function SKUCounts({
                       <span className='Countb'>{skuCount.pieces}</span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
-                    {countSelected && !countSelected.hasStock && (
+                    {!skuCount.hasStock && (
                       <div className='notifytxt'>
                         <a href='#'>NOTIFY ME</a>
                       </div>
@@ -253,13 +256,14 @@ function SKUCounts({
       {/* Desktop view  */}
 
       <div className='itempanel'>
-        <div className='itemtxt'>
-          ITEM CODE: <span>{countSelected && countSelected.itemCode}</span>
-          {/* <span>
+        {countSelected && countSelected.itemCode && (
+          <div className='itemtxt'>
+            ITEM CODE: <span>{countSelected && countSelected.itemCode}</span>
+            {/* <span>
             {`  (in stock: ${countSelected && countSelected.availableStock})`}
           </span> */}
-        </div>
-
+          </div>
+        )}
         <div className='price-section'>
           {countSelected && countSelected.salePrice && (
             <span className='priceb'>{countSelected.salePrice} </span>
