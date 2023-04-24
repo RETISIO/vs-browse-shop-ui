@@ -43,7 +43,10 @@ function Static({ data }) {
  
   useEffect(() => {
     if(searchData && state.userData && state.channelData) {
-      Search({ ...searchData, userData: state?.userData, channelData: state?.channelData });
+      const autoSuggest = router?.query?.as === 't';
+      Search({
+        ...searchData, userData: state?.userData, channelData: state?.channelData, autoSuggest
+      });
     }
   }, [searchData, state]);
   useEffect(() => {

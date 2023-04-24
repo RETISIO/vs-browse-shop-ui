@@ -14,8 +14,8 @@ const SearchProd = (obj) => {
     siteId,
     catalogId: obj?.channelData?.defaultCatalogId || catalogId,
     queryString: obj?.payLoad?.searchTerm,
-    isTypedQuery: !obj?.payLoad?.autoCorrectTerm,
-    isAutoSuggestedQuery: false,
+    isTypedQuery: obj.autoSuggest ? false : !obj?.payLoad?.autoCorrectTerm,
+    isAutoSuggestedQuery: obj.autoSuggest,
     isCorrectedQuery: !!obj?.payLoad?.autoCorrectTerm,
     queryTokens: '',
     resultFound: true,
@@ -33,7 +33,12 @@ const SearchProd = (obj) => {
   });
 };
 
+const ProductClick = (obj) => {
+  console.log(obj);
+};
+
 export {
   RviewItem,
   SearchProd,
+  ProductClick,
 };
