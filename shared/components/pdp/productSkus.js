@@ -20,6 +20,8 @@ import SkusBasedOnWeights from './skusBasedOnWeights'
 import SkuSelection from './skuSelection'
 
 function ProductSkus({ props, handleShowOnSaleBadge }) {
+  // console.log('from productSkus....props..', props)
+
   //   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
   const [skuWeightSelected, setSkuWeightSelected] = useState() // {id:'', weight:'', thickness:'' }
   const [skuSelected, setSkuSelected] = useState() // [skuObj1, ....]
@@ -28,7 +30,7 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
   // const [defaultSkuId, setDefaultSkuId] = useState()
   const productId = props?.payLoad?.products[0]?.productId || ''
   const defaultSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
-  const skusData = prepareSkusData()
+  const skusData = prepareSkusData() || {}
 
   // useEffect(() => {
   //   const defSkuId = props?.payLoad?.products[0]?.defaultSkuId || ''
@@ -43,11 +45,15 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
 
   function prepareSkusData() {
     const { payLoad } = props
-    const product = payLoad.products[0]
-    const { skus } = product
+    console.log('from productSkus....props..', props)
+
+    const product = payLoad && payLoad.products && payLoad.products[0]
+    const skus = (product && product.skus) || {}
     const skusObj = {}
     for (const key in skus) {
-      const { weight, thickness } = skus[key].skuDetails.additionalDetails
+      const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
+      const thickness =
+        skus[key]?.skuDetails?.additionalDetails?.thickness || ''
       const skusObjKey = `${weight}`
       //   const skusObjKey = `${weight}__${thickness}`
       if (!skusObj[skusObjKey]) {
@@ -57,17 +63,25 @@ function ProductSkus({ props, handleShowOnSaleBadge }) {
       //   skusObj[weight].thickness =
       //     skus[key].skuDetails.additionalDetails.thickness
       const countObj = {}
-      countObj.pieces = skus[key].skuDetails.additionalDetails.pieces
-      countObj.availableStock = skus[key].skuDetails.inventory[0].availableStock
+      countObj.pieces = skus[key]?.skuDetails?.additionalDetails?.pieces || ''
+      countObj.availableStock =
+        skus[key]?.skuDetails?.inventory[0]?.availableStock || ''
       countObj.quantityAddedToCart = 0
-      countObj.inventoryStatusLabel = skus[key].skuDetails.inventoryStatusLabel
+      countObj.inventoryStatusLabel =
+        skus[key]?.skuDetails?.inventoryStatusLabel || ''
       //   countObj.hasPrice = skus[key].skuDetails.hasPrice
       //   countObj.hasStock = false
-      countObj.hasStock = skus[key].skuDetails.hasStock
-      countObj.onSale = skus[key].skuDetails.onSale
-      countObj.salePrice = skus[key].skuDetails.price.salePrice
+      countObj.hasStock = skus[key]?.skuDetails?.hasStock
+      countObj.onSale = skus[key]?.skuDetails?.onSale
+      countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
+        ? skus[key].skuDetails.price.salePrice.price
+        : ''
       countObj.price = skus[key].skuDetails.price.listPrice.price
+        ? skus[key].skuDetails.price.listPrice.price
+        : ''
       countObj.listPrice = skus[key].skuDetails.price.listPrice.price
+        ? skus[key].skuDetails.price.listPrice.price
+        : ''
       countObj.itemCode = skus[key].skuId
       //   countObj.largeImage = skus[key].media.largeImg
       //   countObj.largeImage = skus[key].media.largeImg

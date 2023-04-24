@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable linebreak-style */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -55,7 +56,8 @@ function Facet(props) {
   return (
     <>
       <div className="catalog-filter__top">
-        {(pageContentData?.payLoad?.categories && pageContentData?.payLoad?.categories?.length > 0
+        {(pageContentData?.payLoad?.categoryFacetEnabled && pageContentData?.payLoad?.categories 
+        && pageContentData?.payLoad?.categories?.length > 0
         && pageType !== "search")
         ? (
           <div className="panel panel-default">

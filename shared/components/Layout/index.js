@@ -35,19 +35,32 @@ export default function MainLayout({ data, children }) {
   };
 
   useEffect(() => {
-    if (!state.channelData) {
-      (async() => {
-        let channelData = await requestContructor(
+    (async() => {
+      let finalChannelData = {}; let
+        userData = {};
+      if (!state.channelData) {
+        const channelData = await requestContructor(
           'getChannelDetails',
           '',
           {},
           false,
         );
-        channelData = channelData[process.env.NEXT_PUBLIC_CHANNELDOMAIN];
-        updateState({ ...state, channelData });
-        await getPersonalization();
-      })();
-    }
+        const channelURL = window && window.location.origin.indexOf('localhost') < 0
+          ? window.location.origin
+          : 'https://us.ab-dev.retisio.com';
+        finalChannelData = channelData[channelURL];
+      }
+      if(getCookie('lu')) {
+        userData = await requestContructor(
+          'getprofile',
+          '',
+          {},
+          false,
+        );
+      }
+      updateState({ ...state, channelData: finalChannelData, userData });
+      await getPersonalization();
+    })();
   }, []);
   useEffect(() => {
     getData();
