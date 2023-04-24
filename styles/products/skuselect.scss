@@ -361,7 +361,8 @@
     }
 
     .list-inline-item {
-        display: inline-flex;
+        display: inline-block;
+        // display: inline-flex;
     }
 
     .tag {
@@ -460,7 +461,8 @@
         font-weight: 700;
         display: block;
         color: #000000;
-        padding: 16px 6px 6px 6px;
+        padding: 20px 6px 20px 6px;
+        // padding: 16px 6px 6px 6px;
         width: 70px;
         height: 70px;
         text-decoration: none;
@@ -472,20 +474,22 @@
         font-weight: 700;
         display: block;
         color: #000000;
-        padding: 16px 6px 6px 6px;
+        padding: 20px 6px 20px 6px;
+        // padding: 16px 6px 6px 6px;
         width: 70px;
         height: 70px;
         text-decoration: none;
         cursor: pointer;
+        position: relative;
     }
     .count-sku-selected {
-        right: -43px;
+        right: 1px;
         // bottom: 263px;
         background: #f70202;
-        top: -15px;
+        top: 1px;
         width: 16px;
         height: 16px;
-        position: relative;
+        position: absolute;
         border-radius: 60px;
         text-align: center;
         padding: 0;
@@ -494,7 +498,7 @@
      }
      .count-sku-not-selected {
         visibility: hidden;
-        // display: none;
+        display: none;
     }
     .Count:hover,
     .Count:focus {
@@ -518,15 +522,16 @@
 
     .outoftocklab {
         background: #c92c2c;
-        padding: 2px;
+        padding: 0px;
         position: relative;
-        left: 0px;
-        top: 0px;
+        left: -6px;
+        top: 6px;
         font-size: 9px;
         color: #fff;
         text-align: center;
         font-weight: 400;
         display: block;
+        width: 69px;
     }
 
     .notifytxt {
@@ -547,7 +552,7 @@
         color: #747474;
         font-weight: 600;
         font-size: 14px;
-        padding: 0px 0 10px 0px;
+        padding: 0px 0 30px 0px;
     }
 
     .price-section {
@@ -593,6 +598,9 @@
         width: 23%;
     }
 
+    .hide-panel1 {
+        display:none
+    }
     .panel1mob {
         display: flex;
         float: left;
@@ -614,7 +622,19 @@
         background: none;
         cursor: default;
         font-weight: 600;
+        width:52px;
+        text-align:center
     }
+
+    .sku-counter-section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sku-qty-error-msg {
+        color: red
+    }
+
     .rd {
         border-radius: 25px !important;
     }

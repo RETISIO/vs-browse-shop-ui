@@ -346,8 +346,8 @@ export default function ProductDescription(props) {
                     ? skusData.defaultCount
                     : skusData.selectedCount)
                 }
-                productId={productId}
-                handleShowOnSaleBadge={handleShowOnSaleBadge}
+                // productId={productId}
+                // handleShowOnSaleBadge={handleShowOnSaleBadge}
               />
             </div>
           </div>
