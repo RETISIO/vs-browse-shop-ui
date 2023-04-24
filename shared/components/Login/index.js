@@ -12,6 +12,7 @@ import { useAppContext } from '../../context/appContext';
 import { requestContructor }from '../../helpers/api';
 import ResetPassword from '../ResetPassword';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
+import getPersonalization from '../../helpers/utils';
 
 export function Index(props) {
   const { show, setShow } = useAppContext();
@@ -83,6 +84,9 @@ export function Index(props) {
         setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
+          (async() => {
+            await getPersonalization();
+          })();
           const isMergeCart = !!getCookie('arcCartId');
           if (isMergeCart) {
             const result = triggerMergeCart();

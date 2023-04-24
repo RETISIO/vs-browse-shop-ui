@@ -44,7 +44,7 @@ NoResult.getInitialProps = async (context) => {
   const data = await requestContructor(
     'static/noresult',
     '',
-    {},
+    { cookie: req ? req.headers.cookie : '' },
     req,
     asPath,
   );

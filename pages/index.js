@@ -62,7 +62,13 @@ Home.getInitialProps = async(context) => {
   const { req, asPath } = context;
   let res;
   try {
-    res = await requestContructor('static/home', '', {}, req, asPath);
+    res = await requestContructor(
+      'static/home',
+      '',
+      { customHeaders: { cookie: req ? req.headers.cookie : '' } },
+      req,
+      asPath,
+    );
   } catch (e) {
     res = {};
   }
