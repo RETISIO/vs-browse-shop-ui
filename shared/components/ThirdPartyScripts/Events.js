@@ -16,7 +16,11 @@ const visitPDP = (itemData) => {
 };
 
 const Search = (obj) => {
-  SearchProd(obj);
+  try{
+    SearchProd(obj);
+  }catch(e){
+    console.log(e);
+  }
 };
 
 const ClickProduct = (obj) => {
