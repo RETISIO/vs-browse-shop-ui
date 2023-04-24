@@ -63,7 +63,7 @@ Static.getInitialProps = async context => {
       res = await requestContructor(
         `static/${query.id.join('/')}`,
         '',
-        {},
+        { customHeaders: { cookie: req ? req.headers.cookie : '' } },
         req,
         asPath
       )
