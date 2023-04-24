@@ -61,10 +61,9 @@ function SKUWeights({
   skusData,
   weightSelected
 }) {
-  console.log('from SKUWeights.....skusData..', skusData)
+  //   console.log('from SKUWeights.....skusData..', skusData)
 
   const handleSkuSelected = skuObj => {
-    console.log('from handler......skuObj...', skuObj)
     handleWeightSelected(skuObj)
   }
 
@@ -75,48 +74,44 @@ function SKUWeights({
     return str
   }
 
-  const displayWeights = () => {
-    console.log('from displayWeights.....skusData,...', skusData)
-    return (
-      <>
-        <div className='sukhead'> Weight: </div>
-        <div>
-          <ul className='list-inline'>
-            {skusData &&
-              Object.keys(skusData.skus).map(key => (
-                <li className='list-inline-item me-2 mb-2'>
-                  <div
-                    className={
+  const displayWeights = () => (
+    <>
+      <div className='sukhead'> Weight: </div>
+      <div>
+        <ul className='list-inline'>
+          {skusData &&
+            Object.keys(skusData.skus).map(key => (
+              <li className='list-inline-item me-2 mb-2'>
+                <div
+                  className={
+                    weightSelected &&
+                    weightSelected.weight === skusData.skus[key].weight
+                      ? 'tag-selected'
+                      : 'tag'
+                  }
+                  onClick={() => handleSkuSelected(skusData.skus[key])}
+                >
+                  <span
+                    className={`${
                       weightSelected &&
                       weightSelected.weight === skusData.skus[key].weight
-                        ? 'tag-selected'
-                        : 'tag'
-                    }
-                    onClick={() => handleSkuSelected(skusData.skus[key])}
+                        ? 'sku-selected'
+                        : 'sku-not-selected'
+                    }`}
                   >
-                    <span
-                      className={`${
-                        weightSelected &&
-                        weightSelected.weight === skusData.skus[key].weight
-                          ? 'sku-selected'
-                          : 'sku-not-selected'
-                      }`}
-                    >
-                      <i className='icon fas fa-check'></i>
-                    </span>
-                    <span className='txttagb'>{skusData.skus[key].weight}</span>
-                    <span className='txttagz'>
-                      {formatThickness(skusData.skus[key].thickness)}
-                    </span>
-                  </div>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </>
-    )
-  }
-  //   return <div className='sukproduct'>{displayWeights()}</div>
+                    <i className='icon fas fa-check'></i>
+                  </span>
+                  <span className='txttagb'>{skusData.skus[key].weight}</span>
+                  <span className='txttagz'>
+                    {formatThickness(skusData.skus[key].thickness)}
+                  </span>
+                </div>
+              </li>
+            ))}
+        </ul>
+      </div>
+    </>
+  )
   return <>{displayWeights()}</>
 }
 

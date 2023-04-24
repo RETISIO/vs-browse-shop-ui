@@ -24,13 +24,10 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import NextImage from '../template/components/nextImage'
-// import SkuLineItem from './skuLineItem';
 import GiftCard from '../giftCard'
-import SkuSelection from './skuSelection'
 import NewBadge from '../../../public/static/assets/new.png'
 import FreshBadge from '../../../public/static/assets/Fresh.png'
 import ImageCarousel from '../ImageCarousel'
-import ProductSkus from './productSkus'
 import SKUWeights from './skuWeights'
 import SKUCounts from './skuCounts'
 
@@ -69,8 +66,6 @@ import SKUCounts from './skuCounts'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
-  // const pdpData = props?.pdpData?.payLoad
-  // console.log('from ProductDescription111111111....props...', props)
   const productSkus =
     pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
   const productType = pdpData?.products[0]?.productType
@@ -100,13 +95,9 @@ export default function ProductDescription(props) {
   // skusData: {  [weight]: {skuId,weight, thickness, count: [{}, {},..]},
   //              [weight]: { }, ..}
 
-  // const handleSkuSelected = skuWeight => {
-  //   setSkuWeightSelected(skuWeight)
-  // }
-
   function prepareSkusData() {
     const { payLoad } = props
-    console.log('from productSkus....props..', props)
+    // console.log('from productSkus....props..', props)
 
     const product = payLoad && payLoad.products && payLoad.products[0]
     const skus = (product && product.skus) || {}
@@ -161,7 +152,7 @@ export default function ProductDescription(props) {
       if (skusObj.skus[key].skuId === defaultSkuId) {
         skusObj.defaultWeight = skusObj.skus[key]
         for (const countObj of skusObj.skus[key].count) {
-          // select default count whose stock should be available
+          // select default count for which the stock is available
           if (countObj.hasStock) {
             skusObj.defaultCount = countObj
             setShowSaleWidget(countObj.onSale) // set onSale badge based on selected weight
@@ -179,17 +170,11 @@ export default function ProductDescription(props) {
             break
           }
         }
-        // skusObj.defaultCount = skusObj.skus[firstKey].count[0]
-        // setShowSaleWidget(skusObj.skus[firstKey].count[0].onSale) // set onSale badge based on selected weight
         break
       }
     }
     setSkusData({ ...skusObj })
   }
-
-  // const handleShowOnSaleBadge = showBadge => {
-  //   setShowSaleWidget(showBadge)
-  // }
 
   const renderGalleryImage = () => (
     <aside className='col-md-5'>
@@ -206,8 +191,7 @@ export default function ProductDescription(props) {
   )
 
   const selectDefaultCount = weightObj => {
-    // select default count whose hasStock is true
-    console.log('from selectDefaultCount.....weightObj...', weightObj)
+    // select default count for which the hasStock is true
     const countArr = weightObj.count
     let defObj = {}
     countArr.every(obj => {
@@ -228,7 +212,7 @@ export default function ProductDescription(props) {
     skusObj.defaultCount = selectDefaultCount(weightObj) // default count of selected weight
     // skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
     setSkusData(skusObj)
-    setShowSaleWidget(skusObj.skus[weight].count[0].onSale) // set onSale badge based on selected weight
+    setShowSaleWidget(skusObj.defaultCount.onSale) // set onSale badge based on selected weight
   }
 
   const handleCountSelected = (weightObj, countObj) => {
@@ -338,11 +322,6 @@ export default function ProductDescription(props) {
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}
           <div className='col-md-7'>
-            {/* <ProductSkus
-              props={props}
-              handleShowOnSaleBadge={handleShowOnSaleBadge}
-            /> */}
-            {/* <SkuSelection data={props} /> */}
             <div className='sukproduct'>
               <SKUWeights
                 handleWeightSelected={handleWeightSelected}
@@ -369,8 +348,7 @@ export default function ProductDescription(props) {
                     ? skusData.defaultCount
                     : skusData.selectedCount)
                 }
-                // productId={productId}
-                // handleShowOnSaleBadge={handleShowOnSaleBadge}
+                productId={productId}
               />
             </div>
           </div>

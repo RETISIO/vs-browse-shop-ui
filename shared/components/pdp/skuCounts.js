@@ -57,38 +57,30 @@ import { useAppContext } from '../../context/appContext'
 // }
 
 function SKUCounts({
-  handleShowOnSaleBadge,
   productId,
   handleCountSelected,
-  skusData,
   weightSelected,
   countSelected
 }) {
-  //   const [countSelected, setCountSelected] = useState()
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-  //   const [errorMsgForMaxQty, setErrorMsgForMaxQty] = useState('')
-  //   const [disableCounter, setDisableCounter] = useState(false)
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
   const { setShow } = useAppContext()
 
-  console.log(
-    'from skuCounts....weightSelected, countSelected,itemQuantity.',
-    weightSelected,
-    countSelected,
-    itemQuantity
-  )
+  //   console.log(
+  //     'from skuCounts....weightSelected, countSelected,itemQuantity,productId',
+  //     weightSelected,
+  //     countSelected,
+  //     itemQuantity,
+  //     productId
+  //   )
 
   useEffect(() => {
     if ((countSelected && !countSelected.hasStock) || !countSelected) {
-      //   setItemQuantity(0)
-      //   setDisablePlusCounter(true)
-      //   setDisableMinusCounter(true)
       setDisableAddToCart(true)
     } else {
-      console.log('from else.......')
       setItemQuantity(1)
       setDisablePlusCounter(false)
       setDisableMinusCounter(false)
@@ -98,7 +90,6 @@ function SKUCounts({
 
   const handleSelected = skuCount => {
     handleCountSelected(weightSelected, skuCount)
-    // handleShowOnSaleBadge(skuCount.onSale)
   }
 
   const addItemQuantity = () => {
@@ -125,7 +116,6 @@ function SKUCounts({
     }
     setDisablePlusCounter(false)
     setDisableAddToCart(false)
-    // setErrorMsgForMaxQty('')
   }
 
   const addToBagHandler = event => {
@@ -140,11 +130,12 @@ function SKUCounts({
         }
       ]
     }
-    const result = addToBagDetails(pdp)
-    // console.log('addToCart...', result, pdp)
-    result.then(data => {
-      setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
-    })
+    if (productId) {
+      const result = addToBagDetails(pdp)
+      result.then(data => {
+        setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+      })
+    }
   }
 
   const addToWishLisrHandler = e => {
@@ -185,7 +176,7 @@ function SKUCounts({
   }
 
   const displayQtyErrorMsg = () => {
-    console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
+    // console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
     const qty = parseInt(itemQuantity)
     const maxQty = (countSelected && countSelected.availableStock) || 0
     if (qty > maxQty) {
@@ -197,7 +188,6 @@ function SKUCounts({
   const displayPricePanel = () => {
     const hasStock = countSelected && countSelected.hasStock
     if (!hasStock) {
-      //   setDisableAddToCart(true)
       return 'hide-panel1'
     }
     return 'panel1'
@@ -259,9 +249,6 @@ function SKUCounts({
         {countSelected && countSelected.itemCode && (
           <div className='itemtxt'>
             ITEM CODE: <span>{countSelected && countSelected.itemCode}</span>
-            {/* <span>
-            {`  (in stock: ${countSelected && countSelected.availableStock})`}
-          </span> */}
           </div>
         )}
         <div className='price-section'>
@@ -311,7 +298,6 @@ function SKUCounts({
                 </span>
                 <input
                   className='sku-item-qty'
-                  //   className='sku-item-qty disabled'
                   type='number'
                   value={itemQuantity}
                   onChange={handleQtyChange}
@@ -319,7 +305,6 @@ function SKUCounts({
                 <span className='input-group-btn'>
                   {/* plus button */}
                   <button
-                    // className={`btn js-counter__btn rdrt ${displayAddQtyBtnClass()}`}
                     className={`btn js-counter__btn rdrt ${
                       disablePlusCounter ||
                       (countSelected && !countSelected.hasStock) ||
