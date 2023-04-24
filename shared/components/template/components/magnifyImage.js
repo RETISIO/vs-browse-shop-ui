@@ -1,41 +1,22 @@
-import React, { useState, useEffect } from 'react'
-// import ReactImageMagnify from 'react-image-magnify';
-import NoImage from '../../../../public/static/assets/no-image.png'
+import React, { useState, useEffect } from 'react';
+import ReactImageZoom from 'react-image-zoom';
+import NoImage from '../../../../public/static/assets/no-image.png';
 
-function MagnifyImage ({ src, alt, width, height }) {
-  const [srcImg, setSrc] = useState(src)
+function MagnifyImage(props) {
+  const [srcImg, setSrc] = useState(props?.src);
 
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
-    setSrc(src)
-  }, [src])
+    setSrc(props?.src);
+  }, [props]);
 
   return (
-    // <ReactImageMagnify
-    //   {...{
-    //     smallImage: {
-    //       src: srcImg.src ? srcImg.src : srcImg,
-    //       isFluidWidth: true,
-    //       alt,
-    //       onError: () => setSrc(NoImage),
-    //     },
-    //     largeImage: {
-    //       src: srcImg.src ? srcImg.src : srcImg,
-    //       width: width || 600,
-    //       height: height || 600,
-    //       alt,
-    //       onError: () => setSrc(NoImage),
-    //     },
-    //   }}
-    //   style={{
-    //     cursor: 'zoom-in',
-    //   }}
-    //   enlargedImageContainerStyle={{
-    //     zIndex: 999,
-    //   }}
-    // />
-    <>This is test component</>
-  )
+    <div className="magnify-img">
+      <ReactImageZoom
+        {...props}
+      />
+    </div>
+  );
 }
 
-export default MagnifyImage
+export default MagnifyImage;
