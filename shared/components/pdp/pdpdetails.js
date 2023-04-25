@@ -108,8 +108,9 @@ export default function ProductDescription(props) {
       selectedCount: '',
       skus: {}
     }
-    const keysArr = Object.keys(skus)
-    keysArr.forEach((key, index) => {
+    // const keysArr = Object.keys(skus)
+    // keysArr.forEach((key, index) => {
+    for (const key in skus) {
       const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
       const thickness =
         skus[key]?.skuDetails?.additionalDetails?.thickness || ''
@@ -126,14 +127,8 @@ export default function ProductDescription(props) {
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel =
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
-      if (index === 0) {
-        countObj.hasStock = false
-        // countObj.hasStock = skus[key]?.skuDetails?.hasStock
-      } else {
-        // countObj.hasStock = false
-        countObj.hasStock = skus[key]?.skuDetails?.hasStock
-      }
-
+      // countObj.hasStock = false
+      countObj.hasStock = skus[key]?.skuDetails?.hasStock
       countObj.onSale = skus[key]?.skuDetails?.onSale
       countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
         ? skus[key].skuDetails.price.salePrice.price
@@ -146,7 +141,7 @@ export default function ProductDescription(props) {
         : ''
       countObj.itemCode = skus[key].skuId
       skusObj.skus[skusObjKey].count.push(countObj)
-    })
+    }
     // select default weight, default count
     for (const key in skusObj.skus) {
       if (skusObj.skus[key].skuId === defaultSkuId) {
