@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable react/void-dom-elements-no-children */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable linebreak-style */
@@ -61,10 +62,10 @@ function SKUWeights({
   skusData,
   weightSelected
 }) {
-  console.log('from SKUWeights.....skusData..', skusData)
+  // console.log('from SKUWeights.....skusData..', skusData)
 
   const handleSkuSelected = skuObj => {
-    console.log('from handler......skuObj...', skuObj)
+    // console.log('from handler......skuObj...', skuObj)
     handleWeightSelected(skuObj)
   }
 
@@ -76,7 +77,7 @@ function SKUWeights({
   }
 
   const displayWeights = () => {
-    console.log('from displayWeights.....skusData,...', skusData)
+    // console.log('from displayWeights.....skusData,...', skusData)
     return (
       <>
         <div className='sukhead'> Weight: </div>

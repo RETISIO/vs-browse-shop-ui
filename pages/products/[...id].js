@@ -8,8 +8,9 @@ import { PageBuilder } from '@retisio/sf-ui'
 import { usePageDataContext } from '../../shared/context/pageData-context'
 import MainLayout from '../../shared/components/Layout'
 import getPDPData from '../../shared/helpers/getPDPData'
-// import ProductDescription from '../../shared/components/pdp/pdpdetails'
-import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
+//import ProductDescription from '../../shared/components/pdp/pdpdetails'
+//import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
+import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 
@@ -19,7 +20,7 @@ export default function ProductDetails({ data }) {
   const { payLoad } = data
   useEffect(() => {
     setPageData(data)
-    viewItem(data)
+    visitPDP(data)
   }, [])
 
   return (

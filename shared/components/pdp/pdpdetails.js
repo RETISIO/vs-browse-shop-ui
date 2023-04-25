@@ -106,7 +106,7 @@ export default function ProductDescription(props) {
 
   function prepareSkusData() {
     const { payLoad } = props
-    console.log('from productSkus....props..', props)
+    // console.log('from productSkus....props..', props)
 
     const product = payLoad && payLoad.products && payLoad.products[0]
     const skus = (product && product.skus) || {}

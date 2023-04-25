@@ -74,12 +74,12 @@ function SKUCounts({
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
   const { setShow } = useAppContext()
 
-  console.log(
-    'from skuCounts....weightSelected, countSelected,itemQuantity.',
-    weightSelected,
-    countSelected,
-    itemQuantity
-  )
+  // console.log(
+  //   'from skuCounts....weightSelected, countSelected,itemQuantity.',
+  //   weightSelected,
+  //   countSelected,
+  //   itemQuantity
+  // )
 
   useEffect(() => {
     if (countSelected && !countSelected.hasStock) {

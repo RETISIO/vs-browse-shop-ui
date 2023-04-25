@@ -4,10 +4,10 @@
 import { useState, useEffect } from 'react';
 import { LoginModel } from '@retisio/sf-ui';
 import { useRouter } from 'next/router';
-
 import { Modal } from 'react-bootstrap';
 import { getCookie } from '@retisio/sf-api';
 // import { LoginModel } from '../loginModel';
+import { login } from '../ThirdPartyScripts/Events'
 import { useAppContext } from '../../context/appContext';
 import { requestContructor }from '../../helpers/api';
 import ResetPassword from '../ResetPassword';
@@ -75,6 +75,7 @@ export function Index(props) {
   };
 
   const handleSubmitForm = async(data) => {
+    login(data.userName);
     const loginData = await requestContructor(
       'signIn',
       '',
@@ -105,7 +106,6 @@ export function Index(props) {
     });
     return loginData;
   };
-
   return (
     <div>
       {props.children}
