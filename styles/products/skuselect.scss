@@ -361,7 +361,7 @@
     }
 
     .list-inline-item {
-        display: inline-block;
+        display: inline-grid;
         // display: inline-flex;
     }
 
@@ -404,7 +404,7 @@
     .txttagb {
         display: block;
         text-align: center;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         padding: 0px 0 0 0;
         margin: 0;
@@ -595,7 +595,8 @@
         display: flex;
         float: left;
         padding-right: 20px;
-        width: 23%;
+        width: 28%;
+        padding-bottom: 20px;
     }
 
     .hide-panel1 {
