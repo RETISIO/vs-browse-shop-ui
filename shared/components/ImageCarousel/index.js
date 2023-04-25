@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from 'react-slick';
 import Carousel from 'react-bootstrap/Carousel';
 import Modal from 'react-bootstrap/Modal';
@@ -15,6 +15,7 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
   const imgData = [...defaultImg, ...alternateImg];
   const [show, setShow] = useState(false);
   const [openImg, setOpenImg] = useState();
+  const [width, setWidth] = useState(992);
 
   const settings = {
     slidesToShow: 3,
@@ -29,21 +30,25 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
     setShow(true);
   };
 
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setWidth(window.innerWidth);
+    });
+  }, []);
+
   return (
     <>
-      <div className="popup">
-        <Modal className="mv-popup" show={show} fullscreen={true} onHide={() => setShow(false)}>
-          <Modal.Header closeButton></Modal.Header>
-          <Modal.Body>
-            <NextImage
-              alt={openImg?.altText}
-              src={`${damPath}${openImg?.largeImg}`}
-              fill
-              className="thmbnl imgpos"
-            />
-          </Modal.Body>
-        </Modal>
-      </div>
+      <Modal dialogAs="div" dialogClassName="mv-popup" show={show} fullscreen={true} onHide={() => setShow(false)}>
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <NextImage
+            alt={openImg?.altText}
+            src={`${damPath}${openImg?.largeImg}`}
+            fill
+            className="thmbnl imgpos"
+          />
+        </Modal.Body>
+      </Modal>
       <div className="image-carousel">
         <div className="thumbnail-section">
           <Slider {...settings}>
@@ -89,11 +94,21 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
                 className="sale-logo"
               />
             )}
-            <MagnifyImage
-              img={`${damPath}${selected?.largeImg}`}
-              alt={selected?.altText}
-              offset={{ vertical: 0, horizontal: 10 }}
-            />
+            {width > 991
+              ? (
+                <MagnifyImage
+                  img={`${damPath}${selected?.largeImg}`}
+                  alt={selected?.altText}
+                  offset={{ vertical: 0, horizontal: 10 }}
+                />
+              )
+              : (
+                <MagnifyImage
+                  img={`${damPath}${selected?.largeImg}`}
+                  alt={selected?.altText}
+                  zoomPosition="original"
+                />
+              )}
           </div>
         )}
       </div>
