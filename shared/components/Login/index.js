@@ -66,12 +66,18 @@ export function Index(props) {
     return data;
   };
 
+  const personaliseData = async() => {
+    const data = await getPersonalization();
+    return data;
+  };
+
   const reloadToPath = () => {
     if(page) {
       window.location.href = page;
     }else{
       window.location.href = asPath;
     }
+    setShow(false);
   };
 
   const handleSubmitForm = async(data) => {
@@ -82,21 +88,20 @@ export function Index(props) {
       { method: 'POST', data },
     ).then((res) => {
       if(res) {
-        setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
-          (async() => {
-            await getPersonalization();
-          })();
           const isMergeCart = !!getCookie('arcCartId');
-          if (isMergeCart) {
-            const result = triggerMergeCart();
-            result.then((mergeRes) => {
-              if (mergeRes.status === 200) { reloadToPath(); }
-            });
-          } else {
-            reloadToPath();
-          }
+          const pData = personaliseData();
+          pData.then(() => {
+            if (isMergeCart) {
+              const result = triggerMergeCart();
+              result.then((mergeRes) => {
+                if (mergeRes.status === 200) { reloadToPath(); }
+              });
+            } else {
+              reloadToPath();
+            }
+          });
         }
       }
     }, (error) => {
