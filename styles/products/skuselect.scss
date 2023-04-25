@@ -361,7 +361,7 @@
     }
 
     .list-inline-item {
-        display: inline-block;
+        display: inline-grid;
         // display: inline-flex;
     }
 
@@ -404,7 +404,7 @@
     .txttagb {
         display: block;
         text-align: center;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         padding: 0px 0 0 0;
         margin: 0;
@@ -595,7 +595,8 @@
         display: flex;
         float: left;
         padding-right: 20px;
-        width: 23%;
+        width: 28%;
+        padding-bottom: 20px;
     }
 
     .hide-panel1 {
@@ -614,15 +615,15 @@
     }
 
     .sku-item-qty {
-        height: 46px;
-        padding: 10px 16px;
+        height: 41px;
+        // padding: 10px 16px;
         font-size: 18px;
-        line-height: 1.33;
+        // line-height: 1.33;
         border: none;
         background: none;
         cursor: default;
         font-weight: 600;
-        width:52px;
+        width:64px;
         text-align:center
     }
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Loader } from '../loader';
 
-function Customreadcrumb(props) {
+function CustomBreadcrumb(props) {
   const { payLoad } = props;
   const router = useRouter();
 
@@ -49,4 +49,4 @@ function Customreadcrumb(props) {
   );
 }
 
-export default Customreadcrumb;
+export default CustomBreadcrumb;

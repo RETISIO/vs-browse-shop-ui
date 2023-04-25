@@ -4,6 +4,7 @@ import { viewItem } from './gtag';
 import { RviewItem, SearchProd, ProductClick } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
+  debugger;
   viewItem(itemData);
   try {
     if (window && window.lstImplement) {
@@ -19,7 +20,11 @@ const visitPDP = (itemData) => {
 };
 
 const Search = (obj) => {
-  SearchProd(obj);
+  try{
+    SearchProd(obj);
+  }catch(e){
+    console.log(e);
+  }
 };
 
 const ClickProduct = (obj) => {

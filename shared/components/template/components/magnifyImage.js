@@ -1,41 +1,35 @@
-import React, { useState, useEffect } from 'react'
-// import ReactImageMagnify from 'react-image-magnify';
-import NoImage from '../../../../public/static/assets/no-image.png'
+import React, { useState, useEffect } from 'react';
+import ReactImageZoom from 'react-image-zoom';
+import NoImage from '../../../../public/static/assets/no-image.png';
 
-function MagnifyImage ({ src, alt, width, height }) {
-  const [srcImg, setSrc] = useState(src)
+function MagnifyImage(props) {
+  const [data, setData] = useState(props);
+
+  const getImageOrFallback = (url, fallback) => new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = url;
+    img.onload = () => resolve(url);
+    img.onerror = () => {
+      reject(`image not found for url ${url}`);
+    };
+  }).catch(() => fallback?.src);
 
   useEffect(() => {
     // eslint-disable-next-line react/destructuring-assignment
-    setSrc(src)
-  }, [src])
+    getImageOrFallback(props?.img, NoImage)
+      .then((res) => {
+        setData({
+          ...props,
+          img: res,
+        });
+      });
+  }, [props]);
 
   return (
-    // <ReactImageMagnify
-    //   {...{
-    //     smallImage: {
-    //       src: srcImg.src ? srcImg.src : srcImg,
-    //       isFluidWidth: true,
-    //       alt,
-    //       onError: () => setSrc(NoImage),
-    //     },
-    //     largeImage: {
-    //       src: srcImg.src ? srcImg.src : srcImg,
-    //       width: width || 600,
-    //       height: height || 600,
-    //       alt,
-    //       onError: () => setSrc(NoImage),
-    //     },
-    //   }}
-    //   style={{
-    //     cursor: 'zoom-in',
-    //   }}
-    //   enlargedImageContainerStyle={{
-    //     zIndex: 999,
-    //   }}
-    // />
-    <>This is test component</>
-  )
+    <div className="magnify-img">
+      <ReactImageZoom {...data} />
+    </div>
+  );
 }
 
-export default MagnifyImage
+export default MagnifyImage;

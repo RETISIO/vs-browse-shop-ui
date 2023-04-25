@@ -61,11 +61,18 @@ function Home({ data }) {
 Home.getInitialProps = async(context) => {
   const { req, asPath } = context;
   let res;
+  let customHeaders = {};
+  if(req) {
+    customHeaders = { 
+      cookie: req.headers.cookie,
+      'user-agent': req.headers['user-agent']
+    };
+  }
   try {
     res = await requestContructor(
       'static/home',
       '',
-      { customHeaders: { cookie: req ? req.headers.cookie : '' } },
+      { customHeaders },
       req,
       asPath,
     );
