@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag'
 import { RviewItem, SearchProd, ProductClick } from './RetisioEvents'
@@ -28,4 +29,25 @@ const ClickProduct = obj => {
   ProductClick(obj)
 }
 
-export { visitPDP, Search, ClickProduct }
+const login = data => {
+  console.log(data)
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.captureEmail(data)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+const cartItems = data => {
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.captureCartItems(data)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export { visitPDP, Search, ClickProduct, login, cartItems }

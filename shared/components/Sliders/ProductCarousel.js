@@ -90,7 +90,10 @@ export default function ProductCarousel(props) {
     <>
       {load && (
         <>
-          <h1 className='row align-left'>{props.name}</h1>
+          <h1 className='row align-left'>
+            <span>{props.name}</span>
+            <small className='ml-10'>{productsData?.configValues.defaultProductSelector.viewAllLink && <a href={productsData?.configValues.defaultProductSelector.viewAllLink}>View All</a>}</small>
+          </h1>
           <Slider {...productsData.settings}>
             {productsData?.configValues?.defaultProductSelector?.products.map(
               (value, index) => (
