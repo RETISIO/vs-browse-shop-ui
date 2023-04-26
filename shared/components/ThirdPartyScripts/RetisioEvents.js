@@ -37,8 +37,13 @@ const ProductClick = (obj) => {
   // console.log(obj);
 };
 
+const AddItem = (obj) => {
+  // console.log(obj);
+};
+
 export {
   RviewItem,
   SearchProd,
   ProductClick,
+  AddItem,
 };

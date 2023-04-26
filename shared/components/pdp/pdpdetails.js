@@ -98,7 +98,7 @@ export default function ProductDescription(props) {
   }, [])
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productData = pdpData?.products[0]
+  const productData = pdpData?.products[0];
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}

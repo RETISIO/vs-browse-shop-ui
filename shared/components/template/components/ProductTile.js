@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import NextImage from './nextImage';
+import { ProductClick } from '../../ThirdPartyScripts/RetisioEvents';
 
 export default function ProductTile({ value }) {
   return (
