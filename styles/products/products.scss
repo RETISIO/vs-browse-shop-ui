@@ -188,6 +188,39 @@
     position: relative !important;
 }
 
+.hide {
+    display: none;
+}
+
+.cooking-instruction-button {
+    float: right;
+    .printbtn, .sharebtn {
+        border-radius: 4px;
+        border: 1px solid;
+    }
+    .printbtn {
+        padding: 4px 10px 3px 10px;
+    }
+    .sharebtn {
+        margin-left: 20px;
+        padding: 5px 10px 5px 10px;
+    }
+}
+
+.accordions-section{
+    .accordion {
+        .accordion-item {
+            .accordion-header {
+                .accordion-button {
+                    padding: 0 !important;
+                }
+            }
+        }
+    }
+    .panel-body {
+        padding: 25px 65px 0 50px !important
+    }
+}
 
 @media screen and (max-width: 991px) {
   .pdpMainContainer {
@@ -215,6 +248,20 @@
         }
         .image-carousel-mv {
             max-width: calc(100vh - 50px);
+        }
+    }
+    .accordions-section{
+        .accordion {
+            .accordion-item {
+                .accordion-header {
+                    .accordion-button {
+                        padding: 0 !important;
+                    }
+                }
+            }
+        }
+        .panel-body {
+            padding: 25px 15px 0 5px !important;
         }
     }
 }
