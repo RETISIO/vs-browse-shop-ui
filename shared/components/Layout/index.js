@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
@@ -16,15 +17,18 @@ import ComponentMap from '../componentMap';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
 import getPersonalization from '../../helpers/utils';
 
-export default function MainLayout({ data, abUrl = '', children }) {
+export default function MainLayout({
+  data, abUrl = '', SEO, children,
+}) {
   const { state, updateState } = useAppContext();
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
-  if(data && data.payLoad && data.payLoad.webEnabledAttr) {
-    seoData = data.payLoad.webEnabledAttr;
+  if(SEO) {
+    seoData = SEO;
   }
+
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {

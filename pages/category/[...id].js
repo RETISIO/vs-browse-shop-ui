@@ -29,6 +29,10 @@ function Static({ data, origin }) {
   } = usePLPDataContext();
   const [loading, setLoading] = useState(false);
   let abUrl = '';
+  let seoData = '';
+  if(data && data.payLoad && data.payLoad.webEnabledAttr) {
+    seoData = data.payLoad.webEnabledAttr;
+  }
   if(origin) {
     abUrl = origin + router.asPath;
   }
@@ -69,7 +73,7 @@ function Static({ data, origin }) {
   }, [router.asPath]);
 
   return (
-    <MainLayout data={data} abUrl={abUrl}>
+    <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }

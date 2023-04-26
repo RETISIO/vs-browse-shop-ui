@@ -29,12 +29,17 @@ export default function ProductDetails({ data, origin }) {
   const router = useRouter();
 
   let abUrl = '';
+  let seoData = '';
   if(origin) {
     abUrl = origin + router.asPath;
   }else{
     abUrl = window.location.href;
   }
-
+  if(data && data.payLoad && data.payLoad.products
+    && data.payLoad.products[0] && data.payLoad.products[0].productDetails
+    && data.payLoad.products[0].productDetails.seoData) {
+    seoData = data.payLoad.products[0].productDetails.seoData;
+  }
   const renderProductDescriptionPage = () => {
     const productType = payLoad?.products && payLoad?.products[0]?.productType;
     if (productType === 'giftcard') {
@@ -50,7 +55,7 @@ export default function ProductDetails({ data, origin }) {
   }
 
   return (
-    <MainLayout data={data} abUrl={abUrl}>
+    <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
       {/* <Yotpo /> */}
       <main>
         {/* {i18n.t('title')} */}
