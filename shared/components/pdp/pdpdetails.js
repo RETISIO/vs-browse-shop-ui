@@ -130,8 +130,7 @@ export default function ProductDescription(props) {
       skusObj.skus[skusObjKey].skuId = skus[key].skuId
       const countObj = {}
       countObj.pieces = skus[key]?.skuDetails?.additionalDetails?.pieces || ''
-      countObj.availableStock =
-        skus[key]?.skuDetails?.inventory[0]?.availableStock || ''
+      countObj.availableStock = skus[key]?.skuDetails?.inventory ? skus[key]?.skuDetails?.inventory[0]?.availableStock : ''
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel =
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
