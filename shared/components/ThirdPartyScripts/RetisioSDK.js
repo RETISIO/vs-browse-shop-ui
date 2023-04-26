@@ -4,7 +4,7 @@ import Script from 'next/script';
 
 export default function RetisioSDK() {
   return (
-    <Script src="http://192.168.23.213/sdk/retisio-sdk.js">
+    <Script src="https://storage.googleapis.com/retisio-dm-web-sdk/retisio-sdk.js">
       {`retisioSDK.init(${process.env.NEXT_PUBLIC_RETISIO_ID});`}
     </Script>
   );
