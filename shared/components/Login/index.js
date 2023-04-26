@@ -4,10 +4,10 @@
 import { useState, useEffect } from 'react';
 import { LoginModel } from '@retisio/sf-ui';
 import { useRouter } from 'next/router';
-
 import { Modal } from 'react-bootstrap';
 import { getCookie } from '@retisio/sf-api';
 // import { LoginModel } from '../loginModel';
+import { login } from '../ThirdPartyScripts/Events'
 import { useAppContext } from '../../context/appContext';
 import { requestContructor }from '../../helpers/api';
 import ResetPassword from '../ResetPassword';
@@ -66,36 +66,42 @@ export function Index(props) {
     return data;
   };
 
+  const personaliseData = async() => {
+    const data = await getPersonalization();
+    return data;
+  };
+
   const reloadToPath = () => {
     if(page) {
       window.location.href = page;
     }else{
       window.location.href = asPath;
     }
+    setShow(false);
   };
 
   const handleSubmitForm = async(data) => {
+    login(data.userName);
     const loginData = await requestContructor(
       'signIn',
       '',
       { method: 'POST', data },
     ).then((res) => {
       if(res) {
-        setShow(false);
         if (getCookie('lu')) {
           setisLogged(true);
-          (async() => {
-            await getPersonalization();
-          })();
           const isMergeCart = !!getCookie('arcCartId');
-          if (isMergeCart) {
-            const result = triggerMergeCart();
-            result.then((mergeRes) => {
-              if (mergeRes.status === 200) { reloadToPath(); }
-            });
-          } else {
-            reloadToPath();
-          }
+          const pData = personaliseData();
+          pData.then(() => {
+            if (isMergeCart) {
+              const result = triggerMergeCart();
+              result.then((mergeRes) => {
+                if (mergeRes.status === 200) { reloadToPath(); }
+              });
+            } else {
+              reloadToPath();
+            }
+          });
         }
       }
     }, (error) => {
@@ -105,7 +111,6 @@ export function Index(props) {
     });
     return loginData;
   };
-
   return (
     <div>
       {props.children}

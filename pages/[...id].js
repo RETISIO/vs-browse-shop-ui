@@ -23,6 +23,7 @@ import MainLayout from '../shared/components/Layout'
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../shared/components/componentMap'
 import { Loader } from '../shared/components/loader'
+
 function Static({ data }) {
   // const i18n = useI18n();
   const { setPageData } = usePageDataContext()
@@ -57,13 +58,13 @@ function Static({ data }) {
 
 Static.getInitialProps = async context => {
   const { query, req, asPath } = context;
-  let res
+  let res; 
   try {
     if (!query.id.includes('nginx-health')) {
       res = await requestContructor(
         `static/${query.id.join('/')}`,
         '',
-        { customHeaders: { cookie: req ? req.headers.cookie : '' } },
+        { },
         req,
         asPath
       )

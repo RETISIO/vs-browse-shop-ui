@@ -1,14 +1,18 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag';
-import { RviewItem, SearchProd, ProductClick } from './RetisioEvents';
+import {
+  RviewItem, SearchProd, ProductClick, AddItem,
+} from './RetisioEvents';
 
 const visitPDP = (itemData) => {
   viewItem(itemData);
-  try{
-    if(window && window.lstImplement) {
+  try {
+    if (window && window.lstImplement) {
       window.lstImplement.browsedProduct(itemData);
     }
-  }catch(e) {
+  } catch (e) {
     console.log(e);
   }
 
@@ -27,8 +31,39 @@ const ClickProduct = (obj) => {
   ProductClick(obj);
 };
 
+const login = (data) => {
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.captureEmail(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const AddToCart = (data) => {
+  try {
+    AddItem(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const cartItems = (data) => {
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.captureCartItems(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export {
   visitPDP,
   Search,
   ClickProduct,
+  login,
+  cartItems,
+  AddToCart,
 };

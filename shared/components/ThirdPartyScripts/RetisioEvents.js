@@ -2,7 +2,7 @@
 const siteId = process.env.NEXT_PUBLIC_SITEID;
 const catalogId = '1001';
 const RviewItem = (itemData) => {
-  console.log('itemData', itemData);
+  // console.log('itemData', itemData);
 };
 
 const SearchProd = (obj) => {
@@ -34,11 +34,16 @@ const SearchProd = (obj) => {
 };
 
 const ProductClick = (obj) => {
-  console.log(obj);
+  // console.log(obj);
+};
+
+const AddItem = (obj) => {
+  // console.log(obj);
 };
 
 export {
   RviewItem,
   SearchProd,
   ProductClick,
+  AddItem,
 };

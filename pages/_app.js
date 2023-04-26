@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 import { useEffect } from 'react';

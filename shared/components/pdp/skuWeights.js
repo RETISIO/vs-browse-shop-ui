@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 /* eslint-disable react/void-dom-elements-no-children */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable linebreak-style */

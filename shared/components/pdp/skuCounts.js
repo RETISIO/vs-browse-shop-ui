@@ -18,10 +18,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable jsx-quotes */
 import React, { useState, useEffect } from 'react'
-import { getCookie } from '@retisio/sf-api'
-import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
-import { useMiniCartDataContext } from '../../context/miniCartcontext'
-import { useAppContext } from '../../context/appContext'
 
 // skuObj = {
 // defaultWeight: '',
@@ -57,17 +53,17 @@ import { useAppContext } from '../../context/appContext'
 // }
 
 function SKUCounts({
-  productId,
+  productData,
   handleCountSelected,
   weightSelected,
-  countSelected
+  countSelected,
+  handleAddtoCart,
+  handleAddtoWishList
 }) {
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const { setShow } = useAppContext()
 
   //   console.log(
   //     'from skuCounts....weightSelected, countSelected,itemQuantity,productId',
@@ -118,36 +114,13 @@ function SKUCounts({
     setDisableAddToCart(false)
   }
 
-  const addToBagHandler = event => {
+  const handleAddtoCartOnClick = event => {
     event.preventDefault()
-    const pdp = {
-      items: [
-        {
-          variantId: countSelected.itemCode,
-          productId,
-          quantity: itemQuantity,
-          productType: 'product'
-        }
-      ]
-    }
-    if (productId) {
-      const result = addToBagDetails(pdp)
-      result.then(data => {
-        setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
-      })
-    }
+    handleAddtoCart(countSelected, itemQuantity)
   }
 
-  const addToWishLisrHandler = e => {
-    if (getCookie('lu')) {
-      addToWishList({
-        skuId: countSelected.itemCode,
-        productId,
-        quantity: '1'
-      })
-    } else {
-      setShow(true)
-    }
+  const handleAddtoWishListOnClick = event => {
+    handleAddtoWishList(countSelected)
   }
 
   const displayPrice = (listPrice, salePrice) => {
@@ -334,7 +307,7 @@ function SKUCounts({
                     : ''
                 }`}
                 id='0'
-                onClick={e => addToBagHandler(e)}
+                onClick={e => handleAddtoCartOnClick(e)}
               >
                 ADD TO CART
               </button>
@@ -343,7 +316,7 @@ function SKUCounts({
               <button
                 className='btn btn-primary btn-md add-to-cart'
                 id='1'
-                onClick={e => addToWishLisrHandler(e)}
+                onClick={e => handleAddtoWishListOnClick(e)}
               >
                 ADD TO WISHLIST
               </button>
