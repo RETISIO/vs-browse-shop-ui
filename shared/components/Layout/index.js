@@ -11,6 +11,7 @@ import { getCookie } from '@retisio/sf-api';
 import { Layout } from '@retisio/sf-ui';
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
+import { cartItems } from '../ThirdPartyScripts/Events';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ComponentMap from '../componentMap';
@@ -25,6 +26,9 @@ export default function MainLayout({
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
+  if (data && data.payLoad && data.payLoad.webEnabledAttr) {
+    seoData = data.payLoad.webEnabledAttr;
+  }
   if(SEO) {
     seoData = SEO;
   }
@@ -54,7 +58,7 @@ export default function MainLayout({
           : 'https://us.ab-dev.retisio.com';
         finalChannelData = channelData[channelURL];
       }
-      if(getCookie('lu')) {
+      if (getCookie('lu')) {
         userData = await requestContructor(
           'getprofile',
           '',
@@ -85,7 +89,9 @@ export default function MainLayout({
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const getMiniCartData = async() => {
     const cartData = await requestContructor('getCartArc', '', {});
+    cartItems(cartData);
     if (miniCartDetails.itemAdded === true) {
+      // cartItems(cartData);
       setMiniCartDetails({
         ...miniCartDetails,
         itemAdded: false,

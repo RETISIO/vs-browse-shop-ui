@@ -42,7 +42,7 @@ export default function ProductDetails({ data, origin }) {
   }
   const renderProductDescriptionPage = () => {
     const productType = payLoad?.products && payLoad?.products[0]?.productType;
-    if (productType === 'giftcard') {
+    if (productType === 'egiftcard' || productType === 'giftcard') {
       return <GiftCard pdpData={data}/>
     }
     return (
