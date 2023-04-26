@@ -16,7 +16,7 @@ import ComponentMap from '../componentMap';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
 import getPersonalization from '../../helpers/utils';
 
-export default function MainLayout({ data, children }) {
+export default function MainLayout({ data, abUrl = '', children }) {
   const { state, updateState } = useAppContext();
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
@@ -166,7 +166,7 @@ export default function MainLayout({ data, children }) {
         {seoData?.canonicalUrl ? (
           <link rel="canonical" href={seoData?.canonicalUrl} />
         ) : (
-          <link rel="canonical" href="restisio home" />
+          <link rel="canonical" href={abUrl} />
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable linebreak-style */
 /* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
@@ -9,6 +10,7 @@
 import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
 import { useRouter, Router } from 'next/router';
+import absoluteUrl from 'next-absolute-url';
 // eslint-disable-next-line import/named
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import { usePLPDataContext } from '../../shared/context/plpDatacontext';
@@ -18,15 +20,18 @@ import { Loader } from '../../shared/components/loader';
 import getPLPData from '../../shared/helpers/getPLPData';
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 
-function Static({ data }) {
+function Static({ data, origin }) {
   // const i18n = useI18n();
   const router = useRouter();
   const { setPageData } = usePageDataContext();
   const {
     setOffset,
   } = usePLPDataContext();
-
   const [loading, setLoading] = useState(false);
+  let abUrl = '';
+  if(origin) {
+    abUrl = origin + router.asPath;
+  }
 
   useEffect(() => {
     setPageData(data);
@@ -64,7 +69,7 @@ function Static({ data }) {
   }, [router.asPath]);
 
   return (
-    <MainLayout data={data}>
+    <MainLayout data={data} abUrl={abUrl}>
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
@@ -76,9 +81,12 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async (context) => {
+  const { origin } = absoluteUrl(context.req);
+
   const data = await getPLPData(context);
   return {
     data,
+    origin
   };
 };
 
