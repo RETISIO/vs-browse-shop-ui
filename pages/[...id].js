@@ -58,20 +58,13 @@ function Static({ data }) {
 
 Static.getInitialProps = async context => {
   const { query, req, asPath } = context;
-  let res; let
-    customHeaders;
-  if(req) {
-    customHeaders = {
-      cookie: req.headers.cookie,
-      'user-agent': req.headers['user-agent']
-    };
-  }
+  let res; 
   try {
     if (!query.id.includes('nginx-health')) {
       res = await requestContructor(
         `static/${query.id.join('/')}`,
         '',
-        { customHeaders },
+        { },
         req,
         asPath
       )

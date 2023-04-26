@@ -29,7 +29,7 @@ const ComponentMap = {
   'miniStaticCarousel:custom': MiniStaticCarousel,
   'imagelist:custom': CookingGuide,
   'article:custom': Article,
-  'pdp-product-block:custom': ProductDescription,
+  'pdpproductblock:custom': ProductDescription,
   'articletile:custom': ArticleTitle,
   // 'article-detail-prodcutid:custom': Article,
   'breadcrumb:default': CustomBreadcrumb,

@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow */
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/named */
 /* eslint-disable no-unused-vars */
@@ -17,7 +18,9 @@ import ComponentMap from '../componentMap';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
 import getPersonalization from '../../helpers/utils';
 
-export default function MainLayout({ data, children }) {
+export default function MainLayout({
+  data, abUrl = '', SEO, children,
+}) {
   const { state, updateState } = useAppContext();
   const { show, setShow } = useAppContext();
   const { isLogged } = useAppContext();
@@ -25,7 +28,10 @@ export default function MainLayout({ data, children }) {
   let seoData = data?.page?.seo;
   if (data && data.payLoad && data.payLoad.webEnabledAttr) {
     seoData = data.payLoad.webEnabledAttr;
+  if(SEO) {
+    seoData = SEO;
   }
+
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async () => {
@@ -154,12 +160,12 @@ export default function MainLayout({ data, children }) {
         {seoData?.title ? (
           <title>{seoData?.title}</title>
         ) : (
-          <title>Retisio Page</title>
+          <title>Allen Brothers</title>
         )}
         {seoData?.description ? (
           <meta name="description" content={seoData?.description} />
         ) : (
-          <meta name="description" content="restisio home" />
+          <meta name="description" content="Allen Brothers" />
         )}
         {seoData?.keywords ? (
           <meta name="keywords" content={seoData?.keywords} />
@@ -169,7 +175,7 @@ export default function MainLayout({ data, children }) {
         {seoData?.canonicalUrl ? (
           <link rel="canonical" href={seoData?.canonicalUrl} />
         ) : (
-          <link rel="canonical" href="restisio home" />
+          <link rel="canonical" href={abUrl} />
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
