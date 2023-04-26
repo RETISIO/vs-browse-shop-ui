@@ -11,6 +11,7 @@ import { getCookie } from '@retisio/sf-api';
 import { Layout } from '@retisio/sf-ui';
 // import Login from '../shared/components/Login';
 // eslint-disable-next-line import/named
+import { cartItems } from '../ThirdPartyScripts/Events'
 import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ComponentMap from '../componentMap';
@@ -25,13 +26,15 @@ export default function MainLayout({
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
+  if (data && data.payLoad && data.payLoad.webEnabledAttr) {
+    seoData = data.payLoad.webEnabledAttr;
   if(SEO) {
     seoData = SEO;
   }
 
   const i18n = useI18n();
   const [rootCatagories, setRootCatagories] = useState([]);
-  const getData = async() => {
+  const getData = async () => {
     const res = await requestContructor('getCategoryList', '', {}, false);
 
     setRootCatagories(res?.payLoad?.categories);
@@ -39,7 +42,7 @@ export default function MainLayout({
   };
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       let finalChannelData = {}; let
         userData = {};
       if (!state.channelData) {
@@ -54,7 +57,7 @@ export default function MainLayout({
           : 'https://us.ab-dev.retisio.com';
         finalChannelData = channelData[channelURL];
       }
-      if(getCookie('lu')) {
+      if (getCookie('lu')) {
         userData = await requestContructor(
           'getprofile',
           '',
@@ -83,9 +86,11 @@ export default function MainLayout({
   }, [router.locale]);
   /* *************Mini Cart functionality starts here ***************** */
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
-  const getMiniCartData = async() => {
+  const getMiniCartData = async () => {
     const cartData = await requestContructor('getCartArc', '', {});
+    cartItems(cartData);
     if (miniCartDetails.itemAdded === true) {
+      //cartItems(cartData);
       setMiniCartDetails({
         ...miniCartDetails,
         itemAdded: false,
@@ -120,7 +125,7 @@ export default function MainLayout({
   }, [miniCartDetails.itemAdded]);
   /* *************Mini Cart functionality ends here *********************** */
   const [searchAheadData, setSearchAheadData] = useState(null);
-  const getSearchAheadData = async(text) => {
+  const getSearchAheadData = async (text) => {
     const res = await requestContructor(
       'getTypeAheadArc',
       `?searchKey=${text}&size=4`,
@@ -138,7 +143,7 @@ export default function MainLayout({
     }
   };
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
-  const signout = async() => {
+  const signout = async () => {
     const res = await requestContructor('signout', '', {}, false).then((data) => {
       if (data) {
         window.location.reload();
