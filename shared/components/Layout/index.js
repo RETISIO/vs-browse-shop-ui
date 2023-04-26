@@ -155,12 +155,12 @@ export default function MainLayout({
         {seoData?.title ? (
           <title>{seoData?.title}</title>
         ) : (
-          <title>Retisio Page</title>
+          <title>Allen Brothers</title>
         )}
         {seoData?.description ? (
           <meta name="description" content={seoData?.description} />
         ) : (
-          <meta name="description" content="restisio home" />
+          <meta name="description" content="Allen Brothers" />
         )}
         {seoData?.keywords ? (
           <meta name="keywords" content={seoData?.keywords} />
