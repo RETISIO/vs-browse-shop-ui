@@ -38,7 +38,7 @@ const ComponentMap = {
   'breadcrumb:default': CustomBreadcrumb,
   'classification:custom': ProductAccordions,
   'pdpshippinginfo:custom': ShippingInfoAccordion,
-  'pdp-cooking-instructions:custom': CookingInstructions,
-  'pdp-yotpo-placeholder:custom': ReviewSection
+  'pdpcookinginstructions:custom': CookingInstructions,
+  'pdpyotpoplaceholder:custom': ReviewSection
 }
 export default ComponentMap

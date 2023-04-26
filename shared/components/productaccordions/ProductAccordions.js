@@ -49,7 +49,7 @@ function ProductAccordions(props) {
             </Accordion.Item>
           )}
           {config?.classification?.product === 'defaultParentCategory' && (
-            <Accordion.Item eventKey="3">
+            <Accordion.Item eventKey="0">
               <Accordion.Header>
                 <div className="panel panel-default panel-large">
                   <div className="panel-heading">
