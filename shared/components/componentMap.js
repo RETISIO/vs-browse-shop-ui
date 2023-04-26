@@ -20,6 +20,7 @@ import ArticleTitle from './article/articleTitle'
 import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
+import ProductRecommondation from './Sliders/ProductRecommondation'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -39,6 +40,7 @@ const ComponentMap = {
   'classification:custom': ProductAccordions,
   'pdpshippinginfo:custom': ShippingInfoAccordion,
   'pdpcookinginstructions:custom': CookingInstructions,
-  'pdpyotpoplaceholder:custom': ReviewSection
+  'pdpyotpoplaceholder:custom': ReviewSection,
+  'productRecommendations:custom': ProductRecommondation,
 }
 export default ComponentMap
