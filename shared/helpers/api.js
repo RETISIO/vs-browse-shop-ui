@@ -36,7 +36,9 @@ const requestContructor = async (
   let finalHeaders = { originurl: finalOriginURl, relativeurl }
   let tempURI
   if (req) {
-    finalHeaders.host = req.headers.host
+    finalHeaders.host = req.headers.host;
+    finalHeaders.cookie = req.headers.cookie;
+    finalHeaders['user-agent'] = req.headers['user-agent'];
   }
   if (req && req.headers.correlationid) {
     finalHeaders.correlationid = req.headers.correlationid
