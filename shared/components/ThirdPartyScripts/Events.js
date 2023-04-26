@@ -17,7 +17,7 @@ const visitPDP = (itemData) => {
   }
 
   RviewItem(itemData);
-};
+}
 
 const Search = (obj) => {
   try{
@@ -27,9 +27,9 @@ const Search = (obj) => {
   }
 };
 
-const ClickProduct = (obj) => {
+const ClickProduct = obj => {
   ProductClick(obj);
-};
+}
 
 const login = (data) => {
   try {

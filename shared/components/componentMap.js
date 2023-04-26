@@ -29,7 +29,7 @@ const ComponentMap = {
   'productCarousel:default': ProductCarousel,
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
-  'article-detail-prodcutid:custom': Article,
+  // 'article-detail-prodcutid:custom': Article,
   'miniStaticCarousel:custom': MiniStaticCarousel,
   'imagelist:custom': CookingGuide,
   'article:custom': Article,

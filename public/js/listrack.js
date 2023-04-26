@@ -1,3 +1,6 @@
+/* eslint-disable padded-blocks */
+/* eslint-disable spaced-comment */
+/* eslint-disable space-before-blocks */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 /* eslint-disable prefer-arrow-callback */
