@@ -127,8 +127,30 @@ window.lstImplement = {
     _ltk.SCA.Submit();
   },
 
-  captureCartItems: (data) => {
-    console.log(data);
+  captureCartItems: (cartData) => {
+
+    if(!cartData){
+      _ltk.SCA.ClearCart();
+    }
+
+    //console.log(cartData);
+    const items = cartData.items;
+    let total = items.length
+    for (let i = 0; i < total; i++) {
+      const childItems = items[i];
+      console.log(childItems);
+
+      let sku = childItems.skuId;
+      let quantity = childItems.quantity
+      let price = childItems.itemPrice.salePrice ? childItems.itemPrice.salePrice : childItems.itemPrice.listPrice;
+      let title = childItems.productName;
+      let imageURL = childItems.imageUrl;
+      let productURL = childItems.pdpUrl;
+
+      _ltk.SCA.AddItemWithLinks(sku, quantity, price, title, imageURL, productURL);
+    }
+    _ltk.SCA.Total = total;
+    _ltk.SCA.Submit();
   },
 
 };
