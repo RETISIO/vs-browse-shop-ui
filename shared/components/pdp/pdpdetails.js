@@ -79,8 +79,9 @@ export default function ProductDescription(props) {
   const [skusData, setSkusData] = useState()
   const [errorMsg, setErrorMsg] = useState()
   const [successMsg, setSuccessMsg] = useState()
+  const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const { setShow } = useAppContext()
+  const { setShow, isLogged, setNoReload, noReload } = useAppContext()
 
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
@@ -97,8 +98,17 @@ export default function ProductDescription(props) {
     prepareSkusData()
   }, [])
 
+  useEffect(() => {
+    if (noReload && isLogged) {
+      if (skuSelected) {
+        addToWishLisrHandler(skuSelected)
+        setNoReload(false)
+      }
+    }
+  }, [noReload, isLogged])
+
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productData = pdpData?.products[0];
+  const productData = pdpData?.products[0]
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}
@@ -130,8 +140,7 @@ export default function ProductDescription(props) {
       skusObj.skus[skusObjKey].skuId = skus[key].skuId
       const countObj = {}
       countObj.pieces = skus[key]?.skuDetails?.additionalDetails?.pieces || ''
-      countObj.availableStock =
-        skus[key]?.skuDetails?.inventory[0]?.availableStock || ''
+      countObj.availableStock = skus[key]?.skuDetails?.inventory ? skus[key]?.skuDetails?.inventory[0]?.availableStock : ''
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel =
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
@@ -230,6 +239,7 @@ export default function ProductDescription(props) {
     skusObj.selectedCount = countArr.length ? countArr[0] : ''
     setSkusData(skusObj)
     setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
+    setSkuSelected(countObj)
   }
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
@@ -271,7 +281,15 @@ export default function ProductDescription(props) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
-          setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+          if (data && data.status === 200) {
+            setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+          } else if (data && data.status === 400) {
+            const error =
+              data.errors && Array.isArray(data.errors)
+                ? data.errors[0].message
+                : ''
+            setErrorMsg(error)
+          }
         })
         .catch(error => {
           setErrorMsg(error.message)
@@ -280,25 +298,38 @@ export default function ProductDescription(props) {
   }
 
   const addToWishLisrHandler = countSelected => {
-    if (getCookie('lu')) {
+    if (getCookie('lu') && countSelected && Object.keys(countSelected).length) {
       const result = addToWishList({
         skuId: countSelected.itemCode,
         productId: productData.productId,
         quantity: '1'
       })
-      // console.log('results....', result)
       result
         .then(data => {
           if (data && data.status === 200) {
             setSuccessMsg(
               `The following item have been moved to your wishlist: ${productData.displayName}`
             )
+          } else if (data && data.status === 400) {
+            const error =
+              (data.errors &&
+                Array.isArray(data.errors) &&
+                data.errors[0].message) ||
+              ''
+            setErrorMsg(error)
           }
         })
         .catch(error => {
           setErrorMsg(error.message)
         })
+    } else if (
+      !countSelected ||
+      (countSelected && Object.keys(countSelected).length === 0)
+    ) {
+      setErrorMsg('skuId must not be empty')
     } else {
+      setSkuSelected(countSelected)
+      setNoReload(true)
       setShow(true)
     }
   }
@@ -449,128 +480,6 @@ export default function ProductDescription(props) {
             </div>
           </div>
         </div>
-      </div>
-
-      <section className='product-info-section '>
-        <div className='container'>
-          <Accordion defaultActiveKey='0' flush>
-            <Accordion.Item eventKey='0'>
-              <Accordion.Header>
-                <div className='panel panel-default panel-large'>
-                  <div className='panel-heading'>
-                    <div className='panel-title'>
-                      <a
-                        id='productInfoSelector'
-                        className='collapse'
-                        role='button'
-                        data-toggle='collapse'
-                        href='#productInfoPanel'
-                      >
-                        Product Info
-                        <i className='icon fas fa-chevron-down'></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Accordion.Header>
-              <Accordion.Body>
-                <div
-                  className='panel-body'
-                  data-bind='html: $data.product().longDescription()'
-                >
-                  <p>
-                    A fine texture and rich marbling combined with our special
-                    dry-aging process give Allen Brothers sirloin strip steaks
-                    an incredibly robust flavor and juicy tenderness. Sometimes
-                    called a New York strip or shell steak, by any name it's a
-                    classic steak-lover's steak
-                  </p>
-                  <p>
-                    We dry age our steaks in custom-designed, dry aging coolers
-                    where a complex process incorporates an intricate and
-                    delicate balance of time, temperature, air circulation and
-                    humidity. The beef ages openly exposed to the air inside the
-                    cooler, from the outside in, forming a hard crust around the
-                    edible tissue. After aging is complete, this firm outer
-                    crust is carefully removed, leaving meat that is
-                    significantly more tender and with the distinctive ‘beefy’
-                    flavor specific to dry aging.
-                  </p>
-                </div>
-              </Accordion.Body>
-            </Accordion.Item>
-            <Accordion.Item eventKey='1'>
-              <Accordion.Header>
-                <div className='panel panel-default panel-large'>
-                  <div className='panel-heading'>
-                    <div className='panel-title'>
-                      <a
-                        id='productInfoSelector'
-                        className='collapse'
-                        role='button'
-                        data-toggle='collapse'
-                        href='#productInfoPanel'
-                      >
-                        Shipping Info
-                        <i className='icon fas fa-chevron-down'></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </Accordion.Header>
-              <Accordion.Body>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-          {/* <div className="panel-group">
-            <div className="row">
-              <div className="oc-panel col-md-12" data-oc-id="panel-0-0">
-                <div data-bind="element: 'allnPDP-productInfo'" id="wi1800003-allnPDP-productInfo-id">
-                  <div className="panel panel-default panel-large">
-                    <div className="panel-heading">
-                      <div className="panel-title">
-                        <a id="productInfoSelector" className="collapse" role="button" data-toggle="collapse" href="#productInfoPanel">
-                          Product Info
-                          <i className="icon fas fa-chevron-down"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="panel-collapse collapse in" data-collapse="xs" id="productInfoPanel">
-                      <div className="panel-body" data-bind="html: $data.product().longDescription()">
-                        <p>A fine texture and rich marbling combined with our special dry-aging process give Allen Brothers sirloin strip steaks an incredibly robust flavor and juicy tenderness. Sometimes called a New York strip or shell steak, by any name it's a classic steak-lover's steak</p>
-                        <p>We dry age our steaks in custom-designed, dry aging coolers where a complex process incorporates an intricate and delicate balance of time, temperature, air circulation and humidity. The beef ages openly exposed to the air inside the cooler, from the outside in, forming a hard crust around the edible tissue. After aging is complete, this firm outer crust is carefully removed, leaving meat that is significantly more tender and with the distinctive ‘beefy’ flavor specific to dry aging.</p>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-        </div>
-      </section>
-      <div className='container' id='reviewsection'>
-        {showWidget && (
-          <div
-            className='yotpo yotpo-main-widget'
-            data-product-id={pdpData?.products[0]?.productId}
-            data-price={pdpData?.products[0]?.productId}
-            data-currency='USD'
-            data-name={pdpData?.products[0]?.displayName}
-            data-url={window.location.href}
-            data-image-url={`${damPath}${
-              pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
-                ?.media?.thumbnailImg
-            }`}
-          ></div>
-        )}
       </div>
     </section>
   )

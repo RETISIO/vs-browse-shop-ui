@@ -2,7 +2,9 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag';
-import { RviewItem, SearchProd, ProductClick, AddItem } from './RetisioEvents';
+import {
+  RviewItem, SearchProd, ProductClick, AddItem,
+} from './RetisioEvents';
 
 const visitPDP = (itemData) => {
   viewItem(itemData);
@@ -23,7 +25,7 @@ const Search = (obj) => {
   }catch(e) {
     console.log(e);
   }
-}
+};
 
 const ClickProduct = obj => {
   ProductClick(obj);
@@ -37,7 +39,7 @@ const login = (data) => {
   } catch (e) {
     console.log(e);
   }
-}
+};
 
 const AddToCart = (data) => {
   try {
@@ -53,9 +55,9 @@ const cartItems = (data) => {
       window.lstImplement.captureCartItems(data);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 export {
   visitPDP,
