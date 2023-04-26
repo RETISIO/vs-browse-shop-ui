@@ -28,6 +28,7 @@ export default function MainLayout({
   let seoData = data?.page?.seo;
   if (data && data.payLoad && data.payLoad.webEnabledAttr) {
     seoData = data.payLoad.webEnabledAttr;
+  }
   if(SEO) {
     seoData = SEO;
   }
@@ -153,9 +154,6 @@ export default function MainLayout({
   };
   return (
     <>
-      {/* {show ? 'tue' : 'false sdf'}
-      <button onClick={()=>{setShow(!show)}}>click</button> */}
-      {/* <Login /> */}
       <Head>
         {seoData?.title ? (
           <title>{seoData?.title}</title>
