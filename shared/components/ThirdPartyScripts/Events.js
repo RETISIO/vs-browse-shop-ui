@@ -8,13 +8,13 @@ const visitPDP = (itemData) => {
   viewItem(itemData);
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.browsedProduct(itemData)
+      window.lstImplement.browsedProduct(itemData);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 
-  RviewItem(itemData)
+  RviewItem(itemData);
 }
 
 const Search = (obj) => {
@@ -26,16 +26,16 @@ const Search = (obj) => {
 }
 
 const ClickProduct = obj => {
-  ProductClick(obj)
+  ProductClick(obj);
 }
 
 const login = (data) => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureEmail(data)
+      window.lstImplement.captureEmail(data);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
@@ -50,7 +50,7 @@ const AddToCart = (data) => {
 const cartItems = (data) => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureCartItems(data)
+      window.lstImplement.captureCartItems(data);
     }
   } catch (e) {
     console.log(e)
