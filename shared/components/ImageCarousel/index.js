@@ -51,26 +51,28 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
       </Modal>
       <div className="image-carousel">
         <div className="thumbnail-section">
-          <Slider {...settings}>
-            {imgData?.map((img, index) => (
-              <div
-                className={`${
+          {imgData.length > 1 && (
+            <Slider {...settings}>
+              {imgData?.map((img, index) => (
+                <div
+                  className={`${
                   imgData.length <= 3 ? 'thumbnail-np' : 'thumbnail-image'
                 } ${img?.smallImg === selected?.smallImg ? 'selectedImg' : ''}`}
-                onClick={() => setSelected(img)}
-                key={`${img.smallImg}_${index}`}
-              >
-                <NextImage
-                  alt={img.altText}
-                  src={`${damPath}${img?.thumbnailImg}`}
-                  height="80"
-                  width="80"
-                  id={`${img.smallImg}-${index}`}
-                  className="thmbnl"
-                />
-              </div>
-            ))}
-          </Slider>
+                  onClick={() => setSelected(img)}
+                  key={`${img.smallImg}_${index}`}
+                >
+                  <NextImage
+                    alt={img.altText}
+                    src={`${damPath}${img?.thumbnailImg}`}
+                    height="80"
+                    width="80"
+                    id={`${img.smallImg}-${index}`}
+                    className="thmbnl"
+                  />
+                </div>
+              ))}
+            </Slider>
+          )}
         </div>
         {selected && (
           <div className="picture-section">

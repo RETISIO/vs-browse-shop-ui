@@ -15,8 +15,11 @@ import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
 import ProductDescription from './pdp/pdpdetails'
 import CustomBreadcrumb from './custombreadcrumb'
-import ProductInfo from './productinfo'
+import ProductAccordions from './productaccordions/ProductAccordions'
 import ArticleTitle from './article/articleTitle'
+import ReviewSection from './reviewsection'
+import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
+import CookingInstructions from './productaccordions/CookingInstructions'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -33,6 +36,9 @@ const ComponentMap = {
   'articletile:custom': ArticleTitle,
   // 'article-detail-prodcutid:custom': Article,
   'breadcrumb:default': CustomBreadcrumb,
-  'classification:custom': ProductInfo
+  'classification:custom': ProductAccordions,
+  'pdpshippinginfo:custom': ShippingInfoAccordion,
+  'pdpcookinginstructions:custom': CookingInstructions,
+  'pdpyotpoplaceholder:custom': ReviewSection
 }
 export default ComponentMap

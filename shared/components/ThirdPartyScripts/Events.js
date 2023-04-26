@@ -2,20 +2,22 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag';
-import { RviewItem, SearchProd, ProductClick, AddItem } from './RetisioEvents';
+import {
+  RviewItem, SearchProd, ProductClick, AddItem,
+} from './RetisioEvents';
 
 const visitPDP = (itemData) => {
   viewItem(itemData);
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.browsedProduct(itemData)
+      window.lstImplement.browsedProduct(itemData);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 
-  RviewItem(itemData)
-}
+  RviewItem(itemData);
+};
 
 const Search = (obj) => {
   try{
@@ -23,21 +25,21 @@ const Search = (obj) => {
   }catch(e) {
     console.log(e);
   }
-}
+};
 
-const ClickProduct = obj => {
-  ProductClick(obj)
-}
+const ClickProduct = (obj) => {
+  ProductClick(obj);
+};
 
 const login = (data) => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureEmail(data)
+      window.lstImplement.captureEmail(data);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 const AddToCart = (data) => {
   try {
@@ -50,12 +52,12 @@ const AddToCart = (data) => {
 const cartItems = (data) => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureCartItems(data)
+      window.lstImplement.captureCartItems(data);
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
 export {
   visitPDP,
