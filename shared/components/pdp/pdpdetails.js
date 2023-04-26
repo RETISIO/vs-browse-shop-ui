@@ -306,9 +306,9 @@ export default function ProductDescription(props) {
   return (
     <section>
       <div className='container pdpMainContainer'>
-        {(errorMsg || successMsg) && (
+        {errorMsg && (
           <div
-            className='alert alert-dismissible hidden-print alert-danger undefined'
+            className='alert alert-dismissible hidden-print alert-danger undefined cart-success-msg'
             aria-describedby='loginModalErrors-desc'
             tabIndex='0'
             role='alert'
@@ -319,14 +319,14 @@ export default function ProductDescription(props) {
         )}
         {successMsg && (
           <div
-            className='alert alert-dismissible hidden-print alert-success undefined header-alert-top'
+            className='alert alert-dismissible hidden-print alert-success undefined header-alert-top cart-success-msg'
             role='alert'
           >
             {handleCloseBtn(undefined, successMsg)}
             <strong>{successMsg}</strong>
           </div>
         )}
-        <div>
+        {/* <div>
           <div className='hidden-lg hidden-md visible-sm visible-xs'>
             <div
               className='alert alert-dismissible hidden-print alert-success undefined'
@@ -366,7 +366,7 @@ export default function ProductDescription(props) {
               <span aria-hidden='true'>×</span>
             </button>
           </div>
-        </div>
+        </div> */}
         <div className='product-title-wrapper'>
           <h1 className='page-title'>
             <span>{pdpData?.products[0]?.displayName}</span>
