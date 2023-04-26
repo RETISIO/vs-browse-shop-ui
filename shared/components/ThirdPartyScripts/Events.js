@@ -1,35 +1,31 @@
 /* eslint-disable import/prefer-default-export */
-import { viewItem } from './gtag';
-import { RviewItem, SearchProd, ProductClick } from './RetisioEvents';
+import { viewItem } from './gtag'
+import { RviewItem, SearchProd, ProductClick } from './RetisioEvents'
 
-const visitPDP = (itemData) => {
-  debugger;
-  viewItem(itemData);
-  try{
-    if(window && window.lstImplement) {
-      window.lstImplement.browsedProduct(itemData);
+const visitPDP = itemData => {
+  // debugger;
+  viewItem(itemData)
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.browsedProduct(itemData)
     }
-  }catch(e) {
-    console.log(e);
+  } catch (e) {
+    console.log(e)
   }
 
-  RviewItem(itemData);
-};
+  RviewItem(itemData)
+}
 
-const Search = (obj) => {
-  try{
-    SearchProd(obj);
-  }catch(e){
-    console.log(e);
+const Search = obj => {
+  try {
+    SearchProd(obj)
+  } catch (e) {
+    console.log(e)
   }
-};
+}
 
-const ClickProduct = (obj) => {
-  ProductClick(obj);
-};
+const ClickProduct = obj => {
+  ProductClick(obj)
+}
 
-export {
-  visitPDP,
-  Search,
-  ClickProduct,
-};
+export { visitPDP, Search, ClickProduct }

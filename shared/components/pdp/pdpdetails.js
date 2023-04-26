@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-unreachable-loop */
@@ -23,6 +24,7 @@
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
+import { getCookie } from '@retisio/sf-api'
 import NextImage from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
@@ -30,6 +32,9 @@ import FreshBadge from '../../../public/static/assets/Fresh.png'
 import ImageCarousel from '../ImageCarousel'
 import SKUWeights from './skuWeights'
 import SKUCounts from './skuCounts'
+import { useMiniCartDataContext } from '../../context/miniCartcontext'
+import { useAppContext } from '../../context/appContext'
+import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 
 // skuObj = {
 // defaultWeight: '',
@@ -72,6 +77,11 @@ export default function ProductDescription(props) {
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [skusData, setSkusData] = useState()
+  const [errorMsg, setErrorMsg] = useState()
+  const [successMsg, setSuccessMsg] = useState()
+  const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
+  const { setShow } = useAppContext()
+
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -88,7 +98,7 @@ export default function ProductDescription(props) {
   }, [])
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productId = pdpData?.products[0]?.productId
+  const productData = pdpData?.products[0]
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}
@@ -100,6 +110,7 @@ export default function ProductDescription(props) {
     // console.log('from productSkus....props..', props)
 
     const product = payLoad && payLoad.products && payLoad.products[0]
+    // console.log('product...', product)
     const skus = (product && product.skus) || {}
     const skusObj = {
       defaultWeight: '',
@@ -108,14 +119,11 @@ export default function ProductDescription(props) {
       selectedCount: '',
       skus: {}
     }
-    // const keysArr = Object.keys(skus)
-    // keysArr.forEach((key, index) => {
     for (const key in skus) {
       const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
       const thickness =
         skus[key]?.skuDetails?.additionalDetails?.thickness || ''
       const skusObjKey = `${weight}`
-      //   const skusObjKey = `${weight}__${thickness}`
       if (!skusObj.skus[skusObjKey]) {
         skusObj.skus[skusObjKey] = { weight, thickness, count: [] }
       }
@@ -224,9 +232,100 @@ export default function ProductDescription(props) {
     setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
   }
 
+  const handleCloseBtn = (errMsg, sucsMsg) => (
+    <button
+      className='close'
+      type='button'
+      aria-label='Close'
+      style={{
+        opacity: '1.2',
+        fontSize: '31px',
+        lineHeight: '0px',
+        marginTop: '10px'
+      }}
+      onClick={() => {
+        if (errMsg) {
+          setErrorMsg('')
+        }
+        if (sucsMsg) {
+          setSuccessMsg('')
+        }
+      }}
+    >
+      <span aria-hidden='true'>×</span>
+    </button>
+  )
+
+  const addToBagHandler = (countSelected, itemQuantity) => {
+    const pdp = {
+      items: [
+        {
+          variantId: countSelected.itemCode,
+          productId: productData.productId,
+          quantity: itemQuantity,
+          productType: 'product'
+        }
+      ]
+    }
+    if (productData.productId) {
+      const result = addToBagDetails(pdp)
+      result
+        .then(data => {
+          setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+        })
+        .catch(error => {
+          setErrorMsg(error.message)
+        })
+    }
+  }
+
+  const addToWishLisrHandler = countSelected => {
+    if (getCookie('lu')) {
+      const result = addToWishList({
+        skuId: countSelected.itemCode,
+        productId: productData.productId,
+        quantity: '1'
+      })
+      // console.log('results....', result)
+      result
+        .then(data => {
+          if (data && data.status === 200) {
+            setSuccessMsg(
+              `The following item have been moved to your wishlist: ${productData.displayName}`
+            )
+          }
+        })
+        .catch(error => {
+          setErrorMsg(error.message)
+        })
+    } else {
+      setShow(true)
+    }
+  }
+
   return (
     <section>
       <div className='container pdpMainContainer'>
+        {(errorMsg || successMsg) && (
+          <div
+            className='alert alert-dismissible hidden-print alert-danger undefined'
+            aria-describedby='loginModalErrors-desc'
+            tabIndex='0'
+            role='alert'
+          >
+            {handleCloseBtn(errorMsg, undefined)}
+            <b id='loginModalErrors-desc'>{errorMsg}</b>
+          </div>
+        )}
+        {successMsg && (
+          <div
+            className='alert alert-dismissible hidden-print alert-success undefined header-alert-top'
+            role='alert'
+          >
+            {handleCloseBtn(undefined, successMsg)}
+            <strong>{successMsg}</strong>
+          </div>
+        )}
         <div>
           <div className='hidden-lg hidden-md visible-sm visible-xs'>
             <div
@@ -343,7 +442,9 @@ export default function ProductDescription(props) {
                     ? skusData.defaultCount
                     : skusData.selectedCount)
                 }
-                productId={productId}
+                productData={productData}
+                handleAddtoCart={addToBagHandler}
+                handleAddtoWishList={addToWishLisrHandler}
               />
             </div>
           </div>
