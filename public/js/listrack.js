@@ -6,14 +6,13 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-var */
 /* eslint-disable no-undef */
-(function (d) {
+(function(d) {
   if (typeof _ltk === 'undefined') {
     if (document.addEventListener) {
       document.addEventListener('ltkAsyncListener', () => {
         _ltk_util.ready(d);
       });
-    }
-    else {
+    } else {
       e = document.documentElement;
       e.ltkAsyncProperty = 0;
       e.attachEvent('onpropertychange', (e) => {
@@ -54,7 +53,7 @@
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('ltkmodal-email')) {
       const originalModalSubmit = window.LTKModal.prototype.submit;
-      window.LTKModal.prototype.submit = function () {
+      window.LTKModal.prototype.submit = function() {
         originalModalSubmit.apply(this);
       };
     }
@@ -99,7 +98,7 @@ window.lstImplement = {
     const product = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products[0] ? itemData.payLoad.products[0] : {};
     const childSKUs = Object.values(product.skus);
 
-    var leastExpensiveSku = childSKUs.reduce(function (leastExpensiveSku, sku) {
+    var leastExpensiveSku = childSKUs.reduce(function(leastExpensiveSku, sku) {
       if (!leastExpensiveSku) {
         return sku;
       }
@@ -126,29 +125,28 @@ window.lstImplement = {
 
   captureEmail: (data) => {
     console.log(data);
-    _ltk.SCA.Update("email", data);
+    _ltk.SCA.Update('email', data);
     _ltk.SCA.Submit();
   },
 
   captureCartItems: (cartData) => {
-
-    if(!cartData){
+    if(!cartData) {
       _ltk.SCA.ClearCart();
     }
 
-    //console.log(cartData);
-    const items = cartData.items;
-    let total = items.length
+    // console.log(cartData);
+    const { items } = cartData;
+    const total = items.length;
     for (let i = 0; i < total; i++) {
       const childItems = items[i];
       console.log(childItems);
 
-      let sku = childItems.skuId;
-      let quantity = childItems.quantity
-      let price = childItems.itemPrice.salePrice ? childItems.itemPrice.salePrice : childItems.itemPrice.listPrice;
-      let title = childItems.productName;
-      let imageURL = childItems.imageUrl;
-      let productURL = childItems.pdpUrl;
+      const sku = childItems.skuId;
+      const { quantity } = childItems;
+      const price = childItems.itemPrice.salePrice ? childItems.itemPrice.salePrice : childItems.itemPrice.listPrice;
+      const title = childItems.productName;
+      const imageURL = childItems.imageUrl;
+      const productURL = childItems.pdpUrl;
 
       _ltk.SCA.AddItemWithLinks(sku, quantity, price, title, imageURL, productURL);
     }
@@ -156,4 +154,47 @@ window.lstImplement = {
     _ltk.SCA.Submit();
   },
 
+  notifyMe: (obj, merchantId) => {
+    if (_ltk.isValidEmail(obj.email)) {
+      _ltk.Alerts.AddAlert(obj.email, obj.sku, 'BIS');
+
+    // Not ideal, but the function doesn't return success or failure or have any way
+    // to detect status
+      _ltk.Alerts.Submit = function() {
+        try {
+          _ltk_util.ready(function() {
+            try {
+              this.Assembler = new _Assembler();
+              this.Assembler.Name = 'Alert data';
+              this.Assembler.QueryMode = 1;
+              this.Assembler.EndPointArray = [];
+              this.Assembler.EndPointArray.push('al1.listrakbi.com');
+              this.Assembler.EndPointPath = '/Handlers/Set.ashx';
+              this.Assembler.QueryHeader = `ctid=${merchantId}&uid=${_ltk.uuidCompact()}&gsid=${_ltk.Session.GlobalID}`;
+              this.Assembler.AddArrayObject(this.Alert, 'Alert');
+              this.Assembler.Flush();
+              this.Alert.length = 0;
+              if (typeof obj.successHandler === 'function') {
+                obj.successHandler();
+              }
+            } catch (n) {
+              if (typeof obj.errorHandler === 'function') {
+                obj.errorHandler('LISTRAK_SUBMIT_FAILED');
+              }
+              _ltk.Exception.Submit(n, 'Alert Submit');
+            }
+          }, this);
+        } catch (n) {
+          if (typeof obj.errorHandler === 'function') {
+            obj.errorHandler('LISTRAK_SUBMIT_INIT_FAILED');
+          }
+          _ltk.Exception.Submit(n, 'Init Alert Submit');
+        }
+      };
+
+      _ltk.Alerts.Submit();
+    } else if (typeof obj.errorHandler === 'function') {
+      obj.errorHandler('INVALID_EMAIL');
+    }
+  },
 };

@@ -58,7 +58,8 @@ function SKUCounts({
   weightSelected,
   countSelected,
   handleAddtoCart,
-  handleAddtoWishList
+  handleAddtoWishList,
+  handleNotifyMe
 }) {
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
@@ -186,7 +187,7 @@ function SKUCounts({
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
                     {!skuCount.hasStock && (
-                      <div className='notifytxt'>
+                      <div className='notifytxt' onClick={() => handleNotifyMe({ ...skuCount, ...weightSelected })}>
                         <a href='#'>NOTIFY ME</a>
                       </div>
                     )}

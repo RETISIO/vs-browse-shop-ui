@@ -59,6 +59,16 @@ const cartItems = (data) => {
   }
 };
 
+const notifyMe = (data, merchId) => {
+  try {
+    if(window && window.lstImplement) {
+      window.lstImplement.notifyMe(data, merchId);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export {
   visitPDP,
   Search,
@@ -66,4 +76,5 @@ export {
   login,
   cartItems,
   AddToCart,
+  notifyMe,
 };
