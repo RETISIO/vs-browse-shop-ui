@@ -128,9 +128,9 @@ export default function GcDetailsPage(props) {
       <Form noValidate autoComplete="off">
         <h1 className="page-title">Gift Card</h1>
         <p className="page-short-description">Give the gift of a delicious, unforgettable meal with an Allen Brothers gift card. Choose either an e-gift card or a physical gift card sent by mail.</p>
-        <h3 className="mb-0">Select a Gift Card Type</h3>
+        {/* <h3 className="mb-0">Select a Gift Card Type</h3> */}
         <div className="js-tabs">
-          <ul className="list-inline gift-card-tyle-list">
+          {/* <ul className="list-inline gift-card-tyle-list">
             <li>
               <div className="radio">
                 <label className="radio__label">
@@ -163,7 +163,7 @@ export default function GcDetailsPage(props) {
                 </label>
               </div>
             </li>
-          </ul>
+          </ul> */}
           <div className="js-tabs__tab">
             <h3 data-bind="widgetLocaleText: 'giftCardAmount'">Select a Gift Card Amount</h3>
             {renderGCSelect()}

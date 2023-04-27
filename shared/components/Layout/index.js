@@ -26,10 +26,9 @@ export default function MainLayout({
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
-  if (data && data.payLoad && data.payLoad.webEnabledAttr) {
-    seoData = data.payLoad.webEnabledAttr;
-  }
-  if(SEO) {
+  // if (data && data.payLoad && data.payLoad.webEnabledAttr) {
+  //   seoData = data.payLoad.webEnabledAttr;
+  if (SEO) {
     seoData = SEO;
   }
 
@@ -37,7 +36,6 @@ export default function MainLayout({
   const [rootCatagories, setRootCatagories] = useState([]);
   const getData = async() => {
     const res = await requestContructor('getCategoryList', '', {}, false);
-
     setRootCatagories(res?.payLoad?.categories);
     return res?.payLoad?.categories;
   };
@@ -85,13 +83,13 @@ export default function MainLayout({
     }
     changeLocale();
   }, [router.locale]);
-  /* *************Mini Cart functionality starts here ***************** */
+    /* *************Mini Cart functionality starts here ***************** */
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext();
   const getMiniCartData = async() => {
     const cartData = await requestContructor('getCartArc', '', {});
     cartItems(cartData);
     if (miniCartDetails.itemAdded === true) {
-      // cartItems(cartData);
+        //cartItems(cartData);
       setMiniCartDetails({
         ...miniCartDetails,
         itemAdded: false,
@@ -108,30 +106,30 @@ export default function MainLayout({
     }
   };
   useEffect(() => {
-    // if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
-    // && (miniCartDetails.itemAdded === false)) {
-    // to get cart details on load of the module.
+      // if ((isLogged || getCookie('arcCartId')) && !('items' in miniCartDetails.miniCartData)
+      // && (miniCartDetails.itemAdded === false)) {
+      // to get cart details on load of the module.
     getMiniCartData();
-    // }
+      // }
     if (miniCartDetails?.showMiniCart) {
       setMiniCartDetails({ ...miniCartDetails, showMiniCart: false });
     }
   }, []);
-  /** ********************* The below useEffect is for triggering the cart api
-   after adding the new item in Cart from PDP page ************************ */
+    /** ********************* The below useEffect is for triggering the cart api
+     after adding the new item in Cart from PDP page ************************ */
   useEffect(() => {
     if (miniCartDetails.itemAdded === true) {
       getMiniCartData();
     }
   }, [miniCartDetails.itemAdded]);
-  /* *************Mini Cart functionality ends here *********************** */
+    /* *************Mini Cart functionality ends here *********************** */
   const [searchAheadData, setSearchAheadData] = useState(null);
   const getSearchAheadData = async(text) => {
     const res = await requestContructor(
       'getTypeAheadArc',
-      `?searchKey=${text}&size=4`,
-      {},
-      false,
+        `?searchKey=${text}&size=4`,
+        {},
+        false,
     );
     setSearchAheadData(res);
     return res;

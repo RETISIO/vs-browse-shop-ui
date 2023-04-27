@@ -82,8 +82,11 @@ export default function ProductDescription(props) {
   const [skusData, setSkusData] = useState()
   const [errorMsg, setErrorMsg] = useState()
   const [successMsg, setSuccessMsg] = useState()
+  const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const { setShow } = useAppContext()
+  const {
+ setShow, isLogged, setNoReload, noReload
+} = useAppContext()
   const [notifyPopupShow, setNotifyPopupShow] = useState(false);
   const [notifyPopupData, setNotifyPopupData] = useState();
   const [message, setMessage] = useState();
@@ -104,8 +107,17 @@ export default function ProductDescription(props) {
     prepareSkusData()
   }, [])
 
+  useEffect(() => {
+    if (noReload && isLogged) {
+      if (skuSelected) {
+        addToWishLisrHandler(skuSelected)
+        setNoReload(false)
+      }
+    }
+  }, [noReload, isLogged])
+
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productData = pdpData?.products[0];
+  const productData = pdpData?.products[0]
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}
@@ -236,6 +248,7 @@ export default function ProductDescription(props) {
     skusObj.selectedCount = countArr.length ? countArr[0] : ''
     setSkusData(skusObj)
     setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
+    setSkuSelected(countObj)
   }
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
@@ -277,7 +290,15 @@ export default function ProductDescription(props) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
-          setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+          if (data && data.status === 200) {
+            setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+          } else if (data && data.status === 400) {
+            const error =
+              data.errors && Array.isArray(data.errors)
+                ? data.errors[0].message
+                : ''
+            setErrorMsg(error)
+          }
         })
         .catch(error => {
           setErrorMsg(error.message)
@@ -286,25 +307,38 @@ export default function ProductDescription(props) {
   }
 
   const addToWishLisrHandler = countSelected => {
-    if (getCookie('lu')) {
+    if (getCookie('lu') && countSelected && Object.keys(countSelected).length) {
       const result = addToWishList({
         skuId: countSelected.itemCode,
         productId: productData.productId,
         quantity: '1'
       })
-      // console.log('results....', result)
       result
         .then(data => {
           if (data && data.status === 200) {
             setSuccessMsg(
               `The following item have been moved to your wishlist: ${productData.displayName}`
             )
+          } else if (data && data.status === 400) {
+            const error =
+              (data.errors &&
+                Array.isArray(data.errors) &&
+                data.errors[0].message) ||
+              ''
+            setErrorMsg(error)
           }
         })
         .catch(error => {
           setErrorMsg(error.message)
         })
+    } else if (
+      !countSelected ||
+      (countSelected && Object.keys(countSelected).length === 0)
+    ) {
+      setErrorMsg('skuId must not be empty')
     } else {
+      setSkuSelected(countSelected)
+      setNoReload(true)
       setShow(true)
     }
   }

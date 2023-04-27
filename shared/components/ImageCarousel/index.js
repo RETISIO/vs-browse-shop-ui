@@ -29,6 +29,10 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
     setOpenImg(img);
     setShow(true);
   };
+  useEffect(() => {
+    const dImg = data?.media ? [data?.media] : [];
+    setSelected(dImg[0]);
+  }, [data]);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
