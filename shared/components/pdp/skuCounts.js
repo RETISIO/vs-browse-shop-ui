@@ -64,7 +64,7 @@ function SKUCounts({
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-
+  const maxQtyAllowed = 999 // max qty user can enter
   //   console.log(
   //     'from skuCounts....weightSelected, countSelected,itemQuantity,productId',
   //     weightSelected,
@@ -130,8 +130,12 @@ function SKUCounts({
   }
 
   const handleQtyChange = e => {
-    const val = parseInt(e.target.value)
+    let val = parseInt(e.target.value)
     const maxQty = countSelected.availableStock || 0
+    if (val > maxQtyAllowed) {
+      val = maxQtyAllowed
+      setItemQuantity(maxQtyAllowed)
+    }
     if (val <= 0 || val === '' || Number.isNaN(val)) {
       setItemQuantity(1)
       return
