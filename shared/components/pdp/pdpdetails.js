@@ -25,6 +25,7 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { getCookie } from '@retisio/sf-api'
+import Alert from 'react-bootstrap/Alert';
 import NextImage from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
@@ -35,6 +36,8 @@ import SKUCounts from './skuCounts'
 import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
+import NotifyMe from '../notifyme'
+import { notifyMe } from '../ThirdPartyScripts/Events'
 
 // skuObj = {
 // defaultWeight: '',
@@ -81,6 +84,10 @@ export default function ProductDescription(props) {
   const [successMsg, setSuccessMsg] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
   const { setShow } = useAppContext()
+  const [notifyPopupShow, setNotifyPopupShow] = useState(false);
+  const [notifyPopupData, setNotifyPopupData] = useState();
+  const [message, setMessage] = useState();
+  const [showAlert, setShowAlert] = useState(false);
 
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
@@ -302,8 +309,43 @@ export default function ProductDescription(props) {
     }
   }
 
+  const handleNotifyMe = (data) => {
+    setNotifyPopupData(data);
+    setNotifyPopupShow(true);
+  }
+
+  const handleSave = (obj) => {
+    const merchId = process.env.NEXT_PUBLIC_LISTRACK_MID;
+    const successHandler = () => {
+      setNotifyPopupShow(false);
+      setMessage('Thank You! We will notify you when the product comes back in stock.');
+      setShowAlert(true);
+    }
+    const errorHandler = (val) => {
+      console.log(val);
+      setNotifyPopupShow(false);
+    }
+    notifyMe({ ...obj, successHandler, errorHandler }, merchId)
+  }
+
   return (
     <section>
+      {notifyPopupShow && (
+        <NotifyMe
+          show={notifyPopupShow}
+          skuData={notifyPopupData}
+          productData={pdpData?.products[0]}
+          handleClose={() => setNotifyPopupShow(false)}
+          handleSave={handleSave}
+        />
+      )}
+      {showAlert && (
+      <Alert className='success-alert-msg' show={showAlert} onClose={() => setShowAlert(false)} variant="success" dismissible>
+        <p>
+          {message}
+        </p>
+      </Alert>
+)}
       <div className='container pdpMainContainer'>
         {errorMsg && (
           <div
@@ -444,6 +486,7 @@ export default function ProductDescription(props) {
                 productData={productData}
                 handleAddtoCart={addToBagHandler}
                 handleAddtoWishList={addToWishLisrHandler}
+                handleNotifyMe={handleNotifyMe}
               />
             </div>
           </div>
