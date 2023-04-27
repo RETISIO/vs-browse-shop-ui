@@ -1,0 +1,9 @@
+@import '../variables.scss';
+
+section:has(.productRecommendations){
+	background-color: $colorBackgroundGray;
+    margin-top: 25px;
+    h1{
+        margin: 40px 0 35px;
+    }
+}
