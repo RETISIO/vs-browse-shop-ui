@@ -5,11 +5,11 @@
 /* eslint-disable space-before-function-paren */
 import React, { useEffect } from 'react'
 import { PageBuilder } from '@retisio/sf-ui'
+import absoluteUrl from 'next-absolute-url'
+import { useRouter } from 'next/router'
 import { usePageDataContext } from '../../shared/context/pageData-context'
 import MainLayout from '../../shared/components/Layout'
-import getPDPData from '../../shared/helpers/getPDPData';
-import absoluteUrl from 'next-absolute-url';
-import { useRouter } from 'next/router';
+import getPDPData from '../../shared/helpers/getPDPData'
 
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
@@ -26,24 +26,29 @@ export default function ProductDetails({ data, origin }) {
     setPageData(data)
     visitPDP(data)
   }, [])
-  const router = useRouter();
+  const router = useRouter()
 
-  let abUrl = '';
-  let seoData = '';
-  if(origin) {
-    abUrl = origin + router.asPath;
-  }else{
-    abUrl = window.location.href;
+  let abUrl = ''
+  let seoData = ''
+  if (origin) {
+    abUrl = origin + router.asPath
+  } else {
+    abUrl = window.location.href
   }
-  if(data && data.payLoad && data.payLoad.products
-    && data.payLoad.products[0] && data.payLoad.products[0].productDetails
-    && data.payLoad.products[0].productDetails.seoData) {
-    seoData = data.payLoad.products[0].productDetails.seoData;
+  if (
+    data &&
+    data.payLoad &&
+    data.payLoad.products &&
+    data.payLoad.products[0] &&
+    data.payLoad.products[0].productDetails &&
+    data.payLoad.products[0].productDetails.seoData
+  ) {
+    seoData = data.payLoad.products[0].productDetails.seoData
   }
   const renderProductDescriptionPage = () => {
-    const productType = payLoad?.products && payLoad?.products[0]?.productType;
+    const productType = payLoad?.products && payLoad?.products[0]?.productType
     if (productType === 'egiftcard' || productType === 'giftcard') {
-      return <GiftCard pdpData={data}/>
+      return <GiftCard pdpData={data} />
     }
     return (
       <PageBuilder
@@ -59,7 +64,7 @@ export default function ProductDetails({ data, origin }) {
       {/* <Yotpo /> */}
       <main>
         {/* {i18n.t('title')} */}
-        { renderProductDescriptionPage() }
+        {renderProductDescriptionPage()}
       </main>
       <Yotpo />
     </MainLayout>
@@ -67,7 +72,7 @@ export default function ProductDetails({ data, origin }) {
 }
 
 ProductDetails.getInitialProps = async context => {
-  const { origin } = absoluteUrl(context.req);
+  const { origin } = absoluteUrl(context.req)
   const data = await getPDPData(context)
   return {
     data,

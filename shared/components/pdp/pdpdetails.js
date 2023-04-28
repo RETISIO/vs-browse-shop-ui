@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-use-before-define */
@@ -25,7 +26,7 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { getCookie } from '@retisio/sf-api'
-import Alert from 'react-bootstrap/Alert';
+import Alert from 'react-bootstrap/Alert'
 import NextImage from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
@@ -74,8 +75,8 @@ import { notifyMe } from '../ThirdPartyScripts/Events'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
-  const productSkus =
-    pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
+  // const productSkus =
+  //   pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
   const productType = pdpData?.products[0]?.productType
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
@@ -84,13 +85,11 @@ export default function ProductDescription(props) {
   const [successMsg, setSuccessMsg] = useState()
   const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const {
- setShow, isLogged, setNoReload, noReload
-} = useAppContext()
-  const [notifyPopupShow, setNotifyPopupShow] = useState(false);
-  const [notifyPopupData, setNotifyPopupData] = useState();
-  const [message, setMessage] = useState();
-  const [showAlert, setShowAlert] = useState(false);
+  const { setShow, isLogged, setNoReload, noReload } = useAppContext()
+  const [notifyPopupShow, setNotifyPopupShow] = useState(false)
+  const [notifyPopupData, setNotifyPopupData] = useState()
+  const [message, setMessage] = useState()
+  const [showAlert, setShowAlert] = useState(false)
 
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
@@ -118,6 +117,7 @@ export default function ProductDescription(props) {
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
   const productData = pdpData?.products[0]
+  // productData.productDetails.isGiftItem = true
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
   // const skusData = prepareSkusData() || {}
@@ -126,8 +126,6 @@ export default function ProductDescription(props) {
 
   function prepareSkusData() {
     const { payLoad } = props
-    // console.log('from productSkus....props..', props)
-
     const product = payLoad && payLoad.products && payLoad.products[0]
     // console.log('product...', product)
     const skus = (product && product.skus) || {}
@@ -149,7 +147,9 @@ export default function ProductDescription(props) {
       skusObj.skus[skusObjKey].skuId = skus[key].skuId
       const countObj = {}
       countObj.pieces = skus[key]?.skuDetails?.additionalDetails?.pieces || ''
-      countObj.availableStock = skus[key]?.skuDetails?.inventory ? skus[key]?.skuDetails?.inventory[0]?.availableStock : ''
+      countObj.availableStock = skus[key]?.skuDetails?.inventory
+        ? skus[key]?.skuDetails?.inventory[0]?.availableStock
+        : ''
       countObj.quantityAddedToCart = 0
       countObj.inventoryStatusLabel =
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
@@ -343,21 +343,23 @@ export default function ProductDescription(props) {
     }
   }
 
-  const handleNotifyMe = (data) => {
-    setNotifyPopupData(data);
-    setNotifyPopupShow(true);
+  const handleNotifyMe = data => {
+    setNotifyPopupData(data)
+    setNotifyPopupShow(true)
   }
 
-  const handleSave = (obj) => {
-    const merchId = process.env.NEXT_PUBLIC_LISTRACK_MID;
+  const handleSave = obj => {
+    const merchId = process.env.NEXT_PUBLIC_LISTRACK_MID
     const successHandler = () => {
-      setNotifyPopupShow(false);
-      setMessage('Thank You! We will notify you when the product comes back in stock.');
-      setShowAlert(true);
+      setNotifyPopupShow(false)
+      setMessage(
+        'Thank You! We will notify you when the product comes back in stock.'
+      )
+      setShowAlert(true)
     }
-    const errorHandler = (val) => {
-      console.log(val);
-      setNotifyPopupShow(false);
+    const errorHandler = val => {
+      // console.log(val)
+      setNotifyPopupShow(false)
     }
     notifyMe({ ...obj, successHandler, errorHandler }, merchId)
   }
@@ -374,12 +376,16 @@ export default function ProductDescription(props) {
         />
       )}
       {showAlert && (
-      <Alert className='success-alert-msg' show={showAlert} onClose={() => setShowAlert(false)} variant="success" dismissible>
-        <p>
-          {message}
-        </p>
-      </Alert>
-)}
+        <Alert
+          className='success-alert-msg'
+          show={showAlert}
+          onClose={() => setShowAlert(false)}
+          variant='success'
+          dismissible
+        >
+          <p>{message}</p>
+        </Alert>
+      )}
       <div className='container pdpMainContainer'>
         {errorMsg && (
           <div
@@ -490,40 +496,44 @@ export default function ProductDescription(props) {
         </div>
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}
-          <div className='col-md-7'>
-            <div className='sukproduct'>
-              <SKUWeights
-                handleWeightSelected={handleWeightSelected}
-                skusData={skusData}
-                weightSelected={
-                  skusData &&
-                  (skusData.defaultWeight
-                    ? skusData.defaultWeight
-                    : skusData.selectedWeight)
-                }
-              />
-              <SKUCounts
-                handleCountSelected={handleCountSelected}
-                skusData={skusData}
-                weightSelected={
-                  skusData &&
-                  (skusData.defaultWeight
-                    ? skusData.defaultWeight
-                    : skusData.selectedWeight)
-                }
-                countSelected={
-                  skusData &&
-                  (skusData.defaultCount
-                    ? skusData.defaultCount
-                    : skusData.selectedCount)
-                }
-                productData={productData}
-                handleAddtoCart={addToBagHandler}
-                handleAddtoWishList={addToWishLisrHandler}
-                handleNotifyMe={handleNotifyMe}
-              />
-            </div>
-          </div>
+          {productData &&
+            productData.productDetails &&
+            !productData.productDetails.isGiftItem && (
+              <div className='col-md-7'>
+                <div className='sukproduct'>
+                  <SKUWeights
+                    handleWeightSelected={handleWeightSelected}
+                    skusData={skusData}
+                    weightSelected={
+                      skusData &&
+                      (skusData.defaultWeight
+                        ? skusData.defaultWeight
+                        : skusData.selectedWeight)
+                    }
+                  />
+                  <SKUCounts
+                    handleCountSelected={handleCountSelected}
+                    skusData={skusData}
+                    weightSelected={
+                      skusData &&
+                      (skusData.defaultWeight
+                        ? skusData.defaultWeight
+                        : skusData.selectedWeight)
+                    }
+                    countSelected={
+                      skusData &&
+                      (skusData.defaultCount
+                        ? skusData.defaultCount
+                        : skusData.selectedCount)
+                    }
+                    productData={productData}
+                    handleAddtoCart={addToBagHandler}
+                    handleAddtoWishList={addToWishLisrHandler}
+                    handleNotifyMe={handleNotifyMe}
+                  />
+                </div>
+              </div>
+            )}
         </div>
       </div>
     </section>
