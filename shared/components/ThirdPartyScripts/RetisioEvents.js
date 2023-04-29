@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
+
 /* eslint-disable no-unused-vars */
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 import { getCookie } from '@retisio/sf-api';
@@ -39,7 +41,25 @@ const SearchProd = (obj) => {
 };
 
 const ProductClick = (obj) => {
-  // console.log(obj);
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'clickProduct', '1.0', {
+    skuId: obj.data.defaultSkuId,
+    productId: obj.data.productId,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    categories: obj.searchData.categories.map((vl) => vl.id),
+    searchAttribution: true,
+    recommendationAttribution: false,
+    browseAttribution: false,
+    promotionAttribution: false,
+    searchAttributionDetails: {
+      query: obj.searchData.searchTerm
+      ,
+    },
+    profileId: loggedInUserData,
+  });
 };
 
 const AddItem = (obj) => {
