@@ -1,5 +1,3 @@
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
@@ -42,7 +40,6 @@ import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
 import { notifyMe } from '../ThirdPartyScripts/Events'
-import SkuVariants from './skuVariants'
 
 // skuObj = {
 // defaultWeight: '',
@@ -94,9 +91,6 @@ export default function ProductDescription(props) {
   const [notifyPopupData, setNotifyPopupData] = useState()
   const [message, setMessage] = useState()
   const [showAlert, setShowAlert] = useState(false)
-  const [variantSelected, setVariantSelected] = useState()
-  const [variantsArr, setVariantsArr] = useState()
-  const [variantsOptions, setVariantsOptions] = useState()
 
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
@@ -111,8 +105,6 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareSkusData()
-    prepareVarinatsArr()
-    prepareVarinatsOptions()
   }, [])
 
   useEffect(() => {
@@ -129,51 +121,33 @@ export default function ProductDescription(props) {
   // productData.productDetails.isGiftItem = true
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
+  // total variants
+  const variantsObj = productData && productData.variantOptions
+  const variants = Object.keys(variantsObj).map(varntKey => {
+    const obj = { name: '', skus: [], options: {} }
+    obj.name = varntKey
+    obj.skus = variantsObj[varntKey]
+    for (let i = 0; i < obj.skus.length; i++) {
+      obj.options[obj.skus[i].optionValue] = obj.skus[i].associatedSkus
+    }
+    return obj
+  })
+
+  console.log('variants...', variants)
   // const skusData = prepareSkusData() || {}
   // skusData: {  [weight]: {skuId,weight, thickness, count: [{}, {},..]},
   //              [weight]: { }, ..}
-
-  console.log('productData.....', productData)
-
-  function prepareVarinatsArr() {
-    // total variants
-    const variantsOptionsKeysObj = productData && productData.variantOptions
-    const variantsA =
-      variantsOptionsKeysObj &&
-      Object.keys(variantsOptionsKeysObj).map(varntKey => {
-        const obj = {
-          name: '',
-          skus: [],
-          defaultOption: '',
-          optionSelected: ''
-        }
-        obj.name = varntKey
-        obj.skus = variantsOptionsKeysObj[varntKey]
-        obj.defaultOption = variantsOptionsKeysObj[varntKey][0]
-        obj.optionSelected = ''
-        return obj
-      })
-    setVariantsArr(variantsA)
-    console.log('variantsArr...', variantsArr)
-  }
-
-  function prepareVarinatsOptions() {
-    const variantOptionsObj = {}
-    productData &&
-      Object.keys(productData.variantOptions).forEach(variantKey => {
-        variantOptionsObj[variantKey] = {
-          options: productData.variantOptions[variantKey],
-          defaultSelected: productData.variantOptions[variantKey][0],
-          optionSelected: ''
-        }
-      })
-    setVariantsOptions({ ...variantOptionsObj })
-  }
 
   function prepareSkusData() {
     const { payLoad } = props
     const product = payLoad && payLoad.products && payLoad.products[0]
     // console.log('product...', product)
+    // const firstSku = product && product.skus && Object.keys(product.skus)[0]
+    // const skuOptionsArr = (firstSku && firstSku.skuDetails?.skuOptions) || []
+    // const optionNames = []
+    // for (let i = 0; i < skuOptionsArr.length; i++) {
+    //   optionNames.push(skuOptionsArr[i].optionName)
+    // }
 
     const skus = (product && product.skus) || {}
     const skusObj = {
@@ -183,7 +157,6 @@ export default function ProductDescription(props) {
       selectedCount: '',
       skus: {}
     }
-
     for (const key in skus) {
       const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
       const thickness =
@@ -282,29 +255,6 @@ export default function ProductDescription(props) {
     // skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
     setSkusData(skusObj)
     setShowSaleWidget(skusObj.defaultCount.onSale) // set onSale badge based on selected weight
-  }
-
-  const handleVariantSelected = (index, variantKey, value, variant) => {
-    // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
-    // console.log(
-    //   'from handleVariantSelected.....value, variant...',
-    //   value,
-    //   variant
-    // )
-    const variantOptionsObj = { ...variantsOptions }
-    variantOptionsObj[variantKey].optionSelected = variant
-    variantOptionsObj[variantKey].defaultSelected = ''
-    // index===0, set all other options default to empty
-    if (index === 0) {
-      Object.keys(variantOptionsObj).forEach((vKey, idx) => {
-        if (idx > 0) {
-          variantOptionsObj[vKey].optionSelected = ''
-          variantOptionsObj[vKey].defaultSelected = ''
-        }
-      })
-    }
-    setVariantSelected({ variantKey, variant })
-    setVariantsOptions({ ...variantOptionsObj })
   }
 
   const handleCountSelected = (weightObj, countObj) => {
@@ -478,6 +428,47 @@ export default function ProductDescription(props) {
             <strong>{successMsg}</strong>
           </div>
         )}
+        {/* <div>
+          <div className='hidden-lg hidden-md visible-sm visible-xs'>
+            <div
+              className='alert alert-dismissible hidden-print alert-success undefined'
+              role='alert'
+              style={{ display: 'none' }}
+            >
+              <button className='close' type='button' aria-label='Close'>
+                <span aria-hidden='true'>×</span>
+              </button>
+            </div>
+          </div>
+          <div
+            className='alert alert-dismissible hidden-print alert-success undefined'
+            role='alert'
+            style={{ display: 'none' }}
+          >
+            <button
+              data-bind='click: $data.clearSuccessMessages'
+              className='close'
+              type='button'
+              aria-label='Close'
+            >
+              <span aria-hidden='true'>×</span>
+            </button>
+          </div>
+          <div
+            className='alert alert-dismissible hidden-print alert-danger undefined'
+            role='alert'
+            style={{ display: 'none' }}
+          >
+            <button
+              data-bind='click: $data.clearErrorMessages'
+              className='close'
+              type='button'
+              aria-label='Close'
+            >
+              <span aria-hidden='true'>×</span>
+            </button>
+          </div>
+        </div> */}
         <div className='product-title-wrapper'>
           <h1 className='page-title'>
             <span>{pdpData?.products[0]?.displayName}</span>
@@ -531,7 +522,7 @@ export default function ProductDescription(props) {
             !productData.productDetails.isGiftItem && (
               <div className='col-md-7'>
                 <div className='sukproduct'>
-                  {/* <SKUWeights
+                  <SKUWeights
                     handleWeightSelected={handleWeightSelected}
                     skusData={skusData}
                     weightSelected={
@@ -560,30 +551,6 @@ export default function ProductDescription(props) {
                     handleAddtoCart={addToBagHandler}
                     handleAddtoWishList={addToWishLisrHandler}
                     handleNotifyMe={handleNotifyMe}
-                  /> */}
-                  <SkuVariants
-                    handleVariantSelected={handleVariantSelected}
-                    skusData={skusData}
-                    weightSelected={
-                      skusData &&
-                      (skusData.defaultWeight
-                        ? skusData.defaultWeight
-                        : skusData.selectedWeight)
-                    }
-                    handleCountSelected={handleCountSelected}
-                    countSelected={
-                      skusData &&
-                      (skusData.defaultCount
-                        ? skusData.defaultCount
-                        : skusData.selectedCount)
-                    }
-                    productData={productData}
-                    handleAddtoCart={addToBagHandler}
-                    handleAddtoWishList={addToWishLisrHandler}
-                    handleNotifyMe={handleNotifyMe}
-                    variantsArr={variantsArr}
-                    variantSelected={variantSelected}
-                    variantOptions={variantsOptions}
                   />
                 </div>
               </div>
