@@ -1,3 +1,6 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { validator } from '@retisio/sf-ui';
@@ -11,16 +14,6 @@ export default function GcDetailsPage(props) {
   const physicalGCskuArr = [];
   const electronicGCskuArr = [];
   const productId = giftCartData?.products[0]?.productId;
-  //   const gcSkus = giftCartData?.products[0]?.skus;
-  //   for (const property in gcSkus) {
-  //     // console.log(`${property}: ${gcSkus[property].skuDetails?.additionalDetails?.giftCardType}`);
-  //     const giftCardType = gcSkus[property]?.skuDetails?.additionalDetails?.giftCardType;
-  //     if (giftCardType === 'Physical') {
-  //       physicalGCskuArr.push(gcSkus[property]);
-  //     } else if (giftCardType === 'Electronic') {
-  //       electronicGCskuArr.push(gcSkus[property]);
-  //     }
-  //   }
   gcSkus.map((item) => {
     if (item?.skuDetails?.additionalDetails?.giftCardType === 'Physical') {
       physicalGCskuArr.push(item);
@@ -126,44 +119,11 @@ export default function GcDetailsPage(props) {
   return (
     <div className="col-md-7 col-sm-12">
       <Form noValidate autoComplete="off">
-        <h1 className="page-title">Gift Card</h1>
-        <p className="page-short-description">Give the gift of a delicious, unforgettable meal with an Allen Brothers gift card. Choose either an e-gift card or a physical gift card sent by mail.</p>
-        {/* <h3 className="mb-0">Select a Gift Card Type</h3> */}
+        <h1 className="page-title">{giftCartData?.products[0]?.displayName}</h1>
+        <p className="page-short-description">
+          {giftCartData?.products[0]?.description}
+        </p>
         <div className="js-tabs">
-          {/* <ul className="list-inline gift-card-tyle-list">
-            <li>
-              <div className="radio">
-                <label className="radio__label">
-                  <input
-                    className="js-alt-tab-controller"
-                    checked={selectedGC === 'electronicGC'}
-                    type="radio"
-                    value="electronicGC"
-                    name="type"
-                    onChange={(e) => handleGCTypeClick(e)}
-                  />
-                  <span className="radio__text">Email Gift Card</span>
-                  <span className="radio__visual"></span>
-                </label>
-              </div>
-            </li>
-            <li>
-              <div className="radio">
-                <label className="radio__label">
-                  <input
-                    className="js-alt-tab-controller"
-                    checked={selectedGC === 'physicalGC'}
-                    type="radio"
-                    value="physicalGC"
-                    name="type"
-                    onChange={(e) => handleGCTypeClick(e)}
-                  />
-                  <span className="radio__text">Physical Gift Card</span>
-                  <span className="radio__visual"></span>
-                </label>
-              </div>
-            </li>
-          </ul> */}
           <div className="js-tabs__tab">
             <h3 data-bind="widgetLocaleText: 'giftCardAmount'">Select a Gift Card Amount</h3>
             {renderGCSelect()}
@@ -192,7 +152,13 @@ export default function GcDetailsPage(props) {
                         >
                           Recipients Name *
                         </Form.Label>
-                        <Form.Control.Feedback className="text-danger" type="invalid" role="alert">{formerrors.recipientsName}</Form.Control.Feedback>
+                        <Form.Control.Feedback
+                          className="text-danger"
+                          type="invalid"
+                          role="alert"
+                        >
+                          {formerrors.recipientsName}
+                        </Form.Control.Feedback>
                       </div>
                     </Form.Group>
                     <Form.Group>
@@ -215,7 +181,13 @@ export default function GcDetailsPage(props) {
                         >
                           Recipients Email Address *
                         </Form.Label>
-                        <Form.Control.Feedback className="text-danger" type="invalid" role="alert">{formerrors.recipientsEmail}</Form.Control.Feedback>
+                        <Form.Control.Feedback
+                          className="text-danger"
+                          type="invalid"
+                          role="alert"
+                        >
+                          {formerrors.recipientsEmail}
+                        </Form.Control.Feedback>
                       </div>
                     </Form.Group>
                   </div>
