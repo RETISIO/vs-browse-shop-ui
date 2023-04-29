@@ -1,6 +1,4 @@
  .home-header-container #header {
-    // padding-left: 8px;
-    // padding-right: 8px;
 
     @media screen and (min-width: 992px) {
         background-color: transparent;
@@ -51,7 +49,7 @@
             height: 5px;
             border-radius: 5px 0 0 5px;
             outline: none;
-            color: #9dbfaf;
+            color: $colorBlack;
             background-color: #E1E1E1;
           }
         }
@@ -267,6 +265,10 @@
     }
   }
 
+  #header {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 
   @media screen and (max-width: 768px) {
     .home-header-container #header {
@@ -287,16 +289,6 @@
       }
     }
   }
-
-  // @media screen and (min-width: 768px) {
-  //   .home-header-container #header {
-  //     .header-sticky.js-sticky-menu.is_stuck {
-  //       .navbar.redesign-navbar {
-  //         margin-left: 0;
-  //       }
-  //     }
-  //   }
-  // }
 
   .home-header-container .nonHomePageHeader #header {
     .header-content-redesign {

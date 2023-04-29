@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable radix */
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
@@ -73,6 +75,7 @@ function SKUCounts({
   //     itemQuantity,
   //     productId
   //   )
+  console.log('from skuCounts....productData......', productData)
 
   useEffect(() => {
     if ((countSelected && !countSelected.hasStock) || !countSelected) {
@@ -187,7 +190,12 @@ function SKUCounts({
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
                     {!skuCount.hasStock && (
-                      <div className='notifytxt' onClick={() => handleNotifyMe({ ...skuCount, ...weightSelected })}>
+                      <div
+                        className='notifytxt'
+                        onClick={() =>
+                          handleNotifyMe({ ...skuCount, ...weightSelected })
+                        }
+                      >
                         <a href='#'>NOTIFY ME</a>
                       </div>
                     )}
