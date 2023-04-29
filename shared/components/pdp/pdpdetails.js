@@ -38,7 +38,7 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
-import { notifyMe } from '../ThirdPartyScripts/Events'
+import { notifyMe, AddToCart } from '../ThirdPartyScripts/Events'
 
 // skuObj = {
 // defaultWeight: '',
@@ -82,10 +82,11 @@ export default function ProductDescription(props) {
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [skusData, setSkusData] = useState()
   const [errorMsg, setErrorMsg] = useState()
+  const [productAdded, setProductAdded] = useState({ added: false });
   const [successMsg, setSuccessMsg] = useState()
   const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const { setShow, isLogged, setNoReload, noReload } = useAppContext()
+  const { setShow, isLogged, setNoReload, noReload, state } = useAppContext()
   const [notifyPopupShow, setNotifyPopupShow] = useState(false)
   const [notifyPopupData, setNotifyPopupData] = useState()
   const [message, setMessage] = useState()
@@ -105,6 +106,13 @@ export default function ProductDescription(props) {
     }, 10)
     prepareSkusData()
   }, [])
+
+  useEffect(() => {
+    if(productAdded.added) {
+      AddToCart({ ...productAdded, miniCartDetails })
+      setProductAdded({ added: false })
+    }
+  }, [miniCartDetails.miniCartData])
 
   useEffect(() => {
     if (noReload && isLogged) {
@@ -276,22 +284,24 @@ export default function ProductDescription(props) {
   )
 
   const addToBagHandler = (countSelected, itemQuantity) => {
-    const pdp = {
-      items: [
-        {
-          variantId: countSelected.itemCode,
-          productId: productData.productId,
-          quantity: itemQuantity,
-          productType: 'product'
-        }
-      ]
+    const addToProdData = {
+      variantId: countSelected.itemCode,
+      productId: productData.productId,
+      quantity: itemQuantity,
+      productType: 'product'
     }
+    const pdp = {
+      items: []
+    }
+    pdp.items.push(addToProdData);
     if (productData.productId) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
           if (data && data.status === 200) {
-            setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
+            setMiniCartDetails({ ...miniCartDetails, itemAdded: true });
+            // AddToCart({ productData, addToProdData, channelData: state.channelData, userData: state.userData })
+            setProductAdded({ productData, addToProdData, channelData: state.channelData, userData: state.userData, added: true })
           } else if (data && data.status === 400) {
             const error =
               data.errors && Array.isArray(data.errors)
