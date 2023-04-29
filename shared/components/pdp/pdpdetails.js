@@ -38,7 +38,7 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
-import { notifyMe, AddToCart } from '../ThirdPartyScripts/Events'
+import { notifyMe, AddToCart, AddtoWishhList } from '../ThirdPartyScripts/Events'
 
 // skuObj = {
 // defaultWeight: '',
@@ -329,6 +329,13 @@ export default function ProductDescription(props) {
             setSuccessMsg(
               `The following item have been moved to your wishlist: ${productData.displayName}`
             )
+            AddtoWishhList({
+              skuId: countSelected.itemCode,
+              productId: productData.productId,
+              channelData: state.channelData,
+              userData: state.userData,
+              wishListId: data.wishListId
+            });
           } else if (data && data.status === 400) {
             const error =
               (data.errors &&

@@ -3,7 +3,7 @@
 /* eslint-disable import/prefer-default-export */
 import { viewItem } from './gtag';
 import {
-  RviewItem, SearchProd, ProductClick, AddItem,
+  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
 } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
@@ -59,6 +59,11 @@ const cartItems = (data) => {
   }
 };
 
+const AddtoWishhList = (obj) => {
+  RaddtoWishhList(obj);
+};
+
+
 const notifyMe = (data, merchId) => {
   try {
     if(window && window.lstImplement) {
@@ -77,4 +82,5 @@ export {
   cartItems,
   AddToCart,
   notifyMe,
+  AddtoWishhList,
 };

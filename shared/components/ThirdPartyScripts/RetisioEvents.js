@@ -92,6 +92,20 @@ const AddItem = (obj) => {
   });
 };
 
+const RaddtoWishhList = (obj) => {
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'addToWishlist', '1.0', {
+    wishlistId: obj.wishListId,
+    skuId: obj.skuId,
+    productId: obj.productId,
+    profileId: loggedInUserData,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+  });
+};
+
 const convertFloat = (amt = '$0.0') => {
   const Amount = amt.split('$')[1];
   return parseFloat(Amount);
@@ -102,4 +116,5 @@ export {
   SearchProd,
   ProductClick,
   AddItem,
+  RaddtoWishhList,
 };
