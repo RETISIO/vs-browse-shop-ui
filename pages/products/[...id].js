@@ -5,11 +5,11 @@
 /* eslint-disable space-before-function-paren */
 import React, { useEffect } from 'react'
 import { PageBuilder } from '@retisio/sf-ui'
+import absoluteUrl from 'next-absolute-url';
+import { useRouter } from 'next/router';
 import { usePageDataContext } from '../../shared/context/pageData-context'
 import MainLayout from '../../shared/components/Layout'
 import getPDPData from '../../shared/helpers/getPDPData';
-import absoluteUrl from 'next-absolute-url';
-import { useRouter } from 'next/router';
 
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
@@ -43,7 +43,7 @@ export default function ProductDetails({ data, origin }) {
   const renderProductDescriptionPage = () => {
     const productType = payLoad?.products && payLoad?.products[0]?.productType;
     if (productType === 'egiftcard' || productType === 'giftcard') {
-      return <GiftCard pdpData={data}/>
+      return <GiftCard pdpData={data} />
     }
     return (
       <PageBuilder

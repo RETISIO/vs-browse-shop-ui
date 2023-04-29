@@ -34,6 +34,14 @@ export default function ProductRecommondation(props) {
           },
         },
         {
+          breakpoint: 780,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            initialSlide: 3,
+          },
+        },
+        {
           breakpoint: 600,
           settings: {
             slidesToShow: 2,
