@@ -47,7 +47,7 @@ function SkuVariants({
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-  const maxQtyAllowed = 1999 // max qty user can enter
+  const maxQtyAllowed = 999 // max qty user can enter
   //   console.log('from skuCounts....productData......', productData)
 
   useEffect(() => {
