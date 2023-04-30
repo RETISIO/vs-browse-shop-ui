@@ -237,7 +237,7 @@ export default function ProductDescription(props) {
   }
 
   const handleSelectedSku = skuData => {
-    // debugger
+    // for setting onSale badge and addToWishlist payload
     if (skuData) {
       setShowSaleWidget(skuData.skuDetails.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)

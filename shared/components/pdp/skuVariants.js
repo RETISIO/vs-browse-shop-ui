@@ -62,7 +62,7 @@ function SkuVariants({
   }, [countSelected])
 
   const handleSelectedSkuData = skuData => {
-    handleSelectedSku(skuData)
+    handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
   }
 
   const addItemQuantity = skuData => {
@@ -150,6 +150,7 @@ function SkuVariants({
   }
 
   const handleSkuSelected = (index, variantKey, value, variant) => {
+    // handle tile selection
     handleVariantSelected(index, variantKey, value, variant)
   }
 
@@ -160,6 +161,7 @@ function SkuVariants({
     return str
   }
 
+  // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey) => {
     const skuId = variantOptions[variantKey].skuId || ''
     const skuData = productData && productData.skus[skuId]
@@ -281,6 +283,7 @@ function SkuVariants({
     )
   }
 
+  // displays all variants sections
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
     let selectedSku = {}
@@ -293,7 +296,7 @@ function SkuVariants({
         : variantOptions[prevVariantKey].optionSelected
       const { associatedSkuIds } = skuSelectedInPrevSection
 
-      // find all matching skus in current section
+      // find all associated skus in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
         const optionSkus =
           variantOptions[variantKey].options[i].associatedSkuIds
@@ -365,7 +368,7 @@ function SkuVariants({
                 index === Object.keys(variantOptions).length - 1 &&
                 !variantOptions[variantKey].hasStock
               ) {
-                // return checkForOutOfStock(index, variantKey, sku)
+                // out of stock section
                 return (
                   <li className='list-inline-item me-2 mb-2'>
                     <div className='Count outstock'>
@@ -430,17 +433,11 @@ function SkuVariants({
     return (
       variantOptions &&
       Object.keys(variantOptions).map((variantKey, index) => {
-        if (index === 0) {
-          return displayVariants(index, variantKey)
-        }
-        if (index > 0) {
-          return displayVariants(index, variantKey)
-        }
+        return displayVariants(index, variantKey)
       })
     )
   }
-  const displayWeights = () => <>{displayVariantsSection()}</>
-  return <>{displayWeights()}</>
+  return <>{displayVariantsSection()}</>
 }
 
 export default SkuVariants
