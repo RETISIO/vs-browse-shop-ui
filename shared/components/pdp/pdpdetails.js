@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
@@ -44,39 +45,6 @@ import NotifyMe from '../notifyme'
 import { notifyMe } from '../ThirdPartyScripts/Events'
 import SkuVariants from './skuVariants'
 
-// skuObj = {
-// defaultWeight: '',
-// selectedWeight: ''
-// skus: {
-// [weight]: {
-// skuId: skuId
-//   wieght: "10oz",
-//   thickness: 'ssss',
-//   count: [
-//     {
-//     pieces: "2pcs",
-//     availableStock: 200,
-//     quantityAddedToCart: 0,
-//      inventoryStatusLabel: '....',
-//     image:xxxx,
-//     thumbnailImgs: [aaa,bbb,ccc],
-//     itemCode: 1111,
-//     salePrice: 1111,
-//     listPrice: 9999,
-// hasPrice: false,
-//   hasStock: false,
-//     onSale: false,
-//     outOfStock: false,
-//     },
-//    ],
-//    addToCart: ()=>{},
-//    addToWishList: ()=>{},
-//    notifyMe: ()=>{}
-//   },
-// ...
-// }
-// }
-
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
   // const productSkus =
@@ -95,7 +63,6 @@ export default function ProductDescription(props) {
   const [message, setMessage] = useState()
   const [showAlert, setShowAlert] = useState(false)
   const [variantSelected, setVariantSelected] = useState()
-  const [variantsArr, setVariantsArr] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
 
   const defaultSkuId =
@@ -111,7 +78,7 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareSkusData()
-    prepareVarinatsArr()
+    // prepareVarinatsArr()
     prepareVarinatsOptions()
   }, [])
 
@@ -133,40 +100,20 @@ export default function ProductDescription(props) {
   // skusData: {  [weight]: {skuId,weight, thickness, count: [{}, {},..]},
   //              [weight]: { }, ..}
 
-  console.log('productData.....', productData)
-
-  function prepareVarinatsArr() {
-    // total variants
-    const variantsOptionsKeysObj = productData && productData.variantOptions
-    const variantsA =
-      variantsOptionsKeysObj &&
-      Object.keys(variantsOptionsKeysObj).map(varntKey => {
-        const obj = {
-          name: '',
-          skus: [],
-          defaultOption: '',
-          optionSelected: ''
-        }
-        obj.name = varntKey
-        obj.skus = variantsOptionsKeysObj[varntKey]
-        obj.defaultOption = variantsOptionsKeysObj[varntKey][0]
-        obj.optionSelected = ''
-        return obj
-      })
-    setVariantsArr(variantsA)
-    console.log('variantsArr...', variantsArr)
-  }
+  // console.log('productData.....', productData)
 
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
-    productData &&
+    if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach(variantKey => {
         variantOptionsObj[variantKey] = {
           options: productData.variantOptions[variantKey],
           defaultSelected: productData.variantOptions[variantKey][0],
-          optionSelected: ''
+          optionSelected: '',
+          skuId: ''
         }
       })
+    }
     setVariantsOptions({ ...variantOptionsObj })
   }
 
@@ -259,38 +206,8 @@ export default function ProductDescription(props) {
     </aside>
   )
 
-  const selectDefaultCount = weightObj => {
-    // select default count for which the hasStock is true
-    const countArr = weightObj.count
-    let defObj = {}
-    countArr.every(obj => {
-      if (obj.hasStock) {
-        defObj = obj
-        return false
-      }
-      return true
-    })
-    return defObj
-  }
-
-  const handleWeightSelected = weightObj => {
-    const skusObj = { ...skusData }
-    const weight = weightObj.weight
-    skusObj.selectedWeight = weightObj
-    skusObj.defaultWeight = ''
-    skusObj.defaultCount = selectDefaultCount(weightObj) // default count of selected weight
-    // skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
-    setSkusData(skusObj)
-    setShowSaleWidget(skusObj.defaultCount.onSale) // set onSale badge based on selected weight
-  }
-
   const handleVariantSelected = (index, variantKey, value, variant) => {
     // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
-    // console.log(
-    //   'from handleVariantSelected.....value, variant...',
-    //   value,
-    //   variant
-    // )
     const variantOptionsObj = { ...variantsOptions }
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
@@ -307,19 +224,12 @@ export default function ProductDescription(props) {
     setVariantsOptions({ ...variantOptionsObj })
   }
 
-  const handleCountSelected = (weightObj, countObj) => {
-    const skusObj = { ...skusData }
-    const weight = weightObj.weight
-    skusObj.selectedWeight = weightObj
-    skusObj.defaultWeight = ''
-    skusObj.defaultCount = ''
-    const countArr = skusObj.skus[weight].count.filter(
-      obj => obj.itemCode === countObj.itemCode
-    )
-    skusObj.selectedCount = countArr.length ? countArr[0] : ''
-    setSkusData(skusObj)
-    setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
-    setSkuSelected(countObj)
+  const handleSelectedSku = skuData => {
+    // debugger
+    if (skuData) {
+      setShowSaleWidget(skuData.skuDetails.onSale) // set onSale badge based on selected count
+      setSkuSelected(skuData)
+    }
   }
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
@@ -346,11 +256,11 @@ export default function ProductDescription(props) {
     </button>
   )
 
-  const addToBagHandler = (countSelected, itemQuantity) => {
+  const addToBagHandler = (skuData, itemQuantity) => {
     const pdp = {
       items: [
         {
-          variantId: countSelected.itemCode,
+          variantId: skuData.skuId,
           productId: productData.productId,
           quantity: itemQuantity,
           productType: 'product'
@@ -377,10 +287,10 @@ export default function ProductDescription(props) {
     }
   }
 
-  const addToWishLisrHandler = countSelected => {
-    if (getCookie('lu') && countSelected && Object.keys(countSelected).length) {
+  const addToWishLisrHandler = skuData => {
+    if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
-        skuId: countSelected.itemCode,
+        skuId: skuData.skuId,
         productId: productData.productId,
         quantity: '1'
       })
@@ -402,13 +312,10 @@ export default function ProductDescription(props) {
         .catch(error => {
           setErrorMsg(error.message)
         })
-    } else if (
-      !countSelected ||
-      (countSelected && Object.keys(countSelected).length === 0)
-    ) {
+    } else if (!skuData || (skuData && Object.keys(skuData).length === 0)) {
       setErrorMsg('skuId must not be empty')
     } else {
-      setSkuSelected(countSelected)
+      setSkuSelected(skuData)
       setNoReload(true)
       setShow(true)
     }
@@ -563,14 +470,6 @@ export default function ProductDescription(props) {
                   /> */}
                   <SkuVariants
                     handleVariantSelected={handleVariantSelected}
-                    skusData={skusData}
-                    weightSelected={
-                      skusData &&
-                      (skusData.defaultWeight
-                        ? skusData.defaultWeight
-                        : skusData.selectedWeight)
-                    }
-                    handleCountSelected={handleCountSelected}
                     countSelected={
                       skusData &&
                       (skusData.defaultCount
@@ -581,9 +480,9 @@ export default function ProductDescription(props) {
                     handleAddtoCart={addToBagHandler}
                     handleAddtoWishList={addToWishLisrHandler}
                     handleNotifyMe={handleNotifyMe}
-                    variantsArr={variantsArr}
                     variantSelected={variantSelected}
                     variantOptions={variantsOptions}
+                    handleSelectedSku={handleSelectedSku}
                   />
                 </div>
               </div>

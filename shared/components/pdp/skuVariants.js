@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
@@ -31,67 +32,22 @@
 /* eslint-disable jsx-quotes */
 import React, { useState, useEffect } from 'react'
 
-// skuObj = {
-// defaultWeight: '',
-// selectedWeight: ''
-// skus: {
-// [weight]: {
-// skuId: skuId
-//   wieght: "10oz",
-//   thickness: 'ssss',
-//   count: [
-//     {
-//     pieces: "2pcs",
-//     availableStock: 200,
-//     quantityAddedToCart: 0,
-//      inventoryStatusLabel: '....',
-//     image:xxxx,
-//     thumbnailImgs: [aaa,bbb,ccc],
-//     itemCode: 1111,
-//     salePrice: 1111,
-//     listPrice: 9999,
-// hasPrice: false,
-//   hasStock: false,
-//     onSale: false,
-//     outOfStock: false,
-//     },
-//    ],
-//    addToCart: ()=>{},
-//    addToWishList: ()=>{},
-//    notifyMe: ()=>{}
-//   },
-// ...
-// }
-// }
-
 function SkuVariants({
   productId,
   handleVariantSelected,
-  skusData,
-  weightSelected,
   productData,
-  handleCountSelected,
+  handleSelectedSku,
   countSelected,
   handleAddtoCart,
   handleAddtoWishList,
   handleNotifyMe,
-  variantsArr,
-  variantSelected,
   variantOptions
 }) {
-  console.log('from SkuVariants.....variantSelected..', variantSelected)
   const [itemQuantity, setItemQuantity] = useState()
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-  const maxQtyAllowed = 999 // max qty user can enter
-  //   console.log(
-  //     'from skuCounts....weightSelected, countSelected,itemQuantity,productId',
-  //     weightSelected,
-  //     countSelected,
-  //     itemQuantity,
-  //     productId
-  //   )
+  const maxQtyAllowed = 1999 // max qty user can enter
   //   console.log('from skuCounts....productData......', productData)
 
   useEffect(() => {
@@ -105,12 +61,13 @@ function SkuVariants({
     }
   }, [countSelected])
 
-  const handleSelected = skuCount => {
-    handleCountSelected(weightSelected, skuCount)
+  const handleSelectedSkuData = skuData => {
+    handleSelectedSku(skuData)
   }
 
-  const addItemQuantity = () => {
-    const { availableStock } = countSelected
+  const addItemQuantity = skuData => {
+    const availableStock =
+      skuData && skuData?.skuDetails?.inventory[0].availableStock
     const qty = parseInt(itemQuantity)
     if (qty < availableStock) {
       setItemQuantity(qty + 1)
@@ -135,13 +92,13 @@ function SkuVariants({
     setDisableAddToCart(false)
   }
 
-  const handleAddtoCartOnClick = event => {
+  const handleAddtoCartOnClick = (event, skuData) => {
     event.preventDefault()
-    handleAddtoCart(countSelected, itemQuantity)
+    handleAddtoCart(skuData, itemQuantity)
   }
 
-  const handleAddtoWishListOnClick = event => {
-    handleAddtoWishList(countSelected)
+  const handleAddtoWishListOnClick = (event, skuData) => {
+    handleAddtoWishList(skuData)
   }
 
   const displayPrice = (listPrice, salePrice) => {
@@ -150,9 +107,9 @@ function SkuVariants({
     return Math.ceil(listP - saleP)
   }
 
-  const handleQtyChange = e => {
+  const handleQtyChange = (e, skuData) => {
     let val = parseInt(e.target.value)
-    const maxQty = countSelected.availableStock || 0
+    const maxQty = skuData?.skuDetails?.inventory[0].availableStock || 0
     if (val > maxQtyAllowed) {
       val = maxQtyAllowed
       setItemQuantity(maxQtyAllowed)
@@ -173,18 +130,19 @@ function SkuVariants({
     setDisableAddToCart(false)
   }
 
-  const displayQtyErrorMsg = () => {
+  const displayQtyErrorMsg = skuData => {
     // console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
     const qty = parseInt(itemQuantity)
-    const maxQty = (countSelected && countSelected.availableStock) || 0
+    const maxQty =
+      (skuData && skuData?.skuDetails?.inventory[0].availableStock) || 0
     if (qty > maxQty) {
       return `There is not enough inventory in stock. Please enter quantity no more than ${maxQty}`
     }
     return ''
   }
 
-  const displayPricePanel = () => {
-    const hasStock = countSelected && countSelected.hasStock
+  const displayPricePanel = skuData => {
+    const hasStock = (skuData && skuData?.skuDetails?.hasStock) || ''
     if (!hasStock) {
       return 'hide-panel1'
     }
@@ -202,179 +160,130 @@ function SkuVariants({
     return str
   }
 
-  const displayCheckMark = (variant, sku) => {
-    if (
-      variant.defaultOption &&
-      variant.defaultOption.optionValue === sku.optionValue
-    ) {
-      return true
-    }
-    if (
-      variant.optionSelected &&
-      variant.optionSelected.optionValue === sku.optionValue
-    ) {
-      return true
-    }
-    return false
-  }
-
-  const displayVariantSection = (variant, index) => {
+  const displayVariantPriceSection = (index, variantKey) => {
+    const skuId = variantOptions[variantKey].skuId || ''
+    const skuData = productData && productData.skus[skuId]
+    // skuData.skuDetails.price.salePrice = '$100.95' //test data
+    handleSelectedSkuData(skuData)
+    // debugger
     return (
-      <>
-        <div className='sukhead'>{variant.name}</div>
-        <div>
-          <ul className='list-inline'>
-            {variant.skus.map(sku => (
-              <li className='list-inline-item me-2 mb-2'>
-                <div
-                  className={
-                    displayCheckMark(variant, sku) ? 'tag-selected' : 'tag'
-                  }
-                  //   className={
-                  //     variantSelected &&
-                  //     variantSelected.optionValue === sku.optionValue
-                  //       ? 'tag-selected'
-                  //       : 'tag'
-                  //   }
-                  onClick={() => handleSkuSelected(sku.optionValue, variant)}
-                >
-                  <span
-                    className={`${
-                      displayCheckMark(variant, sku)
-                        ? 'sku-selected'
-                        : 'sku-not-selected'
-                    }`}
-                  >
-                    <i className='icon fas fa-check'></i>
-                  </span>
-                  <span className='txttagb'>{sku.optionValue}</span>
-                  {/* <span className='txttagz'>
-                    {formatThickness(skusData.skus[key].thickness)}
-                  </span> */}
-                </div>
-              </li>
-            ))}
-          </ul>
+      <div className='itempanel'>
+        <div className='itemtxt'>
+          ITEM CODE: <span>{skuId && skuId}</span>
         </div>
-        {index === variantsArr.length - 1 && (
-          <div className='itempanel'>
-            {countSelected && countSelected.itemCode && (
-              <div className='itemtxt'>
-                ITEM CODE:{' '}
-                <span>{countSelected && countSelected.itemCode}</span>
-              </div>
-            )}
-            <div className='price-section'>
-              {countSelected && countSelected.salePrice && (
-                <span className='priceb'>{countSelected.salePrice} </span>
-              )}
-              {countSelected && countSelected.listPrice && (
-                <span
-                  className={
-                    countSelected.listPrice && countSelected.salePrice
-                      ? 'pricebstik'
-                      : 'priceb'
-                  }
-                >
-                  {countSelected.listPrice}
-                </span>
-              )}
-              {countSelected && countSelected.salePrice && (
-                <span className='pricenred'>
-                  {`You save: $${displayPrice(
-                    countSelected.listPrice,
-                    countSelected.salePrice
-                  )}.00`}
-                </span>
-              )}
-            </div>
-
-            {/* counter section */}
-            <div className='sku-counter-section'>
-              <div className=''>
-                <span className={displayPricePanel()}>
-                  <div className='input-group'>
-                    <span className='input-group-btn'>
-                      {/* minus button */}
-                      <button
-                        className={`btn js-counter__btn rdrt ${
-                          disableMinusCounter ||
-                          (countSelected && !countSelected.hasStock)
-                            ? 'disabled'
-                            : ''
-                        }`}
-                        type='button'
-                        onClick={reduceItemQuantity}
-                      >
-                        <i className='fa fa-minus' aria-hidden='true'></i>
-                      </button>
-                    </span>
-                    <input
-                      className='sku-item-qty'
-                      type='number'
-                      value={itemQuantity}
-                      onChange={handleQtyChange}
-                    />
-                    <span className='input-group-btn'>
-                      {/* plus button */}
-                      <button
-                        className={`btn js-counter__btn rdrt ${
-                          disablePlusCounter ||
-                          (countSelected && !countSelected.hasStock) ||
-                          (countSelected &&
-                            itemQuantity &&
-                            itemQuantity > countSelected.availableStock)
-                            ? 'disabled'
-                            : ''
-                        }`}
-                        type='button'
-                        onClick={addItemQuantity}
-                      >
-                        <i className='fa fa-plus' aria-hidden='true'></i>
-                      </button>
-                    </span>
-                  </div>
-                </span>
-                <span className='sp-20'>
+        <div className='price-section'>
+          {skuData && skuData?.skuDetails?.price?.salePrice && (
+            <span className='priceb'>
+              {skuData?.skuDetails?.price?.salePrice}
+            </span>
+          )}
+          {skuData && skuData?.skuDetails?.price?.listPrice && (
+            <span
+              className={
+                skuData?.skuDetails?.price?.listPrice &&
+                skuData?.skuDetails?.price?.salePrice
+                  ? 'pricebstik'
+                  : 'priceb'
+              }
+            >
+              {skuData?.skuDetails?.price?.listPrice.price}
+            </span>
+          )}
+          {skuData?.skuDetails?.price?.salePrice && (
+            <span className='pricenred'>
+              {`You save: $${displayPrice(
+                skuData?.skuDetails?.price?.listPrice.price,
+                skuData?.skuDetails?.price?.salePrice
+              )}.00`}
+            </span>
+          )}
+        </div>
+        {/* counter section */}
+        <div className='sku-counter-section'>
+          <div className=''>
+            <span className={displayPricePanel(skuData)}>
+              <div className='input-group'>
+                <span className='input-group-btn'>
+                  {/* minus button */}
                   <button
-                    className={`btn btn-secondary btn-md add-to-cart ${
-                      disableAddToCart ||
-                      (countSelected && !countSelected.hasStock) ||
-                      (countSelected &&
-                        itemQuantity &&
-                        itemQuantity > countSelected.availableStock)
+                    className={`btn js-counter__btn rdrt ${
+                      disableMinusCounter ||
+                      (skuData && !skuData?.skuDetails?.hasStock)
                         ? 'disabled'
                         : ''
                     }`}
-                    id='0'
-                    onClick={e => handleAddtoCartOnClick(e)}
+                    type='button'
+                    onClick={reduceItemQuantity}
                   >
-                    ADD TO CART
+                    <i className='fa fa-minus' aria-hidden='true'></i>
                   </button>
                 </span>
-                <span>
+                <input
+                  className='sku-item-qty'
+                  type='number'
+                  value={itemQuantity}
+                  onChange={e => handleQtyChange(e, skuData)}
+                />
+                <span className='input-group-btn'>
+                  {/* plus button */}
                   <button
-                    className='btn btn-primary btn-md add-to-cart'
-                    id='1'
-                    onClick={e => handleAddtoWishListOnClick(e)}
+                    className={`btn js-counter__btn rdrt ${
+                      disablePlusCounter ||
+                      (skuData && !skuData?.skuDetails?.hasStock) ||
+                      (skuData &&
+                        itemQuantity &&
+                        itemQuantity >
+                          skuData?.skuDetails?.inventory[0].availableStock)
+                        ? 'disabled'
+                        : ''
+                    }`}
+                    type='button'
+                    onClick={() => addItemQuantity(skuData)}
                   >
-                    ADD TO WISHLIST
+                    <i className='fa fa-plus' aria-hidden='true'></i>
                   </button>
                 </span>
               </div>
-              <span className='sku-qty-error-msg'>{displayQtyErrorMsg()}</span>
-            </div>
+            </span>
+            <span className='sp-20'>
+              <button
+                className={`btn btn-secondary btn-md add-to-cart ${
+                  disableAddToCart ||
+                  (skuData && !skuData?.skuDetails?.hasStock) ||
+                  (skuData &&
+                    itemQuantity &&
+                    itemQuantity >
+                      skuData?.skuDetails?.inventory[0].availableStock)
+                    ? 'disabled'
+                    : ''
+                }`}
+                id='0'
+                onClick={e => handleAddtoCartOnClick(e, skuData)}
+              >
+                ADD TO CART
+              </button>
+            </span>
+            <span>
+              <button
+                className='btn btn-primary btn-md add-to-cart'
+                id='1'
+                onClick={e => handleAddtoWishListOnClick(e, skuData)}
+              >
+                ADD TO WISHLIST
+              </button>
+            </span>
           </div>
-        )}
-      </>
+          <span className='sku-qty-error-msg'>
+            {displayQtyErrorMsg(skuData)}
+          </span>
+        </div>
+      </div>
     )
   }
 
   const displayVariants = (index, variantKey) => {
-    // const associatedSkus = []
     let optionsToDisplay = []
     let selectedSku = {}
-    // let prevVariantKey = ''
     if (index > 0) {
       const prevVariantKey = Object.keys(variantOptions)[index - 1] // 'count'
       // find out what is selected variant in this section
@@ -382,13 +291,14 @@ function SkuVariants({
         .defaultSelected
         ? variantOptions[prevVariantKey].defaultSelected
         : variantOptions[prevVariantKey].optionSelected
-      const { associatedSkus } = skuSelectedInPrevSection
+      const { associatedSkuIds } = skuSelectedInPrevSection
 
       // find all matching skus in current section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
-        const optionSkus = variantOptions[variantKey].options[i].associatedSkus
-        for (let j = 0; j < associatedSkus.length; j++) {
-          if (optionSkus.includes(associatedSkus[j])) {
+        const optionSkus =
+          variantOptions[variantKey].options[i].associatedSkuIds
+        for (let j = 0; j < associatedSkuIds.length; j++) {
+          if (optionSkus.includes(associatedSkuIds[j])) {
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
@@ -409,126 +319,67 @@ function SkuVariants({
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
     }
-
+    if (index === Object.keys(variantOptions).length - 1) {
+      // sku in last section
+      let skuId = ''
+      let optionsSelected = []
+      const keys = Object.keys(variantOptions)
+      for (let key = 0; key < keys.length; key++) {
+        optionsSelected = optionsSelected.concat(
+          variantOptions[keys[key]].defaultSelected
+            ? variantOptions[keys[key]].defaultSelected.associatedSkuIds
+            : variantOptions[keys[key]].optionSelected.associatedSkuIds
+        )
+      }
+      if (optionsSelected.length > 1) {
+        for (let i = 0; i < optionsSelected.length; i++) {
+          for (let j = i + 1; j < optionsSelected.length; j++) {
+            if (optionsSelected[i] === optionsSelected[j]) {
+              skuId = optionsSelected[i]
+              break
+            }
+          }
+          if (skuId) {
+            break
+          }
+        }
+      } else {
+        skuId = optionsSelected[0]
+      }
+      if (skuId) {
+        variantOptions[keys[keys.length - 1]].skuId = skuId
+        //   variantOptions[keys[keys.length - 1]].hasStock = false //test data
+        variantOptions[keys[keys.length - 1]].hasStock =
+          productData.skus[skuId].skuDetails.hasStock
+        variantOptions[keys[keys.length - 1]].skuData = productData.skus[skuId]
+      }
+      //   console.log('skuID....', skuId)
+    }
     return (
       <>
         <div className='sukhead'>{variantKey}</div>
         <div>
           <ul className='list-inline'>
-            {optionsToDisplay.map(sku => (
-              <li className='list-inline-item me-2 mb-2'>
-                <div
-                  //   className={
-                  //     displayCheckMark(selectedSku, sku) ? 'tag-selected' : 'tag'
-                  //   }
-                  className={
-                    selectedSku && selectedSku.optionValue === sku.optionValue
-                      ? 'tag-selected'
-                      : 'tag'
-                  }
-                  onClick={() =>
-                    handleSkuSelected(index, variantKey, sku.optionValue, sku)
-                  }
-                >
-                  <span
-                    className={`${
-                      selectedSku && selectedSku.optionValue === sku.optionValue
-                        ? 'sku-selected'
-                        : 'sku-not-selected'
-                    }`}
-                  >
-                    <i className='icon fas fa-check'></i>
-                  </span>
-                  <span className='txttagb'>{sku.optionValue}</span>
-                  {/* <span className='txttagz'>
-                    {formatThickness(skusData.skus[key].thickness)}
-                  </span> */}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </>
-    )
-  }
-
-  const displayVariantsSection = () => {
-    return (
-      variantOptions &&
-      Object.keys(variantOptions).map((variantKey, index) => {
-        if (index === 0) {
-          displayVariants(index, variantKey)
-        } else if (index > 0) {
-          displayVariants(index, variantKey)
-        }
-        if (index + 1 === variantOptions.length) {
-          displayVariants(
-            index,
-            variantSelected.variant,
-            variantKey,
-            variantOptions[variantKey].options
-          )
-        }
-      })
-    )
-  }
-  const displayWeights = () => (
-    <>
-      {displayVariantsSection()}
-      {/* {variantsArr && variantsArr.length && displayVariantSection()} */}
-
-      <div className='sukhead'> Weight: </div>
-      <div>
-        <ul className='list-inline'>
-          {skusData &&
-            Object.keys(skusData.skus).map(key => (
-              <li className='list-inline-item me-2 mb-2'>
-                <div
-                  className={
-                    weightSelected &&
-                    weightSelected.weight === skusData.skus[key].weight
-                      ? 'tag-selected'
-                      : 'tag'
-                  }
-                  onClick={() => handleSkuSelected(skusData.skus[key])}
-                >
-                  <span
-                    className={`${
-                      weightSelected &&
-                      weightSelected.weight === skusData.skus[key].weight
-                        ? 'sku-selected'
-                        : 'sku-not-selected'
-                    }`}
-                  >
-                    <i className='icon fas fa-check'></i>
-                  </span>
-                  <span className='txttagb'>{skusData.skus[key].weight}</span>
-                  <span className='txttagz'>
-                    {formatThickness(skusData.skus[key].thickness)}
-                  </span>
-                </div>
-              </li>
-            ))}
-        </ul>
-      </div>
-      <div className='sukhead'> Count: </div>
-      <div>
-        <ul className='list-inline'>
-          {weightSelected &&
-            weightSelected.count.map(skuCount => {
-              if (!skuCount.hasStock) {
-                // out of stock
+            {optionsToDisplay.map(sku => {
+              if (
+                index === Object.keys(variantOptions).length - 1 &&
+                !variantOptions[variantKey].hasStock
+              ) {
+                // return checkForOutOfStock(index, variantKey, sku)
                 return (
                   <li className='list-inline-item me-2 mb-2'>
                     <div className='Count outstock'>
-                      <span className='Countb'>{skuCount.pieces}</span>
+                      <span className='Countb'>{sku.optionValue}</span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
-                    {!skuCount.hasStock && (
+                    {!variantOptions[variantKey].hasStock && (
                       <div
                         className='notifytxt'
                         onClick={() =>
-                          handleNotifyMe({ ...skuCount, ...weightSelected })
+                          handleNotifyMe({
+                            ...variantOptions[variantKey].skuData,
+                            itemCode: variantOptions[variantKey].skuId
+                          })
                         }
                       >
                         <a href='#'>NOTIFY ME</a>
@@ -541,140 +392,54 @@ function SkuVariants({
                 <li className='list-inline-item me-2 mb-2'>
                   <div
                     className={
-                      countSelected && countSelected.pieces === skuCount.pieces
-                        ? 'Count-selected'
-                        : 'Count'
+                      selectedSku && selectedSku.optionValue === sku.optionValue
+                        ? 'tag-selected'
+                        : 'tag'
                     }
-                    onClick={() => handleSelected(skuCount)}
+                    onClick={() =>
+                      handleSkuSelected(index, variantKey, sku.optionValue, sku)
+                    }
                   >
                     <span
                       className={`${
-                        countSelected &&
-                        countSelected.pieces === skuCount.pieces
-                          ? 'count-sku-selected'
-                          : 'count-sku-not-selected'
+                        selectedSku &&
+                        selectedSku.optionValue === sku.optionValue
+                          ? 'sku-selected'
+                          : 'sku-not-selected'
                       }`}
                     >
                       <i className='icon fas fa-check'></i>
                     </span>
-                    <span className='Countb'>{skuCount.pieces}</span>
+                    <span className='txttagb'>{sku.optionValue}</span>
+                    {/* <span className='txttagz'>
+                    {formatThickness(skusData.skus[key].thickness)}
+                  </span> */}
                   </div>
                 </li>
               )
             })}
-        </ul>
-      </div>
-      {/* Desktop view  */}
-
-      <div className='itempanel'>
-        {countSelected && countSelected.itemCode && (
-          <div className='itemtxt'>
-            ITEM CODE: <span>{countSelected && countSelected.itemCode}</span>
-          </div>
-        )}
-        <div className='price-section'>
-          {countSelected && countSelected.salePrice && (
-            <span className='priceb'>{countSelected.salePrice} </span>
-          )}
-          {countSelected && countSelected.listPrice && (
-            <span
-              className={
-                countSelected.listPrice && countSelected.salePrice
-                  ? 'pricebstik'
-                  : 'priceb'
-              }
-            >
-              {countSelected.listPrice}
-            </span>
-          )}
-          {countSelected && countSelected.salePrice && (
-            <span className='pricenred'>
-              {`You save: $${displayPrice(
-                countSelected.listPrice,
-                countSelected.salePrice
-              )}.00`}
-            </span>
-          )}
+          </ul>
         </div>
+        {index === Object.keys(variantOptions).length - 1 &&
+          displayVariantPriceSection(index, variantKey)}
+      </>
+    )
+  }
 
-        {/* counter section */}
-        <div className='sku-counter-section'>
-          <div className=''>
-            <span className={displayPricePanel()}>
-              <div className='input-group'>
-                <span className='input-group-btn'>
-                  {/* minus button */}
-                  <button
-                    className={`btn js-counter__btn rdrt ${
-                      disableMinusCounter ||
-                      (countSelected && !countSelected.hasStock)
-                        ? 'disabled'
-                        : ''
-                    }`}
-                    type='button'
-                    onClick={reduceItemQuantity}
-                  >
-                    <i className='fa fa-minus' aria-hidden='true'></i>
-                  </button>
-                </span>
-                <input
-                  className='sku-item-qty'
-                  type='number'
-                  value={itemQuantity}
-                  onChange={handleQtyChange}
-                />
-                <span className='input-group-btn'>
-                  {/* plus button */}
-                  <button
-                    className={`btn js-counter__btn rdrt ${
-                      disablePlusCounter ||
-                      (countSelected && !countSelected.hasStock) ||
-                      (countSelected &&
-                        itemQuantity &&
-                        itemQuantity > countSelected.availableStock)
-                        ? 'disabled'
-                        : ''
-                    }`}
-                    type='button'
-                    onClick={addItemQuantity}
-                  >
-                    <i className='fa fa-plus' aria-hidden='true'></i>
-                  </button>
-                </span>
-              </div>
-            </span>
-            <span className='sp-20'>
-              <button
-                className={`btn btn-secondary btn-md add-to-cart ${
-                  disableAddToCart ||
-                  (countSelected && !countSelected.hasStock) ||
-                  (countSelected &&
-                    itemQuantity &&
-                    itemQuantity > countSelected.availableStock)
-                    ? 'disabled'
-                    : ''
-                }`}
-                id='0'
-                onClick={e => handleAddtoCartOnClick(e)}
-              >
-                ADD TO CART
-              </button>
-            </span>
-            <span>
-              <button
-                className='btn btn-primary btn-md add-to-cart'
-                id='1'
-                onClick={e => handleAddtoWishListOnClick(e)}
-              >
-                ADD TO WISHLIST
-              </button>
-            </span>
-          </div>
-          <span className='sku-qty-error-msg'>{displayQtyErrorMsg()}</span>
-        </div>
-      </div>
-    </>
-  )
+  const displayVariantsSection = () => {
+    return (
+      variantOptions &&
+      Object.keys(variantOptions).map((variantKey, index) => {
+        if (index === 0) {
+          return displayVariants(index, variantKey)
+        }
+        if (index > 0) {
+          return displayVariants(index, variantKey)
+        }
+      })
+    )
+  }
+  const displayWeights = () => <>{displayVariantsSection()}</>
   return <>{displayWeights()}</>
 }
 
