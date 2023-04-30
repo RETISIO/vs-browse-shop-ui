@@ -321,7 +321,7 @@ export default function ProductDescription(props) {
               `The following item have been moved to your wishlist: ${productData.displayName}`
             )
             AddtoWishhList({
-              skuId: countSelected.itemCode,
+              skuId: skuData.skuId,
               productId: productData.productId,
               channelData: state.channelData,
               userData: state.userData,
