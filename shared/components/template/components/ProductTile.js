@@ -3,8 +3,29 @@ import React from 'react';
 import Link from 'next/link';
 import NextImage from './nextImage';
 import { ProductClick } from '../../ThirdPartyScripts/RetisioEvents';
+import { useRouter } from 'next/navigation';
+import { usePLPDataContext } from '../../../context/plpDatacontext';
+import { ClickProduct } from '../../ThirdPartyScripts/Events';
+import { useAppContext } from '../../../context/appContext';
 
 export default function ProductTile({ value }) {
+  const {
+    searchResultData
+  } = usePLPDataContext();
+  const { state } = useAppContext();
+
+  const router = useRouter();
+
+  const navigatePDP = (data, href, e) => {
+    e.preventDefault();
+    if(searchResultData){
+      ClickProduct({
+        data, searchData:searchResultData.payLoad, userData: state?.userData, channelData: state?.channelData
+      });
+    }
+    router.push(href);
+  };
+
   return (
     <div className="product-card" data-mh="product-card">
       {value?.productPrice?.onSale ? (
@@ -33,9 +54,10 @@ export default function ProductTile({ value }) {
           </div>
         </div>
       ) : null}
-      <Link
+      <a
         className="product-image"
         href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
+        onClick={(e)=> navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
       >
         <div className="image-pos">
           <NextImage
@@ -46,12 +68,14 @@ export default function ProductTile({ value }) {
             width={262}
           />
         </div>
-      </Link>
+      </a>
       <div className="product-card-inner">
         <div className="product-card-desc">
-          <Link href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}>
+          <a 
+          href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
+          onClick={(e)=> navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)} >
             {value.displayName}
-          </Link>
+          </a>
           {(value?.additionalDetails?.isNewProduct || value?.additionalDetails?.isNeverFrozen)
             ? (
               <div

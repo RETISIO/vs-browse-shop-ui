@@ -8,7 +8,7 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
-import Router, { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/navigation';
 // eslint-disable-next-line import/named
 import Head from 'next/head';
 import { usePLPDataContext } from '../shared/context/plpDatacontext';
@@ -30,6 +30,7 @@ function Static({ data }) {
 
   const {
     setOffset,
+    setSearchResultData
   } = usePLPDataContext();
 
   const [loading, setLoading] = useState(false);
@@ -48,6 +49,7 @@ function Static({ data }) {
         ...searchData, userData: state?.userData, channelData: state?.channelData, autoSuggest
       });
     }
+    setSearchResultData(searchData);
   }, [searchData, state]);
   useEffect(() => {
     setLoading(true);

@@ -1,4 +1,11 @@
+/* eslint-disable no-use-before-define */
+
+/* eslint-disable no-unused-vars */
+
+/* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
+import { getCookie } from '@retisio/sf-api';
+
 const siteId = process.env.NEXT_PUBLIC_SITEID;
 const catalogId = '1001';
 const RviewItem = (itemData) => {
@@ -34,11 +41,74 @@ const SearchProd = (obj) => {
 };
 
 const ProductClick = (obj) => {
-  // console.log(obj);
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'clickProduct', '1.0', {
+    skuId: obj.data.defaultSkuId,
+    productId: obj.data.productId,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    categories: obj.searchData.categories.map((vl) => vl.id),
+    searchAttribution: true,
+    recommendationAttribution: false,
+    browseAttribution: false,
+    promotionAttribution: false,
+    searchAttributionDetails: {
+      query: obj.searchData.searchTerm
+      ,
+    },
+    profileId: loggedInUserData,
+  });
 };
 
 const AddItem = (obj) => {
-  // console.log(obj);
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'addItemToCart', '1.0', {
+    cartId: getCookie('arcCartId'),
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    currency: 'USD',
+    cartValue: convertFloat(obj.miniCartDetails.miniCartData.cartSummary.total),
+    items: [
+      {
+        skuId: obj.addToProdData.variantId,
+        productId: obj.addToProdData.productId,
+        brand: obj?.productData?.brand?.displayName,
+        categoryIds: [obj?.productData?.productDetails.productCategory.id],
+        price: convertFloat(obj.productData.skus[obj.addToProdData.variantId].skuDetails.price.listPrice.price),
+        quantity: obj.addToProdData.quantity,
+        shippingOption: 'STD',
+        modelNumber: obj.productData.modelCode || '',
+        attributedToSearch: 'false',
+        attributedToBrowse: 'false',
+        attributedToRecommendation: 'false',
+        attributedToPromotion: 'false',
+      },
+    ],
+    profileId: loggedInUserData,
+  });
+};
+
+const RaddtoWishhList = (obj) => {
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'addToWishlist', '1.0', {
+    wishlistId: obj.wishListId,
+    skuId: obj.skuId,
+    productId: obj.productId,
+    profileId: loggedInUserData,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+  });
+};
+
+const convertFloat = (amt = '$0.0') => {
+  const Amount = amt.split('$')[1];
+  return parseFloat(Amount);
 };
 
 export {
@@ -46,4 +116,5 @@ export {
   SearchProd,
   ProductClick,
   AddItem,
+  RaddtoWishhList,
 };

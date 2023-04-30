@@ -36,12 +36,12 @@ export default function ProductDetails({ data, origin }) {
     abUrl = window.location.href
   }
   if (
-    data &&
-    data.payLoad &&
-    data.payLoad.products &&
-    data.payLoad.products[0] &&
-    data.payLoad.products[0].productDetails &&
-    data.payLoad.products[0].productDetails.seoData
+    data
+    && data.payLoad
+    && data.payLoad.products
+    && data.payLoad.products[0]
+    && data.payLoad.products[0].productDetails
+    && data.payLoad.products[0].productDetails.seoData
   ) {
     seoData = data.payLoad.products[0].productDetails.seoData
   }
