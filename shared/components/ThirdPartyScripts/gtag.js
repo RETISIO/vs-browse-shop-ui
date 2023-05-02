@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
@@ -11,8 +12,9 @@ const pageview = (url) => {
 };
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-const event = ({ action, obj }) => {
-  window && window.gtag && window.gtag('event', action, obj);
+const event = (obj) => {
+  // window && window.gtag && window.gtag('event', action, obj);
+  window && window.dataLayer && window.dataLayer.push(obj);
 };
 
 const viewItem = (itemData) => {
@@ -43,11 +45,33 @@ const viewItem = (itemData) => {
       },
     ],
   };
-  event('view_item', data);
+  // event('view_item', data);
 };
+
+const GAddToCart = (obj)=>{
+  event({
+    event: "product_added_to_cart",
+    ecommerce: {
+      add: {
+        products: [
+          {
+            name: "Allen Brothers Angus Ribeye Duo",
+            id: 10971,
+            price: 189.95,
+            brand: "Allen Brothers",
+            category: "",
+            variant: 98595,
+            quantity: 1
+          }
+        ]
+      }
+    }
+  })
+}
 
 export {
   pageview,
   event,
   viewItem,
+  GAddToCart,
 };

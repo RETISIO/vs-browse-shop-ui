@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
-import { viewItem } from './gtag';
+import { viewItem, GAddToCart } from './gtag';
 import {
   RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
 } from './RetisioEvents';
@@ -44,6 +44,7 @@ const login = (data) => {
 const AddToCart = (data) => {
   try {
     AddItem(data);
+    GAddToCart(data);
   } catch (e) {
     console.log(e);
   }
