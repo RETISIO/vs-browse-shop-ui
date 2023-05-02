@@ -115,29 +115,29 @@
     .header-sticky.js-sticky-menu.is_stuck {
       .header-content-redesign {
         .header-content-inner-redesign {
-          background-color: #00466a;
+          background-color: $colorDeepBlue;
         }
       }
       .navbar.redesign-navbar {
-        background-color: #00466a;
+        background-color: $colorDeepBlue;
         .header-dropdown-menu{
-          background-color: #00466a;
+          background-color: $colorDeepBlue;
         }
         .js-dropdown__btn {
-          background-color: #00466a;
+          background-color: $colorDeepBlue;
         }
         .js-dropdown__btn:hover {
-          background-color: #126b98;
+          background-color: $colorLightBlue;
         }
         .sub-nav:hover .js-dropdown__btn {
-          background-color: #126b98;
+          background-color: $colorLightBlue;
         }
         .sub-nav1 {
-          background-color: #126b98;
+          background-color: $colorLightBlue;
         }
       }
       .header-dropdown-menu {
-        background-color: #00466a;
+        background-color: $colorDeepBlue;
       }
     }
 
@@ -293,7 +293,7 @@
   .home-header-container .nonHomePageHeader #header {
     .header-content-redesign {
       .header-content-inner-redesign {
-        background-color: #00466a;
+        background-color: $colorDeepBlue;
         position: relative;
       }
     }
@@ -301,7 +301,7 @@
 
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar {
-      background-color: #00466a;
+      background-color: $colorDeepBlue;
       width: 100%;
       position: absolute;
     }
@@ -312,7 +312,7 @@
       .header-sticky.is_stuck {
         .navbar {
           &-nav {
-            background-color: #00466a;
+            background-color: $colorDeepBlue;
           }
         }
       }
@@ -321,7 +321,7 @@
 
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
-      background-color: #00466a;
+      background-color: $colorDeepBlue;
     }
   }
 
@@ -346,7 +346,7 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
       .js-dropdown__btn {  
-        background-color: #00466a;
+        background-color: $colorDeepBlue;
       }
     }
   }
@@ -354,7 +354,7 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
       .js-dropdown__btn:hover {  
-        background-color: #126b98;
+        background-color: $colorLightBlue;
       }
     }
   }
@@ -362,14 +362,14 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar .header-dropdown-menu {
       .sub-nav:hover .js-dropdown__btn {
-        background-color: #126b98;
+        background-color: $colorLightBlue;
       }
     }
   }
 
   .home-header-container .nonHomePageHeader #header {
     .sub-nav1 {
-      background-color: #126b98;
+      background-color: $colorLightBlue;
     }
   }
 
