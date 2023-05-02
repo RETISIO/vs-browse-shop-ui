@@ -20,9 +20,9 @@ const visitPDP = (itemData) => {
 }
 
 const Search = (obj) => {
-  try{
+  try {
     SearchProd(obj);
-  }catch(e) {
+  } catch (e) {
     console.log(e);
   }
 };
@@ -75,6 +75,16 @@ const notifyMe = (data, merchId) => {
   }
 };
 
+const pageViewEvent = (data) => {
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.pageEvent(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export {
   visitPDP,
   Search,
@@ -84,4 +94,5 @@ export {
   AddToCart,
   notifyMe,
   AddtoWishhList,
+  pageViewEvent,
 };

@@ -130,7 +130,7 @@ window.lstImplement = {
   },
 
   captureCartItems: (cartData) => {
-    if(!cartData) {
+    if (!cartData)  {
       _ltk.SCA.ClearCart();
     }
 
@@ -139,7 +139,7 @@ window.lstImplement = {
     const total = items.length;
     for (let i = 0; i < total; i++) {
       const childItems = items[i];
-      console.log(childItems);
+      //console.log(childItems);
 
       const sku = childItems.skuId;
       const { quantity } = childItems;
@@ -197,4 +197,10 @@ window.lstImplement = {
       obj.errorHandler('INVALID_EMAIL');
     }
   },
+  pageEvent: (url) => {
+    // _ltk.CustomEvents.submit({});
+    _ltk.Activity.AddPageBrowse(url);
+    _ltk.Activity.Submit();
+  },
+
 };
