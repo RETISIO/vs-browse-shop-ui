@@ -430,13 +430,14 @@ function SkuVariants({
   }
 
   const displayVariantsSection = () => {
-    return (
-      Object.keys(variantOptions).length > 0 ? Object.keys(variantOptions).map((variantKey, index) => {
-        return displayVariants(index, variantKey)
-      }) : displayVariantPriceSection(0, '', productData.defaultSkuId)
+    return (variantOptions && Object.keys(variantOptions).map((variantKey, index) => {
+      return displayVariants(index, variantKey)
+    })
     )
   }
-  return <>{displayVariantsSection()}</>
+  return <>{
+    variantOptions && Object.keys(variantOptions).length > 0 ? displayVariantsSection() : displayVariantPriceSection(0, '', productData.defaultSkuId)
+  }</>
 }
 
 export default SkuVariants
