@@ -72,6 +72,7 @@ const AddItem = (obj) => {
     catalogId: obj?.channelData?.defaultCatalogId || catalogId,
     currency: 'USD',
     cartValue: convertFloat(obj.miniCartDetails.miniCartData.cartSummary.total),
+    isOrderIdCartIdSame: false,
     items: [
       {
         skuId: obj.addToProdData.variantId,
