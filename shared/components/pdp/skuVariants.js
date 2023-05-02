@@ -247,9 +247,10 @@ function SkuVariants({
                 </span>
               </div>
             </span>
-            <span className='sp-20'>
-              <button
-                className={`btn btn-secondary btn-md add-to-cart ${
+            <span className='pdp-buttons'>
+              <span className='sp-20'>
+                <button
+                  className={`btn btn-secondary btn-md add-to-cart ${
                   disableAddToCart ||
                   (skuData && !skuData?.skuDetails?.hasStock) ||
                   (skuData &&
@@ -259,20 +260,21 @@ function SkuVariants({
                     ? 'disabled'
                     : ''
                 }`}
-                id='0'
-                onClick={e => handleAddtoCartOnClick(e, skuData)}
-              >
-                ADD TO CART
-              </button>
-            </span>
-            <span>
-              <button
-                className='btn btn-primary btn-md add-to-cart'
-                id='1'
-                onClick={e => handleAddtoWishListOnClick(e, skuData)}
-              >
-                ADD TO WISHLIST
-              </button>
+                  id='0'
+                  onClick={e => handleAddtoCartOnClick(e, skuData)}
+                >
+                  ADD TO CART
+                </button>
+              </span>
+              <span>
+                <button
+                  className='btn btn-primary btn-md add-to-cart'
+                  id='1'
+                  onClick={e => handleAddtoWishListOnClick(e, skuData)}
+                >
+                  ADD TO WISHLIST
+                </button>
+              </span>
             </span>
           </div>
           <span className='sku-qty-error-msg'>

@@ -268,15 +268,105 @@
     .accordions-section{
         .accordion {
             .accordion-item {
+                border-left: 2px solid #f8f8f8;
                 .accordion-header {
                     .accordion-button {
                         padding: 0 !important;
                     }
                 }
+                .accordion-body {
+                    max-height: 250px !important;
+                    overflow: auto;
+                    margin-right: 12px;
+                    padding-left: 10px;
+                }
             }
         }
         .panel-body {
             padding: 25px 15px 0 5px !important;
+        }
+    }
+    .sukproduct {
+        padding: 0px !important;
+        margin-bottom: 20px !important;
+        .itempanel {
+            border: 1px solid #f7f7f7;
+            box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.2);
+            padding: 10px;
+            .sp-20 {
+                margin-bottom: 10px;
+            }
+        }
+        .panel1 {
+            width: 50% !important;
+        }
+        .pdp-buttons {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            .btn-md {
+                min-width: 150px !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 407px) {
+    .sukproduct {
+        .panel1 {
+            width: 55% !important;
+        }
+        .pdp-buttons {
+            .add-to-cart {
+                font-size: 10px !important;
+            }
+            .btn-md {
+                min-width: 130px !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .sukproduct {
+        .panel1 {
+            width: 52% !important;
+        }
+        .pdp-buttons {
+            .add-to-cart {
+                white-space: break-spaces;
+            }
+        }
+        .sku-item-qty {
+            width: 45px !important;
+        }
+        .pdp-buttons {
+            .add-to-cart {
+                font-size: 10px !important;
+            }
+            .btn-md {
+                min-width: 130px !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .sukproduct {
+        .sku-item-qty {
+            width: 90px !important;
+        }
+        .panel1 {
+            float: none !important;
+            width: 80% !important;
+        }
+        .pdp-buttons {
+            .add-to-cart {
+                font-size: 12px !important;
+            }
+            .btn-md {
+                min-width: 180px !important;
+            }
         }
     }
 }
@@ -287,4 +377,12 @@
             display: none !important;
         }
     }
+}
+
+#reviewsection {
+    margin-bottom: 20px;
+}
+
+.yotpo .text-m {
+    margin-left: 10px !important;
 }

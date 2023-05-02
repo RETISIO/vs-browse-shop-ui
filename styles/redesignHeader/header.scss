@@ -143,7 +143,13 @@
 
     @media screen and (max-width: 768px) {
       .header-sticky.js-sticky-menu.is_stuck {
-        position: inherit;
+        position: fixed;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .navbar.redesign-navbar {
+        display: none;
       }
     }
 
