@@ -17,6 +17,11 @@ const event = (obj) => {
   window && window.dataLayer && window.dataLayer.push(obj);
 };
 
+const convertFloat = (amt = '$0.0') => {
+  const Amount = amt.split('$')[1];
+  return parseFloat(Amount);
+};
+
 const viewItem = (itemData) => {
   const item = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products[0] ? itemData.payLoad.products[0] : {};
   const data = {
@@ -48,26 +53,43 @@ const viewItem = (itemData) => {
   // event('view_item', data);
 };
 
-const GAddToCart = (obj)=>{
+const GAddToCart = (obj) => {
   event({
-    event: "product_added_to_cart",
+    event: 'product_added_to_cart',
     ecommerce: {
       add: {
         products: [
           {
-            name: "Allen Brothers Angus Ribeye Duo",
-            id: 10971,
-            price: 189.95,
-            brand: "Allen Brothers",
-            category: "",
-            variant: 98595,
-            quantity: 1
-          }
-        ]
-      }
-    }
-  })
-}
+            name: obj?.productData?.displayName,
+            id: obj?.productData?.productId,
+            price: convertFloat(obj.productData.skus[obj.addToProdData.variantId].skuDetails.price.listPrice.price),
+            brand: obj?.productData?.brand?.displayName,
+            category: obj?.productData?.productDetails?.productCategory?.displayName,
+            variant: obj.addToProdData.variantId,
+            quantity: obj.addToProdData.quantity,
+          },
+        ],
+      },
+    },
+  });
+  event({
+    event: 'add_to_cart',
+    ecommerce: {
+      items: [
+        {
+          item_name: obj?.productData?.displayName,
+          item_id: obj?.productData?.productId,
+          affiliation: 'Allen Brothers',
+          currency: 'USD',
+          price: convertFloat(obj.productData.skus[obj.addToProdData.variantId].skuDetails.price.listPrice.price),
+          item_category: obj?.productData?.productDetails?.productCategory?.displayName,
+          item_variant: obj.addToProdData.variantId,
+          quantity: obj.addToProdData.quantity,
+        },
+      ],
+    },
+  });
+};
 
 export {
   pageview,
