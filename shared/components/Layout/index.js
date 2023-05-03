@@ -1,3 +1,4 @@
+/* eslint-disable spaced-comment */
 /* eslint-disable no-shadow */
 
 /* eslint-disable linebreak-style */

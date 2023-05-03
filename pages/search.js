@@ -8,7 +8,7 @@
 /* eslint-disable no-unused-expressions */
 import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
-import Router, { useRouter } from 'next/navigation';
+import Router, { useRouter } from 'next/router';
 // eslint-disable-next-line import/named
 import Head from 'next/head';
 import { usePLPDataContext } from '../shared/context/plpDatacontext';
@@ -22,6 +22,7 @@ import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 import { requestContructor } from '../shared/helpers/api';
 import { Search } from '../shared/components/ThirdPartyScripts/Events';
 import { useAppContext } from '../shared/context/appContext';
+import URLHandler from '../shared/helpers/urlHandler';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -63,7 +64,11 @@ function Static({ data }) {
       } else if(res?.payLoad?.redirect) {
         Router.push(res?.payLoad?.redirectURL);
       } else {
+        const { req, asPath } = router;
+        const reqURI = req ? req?.url : asPath;
+        const searchTerm = URLHandler('submit-search', reqURI) || '';
         res.page = res?.payLoad?.page;
+        res.payLoad.searchTerm = searchTerm;
         setSearchPageData(res);
         setLoading(false);
         if(window && window.yotpo) {

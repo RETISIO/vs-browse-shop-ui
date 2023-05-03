@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
-import { viewItem } from './gtag';
+import { viewItem, GAddToCart } from './gtag';
 import {
   RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
 } from './RetisioEvents';
@@ -20,9 +20,9 @@ const visitPDP = (itemData) => {
 }
 
 const Search = (obj) => {
-  try{
+  try {
     SearchProd(obj);
-  }catch(e) {
+  } catch (e) {
     console.log(e);
   }
 };
@@ -44,6 +44,7 @@ const login = (data) => {
 const AddToCart = (data) => {
   try {
     AddItem(data);
+    GAddToCart(data);
   } catch (e) {
     console.log(e);
   }
@@ -74,6 +75,16 @@ const notifyMe = (data, merchId) => {
   }
 };
 
+const pageViewEvent = (data) => {
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.pageEvent(data);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export {
   visitPDP,
   Search,
@@ -83,4 +94,5 @@ export {
   AddToCart,
   notifyMe,
   AddtoWishhList,
+  pageViewEvent,
 };

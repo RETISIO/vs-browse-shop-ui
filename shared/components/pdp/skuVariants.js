@@ -162,8 +162,8 @@ function SkuVariants({
   }
 
   // price section will be printed after all variants sections
-  const displayVariantPriceSection = (index, variantKey) => {
-    const skuId = variantOptions[variantKey].skuId || ''
+  const displayVariantPriceSection = (index, variantKey, skuID) => {
+    const skuId = skuID || variantOptions[variantKey].skuId || ''
     const skuData = productData && productData.skus[skuId]
     // skuData.skuDetails.price.salePrice = '$100.95' //test data
     handleSelectedSkuData(skuData)
@@ -432,14 +432,14 @@ function SkuVariants({
   }
 
   const displayVariantsSection = () => {
-    return (
-      variantOptions &&
-      Object.keys(variantOptions).map((variantKey, index) => {
-        return displayVariants(index, variantKey)
-      })
+    return (variantOptions && Object.keys(variantOptions).map((variantKey, index) => {
+      return displayVariants(index, variantKey)
+    })
     )
   }
-  return <>{displayVariantsSection()}</>
+  return <>{
+    variantOptions && Object.keys(variantOptions).length > 0 ? displayVariantsSection() : displayVariantPriceSection(0, '', productData.defaultSkuId)
+  }</>
 }
 
 export default SkuVariants

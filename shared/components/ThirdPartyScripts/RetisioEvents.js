@@ -32,8 +32,7 @@ const SearchProd = (obj) => {
     siteId,
     profileId: loggedInUserData,
     catalogId: obj?.channelData?.defaultCatalogId || catalogId,
-    eventType: 'recommendation',
-    recommendationType: 'view_view',
+    eventType: 'search',
     searchQuerykey: obj?.payLoad?.searchTerm,
     productIdList: obj?.payLoad?.products?.map((val) => val.productId),
     pageUrl: window.location.href,
@@ -72,6 +71,7 @@ const AddItem = (obj) => {
     catalogId: obj?.channelData?.defaultCatalogId || catalogId,
     currency: 'USD',
     cartValue: convertFloat(obj.miniCartDetails.miniCartData.cartSummary.total),
+    isOrderIdCartIdSame: false,
     items: [
       {
         skuId: obj.addToProdData.variantId,
