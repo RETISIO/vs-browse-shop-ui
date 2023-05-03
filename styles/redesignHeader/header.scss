@@ -34,7 +34,7 @@
           background-position: 100% center;
           border-radius: 50px;
           border: 1px solid #575756;
-          margin: 10px;
+          margin: 12px 10px;
     
           &::placeholder {
             color: color(#575756 a(0.8));
@@ -64,6 +64,7 @@
       background-color: #771e14;
       padding: 1px;
       border-radius: 0 50px 50px 0;
+      border-style: none;
     
       .icon.icon-search.fa.fa-search {
         padding: 0.7rem;
