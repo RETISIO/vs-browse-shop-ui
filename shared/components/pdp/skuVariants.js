@@ -172,12 +172,12 @@ function SkuVariants({
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
-          ITEM CODE: <span>{skuId && skuId}</span>
+          ITEM CODE: <span>{skuId || ''}</span>
         </div>
         <div className='price-section'>
           {skuData && skuData?.skuDetails?.price?.salePrice && (
             <span className='priceb'>
-              {skuData?.skuDetails?.price?.salePrice}
+              {skuData?.skuDetails?.price?.salePrice?.price}
             </span>
           )}
           {skuData && skuData?.skuDetails?.price?.listPrice && (
@@ -196,7 +196,7 @@ function SkuVariants({
             <span className='pricenred'>
               {`You save: $${displayPrice(
                 skuData?.skuDetails?.price?.listPrice.price,
-                skuData?.skuDetails?.price?.salePrice
+                skuData?.skuDetails?.price?.salePrice.price
               )}.00`}
             </span>
           )}
