@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/named */
 /* eslint-disable linebreak-style */
@@ -15,6 +17,7 @@ import { useEffect } from 'react'
 // eslint-disable-next-line import/named
 import Router, { useRouter } from 'next/router'
 import { PageBuilder } from '@retisio/sf-ui'
+import Cookies from 'cookies';
 import DefaultErrorPage from 'next/error'
 import { requestContructor } from '../shared/helpers/api'
 import { usePageDataContext } from '../shared/context/pageData-context'
@@ -57,14 +60,30 @@ function Static({ data }) {
 }
 
 Static.getInitialProps = async context => {
-  const { query, req, asPath } = context;
-  let res; 
+  const {
+    req, asPath, query, res
+  } = context;
+  const cookies = new Cookies(req, res);
+  let response;
+  const options = { customHeaders: {} };
+  if(query.env) {
+    cookies.set('env', query.env, {
+      httpOnly: true, // true by default
+    });
+    options.customHeaders['x-env-name'] = query.env;
+  }
+  if(query.date) {
+    cookies.set('date', query.date, {
+      httpOnly: true, // true by default
+    });
+    options.customHeaders['x-env-date'] = query.date;
+  }
   try {
     if (!query.id.includes('nginx-health')) {
-      res = await requestContructor(
+      response = await requestContructor(
         `static/${query.id.join('/')}`,
         '',
-        { },
+        options,
         req,
         asPath
       )
@@ -79,7 +98,7 @@ Static.getInitialProps = async context => {
     }
   }
   return {
-    data: res
+    data: response
   }
 }
 
