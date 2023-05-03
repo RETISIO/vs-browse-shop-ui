@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-param-reassign */
 /* eslint-disable prefer-destructuring */
@@ -437,9 +438,13 @@ function SkuVariants({
     })
     )
   }
-  return <>{
-    variantOptions && Object.keys(variantOptions).length > 0 ? displayVariantsSection() : displayVariantPriceSection(0, '', productData.defaultSkuId)
-  }</>
+  return (
+    <>{
+      variantOptions && Object.keys(variantOptions).length > 0 ?
+        displayVariantsSection()
+        : <></>
+    }</>
+  )
 }
 
 export default SkuVariants
