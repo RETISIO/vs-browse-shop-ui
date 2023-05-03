@@ -325,7 +325,8 @@ export default function ProductDescription(props) {
               productId: productData.productId,
               channelData: state.channelData,
               userData: state.userData,
-              wishListId: data.wishListId
+              wishListId: data.wishListId,
+              productData
             })
           } else if (data && data.status === 400) {
             const error =
