@@ -117,6 +117,7 @@
 }
 
 .image-carousel-mv {
+    margin-bottom: 20px;
     .carousel {
         .carousel-control-next, .carousel-control-prev {
             position: absolute;
@@ -213,6 +214,13 @@
 
 .hide {
     display: none;
+}
+
+.sukproduct {
+    .pdp-buttons {
+        display: flex;
+        padding-left: 20px;
+    }
 }
 
 .cooking-instruction-button {

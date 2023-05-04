@@ -442,7 +442,7 @@ function SkuVariants({
     <>{
       variantOptions && Object.keys(variantOptions).length > 0 ?
         displayVariantsSection()
-        : <></>
+        : displayVariantPriceSection(0, '', productData.defaultSkuId)
     }</>
   )
 }
