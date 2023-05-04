@@ -12,8 +12,6 @@
     }
     .product-card a {
         color: inherit;
-        text-indent: 100%;
-        overflow: hidden;
     }
     .product-image {
         background-repeat: no-repeat;
@@ -24,11 +22,15 @@
         line-height: 0;
         font-size: 0;
         color: transparent;
-        // height: 100%;
     }
     .cooking-guide-card {
         .product-image {
             height: 100%;
+        }
+        .product-card a {
+            color: inherit;
+            text-indent: 100%;
+            overflow: hidden;
         }
     }
 // }
