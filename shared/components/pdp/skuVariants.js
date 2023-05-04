@@ -136,7 +136,7 @@ function SkuVariants({
     const qty = parseInt(itemQuantity)
     const maxQty =
       (skuData && skuData?.skuDetails?.inventory[0].availableStock) || 0
-    if (qty > maxQty) {
+    if (maxQty > 0 && qty > maxQty) {
       return `There is not enough inventory in stock. Please enter quantity no more than ${maxQty}`
     }
     return ''
@@ -248,7 +248,7 @@ function SkuVariants({
                 </span>
               </div>
             </span>
-            <span className='pdp-buttons'>
+            <span className={`pdp-buttons ${!skuData?.skuDetails?.hasStock ? 'npbuttons' : ''}`}>
               <span className='sp-20'>
                 <button
                   className={`btn btn-secondary btn-md add-to-cart ${
