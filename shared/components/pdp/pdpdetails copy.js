@@ -1,6 +1,3 @@
-/* eslint-disable no-debugger */
-/* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
@@ -42,12 +39,40 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
-import SkuVariants from './skuVariants'
-import {
-  notifyMe,
-  AddToCart,
-  AddtoWishhList
-} from '../ThirdPartyScripts/Events'
+import { notifyMe } from '../ThirdPartyScripts/Events'
+
+// skuObj = {
+// defaultWeight: '',
+// selectedWeight: ''
+// skus: {
+// [weight]: {
+// skuId: skuId
+//   wieght: "10oz",
+//   thickness: 'ssss',
+//   count: [
+//     {
+//     pieces: "2pcs",
+//     availableStock: 200,
+//     quantityAddedToCart: 0,
+//      inventoryStatusLabel: '....',
+//     image:xxxx,
+//     thumbnailImgs: [aaa,bbb,ccc],
+//     itemCode: 1111,
+//     salePrice: 1111,
+//     listPrice: 9999,
+// hasPrice: false,
+//   hasStock: false,
+//     onSale: false,
+//     outOfStock: false,
+//     },
+//    ],
+//    addToCart: ()=>{},
+//    addToWishList: ()=>{},
+//    notifyMe: ()=>{}
+//   },
+// ...
+// }
+// }
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
@@ -58,17 +83,14 @@ export default function ProductDescription(props) {
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [skusData, setSkusData] = useState()
   const [errorMsg, setErrorMsg] = useState()
-  const [productAdded, setProductAdded] = useState({ added: false })
   const [successMsg, setSuccessMsg] = useState()
   const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
-  const { setShow, isLogged, setNoReload, noReload, state } = useAppContext()
+  const { setShow, isLogged, setNoReload, noReload } = useAppContext()
   const [notifyPopupShow, setNotifyPopupShow] = useState(false)
   const [notifyPopupData, setNotifyPopupData] = useState()
   const [message, setMessage] = useState()
   const [showAlert, setShowAlert] = useState(false)
-  const [variantSelected, setVariantSelected] = useState()
-  const [variantsOptions, setVariantsOptions] = useState()
 
   const defaultSkuId =
     pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
@@ -83,16 +105,7 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareSkusData()
-    // prepareVarinatsArr()
-    prepareVarinatsOptions()
   }, [])
-
-  useEffect(() => {
-    if (productAdded.added) {
-      AddToCart({ ...productAdded, miniCartDetails })
-      setProductAdded({ added: false })
-    }
-  }, [miniCartDetails.miniCartData])
 
   useEffect(() => {
     if (noReload && isLogged) {
@@ -108,31 +121,33 @@ export default function ProductDescription(props) {
   // productData.productDetails.isGiftItem = true
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
+  // total variants
+  const variantsObj = productData && productData.variantOptions
+  const variants = Object.keys(variantsObj).map(varntKey => {
+    const obj = { name: '', skus: [], options: {} }
+    obj.name = varntKey
+    obj.skus = variantsObj[varntKey]
+    for (let i = 0; i < obj.skus.length; i++) {
+      obj.options[obj.skus[i].optionValue] = obj.skus[i].associatedSkus
+    }
+    return obj
+  })
+
+  console.log('variants...', variants)
   // const skusData = prepareSkusData() || {}
   // skusData: {  [weight]: {skuId,weight, thickness, count: [{}, {},..]},
   //              [weight]: { }, ..}
-
-  // console.log('productData.....', productData)
-
-  function prepareVarinatsOptions() {
-    const variantOptionsObj = {}
-    if (productData && productData.variantOptions) {
-      Object.keys(productData.variantOptions).forEach(variantKey => {
-        variantOptionsObj[variantKey] = {
-          options: productData.variantOptions[variantKey],
-          defaultSelected: productData.variantOptions[variantKey][0],
-          optionSelected: '',
-          skuId: ''
-        }
-      })
-    }
-    setVariantsOptions({ ...variantOptionsObj })
-  }
 
   function prepareSkusData() {
     const { payLoad } = props
     const product = payLoad && payLoad.products && payLoad.products[0]
     // console.log('product...', product)
+    // const firstSku = product && product.skus && Object.keys(product.skus)[0]
+    // const skuOptionsArr = (firstSku && firstSku.skuDetails?.skuOptions) || []
+    // const optionNames = []
+    // for (let i = 0; i < skuOptionsArr.length; i++) {
+    //   optionNames.push(skuOptionsArr[i].optionName)
+    // }
 
     const skus = (product && product.skus) || {}
     const skusObj = {
@@ -142,7 +157,6 @@ export default function ProductDescription(props) {
       selectedCount: '',
       skus: {}
     }
-
     for (const key in skus) {
       const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
       const thickness =
@@ -218,30 +232,44 @@ export default function ProductDescription(props) {
     </aside>
   )
 
-  const handleVariantSelected = (index, variantKey, value, variant) => {
-    // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
-    const variantOptionsObj = { ...variantsOptions }
-    variantOptionsObj[variantKey].optionSelected = variant
-    variantOptionsObj[variantKey].defaultSelected = ''
-    // index===0, set all other options default to empty
-    if (index === 0) {
-      Object.keys(variantOptionsObj).forEach((vKey, idx) => {
-        if (idx > 0) {
-          variantOptionsObj[vKey].optionSelected = ''
-          variantOptionsObj[vKey].defaultSelected = ''
-        }
-      })
-    }
-    setVariantSelected({ variantKey, variant })
-    setVariantsOptions({ ...variantOptionsObj })
+  const selectDefaultCount = weightObj => {
+    // select default count for which the hasStock is true
+    const countArr = weightObj.count
+    let defObj = {}
+    countArr.every(obj => {
+      if (obj.hasStock) {
+        defObj = obj
+        return false
+      }
+      return true
+    })
+    return defObj
   }
 
-  const handleSelectedSku = skuData => {
-    // for setting onSale badge and addToWishlist payload
-    if (skuData) {
-      setShowSaleWidget(skuData.skuDetails.onSale) // set onSale badge based on selected count
-      setSkuSelected(skuData)
-    }
+  const handleWeightSelected = weightObj => {
+    const skusObj = { ...skusData }
+    const weight = weightObj.weight
+    skusObj.selectedWeight = weightObj
+    skusObj.defaultWeight = ''
+    skusObj.defaultCount = selectDefaultCount(weightObj) // default count of selected weight
+    // skusObj.defaultCount = skusObj.skus[weight].count[0] // default count of selected weight
+    setSkusData(skusObj)
+    setShowSaleWidget(skusObj.defaultCount.onSale) // set onSale badge based on selected weight
+  }
+
+  const handleCountSelected = (weightObj, countObj) => {
+    const skusObj = { ...skusData }
+    const weight = weightObj.weight
+    skusObj.selectedWeight = weightObj
+    skusObj.defaultWeight = ''
+    skusObj.defaultCount = ''
+    const countArr = skusObj.skus[weight].count.filter(
+      obj => obj.itemCode === countObj.itemCode
+    )
+    skusObj.selectedCount = countArr.length ? countArr[0] : ''
+    setSkusData(skusObj)
+    setShowSaleWidget(countObj.onSale) // set onSale badge based on selected count
+    setSkuSelected(countObj)
   }
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
@@ -268,31 +296,23 @@ export default function ProductDescription(props) {
     </button>
   )
 
-  const addToBagHandler = (skuData, itemQuantity) => {
-    const addToProdData = {
-      variantId: skuData.skuId,
-      productId: productData.productId,
-      quantity: itemQuantity,
-      productType: 'product'
-    }
+  const addToBagHandler = (countSelected, itemQuantity) => {
     const pdp = {
-      items: []
+      items: [
+        {
+          variantId: countSelected.itemCode,
+          productId: productData.productId,
+          quantity: itemQuantity,
+          productType: 'product'
+        }
+      ]
     }
-    pdp.items.push(addToProdData)
     if (productData.productId) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
           if (data && data.status === 200) {
             setMiniCartDetails({ ...miniCartDetails, itemAdded: true })
-            // AddToCart({ productData, addToProdData, channelData: state.channelData, userData: state.userData })
-            setProductAdded({
-              productData,
-              addToProdData,
-              channelData: state.channelData,
-              userData: state.userData,
-              added: true
-            })
           } else if (data && data.status === 400) {
             const error =
               data.errors && Array.isArray(data.errors)
@@ -307,10 +327,10 @@ export default function ProductDescription(props) {
     }
   }
 
-  const addToWishLisrHandler = skuData => {
-    if (getCookie('lu') && skuData && Object.keys(skuData).length) {
+  const addToWishLisrHandler = countSelected => {
+    if (getCookie('lu') && countSelected && Object.keys(countSelected).length) {
       const result = addToWishList({
-        skuId: skuData.skuId,
+        skuId: countSelected.itemCode,
         productId: productData.productId,
         quantity: '1'
       })
@@ -320,14 +340,6 @@ export default function ProductDescription(props) {
             setSuccessMsg(
               `The following item have been moved to your wishlist: ${productData.displayName}`
             )
-            AddtoWishhList({
-              skuId: skuData.skuId,
-              productId: productData.productId,
-              channelData: state.channelData,
-              userData: state.userData,
-              wishListId: data.wishListId,
-              productData
-            })
           } else if (data && data.status === 400) {
             const error =
               (data.errors &&
@@ -340,10 +352,13 @@ export default function ProductDescription(props) {
         .catch(error => {
           setErrorMsg(error.message)
         })
-    } else if (!skuData || (skuData && Object.keys(skuData).length === 0)) {
+    } else if (
+      !countSelected ||
+      (countSelected && Object.keys(countSelected).length === 0)
+    ) {
       setErrorMsg('skuId must not be empty')
     } else {
-      setSkuSelected(skuData)
+      setSkuSelected(countSelected)
       setNoReload(true)
       setShow(true)
     }
@@ -413,6 +428,47 @@ export default function ProductDescription(props) {
             <strong>{successMsg}</strong>
           </div>
         )}
+        {/* <div>
+          <div className='hidden-lg hidden-md visible-sm visible-xs'>
+            <div
+              className='alert alert-dismissible hidden-print alert-success undefined'
+              role='alert'
+              style={{ display: 'none' }}
+            >
+              <button className='close' type='button' aria-label='Close'>
+                <span aria-hidden='true'>×</span>
+              </button>
+            </div>
+          </div>
+          <div
+            className='alert alert-dismissible hidden-print alert-success undefined'
+            role='alert'
+            style={{ display: 'none' }}
+          >
+            <button
+              data-bind='click: $data.clearSuccessMessages'
+              className='close'
+              type='button'
+              aria-label='Close'
+            >
+              <span aria-hidden='true'>×</span>
+            </button>
+          </div>
+          <div
+            className='alert alert-dismissible hidden-print alert-danger undefined'
+            role='alert'
+            style={{ display: 'none' }}
+          >
+            <button
+              data-bind='click: $data.clearErrorMessages'
+              className='close'
+              type='button'
+              aria-label='Close'
+            >
+              <span aria-hidden='true'>×</span>
+            </button>
+          </div>
+        </div> */}
         <div className='product-title-wrapper'>
           <h1 className='page-title'>
             <span>{pdpData?.products[0]?.displayName}</span>
@@ -466,7 +522,7 @@ export default function ProductDescription(props) {
             !productData.productDetails.isGiftItem && (
               <div className='col-md-7'>
                 <div className='sukproduct'>
-                  {/* <SKUWeights
+                  <SKUWeights
                     handleWeightSelected={handleWeightSelected}
                     skusData={skusData}
                     weightSelected={
@@ -495,22 +551,6 @@ export default function ProductDescription(props) {
                     handleAddtoCart={addToBagHandler}
                     handleAddtoWishList={addToWishLisrHandler}
                     handleNotifyMe={handleNotifyMe}
-                  /> */}
-                  <SkuVariants
-                    handleVariantSelected={handleVariantSelected}
-                    countSelected={
-                      skusData &&
-                      (skusData.defaultCount
-                        ? skusData.defaultCount
-                        : skusData.selectedCount)
-                    }
-                    productData={productData}
-                    handleAddtoCart={addToBagHandler}
-                    handleAddtoWishList={addToWishLisrHandler}
-                    handleNotifyMe={handleNotifyMe}
-                    variantSelected={variantSelected}
-                    variantOptions={variantsOptions}
-                    handleSelectedSku={handleSelectedSku}
                   />
                 </div>
               </div>

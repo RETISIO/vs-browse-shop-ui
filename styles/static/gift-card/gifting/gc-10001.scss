@@ -4,27 +4,70 @@
     .gift-card-tyle-list li {
         margin-right: 18px;
     }
-    .gift-card-section {
-        margin-bottom: 30px;
+    .product-description {
+        margin-bottom: 40px;
+        margin-top: 40px;
     }
-    @media screen and (min-width: 768px) {
-        .gift-card-section {
-            margin-bottom: 80px;
+    .btn {
+        background-color: #771e14 !important;
+        border-color: #771e14 !important;
+        color: #fff;
+        font-size: 14px !important;
+    }
+    .type1 {
+        .magnify-img {
+            cursor: zoom-in;
+            img {
+                height: 100% !important;
+                width: 100% !important;
+            }
+            .js-image-zoom__zoomed-area {
+                border: 1px solid #aaa;
+                border-color: rgba(170,170,170,0.7);
+                box-shadow: 0 0 5px rgba(0,0,0,0.3);
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .js-image-zoom__zoomed-image {
+                border: 1px solid #aaa;
+                border-color: rgba(170,170,170,0.7);
+                box-shadow: 0 0 5px rgba(0,0,0,0.3);
+                z-index: 10 !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
         }
     }
-    .gift-card-image {
-        margin-bottom: 30px;
-        width: 100%;
-    }
-    @media screen and (min-width: 992px) {
-        .gift-card-image {
-            margin-bottom: 0;
+    .type2 {
+        .magnify-img {
+            cursor: zoom-in;
+            .js-image-zoom__zoomed-image {
+                transform: none !important;
+            }   
         }
     }
+}
+.giftcard-product-recommendation {
+    padding-right: 15px;
+    padding-left: 15px;
+    background-color: #f5f5f5;
+    margin: 5% 5% 5% 5%;
     
-    
+    h1 {
+        text-align: center !important;
+        padding: 30px 0px 30px 0px;
+        max-width: 100% !important;
     }
-
-    .product-card.pcheight {
-        height: 373px !important;
+    .slick-slider {
+        padding: 2% 10% 4% 10%
     }
+    .slick-prev {
+        left: 8% !important;
+    }
+    .slick-next {
+        right: 8% !important;
+    }
+}
+.product-card.pcheight {
+    height: 373px !important;
+}

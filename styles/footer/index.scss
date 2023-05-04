@@ -4,6 +4,10 @@
         width: 102vw;
     }
 
+    input {
+        height: 44px;
+    }
+
     .btn-action-primary {
         background-color: black;
         border-color: #195d8d;
@@ -166,6 +170,13 @@
         .footer-container {
             margin-left: 0px;
             width: 1170px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .footer-container {
+            padding-right: 20px !important;
+            padding-left: 25px !important;
         }
     }
 

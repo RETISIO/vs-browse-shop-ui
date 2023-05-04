@@ -1,11 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable linebreak-style */
 /* eslint-disable import/no-unresolved */
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-// eslint-disable-next-line import/named
+// eslint-disable-next-line import/named, linebreak-style
 // eslint-disable-next-line import/named
 import { PageBuilder } from '@retisio/sf-ui';
-import Script from 'next/script';
+import Cookies from 'cookies';
 import { requestContructor } from '../shared/helpers/api';
 // import { useI18n } from 'next-localization';
 import { usePageDataContext } from '../shared/context/pageData-context';
@@ -59,22 +61,36 @@ function Home({ data }) {
 }
 
 Home.getInitialProps = async(context) => {
-  const { req, asPath } = context;
-  let res;
-  
+  const { req, asPath, query, res } = context;
+  const cookies = new Cookies(req, res);
+
+  let response; 
+  const options = { customHeaders: {} };
+  if(query.env) {
+    cookies.set('env', query.env, {
+      httpOnly: true, // true by default
+    });
+    options.customHeaders['x-env-name'] = query.env;
+  }
+  if(query.date) {
+    cookies.set('date', query.date, {
+      httpOnly: true, // true by default
+    });
+    options.customHeaders['x-env-date'] = query.date;
+  }
   try {
-    res = await requestContructor(
+    response = await requestContructor(
       'static/home',
       '',
-      { },
+      options,
       req,
       asPath,
     );
   } catch (e) {
-    res = {};
+    response = {};
   }
   return {
-    data: res,
+    data: response,
   };
 };
 
