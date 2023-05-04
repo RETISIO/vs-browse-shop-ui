@@ -24,33 +24,19 @@ const convertFloat = (amt = '$0.0') => {
 
 const viewItem = (itemData) => {
   const item = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products[0] ? itemData.payLoad.products[0] : {};
-  const data = {
+  event({
+    event: 'view_item',
     currency: 'USD',
-    value: 7.77,
-    items: [
-      {
-        item_id: item?.productId,
+    ecommerce: {
+      items: [{
         item_name: item?.displayName,
-        // affiliation: 'Google Merchandise Store',
-        // coupon: 'SUMMER_FUN',
-        // discount: 2.22,
-        index: 0,
-        item_brand: item?.brand?.displayName,
-        // item_category: 'Apparel',
-        // item_category2: 'Adult',
-        // item_category3: 'Shirts',
-        // item_category4: 'Crew',
-        // item_category5: 'Short sleeve',
-        // item_list_id: 'related_products',
-        // item_list_name: 'Related Products',
-        // item_variant: 'green',
-        // location_id: 'ChIJIQBpAG2ahYAR_6128GcTUEo',
-        price: item?.productPrice?.maxListPrice,
+        item_id: item?.productId,
+        price: item?.productPrice?.minListPrice,
+        currency: 'USD',
         quantity: 1,
-      },
-    ],
-  };
-  // event('view_item', data);
+      }],
+    },
+  });
 };
 
 const GAddToCart = (obj) => {
@@ -91,9 +77,28 @@ const GAddToCart = (obj) => {
   });
 };
 
+const GAddToWishlist = (obj) => {
+  event({
+    event: 'add_to_wishlist',
+    ecommerce: {
+      items: [
+        {
+          item_id: obj.productId,
+          item_name: obj.productData.displayName,
+          affiliation: 'Allen Brothers',
+          currency: 'USD',
+          price: convertFloat(obj.productData.skus[obj.skuId].skuDetails.price.listPrice.price),
+          quantity: 1,
+        },
+      ],
+    },
+  });
+};
+
 export {
   pageview,
   event,
   viewItem,
   GAddToCart,
+  GAddToWishlist,
 };
