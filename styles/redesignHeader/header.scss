@@ -62,7 +62,7 @@
       bottom: 0;
       top: 0;
       background-color: #771e14;
-      padding: 1px;
+      padding: 4px;
       border-radius: 0 50px 50px 0;
       border-style: none;
     
@@ -114,9 +114,27 @@
     }
 
     .header-sticky.js-sticky-menu.is_stuck {
+      #header-1-redesign {
+        padding-left: 10px;
+        padding-right: 10px;
+        .search-box-redesign {
+          .input-group {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin: 12px 10px;
+          }
+        }
+      }
+    }
+    .header-sticky.js-sticky-menu.is_stuck {
       .header-content-redesign {
         .header-content-inner-redesign {
           background-color: $colorDeepBlue;
+          .icon-redesign {
+            .head-actn {
+              padding-right: 0;
+            }
+          }
         }
       }
       .navbar.redesign-navbar {
@@ -170,6 +188,7 @@
             //A360 #51 start
             display: block;
             //A360 #51 end
+            padding: 5px 25px 5px 1px;
           }
         }
       }
@@ -181,27 +200,28 @@
       .navbar.redesign-navbar {
         .header-menu {
           position: absolute;
-          right: 0;
-          bottom: 20px;
+          right: 5px;
+          bottom: 6px;
+          height: 47px;
         }
       }
     }
   }
-  @media (min-width: 1366px) {
+  @media (min-width: 1367px) {
     .header-sticky.js-sticky-menu.is_stuck {
       .navbar.redesign-navbar {
         .header-menu {
           position: absolute;
-          right: 0;
-          bottom: 20px;
+          right: -4px;
+          bottom: 18px;
         }
       }
     }
   }
-    
+
     #logo-redesign {
       img {
-        margin: 10px 15px 15px 25px;
+         margin-left: 10px;
     
         @media screen and (min-width: $screen-md-min) {
           height: 33px;
@@ -221,7 +241,7 @@
         }
       }
     }
-    
+
     .home-header-container {
       @media (min-width: 320px) and (max-width: 480px) {
         .header {
@@ -272,10 +292,21 @@
     }
   }
 
-  #header {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
+    @media screen and (min-width: 768px) {
+      .home-header-container #header {
+        .header-sticky.js-sticky-menu.is_stuck {
+          .header-content-redesign {
+            .header-content-inner-redesign {
+              #logo-redesign {
+                img {
+                  margin: 10px 15px 15px 2px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
   @media screen and (max-width: 768px) {
     .home-header-container #header {
