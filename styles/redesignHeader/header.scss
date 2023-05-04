@@ -432,6 +432,12 @@
     margin-bottom: 75px;
   }
 
+  @media screen and (max-width: 767px) {
+    .nonHomePageHeader {
+      margin-bottom: 0 !important;
+    }
+  }
+
   .mini-cart-img {
 	  width: 75px;
 	  height: 75px;

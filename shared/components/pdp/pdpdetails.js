@@ -162,7 +162,7 @@ export default function ProductDescription(props) {
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
       // countObj.hasStock = false
       countObj.hasStock = skus[key]?.skuDetails?.hasStock
-      countObj.onSale = skus[key]?.skuDetails?.onSale
+      countObj.onSale = skus[key]?.skuDetails?.additionalDetails?.onSale
       countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
         ? skus[key].skuDetails.price.salePrice.price
         : ''
@@ -205,7 +205,7 @@ export default function ProductDescription(props) {
   }
 
   const renderGalleryImage = () => (
-    <aside className='col-md-5'>
+    <aside className='col-md-5 prdimgs'>
       <div className='product-gallery app-figure' id='zoom-fig'>
         <div className='product-gallery__main'>
           <ImageCarousel
@@ -239,7 +239,7 @@ export default function ProductDescription(props) {
   const handleSelectedSku = skuData => {
     // for setting onSale badge and addToWishlist payload
     if (skuData) {
-      setShowSaleWidget(skuData.skuDetails.onSale) // set onSale badge based on selected count
+      setShowSaleWidget(skuData.skuDetails.additionalDetails.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
     }
   }
@@ -464,7 +464,7 @@ export default function ProductDescription(props) {
           {productData &&
             productData.productDetails &&
             !productData.productDetails.isGiftItem && (
-              <div className='col-md-7'>
+              <div className='col-md-7 prdsku'>
                 <div className='sukproduct'>
                   {/* <SKUWeights
                     handleWeightSelected={handleWeightSelected}
