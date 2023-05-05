@@ -68,7 +68,7 @@ function SkuVariants({
 
   const addItemQuantity = skuData => {
     const availableStock =
-      skuData && skuData?.skuDetails?.inventory[0].availableStock
+      skuData && skuData?.skuDetails?.inventory[0]?.availableStock
     const qty = parseInt(itemQuantity)
     if (qty < availableStock) {
       setItemQuantity(qty + 1)
@@ -110,7 +110,7 @@ function SkuVariants({
 
   const handleQtyChange = (e, skuData) => {
     let val = parseInt(e.target.value)
-    const maxQty = skuData?.skuDetails?.inventory[0].availableStock || 0
+    const maxQty = skuData?.skuDetails?.inventory[0]?.availableStock || 0
     if (val > maxQtyAllowed) {
       val = maxQtyAllowed
       setItemQuantity(maxQtyAllowed)
@@ -135,7 +135,7 @@ function SkuVariants({
     // console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
     const qty = parseInt(itemQuantity)
     const maxQty =
-      (skuData && skuData?.skuDetails?.inventory[0].availableStock) || 0
+      (skuData && skuData?.skuDetails?.inventory[0]?.availableStock) || 0
     if (maxQty > 0 && qty > maxQty) {
       return `There is not enough inventory in stock. Please enter quantity no more than ${maxQty}`
     }
@@ -165,7 +165,7 @@ function SkuVariants({
   // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
-    const skuData = productData && productData.skus[skuId]
+    const skuData = productData && productData?.skus[skuId]
     // skuData.skuDetails.price.salePrice = '$100.95' //test data
     handleSelectedSkuData(skuData)
     // debugger
@@ -195,8 +195,8 @@ function SkuVariants({
           {skuData?.skuDetails?.price?.salePrice && (
             <span className='pricenred'>
               {`You save: $${displayPrice(
-                skuData?.skuDetails?.price?.listPrice.price,
-                skuData?.skuDetails?.price?.salePrice.price
+                skuData?.skuDetails?.price?.listPrice?.price,
+                skuData?.skuDetails?.price?.salePrice?.price
               )}.00`}
             </span>
           )}
@@ -211,7 +211,8 @@ function SkuVariants({
                   <button
                     className={`btn js-counter__btn rdrt ${
                       disableMinusCounter ||
-                      (skuData && !skuData?.skuDetails?.hasStock) || itemQuantity === 1
+                      (skuData && !skuData?.skuDetails?.hasStock) ||
+                      itemQuantity === 1
                         ? 'disabled'
                         : ''
                     }`}
@@ -236,7 +237,7 @@ function SkuVariants({
                       (skuData &&
                         itemQuantity &&
                         itemQuantity >
-                          skuData?.skuDetails?.inventory[0].availableStock)
+                          skuData?.skuDetails?.inventory[0]?.availableStock)
                         ? 'disabled'
                         : ''
                     }`}
@@ -248,19 +249,23 @@ function SkuVariants({
                 </span>
               </div>
             </span>
-            <span className={`pdp-buttons ${!skuData?.skuDetails?.hasStock ? 'npbuttons' : ''}`}>
+            <span
+              className={`pdp-buttons ${
+                !skuData?.skuDetails?.hasStock ? 'npbuttons' : ''
+              }`}
+            >
               <span className='sp-20'>
                 <button
                   className={`btn btn-secondary btn-md add-to-cart ${
-                  disableAddToCart ||
-                  (skuData && !skuData?.skuDetails?.hasStock) ||
-                  (skuData &&
-                    itemQuantity &&
-                    itemQuantity >
-                      skuData?.skuDetails?.inventory[0].availableStock)
-                    ? 'disabled'
-                    : ''
-                }`}
+                    disableAddToCart ||
+                    (skuData && !skuData?.skuDetails?.hasStock) ||
+                    (skuData &&
+                      itemQuantity &&
+                      itemQuantity >
+                        skuData?.skuDetails?.inventory[0]?.availableStock)
+                      ? 'disabled'
+                      : ''
+                  }`}
                   id='0'
                   onClick={e => handleAddtoCartOnClick(e, skuData)}
                 >
@@ -356,8 +361,8 @@ function SkuVariants({
         variantOptions[keys[keys.length - 1]].skuId = skuId
         //   variantOptions[keys[keys.length - 1]].hasStock = false //test data
         variantOptions[keys[keys.length - 1]].hasStock =
-          productData.skus[skuId].skuDetails.hasStock
-        variantOptions[keys[keys.length - 1]].skuData = productData.skus[skuId]
+          productData?.skus[skuId]?.skuDetails?.hasStock
+        variantOptions[keys[keys.length - 1]].skuData = productData?.skus[skuId]
       }
       //   console.log('skuID....', skuId)
     }
@@ -433,17 +438,19 @@ function SkuVariants({
   }
 
   const displayVariantsSection = () => {
-    return (variantOptions && Object.keys(variantOptions).map((variantKey, index) => {
-      return displayVariants(index, variantKey)
-    })
+    return (
+      variantOptions &&
+      Object.keys(variantOptions).map((variantKey, index) => {
+        return displayVariants(index, variantKey)
+      })
     )
   }
   return (
-    <>{
-      variantOptions && Object.keys(variantOptions).length > 0 ?
-        displayVariantsSection()
-        : displayVariantPriceSection(0, '', productData.defaultSkuId)
-    }</>
+    <>
+      {variantOptions && Object.keys(variantOptions).length > 0
+        ? displayVariantsSection()
+        : displayVariantPriceSection(0, '', productData?.defaultSkuId)}
+    </>
   )
 }
 

@@ -164,15 +164,15 @@ export default function ProductDescription(props) {
       countObj.hasStock = skus[key]?.skuDetails?.hasStock
       countObj.onSale = skus[key]?.skuDetails?.additionalDetails?.onSale
       countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
-        ? skus[key].skuDetails.price.salePrice.price
+        ? skus[key].skuDetails?.price?.salePrice?.price
         : ''
-      countObj.price = skus[key].skuDetails.price.listPrice.price
-        ? skus[key].skuDetails.price.listPrice.price
+      countObj.price = skus[key]?.skuDetails?.price?.listPrice?.price
+        ? skus[key]?.skuDetails?.price?.listPrice?.price
         : ''
-      countObj.listPrice = skus[key].skuDetails.price.listPrice.price
-        ? skus[key].skuDetails.price.listPrice.price
+      countObj.listPrice = skus[key]?.skuDetails?.price?.listPrice?.price
+        ? skus[key]?.skuDetails?.price?.listPrice?.price
         : ''
-      countObj.itemCode = skus[key].skuId
+      countObj.itemCode = skus[key]?.skuId
       skusObj.skus[skusObjKey].count.push(countObj)
     }
     // select default weight, default count
@@ -239,7 +239,7 @@ export default function ProductDescription(props) {
   const handleSelectedSku = skuData => {
     // for setting onSale badge and addToWishlist payload
     if (skuData) {
-      setShowSaleWidget(skuData.skuDetails.additionalDetails.onSale) // set onSale badge based on selected count
+      setShowSaleWidget(skuData?.skuDetails?.additionalDetails?.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
     }
   }
