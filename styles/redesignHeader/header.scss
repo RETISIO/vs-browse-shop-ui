@@ -30,7 +30,7 @@
           width: 100%;
           padding: 5px 15px;
           line-height: 10px;
-          background-color: #E1E1E1;
+          background-color: $colorVeryLightGray;
           background-position: 100% center;
           border-radius: 50px;
           border: 1px solid #575756;
@@ -50,7 +50,7 @@
             border-radius: 5px 0 0 5px;
             outline: none;
             color: $colorBlack;
-            background-color: #E1E1E1;
+            background-color: $colorVeryLightGray;
           }
         }
       }
@@ -58,9 +58,9 @@
     
     .ab-searchProducts-redesign {
       position: absolute;
-      right: 0;
-      bottom: 0;
-      top: 0;
+      right: -1px;
+      bottom: -1px;
+      top: -1px;
       background-color: #771e14;
       padding: 4px;
       border-radius: 0 50px 50px 0;
@@ -323,6 +323,9 @@
       .navbar.redesign-navbar {
         .firstDropDownMegaMenu {
           left: -15px;
+          .nav-item {
+            padding: 0;
+          }
         }
       }
     }
@@ -376,7 +379,7 @@
   .home-header-container .nonHomePageHeader #header {
     .navbar.redesign-navbar{
       .firstDropDownMegaMenu {
-        left: -15px;
+        left: -7px;
       }
     }
   }
@@ -417,7 +420,6 @@
     }
   }
 
-
   @media (min-width: 768px) and (max-width: 991px) {
     .allenmainherobanner #overlay{
       position: absolute;
@@ -443,56 +445,57 @@
 	  height: 75px;
 	}
   
-	a.mini-cart-btn {
-	  color: #fff;
-	  text-align: center;
-	  vertical-align: middle;
-	  cursor: pointer;
-	  background-image: none;
+  a.mini-cart-btn {
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
     background-color: #f89b00;
-	  border: 1px solid transparent;
+    border: 1px solid transparent;
 
-	  white-space: nowrap;
-	  padding: 6px 12px;
-	  border-radius: 4px;
-	  user-select: none;
-	  text-decoration: none;
-  
-	  &-header {
-		margin-bottom: 27px;
-		text-align: center;
-		vertical-align: middle;
-		cursor: pointer;
-		background-image: none;
-		border: 1px solid transparent;
-		white-space: nowrap;
-		padding: 6px 12px;
-		border-radius: 4px;
-		user-select: none;
-		text-decoration: none;
-	  }
-	}
-.headerDropdown {
-	  button#headerAccnt-dropdown {
-		padding: 0;
-		margin: 0;
-		background-color: transparent;
-		width: auto;
-		border-color: transparent;
-		border-width: 2px;
-		height: auto;
-	  }
-  
-	  .dropdown-item {
-		display: block;
-		width: 100%;
-		clear: both;
-		padding: 3px 20px;
-		color: #354052;
-		font-weight: 300;
-		line-height: 21px;
-	  }
-	}
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 4px;
+    user-select: none;
+    text-decoration: none;
+
+    &-header {
+      margin-bottom: 27px;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      background-image: none;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      padding: 6px 12px;
+      border-radius: 4px;
+      user-select: none;
+      text-decoration: none;
+    }
+  }
+
+  .headerDropdown {
+    button#headerAccnt-dropdown {
+      padding: 0;
+      margin: 0;
+      background-color: transparent;
+      width: auto;
+      border-color: transparent;
+      border-width: 2px;
+      height: auto;
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      clear: both;
+      padding: 3px 20px;
+      color: #354052;
+      font-weight: 300;
+      line-height: 21px;
+    }
+  }
   #accountDropdown-button {
     background-color: transparent;
     border-color: transparent;
