@@ -211,7 +211,7 @@ function SkuVariants({
                   <button
                     className={`btn js-counter__btn rdrt ${
                       disableMinusCounter ||
-                      (skuData && !skuData?.skuDetails?.hasStock)
+                      (skuData && !skuData?.skuDetails?.hasStock) || itemQuantity === 1
                         ? 'disabled'
                         : ''
                     }`}
