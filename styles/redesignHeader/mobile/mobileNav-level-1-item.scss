@@ -1,22 +1,22 @@
 .mobileNavLevel1Item {
     @media screen and (max-width: 991px) {
         .mobile-menu .navbar-header {
-            background-color: #363636;
+            background-color: $colorMobileMenuDark;
         }
         .mobile-menu__level {
-            background-color: #363636;
+            background-color: $colorPrimary;
         }
         .mobile-menu__level .aside-bottom-nav {
-            background-color: #363636;
+            background-color: $colorMobileMenuDark;
         }
         .mobile-menu__level ul.aside-nav > li:not(.mobile-submenu__title) > a {
-            border-bottom: 2px solid #363636;
+            border-bottom: 2px solid $colorMobileMenuDark;
         }
     }
 
     @media screen and (max-width: 991px) {
         .mobile-menu__back, a.mobile-menu__back {
-            background-color: #363636;
+            background-color: $colorMobileMenuDark;
             color: $colorWhite;
         }
         .navbar-title.text-elipsis {
