@@ -26,7 +26,7 @@
         display: block;
         padding: 10px;
         margin-left: 10px;
-        background-color: #363636;
+        background-color: $colorGray;
         text-align: left;
     }
 
@@ -54,7 +54,7 @@
     }
 
     .header-dropdown-menu { 
-        background-color: #363636;
+        background-color: $colorGray;
     }
     .header-dropdown-menu.dropdown-menu.nav-redesign {
         padding-top: 35px;
