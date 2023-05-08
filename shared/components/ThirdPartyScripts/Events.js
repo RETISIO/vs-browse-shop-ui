@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import {
-  viewItem, GAddToCart, GAddToWishlist,
+  viewItem, GAddToCart, GAddToWishlist, viewListItem,
 } from './gtag';
 import {
   RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
@@ -88,6 +88,10 @@ const pageViewEvent = (data) => {
   }
 };
 
+const visitPLP = (itemData) => {
+  viewListItem(itemData);
+};
+
 export {
   visitPDP,
   Search,
@@ -98,4 +102,5 @@ export {
   notifyMe,
   AddtoWishhList,
   pageViewEvent,
+  visitPLP,
 };

@@ -95,10 +95,27 @@ const GAddToWishlist = (obj) => {
   });
 };
 
+const viewListItem = (itemData) => {
+  const item = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products;
+  const itemsList = (item.length > 0) && item?.map((x) => ({
+    item_name: x?.displayName,
+    item_id: x?.productId,
+    price: x?.productPrice.minListPrice,
+    quantity: 1,
+  }));
+  event({
+    event: 'view_item_list',
+    ecommerce: {
+      items: itemsList,
+    },
+  });
+};
+
 export {
   pageview,
   event,
   viewItem,
   GAddToCart,
   GAddToWishlist,
+  viewListItem,
 };

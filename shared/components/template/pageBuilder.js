@@ -6,6 +6,7 @@ import { Template } from './template';
 import SortVO from './components/sortVO';
 import FacetsMobile from './components/facetsMobile';
 import { EllipseLoader } from '../loader';
+import { visitPLP } from '../ThirdPartyScripts/Events';
 
 export default function PageBuilder(props) {
   const { data, pageType } = props;
@@ -13,6 +14,9 @@ export default function PageBuilder(props) {
   // const { pageData } = usePageDataContext();
   useEffect(() => {
     setPageContent(props?.data?.page);
+    if (props?.pageType && props?.pageType === 'productListing') {
+      visitPLP(props?.data);
+    }
   }, [props]);
 
   const [isMobile, setIsMobile] = useState(false);
