@@ -32,7 +32,7 @@ export default function NoResult ({ data }) {
       <main>
         {!data && <Loader /> }
         {/* {i18n.t('title')} */}
-        <PageBuilder {...data} pageType="search" />
+        <PageBuilder {...data} pageType="nosearch" />
       </main>
     </MainLayout>
     

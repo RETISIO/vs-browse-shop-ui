@@ -47,20 +47,28 @@ export function Breadcrumb(props) {
 
             </span>
           </li>
-        ) : (
+        ) : pageType === 'nosearch'
+          ? (
+            <li class="active">
+              <span>
+                {`Your search results for "${pageContentData?.payLoad?.autoCorrectTerm ? pageContentData?.payLoad?.autoCorrectTerm : pageContentData?.payLoad?.searchTerm || searchTerm}"`}
+
+              </span>
+            </li>
+          ) : (
           // eslint-disable-next-line react/jsx-no-useless-fragment
-          <>
-            {pageContentData?.payLoad?.navigationPath?.map((item, _key) => (
-              <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
-                {pageContentData?.payLoad?.navigationPath?.length - 1 !== _key ? (
-                  <Link href={`/category/${item.id}?N=${item.id}`}>{item?.name}</Link>
-                ) : (
-                  <span>{item?.name}</span>
-                )}
-              </li>
-            ))}
-          </>
-        )}
+            <>
+              {pageContentData?.payLoad?.navigationPath?.map((item, _key) => (
+                <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
+                  {pageContentData?.payLoad?.navigationPath?.length - 1 !== _key ? (
+                    <Link href={`/category/${item.id}?N=${item.id}`}>{item?.name}</Link>
+                  ) : (
+                    <span>{item?.name}</span>
+                  )}
+                </li>
+              ))}
+            </>
+          )}
     </>
   );
 }
