@@ -3,15 +3,21 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-restricted-syntax */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { useAppContext } from '../../context/appContext';
 
 function NotifyMe({
   show, handleClose, productData, skuData, handleSave,
 }) {
+  const { state } = useAppContext();
   const [email, setEmail] = useState();
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setEmail(state?.userData?.userDetails?.account[0]?.accountProfile?.email);
+  }, [state]);
 
   const getSKUName = (id) => {
     for (const key in productData?.skus) {
