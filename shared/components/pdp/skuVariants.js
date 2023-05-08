@@ -388,6 +388,9 @@ function SkuVariants({
                   <li className='list-inline-item me-2 mb-2'>
                     <div className='Count outstock'>
                       <span className='Countb'>{sku.optionValue}</span>
+                      <span className='txttagz'>
+                        {formatThickness(sku.thickness)}
+                      </span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
                     {!variantOptions[variantKey].hasStock && (
@@ -429,9 +432,9 @@ function SkuVariants({
                       <i className='icon fas fa-check'></i>
                     </span>
                     <span className='txttagb'>{sku.optionValue}</span>
-                    {/* <span className='txttagz'>
-                    {formatThickness(skusData.skus[key].thickness)}
-                  </span> */}
+                    <span className='txttagz'>
+                      {formatThickness(sku.thickness)}
+                    </span>
                   </div>
                 </li>
               )
