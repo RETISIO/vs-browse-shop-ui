@@ -259,7 +259,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                   <Form.Control
                     id={formData?.orderNumber}
                     type='text'
-                    placeholder='order Number'
+                    placeholder='Order Number'
                     className='formControl-input'
                     name='orderNumber'
                     defaultValue={values?.orderNumber}
