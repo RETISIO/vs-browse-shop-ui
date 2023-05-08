@@ -51,16 +51,16 @@ function SkuVariants({
   const maxQtyAllowed = 999 // max qty user can enter
   //   console.log('from skuCounts....productData......', productData)
 
-  useEffect(() => {
-    if ((countSelected && !countSelected.hasStock) || !countSelected) {
-      setDisableAddToCart(true)
-    } else {
-      setItemQuantity(1)
-      setDisablePlusCounter(false)
-      setDisableMinusCounter(false)
-      setDisableAddToCart(false)
-    }
-  }, [countSelected])
+  // useEffect(() => {
+  //   if ((countSelected && !countSelected.hasStock) || !countSelected) {
+  //     setDisableAddToCart(true)
+  //   } else {
+  //     setItemQuantity(1)
+  //     setDisablePlusCounter(false)
+  //     setDisableMinusCounter(false)
+  //     setDisableAddToCart(false)
+  //   }
+  // }, [countSelected])
 
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
@@ -373,6 +373,8 @@ function SkuVariants({
       }
       //   console.log('skuID....', skuId)
     }
+
+    console.log('optionsToDisplay...', optionsToDisplay)
     return (
       <>
         <div className='sukhead'>{variantKey}</div>
@@ -381,7 +383,7 @@ function SkuVariants({
             {optionsToDisplay.map(sku => {
               if (
                 index === Object.keys(variantOptions).length - 1 &&
-                !variantOptions[variantKey].hasStock
+                !sku.hasStock
               ) {
                 // out of stock section
                 return (
@@ -393,7 +395,7 @@ function SkuVariants({
                       </span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
-                    {!variantOptions[variantKey].hasStock && (
+                    {!sku.hasStock && (
                       <div
                         className='notifytxt'
                         onClick={() =>
