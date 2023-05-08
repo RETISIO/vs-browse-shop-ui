@@ -385,8 +385,7 @@ function SkuVariants({
                         className='notifytxt'
                         onClick={() =>
                           handleNotifyMe({
-                            ...variantOptions[variantKey].skuData,
-                            itemCode: variantOptions[variantKey].skuId
+                            itemCode: sku.skuId
                           })
                         }
                       >
