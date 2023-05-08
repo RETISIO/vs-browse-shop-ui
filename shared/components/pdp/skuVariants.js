@@ -377,7 +377,7 @@ function SkuVariants({
     console.log('optionsToDisplay...', optionsToDisplay)
     return (
       <>
-        <div className='sukhead'>{variantKey}</div>
+        <div className='sukhead'>{variantKey}:</div>
         <div>
           <ul className='list-inline'>
             {optionsToDisplay.map(sku => {
