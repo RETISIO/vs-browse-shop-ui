@@ -11,10 +11,39 @@
     }
  
     .header-actions-redesign-mobile {
-        .icon {
-            color: $colorWhite;
-            padding: 10px;
-            font-size: 32px;
+        .header-actions-search {
+            .input-group {
+                // position: absolute;
+                // right: 235px;
+                background-color: $colorVeryLightGray;
+                // width: 100%;
+                padding: 10px;
+                background-position: 100% center;
+                border-radius: 10px;
+                  .ab-search {
+                    background-color: $colorVeryLightGray;
+                    border: none;
+                    color: $colorBlack;
+                    width: 230px;
+                    outline: none;
+                }
+            }
+        }
+        .ab-searchProducts {
+            position: absolute;
+            right: -1px;
+            bottom: -1px;
+            top: -1px;
+            background-color: #771e14;
+            padding: 4px;
+            border-style: none;
+            border-radius: 0 10px 10px 0;
+
+            .icon.icon-search.fa.fa-search {
+                padding: 0.3rem;
+                color: $colorWhite;
+                font-size: 18px;
+            }
         }
     }
 

@@ -158,7 +158,7 @@ function SkuVariants({
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
-          ITEM CODE: <span>{skuId || ''}</span>
+          ITEM CODE: #<span>{skuId || ''}</span>
         </div>
         <div className='price-section'>
           {skuData && skuData?.skuDetails?.price?.salePrice && (
@@ -362,7 +362,7 @@ function SkuVariants({
     // console.log('optionsToDisplay...', optionsToDisplay)
     return (
       <>
-        <div className='sukhead'>{variantKey}</div>
+        <div className='sukhead'>{variantKey}:</div>
         <div>
           <ul className='list-inline'>
             {optionsToDisplay.map(sku => {
