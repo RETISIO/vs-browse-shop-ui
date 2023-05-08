@@ -310,6 +310,13 @@ function SkuVariants({
           variantOptions[variantKey].options[i].associatedSkuIds
         for (let j = 0; j < associatedSkuIds.length; j++) {
           if (optionSkus.includes(associatedSkuIds[j])) {
+            variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
+            variantOptions[variantKey].options[i].hasStock =
+              productData.skus[associatedSkuIds[j]].skuDetails.hasStock
+            variantOptions[variantKey].options[i].thickness =
+              productData.skus[
+                associatedSkuIds[j]
+              ].skuDetails.additionalDetails.thickness
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
