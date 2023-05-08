@@ -36,8 +36,6 @@ import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
 import FreshBadge from '../../../public/static/assets/Fresh.png'
 import ImageCarousel from '../ImageCarousel'
-import SKUWeights from './skuWeights'
-import SKUCounts from './skuCounts'
 import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
@@ -51,12 +49,9 @@ import {
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
-  // const productSkus =
-  //   pdpData?.products[0]?.skus && Object.values(pdpData?.products[0]?.skus)
   const productType = pdpData?.products[0]?.productType
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
-  const [skusData, setSkusData] = useState()
   const [errorMsg, setErrorMsg] = useState()
   const [productAdded, setProductAdded] = useState({ added: false })
   const [successMsg, setSuccessMsg] = useState()
@@ -82,8 +77,6 @@ export default function ProductDescription(props) {
     setTimeout(() => {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
-    prepareSkusData()
-    // prepareVarinatsArr()
     prepareVarinatsOptions()
   }, [])
 
@@ -108,10 +101,6 @@ export default function ProductDescription(props) {
   // productData.productDetails.isGiftItem = true
   const productAdditionDetails = pdpData?.products[0]?.additionalDetails
 
-  // const skusData = prepareSkusData() || {}
-  // skusData: {  [weight]: {skuId,weight, thickness, count: [{}, {},..]},
-  //              [weight]: { }, ..}
-
   // console.log('productData.....', productData)
 
   function prepareVarinatsOptions() {
@@ -127,81 +116,6 @@ export default function ProductDescription(props) {
       })
     }
     setVariantsOptions({ ...variantOptionsObj })
-  }
-
-  function prepareSkusData() {
-    const { payLoad } = props
-    const product = payLoad && payLoad.products && payLoad.products[0]
-    // console.log('product...', product)
-
-    const skus = (product && product.skus) || {}
-    const skusObj = {
-      defaultWeight: '',
-      selectedWeight: '',
-      defaultCount: '',
-      selectedCount: '',
-      skus: {}
-    }
-
-    for (const key in skus) {
-      const weight = skus[key]?.skuDetails?.additionalDetails?.weight || ''
-      const thickness =
-        skus[key]?.skuDetails?.additionalDetails?.thickness || ''
-      const skusObjKey = `${weight}`
-      if (!skusObj.skus[skusObjKey]) {
-        skusObj.skus[skusObjKey] = { weight, thickness, count: [] }
-      }
-      skusObj.skus[skusObjKey].skuId = skus[key].skuId
-      const countObj = {}
-      countObj.pieces = skus[key]?.skuDetails?.additionalDetails?.pieces || ''
-      countObj.availableStock = skus[key]?.skuDetails?.inventory
-        ? skus[key]?.skuDetails?.inventory[0]?.availableStock
-        : ''
-      countObj.quantityAddedToCart = 0
-      countObj.inventoryStatusLabel =
-        skus[key]?.skuDetails?.inventoryStatusLabel || ''
-      // countObj.hasStock = false
-      countObj.hasStock = skus[key]?.skuDetails?.hasStock
-      countObj.onSale = skus[key]?.skuDetails?.additionalDetails?.onSale
-      countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
-        ? skus[key].skuDetails?.price?.salePrice?.price
-        : ''
-      countObj.price = skus[key]?.skuDetails?.price?.listPrice?.price
-        ? skus[key]?.skuDetails?.price?.listPrice?.price
-        : ''
-      countObj.listPrice = skus[key]?.skuDetails?.price?.listPrice?.price
-        ? skus[key]?.skuDetails?.price?.listPrice?.price
-        : ''
-      countObj.itemCode = skus[key]?.skuId
-      skusObj.skus[skusObjKey].count.push(countObj)
-    }
-    // select default weight, default count
-    for (const key in skusObj.skus) {
-      if (skusObj.skus[key].skuId === defaultSkuId) {
-        skusObj.defaultWeight = skusObj.skus[key]
-        for (const countObj of skusObj.skus[key].count) {
-          // select default count for which the stock is available
-          if (countObj.hasStock) {
-            skusObj.defaultCount = countObj
-            setShowSaleWidget(countObj.onSale) // set onSale badge based on selected weight
-            break
-          }
-        }
-        break
-      } else {
-        const firstKey = Object.keys(skusObj.skus)[0]
-        skusObj.defaultWeight = skusObj.skus[firstKey]
-        for (const countObj of skusObj.skus[firstKey].count) {
-          if (countObj.hasStock) {
-            skusObj.defaultCount = countObj
-            setShowSaleWidget(countObj.onSale) // set onSale badge based on selected weight
-            break
-          }
-        }
-        break
-      }
-    }
-    setSkusData({ ...skusObj })
   }
 
   const renderGalleryImage = () => (
@@ -364,7 +278,6 @@ export default function ProductDescription(props) {
       setShowAlert(true)
     }
     const errorHandler = val => {
-      // console.log(val)
       setNotifyPopupShow(false)
     }
     notifyMe({ ...obj, successHandler, errorHandler }, merchId)
@@ -466,44 +379,8 @@ export default function ProductDescription(props) {
             !productData.productDetails.isGiftItem && (
               <div className='col-md-7 prdsku'>
                 <div className='sukproduct'>
-                  {/* <SKUWeights
-                    handleWeightSelected={handleWeightSelected}
-                    skusData={skusData}
-                    weightSelected={
-                      skusData &&
-                      (skusData.defaultWeight
-                        ? skusData.defaultWeight
-                        : skusData.selectedWeight)
-                    }
-                  />
-                  <SKUCounts
-                    handleCountSelected={handleCountSelected}
-                    skusData={skusData}
-                    weightSelected={
-                      skusData &&
-                      (skusData.defaultWeight
-                        ? skusData.defaultWeight
-                        : skusData.selectedWeight)
-                    }
-                    countSelected={
-                      skusData &&
-                      (skusData.defaultCount
-                        ? skusData.defaultCount
-                        : skusData.selectedCount)
-                    }
-                    productData={productData}
-                    handleAddtoCart={addToBagHandler}
-                    handleAddtoWishList={addToWishLisrHandler}
-                    handleNotifyMe={handleNotifyMe}
-                  /> */}
                   <SkuVariants
                     handleVariantSelected={handleVariantSelected}
-                    countSelected={
-                      skusData &&
-                      (skusData.defaultCount
-                        ? skusData.defaultCount
-                        : skusData.selectedCount)
-                    }
                     productData={productData}
                     handleAddtoCart={addToBagHandler}
                     handleAddtoWishList={addToWishLisrHandler}

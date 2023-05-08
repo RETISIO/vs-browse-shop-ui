@@ -380,6 +380,19 @@
         text-decoration: none;
         cursor: pointer;
     }
+    .tag-wg {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        border: 1px solid #8c8c8c;
+        font-weight: 700;
+        padding: 16px 6px 6px 6px;
+        display: block;
+        color: #000000;
+        width: 70px;
+        height: 90px;
+        text-decoration: none;
+        cursor: pointer;
+    }
     .tag-selected {
         font-size: 0.8rem;
         text-transform: uppercase;
@@ -395,6 +408,24 @@
         position: relative;
         box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0.23) 0px 4px 4px;
     }
+
+    .tag-selected-wg {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        border: 1px solid #f05f5f;
+        font-weight: 700;
+        padding: 16px 6px 6px 6px;
+        display: block;
+        color: #000000;
+        text-decoration: none;
+        cursor: pointer;
+        width: 70px;
+        height: 90px;
+        position: relative;
+        box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0.23) 0px 4px 4px;
+    }
+
+
     .tag:hover,
     .tag:focus {
         border-color: #c78282;
@@ -408,8 +439,9 @@
         text-align: center;
         font-size: 13px;
         font-weight: 600;
-        padding: 0px 0 0 0;
+        padding: 8px 0 0 0;
         margin: 0;
+        line-height: 16px;
     }
 
     .txttaga {
@@ -426,21 +458,22 @@
     .txttagz {
         display: block;
         text-align: center;
-        font-size: 7px;
-        font-weight: 400;
+        font-size: 9px;
+        font-weight: 500;
         padding: 0px;
         margin: 0;
         line-height: 12px;
         color: #000000;
+        text-transform: capitalize;
     } 
     
     .sku-selected {
-       right: 1px;
+       right: 2px;
        bottom: 1px;
        background: #f70202;
-       top: 1px;
-       width: 16px;
-       height: 16px;
+       top: 2px;
+       width: 18px;
+       height: 18px;
        position: absolute;
        border-radius: 60px;
        text-align: center;
@@ -466,7 +499,7 @@
         padding: 20px 6px 20px 6px;
         // padding: 16px 6px 6px 6px;
         width: 70px;
-        height: 70px;
+        height: 90px;
         text-decoration: none;
         cursor: pointer;
     }
@@ -516,6 +549,7 @@
         font-size: 14px;
         font-weight: 600;
         margin: 0;
+        text-transform: uppercase;
     }
 
     .outstock {
@@ -527,7 +561,7 @@
         padding: 0px;
         position: relative;
         left: -6px;
-        top: 6px;
+        top: 2px;
         font-size: 9px;
         color: #fff;
         text-align: center;
@@ -666,6 +700,8 @@
         margin-bottom: 15px;
         float: left;
     }
+
+
 
 
 }

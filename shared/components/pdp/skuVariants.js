@@ -31,36 +31,24 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-quotes */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 function SkuVariants({
   productId,
   handleVariantSelected,
   productData,
   handleSelectedSku,
-  countSelected,
   handleAddtoCart,
   handleAddtoWishList,
   handleNotifyMe,
   variantOptions
 }) {
-  const [itemQuantity, setItemQuantity] = useState()
+  const [itemQuantity, setItemQuantity] = useState(1)
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
   //   console.log('from skuCounts....productData......', productData)
-
-  // useEffect(() => {
-  //   if ((countSelected && !countSelected.hasStock) || !countSelected) {
-  //     setDisableAddToCart(true)
-  //   } else {
-  //     setItemQuantity(1)
-  //     setDisablePlusCounter(false)
-  //     setDisableMinusCounter(false)
-  //     setDisableAddToCart(false)
-  //   }
-  // }, [countSelected])
 
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
@@ -132,7 +120,6 @@ function SkuVariants({
   }
 
   const displayQtyErrorMsg = skuData => {
-    // console.log('from displayQtyErrorMsg.....itemQty...', itemQuantity)
     const qty = parseInt(itemQuantity)
     const maxQty =
       (skuData && skuData?.skuDetails?.inventory[0]?.availableStock) || 0
@@ -168,7 +155,6 @@ function SkuVariants({
     const skuData = productData && productData?.skus[skuId]
     // skuData.skuDetails.price.salePrice = '$100.95' //test data
     handleSelectedSkuData(skuData)
-    // debugger
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
@@ -371,10 +357,9 @@ function SkuVariants({
           productData?.skus[skuId]?.skuDetails?.hasStock
         variantOptions[keys[keys.length - 1]].skuData = productData?.skus[skuId]
       }
-      //   console.log('skuID....', skuId)
     }
 
-    console.log('optionsToDisplay...', optionsToDisplay)
+    // console.log('optionsToDisplay...', optionsToDisplay)
     return (
       <>
         <div className='sukhead'>{variantKey}</div>
@@ -391,7 +376,7 @@ function SkuVariants({
                     <div className='Count outstock'>
                       <span className='Countb'>{sku.optionValue}</span>
                       <span className='txttagz'>
-                        {formatThickness(sku.thickness)}
+                        {sku.thickness && formatThickness(sku.thickness)}
                       </span>
                       <span className='outoftocklab'>Out of stock</span>
                     </div>
@@ -416,8 +401,16 @@ function SkuVariants({
                   <div
                     className={
                       selectedSku && selectedSku.optionValue === sku.optionValue
-                        ? 'tag-selected'
-                        : 'tag'
+                        ? `${
+                            index === Object.keys(variantOptions).length - 1
+                              ? 'tag-selected-wg'
+                              : 'tag-selected'
+                          }`
+                        : `${
+                            index === Object.keys(variantOptions).length - 1
+                              ? 'tag-wg'
+                              : 'tag'
+                          }`
                     }
                     onClick={() =>
                       handleSkuSelected(index, variantKey, sku.optionValue, sku)
@@ -435,7 +428,7 @@ function SkuVariants({
                     </span>
                     <span className='txttagb'>{sku.optionValue}</span>
                     <span className='txttagz'>
-                      {formatThickness(sku.thickness)}
+                      {sku.thickness && formatThickness(sku.thickness)}
                     </span>
                   </div>
                 </li>
