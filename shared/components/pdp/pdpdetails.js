@@ -162,7 +162,7 @@ export default function ProductDescription(props) {
         skus[key]?.skuDetails?.inventoryStatusLabel || ''
       // countObj.hasStock = false
       countObj.hasStock = skus[key]?.skuDetails?.hasStock
-      countObj.onSale = skus[key]?.skuDetails?.additionalDetails?.onSale
+      countObj.onSale = skus[key]?.skuDetails?.onSale
       countObj.salePrice = skus[key]?.skuDetails?.price?.salePrice
         ? skus[key].skuDetails?.price?.salePrice?.price
         : ''
@@ -239,7 +239,7 @@ export default function ProductDescription(props) {
   const handleSelectedSku = skuData => {
     // for setting onSale badge and addToWishlist payload
     if (skuData) {
-      setShowSaleWidget(skuData?.skuDetails?.additionalDetails?.onSale) // set onSale badge based on selected count
+      setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
     }
   }
