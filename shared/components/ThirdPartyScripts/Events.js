@@ -1,3 +1,4 @@
+/* eslint-disable space-before-blocks */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
@@ -31,7 +32,11 @@ const Search = (obj) => {
 };
 
 const ClickProduct = (obj) => {
-  ProductClick(obj);
+  try{
+    ProductClick(obj);
+  }catch(e){
+    console.log(e);
+  }
 };
 
 const login = (data) => {

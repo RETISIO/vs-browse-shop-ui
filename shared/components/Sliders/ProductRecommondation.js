@@ -30,7 +30,7 @@ import { viewEvent } from '../ThirdPartyScripts/Events';
 
 export default function ProductRecommondation(props) {
   const [load, setLoad] = useState(false);
-  const [productsData, setProductsData] = useState({ settings: Settings });
+  const [productsData, setProductsData] = useState({ settings: {...Settings} });
   const [selectedProducts, setSelectedProducts] = useState([]);
   const siteId = process.env.NEXT_PUBLIC_SITEID;
   const { state } = useAppContext();
@@ -79,14 +79,13 @@ export default function ProductRecommondation(props) {
       method: 'POST',
       data: { productIds: selectedProducts },
     }).then((res) => {
-      const lconfigValues = {};
       if (res.payLoad
           && res.payLoad.products
       ) {
-        lconfigValues.products = res.payLoad.products;
+        configValues.products = res.payLoad.products;
         setProductsData({
           ...productsData,
-          lconfigValues,
+          configValues,
         });
         setLoad(true);
       }
@@ -106,7 +105,15 @@ export default function ProductRecommondation(props) {
               (value, index) => (
                 <div key={index}>
                   <div style={{ margin: '15px' }}>
-                    <ProductTile value={value} />
+                    <ProductTile
+                      value={value}
+                      recommondationData={{
+                        recommendationAttributionDetails: {
+                          recommendationType: RecommondationsMap[configValues.productRecommendation.recommendation],
+                          recommendationLocation: 'PDP',
+                        },
+                      }}
+                    />
                   </div>
                 </div>
               ),
