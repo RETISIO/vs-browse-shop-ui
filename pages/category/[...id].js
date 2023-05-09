@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable linebreak-style */
 /* eslint-disable comma-dangle */
@@ -54,7 +55,7 @@ function Static({ data, origin }) {
   }, []);
 
   useEffect(() => {
-    if(data?.payLoad?.page === undefined) {
+    if(data?.payLoad?.page === undefined || data?.payLoad?.products === undefined || (data?.payLoad?.products && data?.payLoad?.products.length > 0)) {
       router?.push('/404');
     }
   }, []);
