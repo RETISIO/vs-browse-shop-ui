@@ -112,7 +112,7 @@ const viewListItem = (itemData) => {
 };
 
 const selectItem = (itemData) => {
-  const item = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products[0] ? itemData.payLoad.products[0] : {};
+  const item = itemData?.payLoad?.products?.[0] || {};
   event({
     event: 'select_item',
     ecommerce: {
