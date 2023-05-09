@@ -1,95 +1,74 @@
 /* eslint-disable react/no-array-index-key */
+
 /* eslint-disable import/named */
+
 /* eslint-disable react/jsx-no-useless-fragment */
+
 /* eslint-disable max-len */
+
 /* eslint-disable react/destructuring-assignment */
+
 /* eslint-disable linebreak-style */
 
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ProductTile from '../template/components/ProductTile';
+import { Settings } from './getSettings';
 
 export default function ProductRecommondation(props) {
   const [load, setLoad] = useState(false);
-  const [productsData, setProductsData] = useState({});
+  const [productsData, setProductsData] = useState({ settings: Settings });
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const siteId = process.env.NEXT_PUBLIC_SITEID;
-  const catalogId = '1001';
+  const { state } = useAppContext();
 
   useEffect(() => {
     let productData;
-    const settings = {
-      dots: false,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      infinite: false,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            dots: true,
-          },
-        },
-        {
-          breakpoint: 780,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            initialSlide: 3,
-          },
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2,
-          },
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          },
-        },
-      ],
-    };
-    console.log('props', props);
+    // console.log('props', props);
     const configValues = props.configValue
       ? JSON.parse(props.configValue)
       : { };
+    console.log('configValues', configValues);
+
     if(configValues?.productRecommendation?.association) {
       productData = props?.payLoad?.products[0]?.productDetails?.productAssociations[configValues.productRecommendation.association];
-    }else{
-      requestContructor(`rxc/similar_sku?siteId=${siteId}&catalogId=${catalogId}&seed=${props?.payLoad?.products[0].productId}&max=5`, '', {
+      setSelectedProducts(productData);
+    }else if(state.channelData) {
+      requestContructor(`rxc/similar_sku?siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0].productId}&max=5`, '', {
         method: 'GET',
       }).then((res) => {
-        console.log('res', res);
+        if(res.recommended) {
+          setSelectedProducts(res.recommended);
+        }
       });
     }
+    setProductsData({ ...productsData });
+  }, [state.channelData]);
+
+  useEffect(() => {
     requestContructor('getProductsData', '', {
       method: 'POST',
-      data: { productData },
+      data: { productIds: selectedProducts },
     }).then((res) => {
+      const configValues = {};
       if (res.payLoad
           && res.payLoad.products
       ) {
         configValues.products = res.payLoad.products;
         setProductsData({
+          ...productsData,
           configValues,
-          settings,
         });
         setLoad(true);
       }
     });
-  }, []);
+  }, [selectedProducts]);
+
   return (
     <>
-      {load && (
+      {load && selectedProducts && selectedProducts.length > 0 && (
         <>
           <h1 className="row align-left">
             <span>{props.name}</span>
