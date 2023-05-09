@@ -56,14 +56,6 @@ export default function RequestCatalog(props) {
     // await addNewAddress()
   }
 
-  //   const handleAddAddressSuccess = async () => {
-  //     await getAddresses();
-  //     handleClose();
-  //     clearForm();
-  //     setModalType("");
-  //     handleAlert(true, "success", "Address book entry added successfully.");
-  //   }
-
   const handleErrorMsg = () => {
     handleClose()
   }
