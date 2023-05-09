@@ -89,7 +89,11 @@ const pageViewEvent = (data) => {
 };
 
 const visitPLP = (itemData) => {
-  viewListItem(itemData);
+  try{
+    viewListItem(itemData);
+  }catch(e){
+    console.log(e);
+  }
 };
 
 export {

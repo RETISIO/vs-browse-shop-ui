@@ -86,12 +86,18 @@ function Static({ data, origin }) {
 
 Static.getInitialProps = async (context) => {
   const { origin } = absoluteUrl(context.req);
-
-  const data = await getPLPData(context);
-  return {
-    data,
-    origin
-  };
+  try {
+    const data = await getPLPData(context);
+    return {
+      data,
+      origin
+    };
+  }catch(e) {
+    return {
+      data: {},
+      origin
+    };
+  }
 };
 
 export default Static;
