@@ -60,7 +60,7 @@ export default function ProductRecommondation(props) {
   }, [state.channelData]);
 
   useEffect(() => {
-    if(state.channelData && state.userData && (selectedProducts && selectedProducts.length > 0) && !configValues.productRecommendation.association) {
+    if(state.channelData && state.userData && (selectedProducts  && selectedProducts.length > 0) && !configValues.productRecommendation.association) {
       viewEvent({
         channelData: state.channelData,
         userData: state.userData,
