@@ -41,6 +41,11 @@ const Settings = {
   ],
 };
 
+const RecommondationsMap = {
+  'Product-Similar SKUs': 'similar_sku',
+};
+
 export{
   Settings,
+  RecommondationsMap,
 };

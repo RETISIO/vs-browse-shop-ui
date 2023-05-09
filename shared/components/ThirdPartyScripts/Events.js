@@ -5,7 +5,7 @@ import {
   viewItem, GAddToCart, GAddToWishlist, viewListItem,
 } from './gtag';
 import {
-  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
+  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList, RViewEvent,
 } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
@@ -91,7 +91,15 @@ const pageViewEvent = (data) => {
 const visitPLP = (itemData) => {
   try{
     viewListItem(itemData);
-  }catch(e){
+  }catch(e) {
+    console.log(e);
+  }
+};
+
+const viewEvent = (obj) => {
+  try{
+    RViewEvent(obj);
+  }catch(e) {
     console.log(e);
   }
 };
@@ -107,4 +115,5 @@ export {
   AddtoWishhList,
   pageViewEvent,
   visitPLP,
+  viewEvent,
 };

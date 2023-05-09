@@ -39,6 +39,24 @@ const SearchProd = (obj) => {
   });
 };
 
+const RViewEvent = (obj) => {
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  window.retisioSDK.event('integration', 'viewEvent', '1.0', {
+    siteId,
+    profileId: loggedInUserData,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    eventType: obj.eventType,
+    productIdList: obj.products,
+    pageUrl: window.location.href,
+    recommendationType: obj.recommendationType,
+    pageType: obj.pageType,
+    pdpProductId: obj.product.productId,
+  });
+};
+
 const ProductClick = (obj) => {
   let loggedInUserData = '';
   if(obj.userData?.userDetails?.accountId) {
@@ -117,4 +135,5 @@ export {
   ProductClick,
   AddItem,
   RaddtoWishhList,
+  RViewEvent,
 };
