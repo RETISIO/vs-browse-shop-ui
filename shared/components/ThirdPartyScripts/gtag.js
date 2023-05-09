@@ -111,6 +111,21 @@ const viewListItem = (itemData) => {
   });
 };
 
+const selectItem = (itemData) => {
+  const item = itemData.payLoad && itemData.payLoad.products.length > 0 && itemData.payLoad.products[0] ? itemData.payLoad.products[0] : {};
+  event({
+    event: 'select_item',
+    ecommerce: {
+      items: [{
+        item_name: item?.displayName,
+        item_id: item?.productId,
+        price: item?.productPrice?.minListPrice,
+        quantity: 1,
+      }],
+    },
+  });
+};
+
 export {
   pageview,
   event,
@@ -118,4 +133,5 @@ export {
   GAddToCart,
   GAddToWishlist,
   viewListItem,
+  selectItem,
 };
