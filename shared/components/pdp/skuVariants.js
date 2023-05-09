@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable indent */
 /* eslint-disable no-lonely-if */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-lone-blocks */
@@ -108,16 +110,22 @@ function SkuVariants({
       skuData?.skuDetails?.inventory[0]?.alwaysInStock || false
     const maxQtyAllowedPerOrder = parseInt(skuData.maxQtyAllowedPerOrder) || 0
     if (!alwaysInStock) {
-      maxQty =
-        maxQtyAllowedPerOrder > availableStock
-          ? availableStock
-          : maxQtyAllowedPerOrder
+      if (maxQtyAllowedPerOrder === 0) {
+        maxQty = availableStock
+      } else if (maxQtyAllowedPerOrder > availableStock) {
+        maxQty = availableStock
+      } else {
+        maxQty = maxQtyAllowedPerOrder
+      }
     } else {
       // always in stock is true
-      maxQty =
-        maxQtyAllowedPerOrder > availableStock
-          ? maxQtyAllowedPerOrder
-          : availableStock
+      if (maxQtyAllowedPerOrder === 0) {
+        maxQty = availableStock
+      } else if (maxQtyAllowedPerOrder > availableStock) {
+        maxQty = maxQtyAllowedPerOrder
+      } else {
+        maxQty = availableStock
+      }
     }
     return maxQty
   }
