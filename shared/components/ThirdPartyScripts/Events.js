@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import {
-  viewItem, GAddToCart, GAddToWishlist, viewListItem,
+  viewItem, GAddToCart, GAddToWishlist, viewListItem,selectItem
 } from './gtag';
 import {
   RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList, RViewEvent,
@@ -109,6 +109,14 @@ const viewEvent = (obj) => {
   }
 };
 
+const selectPLPItem = (itemData) => {
+  try{
+    selectItem(itemData);
+  }catch(e) {
+    console.log(e);
+  }
+};
+
 export {
   visitPDP,
   Search,
@@ -121,4 +129,5 @@ export {
   pageViewEvent,
   visitPLP,
   viewEvent,
+  selectPLPItem,
 };

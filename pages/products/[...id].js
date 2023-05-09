@@ -13,7 +13,7 @@ import getPDPData from '../../shared/helpers/getPDPData'
 
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
-import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
+import { visitPDP, selectPLPItem } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
@@ -25,6 +25,7 @@ export default function ProductDetails({ data, origin }) {
   useEffect(() => {
     setPageData(data)
     visitPDP(data)
+    selectPLPItem(data)
   }, [])
   const router = useRouter()
 
