@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-param-reassign */
@@ -55,8 +56,7 @@ function SkuVariants({
   }
 
   const addItemQuantity = skuData => {
-    const availableStock =
-      skuData && skuData?.skuDetails?.inventory[0]?.availableStock
+    const availableStock = getMaxQtyAllowed(skuData)
     const qty = parseInt(itemQuantity)
     if (qty < availableStock) {
       setItemQuantity(qty + 1)
@@ -96,9 +96,35 @@ function SkuVariants({
     return Math.ceil(listP - saleP)
   }
 
+  const getMaxQtyAllowed = skuData => {
+    let maxQty = 0
+    // test case
+    // const availableStock = 6
+    // const alwaysInStock = true
+    // const maxQtyAllowedPerOrder = 14
+    const availableStock =
+      parseInt(skuData?.skuDetails?.inventory[0]?.availableStock) || 0
+    const alwaysInStock =
+      skuData?.skuDetails?.inventory[0]?.alwaysInStock || false
+    const maxQtyAllowedPerOrder = parseInt(skuData.maxQtyAllowedPerOrder) || 0
+    if (!alwaysInStock) {
+      maxQty =
+        maxQtyAllowedPerOrder > availableStock
+          ? availableStock
+          : maxQtyAllowedPerOrder
+    } else {
+      // always in stock is true
+      maxQty =
+        maxQtyAllowedPerOrder > availableStock
+          ? maxQtyAllowedPerOrder
+          : availableStock
+    }
+    return maxQty
+  }
+
   const handleQtyChange = (e, skuData) => {
     let val = parseInt(e.target.value)
-    const maxQty = skuData?.skuDetails?.inventory[0]?.availableStock || 0
+    const maxQty = getMaxQtyAllowed(skuData)
     if (val > maxQtyAllowed) {
       val = maxQtyAllowed
       setItemQuantity(maxQtyAllowed)
@@ -121,8 +147,7 @@ function SkuVariants({
 
   const displayQtyErrorMsg = skuData => {
     const qty = parseInt(itemQuantity)
-    const maxQty =
-      (skuData && skuData?.skuDetails?.inventory[0]?.availableStock) || 0
+    const maxQty = getMaxQtyAllowed(skuData)
     if (maxQty > 0 && qty > maxQty) {
       return `There is not enough inventory in stock. Please enter quantity no more than ${maxQty}`
     }
@@ -222,8 +247,7 @@ function SkuVariants({
                       (skuData && !skuData?.skuDetails?.hasStock) ||
                       (skuData &&
                         itemQuantity &&
-                        itemQuantity >
-                          skuData?.skuDetails?.inventory[0]?.availableStock)
+                        itemQuantity > getMaxQtyAllowed(skuData))
                         ? 'disabled'
                         : ''
                     }`}
@@ -247,8 +271,7 @@ function SkuVariants({
                     (skuData && !skuData?.skuDetails?.hasStock) ||
                     (skuData &&
                       itemQuantity &&
-                      itemQuantity >
-                        skuData?.skuDetails?.inventory[0]?.availableStock)
+                      itemQuantity > getMaxQtyAllowed(skuData))
                       ? 'disabled'
                       : ''
                   }`}
@@ -359,7 +382,6 @@ function SkuVariants({
       }
     }
 
-    // console.log('optionsToDisplay...', optionsToDisplay)
     return (
       <>
         <div className='sukhead'>{variantKey}:</div>
