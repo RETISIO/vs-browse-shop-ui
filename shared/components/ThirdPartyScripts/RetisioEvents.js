@@ -1,6 +1,10 @@
 /* eslint-disable no-use-before-define */
 
+
+
 /* eslint-disable no-unused-vars */
+
+
 
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
@@ -39,26 +43,67 @@ const SearchProd = (obj) => {
   });
 };
 
-const ProductClick = (obj) => {
+const RViewEvent = (obj) => {
   let loggedInUserData = '';
   if(obj.userData?.userDetails?.accountId) {
     loggedInUserData = obj.userData?.userDetails?.accountId;
   }
-  window.retisioSDK.event('integration', 'clickProduct', '1.0', {
+  window.retisioSDK.event('integration', 'viewEvent', '1.0', {
+    siteId,
+    profileId: loggedInUserData,
+    catalogId: obj?.channelData?.defaultCatalogId || catalogId,
+    eventType: obj.eventType,
+    productIdList: obj.products,
+    pageUrl: window.location.href,
+    recommendationType: obj.recommendationType,
+    pageType: obj.pageType,
+    pdpProductId: obj.product.productId,
+  });
+};
+
+const PrepareClickData = (obj) => {
+  let loggedInUserData = '';
+  if(obj.userData?.userDetails?.accountId) {
+    loggedInUserData = obj.userData?.userDetails?.accountId;
+  }
+  let finalData = {
     skuId: obj.data.defaultSkuId,
     productId: obj.data.productId,
     catalogId: obj?.channelData?.defaultCatalogId || catalogId,
-    categories: obj.searchData.categories.map((vl) => vl.id),
-    searchAttribution: true,
-    recommendationAttribution: false,
-    browseAttribution: false,
-    promotionAttribution: false,
-    searchAttributionDetails: {
-      query: obj.searchData.searchTerm
-      ,
-    },
     profileId: loggedInUserData,
-  });
+  };
+  if(obj.searchData) {
+    finalData = {
+      ...finalData,
+      categories: obj.searchData.categories.map((vl) => vl.id),
+      searchAttribution: true,
+      recommendationAttribution: false,
+      browseAttribution: false,
+      promotionAttribution: false,
+      searchAttributionDetails: {
+        query: obj.searchData.searchTerm,
+      },
+    };
+  }
+
+  if(obj.recommendation) {
+    finalData = {
+      ...finalData,
+      searchAttribution: false,
+      recommendationAttribution: true,
+      browseAttribution: false,
+      promotionAttribution: false,
+      recommendationAttributionDetails: {
+        ...obj.recommendation,
+      },
+    };
+  }
+
+  return finalData;
+};
+
+const ProductClick = (obj) => {
+  window.retisioSDK.event('integration', 'clickProduct', '1.0', PrepareClickData(obj));
 };
 
 const AddItem = (obj) => {
@@ -117,4 +162,5 @@ export {
   ProductClick,
   AddItem,
   RaddtoWishhList,
+  RViewEvent,
 };

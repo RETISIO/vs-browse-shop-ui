@@ -1,3 +1,4 @@
+/* eslint-disable space-before-blocks */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
@@ -5,7 +6,7 @@ import {
   viewItem, GAddToCart, GAddToWishlist, viewListItem,
 } from './gtag';
 import {
-  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList,
+  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList, RViewEvent,
 } from './RetisioEvents';
 
 const visitPDP = (itemData) => {
@@ -31,7 +32,11 @@ const Search = (obj) => {
 };
 
 const ClickProduct = (obj) => {
-  ProductClick(obj);
+  try{
+    ProductClick(obj);
+  }catch(e){
+    console.log(e);
+  }
 };
 
 const login = (data) => {
@@ -91,7 +96,15 @@ const pageViewEvent = (data) => {
 const visitPLP = (itemData) => {
   try{
     viewListItem(itemData);
-  }catch(e){
+  }catch(e) {
+    console.log(e);
+  }
+};
+
+const viewEvent = (obj) => {
+  try{
+    RViewEvent(obj);
+  }catch(e) {
     console.log(e);
   }
 };
@@ -107,4 +120,5 @@ export {
   AddtoWishhList,
   pageViewEvent,
   visitPLP,
+  viewEvent,
 };

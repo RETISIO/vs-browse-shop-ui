@@ -1,16 +1,17 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable space-before-blocks */
 /* eslint-disable max-len */
 import React from 'react';
-import Link from 'next/link';
-import NextImage from './nextImage';
-import { ProductClick } from '../../ThirdPartyScripts/RetisioEvents';
+// import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import NextImage from './nextImage';
 import { usePLPDataContext } from '../../../context/plpDatacontext';
 import { ClickProduct } from '../../ThirdPartyScripts/Events';
 import { useAppContext } from '../../../context/appContext';
 
-export default function ProductTile({ value }) {
+export default function ProductTile({ value, recommondationData }) {
   const {
-    searchResultData
+    searchResultData,
   } = usePLPDataContext();
   const { state } = useAppContext();
 
@@ -20,7 +21,12 @@ export default function ProductTile({ value }) {
     e.preventDefault();
     if(searchResultData){
       ClickProduct({
-        data, searchData:searchResultData.payLoad, userData: state?.userData, channelData: state?.channelData
+        data, searchData: searchResultData.payLoad, userData: state?.userData, channelData: state?.channelData,
+      });
+    }
+    if(recommondationData){
+      ClickProduct({
+        data, recommendation: { ...recommondationData.recommendationAttributionDetails }, userData: state?.userData, channelData: state?.channelData,
       });
     }
     router.push(href);
@@ -57,7 +63,7 @@ export default function ProductTile({ value }) {
       <a
         className="product-image"
         href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
-        onClick={(e)=> navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
+        onClick={(e) => navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
       >
         <div className="image-pos">
           <NextImage
@@ -71,9 +77,10 @@ export default function ProductTile({ value }) {
       </a>
       <div className="product-card-inner">
         <div className="product-card-desc">
-          <a 
-          href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
-          onClick={(e)=> navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)} >
+          <a
+            href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
+            onClick={(e) => navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
+          >
             {value.displayName}
           </a>
           {(value?.additionalDetails?.isNewProduct || value?.additionalDetails?.isNeverFrozen)
