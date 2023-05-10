@@ -68,7 +68,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
         }
       }
     } else if (name === 'city') {
-      const regEx = /^[a-zA-Z~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
+      const regEx = /^[a-zA-Z0-9~!@#$%^&*()_\-+={}[\]|:;<>,./?"'\\` ]{0,30}$/
       if (regEx.test(value)) {
         fieldsObj[name] = value
       }
