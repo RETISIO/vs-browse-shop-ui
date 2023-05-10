@@ -3,119 +3,127 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import {
-  viewItem, GAddToCart, GAddToWishlist, viewListItem,selectItem
-} from './gtag';
+  viewItem,
+  GAddToCart,
+  GAddToWishlist,
+  viewListItem,
+  selectItem
+} from './gtag'
 import {
-  RviewItem, SearchProd, ProductClick, AddItem, RaddtoWishhList, RViewEvent,
-} from './RetisioEvents';
+  RviewItem,
+  SearchProd,
+  ProductClick,
+  AddItem,
+  RaddtoWishhList,
+  RViewEvent
+} from './RetisioEvents'
 
-const visitPDP = (itemData) => {
-  viewItem(itemData);
-
+const visitPDP = itemData => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.browsedProduct(itemData);
+      window.lstImplement.browsedProduct(itemData)
     }
+    viewItem(itemData)
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 
-  RviewItem(itemData);
-};
+  RviewItem(itemData)
+}
 
-const Search = (obj) => {
+const Search = obj => {
   try {
-    SearchProd(obj);
+    SearchProd(obj)
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const ClickProduct = (obj) => {
-  try{
-    ProductClick(obj);
-  }catch(e){
-    console.log(e);
+const ClickProduct = obj => {
+  try {
+    ProductClick(obj)
+  } catch (e) {
+    console.log(e)
   }
-};
+}
 
-const login = (data) => {
+const login = data => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureEmail(data);
+      window.lstImplement.captureEmail(data)
     }
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const AddToCart = (data) => {
+const AddToCart = data => {
   try {
-    AddItem(data);
-    GAddToCart(data);
+    AddItem(data)
+    GAddToCart(data)
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const cartItems = (data) => {
+const cartItems = data => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.captureCartItems(data);
+      window.lstImplement.captureCartItems(data)
     }
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const AddtoWishhList = (obj) => {
-  RaddtoWishhList(obj);
-  GAddToWishlist(obj);
-};
+const AddtoWishhList = obj => {
+  RaddtoWishhList(obj)
+  GAddToWishlist(obj)
+}
 
 const notifyMe = (data, merchId) => {
   try {
-    if(window && window.lstImplement) {
-      window.lstImplement.notifyMe(data, merchId);
+    if (window && window.lstImplement) {
+      window.lstImplement.notifyMe(data, merchId)
     }
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const pageViewEvent = (data) => {
+const pageViewEvent = data => {
   try {
     if (window && window.lstImplement) {
-      window.lstImplement.pageEvent(data);
+      window.lstImplement.pageEvent(data)
     }
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-};
+}
 
-const visitPLP = (itemData) => {
-  try{
-    viewListItem(itemData);
-  }catch(e) {
-    console.log(e);
+const visitPLP = itemData => {
+  try {
+    viewListItem(itemData)
+  } catch (e) {
+    console.log(e)
   }
-};
+}
 
-const viewEvent = (obj) => {
-  try{
-    RViewEvent(obj);
-  }catch(e) {
-    console.log(e);
+const viewEvent = obj => {
+  try {
+    RViewEvent(obj)
+  } catch (e) {
+    console.log(e)
   }
-};
+}
 
-const selectPLPItem = (itemData) => {
-  try{
-    selectItem(itemData);
-  }catch(e) {
-    console.log(e);
+const selectPLPItem = itemData => {
+  try {
+    selectItem(itemData)
+  } catch (e) {
+    console.log(e)
   }
-};
+}
 
 export {
   visitPDP,
@@ -129,5 +137,5 @@ export {
   pageViewEvent,
   visitPLP,
   viewEvent,
-  selectPLPItem,
-};
+  selectPLPItem
+}
