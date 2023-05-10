@@ -30,7 +30,7 @@ import { viewEvent } from '../ThirdPartyScripts/Events';
 
 export default function ProductRecommondation(props) {
   const [load, setLoad] = useState(false);
-  const [productsData, setProductsData] = useState({ settings: {...Settings} });
+  const [productsData, setProductsData] = useState({ settings: { ...Settings } });
   const [selectedProducts, setSelectedProducts] = useState([]);
   const siteId = process.env.NEXT_PUBLIC_SITEID;
   const { state } = useAppContext();
@@ -47,17 +47,21 @@ export default function ProductRecommondation(props) {
     if(configValues?.productRecommendation?.association) {
       productData = props?.payLoad?.products[0]?.productDetails?.productAssociations[configValues.productRecommendation.association];
       setSelectedProducts(productData);
-    }else if(state.channelData && configValues.productRecommendation.recommendationType === 'AI_DRIVEN') {
+    }else if(state.channelData && state?.channelData?.defaultCatalogId && configValues.productRecommendation.recommendationType === 'AI_DRIVEN') {
       requestContructor(`rxc/${RecommondationsMap[configValues.productRecommendation.recommendation]}?siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0].productId}&max=5`, '', {
         method: 'GET',
       }).then((res) => {
         if(res.recommended) {
           setSelectedProducts(res.recommended);
+        }else{
+          setSelectedProducts([]);
         }
       });
+    }else{
+      setSelectedProducts([]);
     }
     setProductsData({ ...productsData });
-  }, [state.channelData]);
+  }, [state.channelData, props]);
 
   useEffect(() => {
     if(state.channelData && state.userData && (selectedProducts && selectedProducts.length > 0) && !configValues.productRecommendation.association) {
@@ -75,21 +79,30 @@ export default function ProductRecommondation(props) {
   }, [state.channelData, state.userData, selectedProducts]);
 
   useEffect(() => {
-    requestContructor('getProductsData', '', {
-      method: 'POST',
-      data: { productIds: selectedProducts },
-    }).then((res) => {
-      if (res.payLoad
-          && res.payLoad.products
-      ) {
-        configValues.products = res.payLoad.products;
-        setProductsData({
-          ...productsData,
-          configValues,
-        });
-        setLoad(true);
-      }
-    });
+    if(selectedProducts && selectedProducts.length > 0) {
+      requestContructor('getProductsData', '', {
+        method: 'POST',
+        data: { productIds: selectedProducts },
+      }).then((res) => {
+        if (res.payLoad
+            && res.payLoad.products
+        ) {
+          configValues.products = res.payLoad.products;
+          setProductsData({
+            ...productsData,
+            configValues,
+          });
+          setLoad(true);
+        }
+      });
+    }else{
+      configValues.products = [];
+      setProductsData({
+        ...productsData,
+        configValues,
+      });
+      setLoad(true);
+    }
   }, [selectedProducts]);
 
   return (

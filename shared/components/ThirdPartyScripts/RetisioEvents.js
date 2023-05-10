@@ -89,6 +89,7 @@ const PrepareClickData = (obj) => {
   if(obj.recommendation) {
     finalData = {
       ...finalData,
+      categories: obj.data.breadcrumbs,
       searchAttribution: false,
       recommendationAttribution: true,
       browseAttribution: false,
