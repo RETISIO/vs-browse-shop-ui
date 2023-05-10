@@ -264,6 +264,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     name='orderNumber'
                     defaultValue={values?.orderNumber}
                     maxLength='10'
+                    minLength='10'
                     onChange={handleChange}
                     isInvalid={!!formerrors?.orderNumber}
                     onBlur={handleBlur}
