@@ -137,7 +137,7 @@ export default function GcDetailsPage(props) {
                           className="form-control formControl-input"
                           type="text"
                           required
-                          maxLength="50"
+                          maxLength="40"
                           placeholder="Recipients Name *"
                           id="recipientsName"
                           name="recipientsName"

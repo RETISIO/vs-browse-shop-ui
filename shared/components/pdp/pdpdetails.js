@@ -49,7 +49,11 @@ import {
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
-  const productType = pdpData?.products[0]?.productType
+  const productType =
+    pdpData &&
+    pdpData.products &&
+    pdpData.products[0] &&
+    pdpData?.products[0]?.productType
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [errorMsg, setErrorMsg] = useState()
@@ -65,8 +69,8 @@ export default function ProductDescription(props) {
   const [variantSelected, setVariantSelected] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
 
-  const defaultSkuId =
-    pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
+  // const defaultSkuId =
+  //   pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
   if (productType === 'giftcard') {
     return <GiftCard {...props} />
@@ -97,9 +101,9 @@ export default function ProductDescription(props) {
   }, [noReload, isLogged])
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const productData = pdpData?.products[0]
+  const productData = pdpData && pdpData.products && pdpData.products[0]
   // productData.productDetails.isGiftItem = true
-  const productAdditionDetails = pdpData?.products[0]?.additionalDetails
+  const productAdditionDetails = productData?.additionalDetails
 
   // console.log('productData.....', productData)
 
@@ -123,7 +127,7 @@ export default function ProductDescription(props) {
       <div className='product-gallery app-figure' id='zoom-fig'>
         <div className='product-gallery__main'>
           <ImageCarousel
-            data={pdpData?.products[0]?.productDetails?.productMedia?.default}
+            data={productData?.productDetails?.productMedia?.default}
             additionalDetails={productAdditionDetails}
             onSale={showSaleWidget}
           />
@@ -185,7 +189,7 @@ export default function ProductDescription(props) {
   const addToBagHandler = (skuData, itemQuantity) => {
     const addToProdData = {
       variantId: skuData.skuId,
-      productId: productData.productId,
+      productId: productData?.productId,
       quantity: itemQuantity,
       productType: 'product'
     }
@@ -225,14 +229,14 @@ export default function ProductDescription(props) {
     if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
         skuId: skuData.skuId,
-        productId: productData.productId,
+        productId: productData?.productId,
         quantity: '1'
       })
       result
         .then(data => {
           if (data && data.status === 200) {
             setSuccessMsg(
-              `The following item have been moved to your wishlist: ${productData.displayName}`
+              `The following item have been moved to your wishlist: ${productData?.displayName}`
             )
             AddtoWishhList({
               skuId: skuData.skuId,
@@ -289,7 +293,7 @@ export default function ProductDescription(props) {
         <NotifyMe
           show={notifyPopupShow}
           skuData={notifyPopupData}
-          productData={pdpData?.products[0]}
+          productData={productData}
           handleClose={() => setNotifyPopupShow(false)}
           handleSave={handleSave}
         />
@@ -328,12 +332,12 @@ export default function ProductDescription(props) {
         )}
         <div className='product-title-wrapper'>
           <h1 className='page-title'>
-            <span>{pdpData?.products[0]?.displayName}</span>
+            <span>{productData?.displayName}</span>
             <div>
               <div
                 htmlFor='reviewsection'
                 className='yotpo bottomLine'
-                data-yotpo-product-id={pdpData?.products[0]?.productId}
+                data-yotpo-product-id={productData?.productId}
               ></div>
             </div>
             {productAdditionDetails?.isNeverFrozen && (
@@ -368,9 +372,7 @@ export default function ProductDescription(props) {
                 </div>
               )}
           </h1>
-          <p className='page-short-description'>
-            {pdpData?.products[0]?.description}
-          </p>
+          <p className='page-short-description'>{productData?.description}</p>
         </div>
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}
