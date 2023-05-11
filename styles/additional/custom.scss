@@ -61,7 +61,7 @@ body {
 		.btn {
 			background-color: $colorWhite;
 			border-color: #9B9B9B;
-			border-left: none;
+			border-left: 1px solid #9B9B9B;
 			border-radius: 0;
 			border-width: 1px;
 			color: #000;
@@ -3128,5 +3128,5 @@ h2.page-subtitle {
 
 .showHidePasswordTrigger {
 	font-size: 18px !important;
-    height: 34px !important;
+    // height: 34px !important;
 }
