@@ -456,12 +456,12 @@
 	}
   
   a.mini-cart-btn {
-    color: #fff;
+    color: $colorWhite;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
-    background-color: #f89b00;
+    background-color: $coloYellow;
     border: 1px solid transparent;
 
     white-space: nowrap;
@@ -501,7 +501,7 @@
       width: 100%;
       clear: both;
       padding: 3px 20px;
-      color: #354052;
+      color: $colorDarkBlue;
       font-weight: 300;
       line-height: 21px;
     }
