@@ -294,6 +294,13 @@
         }
       }
     }
+    //AB-1339 starts here
+    @media screen and (max-width: 768px) {
+      .dropdown-menu-search {
+        width: 100%;
+      }
+    }
+    //AB-1339 ends here
   }
 
     @media screen and (min-width: 768px) {
