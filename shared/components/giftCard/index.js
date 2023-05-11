@@ -4,10 +4,11 @@ import Breadcrumb from '../template/components/breadcrumb';
 import GcDetailsPage from './gcDetailsPage';
 import ProductRecommondation from '../Sliders/ProductRecommondation';
 import NextImage from '../template/components/nextImage';
+import config from '../../helpers/getConfig';
 
 export default function GiftCard(props) {
   const pdpData = props?.pdpData?.payLoad;
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const damPath = config.IMGPATH;
   const defaultSkuId = pdpData?.products[0]?.defaultSkuId;
   const breadcrumbData = {
     ...props?.pdpData,

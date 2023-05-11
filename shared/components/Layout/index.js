@@ -18,6 +18,7 @@ import { requestContructor } from '../../helpers/api';
 import ComponentMap from '../componentMap';
 import { useMiniCartDataContext } from '../../context/miniCartcontext';
 import getPersonalization from '../../helpers/utils';
+import config from '../../helpers/getConfig';
 
 export default function MainLayout({
   data, abUrl = '', SEO, children,
@@ -142,7 +143,7 @@ export default function MainLayout({
       setSearchAheadData(null);
     }
   };
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const damPath = config.IMGPATH;
   const signout = async() => {
     const res = await requestContructor('signout', '', {}, false).then((data) => {
       if (data) {

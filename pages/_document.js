@@ -2,9 +2,10 @@
 import {
   Html, Head, Main, NextScript,
 } from 'next/document';
+import config from '../shared/helpers/getConfig';
 
 export default function Document() {
-  const GtagSrc = `https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GA_KEY}&gtm_auth=FX9Yprad5blniYKnO31hiw&gtm_preview=env-638&gtm_cookies_win=x`;
+  const GtagSrc = `https://www.googletagmanager.com/ns.html?id=${config.GAKEY}&gtm_auth=FX9Yprad5blniYKnO31hiw&gtm_preview=env-638&gtm_cookies_win=x`;
 
   return (
     <Html lang="en">

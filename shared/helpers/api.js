@@ -8,6 +8,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-import-module-exports */
 import { Service } from '@retisio/sf-api'
+import config from './getConfig'
 
 const requestContructor = async (
   URL,
@@ -52,7 +53,7 @@ const requestContructor = async (
   // finalHeaders['x-chnl-id'] = process.env.NEXT_PUBLIC_CHANNELID || 'http://us.ab-dev.retisio.com';
 
   if (req) {
-    tempURI = process.env.NEXT_PUBLIC_APIURL + URL + params
+    tempURI = config.APIURL + URL + params
   } else {
     tempURI = `/arc/${URL}${params}`
   }

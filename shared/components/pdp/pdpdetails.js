@@ -46,6 +46,7 @@ import {
   AddToCart,
   AddtoWishhList
 } from '../ThirdPartyScripts/Events'
+import config from '../../helpers/getConfig'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
@@ -100,7 +101,7 @@ export default function ProductDescription(props) {
     }
   }, [noReload, isLogged])
 
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
+  const damPath = config.IMGPATH
   const productData = pdpData && pdpData.products && pdpData.products[0]
   // productData.productDetails.isGiftItem = true
   const productAdditionDetails = productData?.additionalDetails
@@ -273,7 +274,7 @@ export default function ProductDescription(props) {
   }
 
   const handleSave = obj => {
-    const merchId = process.env.NEXT_PUBLIC_LISTRACK_MID
+    const merchId = config.LISKEY;
     const successHandler = () => {
       setNotifyPopupShow(false)
       setMessage(

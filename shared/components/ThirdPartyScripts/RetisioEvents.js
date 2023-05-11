@@ -9,8 +9,9 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 import { getCookie } from '@retisio/sf-api';
+import config from '../../helpers/getConfig';
 
-const siteId = process.env.NEXT_PUBLIC_SITEID;
+const siteId = config.SKEY;
 const catalogId = '1001';
 const RviewItem = (itemData) => {
   // console.log('itemData', itemData);
