@@ -34,7 +34,9 @@
           background-position: 100% center;
           border-radius: 50px;
           border: 1px solid #575756;
-          margin: 12px 10px;
+          @media screen and (min-width: 768px) { //AB-1339
+            margin: 12px 10px;
+          }
     
           &::placeholder {
             color: color(#575756 a(0.8));
