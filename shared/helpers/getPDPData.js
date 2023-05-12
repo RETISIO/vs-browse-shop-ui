@@ -4,7 +4,8 @@ import { requestContructor } from './api'
 // import URLHandler from './urlHandler';
 
 export default async function getPDPData (context) {
-  const productId = context?.query?.id[1]
+  const length = context?.query?.id?.length || 1
+  const productId = context?.query?.id[length - 1]
   const { req } = context
   let data
 
