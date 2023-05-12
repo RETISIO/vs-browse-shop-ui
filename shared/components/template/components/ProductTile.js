@@ -2,7 +2,6 @@
 /* eslint-disable space-before-blocks */
 /* eslint-disable max-len */
 import React from 'react'
-// import Link from 'next/link';
 import { useRouter } from 'next/navigation'
 import NextImage from './nextImage'
 import { usePLPDataContext } from '../../../context/plpDatacontext'
@@ -10,11 +9,6 @@ import { ClickProduct } from '../../ThirdPartyScripts/Events'
 import { useAppContext } from '../../../context/appContext'
 
 export default function ProductTile ({ value, recommondationData }) {
-  console.log(
-    'frm productTile.....value,recommondationData...',
-    value,
-    recommondationData
-  )
   const { searchResultData } = usePLPDataContext()
   const { state } = useAppContext()
 
@@ -50,13 +44,6 @@ export default function ProductTile ({ value, recommondationData }) {
   }
 
   const displayPrice = () => {
-    // $
-    // {
-    //   value?.productPrice?.minSalePrice
-    //     ? value?.productPrice?.minSalePrice
-    //     : value?.productPrice?.minListPrice
-    // }
-    // debugger
     // value.productPrice.minSalePrice = 50.9 //test data
 
     if (value && value?.productPrice?.minSalePrice) {
@@ -204,7 +191,6 @@ export default function ProductTile ({ value, recommondationData }) {
         <div
           className='yotpo bottomLine yotpo-small'
           data-yotpo-product-id={value?.productId}
-          // data-yotpo-product-id="10660"
           data-currency='USD'
         ></div>
         <div className='product-card-price'>

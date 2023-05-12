@@ -455,7 +455,15 @@ function SkuVariants({
                     >
                       <i className='icon fas fa-check'></i>
                     </span>
-                    <span className='txttagb'>{sku.optionValue}</span>
+                    <span
+                      className={`${
+                        index === Object.keys(variantOptions).length - 1
+                          ? 'txttagb-last'
+                          : 'txttagb'
+                      }`}
+                    >
+                      {sku.optionValue}
+                    </span>
                     <span className='txttagz'>
                       {sku.thickness && formatThickness(sku.thickness)}
                     </span>
