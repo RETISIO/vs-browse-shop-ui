@@ -6,8 +6,6 @@ import { HtmlContent } from '@retisio/sf-ui'
 
 function CookingInstructions (props) {
   const pdpDetails = props?.payLoad?.products[0]
-
-  console.log('from cooking.......props, pdpDetails...', props, pdpDetails)
   const [data, setData] = useState()
   const [description, setDescription] = useState()
   const [contentId, setContentId] = useState()
