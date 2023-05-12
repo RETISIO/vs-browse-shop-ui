@@ -77,7 +77,7 @@ function Static({ data, origin }) {
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader /> }
-        <PageBuilder pageContent={pageContent} data={data} pageType="productListing" />
+        <PageBuilder pageContent={pageContent} data={data} />
       </main>
       <Yotpo />
     </MainLayout>
