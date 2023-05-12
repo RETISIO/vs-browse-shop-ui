@@ -120,11 +120,11 @@ function SkuVariants({
     } else {
       // always in stock is true
       if (maxQtyAllowedPerOrder === 0) {
-        maxQty = availableStock
+        maxQty = maxQtyAllowed
       } else if (maxQtyAllowedPerOrder > availableStock) {
-        maxQty = maxQtyAllowedPerOrder
-      } else {
         maxQty = availableStock
+      } else {
+        maxQty = maxQtyAllowedPerOrder
       }
     }
     return maxQty
