@@ -113,6 +113,43 @@
       }
     }
 
+    @media screen and (max-width: 1150px) {
+      .icon-redesign {
+        width: 32%;
+        padding: 0;
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      .icon-redesign {
+        width: 47%;
+      }
+    }
+
+    @media screen and (max-width: 980px) {
+      .icon-redesign {
+        width: 58%;
+      }
+    }
+
+    @media screen and (max-width: 887px) {
+      .icon-redesign {
+        width: 67%;
+      }
+    }
+
+    @media screen and (max-width: 866px) {
+      .icon-redesign {
+        width: 70%;
+      }
+    }
+
+    @media screen and (max-width: 854px) {
+      .icon-redesign {
+        width: 76%;
+      }
+    }
+
     .header-sticky.js-sticky-menu.is_stuck {
       position: fixed;
       top: 0;
@@ -446,6 +483,14 @@
       z-index: 2;
       height: 100%;
       background-image: linear-gradient(180deg, #2c2828 4%, transparent 30%);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    #region-re1700018{
+      .allenmainherobanner .banner-content {
+        padding: 143px 0 0 0;
+      }
     }
   }
 
