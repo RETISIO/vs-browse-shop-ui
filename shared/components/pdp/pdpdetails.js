@@ -188,7 +188,7 @@ export default function ProductDescription(props) {
 
   const addToBagHandler = (skuData, itemQuantity) => {
     const addToProdData = {
-      variantId: skuData.skuId,
+      variantId: skuData?.skuId,
       productId: productData?.productId,
       quantity: itemQuantity,
       productType: 'product'
@@ -197,7 +197,7 @@ export default function ProductDescription(props) {
       items: []
     }
     pdp.items.push(addToProdData)
-    if (productData.productId) {
+    if (productData?.productId) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
@@ -228,7 +228,7 @@ export default function ProductDescription(props) {
   const addToWishLisrHandler = skuData => {
     if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
-        skuId: skuData.skuId,
+        skuId: skuData?.skuId,
         productId: productData?.productId,
         quantity: '1'
       })
@@ -239,8 +239,8 @@ export default function ProductDescription(props) {
               `The following item have been moved to your wishlist: ${productData?.displayName}`
             )
             AddtoWishhList({
-              skuId: skuData.skuId,
-              productId: productData.productId,
+              skuId: skuData?.skuId,
+              productId: productData?.productId,
               channelData: state.channelData,
               userData: state.userData,
               wishListId: data.wishListId,
