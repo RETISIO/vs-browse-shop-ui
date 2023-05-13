@@ -53,12 +53,12 @@ export default function ProductTile ({ value, recommondationData }) {
           <span className='pricebstik'>
             {` $${value?.productPrice?.minListPrice}`}
           </span>
-          <span className='pricenred'>
+          {/* <span className='pricenred'>
             {`You save: $${calcDisc(
               value?.productPrice?.minListPrice,
               value?.productPrice?.minSalePrice
             )}.00`}
-          </span>
+          </span> */}
         </b>
       )
     }
