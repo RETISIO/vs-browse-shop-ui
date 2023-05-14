@@ -404,7 +404,7 @@ function SkuVariants({
                 return (
                   <li className='list-inline-item me-2 mb-2'>
                     <div className='Count outstock'>
-                      <span className='outoftocklab'>Out of stock</span>
+                      <span className='outoftocklab'>Out of Stock</span>
                       <span className='Countb'>{sku.optionValue}</span>
                       <span className='txttagz'>
                         {sku.thickness && formatThickness(sku.thickness)}
