@@ -591,7 +591,15 @@
       background: none;
     }
     .mobile-account-flyout .mobile-menu-right .mobile-menu__level ul.aside-nav > li:not(.mobile-submenu__title) > a {
-      padding: 8px 20px 8px 13px;
+      padding: 8px 20px 8px 40px;
+    }
+    .mobile-account-flyout .mobile-menu-right .mobile-menu__level ul.aside-nav > li{
+      position: relative;
+    }
+    .acnt-iconContainer {
+      position: absolute;
+      top: 7px;
+      left: 15px;
     }
   }
   //AB-1203 ends here
