@@ -1,19 +1,36 @@
-FROM node:18-alpine
+# Install dependencies only when needed
+FROM node:18-alpine AS deps
+WORKDIR /usr/src/app
+COPY package.json ./
+Run npm install --frozen-lockfile
+
+# Rebuild the source code only when needed
+FROM node:18-alpine AS builder
+WORKDIR /usr/src/app
+COPY . .
+COPY --from=deps //usr/src/app/node_modules ./node_modules
+Run npm run build && npm install --production
+
+# Production image, copy all the files and run next
+FROM node:18-alpine AS runner
 
 WORKDIR /usr/src/app
+ENV NODE_ENV production
 
-RUN echo -e "\
-NEXT_PUBLIC_APIURL=http://ab-aggregator/\n\
-NEXT_PUBLIC_CHANNELDOMAIN=https://us.ab-dev.retisio.com\n\
-NEXT_PUBLIC_IMAGEPATH=/dam/AB\n\
-NEXT_PUBLIC_YOTPO_KEY=Xzwy9124YJ6LKTkJdWTSfw6Vij93GMnCjDzxdi9t\n\
-NEXT_PUBLIC_GA_KEY=GTM-NLXT83\n\
-NEXT_PUBLIC_LISTRACK_MID=LhfaAOez5ttd\n\
-" > .env.production
+# You only need to copy next.config.js if you are NOT using the default configuration
+#COPY --from=builder /usr/src/app/next.config.js ./
+COPY --from=builder /usr/src/app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/package.json ./package.json
+COPY entrypoint.sh .
+COPY .env.production .
+# Execute script
+RUN apk add --no-cache --upgrade bash
+RUN ["chmod", "+x", "./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
-COPY . .
-RUN npm install
-RUN npm run build
+EXPOSE 3000
+ENV PORT 3000
 
-
-CMD [ "npm", "start"]
+CMD ["node_modules/.bin/next", "start"]
