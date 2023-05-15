@@ -579,9 +579,9 @@
 .home-header-container {
   //AB-1203 starts here
   @media screen and (max-width: 768px) {
-    .mobile-menu {
+    .mobile-menu.login {
       min-height: 200px;
-      max-height: 1050px;
+      max-height: 266px;
     }
     .mobile-menu.guest {
       min-height: 100px;
@@ -590,7 +590,7 @@
     .mobile-account-flyout .page-overlay {
       background: none;
     }
-    .mobile-menu-right .mobile-menu__level ul.aside-nav > li:not(.mobile-submenu__title) > a {
+    .mobile-account-flyout .mobile-menu-right .mobile-menu__level ul.aside-nav > li:not(.mobile-submenu__title) > a {
       padding: 8px 20px 8px 13px;
     }
   }
