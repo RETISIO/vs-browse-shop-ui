@@ -103,7 +103,7 @@ function SkuVariants({
     // test case
     // const availableStock = 6
     // const alwaysInStock = true
-    // const maxQtyAllowedPerOrder = 14
+    // const maxQtyAllowedPerOrder = 14 - order upto 14
     const availableStock =
       parseInt(skuData?.skuDetails?.inventory[0]?.availableStock) || 0
     const alwaysInStock =
@@ -121,11 +121,12 @@ function SkuVariants({
       // always in stock is true
       if (maxQtyAllowedPerOrder === 0) {
         maxQty = maxQtyAllowed
-      } else if (maxQtyAllowedPerOrder > availableStock) {
-        maxQty = availableStock
       } else {
         maxQty = maxQtyAllowedPerOrder
       }
+      // } else if (maxQtyAllowedPerOrder > availableStock) {
+      //   maxQty = availableStock
+      // }
     }
     return maxQty
   }
