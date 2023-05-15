@@ -32,11 +32,11 @@ function CookingInstructions (props) {
   useEffect(() => {
     const pdpData = props?.payLoad?.products[0]
     if (
-      pdpData?.additionalDetails?.cookingGuideProductIds &&
-      pdpData?.additionalDetails?.cookingGuideProductIds?.length > 0
+      pdpData?.productDetails?.productAssociations?.cooking_guides &&
+      pdpData?.productDetails?.productAssociations?.cooking_guides?.length > 0
     ) {
-      fetchCookingData(pdpData?.additionalDetails?.cookingGuideProductIds[0])
-      setContentId(pdpData?.additionalDetails?.cookingGuideProductIds[0])
+      fetchCookingData(pdpData?.productDetails?.productAssociations?.cooking_guides[0]);
+      setContentId(pdpData?.productDetails?.productAssociations?.cooking_guides[0]);
     }
   }, [props])
 
