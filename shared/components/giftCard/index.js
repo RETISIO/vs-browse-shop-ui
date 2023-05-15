@@ -63,7 +63,7 @@ export default function GiftCard(props) {
         </div>
       </div>
       <div className="giftcard-product-recommendation">
-        <ProductRecommondation {...configValue} />
+        <ProductRecommondation {...configValue} payLoad={pdpData} />
       </div>
     </>
   );
