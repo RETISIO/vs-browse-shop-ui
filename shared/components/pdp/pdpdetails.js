@@ -115,7 +115,8 @@ export default function ProductDescription(props) {
           options: productData.variantOptions[variantKey],
           defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
-          skuId: ''
+          skuId: '',
+          optionsTextForMv: '' // selected options text in mobile view
         }
       })
     }

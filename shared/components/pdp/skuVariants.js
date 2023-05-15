@@ -51,7 +51,6 @@ function SkuVariants({
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
-  //   console.log('from skuCounts....productData......', productData)
 
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
@@ -124,9 +123,6 @@ function SkuVariants({
       } else {
         maxQty = maxQtyAllowedPerOrder
       }
-      // } else if (maxQtyAllowedPerOrder > availableStock) {
-      //   maxQty = availableStock
-      // }
     }
     return maxQty
   }
@@ -187,12 +183,20 @@ function SkuVariants({
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
     const skuData = productData && productData?.skus[skuId]
+    const optionsTxtForMv =
+      (variantOptions &&
+        variantOptions[variantKey] &&
+        variantOptions[variantKey]?.optionsTextForMv) ||
+      ''
     // skuData.skuDetails.price.salePrice = '$100.95' //test data
     handleSelectedSkuData(skuData)
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
           ITEM CODE: #<span>{skuId || ''}</span>
+          <span className='itemtxt-mv'>{`${
+            optionsTxtForMv ? ` | ${optionsTxtForMv}` : ''
+          }`}</span>
         </div>
         <div className='price-section'>
           {skuData && skuData?.skuDetails?.price?.salePrice && (
@@ -313,6 +317,7 @@ function SkuVariants({
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
     let selectedSku = {}
+    const optionsText = ''
     if (index > 0) {
       const prevVariantKey = Object.keys(variantOptions)[index - 1] // 'count'
       // find out what is selected variant in this section
@@ -388,6 +393,22 @@ function SkuVariants({
         variantOptions[keys[keys.length - 1]].hasStock =
           productData?.skus[skuId]?.skuDetails?.hasStock
         variantOptions[keys[keys.length - 1]].skuData = productData?.skus[skuId]
+        let optionsTextForMv = ''
+        // prepare options text for mobile view
+        Object.keys(variantOptions).forEach(vKey => {
+          // variant key === count/weight
+          let txt = ''
+          if (variantOptions[vKey].defaultSelected) {
+            txt = variantOptions[vKey].defaultSelected.optionValue
+          } else if (variantOptions[vKey].optionSelected) {
+            txt = variantOptions[vKey].optionSelected.optionValue
+          }
+          optionsTextForMv = optionsTextForMv
+            ? `${optionsTextForMv} | ${txt}`
+            : `${txt}`
+        })
+        variantOptions[keys[keys.length - 1]].optionsTextForMv =
+          optionsTextForMv
       }
     }
 
