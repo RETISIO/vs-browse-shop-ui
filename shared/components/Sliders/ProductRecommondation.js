@@ -25,7 +25,7 @@ export default function ProductRecommondation (props) {
 
   useEffect(() => {
     let productData
-    if (configValues?.productRecommendation?.association) {
+    if (configValues?.productRecommendation?.association && props?.payLoad?.products[0] && props?.payLoad?.products[0]?.productDetails && props?.payLoad?.products[0]?.productDetails?.productAssociations) {
       productData =
         props?.payLoad?.products[0]?.productDetails?.productAssociations[
           configValues.productRecommendation.association
