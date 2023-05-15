@@ -108,7 +108,7 @@ function SkuVariants({
       parseInt(skuData?.skuDetails?.inventory[0]?.availableStock) || 0
     const alwaysInStock =
       skuData?.skuDetails?.inventory[0]?.alwaysInStock || false
-    const maxQtyAllowedPerOrder = parseInt(skuData.maxQtyAllowedPerOrder) || 0
+    const maxQtyAllowedPerOrder = parseInt(skuData?.maxQtyAllowedPerOrder) || 0
     if (!alwaysInStock) {
       if (maxQtyAllowedPerOrder === 0) {
         maxQty = availableStock
@@ -208,7 +208,7 @@ function SkuVariants({
                   : 'priceb'
               }
             >
-              {skuData?.skuDetails?.price?.listPrice.price}
+              {skuData?.skuDetails?.price?.listPrice?.price}
             </span>
           )}
           {skuData?.skuDetails?.price?.salePrice && (
@@ -329,11 +329,11 @@ function SkuVariants({
           if (optionSkus.includes(associatedSkuIds[j])) {
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
             variantOptions[variantKey].options[i].hasStock =
-              productData.skus[associatedSkuIds[j]].skuDetails.hasStock
+              productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
             variantOptions[variantKey].options[i].thickness =
-              productData.skus[
+              productData?.skus[
                 associatedSkuIds[j]
-              ].skuDetails.additionalDetails.thickness
+              ]?.skuDetails?.additionalDetails?.thickness
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
@@ -404,7 +404,7 @@ function SkuVariants({
                 return (
                   <li className='list-inline-item me-2 mb-2'>
                     <div className='Count outstock'>
-                      <span className='outoftocklab'>Out of stock</span>
+                      <span className='outoftocklab'>Out of Stock</span>
                       <span className='Countb'>{sku.optionValue}</span>
                       <span className='txttagz'>
                         {sku.thickness && formatThickness(sku.thickness)}
