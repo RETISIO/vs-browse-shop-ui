@@ -2,6 +2,7 @@
 FROM node:18-alpine AS deps
 WORKDIR /usr/src/app
 COPY package.json ./
+COPY .npmrc ./
 Run npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
