@@ -60,8 +60,8 @@ function CookingInstructions (props) {
     <>
       {description && (<div
         className={`accordions-section ${
-          pdpData?.productDetails?.productAssociations?.cooking_guides &&
-          pdpData?.productDetails?.productAssociations?.cooking_guides?.length > 0
+          pdpDetails?.productDetails?.productAssociations?.cooking_guides &&
+          pdpDetails?.productDetails?.productAssociations?.cooking_guides?.length > 0
             ? ''
             : 'hide'
         }`}
