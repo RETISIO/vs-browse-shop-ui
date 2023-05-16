@@ -354,127 +354,110 @@
             padding: 25px 15px 0 5px !important;
         }
     }
-    .sukproduct {
-        padding: 0px !important;
-        margin-bottom: 20px !important;
+}
+
+@media screen and (max-width: 600px) {
+    .pdpMainContainer{
+        padding-right: 7.5px !important;
+        .product-title-wrapper {
+            width: 96% !important;
+        }
         .itempanel {
-            border: 1px solid #f7f7f7;
-            box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.2);
-            padding: 10px;
-            .sp-20 {
-                margin-bottom: 10px;
+            .priceb {
+                font-size: 20px;
             }
-            .itemtxt {
+            .pricebstik {
+                font-size: 20px;
+            }
+        }
+        .sukproduct {
+            padding: 0px !important;
+            margin-bottom: 20px !important;
+            .itempanel {
+                border: 1px solid #f7f7f7;
+                box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.2);
+                padding: 10px;
+                .sp-20 {
+                    margin-bottom: 10px;
+                }
+            }
+            .panel1 {
+                width: 100% !important;
+            }
+            .pdp-buttons {
+                display: block;
+            }
+            .pdp-buttons {
+                padding-left: 0;
+            }
+        }
+    }    
+}
+
+@media screen and (max-width: 400px) {
+    .pdpMainContainer{
+        .itempanel {
+            .priceb {
+                font-size: 20px;
+            }
+            .pricebstik {
+                font-size: 20px;
+            }
+        }
+    }    
+}
+
+@media screen and (max-width: 378px) {
+    .pdpMainContainer{
+        .itempanel {
+            .priceb {
+                font-size: 16px;
+            }
+            .pricebstik {
+                font-size: 16px;
+            }
+            .pricenred {
+                font-size: 12px;
+            }
+        }
+    }    
+}
+
+@media screen and (max-width: 340px) {
+    .pdpMainContainer{
+        .itempanel {
+            .priceb {
+                font-size: 15px;
+                padding: 0px 7.5px 0px 0px;;
+            }
+            .pricebstik {
+                font-size: 15px;
+                padding: 0px 7.5px 0px 0px;;
+            }
+            .pricenred {
                 font-size: 11px;
             }
-            .itemtxt-mv {
-                visibility: visible
-            }
         }
-        .panel1 {
-            width: 50% !important;
-        }
-        .pdp-buttons {
-            display: flex;
-            align-items: flex-start;
-            flex-direction: column;
-            .btn-md {
-                min-width: 150px !important;
-            }
-        }
-        .pdp-buttons {
-            padding-left: 0;
-        }
-    }
+    }    
 }
 
-@media screen and (min-width: 480px) and (max-width: 600px) {
-    .sukproduct {
-        padding: 0px !important;
-        margin-bottom: 20px !important;
+@media screen and (max-width: 310px) {
+    .pdpMainContainer{
         .itempanel {
-            border: 1px solid #f7f7f7;
-            box-shadow: 0 0 10px 1px rgba(101, 110, 119, 0.2);
-            padding: 10px;
-            .sp-20 {
-                margin-bottom: 10px;
+            .priceb {
+                font-size: 16px;
+                padding: 0px 7.5px 0px 0px;;
+            }
+            .pricebstik {
+                font-size: 16px;
+                padding: 0px 7.5px 0px 0px;;
+            }
+            .pricenred {
+                display: block;
+                padding: 5px 0px !important;
             }
         }
-        .panel1 {
-            width: 50% !important;
-        }
-        .pdp-buttons {
-            display: flex;
-            align-items: flex-start;
-            flex-direction: column;
-            .btn-md {
-                min-width: 180px !important;
-            }
-        }
-        .pdp-buttons {
-            padding-left: 0;
-        }
-    }
-}
-
-@media screen and (max-width: 407px) {
-    .sukproduct {
-        .panel1 {
-            width: 55% !important;
-        }
-        .pdp-buttons {
-            .add-to-cart {
-                font-size: 10px !important;
-            }
-            .btn-md {
-                min-width: 130px !important;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .sukproduct {
-        .panel1 {
-            width: 52% !important;
-        }
-        .pdp-buttons {
-            .add-to-cart {
-                white-space: break-spaces;
-            }
-        }
-        .sku-item-qty {
-            width: 45px !important;
-        }
-        .pdp-buttons {
-            .add-to-cart {
-                font-size: 9px !important;
-            }
-            .btn-md {
-                min-width: 130px !important;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 359px) {
-    .sukproduct {
-        .sku-item-qty {
-            width: 90px !important;
-        }
-        .panel1 {
-            float: none !important;
-            width: 80% !important;
-        }
-        .pdp-buttons {
-            .add-to-cart {
-                font-size: 12px !important;
-            }
-            .btn-md {
-                min-width: 180px !important;
-            }
-        }
-    }
+    }    
 }
 
 @media screen and (min-width: 481px) {
