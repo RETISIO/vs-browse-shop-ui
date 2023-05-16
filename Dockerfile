@@ -9,7 +9,7 @@ Run npm install --frozen-lockfile
 FROM node:18-alpine AS builder
 WORKDIR /usr/src/app
 COPY . .
-COPY --from=deps //usr/src/app/node_modules ./node_modules
+COPY --from=deps /usr/src/app/node_modules ./node_modules
 Run npm run build && npm install --production
 
 # Production image, copy all the files and run next
