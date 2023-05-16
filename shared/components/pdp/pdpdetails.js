@@ -31,6 +31,7 @@ import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { getCookie } from '@retisio/sf-api'
 import Alert from 'react-bootstrap/Alert'
+import { useRouter } from 'next/router'
 import NextImage from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
@@ -68,7 +69,8 @@ export default function ProductDescription(props) {
   const [showAlert, setShowAlert] = useState(false)
   const [variantSelected, setVariantSelected] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
-
+  const router = useRouter()
+  const { skuid } = router.query
   // const defaultSkuId =
   //   pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -106,13 +108,36 @@ export default function ProductDescription(props) {
 
   // console.log('productData.....', productData)
 
+  const getDefaultSku = variantKey => {
+    let defaultSku = {}
+    if (
+      productData &&
+      productData.variantOptions &&
+      productData.variantOptions[variantKey].length
+    ) {
+      const skuId = skuid || productData?.defaultSkuId
+      // find skuId in associatedSkuds of variantOptions
+      for (let i = 0; i < productData?.variantOptions[variantKey].length; i++) {
+        // options array
+        const associatedSkusIds =
+          productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
+        if (associatedSkusIds.includes(skuId)) {
+          defaultSku = productData?.variantOptions[variantKey][i]
+          break
+        }
+      }
+    }
+    return defaultSku
+  }
+
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach(variantKey => {
         variantOptionsObj[variantKey] = {
           options: productData.variantOptions[variantKey],
-          defaultSelected: productData.variantOptions[variantKey][0],
+          defaultSelected: getDefaultSku(variantKey),
+          // defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
           skuId: '',
           optionsTextForMv: '' // selected options text in mobile view
