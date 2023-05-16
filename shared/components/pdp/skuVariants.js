@@ -199,10 +199,10 @@ function SkuVariants({
       // out of stock section
       return (
         <>
-          <span className='outoftocklab'>Out of Stock</span>
+          <span className='outoftocklabdt'>Out of Stock</span>
           {!sku.hasStock && (
             <span
-              className='notifytxt'
+              className='notifytxtnew'
               onClick={() =>
                 handleNotifyMe({
                   itemCode: sku.skuId
