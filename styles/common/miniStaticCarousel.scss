@@ -53,4 +53,12 @@
     .visually-hidden {
         display: none;
     }
+    @media screen and (max-width: 991px) {
+        .expert-select {
+          padding-left: 0;
+        }
+        .precision-cutting {
+            padding-left: 0;
+        }
+    }
 }
