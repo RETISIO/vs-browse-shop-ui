@@ -11,6 +11,9 @@
     }
  
     .header-actions-redesign-mobile {
+        @media screen and (max-width: 375px) {
+            padding-left: 0;
+        }
         .header-actions-search {
             .input-group {
                 // position: absolute;
