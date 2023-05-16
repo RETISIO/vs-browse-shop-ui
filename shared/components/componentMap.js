@@ -21,14 +21,14 @@ import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
 import ProductRecommondation from './Sliders/ProductRecommondation'
-import loginIcon from '../../public/headerImg/mobile/account/acc-loginIcon.svg';
-import registerIcon from '../../public/headerImg/mobile/account/acc-registerIcon.svg';
-import dashboardIcon from '../../public/headerImg/mobile/account/acc-dashboardIcon.svg';
-import accountInfoIcon from '../../public/headerImg/mobile/account/acc-accountInfoIcon.svg'
-import addressBookIcon from '../../public/headerImg/mobile/account/acc-addressBookIcon.svg'
-import ordersIcon from '../../public/headerImg/mobile/account/acc-ordersIcon.svg'
-import wishlistIcon from '../../public/headerImg/mobile/account/acc-wishlistIcon.svg'
-import logOutIcon from '../../public/headerImg/mobile/account/acc-logOutIcon.svg'
+import loginIcon from '../../public/headerImg/mobile/account/acc-loginIcon.png';
+import registerIcon from '../../public/headerImg/mobile/account/acc-registerIcon.png';
+import dashboardIcon from '../../public/headerImg/mobile/account/acc-dashboardIcon.png';
+import accountInfoIcon from '../../public/headerImg/mobile/account/acc-accountInfoIcon.png'
+import addressBookIcon from '../../public/headerImg/mobile/account/acc-addressBookIcon.png'
+import ordersIcon from '../../public/headerImg/mobile/account/acc-ordersIcon.png'
+import wishlistIcon from '../../public/headerImg/mobile/account/acc-wishlistIcon.png'
+import logOutIcon from '../../public/headerImg/mobile/account/acc-logOutIcon.png'
 
 const ComponentMap = {
   nextImage: NextImage,
