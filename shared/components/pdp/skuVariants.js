@@ -52,6 +52,8 @@ function SkuVariants({
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
 
+  console.log('variant options,productData...', variantOptions, productData)
+
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
   }
@@ -179,6 +181,42 @@ function SkuVariants({
     return str
   }
 
+  // out of section for product without options
+  const displayOOSForWoOp = () => {
+    const skuId = (productData && productData.defaultSkuId) || ''
+    let sku = {}
+    if (variantOptions && Object.keys(variantOptions).length === 0) {
+      sku = productData && productData.skus && productData.skus[skuId]
+    } else {
+      return
+    }
+    console.log('sku192....', sku)
+    if (
+      variantOptions &&
+      Object.keys(variantOptions).length === 0 &&
+      !sku.hasStock
+    ) {
+      // out of stock section
+      return (
+        <>
+          <span className='outoftocklab'>Out of Stock</span>
+          {!sku.hasStock && (
+            <span
+              className='notifytxt'
+              onClick={() =>
+                handleNotifyMe({
+                  itemCode: sku.skuId
+                })
+              }
+            >
+              <a href='#'>NOTIFY ME</a>
+            </span>
+          )}
+        </>
+      )
+    }
+  }
+
   // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
@@ -197,15 +235,17 @@ function SkuVariants({
           <span className='itemtxt-mv'>{`${
             optionsTxtForMv ? ` | ${optionsTxtForMv}` : ''
           }`}</span>
+          {displayOOSForWoOp()}
         </div>
         <div className='price-section'>
+          {/* sale price */}
           {skuData && skuData?.skuDetails?.price?.salePrice && (
             <span className='priceb'>
               {skuData?.skuDetails?.price?.salePrice?.price}
             </span>
           )}
           {skuData && skuData?.skuDetails?.price?.listPrice && (
-            <span
+            <span // list price
               className={
                 skuData?.skuDetails?.price?.listPrice &&
                 skuData?.skuDetails?.price?.salePrice
