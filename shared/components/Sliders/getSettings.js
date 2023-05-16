@@ -12,40 +12,37 @@ const Settings = {
         slidesToShow: 4,
         slidesToScroll: 4,
         infinite: true,
-        dots: true,
-      },
+        dots: true
+      }
     },
     {
       breakpoint: 780,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        initialSlide: 3,
-      },
+        initialSlide: 3
+      }
     },
     {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2,
-      },
+        initialSlide: 2
+      }
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
+        slidesToScroll: 1
+      }
+    }
+  ]
+}
 
 const RecommondationsMap = {
-  'Product-Similar SKUs': 'similar_sku',
-};
+  'Product-Similar SKUs': 'similar_sku'
+}
 
-export{
-  Settings,
-  RecommondationsMap,
-};
+export { Settings, RecommondationsMap }

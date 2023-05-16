@@ -25,7 +25,12 @@ export default function ProductRecommondation (props) {
 
   useEffect(() => {
     let productData
-    if (configValues?.productRecommendation?.association && props?.payLoad?.products[0] && props?.payLoad?.products[0]?.productDetails && props?.payLoad?.products[0]?.productDetails?.productAssociations) {
+    if (
+      configValues?.productRecommendation?.association &&
+      props?.payLoad?.products[0] &&
+      props?.payLoad?.products[0]?.productDetails &&
+      props?.payLoad?.products[0]?.productDetails?.productAssociations
+    ) {
       productData =
         props?.payLoad?.products[0]?.productDetails?.productAssociations[
           configValues.productRecommendation.association
@@ -105,6 +110,32 @@ export default function ProductRecommondation (props) {
     }
   }, [selectedProducts])
 
+  const displayProducts = () => {
+    if (productsData?.configValues?.products?.length) {
+      return (
+        <Slider {...productsData.settings}>
+          {productsData?.configValues?.products.map((value, index) => (
+            <div key={index}>
+              <div style={{ margin: '15px' }}>
+                <ProductTile
+                  value={value}
+                  recommondationData={{
+                    recommendationAttributionDetails: {
+                      recommendationType:
+                        RecommondationsMap[
+                          configValues.productRecommendation.recommendation
+                        ],
+                      recommendationLocation: 'PDP'
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      )
+    }
+  }
   return (
     <>
       {load && selectedProducts && selectedProducts.length > 0 && (
@@ -113,26 +144,7 @@ export default function ProductRecommondation (props) {
             <span>{props.name}</span>
             {/* <small className="ml-10">{productsData?.configValues.defaultProductSelector.viewAllLink && <a href={productsData?.configValues.defaultProductSelector.viewAllLink}>View All</a>}</small> */}
           </h1>
-          <Slider {...productsData.settings}>
-            {productsData?.configValues?.products.map((value, index) => (
-              <div key={index}>
-                <div style={{ margin: '15px' }}>
-                  <ProductTile
-                    value={value}
-                    recommondationData={{
-                      recommendationAttributionDetails: {
-                        recommendationType:
-                          RecommondationsMap[
-                            configValues.productRecommendation.recommendation
-                          ],
-                        recommendationLocation: 'PDP'
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </Slider>
+          {displayProducts()}
         </>
       )}
     </>
