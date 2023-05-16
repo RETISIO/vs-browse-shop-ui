@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
-    "@retisio/sf-api": "^0.0.138",
-    "@retisio/sf-ui": "^0.0.138",
+    "@retisio/sf-api": "^0.0.139",
+    "@retisio/sf-ui": "^0.0.139",
     "cookies": "^0.8.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
