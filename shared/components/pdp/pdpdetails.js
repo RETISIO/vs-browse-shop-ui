@@ -102,7 +102,6 @@ export default function ProductDescription(props) {
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
   const productData = pdpData && pdpData.products && pdpData.products[0]
-  // productData.productDetails.isGiftItem = true
   const productAdditionDetails = productData?.additionalDetails
 
   // console.log('productData.....', productData)

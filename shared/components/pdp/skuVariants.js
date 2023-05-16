@@ -52,8 +52,6 @@ function SkuVariants({
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
 
-  console.log('variant options,productData...', variantOptions, productData)
-
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
   }
@@ -182,30 +180,29 @@ function SkuVariants({
   }
 
   // out of section for product without options
-  const displayOOSForWoOp = () => {
-    const skuId = (productData && productData.defaultSkuId) || ''
-    let sku = {}
+  const displayOOSForWoOp = skuId => {
+    if (!skuId) {
+      return
+    }
+
+    let skuData = {}
     if (variantOptions && Object.keys(variantOptions).length === 0) {
-      sku = productData && productData.skus && productData.skus[skuId]
+      skuData = productData && productData.skus && productData.skus[skuId]
+      // skuData.skuDetails.hasStock = false // test data
     } else {
       return
     }
-    console.log('sku192....', sku)
-    if (
-      variantOptions &&
-      Object.keys(variantOptions).length === 0 &&
-      !sku.hasStock
-    ) {
+    if (!skuData?.skuDetails?.hasStock) {
       // out of stock section
       return (
         <>
           <span className='outoftocklabdt'>Out of Stock</span>
-          {!sku.hasStock && (
+          {!skuData?.skuDetails?.hasStock && (
             <span
               className='notifytxtnew'
               onClick={() =>
                 handleNotifyMe({
-                  itemCode: sku.skuId
+                  itemCode: skuId
                 })
               }
             >
@@ -221,12 +218,14 @@ function SkuVariants({
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
     const skuData = productData && productData?.skus[skuId]
+    // skuData.skuDetails.price.salePrice = '$100.95' //test data
+    // skuData.skuDetails.hasStock = false // test data for out of stock
+
     const optionsTxtForMv =
       (variantOptions &&
         variantOptions[variantKey] &&
         variantOptions[variantKey]?.optionsTextForMv) ||
       ''
-    // skuData.skuDetails.price.salePrice = '$100.95' //test data
     handleSelectedSkuData(skuData)
     return (
       <div className='itempanel'>
@@ -235,7 +234,7 @@ function SkuVariants({
           <span className='itemtxt-mv'>{`${
             optionsTxtForMv ? ` | ${optionsTxtForMv}` : ''
           }`}</span>
-          {displayOOSForWoOp()}
+          {displayOOSForWoOp(skuId)}
         </div>
         <div className='price-section'>
           {/* sale price */}
