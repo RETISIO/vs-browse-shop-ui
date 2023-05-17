@@ -211,6 +211,7 @@ export default function ProductDescription(props) {
     </button>
   )
 
+  // add to cart
   const addToBagHandler = (skuData, itemQuantity) => {
     const addToProdData = {
       variantId: skuData?.skuId,
@@ -236,6 +237,10 @@ export default function ProductDescription(props) {
               userData: state.userData,
               added: true
             })
+            setSuccessMsg(
+              'The item(s) has been successfully added to your cart.'
+            )
+            window.scrollTo(0, 0)
           } else if (data && data.status === 400) {
             const error =
               data.errors && Array.isArray(data.errors)
@@ -263,6 +268,7 @@ export default function ProductDescription(props) {
             setSuccessMsg(
               `The following item have been moved to your wishlist: ${productData?.displayName}`
             )
+            window.scrollTo(0, 0)
             AddtoWishhList({
               skuId: skuData?.skuId,
               productId: productData?.productId,
