@@ -383,6 +383,13 @@
             padding: 0;
           }
         }
+        .navbar-nav {
+          .nav-redesign {
+            .category-list-item:hover {
+              background-color: $colorLightBlue;
+            }
+          }
+        }
       }
     }
   }
@@ -410,6 +417,15 @@
         .navbar {
           &-nav {
             background-color: $colorDeepBlue;
+          }
+        }
+      }
+      .navbar.redesign-navbar {
+        .navbar-nav {
+          .nav-redesign {
+            .category-list-item:hover {
+              background-color: $colorLightBlue;
+            }
           }
         }
       }

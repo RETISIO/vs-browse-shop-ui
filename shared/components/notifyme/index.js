@@ -30,25 +30,20 @@ function NotifyMe({
   };
 
   const handleChange = (val) => {
-    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{1,4}$/;
     setEmail(val);
-    setError('');
-    if(val === '') {
-      setError('Please enter your email address.');
-    } else if(!pattern.test(val)) {
-      setError('Please enter a valid format for your email address.');
-    }
   };
 
   const handleSubmit = (data) => {
+    // eslint-disable-next-line max-len
+    const pattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
     if((email && email?.length === 0) || !email) {
       setError('Please enter your email address.');
-      return;
+    } else if(!pattern.test(email)) {
+      setError('Please enter a valid format for your email address.');
+    } else {
+      handleSave(data);
+      setError('');
     }
-    if(error.length > 0) {
-      return;
-    }
-    handleSave(data);
   };
 
   return (
