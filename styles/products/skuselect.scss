@@ -332,7 +332,9 @@
 
 
 // }
-
+html {
+    scroll-behavior: smooth;
+}
 .cart-success-msg {
     margin-bottom: 10px;
 }
