@@ -94,7 +94,8 @@ function SkuVariants({
   const displayPrice = (listPrice, salePrice) => {
     const listP = (listPrice && parseFloat(listPrice.slice(1))) || 0
     const saleP = (salePrice && parseFloat(salePrice.slice(1))) || 0
-    return Math.ceil(listP - saleP)
+    const res = (listP - saleP).toFixed(2)
+    return res
   }
 
   const getMaxQtyAllowed = skuData => {
@@ -218,7 +219,7 @@ function SkuVariants({
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
     const skuData = productData && productData?.skus[skuId]
-    // skuData.skuDetails.price.salePrice = '$100.95' //test data
+    // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
     // skuData.skuDetails.hasStock = false // test data for out of stock
 
     const optionsTxtForMv =
@@ -260,7 +261,7 @@ function SkuVariants({
               {`You save: $${displayPrice(
                 skuData?.skuDetails?.price?.listPrice?.price,
                 skuData?.skuDetails?.price?.salePrice?.price
-              )}.00`}
+              )}`}
             </span>
           )}
         </div>
