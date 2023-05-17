@@ -247,10 +247,12 @@ export default function ProductDescription(props) {
                 ? data.errors[0].message
                 : ''
             setErrorMsg(error)
+            window.scrollTo(0, 0)
           }
         })
         .catch(error => {
           setErrorMsg(error.message)
+          window.scrollTo(0, 0)
         })
     }
   }
@@ -284,13 +286,16 @@ export default function ProductDescription(props) {
                 data.errors[0].message) ||
               ''
             setErrorMsg(error)
+            window.scrollTo(0, 0)
           }
         })
         .catch(error => {
           setErrorMsg(error.message)
+          window.scrollTo(0, 0)
         })
     } else if (!skuData || (skuData && Object.keys(skuData).length === 0)) {
       setErrorMsg('skuId must not be empty')
+      window.scrollTo(0, 0)
     } else {
       setSkuSelected(skuData)
       setNoReload(true)

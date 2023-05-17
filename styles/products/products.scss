@@ -407,6 +407,17 @@
     }    
 }
 
+@media screen and (max-width: 414px) {
+    .pdpMainContainer{
+        .itempanel {     
+            .itemtxt-mv {
+                visibility: visible;
+            }
+           
+        }
+    }    
+}
+
 @media screen and (max-width: 378px) {
     .pdpMainContainer{
         .itempanel {
