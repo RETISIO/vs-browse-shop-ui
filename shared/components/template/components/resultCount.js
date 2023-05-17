@@ -63,7 +63,7 @@ export function ResultCount (props) {
   return (
     <div>
       <h1 className='w-100'>
-        {pageContentData?.page?.pageType?.id === 'search:default' ? (
+        {(pageContentData?.page?.pageType?.id === 'search:default' || pageContentData?.payLoad?.searchTerm !== '') ? (
           <span className='result-title-count'>
             {`Showing Results for "${
               pageContentData?.payLoad?.autoCorrectTerm
