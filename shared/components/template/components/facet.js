@@ -194,7 +194,7 @@ function Facet(props) {
       </div>
       <div className="catalog-filter__block ab-accordion-container">
         <div className="panel-group">
-          {pageType === "search"
+          {(pageType === "search") && (pageContentData?.payLoad?.categories?.length > 0)
           && (
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
