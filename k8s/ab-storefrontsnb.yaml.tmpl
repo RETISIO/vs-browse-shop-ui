@@ -23,11 +23,11 @@ spec:
             -
               containerPort: 3000
           env:
-            - name: AGGREGATOR_CONFIG_FILE
+            - name: ENV_FILE
               valueFrom:
                 configMapKeyRef:
                   name: sfbrowseshop-config
-                  key: ENVFILE
+                  key: ENV_FILE
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
@@ -55,8 +55,8 @@ spec:
           configMap:
             name: sfbrowseshop-config
             items:
-            - key: "ENVFILE"
-              path: "ENVFILE"
+            - key: "ENV_FILE"
+              path: "ENV_FILE"
 ---
 apiVersion: v1
 kind: Service
