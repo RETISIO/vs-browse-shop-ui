@@ -35,6 +35,7 @@ const ComponentMap = {
   login: Login,
   'imageCarousel:default': ImageCarousel,
   'productCarousel:default': ProductCarousel,
+  'defaultProductSelector:custom': ProductCarousel,
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
   // 'article-detail-prodcutid:custom': Article,
