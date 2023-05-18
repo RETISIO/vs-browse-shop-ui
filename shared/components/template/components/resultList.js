@@ -11,14 +11,17 @@ import ProductCard from './productCard';
 import URLHandler from '../../../helpers/urlHandler';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../../../helpers/api';
+import { useAppContext } from '../../../context/appContext';
+import { Search } from '../../ThirdPartyScripts/Events';
 
 function ResultList(props) {
   const { data, setLoader } = props;
   // eslint-disable-next-line no-unused-vars
   const [pageContentData, setPageContent] = useState(data);
-  
+  const { state } = useAppContext();
   const { pageData } = usePageDataContext();
   const router = useRouter();
+  const [searchData, setSearchPageData] = useState();
 
   const {
     offset,
@@ -39,6 +42,15 @@ function ResultList(props) {
       setProductCount(props?.data?.payLoad?.productCount);
     }
   }, [props]);
+
+  useEffect(() => {
+    if(searchData && state.userData && state.channelData) {
+      const autoSuggest = router?.query?.as === 't';
+      Search({
+        ...searchData, userData: state?.userData, channelData: state?.channelData, autoSuggest,
+      });
+    }
+  }, [searchData, state]);
 
   // const isServer = typeof window === 'undefined';
   // const isServer = process.browser;
@@ -102,6 +114,11 @@ function ResultList(props) {
           setProducts([...products, ...res?.payLoad?.products]);
           setProductCount(res?.payLoad?.productCount);
           setLoader(false);
+          if(res.payLoad.searchTerm) {
+            res.payLoad.searchTerm = searchTerm;
+            setSearchPageData(res);
+          }
+
           if(window && window.yotpo) {
             setTimeout(() => {
               window.yotpo.refreshWidgets();
