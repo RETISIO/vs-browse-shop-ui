@@ -24,7 +24,7 @@ export default function MainLayout({
 }) {
   const { state, updateState } = useAppContext();
   const { show, setShow } = useAppContext();
-  const { isLogged, isMobileView } = useAppContext();
+  const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
   // if (data && data.payLoad && data.payLoad.webEnabledAttr) {
@@ -195,7 +195,6 @@ export default function MainLayout({
         miniCartDetails={miniCartDetails}
         isNextJs={true}
         setMiniCartDetails={setMiniCartDetails}
-        isMobileView={isMobileView}
       >
         {children}
       </Layout>

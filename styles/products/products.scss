@@ -348,6 +348,14 @@
     }    
 }
 
+@media screen and (min-width: 540px) and (max-width: 549px) {
+    .pdpMainContainer {
+        .sukproduct {
+            padding: 10px 0px 0px 108px !important;
+        }
+    }
+}
+
 @media screen and (max-width: 400px) {
     .pdpMainContainer{
         .itempanel {
