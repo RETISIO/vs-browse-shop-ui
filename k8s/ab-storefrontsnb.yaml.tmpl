@@ -22,8 +22,9 @@ spec:
           ports:
             -
               containerPort: 3000
-          env_file:
-          - "k8s/envvariable/${ENV}/.env"
+          envFrom:
+            - configMapRef:
+                name: sfbrowseshop-config
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
