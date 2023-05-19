@@ -2154,6 +2154,12 @@ h2.page-subtitle {
 
 .page-title-container {
 	margin: 0 0 15px;
+    padding-bottom: 10px;
+
+	.result-count-start {
+		width:100%;
+		border-bottom: 1px solid rgba(81,83,86,0.75);
+	}
 
 	@media screen and (max-width: $screen-xs-max) {
 		flex-direction: column;
@@ -2161,6 +2167,11 @@ h2.page-subtitle {
 
 	@media screen and (min-width: $screen-sm-min) {
 		margin: 0 0 30px;
+		border-bottom: 1px solid rgba(81,83,86,0.75);
+		.result-count-start {
+			width:100%;
+			border-bottom: none;
+		}
 	}
 
 	@media screen and (max-width: $screen-sm) {
@@ -2174,6 +2185,8 @@ h2.page-subtitle {
 		display: inline;
 		vertical-align: middle;
 		margin: 0;
+		border-bottom: none;
+		font-weight:0;
 	}
 
 	.btn {
@@ -2191,6 +2204,8 @@ h2.page-subtitle {
 			flex-direction: column;
 		}
 	}
+
+
 }
 
 .page-actions {
