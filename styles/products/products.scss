@@ -372,6 +372,9 @@
             .pricebstik {
                 font-size: 20px;
             }
+            .itemtxt-mv {
+                visibility: visible;
+            }
         }
         .sukproduct {
             padding: 0px !important;
@@ -400,7 +403,7 @@
 @media screen and (min-width: 540px) and (max-width: 549px) {
     .pdpMainContainer {
         .sukproduct {
-            padding: 10px 0px 0px 108px !important;
+            padding: 10px 0px 0px 8px !important;
         }
     }
 }
