@@ -18,11 +18,11 @@ spec:
       containers:
         -
           image: "${IMAGE}:${IMAGETAG}"
+          command: [ "/bin/sh", "-c", "env" ]
           name: ab-be
           ports:
             -
               containerPort: 3000
-		  command: [ "/bin/sh", "-c", "env" ]
           env:
             - name: ENV_FILE
               valueFrom:
@@ -50,14 +50,14 @@ spec:
             httpGet:
               port: 3000
               path: /api/health
-              scheme: HTTP      
-      volumes:
-        - name: sfbrowseshop-config
-          configMap:
-            name: sfbrowseshop-config
-            items:
-            - key: "ENV_FILE"
-              path: "ENV_FILE"
+              scheme: HTTP
+    volumes:
+      - name: sfbrowseshop-config
+        configMap:
+          name: sfbrowseshop-config
+          items:
+          - key: "ENV_FILE"
+            path: "ENV_FILE"
 ---
 apiVersion: v1
 kind: Service
