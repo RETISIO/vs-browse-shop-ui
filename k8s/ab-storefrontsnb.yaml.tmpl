@@ -51,13 +51,13 @@ spec:
               port: 3000
               path: /api/health
               scheme: HTTP
-    volumes:
-      - name: sfbrowseshop-config
-        configMap:
-          name: sfbrowseshop-config
-          items:
-          - key: "ENV_FILE"
-            path: "ENV_FILE"
+      volumes:
+        - name: sfbrowseshop-config
+          configMap:
+            name: sfbrowseshop-config
+            items:
+            - key: "ENV_FILE"
+              path: "ENV_FILE"
 ---
 apiVersion: v1
 kind: Service
