@@ -22,9 +22,9 @@
     
     #header-1-redesign {
       .search-box-redesign {
-        .header-search-form-redesign {
-          height: 10px;
-        }
+        // .header-search-form-redesign {
+        //   height: 10px;
+        // }
     
         .input-group {
           width: 100%;
@@ -593,6 +593,10 @@
   }
 
 .home-header-container {
+  /* **** DB css for the account and mini cart ****** */
+  .miniCartFlyoutImgContainer {
+    word-break: break-word;
+  }
   //AB-1203 starts here
   @media screen and (max-width: 768px) {
     .mobile-menu.login {
@@ -620,6 +624,32 @@
       height: 24px;
       overflow: hidden;
     }
+    .headerActionRightContainer {
+      width: 100px;
+      display: block;
+
+      .headerAccntActionContainer {
+        float: left;
+      }
+      .headerCartActionContainer {
+        float: right;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .headerActionRightContainer {
+        width: 90px;
+      }
+      .headerCartActionContainer {
+        margin-right: 8px;
+      }
+      .headerAccntActionContainer .icon-user,
+      .headerCartActionContainer .icon-cart {
+        font-size: 30px;
+        margin-top: 2px;
+      }
+    }
   }
   //AB-1203 ends here
+  /* **** DB css for the account and mini cart ****** */
 }

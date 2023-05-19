@@ -47,11 +47,14 @@
     padding-right: 0.5rem;
     width: 120px;
     display: grid;
-    align-items: center;
+    //align-items: center;
     flex: 15%;
     // .slick-slider {
     //     text-align: -webkit-center !important;
     // }
+    .slick-track {
+        height: auto !important;
+    }
     .slick-prev {
         position: initial !important;
         width: 100% !important;
@@ -256,58 +259,6 @@
     }
 }
 
-
-@media screen and (min-width: 750px) and (max-width: 991px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 600px;
-        }
-        .sukproduct {
-            margin: 0px 0px 0px 100px;
-        }
-    }
-}
-
-@media screen and (min-width: 700px) and (max-width: 749px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 580px;
-        }
-    }
-}
-
-@media screen and (min-width: 650px) and (max-width: 699px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 560px;
-        }
-    }
-}
-
-@media screen and (min-width: 600px) and (max-width: 649px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 500px;
-        }
-    }
-}
-
-@media screen and (min-width: 550px) and (max-width: 599px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 480px;
-        }
-    }
-}
-
-@media screen and (min-width: 481px) and (max-width: 549px) {
-    .pdpMainContainer {
-        .product-gallery__main {
-            height: 400px;
-        }
-    }
-}
-
 @media screen and (max-width: 991px) {
   .pdpMainContainer {
         display: grid;
@@ -500,4 +451,12 @@
 .yotpo .text-m {
     margin-left: 10px !important;
     // text-decoration: underline !important;
+}
+
+@media screen and (min-width: 480px) and (max-width: 991px) {
+    .pdpMainContainer {
+        .sukproduct {
+            padding: 15px 0px 0px 0px !important;
+        }
+    }
 }
