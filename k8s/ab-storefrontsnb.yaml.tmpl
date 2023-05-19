@@ -18,7 +18,6 @@ spec:
       containers:
         -
           image: "${IMAGE}:${IMAGETAG}"
-          command: [ "/bin/sh", "-c", "env" ]
           name: ab-be
           ports:
             -
