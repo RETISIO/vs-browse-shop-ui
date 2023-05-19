@@ -369,10 +369,10 @@ function SkuVariants({
 
       // find all associated skus in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
-        const optionSkus =
+        const optionSkusIds =
           variantOptions[variantKey].options[i].associatedSkuIds
         for (let j = 0; j < associatedSkuIds.length; j++) {
-          if (optionSkus.includes(associatedSkuIds[j])) {
+          if (optionSkusIds.includes(associatedSkuIds[j])) {
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
             variantOptions[variantKey].options[i].hasStock =
               productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
@@ -399,6 +399,26 @@ function SkuVariants({
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
+      const associatedSkuIds = selectedSku?.associatedSkuIds
+      if (index === Object.keys(variantOptions).length - 1) {
+        // only one variant
+        for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
+          // find out matching selected sku in variant options
+          const optionSkusIds =
+            variantOptions[variantKey]?.options[i]?.associatedSkuIds
+          for (let j = 0; j < associatedSkuIds.length; j++) {
+            if (optionSkusIds.includes(associatedSkuIds[j])) {
+              variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
+              variantOptions[variantKey].options[i].hasStock =
+                productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
+              variantOptions[variantKey].options[i].thickness =
+                productData?.skus[
+                  associatedSkuIds[j]
+                ]?.skuDetails?.additionalDetails?.thickness
+            }
+          }
+        }
+      }
     }
     if (index === Object.keys(variantOptions).length - 1) {
       // sku in last section
