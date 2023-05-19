@@ -259,6 +259,8 @@
     }
 }
 
+
+
 @media screen and (max-width: 991px) {
   .pdpMainContainer {
         display: grid;
@@ -457,6 +459,22 @@
     .pdpMainContainer {
         .sukproduct {
             padding: 15px 0px 0px 0px !important;
+        }
+    }
+}
+
+@media screen and (min-width: 540px) and (max-width: 720px) {
+    .pdpMainContainer {
+        .sukproduct {
+            margin: 0px 0px 0px 110px;
+        }
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 991px) {
+    .pdpMainContainer {
+        .sukproduct {
+            margin: 0px 0px 0px 110px;
         }
     }
 }
