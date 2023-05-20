@@ -593,7 +593,7 @@
   }
 
 // .home-header-container {
-//   @media (min-width: 769px) and (max-width: 980px) {
+//   @media (min-width: 768px) and (max-width: 979px) {
 //     .ipadHeaderRightCTASection {
 //       // css goes here for Ipad
 //     }
@@ -602,6 +602,11 @@
 
 .home-header-container {
   /* **** DB css for the account and mini cart ****** */
+  @media screen and (max-width: 1200px) {
+    .js-minicart-toggle .fast-order__dropdown {
+      transform: translateX(0%) !important;
+    }
+  }
   .miniCartFlyoutImgContainer {
     word-break: break-word;
   }
@@ -617,7 +622,7 @@
     }
   }
   //AB-1203 starts here
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     .mobile-menu.login {
       min-height: 200px;
       max-height: 266px;
