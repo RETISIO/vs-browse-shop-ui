@@ -29,6 +29,14 @@ import ProductRecommondation from './Sliders/ProductRecommondation'
 // import ordersIcon from '../../public/headerImg/mobile/account/acc-ordersIcon.png'
 // import wishlistIcon from '../../public/headerImg/mobile/account/acc-wishlistIcon.png'
 // import logOutIcon from '../../public/headerImg/mobile/account/acc-logOutIcon.png'
+import loginIcon from '../../public/static/header/account/acc-loginIcon.svg';
+import registerIcon from '../../public/static/header/account/acc-registerIcon.svg';
+import dashboardIcon from '../../public/static/header/account/acc-dashboardIcon.svg';
+import accountInfoIcon from '../../public/static/header/account/acc-accountInfoIcon.svg';
+import addressBookIcon from '../../public/static/header/account/acc-addressBookIcon.svg';
+import ordersIcon from '../../public/static/header/account/acc-ordersIcon.svg';
+import wishlistIcon from '../../public/static/header/account/acc-wishlistIcon.svg';
+import logOutIcon from '../../public/static/header/account/acc-logOutIcon.svg';
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -51,14 +59,14 @@ const ComponentMap = {
   'pdpcookinginstructions:custom': CookingInstructions,
   'pdpyotpoplaceholder:custom': ReviewSection,
   'productRecommendations:custom': ProductRecommondation,
-  // loginIcon,
-  // registerIcon,
-  // dashboardIcon,
-  // accountInfoIcon,
-  // addressBookIcon,
-  // ordersIcon,
-  // wishlistIcon,
-  // logOutIcon,
+  loginIcon,
+  registerIcon,
+  dashboardIcon,
+  accountInfoIcon,
+  addressBookIcon,
+  ordersIcon,
+  wishlistIcon,
+  logOutIcon,
 
 }
 export default ComponentMap
