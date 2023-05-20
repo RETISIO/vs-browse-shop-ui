@@ -605,53 +605,6 @@
   .miniCartFlyoutImgContainer {
     word-break: break-word;
   }
-  .accntMenuDropDownDesktop {
-    min-width: 180px;
-
-    .iconListItems {
-      padding-left: 40px !important;
-    }
-  }
-  .accountMenuContainer {
-    .iconListItems {
-      position: relative;
-
-      &::before {
-        background-repeat: no-repeat;
-        content: "";
-        width: 30px;
-        height: 30px;
-        display: inline-block;
-        position: absolute;
-        left: 15px;
-        top: 5px;
-      }
-    }
-    .acc-loginIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-loginIcon.svg");
-    }
-    .acc-registerIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-registerIcon.svg");
-    }
-    .acc-dashboardIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-dashboardIcon.svg");
-    }
-    .acc-accountInfoIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-accountInfoIcon.svg");
-    }
-    .acc-addressBookIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-addressBookIcon.svg");
-    }
-    .acc-ordersIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-ordersIcon.svg");
-    }
-    .acc-wishlistIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-wishlistIcon.svg");
-    }
-    .acc-logOutIcon::before {
-      background-image: url("/dam/AB/storefront/static/acc-logOutIcon.svg");
-    }
-  }
   //AB-1203 starts here
   @media screen and (max-width: 768px) {
     .mobile-menu.login {
@@ -668,10 +621,16 @@
     .mobile-account-flyout .mobile-menu-right .mobile-menu__level ul.aside-nav > li:not(.mobile-submenu__title) > a {
       padding: 8px 20px 8px 40px;
     }
-    .accountMenuContainer {
-      .iconListItems::before {
-        top: 10px;
-      }
+    .mobile-account-flyout .mobile-menu-right .mobile-menu__level ul.aside-nav > li{
+      position: relative;
+    }
+    .acnt-iconContainer {
+      position: absolute;
+      top: 7px;
+      left: 15px;
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
     }
     .headerActionRightContainer {
       width: 100px;
