@@ -605,6 +605,17 @@
   .miniCartFlyoutImgContainer {
     word-break: break-word;
   }
+  .accntMenuDropDownDesktop {
+    min-width: 180px;
+    .acnt-desktop-iconContainer {
+      display: inline-block;
+      width: 20px;
+      margin-right: 5px;
+      img {
+        text-indent: -9999px;
+      }
+    }
+  }
   //AB-1203 starts here
   @media screen and (max-width: 768px) {
     .mobile-menu.login {
