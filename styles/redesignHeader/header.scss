@@ -646,6 +646,9 @@
   }
   //AB-1203 starts here
   @media screen and (max-width: 767px) {
+    .mobile-header img {
+      width: 80%;
+    }
     .mobile-menu.login {
       min-height: 200px;
       max-height: 266px;
