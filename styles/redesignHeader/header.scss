@@ -676,14 +676,16 @@
     }
     .headerActionRightContainer {
       width: 100px;
-      display: block;
+      justify-content: center;
+      // display: block;
 
       .headerAccntActionContainer {
-        float: left;
+        // float: left;
+        flex: 1 1 auto;
       }
-      .headerCartActionContainer {
-        float: right;
-      }
+      // .headerCartActionContainer {
+      //   float: right;
+      // }
     }
 
     @media screen and (max-width: 480px) {
