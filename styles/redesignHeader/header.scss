@@ -19,7 +19,9 @@
         background-color: $colorGray;
       }
     }
-    
+    #logoMain img {
+      width: 100%;
+    }
     #header-1-redesign {
       .search-box-redesign {
         // .header-search-form-redesign {
@@ -592,13 +594,34 @@
     padding: 0;
   }
 
-// .home-header-container {
-//   @media (min-width: 768px) and (max-width: 979px) {
-//     .ipadHeaderRightCTASection {
-//       // css goes here for Ipad
-//     }
-//   }
-// }
+.home-header-container #header{
+  @media (min-width: 768px) and (max-width: 991px) {
+    .ipadHeaderRightCTASection {
+      // css goes here for Ipad
+      width: 200px !important;
+      .header-actions-redesign .icon {
+        font-size: 30px;
+      }
+      .header-actions-redesign .pipeDelimeter {
+        padding-right: 20px;
+        padding-left: 20px;
+        font-size: 24px;
+      }
+      .header-actions-redesign {
+        justify-content: center;
+        float: none;
+      }
+      .headerDropdown .label-redesign,
+      .ab-miniCart-Icon  .label-redesign{
+        display: none;
+      }
+      .ab-miniCart-Icon .cart-counter {
+        top: -10px;
+        right: -15px;
+      }
+    }
+  }
+}
 
 .home-header-container {
   /* **** DB css for the account and mini cart ****** */
