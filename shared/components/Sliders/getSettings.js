@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+
 /* eslint-disable linebreak-style */
 const Settings = {
   dots: false,
@@ -11,38 +12,35 @@ const Settings = {
       settings: {
         slidesToShow: 4,
         slidesToScroll: 4,
-        infinite: true,
-        dots: true
-      }
+      },
     },
     {
-      breakpoint: 780,
+      breakpoint: 980,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
-        initialSlide: 3
-      }
+      },
     },
     {
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
-        initialSlide: 2
-      }
+        initialSlide: 2,
+      },
     },
     {
       breakpoint: 480,
       settings: {
         slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-}
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 
 const RecommondationsMap = {
-  'Product-Similar SKUs': 'similar_sku'
-}
+  'Product-Similar SKUs': 'similar_sku',
+};
 
-export { Settings, RecommondationsMap }
+export { Settings, RecommondationsMap };
