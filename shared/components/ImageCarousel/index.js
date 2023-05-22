@@ -86,18 +86,18 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
       <div className='image-carousel'>
         {imgData.length > 1 && (
           <div className='thumbnail-section'>
-          <Slider {...settings}>
-            {imgData?.map((img, index) => (
-              <div
-                className={`${
-                  imgData.length <= 3 ? 'thumbnail-np' : 'thumbnail-image'
-                } ${
-                  img?.smallImg === selected?.smallImg ? 'selectedImg' : ''
-                }`}
-                onClick={() => setSelected(img)}
-                key={`${img.smallImg}_${index}`}
-              >
-                {/* <NextImage
+            <Slider {...settings}>
+              {imgData?.map((img, index) => (
+                <div
+                  className={`${
+                    imgData.length <= 3 ? 'thumbnail-np' : 'thumbnail-image'
+                  } ${
+                    img?.smallImg === selected?.smallImg ? 'selectedImg' : ''
+                  }`}
+                  onClick={() => setSelected(img)}
+                  key={`${img.smallImg}_${index}`}
+                >
+                  {/* <NextImage
                   alt={img.altText}
                   src={`${damPath}${img?.thumbnailImg}`}
                   height='80'
@@ -105,13 +105,13 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                   id={`${img.smallImg}-${index}`}
                   className='thmbnl'
                 /> */}
-                {displayAlternateImages(img, index)}
-              </div>
-            ))}
-          </Slider>
+                  {displayAlternateImages(img, index)}
+                </div>
+              ))}
+            </Slider>
           </div>
         )}
-       
+
         {selected && (
           <div className='picture-section'>
             {additionalDetails?.productCategory === 'USDA PRIME' && (
@@ -139,6 +139,9 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                 img={`${damPath}${selected?.largeImg}`}
                 alt={selected?.altText}
                 offset={{ vertical: 0, horizontal: 10 }}
+                width={500}
+                height={500}
+                scale={1}
               />
             ) : (
               <MagnifyImage
