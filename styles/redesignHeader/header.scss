@@ -19,7 +19,9 @@
         background-color: $colorGray;
       }
     }
-    
+    #logoMain img {
+      width: 100%;
+    }
     #header-1-redesign {
       .search-box-redesign {
         // .header-search-form-redesign {
@@ -592,13 +594,61 @@
     padding: 0;
   }
 
+.home-header-container #header{
+  @media (min-width: 768px) and (max-width: 991px) {
+    .ipadHeaderRightCTASection {
+      // css goes here for Ipad
+      width: 200px !important;
+      .header-actions-redesign .icon {
+        font-size: 30px;
+      }
+      .header-actions-redesign .pipeDelimeter {
+        padding-right: 20px;
+        padding-left: 20px;
+        font-size: 24px;
+      }
+      .header-actions-redesign {
+        justify-content: center;
+        float: none;
+      }
+      .headerDropdown .label-redesign,
+      .ab-miniCart-Icon  .label-redesign{
+        display: none;
+      }
+      .ab-miniCart-Icon .cart-counter {
+        top: -10px;
+        right: -15px;
+      }
+    }
+  }
+}
+
 .home-header-container {
   /* **** DB css for the account and mini cart ****** */
+  @media screen and (max-width: 1199px) {
+    .js-minicart-toggle .fast-order__dropdown {
+      transform: translateX(0%) !important;
+    }
+  }
   .miniCartFlyoutImgContainer {
     word-break: break-word;
   }
+  .accntMenuDropDownDesktop {
+    min-width: 180px;
+    .acnt-desktop-iconContainer {
+      display: inline-block;
+      width: 20px;
+      margin-right: 5px;
+      img {
+        text-indent: -9999px;
+      }
+    }
+  }
   //AB-1203 starts here
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
+    .mobile-header img {
+      width: 80%;
+    }
     .mobile-menu.login {
       min-height: 200px;
       max-height: 266px;
@@ -626,14 +676,16 @@
     }
     .headerActionRightContainer {
       width: 100px;
-      display: block;
+      justify-content: center;
+      // display: block;
 
       .headerAccntActionContainer {
-        float: left;
+        // float: left;
+        flex: 1 1 auto;
       }
-      .headerCartActionContainer {
-        float: right;
-      }
+      // .headerCartActionContainer {
+      //   float: right;
+      // }
     }
 
     @media screen and (max-width: 480px) {
