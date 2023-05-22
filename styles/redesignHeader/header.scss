@@ -55,6 +55,10 @@
             outline: none;
             color: $colorBlack;
             background-color: $colorVeryLightGray;
+            @media (min-width: 768px) and (max-width: 840px) {
+              padding-left: 5px;
+              font-size: 13px;
+            }
           }
         }
       }
@@ -117,38 +121,8 @@
 
     @media screen and (max-width: 1150px) {
       .icon-redesign {
-        width: 32%;
+        width: 28%;
         padding: 0;
-      }
-    }
-
-    @media screen and (max-width: 991px) {
-      .icon-redesign {
-        width: 47%;
-      }
-    }
-
-    @media screen and (max-width: 980px) {
-      .icon-redesign {
-        width: 58%;
-      }
-    }
-
-    @media screen and (max-width: 887px) {
-      .icon-redesign {
-        width: 67%;
-      }
-    }
-
-    @media screen and (max-width: 866px) {
-      .icon-redesign {
-        width: 70%;
-      }
-    }
-
-    @media screen and (max-width: 854px) {
-      .icon-redesign {
-        width: 76%;
       }
     }
 
