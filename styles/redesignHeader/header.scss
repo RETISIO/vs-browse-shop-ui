@@ -69,14 +69,14 @@
       padding: 4px;
       border-radius: 0 50px 50px 0;
       border-style: none;
-      @media screen and (max-width: 768px) { //AB-1339
+      @media screen and (max-width: 767px) { //AB-1339
         padding: 0px;
       }
     
       .icon.icon-search.fa.fa-search {
         padding: 0.7rem;
         color: $colorWhite;
-        @media screen and (max-width: 768px) { //AB-1339
+        @media screen and (max-width: 767px) { //AB-1339
           font-size: 16px;
         }
       }
@@ -209,7 +209,7 @@
       }
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       .header-sticky.js-sticky-menu.is_stuck {
         position: fixed;
       }
@@ -340,7 +340,7 @@
       }
     }
     //AB-1339 starts here
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       .dropdown-menu-search {
         width: 100%;
         height: 600px;
@@ -366,7 +366,7 @@
       }
     }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     .home-header-container #header {
       .header-sticky.js-sticky-menu.is_stuck {
         .navbar.redesign-navbar {
