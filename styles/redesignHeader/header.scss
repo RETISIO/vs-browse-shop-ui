@@ -55,6 +55,10 @@
             outline: none;
             color: $colorBlack;
             background-color: $colorVeryLightGray;
+            @media (min-width: 768px) and (max-width: 840px) {
+              padding-left: 5px;
+              font-size: 13px;
+            }
           }
         }
       }
@@ -65,7 +69,7 @@
       right: -1px;
       bottom: -1px;
       top: -1px;
-      background-color: #771e14;
+      background-color: $colorBrandRed;
       padding: 4px;
       border-radius: 0 50px 50px 0;
       border-style: none;
@@ -117,38 +121,8 @@
 
     @media screen and (max-width: 1150px) {
       .icon-redesign {
-        width: 32%;
+        width: 28%;
         padding: 0;
-      }
-    }
-
-    @media screen and (max-width: 991px) {
-      .icon-redesign {
-        width: 47%;
-      }
-    }
-
-    @media screen and (max-width: 980px) {
-      .icon-redesign {
-        width: 58%;
-      }
-    }
-
-    @media screen and (max-width: 887px) {
-      .icon-redesign {
-        width: 67%;
-      }
-    }
-
-    @media screen and (max-width: 866px) {
-      .icon-redesign {
-        width: 70%;
-      }
-    }
-
-    @media screen and (max-width: 854px) {
-      .icon-redesign {
-        width: 76%;
       }
     }
 
@@ -270,7 +244,7 @@
 
     #logo-redesign {
       img {
-         margin-left: 10px;
+        margin-left: 10px;
     
         @media screen and (min-width: $screen-md-min) {
           height: 33px;
@@ -296,7 +270,6 @@
         .header {
           &-sticky {
             background-color: $colorWhite;
-            ;
             z-index: $zindex-navbar;
           }
         }
@@ -306,7 +279,6 @@
         .header {
           &-sticky {
             background-color: $colorWhite;
-            ;
             z-index: $zindex-navbar;
           }
         }
@@ -344,27 +316,26 @@
       .dropdown-menu-search {
         width: 100%;
         height: 600px;
-        // margin-top: 50px; //Only for cart n account module
       }
     }
     //AB-1339 ends here
   }
 
-    @media screen and (min-width: 768px) {
-      .home-header-container #header {
-        .header-sticky.js-sticky-menu.is_stuck {
-          .header-content-redesign {
-            .header-content-inner-redesign {
-              #logo-redesign {
-                img {
-                  margin: 10px 15px 15px 2px;
-                }
+  @media screen and (min-width: 768px) {
+    .home-header-container #header {
+      .header-sticky.js-sticky-menu.is_stuck {
+        .header-content-redesign {
+          .header-content-inner-redesign {
+            #logo-redesign {
+              img {
+                margin: 10px 15px 15px 2px;
               }
             }
           }
         }
       }
     }
+  }
 
   @media screen and (max-width: 767px) {
     .home-header-container #header {
@@ -505,31 +476,9 @@
   }
 
   @media screen and (min-width: 768px) {
-    #region-re1700018{
-      .allenmainherobanner .banner-content {
-        padding: 143px 0 0 0;
-      }
+    main.page-row.page-row-expanded.nonHomePageHeader {
+      margin-bottom: 75px;
     }
-  }
-
-  main.page-row.page-row-expanded.nonHomePageHeader {
-    margin-bottom: 75px;
-  }
-
-  @media screen and (max-width: 767px) {
-    .nonHomePageHeader {
-      margin-bottom: 0 !important;
-    }
-  }
-
-  @media screen and (min-width: 1366px) {
-    .fast-order__dropdown.dropdown-menu-center {
-      transform: translateX(-86%);
-    }
-  }
-
-  .header-actions-cart .dropdown-menu-center {
-    z-index: 2000;
   }
 
   .mini-cart-img {

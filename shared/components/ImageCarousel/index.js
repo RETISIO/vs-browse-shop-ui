@@ -84,8 +84,8 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
         </Modal.Body>
       </Modal>
       <div className='image-carousel'>
-        <div className='thumbnail-section'>
-          {imgData.length > 1 && (
+        {imgData.length > 1 && (
+          <div className='thumbnail-section'>
             <Slider {...settings}>
               {imgData?.map((img, index) => (
                 <div
@@ -98,19 +98,20 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                   key={`${img.smallImg}_${index}`}
                 >
                   {/* <NextImage
-                    alt={img.altText}
-                    src={`${damPath}${img?.thumbnailImg}`}
-                    height='80'
-                    width='80'
-                    id={`${img.smallImg}-${index}`}
-                    className='thmbnl'
-                  /> */}
+                  alt={img.altText}
+                  src={`${damPath}${img?.thumbnailImg}`}
+                  height='80'
+                  width='80'
+                  id={`${img.smallImg}-${index}`}
+                  className='thmbnl'
+                /> */}
                   {displayAlternateImages(img, index)}
                 </div>
               ))}
             </Slider>
-          )}
-        </div>
+          </div>
+        )}
+
         {selected && (
           <div className='picture-section'>
             {additionalDetails?.productCategory === 'USDA PRIME' && (
@@ -138,6 +139,9 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                 img={`${damPath}${selected?.largeImg}`}
                 alt={selected?.altText}
                 offset={{ vertical: 0, horizontal: 10 }}
+                width={500}
+                height={500}
+                scale={1}
               />
             ) : (
               <MagnifyImage

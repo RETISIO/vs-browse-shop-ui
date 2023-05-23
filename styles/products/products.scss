@@ -474,7 +474,8 @@
 @media screen and (min-width: 750px) and (max-width: 991px) {
     .pdpMainContainer {
         .sukproduct {
-            margin: 0px 0px 0px 110px;
+            // AB-1706
+            // margin: 0px 0px 0px 110px;
         }
     }
 }
