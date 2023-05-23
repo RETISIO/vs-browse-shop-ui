@@ -141,13 +141,16 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                 offset={{ vertical: 0, horizontal: 10 }}
                 width={500}
                 height={500}
-                scale={1}
+                scale={0}
               />
             ) : (
               <MagnifyImage
                 img={`${damPath}${selected?.largeImg}`}
                 alt={selected?.altText}
                 zoomPosition='original'
+                width={500}
+                height={500}
+                scale={0}
               />
             )}
           </div>
