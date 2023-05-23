@@ -104,6 +104,8 @@ export function Index (props) {
                   if (mergeRes.status === 200) {
                     reloadToPath()
                   }
+                }).catch(e=>{
+                  reloadToPath()
                 })
               } else {
                 reloadToPath()
