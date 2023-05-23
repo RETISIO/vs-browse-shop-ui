@@ -148,6 +148,10 @@ export default function MainLayout({
       if (data) {
         window.location.reload();
       }
+    }).catch((error) => {
+      if (error) {
+        window.location.reload();
+      }
     });
     return res;
   };
