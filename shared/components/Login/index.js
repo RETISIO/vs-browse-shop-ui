@@ -15,10 +15,10 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import getPersonalization from '../../helpers/utils'
 
 export function Index (props) {
-  const { show, setShow } = useAppContext()
+  const { show, setShow, loginErrorMsg, setLoginErrorMsg,
+    errorBanner, setErrorBanner, isInActive } = useAppContext()
   const { setisLogged, noReload } = useAppContext()
   const { openReset, updateOpenReset } = useAppContext()
-  const [errorBanner, setErrorBanner] = useState(false)
   const [passwordRegex, setPasswordRegex] = useState([])
   const [passwordErrors, setPasswordErrors] = useState([])
   const router = useRouter()
@@ -74,6 +74,18 @@ export function Index (props) {
     return data
   }
 
+  const handleErrorMessage = (errorData) => {
+    errorData?.map((item) => {
+      if(item?.code === 'ERR_ACC_02') { 
+        setLoginErrorMsg("We're sorry, we do not recognize the email and/or password you have entered. Please revise and try again.");
+      } else if (item?.code === "ERR_ACC_06") {
+        setLoginErrorMsg("Your password has been expired. Please reset your password to access your account.");
+      } else {
+        setLoginErrorMsg(item?.message);
+      }
+    })
+  }
+
   const reloadToPath = () => {
     if (!noReload) {
       if (page) {
@@ -114,6 +126,7 @@ export function Index (props) {
       },
       error => {
         if (error) {
+          handleErrorMessage(error?.errors);
           setErrorBanner(true)
         }
       }
@@ -139,6 +152,8 @@ export function Index (props) {
           openReset={updateOpenReset}
           passwordRegex={passwordRegex}
           passwordErrors={passwordErrors}
+          loginErrorMsg={loginErrorMsg}
+          isInActive={isInActive}
         />
       </Modal>
       <ResetPassword open={openReset} close={updateOpenReset} />
