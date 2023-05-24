@@ -217,39 +217,9 @@
       }
     }
   }
-
-  @media (min-width: 768px) and (max-width: 1366px) {
-    .header-sticky.js-sticky-menu.is_stuck {
-      .navbar.redesign-navbar {
-        .header-menu {
-          position: absolute;
-          right: 5px;
-          bottom: 6px;
-          height: 47px;
-        }
-      }
-    }
-  }
-  @media (min-width: 1367px) {
-    .header-sticky.js-sticky-menu.is_stuck {
-      .navbar.redesign-navbar {
-        .header-menu {
-          position: absolute;
-          right: -4px;
-          bottom: 18px;
-        }
-      }
-    }
-  }
-
     #logo-redesign {
       img {
         margin-left: 10px;
-    
-        @media screen and (min-width: $screen-md-min) {
-          height: 33px;
-        }
-    
         @media screen and (min-width: 768px) {
           height: 33px;
         }
