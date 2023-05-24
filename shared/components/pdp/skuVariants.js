@@ -135,7 +135,7 @@ function SkuVariants({
       val = maxQtyAllowed
       setItemQuantity(maxQtyAllowed)
     }
-    if (val <= 0 || val === '' || Number.isNaN(val)) {
+    if (val <= 0) {
       setItemQuantity(1)
       return
     }
@@ -149,6 +149,12 @@ function SkuVariants({
     setItemQuantity(val)
     setDisablePlusCounter(false)
     setDisableAddToCart(false)
+  }
+
+  const handleOnBlur = e => {
+    if (e.target.value === '' || Number.isNaN(e.target.value)) {
+      setItemQuantity(1)
+    }
   }
 
   const displayQtyErrorMsg = skuData => {
@@ -286,11 +292,13 @@ function SkuVariants({
                     <i className='fa fa-minus' aria-hidden='true'></i>
                   </button>
                 </span>
+                {/** qty input field */}
                 <input
                   className='sku-item-qty'
                   type='number'
                   value={itemQuantity}
                   onChange={e => handleQtyChange(e, skuData)}
+                  onBlur={e => handleOnBlur(e, skuData)}
                 />
                 <span className='input-group-btn'>
                   {/* plus button */}
