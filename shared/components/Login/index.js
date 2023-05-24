@@ -78,12 +78,11 @@ export function Index(props) {
 
   const handleErrorMessage = (errorData) => {
     errorData?.map((item) => {
-      if(item?.code === 'ERR_ACC_02') {
-        setLoginErrorMsg("We're sorry, we do not recognize the email and/or password you have entered. Please revise and try again.");
-      } else if (item?.code === 'ERR_ACC_06') {
+      if (item?.code === 'ERR_ACC_06') {
         setLoginErrorMsg('Your password has been expired. Please reset your password to access your account.');
       } else {
-        setLoginErrorMsg(item?.message);
+        // eslint-disable-next-line max-len
+        setLoginErrorMsg("We're sorry, we do not recognize the email and/or password you have entered. Please revise and try again.");
       }
     });
   };
