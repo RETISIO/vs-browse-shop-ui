@@ -67,7 +67,6 @@
             line-height: 17px;
         }
         .category-list-item:hover {
-            // font-size: 17px;
             background-color: $colorEclipse;
             a {
                 font-weight: bold;
@@ -78,7 +77,6 @@
     .header-dropdown-menu .category-list-item a {
         color: $colorWhite;
         display: inline-block;
-        // line-height: 3;
         font-weight: normal;
     }
     .header-dropdown-menu .list-heading {
@@ -138,13 +136,6 @@
         border: none;
         color: $colorWhite;
     }
-        
-    @media (min-width: 768px) {
-        .navbar-nav {
-            float: none; 
-            margin: 0;
-        }
-    }
 
     .header-dropdown-menu .category-heading {
         color: $colorWhite;
@@ -153,13 +144,11 @@
         font-weight: 600;
     }
     
-    @media (min-width: 768px) and (max-width: 992px) {
-        .nav-list {
-            display: flex;
-            flex-direction: row;
+    @media (min-width: 768px) {
+        .navbar-nav {
+            float: none;
+            margin: 0;
         }
-    }
-    @media (min-width: 992px) {
         .nav-list {
             display: flex;
             flex-direction: row;
@@ -171,13 +160,12 @@
     .firstDropDownMegaMenu {
         height: 100vh;
         .homeDropdownMenu {
-            top: 25px;
+            top: 0;
             left: 200px;
             padding: 0;
         }
     }
     .mobileMenuContainer {
-        margin-top: -25px;
         width: 400px;
     }
 }
