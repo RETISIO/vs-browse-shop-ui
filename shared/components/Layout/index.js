@@ -23,7 +23,7 @@ export default function MainLayout({
   data, abUrl = '', SEO, children,
 }) {
   const { state, updateState } = useAppContext();
-  const { show, setShow } = useAppContext();
+  const { show, setShow, loginErrorMsg, setLoginErrorMsg, setErrorBanner, setIsInActive } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
@@ -148,9 +148,27 @@ export default function MainLayout({
       if (data) {
         window.location.reload();
       }
+    }).catch((error) => {
+      if (error) {
+        window.location.reload();
+      }
     });
     return res;
   };
+
+    const showLoginModal = (value) => {
+    if(value) {
+      setLoginErrorMsg("You habe been logged out due to inactivity. Please login again.");
+      setIsInActive(true);
+      setShow(true);
+      setErrorBanner(true);
+    } else {
+      setShow(false);
+      setErrorBanner(false);
+      setLoginErrorMsg('');
+    } 
+  }
+  
   return (
     <>
       {/* {show ? 'tue' : 'false sdf'}
@@ -195,6 +213,8 @@ export default function MainLayout({
         miniCartDetails={miniCartDetails}
         isNextJs={true}
         setMiniCartDetails={setMiniCartDetails}
+        loginErrorMsg={loginErrorMsg}
+        showLoginModal={showLoginModal}
       >
         {children}
       </Layout>

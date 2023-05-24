@@ -58,8 +58,10 @@ export default function ProductDescription(props) {
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [errorMsg, setErrorMsg] = useState()
+  const [wishListErrorMsg, setWishListErrorMsg] = useState()
   const [productAdded, setProductAdded] = useState({ added: false })
   const [successMsg, setSuccessMsg] = useState()
+  const [wishListSuccessMsg, setWishListSuccessMsg] = useState()
   const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
   const { setShow, isLogged, setNoReload, noReload, state } = useAppContext()
@@ -84,6 +86,10 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareVarinatsOptions()
+    setErrorMsg('')
+    setSuccessMsg('')
+    setWishListSuccessMsg('')
+    setWishListErrorMsg('')
   }, [])
 
   useEffect(() => {
@@ -101,6 +107,17 @@ export default function ProductDescription(props) {
       }
     }
   }, [noReload, isLogged])
+
+  useEffect(() => {
+    if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
+      setTimeout(() => {
+        setSuccessMsg('')
+        setErrorMsg('')
+        setWishListSuccessMsg('')
+        setWishListErrorMsg('')
+      }, 3000)
+    }
+  }, [errorMsg, successMsg, wishListErrorMsg, wishListSuccessMsg])
 
   const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
   const productData = pdpData && pdpData.products && pdpData.products[0]
@@ -201,9 +218,11 @@ export default function ProductDescription(props) {
       onClick={() => {
         if (errMsg) {
           setErrorMsg('')
+          setWishListErrorMsg('')
         }
         if (sucsMsg) {
           setSuccessMsg('')
+          setWishListSuccessMsg('')
         }
       }}
     >
@@ -237,6 +256,9 @@ export default function ProductDescription(props) {
               userData: state.userData,
               added: true
             })
+            setErrorMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg('')
             setSuccessMsg(
               'The item(s) has been successfully added to your cart.'
             )
@@ -246,6 +268,9 @@ export default function ProductDescription(props) {
               data.errors && Array.isArray(data.errors)
                 ? data.errors[0].message
                 : ''
+            setSuccessMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg('')
             setErrorMsg(error)
             window.scrollTo(0, 0)
           }
@@ -267,7 +292,10 @@ export default function ProductDescription(props) {
       result
         .then(data => {
           if (data && data.status === 200) {
-            setSuccessMsg(
+            setSuccessMsg('')
+            setErrorMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg(
               `The following item have been moved to your wishlist: ${productData?.displayName}`
             )
             window.scrollTo(0, 0)
@@ -285,16 +313,22 @@ export default function ProductDescription(props) {
                 Array.isArray(data.errors) &&
                 data.errors[0].message) ||
               ''
-            setErrorMsg(error)
+            setSuccessMsg('')
+            setErrorMsg('')
+            setWishListSuccessMsg('')
+            setWishListErrorMsg(error)
             window.scrollTo(0, 0)
           }
         })
         .catch(error => {
-          setErrorMsg(error.message)
+          setSuccessMsg('')
+          setErrorMsg('')
+          setWishListSuccessMsg('')
+          setWishListErrorMsg(error.message)
           window.scrollTo(0, 0)
         })
     } else if (!skuData || (skuData && Object.keys(skuData).length === 0)) {
-      setErrorMsg('skuId must not be empty')
+      setWishListErrorMsg('skuId must not be empty')
       window.scrollTo(0, 0)
     } else {
       setSkuSelected(skuData)
@@ -346,24 +380,26 @@ export default function ProductDescription(props) {
         </Alert>
       )}
       <div className='container pdpMainContainer'>
-        {errorMsg && (
+        {(errorMsg || wishListErrorMsg) && (
           <div
             className='alert alert-dismissible hidden-print alert-danger undefined cart-success-msg'
             aria-describedby='loginModalErrors-desc'
             tabIndex='0'
             role='alert'
+            id={`pdp-${errorMsg ? 'errorMsg' : 'wishListErrorMsg'}`}
           >
-            {handleCloseBtn(errorMsg, undefined)}
-            <b id='loginModalErrors-desc'>{errorMsg}</b>
+            {handleCloseBtn(errorMsg || wishListErrorMsg, undefined)}
+            <b id='loginModalErrors-desc'>{errorMsg || wishListErrorMsg}</b>
           </div>
         )}
-        {successMsg && (
+        {(successMsg || wishListSuccessMsg) && (
           <div
             className='alert alert-dismissible hidden-print alert-success undefined header-alert-top cart-success-msg'
             role='alert'
+            id={`pdp-${successMsg ? 'successMsg' : 'wishListSuccessMsg'}`}
           >
-            {handleCloseBtn(undefined, successMsg)}
-            <strong>{successMsg}</strong>
+            {handleCloseBtn(undefined, successMsg || wishListSuccessMsg)}
+            <strong>{successMsg || wishListSuccessMsg}</strong>
           </div>
         )}
         <div className='product-title-wrapper'>

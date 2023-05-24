@@ -31,6 +31,12 @@
         letter-spacing: 0.46px;
         line-height: 20px;
     }
+    #pdp-errorMsg {
+        display: none;
+    }
+    #pdp-successMsg {
+        display: none;
+    }
 }
 .pdp-btn-wishlist{
     margin-top: 12px;
@@ -276,6 +282,12 @@
                     transform: none !important;
                 }   
             }
+        }
+        #pdp-errorMsg {
+            display: block;
+        }
+        #pdp-successMsg {
+            display: block;
         }
     }
 }
