@@ -162,6 +162,7 @@ export default function MainLayout({
       setIsInActive(true);
       setShow(true);
       setErrorBanner(true);
+      document.cookie = `usrsn=; expires=${new Date(0).toUTCString()}; path=/;`;
     } else {
       setShow(false);
       setErrorBanner(false);
