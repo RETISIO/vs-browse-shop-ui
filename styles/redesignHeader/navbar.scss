@@ -167,10 +167,14 @@
         }
     }
     .nav-item.js-dropdown.sub-nav .homeDropdownMenu { display: none;}
-    .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { display: block;}
-    .firstDropDownMegaMenu .homeDropdownMenu {
-        top: 25px;
-        left: 200px;
+    .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { display: block; padding: 20px 0;}
+    .firstDropDownMegaMenu {
+        height: 100vh;
+        .homeDropdownMenu {
+            top: 25px;
+            left: 200px;
+            padding: 0;
+        }
     }
     .mobileMenuContainer {
         margin-top: -45px;
