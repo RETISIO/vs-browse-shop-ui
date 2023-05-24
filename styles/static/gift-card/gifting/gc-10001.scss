@@ -48,6 +48,9 @@
             }   
         }
     }
+    #pdp-successMsg {
+        display: none;
+    }
 }
 .giftcard-product-recommendation {
     padding-right: 15px;
@@ -73,3 +76,47 @@
 .product-card.pcheight {
     height: 373px !important;
 }
+
+@media screen and (max-width: 1024px) {
+    .giftCardConainer {
+          #pdp-errorMsg {
+              display: block;
+          }
+          #pdp-successMsg {
+              display: block;
+          }
+      }
+      #zoom-image {
+        padding-right: 74px;
+      }
+  }
+
+@media screen and (max-width: 991px) {
+    .giftCardConainer {
+          #pdp-errorMsg {
+              display: block;
+          }
+          #pdp-successMsg {
+              display: block;
+          }
+      }
+      #zoom-image {
+        width: 100vw;
+        padding-right: 74px;
+      }
+  }
+
+@media screen and (max-width: 540px) {
+    .giftCardConainer {
+          #pdp-errorMsg {
+              display: block;
+          }
+          #pdp-successMsg {
+              display: block;
+          }
+      }
+      #zoom-image {
+        width: 100vw;
+        padding-right: 17px;
+      }
+  }
