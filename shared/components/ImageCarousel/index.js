@@ -114,7 +114,7 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
 
         {selected && (
           <div className='picture-section'>
-            {additionalDetails?.productCategory === 'USDA PRIME' && (
+            {additionalDetails?.isPrimeProduct && (
               <NextImage
                 alt='USDA Prime'
                 src={USDABadge}
@@ -173,7 +173,7 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
                 className='sale-logo'
               />
               {/* )} */}
-              {additionalDetails?.productCategory === 'USDA PRIME' && (
+              {additionalDetails?.isPrimeProduct && (
                 <NextImage
                   alt='USDA Prime'
                   src={USDABadge}
