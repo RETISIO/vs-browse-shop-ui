@@ -5350,6 +5350,7 @@ button.close {
 }
 .modal-open {
   overflow: hidden;
+  padding-right: 0px !important;
 }
 .modal {
   position: fixed;
