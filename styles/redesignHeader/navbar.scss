@@ -41,7 +41,7 @@
     }
     
     .sub-nav1 {
-        transform: translate(184px,-456px);
+        // transform: translate(184px,-456px);
         background-color: $colorEclipse;
         padding: 10px;    
         line-height: 2.5;
@@ -166,8 +166,11 @@
             width: 100%;
         }
     }
-    .homeDropdownMenu {
-        left: 16px;
+    .nav-item.js-dropdown.sub-nav .homeDropdownMenu { display: none;}
+    .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { display: block;}
+    .firstDropDownMegaMenu .homeDropdownMenu {
+        top: 25px;
+        left: 200px;
     }
     .mobileMenuContainer {
         margin-top: -45px;
