@@ -81,15 +81,15 @@ export default function ProductDescription(props) {
   }
 
   useEffect(() => {
+    setErrorMsg('')
+    setSuccessMsg('')
+    setWishListSuccessMsg('')
+    setWishListErrorMsg('')
     setShowWidget(true)
     setTimeout(() => {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareVarinatsOptions()
-    setErrorMsg('')
-    setSuccessMsg('')
-    setWishListSuccessMsg('')
-    setWishListErrorMsg('')
   }, [])
 
   useEffect(() => {
