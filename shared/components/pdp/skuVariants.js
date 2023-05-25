@@ -506,8 +506,22 @@ function SkuVariants({
                       }
                     >
                       <span className='outoftocklab'>Out of Stock</span>
-                      <span className='Countb'>{sku.optionValue}</span>
-                      <span className='txttagz'>
+                      <span
+                        className={`${
+                          sku.optionValue.length > 12
+                            ? 'Countb-large'
+                            : 'Countb'
+                        }`}
+                      >
+                        {sku.optionValue}
+                      </span>
+                      <span
+                        className={`${
+                          sku.optionValue.length > 12
+                            ? 'txttagz-large'
+                            : 'txttagz'
+                        }`}
+                      >
                         {sku.thickness && formatThickness(sku.thickness)}
                       </span>
                     </div>
@@ -566,7 +580,13 @@ function SkuVariants({
                       {sku.optionValue}
                     </span>
                     {sku.thickness && (
-                      <span className='txttagz'>
+                      <span
+                        className={`${
+                          sku.optionValue.length > 12
+                            ? 'txttagz-large'
+                            : 'txttagz'
+                        }`}
+                      >
                         {formatThickness(sku.thickness)}
                       </span>
                     )}
