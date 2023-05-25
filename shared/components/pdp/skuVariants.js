@@ -320,6 +320,7 @@ function SkuVariants({
                 </span>
               </div>
             </span>
+            {/** add to cart & add to wishlist */}
             <span
               className={`pdp-buttons ${
                 !skuData?.skuDetails?.hasStock ? 'npbuttons' : ''
@@ -493,7 +494,17 @@ function SkuVariants({
                 // out of stock section
                 return (
                   <li className='list-inline-item me-2 mb-2'>
-                    <div className='Count outstock'>
+                    <div
+                      className='Count outstock'
+                      onClick={() =>
+                        handleSkuSelected(
+                          index,
+                          variantKey,
+                          sku.optionValue,
+                          sku
+                        )
+                      }
+                    >
                       <span className='outoftocklab'>Out of Stock</span>
                       <span className='Countb'>{sku.optionValue}</span>
                       <span className='txttagz'>
