@@ -11,7 +11,7 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-confusing-arrow */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Trans, withTranslation } from 'react-i18next'
@@ -28,6 +28,15 @@ function AddressForm({
 }) {
   const { clearForm } = useFormDataContext()
   const [showAddress, setShowAddress] = useState(!!values?.address2)
+
+  useEffect(() => {
+    const elem = window.document.getElementById('country-label')
+    if (elem) {
+      elem.style.marginTop = '-15px'
+      elem.style.opacity = 1
+      elem.style.zIndex = 100
+    }
+  }, [])
 
   return (
     <>
@@ -196,7 +205,7 @@ function AddressForm({
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            <Form.Label className='formGroup-label'>
+            <Form.Label className='formGroup-label' id='country-label'>
               <Trans>Country*</Trans>
             </Form.Label>
           </div>
