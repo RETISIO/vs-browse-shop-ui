@@ -65,7 +65,11 @@
               width: 94%;
               padding-right: 0;
             }
-            @media (min-width: 1400px) {
+            @media (min-width: 1200px) {
+              width: 95%;
+              padding-right: 0;
+            }
+            @media (min-width: 1366px) {
               width: 96%;
               padding-right: 0;
             }
