@@ -90,7 +90,7 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareVarinatsOptions()
-  }, [])
+  }, [props])
 
   useEffect(() => {
     if (productAdded.added) {

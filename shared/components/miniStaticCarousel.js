@@ -22,7 +22,7 @@ export default function MiniStaticCarousel() {
           <span>Expert selection of the top 1% of products</span>
         </div>
       </div>
-      <div className="widgets_div col-md-4 col-xs-12 col-sm-6">
+      <div className="widgets_div col-md-4 col-xs-12 col-sm-6 highest-standard">
         <div className="icon_div">
           <span>
             <img
@@ -36,7 +36,7 @@ export default function MiniStaticCarousel() {
           <span>The highest standard packaging and delivery experience</span>
         </div>
       </div>
-      <div className="widgets_div col-md-4 col-xs-12 col-sm-6">
+      <div className="widgets_div col-md-4 col-xs-12 col-sm-6 satisfication-guaranteed">
         <div className="icon_div">
           <span>
             <img
@@ -66,7 +66,7 @@ export default function MiniStaticCarousel() {
         </div>
         <div className="text_div"><span>Precision hand-cutting and aging</span></div>
       </div>
-      <div className="widgets_div col-md-6 col-xs-12 col-sm-6">
+      <div className="widgets_div col-md-6 col-xs-12 col-sm-6 exclusive-access">
         <div className="icon_div">
           <span>
             <img

@@ -98,6 +98,9 @@
     }
     .firstDropDownMegaMenu {
         left: -7px;
+        @media (min-width: 768px) and (max-width: 1024px) {
+            left: -15px;
+        }
     }
 
     .c-list li {

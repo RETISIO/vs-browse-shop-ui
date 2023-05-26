@@ -58,6 +58,20 @@
             @media (min-width: 768px) and (max-width: 840px) {
               padding-left: 5px;
               font-size: 13px;
+              width: 92%;
+              padding-right: 0;
+            }
+            @media (min-width: 841px) {
+              width: 94%;
+              padding-right: 0;
+            }
+            @media (min-width: 1200px) {
+              width: 95%;
+              padding-right: 0;
+            }
+            @media (min-width: 1366px) {
+              width: 96%;
+              padding-right: 0;
             }
           }
         }
@@ -395,6 +409,9 @@
     .navbar.redesign-navbar{
       .firstDropDownMegaMenu {
         left: -7px;
+        @media (min-width: 768px) and (max-width: 1024px) {
+          left: -15px;
+        }
       }
     }
   }

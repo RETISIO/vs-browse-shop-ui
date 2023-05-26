@@ -479,6 +479,19 @@ html {
         text-transform: capitalize;
         height:24px;
     } 
+
+    .txttagz-large {
+        display: block;
+        text-align: center;
+        font-size: 9px;
+        font-weight: 500;
+        padding: 0px;
+        margin: 6px 0px 0px 0px;
+        line-height: 10px;
+        color: #000000;
+        text-transform: capitalize;
+        height:24px;
+    } 
     
     .sku-selected {
        right: 2px;
@@ -565,6 +578,19 @@ html {
         font-weight: 600;
         margin: -12px 0px -6px 0px;
         text-transform: uppercase;
+    }
+
+    .Countb-large {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        margin: -12px 0px -6px 0px;
+        text-transform: uppercase;
+        max-height: 2.6rem;
+        word-break: break-word;
+        overflow: hidden;
+        line-height: 0.9rem;
     }
 
     .outstock {
