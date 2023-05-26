@@ -100,7 +100,7 @@ export default function ProductCarousel(props) {
     <>
       {load && (
         <>
-          <h1 className='row align-left'>
+          <h1 className='row align-left' style={{ marginLeft: '15px' }}>
             <span>{props.name}</span>
             <small className='ml-10'>{productsData?.configValues.defaultProductSelector.viewAllLink && <a href={productsData?.configValues.defaultProductSelector.viewAllLink}>View All</a>}</small>
           </h1>
