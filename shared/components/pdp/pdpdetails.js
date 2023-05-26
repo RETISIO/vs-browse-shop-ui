@@ -81,6 +81,8 @@ export default function ProductDescription(props) {
   }
 
   useEffect(() => {
+    setShowAlert('')
+    setMessage('')
     setErrorMsg('')
     setSuccessMsg('')
     setWishListSuccessMsg('')
