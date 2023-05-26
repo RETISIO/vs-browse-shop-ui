@@ -158,7 +158,7 @@ export default function MainLayout({
 
     const showLoginModal = (value) => {
     if(value) {
-      setLoginErrorMsg("You habe been logged out due to inactivity. Please login again.");
+      setLoginErrorMsg("You have been logged out due to inactivity. Please login again.");
       setIsInActive(true);
       setShow(true);
       setErrorBanner(true);
