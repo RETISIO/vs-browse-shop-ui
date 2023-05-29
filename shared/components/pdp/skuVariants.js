@@ -584,7 +584,9 @@ function SkuVariants({
                     <span
                       className={`${
                         index === Object.keys(variantOptions).length - 1
-                          ? 'txttagb-last'
+                          ? sku.optionValue.length > 9
+                            ? 'txttagb-last-large'
+                            : 'txttagb-last'
                           : 'txttagb'
                       }`}
                     >
