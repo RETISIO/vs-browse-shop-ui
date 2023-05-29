@@ -31,7 +31,9 @@ export function ResultCount (props) {
   const path = router.asPath.split('?')[0]
 
   const filterSearch = val => {
-    const checkTextforSpace = /^[A-Za-z\s]*$/.test(searchKey)
+    // const checkTextforSpace = /^[A-Za-z\s]*$/.test(searchKey)
+    // AB-1833
+    const checkTextforSpace = (/\s/).test(searchKey);
 
     if (checkTextforSpace) {
       router.push({
