@@ -174,4 +174,11 @@
     .mobileMenuContainer {
         width: 400px;
     }
+    .categoryL1ListContainer {
+        position: relative;
+        .header-menu {
+            top: 5px;
+            display: none;
+        }
+    }
 }
