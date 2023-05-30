@@ -41,11 +41,12 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
-import SkuVariants from './skuVariants'
+import SkuVariants from './skuVariants';
 import {
   notifyMe,
   AddToCart,
-  AddtoWishhList
+  AddtoWishhList,
+  ClickProduct
 } from '../ThirdPartyScripts/Events'
 
 export default function ProductDescription(props) {
@@ -183,6 +184,7 @@ export default function ProductDescription(props) {
   const handleVariantSelected = (index, variantKey, value, variant) => {
     // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
     const variantOptionsObj = { ...variantsOptions }
+    
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
     // index===0, set all other options default to empty
@@ -195,7 +197,13 @@ export default function ProductDescription(props) {
       })
     }
     setVariantSelected({ variantKey, variant })
-    setVariantsOptions({ ...variantOptionsObj })
+    setVariantsOptions({ ...variantOptionsObj });
+
+    ClickProduct({
+      data:{ ...pdpData?.products[0], defaultSkuId: variant?.skuId },
+      userData: state?.userData,
+      channelData: state?.channelData,
+    });
   }
 
   const handleSelectedSku = skuData => {

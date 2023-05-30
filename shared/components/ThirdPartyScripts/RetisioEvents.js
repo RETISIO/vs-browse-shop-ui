@@ -100,6 +100,13 @@ const PrepareClickData = (obj) => {
     };
   }
 
+  if(!finalData.categories && obj.data && obj.data.breadcrumbs) {
+    finalData = {
+      ...finalData,
+      categories: obj.data.breadcrumbs,
+    };
+  }
+
   return finalData;
 };
 
