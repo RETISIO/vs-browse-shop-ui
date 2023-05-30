@@ -34,7 +34,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-quotes */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function SkuVariants({
   productId,
@@ -51,6 +51,13 @@ function SkuVariants({
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
+
+  useEffect(() => {
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
+  }, [productData])
 
   const handleSelectedSkuData = skuData => {
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
@@ -176,6 +183,10 @@ function SkuVariants({
 
   const handleSkuSelected = (index, variantKey, value, variant) => {
     // handle tile selection
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
     handleVariantSelected(index, variantKey, value, variant)
   }
 
@@ -573,7 +584,9 @@ function SkuVariants({
                     <span
                       className={`${
                         index === Object.keys(variantOptions).length - 1
-                          ? 'txttagb-last'
+                          ? sku.optionValue.length > 9
+                            ? 'txttagb-last-large'
+                            : 'txttagb-last'
                           : 'txttagb'
                       }`}
                     >
