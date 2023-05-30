@@ -41,7 +41,7 @@ import { useMiniCartDataContext } from '../../context/miniCartcontext'
 import { useAppContext } from '../../context/appContext'
 import { addToBagDetails, addToWishList } from '../../helpers/getPDPData'
 import NotifyMe from '../notifyme'
-import SkuVariants from './skuVariants';
+import SkuVariants from './skuVariants'
 import {
   notifyMe,
   AddToCart,
@@ -182,9 +182,10 @@ export default function ProductDescription(props) {
   )
 
   const handleVariantSelected = (index, variantKey, value, variant) => {
+    // user clicked on option e.g., 4pcs or 10oz
     // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
     const variantOptionsObj = { ...variantsOptions }
-    
+
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
     // index===0, set all other options default to empty
@@ -197,19 +198,19 @@ export default function ProductDescription(props) {
       })
     }
     setVariantSelected({ variantKey, variant })
-    setVariantsOptions({ ...variantOptionsObj });
+    setVariantsOptions({ ...variantOptionsObj })
   }
 
   const handleSelectedSku = skuData => {
-    // for setting onSale badge and addToWishlist payload
+    // sku identified - for setting onSale badge and addToWishlist payload
     if (skuData) {
       setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
-      setSkuSelected(skuData);
+      setSkuSelected(skuData)
       ClickProduct({
-        data:{ ...pdpData?.products[0], defaultSkuId: skuData?.skuId },
+        data: { ...pdpData?.products[0], defaultSkuId: skuData?.skuId },
         userData: state?.userData,
-        channelData: state?.channelData,
-      });
+        channelData: state?.channelData
+      })
     }
   }
 
