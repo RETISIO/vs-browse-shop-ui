@@ -183,7 +183,7 @@ function SkuVariants({
   }
 
   const handleSkuSelected = (index, variantKey, value, variant) => {
-    // handle tile selection - user clicked on tile e.g., 4pcs
+    // handle tile selection - user clicked on tile e.g., 4pcs or 10oz etc.,
     setItemQuantity(1)
     setDisableAddToCart(false)
     setDisableMinusCounter(false)
@@ -198,7 +198,7 @@ function SkuVariants({
     return str
   }
 
-  // out of section for product without options
+  // out of stock for product without options
   const displayOOSForWoOp = skuId => {
     if (!skuId) {
       return
