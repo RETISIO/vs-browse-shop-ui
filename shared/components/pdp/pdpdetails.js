@@ -198,19 +198,18 @@ export default function ProductDescription(props) {
     }
     setVariantSelected({ variantKey, variant })
     setVariantsOptions({ ...variantOptionsObj });
-
-    ClickProduct({
-      data:{ ...pdpData?.products[0], defaultSkuId: variant?.skuId },
-      userData: state?.userData,
-      channelData: state?.channelData,
-    });
   }
 
   const handleSelectedSku = skuData => {
     // for setting onSale badge and addToWishlist payload
     if (skuData) {
       setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
-      setSkuSelected(skuData)
+      setSkuSelected(skuData);
+      ClickProduct({
+        data:{ ...pdpData?.products[0], defaultSkuId: skuData?.skuId },
+        userData: state?.userData,
+        channelData: state?.channelData,
+      });
     }
   }
 
