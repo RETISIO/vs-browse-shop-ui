@@ -40,7 +40,7 @@ function SortVO(props) {
         N: encodeURI(`${selectedCategories}`),
         t: encodeURI(`${selectedFacets}`),
         so: encodeURI(`${(id)}`),
-        'submit-search': encodeURI(`${searchTerm}`),
+        'submit-search': searchTerm, //search term issue
       },
     });
   };
