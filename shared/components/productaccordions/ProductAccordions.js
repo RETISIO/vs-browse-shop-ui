@@ -7,20 +7,6 @@ function ProductAccordions (props) {
   const [config, setConfig] = useState()
 
   useEffect(() => {
-    const hElem = window.document.getElementById('productInfoSelector-header')
-    const bElem = window.document.getElementById('productInfoSelector-body')
-    if (hElem) {
-      const pElem = hElem.parentElement
-      if (pElem.hasAttribute('aria-expanded')) {
-        pElem.setAttribute('aria-expanded', true)
-        pElem.classList.remove('collapsed')
-      }
-    }
-    if (bElem) {
-      const pElem = bElem.parentElement
-      pElem.classList.add('show')
-    }
-
     const configVal = JSON.parse(props?.configValue)
     setConfig(configVal)
     if (configVal?.classification?.product === 'longDescription') {
@@ -35,14 +21,11 @@ function ProductAccordions (props) {
       {data && (
         <div className='accordions-section'>
           <div className='container'>
-            <Accordion flush>
+            <Accordion flush defaultActiveKey='0'>
               {config?.classification?.product === 'longDescription' && (
                 <Accordion.Item eventKey='0'>
                   <Accordion.Header>
-                    <div
-                      className='panel panel-default panel-large'
-                      id='productInfoSelector-header'
-                    >
+                    <div className='panel panel-default panel-large'>
                       <div className='panel-heading'>
                         <div className='panel-title'>
                           <a
@@ -59,7 +42,7 @@ function ProductAccordions (props) {
                       </div>
                     </div>
                   </Accordion.Header>
-                  <Accordion.Body id='productInfoSelector-body'>
+                  <Accordion.Body>
                     <div
                       className='panel-body'
                       data-bind='html: $data.product().longDescription()'
