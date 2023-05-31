@@ -13,7 +13,7 @@ function CustomBreadcrumb(props) {
   const [pageContentData, setPageContent] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if(props?.payLoad?.pageTye === 'PDP') {
+    if(props?.payLoad?.pageType === 'PDP') {
       const prdObj = [
         {
           isRootCategory: false,
