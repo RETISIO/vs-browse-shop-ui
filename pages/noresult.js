@@ -8,10 +8,11 @@
 /* eslint-disable no-unused-expressions */
 import Head from 'next/head';
 // eslint-disable-next-line import/named
+import { PageBuilder } from '@retisio/sf-ui';
 import { requestContructor } from '../shared/helpers/api';
 import MainLayout from '../shared/components/Layout';
-import PageBuilder from '../shared/components/template/noResultPageBuilder';
 import { Loader } from '../shared/components/loader';
+import ComponentMap from '../shared/components/componentMap';
 
 export default function NoResult ({ data }) {
 //   // const i18n = useI18n();
@@ -24,15 +25,40 @@ export default function NoResult ({ data }) {
   //   })();
   // }, []);
 
+  const pageContent = data && data.page && data.page.segmentsMap;
+  const pageType = 'search';
+
   return (
     <MainLayout data={data}>
       <Head>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main>
-        {!data && <Loader /> }
-        {/* {i18n.t('title')} */}
-        <PageBuilder {...data} pageType="nosearch" />
+        <div id="main" className="container">
+          <div className="row">
+            <div className="redBox">
+              <div className="col-sm-12" id="region-megaMenuRegionCatPage">
+                <div id="allnProductLisitingPage_v10-wi1400005">
+                  <div className="page-overlay js-overlay"></div>
+                  <div className="page-main-inner">
+                    <div className="container">
+                      {!data && <Loader /> }
+                      {/* {i18n.t('title')} */}
+                      <PageBuilder
+                        pageContent={pageContent}
+                        ComponentMap={ComponentMap}
+                        payLoad={{
+                          ...data.payLoad, pageType
+                        }}
+                      
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </MainLayout>
     

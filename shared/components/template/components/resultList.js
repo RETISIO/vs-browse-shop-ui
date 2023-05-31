@@ -13,9 +13,13 @@ import URLHandler from '../../../helpers/urlHandler';
 import { requestContructor } from '../../../helpers/api';
 import { useAppContext } from '../../../context/appContext';
 import { Search } from '../../ThirdPartyScripts/Events';
+import { EllipseLoader } from '../../loader';
+import { searchTermHandler } from '../../../helpers/utils';
 
 function ResultList(props) {
-  const { data, setLoader } = props;
+  const { data } = props;
+  console.log('coming here', props);
+  const { loader, setLoader } = props.payLoad;
   // eslint-disable-next-line no-unused-vars
   const [pageContentData, setPageContent] = useState(data);
   const { state } = useAppContext();
@@ -38,8 +42,8 @@ function ResultList(props) {
 
   useEffect(() => {
     if (offset === 0) {
-      setProducts(props?.data?.payLoad?.products);
-      setProductCount(props?.data?.payLoad?.productCount);
+      setProducts(props?.payLoad?.products);
+      setProductCount(props?.payLoad?.productCount);
     }
   }, [props]);
 
@@ -65,7 +69,7 @@ function ResultList(props) {
         const categoryIds = URLHandler('N', router.asPath) || '';
         const facetIds = URLHandler('t', router.asPath) || '';
         const sort = URLHandler('so', router.asPath) || '';
-        const searchTerm = URLHandler('submit-search', router.asPath) || '';
+        const searchTerm = searchTermHandler('submit-search', router.asPath) || '';
 
         const pageDivider = productCount % 12;
 
@@ -130,43 +134,23 @@ function ResultList(props) {
   }, [offset]);
 
   return (
-    <>
-      {/* {isServer
-        ? (
-          <>
-            {products?.map((value, index) => (
-              <ProductCard
-                value={value}
-                isLast={index === products.length - 1}
-                newLimit={() => setOffset(offset + 1)}
-                index={index}
-              />
-            ))}
-          </>
-        )
-        : (
-          <>
-            {productArr?.map((value, index) => (
-              <ProductCard
-                value={value}
-                isLast={index === productArr.length - 1}
-                newLimit={() => setOffset(offset + 1)}
-                index={index}
-              />
-            ))}
-          </>
-        )} */}
-      {products?.map((value, index) => (
-        <ProductCard
-          value={value}
-          isLast={index === products.length - 1}
-          newLimit={() => setOffset(offset + 1)}
-          index={index}
+     
+    <div id="product-grid">
+      <div className="row row-gutter-sm-15">
+        {products?.map((value, index) => (
+          <ProductCard
+            value={value}
+            isLast={index === products.length - 1}
+            newLimit={() => setOffset(offset + 1)}
+            index={index}
           // eslint-disable-next-line react/no-array-index-key
-          key={index}
-        />
-      ))}
-    </>
+            key={index}
+          />
+        ))}
+      </div>
+      {loader && <EllipseLoader /> }
+    </div>
+    
   );
 }
 

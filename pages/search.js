@@ -11,8 +11,8 @@ import { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 // eslint-disable-next-line import/named
 import Head from 'next/head';
+import { PageBuilder } from '@retisio/sf-ui';
 import { usePLPDataContext } from '../shared/context/plpDatacontext';
-import PageBuilder from '../shared/components/template/pageBuilder';
 import MainLayout from '../shared/components/Layout';
 import { Loader } from '../shared/components/loader';
 import getSearchData from '../shared/helpers/getSearchData';
@@ -23,6 +23,7 @@ import { requestContructor } from '../shared/helpers/api';
 import { Search } from '../shared/components/ThirdPartyScripts/Events';
 import { useAppContext } from '../shared/context/appContext';
 import URLHandler from '../shared/helpers/urlHandler';
+import ComponentMap from '../shared/components/componentMap';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -35,9 +36,12 @@ function Static({ data }) {
   } = usePLPDataContext();
 
   const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [searchData, setSearchPageData] = useState();
 
-  const pageContent = data;
+  // const pageContent = data;
+  const pageContent = data && data.page && data.page.segmentsMap;
+  const pageType = 'search';
 
   useEffect(() => {
     setOffset(0);
@@ -84,15 +88,32 @@ function Static({ data }) {
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <main>
-        {/* {i18n.t('title')} */}
-        {loading && <Loader /> }
-        {searchData && (
-          <PageBuilder
-            pageContent={pageContent}
-            data={searchData}
-            pageType="search"
-          />
-        )}
+        <div id="main" className="container">
+          <div className="row">
+            <div className="redBox">
+              <div className="col-sm-12" id="region-megaMenuRegionCatPage">
+                <div id="allnProductLisitingPage_v10-wi1400005">
+                  <div className="page-overlay js-overlay"></div>
+                  <div className="page-main-inner">
+                    <div className="container">
+                      {/* {i18n.t('title')} */}
+                      {loading && <Loader /> }
+                      {searchData && (
+                        <PageBuilder
+                          pageContent={pageContent}
+                          ComponentMap={ComponentMap}
+                          payLoad={{
+                            ...searchData.payLoad, loader, setLoader, pageType
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
       <Yotpo />
     </MainLayout>

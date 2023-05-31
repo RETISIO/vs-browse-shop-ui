@@ -26,6 +26,7 @@ import GiftCard from '../../shared/components/giftCard'
 export default function ProductDetails({ data, origin }) {
   const { setPageData } = usePageDataContext()
   const pageContent = data && data.page && data.page.segmentsMap
+  const pageType = 'PDP';
   const { payLoad } = data
   const [loading, setLoading] = useState(false)
 
@@ -88,7 +89,7 @@ export default function ProductDetails({ data, origin }) {
           <PageBuilder
             pageContent={pageContent}
             ComponentMap={ComponentMap}
-            payLoad={payLoad}
+            payLoad={{ ...payLoad, pageType }}
           />
         )}
       </>

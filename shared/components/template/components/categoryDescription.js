@@ -4,15 +4,17 @@
 import React, { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import URLHandler from '../../../helpers/urlHandler';
+import { searchTermHandler } from '../../../helpers/utils';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function CategoryDescription(props) {
   const { data, pageType } = props;
+  const { payLoad } = props;
   const [pageContentData, setPageContent] = useState(data);
   const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
 
-  const searchTerm = URLHandler('submit-search', router.asPath) || '';
+  const searchTerm = searchTermHandler('submit-search', router.asPath) || '';
   // const { pageData } = usePageDataContext();
   useEffect(() => {
     setPageContent(props?.data);
@@ -24,9 +26,9 @@ export function CategoryDescription(props) {
 
   return (
     <>
-      {pageType === 'search' ? (
+      {props?.payLoad?.pageType === 'search' ? (
         <>
-          {pageContentData?.payLoad?.autoCorrectTerm ? (
+          {props?.payLoad?.autoCorrectTerm ? (
             <>
               {!closeFlyout && (
                 <div
@@ -59,12 +61,15 @@ export function CategoryDescription(props) {
           ) : null}
         </>
       ) : (
-        <div
-          dangerouslySetInnerHTML={{
-            __html: pageContentData?.categories?.[0]?.description,
-          }}
-        >
-        </div>
+        <>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: payLoad?.categoryData?.[0]?.description,
+            }}
+          >
+          </div>
+          <br />
+        </>
       )}
     </>
   );
@@ -72,6 +77,7 @@ export function CategoryDescription(props) {
 
 export function CategoryLongDescription(props) {
   const { data } = props;
+  const { payLoad } = props;
   const [pageContentData, setPageContent] = useState(data);
   // const { pageData } = usePageDataContext();
   useEffect(() => {
@@ -79,14 +85,17 @@ export function CategoryLongDescription(props) {
   }, [props]);
 
   return (
-    <div
-      className="hidden-xs"
-      // eslint-disable-next-line max-len
-      dangerouslySetInnerHTML={{
-        __html: pageContentData?.categories?.[0]?.longDescription,
-      }}
-    >
-    </div>
+    <>
+      <div
+        className="hidden-xs"
+        // eslint-disable-next-line max-len
+        dangerouslySetInnerHTML={{
+          __html: payLoad?.categoryData?.[0]?.longDescription,
+        }}
+      >
+      </div>
+      <br />
+    </>
   );
 }
 

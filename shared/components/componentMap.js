@@ -21,14 +21,10 @@ import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
 import ProductRecommondation from './Sliders/ProductRecommondation'
-// import loginIcon from '../../public/headerImg/mobile/account/acc-loginIcon.png';
-// import registerIcon from '../../public/headerImg/mobile/account/acc-registerIcon.png';
-// import dashboardIcon from '../../public/headerImg/mobile/account/acc-dashboardIcon.png';
-// import accountInfoIcon from '../../public/headerImg/mobile/account/acc-accountInfoIcon.png'
-// import addressBookIcon from '../../public/headerImg/mobile/account/acc-addressBookIcon.png'
-// import ordersIcon from '../../public/headerImg/mobile/account/acc-ordersIcon.png'
-// import wishlistIcon from '../../public/headerImg/mobile/account/acc-wishlistIcon.png'
-// import logOutIcon from '../../public/headerImg/mobile/account/acc-logOutIcon.png'
+import Facet from './template/components/facet';
+import ResultList from './template/components/resultList';
+import { ResultCount } from './template/components/resultCount';
+import { CategoryDescription, CategoryLongDescription } from './template/components/categoryDescription';
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -51,14 +47,11 @@ const ComponentMap = {
   'pdpcookinginstructions:custom': CookingInstructions,
   'pdpyotpoplaceholder:custom': ReviewSection,
   'productRecommendations:custom': ProductRecommondation,
-  // loginIcon,
-  // registerIcon,
-  // dashboardIcon,
-  // accountInfoIcon,
-  // addressBookIcon,
-  // ordersIcon,
-  // wishlistIcon,
-  // logOutIcon,
-
+  'facet:default': Facet,
+  'resultCount:default': ResultCount,
+  'resultList:default': ResultList,
+  'categoryDescription:custom': CategoryDescription,
+  'didyoumean:custom': CategoryDescription,
+  'categoryLongDescription:custom': CategoryLongDescription
 }
 export default ComponentMap
