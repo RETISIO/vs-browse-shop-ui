@@ -174,7 +174,7 @@ export default function ProductDescription(props) {
           <ImageCarousel
             data={productData?.productDetails?.productMedia?.default}
             additionalDetails={productAdditionDetails}
-            onSale={showSaleWidget}
+            onSale={showSaleWidget || false}
           />
         </div>
       </div>
@@ -203,7 +203,10 @@ export default function ProductDescription(props) {
 
   const handleSelectedSku = skuData => {
     // sku identified - for setting onSale badge and addToWishlist payload
-    if (skuData) {
+    if (
+      skuData &&
+      (!skuSelected ? true : skuSelected.skuId !== skuData.skuId)
+    ) {
       setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
       ClickProduct({
