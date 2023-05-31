@@ -46,18 +46,33 @@
           }
     
           .ab-search-redesign {
-            width: 100%;
+            width: 92%;
             border: none;
             border-right: none;
             padding: 15px;
             height: 5px;
+            padding-right: 0;
+            padding-left: 5px;
             border-radius: 5px 0 0 5px;
             outline: none;
             color: $colorBlack;
             background-color: $colorVeryLightGray;
+            @media (min-width: 576px) and (max-width: 767px) {
+              width: 95%;
+            }
             @media (min-width: 768px) and (max-width: 840px) {
-              padding-left: 5px;
               font-size: 13px;
+              width: 92%;
+            }
+            @media (min-width: 841px) {
+              width: 94%;
+              padding-left: 15px;
+            }
+            @media (min-width: 1200px) {
+              width: 95%;
+            }
+            @media (min-width: 1366px) {
+              width: 96%;
             }
           }
         }

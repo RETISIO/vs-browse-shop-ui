@@ -34,7 +34,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-quotes */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function SkuVariants({
   productId,
@@ -52,7 +52,15 @@ function SkuVariants({
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
 
+  useEffect(() => {
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
+  }, [productData])
+
   const handleSelectedSkuData = skuData => {
+    // sku identified
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
   }
 
@@ -175,7 +183,11 @@ function SkuVariants({
   }
 
   const handleSkuSelected = (index, variantKey, value, variant) => {
-    // handle tile selection
+    // handle tile selection - user clicked on tile e.g., 4pcs or 10oz etc.,
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
     handleVariantSelected(index, variantKey, value, variant)
   }
 
@@ -186,7 +198,7 @@ function SkuVariants({
     return str
   }
 
-  // out of section for product without options
+  // out of stock for product without options
   const displayOOSForWoOp = skuId => {
     if (!skuId) {
       return
@@ -434,6 +446,10 @@ function SkuVariants({
       let skuId = ''
       let optionsSelected = []
       const keys = Object.keys(variantOptions)
+      // get all associated skuIds of all selected varianOptions
+      // count - 4pcs - [99581, 99521], weight - 10oz - [86381, 99581, 77645]
+      // get all skuIds - [99581, 99521, 86381, 99581, 77645]
+      // for options selected === count[4pcs] - weight[10oz] == the skuId is 99581
       for (let key = 0; key < keys.length; key++) {
         optionsSelected = optionsSelected.concat(
           variantOptions[keys[key]].defaultSelected
@@ -445,7 +461,7 @@ function SkuVariants({
         for (let i = 0; i < optionsSelected.length; i++) {
           for (let j = i + 1; j < optionsSelected.length; j++) {
             if (optionsSelected[i] === optionsSelected[j]) {
-              skuId = optionsSelected[i]
+              skuId = optionsSelected[i] // skuId identified
               break
             }
           }
@@ -457,6 +473,7 @@ function SkuVariants({
         skuId = optionsSelected[0]
       }
       if (skuId) {
+        // populate sku details info in selected option
         variantOptions[keys[keys.length - 1]].skuId = skuId
         //   variantOptions[keys[keys.length - 1]].hasStock = false //test data
         variantOptions[keys[keys.length - 1]].hasStock =
@@ -573,7 +590,9 @@ function SkuVariants({
                     <span
                       className={`${
                         index === Object.keys(variantOptions).length - 1
-                          ? 'txttagb-last'
+                          ? sku.optionValue.length > 9
+                            ? 'txttagb-last-large'
+                            : 'txttagb-last'
                           : 'txttagb'
                       }`}
                     >

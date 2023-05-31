@@ -45,7 +45,8 @@ import SkuVariants from './skuVariants'
 import {
   notifyMe,
   AddToCart,
-  AddtoWishhList
+  AddtoWishhList,
+  ClickProduct
 } from '../ThirdPartyScripts/Events'
 
 export default function ProductDescription(props) {
@@ -81,6 +82,8 @@ export default function ProductDescription(props) {
   }
 
   useEffect(() => {
+    setShowAlert('')
+    setMessage('')
     setErrorMsg('')
     setSuccessMsg('')
     setWishListSuccessMsg('')
@@ -90,7 +93,7 @@ export default function ProductDescription(props) {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareVarinatsOptions()
-  }, [])
+  }, [props])
 
   useEffect(() => {
     if (productAdded.added) {
@@ -179,8 +182,10 @@ export default function ProductDescription(props) {
   )
 
   const handleVariantSelected = (index, variantKey, value, variant) => {
+    // user clicked on option e.g., 4pcs or 10oz
     // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
     const variantOptionsObj = { ...variantsOptions }
+
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
     // index===0, set all other options default to empty
@@ -197,10 +202,15 @@ export default function ProductDescription(props) {
   }
 
   const handleSelectedSku = skuData => {
-    // for setting onSale badge and addToWishlist payload
+    // sku identified - for setting onSale badge and addToWishlist payload
     if (skuData) {
       setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
+      ClickProduct({
+        data: { ...pdpData?.products[0], defaultSkuId: skuData?.skuId },
+        userData: state?.userData,
+        channelData: state?.channelData
+      })
     }
   }
 
