@@ -5,7 +5,7 @@ export function Loader() {
   return (
     <div id="loadingModal" className="loadingIndicator" style={{ display: 'block' }}>
       <div id="cc-spinner" className="cc-spinner">
-        <div className="cc-spinner-css" style={{ top: '150px', left: '50%' }}>
+        <div className="cc-spinner-css" style={{ top: '150px' }}>
           <span className="ie-show">Loading...</span>
           <div className="cc-spinner-css-1"></div>
           <div className="cc-spinner-css-2"></div>
