@@ -88,7 +88,7 @@ function Static({ data, origin }) {
                 <div id="allnProductLisitingPage_v10-wi1400005">
                   <div className="page-overlay js-overlay"></div>
                   <div className="page-main-inner">
-                    <div className="container">
+                    <div className="">
                       {/* {i18n.t('title')} */}
                       {loading && <Loader /> }
                       <PageBuilder

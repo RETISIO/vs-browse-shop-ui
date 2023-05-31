@@ -41,7 +41,7 @@ export default function NoResult ({ data }) {
                 <div id="allnProductLisitingPage_v10-wi1400005">
                   <div className="page-overlay js-overlay"></div>
                   <div className="page-main-inner">
-                    <div className="container">
+                    <div className="">
                       {!data && <Loader /> }
                       {/* {i18n.t('title')} */}
                       <PageBuilder
