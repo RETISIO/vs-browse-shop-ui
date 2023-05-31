@@ -239,13 +239,14 @@ function SkuVariants({
     const skuData = productData && productData?.skus[skuId]
     // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
     // skuData.skuDetails.hasStock = false // test data for out of stock
-
     const optionsTxtForMv =
       (variantOptions &&
         variantOptions[variantKey] &&
         variantOptions[variantKey]?.optionsTextForMv) ||
       ''
-    handleSelectedSkuData(skuData)
+    if (variantOptions && variantKey) {
+      handleSelectedSkuData(skuData)
+    }
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
