@@ -5,16 +5,14 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import URLHandler from '../../../helpers/urlHandler';
 // import { usePageDataContext } from '../../context/pageData-context';
 import SortVO from './sortVO';
 import FacetsMobile from './facetsMobile';
 import { searchTermHandler } from '../../../helpers/utils';
-// import { constructWord } from '../../../helpers/utils';
 
 export function ResultCount(props) {
-  const { data, pageType } = props;
-  const [pageContentData, setPageContent] = useState(data);
+  // const { data, pageType } = props;
+  // const [pageContentData, setPageContent] = useState(data);
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
@@ -28,12 +26,10 @@ export function ResultCount(props) {
     setSearchKey(searchTerm);
   }, [searchTerm]);
 
-  console.log("object56756756", searchTerm);
-
   // const { pageData } = usePageDataContext();
-  useEffect(() => {
-    setPageContent(props?.data);
-  }, [props]);
+  // useEffect(() => {
+  //   setPageContent(props?.data);
+  // }, [props]);
 
   const path = router.asPath.split('?')[0];
 
@@ -73,7 +69,7 @@ export function ResultCount(props) {
     <div className="page-title-container d-flex justify-space-between align-items-top">
       <div className="result-count-start">
         <h1 className="w-100">
-          {pageContentData?.page?.pageType?.id === 'search:default'
+          {props?.payLoad?.page?.pageType?.id === 'search:default'
           || props?.payLoad?.searchTerm !== '' ? (
               <span className="result-title-count">
                 {`Showing Results for "${

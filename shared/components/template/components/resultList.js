@@ -5,7 +5,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { usePageDataContext } from '../../../context/pageData-context';
+// import { usePageDataContext } from '../../../context/pageData-context';
 import { usePLPDataContext } from '../../../context/plpDatacontext';
 import ProductCard from './productCard';
 import URLHandler from '../../../helpers/urlHandler';
@@ -17,13 +17,12 @@ import { EllipseLoader } from '../../loader';
 import { searchTermHandler } from '../../../helpers/utils';
 
 function ResultList(props) {
-  const { data } = props;
-  console.log('coming here', props);
+  const { data, singleColumn } = props;
   const { loader, setLoader } = props.payLoad;
   // eslint-disable-next-line no-unused-vars
-  const [pageContentData, setPageContent] = useState(data);
+  // const [pageContentData, setPageContent] = useState(data);
   const { state } = useAppContext();
-  const { pageData } = usePageDataContext();
+  // const { pageData } = usePageDataContext();
   const router = useRouter();
   const [searchData, setSearchPageData] = useState();
 
@@ -36,9 +35,9 @@ function ResultList(props) {
     productCount,
   } = usePLPDataContext();
 
-  useEffect(() => {
-    setPageContent(props?.data);
-  }, []);
+  // useEffect(() => {
+  //   setPageContent(props?.data);
+  // }, []);
 
   useEffect(() => {
     if (offset === 0) {
@@ -145,6 +144,7 @@ function ResultList(props) {
             index={index}
           // eslint-disable-next-line react/no-array-index-key
             key={index}
+            singleColumn={singleColumn}
           />
         ))}
       </div>
