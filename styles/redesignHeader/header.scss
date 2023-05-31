@@ -232,23 +232,27 @@
       }
     }
   }
-    #logo-redesign {
-      img {
-        margin-left: 10px;
-        @media screen and (min-width: 768px) {
-          height: 33px;
-        }
-        @media (min-width: 320px) and (max-width: 480px) {
-          height: 42px;
-          width: 70%;
-        }
-    
-        @media (min-width: 500px) and (max-width: 516px) {
-          height: auto;
-          width: 86%;
-        }
+  #logo-redesign {
+    img {
+      margin-left: 10px;
+      @media (min-width: 320px) and (max-width: 480px) {
+        width: 70%;
+      }
+  
+      @media (min-width: 500px) and (max-width: 516px) {
+        height: auto;
+        width: 86%;
       }
     }
+  }
+
+  .header-logo-mobile {
+    #logo {
+      img {
+        height: auto;
+      }
+    }
+  }
 
     .home-header-container {
       @media (min-width: 320px) and (max-width: 480px) {
