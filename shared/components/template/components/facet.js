@@ -55,9 +55,10 @@ function Facet(props) {
   };
 
   return (
-    <>
-      <div className="catalog-filter__top">
-        {(props?.payLoad?.categoryFacetEnabled && props?.payLoad?.categories
+    <aside className={!mobileView ? "hidden-xs" : ""}>
+      <div className="catalog-aside">
+        <div className="catalog-filter__top">
+          {(props?.payLoad?.categoryFacetEnabled && props?.payLoad?.categories
         && props?.payLoad?.categories?.length > 0
         && props?.payLoad?.pageType !== "search")
         ? (
@@ -97,24 +98,24 @@ function Facet(props) {
             </div>
           </div>
       ) : null}
-        <div className="catalog-filter__clear">
-          <b>Your Selections: </b>
-          {props?.payLoad?.pageType !== "search" && props?.payLoad?.selectedFacets?.length > 0 && (
-          <Link
-            className="link-underline"
-            href={{
+          <div className="catalog-filter__clear">
+            <b>Your Selections: </b>
+            {props?.payLoad?.pageType !== "search" && props?.payLoad?.selectedFacets?.length > 0 && (
+            <Link
+              className="link-underline"
+              href={{
                 pathname: path,
                 query: {
                   N: encodeURI(`${selectedCategories}`),
                 },
               }}
-            onClick={() => clickFilter()}
-          >
-            Clear All
-          </Link>
+              onClick={() => clickFilter()}
+            >
+              Clear All
+            </Link>
           )}
-          {props?.payLoad?.pageType === "search" && (props?.payLoad?.categoriesSelected?.length > 0 ||
-          props?.payLoad?.selectedFacets?.length > 0) && (
+            {props?.payLoad?.pageType === "search" && (props?.payLoad?.categoriesSelected?.length > 0
+          || props?.payLoad?.selectedFacets?.length > 0) && (
           <Link
             className="link-underline"
             href={{
@@ -129,11 +130,11 @@ function Facet(props) {
           </Link>
           )}
           
-        </div>
-        <ul className="catalog-filter__selected list-unstyled">
-          {props?.payLoad?.pageType === "search" && props?.payLoad?.categoriesSelected?.map((val,i) => (
-            <React.Fragment key={i}>
-              {
+          </div>
+          <ul className="catalog-filter__selected list-unstyled">
+            {props?.payLoad?.pageType === "search" && props?.payLoad?.categoriesSelected?.map((val, i) => (
+              <React.Fragment key={i}>
+                {
                 val.facetValues.map((item, _key) => (
                   <li
                     className="js-detach-row"
@@ -159,11 +160,11 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </React.Fragment>
+              </React.Fragment>
           ))}
-          {props?.payLoad?.selectedFacets?.map((val,i) => (
-            <React.Fragment key={i}>
-              {
+            {props?.payLoad?.selectedFacets?.map((val, i) => (
+              <React.Fragment key={i}>
+                {
                 val.facetValues.map((item, _key) => (
                   <li
                     className="js-detach-row"
@@ -189,13 +190,13 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </React.Fragment>
+              </React.Fragment>
           ))}
-        </ul>
-      </div>
-      <div className="catalog-filter__block ab-accordion-container">
-        <div className="panel-group">
-          {(props?.payLoad?.pageType === "search") && (props?.payLoad?.categories?.length > 0)
+          </ul>
+        </div>
+        <div className="catalog-filter__block ab-accordion-container">
+          <div className="panel-group">
+            {(props?.payLoad?.pageType === "search") && (props?.payLoad?.categories?.length > 0)
           && (
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
@@ -231,18 +232,18 @@ function Facet(props) {
           </Accordion>
           )}
          
-          {props?.payLoad?.facets?.map((value, _key) => (
-            <React.Fragment key={_key}>
-              <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
-                  <Accordion.Header>
-                    {value.displayName}
-                    <i className="icon fas fa-chevron-down"></i>
-                  </Accordion.Header>
-                  {value?.facetValues?.map((val, index) => (
-                    <Accordion.Body>
-                      <Link
-                        href={{
+            {props?.payLoad?.facets?.map((value, _key) => (
+              <React.Fragment key={_key}>
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
+                    <Accordion.Header>
+                      {value.displayName}
+                      <i className="icon fas fa-chevron-down"></i>
+                    </Accordion.Header>
+                    {value?.facetValues?.map((val, index) => (
+                      <Accordion.Body>
+                        <Link
+                          href={{
                           pathname: path,
                           query: {
                             'submit-search': encodeURI(`${searchTerm}`),
@@ -250,23 +251,24 @@ function Facet(props) {
                             t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                           },
                         }}
-                        onClick={() => clickFilter()}
-                      >
-                        {val.facetLabel}
-                        {' '}
-                        (
+                          onClick={() => clickFilter()}
+                        >
+                          {val.facetLabel}
+                          {' '}
+                          (
                         {val.facetValueCount}
-                        )
+                          )
                       </Link>
-                    </Accordion.Body>
+                      </Accordion.Body>
                         ))}
-                </Accordion.Item>
-              </Accordion>
-            </React.Fragment>
+                  </Accordion.Item>
+                </Accordion>
+              </React.Fragment>
           ))}
+          </div>
         </div>
       </div>
-    </>
+    </aside>
   );
 }
 
