@@ -25,7 +25,15 @@
     }
     .cooking-guide-card {
         .product-image {
-            height: 100%;
+            // height: 100%;
+            background-repeat: no-repeat; 
+            background-position: 50% 50%;
+            background-size: cover;
+            display: block;
+            padding-bottom: 100%;
+            line-height: 0;
+            font-size: 0;
+            color: transparent;
         }
         .product-card a {
             color: inherit;
