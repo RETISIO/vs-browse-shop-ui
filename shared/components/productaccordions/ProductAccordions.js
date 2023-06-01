@@ -21,7 +21,12 @@ function ProductAccordions (props) {
       {data && (
         <div className='accordions-section'>
           <div className='container'>
-            <Accordion flush defaultActiveKey='0'>
+            <Accordion
+              flush
+              defaultActiveKey={`${
+                config?.classification?.product === 'longDescription' ? '0' : ''
+              }`}
+            >
               {config?.classification?.product === 'longDescription' && (
                 <Accordion.Item eventKey='0'>
                   <Accordion.Header>
