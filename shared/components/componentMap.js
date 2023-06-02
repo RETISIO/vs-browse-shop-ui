@@ -13,6 +13,7 @@ import RequestCatalog from './requestCatalog'
 import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
+// import ProductDescription from './pdp/pdpdetails_sort'
 import ProductDescription from './pdp/pdpdetails'
 import CustomBreadcrumb from './custombreadcrumb'
 import ProductAccordions from './productaccordions/ProductAccordions'
@@ -21,10 +22,13 @@ import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
 import ProductRecommondation from './Sliders/ProductRecommondation'
-import Facet from './template/components/facet';
-import ResultList from './template/components/resultList';
-import { ResultCount } from './template/components/resultCount';
-import { CategoryDescription, CategoryLongDescription } from './template/components/categoryDescription';
+import Facet from './template/components/facet'
+import ResultList from './template/components/resultList'
+import { ResultCount } from './template/components/resultCount'
+import {
+  CategoryDescription,
+  CategoryLongDescription
+} from './template/components/categoryDescription'
 
 const ComponentMap = {
   nextImage: NextImage,
