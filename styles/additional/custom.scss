@@ -2177,6 +2177,8 @@ h2.page-subtitle {
 	@media screen and (max-width: $screen-sm) {
 		.sort-by {
 			width: 100%;
+			//ABUAT-70
+			margin-top: 15px;
 		}
 	}
 

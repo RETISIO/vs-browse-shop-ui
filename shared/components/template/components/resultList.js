@@ -5,7 +5,6 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-// import { usePageDataContext } from '../../../context/pageData-context';
 import { usePLPDataContext } from '../../../context/plpDatacontext';
 import ProductCard from './productCard';
 import URLHandler from '../../../helpers/urlHandler';
@@ -17,12 +16,9 @@ import { EllipseLoader } from '../../loader';
 import { searchTermHandler } from '../../../helpers/utils';
 
 function ResultList(props) {
-  const { data, singleColumn } = props;
+  const { singleColumn } = props;
   const { loader, setLoader } = props.payLoad;
-  // eslint-disable-next-line no-unused-vars
-  // const [pageContentData, setPageContent] = useState(data);
   const { state } = useAppContext();
-  // const { pageData } = usePageDataContext();
   const router = useRouter();
   const [searchData, setSearchPageData] = useState();
 

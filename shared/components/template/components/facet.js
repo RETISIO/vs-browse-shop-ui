@@ -12,18 +12,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import Accordion from 'react-bootstrap/Accordion';
-// import { usePageDataContext } from "../../../context/pageData-context";
 import URLHandler from '../../../helpers/urlHandler';
 import { searchTermHandler } from "../../../helpers/utils";
 
 function Facet(props) {
   const { mobileView, closeToggle } = props;
-  // const [pageContentData, setPageContent] = useState(props.data);
-  // const { pageData } = usePageDataContext();
   const [isClick, setIsClicked] = useState(false);
   
   useEffect(() => {
-    // setPageContent(props?.data);
     if(isClick && mobileView) {
        closeToggle();
        setIsClicked(false);
@@ -31,7 +27,6 @@ function Facet(props) {
   }, [props]);
 
   const navigate = useRouter();
-  // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
   const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.N?.concat("+") || "");
   const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.t?.concat("+") || "");
   const [searchKey, setSearchKey] = useState(navigate?.query?.['submit-search']?.concat("+") || "");

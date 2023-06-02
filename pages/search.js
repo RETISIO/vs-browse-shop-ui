@@ -16,7 +16,6 @@ import { usePLPDataContext } from '../shared/context/plpDatacontext';
 import MainLayout from '../shared/components/Layout';
 import { Loader } from '../shared/components/loader';
 import getSearchData from '../shared/helpers/getSearchData';
-import PageJson from '../shared/helpers/pageData.json';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';

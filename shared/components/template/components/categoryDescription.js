@@ -4,20 +4,13 @@
 import React, { useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { searchTermHandler } from '../../../helpers/utils';
-// import { usePageDataContext } from '../../context/pageData-context';
 
 export function CategoryDescription(props) {
-  // const { data, pageType } = props;
   const { payLoad } = props;
-  // const [pageContentData, setPageContent] = useState(data);
   const [closeFlyout, setCloseFlyout] = useState(false);
   const router = useRouter();
 
   const searchTerm = searchTermHandler('submit-search', router.asPath) || '';
-  // const { pageData } = usePageDataContext();
-  // useEffect(() => {
-  //   setPageContent(props?.data);
-  // }, [props]);
 
   const navigatePage = () => {
     Router.push(`/noresult?submit-search=${searchTerm}`);
@@ -75,13 +68,7 @@ export function CategoryDescription(props) {
 }
 
 export function CategoryLongDescription(props) {
-  // const { data } = props;
   const { payLoad } = props;
-  // const [pageContentData, setPageContent] = useState(data);
-  // const { pageData } = usePageDataContext();
-  // useEffect(() => {
-  //   setPageContent(props?.data);
-  // }, [props]);
 
   return (
     <>
