@@ -646,3 +646,27 @@
   //AB-1203 ends here
   /* **** DB css for the account and mini cart ****** */
 }
+
+//ABUAT-62 starts here
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar{
+    display: block !important;
+  }
+  .header-content-redesign {
+    display: none !important;
+  }
+  .navbar.redesign-navbar {
+    display: none !important;
+  }
+  .header-logo-mobile {
+    display: block !important;
+  }
+  ul.header-actions-redesign-mobile {
+    justify-content: space-evenly;
+    padding-top: 16px;
+  }
+  .header-actions-cart {
+    display: block !important;
+  }
+}
+//ABUAT-62 ends here
