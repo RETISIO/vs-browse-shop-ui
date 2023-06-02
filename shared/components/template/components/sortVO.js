@@ -2,23 +2,16 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-// import { usePageDataContext } from '../../context/pageData-context';
 import URLHandler from '../../../helpers/urlHandler';
 import { searchTermHandler } from '../../../helpers/utils';
 
 function SortVO(props) {
   const router = useRouter();
-  const { data, payLoad } = props;
-  const [pageContentData, setPageContent] = useState(data);
-  // const { pageData } = usePageDataContext();
+  const { payLoad } = props;
 
   const [selectedCategories, setSelectedCategories] = useState(router?.query?.N?.concat('+') || '');
   const [selectedFacets, setSelectedFacets] = useState(router?.query?.t?.concat('+') || '');
   const [selectedSort, setSelectedSort] = useState(router?.query?.so?.concat('+') || '');
-
-  useEffect(() => {
-    setPageContent(props?.data);
-  }, [props]);
 
   const path = router.asPath.split('?')[0];
   const categoryIds = URLHandler('N', router.asPath) || '';

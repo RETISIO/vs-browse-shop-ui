@@ -5,14 +5,12 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-// import { usePageDataContext } from '../../context/pageData-context';
 import SortVO from './sortVO';
 import FacetsMobile from './facetsMobile';
 import { searchTermHandler } from '../../../helpers/utils';
 
 export function ResultCount(props) {
-  // const { data, pageType } = props;
-  // const [pageContentData, setPageContent] = useState(data);
+  const { singleColumn } = props;
   const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
@@ -25,11 +23,6 @@ export function ResultCount(props) {
   useEffect(() => {
     setSearchKey(searchTerm);
   }, [searchTerm]);
-
-  // const { pageData } = usePageDataContext();
-  // useEffect(() => {
-  //   setPageContent(props?.data);
-  // }, [props]);
 
   const path = router.asPath.split('?')[0];
 
@@ -71,7 +64,7 @@ export function ResultCount(props) {
         <h1 className="w-100">
           {props?.payLoad?.page?.pageType?.id === 'search:default'
           || props?.payLoad?.searchTerm !== '' ? (
-              <span className="result-title-count">
+            <span className="result-title-count">
                 {`Showing Results for "${
                     props?.payLoad?.autoCorrectTerm
                       ? props?.payLoad?.autoCorrectTerm
@@ -111,13 +104,16 @@ export function ResultCount(props) {
           </div>
         )}
       </div>
-      <button
-        className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
-        onClick={() => setIsMobile(true)}
-      >
-        Filter
-      </button>
-      {isMobile && <FacetsMobile closeToggle={() => setIsMobile(false)} {...props} /> }
+      {/* ABUAT-70 */}
+      {!singleColumn && (
+        <button
+          className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
+          onClick={() => setIsMobile(true)}
+        >
+          Filter
+        </button>
+      )}
+      {isMobile && !singleColumn && <FacetsMobile closeToggle={() => setIsMobile(false)} {...props} /> }
       <SortVO {...props} />
     </div>
   );
