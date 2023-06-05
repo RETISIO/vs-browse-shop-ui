@@ -29,6 +29,7 @@ import {
   CategoryDescription,
   CategoryLongDescription
 } from './template/components/categoryDescription'
+import CookingGuideFacet from './cookingGuide/staticFacet'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -56,6 +57,7 @@ const ComponentMap = {
   'resultList:default': ResultList,
   'categoryDescription:custom': CategoryDescription,
   'didyoumean:custom': CategoryDescription,
-  'categoryLongDescription:custom': CategoryLongDescription
+  'categoryLongDescription:custom': CategoryLongDescription,
+  'cookingguidefacet:custom': CookingGuideFacet
 }
 export default ComponentMap
