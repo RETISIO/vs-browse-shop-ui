@@ -109,6 +109,7 @@ export function ResultCount(props) {
         <button
           className="btn btn-block btn-primary btn-filter js-mobile-menu-toggle visible-xs"
           onClick={() => setIsMobile(true)}
+          type="button"
         >
           Filter
         </button>
