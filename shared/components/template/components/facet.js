@@ -70,7 +70,7 @@ function Facet(props) {
                     <li key={i}>
                       <Link
                         href={{
-                          pathname: path,
+                          pathname: `/category/${item.seoData && item.seoData.slug ? item.seoData.slug : item.name.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}`,
                           query: {
                             'submit-search': encodeURI(`${searchKey}`),
                             N: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
@@ -251,9 +251,9 @@ function Facet(props) {
                           {val.facetLabel}
                           {' '}
                           (
-                        {val.facetValueCount}
+                          {val.facetValueCount}
                           )
-                      </Link>
+                        </Link>
                       </Accordion.Body>
                         ))}
                   </Accordion.Item>

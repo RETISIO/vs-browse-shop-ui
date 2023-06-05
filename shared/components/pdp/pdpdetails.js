@@ -137,7 +137,8 @@ export default function ProductDescription(props) {
     ) {
       const skuId = skuid || productData?.defaultSkuId
       // find skuId in associatedSkuds of variantOptions
-      for (let i = 0; i < productData?.variantOptions[variantKey].length; i++) {
+      const arrLngth = productData?.variantOptions[variantKey].length
+      for (let i = 0; i < arrLngth; i++) {
         // options array
         const associatedSkusIds =
           productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
@@ -145,17 +146,40 @@ export default function ProductDescription(props) {
           defaultSku = productData?.variantOptions[variantKey][i]
           break
         }
+        if (i === arrLngth - 1 && Object.keys(defaultSku).length === 0) {
+          // defaultSkuId is not there or not matching with associatedSkuIds
+          if (productData?.variantOptions[variantKey].length) {
+            defaultSku = productData?.variantOptions[variantKey][0]
+          }
+        }
       }
     }
+
     return defaultSku
+  }
+
+  const sortOptionValuesOfVariantKey = variantKeyArray => {
+    const sortAlphaNum = (a, b) =>
+      a.optionValue.localeCompare(b.optionValue, 'en', { numeric: true })
+    // const fruits = ['12', 'sdads', '12pcs', '8 pcs', 'usda', '14', 'abc']
+    // document.getElementById('demo1').innerHTML = fruits
+    variantKeyArray.sort(sortAlphaNum)
+    // document.getElementById('demo2').innerHTML = fruits
+    return variantKeyArray
   }
 
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach(variantKey => {
+        // sort optionValues of variantKey array
+        // e.g., variantKey = [{optionValue: '4pcs', asscoaietDSkuIds:[]}, {optionValue: '2pcs', asscoaietDSkuIds:[]},{}]
+        const sortedVarientKeyArray = sortOptionValuesOfVariantKey(
+          productData.variantOptions[variantKey]
+        )
         variantOptionsObj[variantKey] = {
-          options: productData.variantOptions[variantKey],
+          options: sortedVarientKeyArray,
+          // options: productData.variantOptions[variantKey],
           defaultSelected: getDefaultSku(variantKey),
           // defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
