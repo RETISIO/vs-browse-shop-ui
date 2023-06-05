@@ -116,9 +116,7 @@ export default function ProductTile({ value, recommondationData }) {
       ) : null}
       <a
         className="product-image"
-        href={`/products/${value?.displayName
-          ?.toLowerCase()
-          ?.replace(/ /g, '-')}/${value?.productId}`}
+        href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
         onClick={(e) => navigatePDP(
           value,
             `/products/${value?.displayName
@@ -142,9 +140,7 @@ export default function ProductTile({ value, recommondationData }) {
       <div className="product-card-inner">
         <div className="product-card-desc">
           <a
-            href={`/products/${value?.displayName
-              ?.toLowerCase()
-              ?.replace(/ /g, '-')}/${value?.productId}`}
+            href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
             onClick={(e) => navigatePDP(
               value,
                 `/products/${value?.displayName
@@ -157,31 +153,31 @@ export default function ProductTile({ value, recommondationData }) {
           </a>
           {value?.additionalDetails?.isNewProduct
           || value?.additionalDetails?.isNeverFrozen ? (
-              <div
-              id="cc_img__resize_wrapper-new-badge"
-              className=""
-              style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
-            >
-              <NextImage
-                  alt={
+            <div
+                id="cc_img__resize_wrapper-new-badge"
+                className=""
+                style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
+              >
+                <NextImage
+                alt={
                     (value?.additionalDetails?.isNewProduct
                     && value?.additionalDetails?.isNeverFrozen)
                   || value?.additionalDetails?.isNeverFrozen
                       ? 'fresh'
                       : 'new'
                   }
-                  className="image-badge ccLazyLoaded"
-                  src={
+                className="image-badge ccLazyLoaded"
+                src={
                     (value?.additionalDetails?.isNewProduct
                     && value?.additionalDetails?.isNeverFrozen)
                   || value?.additionalDetails?.isNeverFrozen
                       ? '/static/assets/Fresh.png'
                       : '/static/assets/new.png'
                   }
-                  height={50}
-                  width={23}
-                />
-            </div>
+                height={50}
+                width={23}
+              />
+              </div>
             ) : null}
         </div>
         <div
@@ -198,8 +194,8 @@ export default function ProductTile({ value, recommondationData }) {
                 <b>
                   $
                   {value?.productPrice?.minSalePrice
-                    ? value?.productPrice?.minSalePrice
-                    : value?.productPrice?.minListPrice}
+                    ? value?.productPrice?.minSalePrice.toFixed(2)
+                    : value?.productPrice?.minListPrice.toFixed(2)}
                 </b>
                 {/* {displayPrice()} */}
               </>
