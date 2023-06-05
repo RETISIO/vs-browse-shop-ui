@@ -45,7 +45,7 @@ export default function CookingDescription({ id }) {
     WinPrint.close();
   };
   return (
-    <div className="panel-body">
+    <div className="panel-body cooking-body">
       <div className="cooking-instruction-button">
         <button
           id="print-btn"
