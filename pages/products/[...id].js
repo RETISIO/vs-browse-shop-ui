@@ -73,10 +73,9 @@ export default function ProductDetails({ data, origin }) {
     data.payLoad &&
     data.payLoad.products &&
     data.payLoad.products[0] &&
-    data.payLoad.products[0].productDetails &&
-    data.payLoad.products[0].productDetails.seoData
+    data.payLoad.products[0].seoData
   ) {
-    seoData = data.payLoad.products[0].productDetails.seoData
+    seoData = data.payLoad.products[0].seoData;
   }
   const renderProductDescriptionPage = () => {
     const productType = payLoad?.products && payLoad?.products[0]?.productType
