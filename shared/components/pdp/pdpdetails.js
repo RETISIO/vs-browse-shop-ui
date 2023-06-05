@@ -161,10 +161,8 @@ export default function ProductDescription(props) {
   const sortOptionValuesOfVariantKey = variantKeyArray => {
     const sortAlphaNum = (a, b) =>
       a.optionValue.localeCompare(b.optionValue, 'en', { numeric: true })
-    // const fruits = ['12', 'sdads', '12pcs', '8 pcs', 'usda', '14', 'abc']
-    // document.getElementById('demo1').innerHTML = fruits
+    // const testArr = ['12', 'sdads', '12pcs', '8 pcs', 'usda', '14', 'abc']
     variantKeyArray.sort(sortAlphaNum)
-    // document.getElementById('demo2').innerHTML = fruits
     return variantKeyArray
   }
 
@@ -173,7 +171,7 @@ export default function ProductDescription(props) {
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach(variantKey => {
         // sort optionValues of variantKey array
-        // e.g., variantKey = [{optionValue: '4pcs', asscoaietDSkuIds:[]}, {optionValue: '2pcs', asscoaietDSkuIds:[]},{}]
+        // e.g., variantOptions[variantKey] = [{optionValue: '4pcs', asscoaietDSkuIds:[]}, {optionValue: '2pcs', asscoaietDSkuIds:[]},{}]
         const sortedVarientKeyArray = sortOptionValuesOfVariantKey(
           productData.variantOptions[variantKey]
         )
