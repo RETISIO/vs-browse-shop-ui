@@ -163,16 +163,16 @@ function ImageCarousel ({ data, additionalDetails, onSale }) {
               key={`${img?.smallImg}_${index}`}
               onClick={() => handleShow(img)}
             >
-              {/* {onSale && ( */}
-              <NextImage
-                alt='Sale'
-                src={SaleBadge}
-                height={45}
-                width={45}
-                id='sale-logo'
-                className='sale-logo'
-              />
-              {/* )} */}
+              {onSale && (
+                <NextImage
+                  alt='Sale'
+                  src={SaleBadge}
+                  height={45}
+                  width={45}
+                  id='sale-logo'
+                  className='sale-logo'
+                />
+              )}
               {additionalDetails?.isPrimeProduct && (
                 <NextImage
                   alt='USDA Prime'
