@@ -49,8 +49,6 @@ export default function CookingGuideFacet(props) {
               {filteredStaticLinksArr?.length > 0 && filteredStaticLinksArr?.map((item, i) => renderStaticHeading(item, i))}
             </div>
           </aside>
-          {/* <style>.general-guides-list.list-unstyled .active{ color: #1e4783; font-weight: 600;}</style>
-        <script> if(location && location.pathname) {var els = document.querySelectorAll(".general-guides-list a[href='"+location.pathname+"']"); els.length > 0 && els[0].classList.add("active"); }</script> */}
         </section>
       </div>
       <div className="visible-xs">
