@@ -82,7 +82,7 @@ export default function ArticleDetails({ props }) {
   return (
     <>
       {content && (
-        <div className='cooking-instruction cooking-body' id='11'>
+        <div className='cooking-instruction' id='11'>
           <div className='cooking-instruction-caption'>
             {content.servingSize.length ? (
               <div className='cooking-instruction-heading'>
