@@ -467,12 +467,16 @@
     }
   }
 
-  // @media screen and (min-width: 768px) {
-  //   main.page-row.page-row-expanded.nonHomePageHeader {
-  //     margin-bottom: 75px;
-  //   }
-  // }
-
+  @media screen and (min-width: 768px) {
+    main.page-row.page-row-expanded.nonHomePageHeader {
+      margin-bottom: 0px;
+    }
+  }
+  @media screen and (min-width: 992px) {
+    main.page-row.page-row-expanded.nonHomePageHeader {
+      margin-bottom: 75px;
+    }
+  }
   .mini-cart-img {
 	  width: 75px;
 	  height: 75px;
