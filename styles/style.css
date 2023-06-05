@@ -8424,3 +8424,7 @@ button.close {
 .remove-token {
   cursor: pointer;
 }
+.facet-active {
+  color: #1e4783;
+  font-weight: 600
+}

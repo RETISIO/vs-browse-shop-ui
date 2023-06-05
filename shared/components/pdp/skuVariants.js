@@ -393,6 +393,7 @@ function SkuVariants({
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
         const optionSkusIds =
           variantOptions[variantKey].options[i].associatedSkuIds
+        // if (associatedSkuIds) {
         for (let j = 0; j < associatedSkuIds.length; j++) {
           if (optionSkusIds.includes(associatedSkuIds[j])) {
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
@@ -405,6 +406,7 @@ function SkuVariants({
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
+        // }
       }
       if (
         !variantOptions[variantKey].defaultSelected &&
