@@ -593,7 +593,7 @@
     }
   }
   //AB-1203 starts here
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 991px) {
     .mobile-header img {
       width: 80%;
     }
@@ -622,32 +622,28 @@
       height: 24px;
       overflow: hidden;
     }
+  }
+  @media screen and (max-width: 767px) {
     .headerActionRightContainer {
       width: 100px;
       justify-content: center;
-      // display: block;
 
       .headerAccntActionContainer {
-        // float: left;
         flex: 1 1 auto;
       }
-      // .headerCartActionContainer {
-      //   float: right;
-      // }
     }
-
-    @media screen and (max-width: 480px) {
-      .headerActionRightContainer {
-        width: 90px;
-      }
-      .headerCartActionContainer {
-        margin-right: 8px;
-      }
-      .headerAccntActionContainer .icon-user,
-      .headerCartActionContainer .icon-cart {
-        font-size: 30px;
-        margin-top: 2px;
-      }
+  }
+  @media screen and (max-width: 480px) {
+    .headerActionRightContainer {
+      width: 90px;
+    }
+    .headerCartActionContainer {
+      margin-right: 8px;
+    }
+    .headerAccntActionContainer .icon-user,
+    .headerCartActionContainer .icon-cart {
+      font-size: 30px;
+      margin-top: 2px;
     }
   }
   //AB-1203 ends here
