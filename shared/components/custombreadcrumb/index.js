@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Loader } from '../loader';
 import { searchTermHandler } from '../../helpers/utils';
+import { constructBNSSEOURL } from '../urlUtils';
 
 function CustomBreadcrumb(props) {
   const router = useRouter();
@@ -53,7 +54,7 @@ function CustomBreadcrumb(props) {
                 {pageContentData?.map((item, _key) => (
                   <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
                     {pageContentData?.length - 1 !== _key ? (
-                      <Link href={`/category/${item.id}?N=${item.id}`}>
+                      <Link href={constructBNSSEOURL(item, 'plp')}>
                         {item?.name}
                       </Link>
                     ) : (
@@ -78,7 +79,7 @@ function CustomBreadcrumb(props) {
                       {props?.payLoad?.navigationPath?.map((item, _key) => (
                         <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
                           {props?.payLoad?.navigationPath?.length - 1 !== _key ? (
-                            <Link href={`/category/${item.id}?N=${item.id}`}>{item?.name}</Link>
+                            <Link href={constructBNSSEOURL(item, 'plp')}>{item?.name}</Link>
                           ) : (
                             <span>{item?.name}</span>
                           )}
