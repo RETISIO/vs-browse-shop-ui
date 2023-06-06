@@ -26,7 +26,45 @@
             color: $colorWhite;
         }
     }
-
+    /* ABUAT-65 starts here */
+    // .mobileMenuLevelOneItems {
+    //     background-color: #98B4C3;
+    //     color: $colorBlack;
+    //     a.mobile-menu__btn {
+    //         text-decoration: none;
+    //         &:focus {
+    //             outline: 3px solid white;
+    //         }
+    //         .navbar-title.text-elipsis{
+    //             color: $colorBlack;
+    //         }
+    //     }
+    //     .icon-chevron-right {
+    //         background-color: #ACC2CE;
+    //         color: $colorBlack;
+    //     }
+    // }
+    // .mobile-level-2 {
+    //     li {
+    //         background-color: #98B4C3;
+    //         a {
+    //             text-decoration: none;
+    //             color: $colorBlack !important;
+    //             &:focus {
+    //                 outline: 3px solid white;
+    //             }
+    //         }
+    //     }
+    //     h2.mobile-submenu__title {
+    //         background-color: $colorPrimary;
+    //     }
+    // }
+    .mobile-level-2 {
+        h2.mobile-submenu__title {
+            background-color: #98B4C3;
+        }
+    }
+    /* ABUAT-65 ends here */
 }
 
 
