@@ -50,6 +50,7 @@ function SkuVariants({
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
+  const [selectedSkus, setSelectedSkus] = useState([])
   const maxQtyAllowed = 999 // max qty user can enter
 
   useEffect(() => {
@@ -235,7 +236,7 @@ function SkuVariants({
 
   // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey, skuID) => {
-    const skuId = skuID || variantOptions[variantKey].skuId || ''
+    const skuId = skuID || variantOptions[variantKey]?.skuId || ''
     const skuData = productData && productData?.skus[skuId]
     // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
     // skuData.skuDetails.hasStock = false // test data for out of stock
@@ -301,17 +302,25 @@ function SkuVariants({
                     }`}
                     type='button'
                     onClick={reduceItemQuantity}
+                    value='minus'
+                    aria-labelledby='qty-minus'
                   >
-                    <i className='fa fa-minus' aria-hidden='true'></i>
+                    <i
+                      className='fa fa-minus'
+                      aria-hidden='true'
+                      id='qty-minus'
+                    ></i>
                   </button>
                 </span>
                 {/** qty input field */}
                 <input
+                  id='quantity'
                   className='sku-item-qty'
                   type='number'
                   value={itemQuantity}
                   onChange={e => handleQtyChange(e, skuData)}
                   onBlur={e => handleOnBlur(e, skuData)}
+                  aria-labelledby='quantity'
                 />
                 <span className='input-group-btn'>
                   {/* plus button */}
@@ -327,8 +336,14 @@ function SkuVariants({
                     }`}
                     type='button'
                     onClick={() => addItemQuantity(skuData)}
+                    value='plus'
+                    aria-labelledby='qty-plus'
                   >
-                    <i className='fa fa-plus' aria-hidden='true'></i>
+                    <i
+                      className='fa fa-plus'
+                      aria-hidden='true'
+                      id='qty-plus'
+                    ></i>
                   </button>
                 </span>
               </div>
@@ -375,6 +390,37 @@ function SkuVariants({
     )
   }
 
+  const getSkuIdsOfPreviousSelectedOptions = index => {
+    // debugger
+    // console.log('index...', index)
+    let allCommonSkus = []
+    const skuIdsToDisplay = []
+    for (let i = 0; i < index; i++) {
+      const key = Object.keys(variantOptions)[i]
+      const skuObj = variantOptions[key].defaultSelected
+        ? variantOptions[key].defaultSelected
+        : variantOptions[key].optionSelected
+      allCommonSkus = allCommonSkus.concat(skuObj?.associatedSkuIds)
+    }
+    // find duplicate ids
+    for (let i = 0; i < allCommonSkus.length; i++) {
+      const restOfIds = allCommonSkus.slice(i + 1)
+      if (
+        restOfIds.includes(allCommonSkus[i]) &&
+        !skuIdsToDisplay.includes(allCommonSkus[i])
+      ) {
+        skuIdsToDisplay.push(allCommonSkus[i])
+      }
+    }
+    // console.log(
+    //   'index,skuIdsToDisplay,allCommonSkus..',
+    //   index,
+    //   skuIdsToDisplay,
+    //   allCommonSkus
+    // )
+    return index > 1 ? skuIdsToDisplay : allCommonSkus
+  }
+
   // displays all variants sections
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
@@ -387,9 +433,17 @@ function SkuVariants({
         .defaultSelected
         ? variantOptions[prevVariantKey].defaultSelected
         : variantOptions[prevVariantKey].optionSelected
-      const { associatedSkuIds } = skuSelectedInPrevSection || []
+      if (!variantOptions[prevVariantKey].skuSelecedInPrevVariantKey) {
+        variantOptions[variantKey].skuSelecedInPrevVariantKey =
+          skuSelectedInPrevSection || {}
+      }
 
-      // find all associated skus in current section based on option selected in prev section
+      // const { associatedSkuIds } = skuSelectedInPrevSection || []
+
+      const associatedSkuIds = getSkuIdsOfPreviousSelectedOptions(index)
+      // debugger
+      // console.log('associatedSkuIds...', associatedSkuIds)
+      // find what are all associated skus matches in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
         const optionSkusIds =
           variantOptions[variantKey].options[i].associatedSkuIds || []
@@ -418,19 +472,30 @@ function SkuVariants({
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
+      // setSelectedSkus([...selectedSkus, selectedSku])
+      // console.log(
+      //   'selectedSku,optionsToDisplay,variantOptions...',
+      //   selectedSku,
+      //   optionsToDisplay,
+      //   variantOptions
+      // )
     } else if (index === 0) {
+      // debugger
       optionsToDisplay = variantOptions[variantKey].options
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
+      // setSelectedSkus([...selectedSkus, selectedSku])
       const associatedSkuIds = selectedSku?.associatedSkuIds || []
       if (index === Object.keys(variantOptions).length - 1) {
         // only one variant
+        // Count - [{ optionValue: '2pcs', associatedSkuIds: [99851] }, { 4pcs, ...}, { 8pcs,..}]
         for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
           // find out matching selected sku in variant options
           const optionSkusIds =
             variantOptions[variantKey]?.options[i]?.associatedSkuIds
           for (let j = 0; j < associatedSkuIds.length; j++) {
+            // associatedSkuIds of selected sku
             if (optionSkusIds.includes(associatedSkuIds[j])) {
               variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
               variantOptions[variantKey].options[i].hasStock =
@@ -503,7 +568,7 @@ function SkuVariants({
 
     return (
       <>
-        <div className='sukhead'>{variantKey}:</div>
+        <div className='sukhead'>{`Select ${variantKey}`}:</div>
         <div>
           <ul className='list-inline'>
             {optionsToDisplay.map(sku => {
@@ -618,7 +683,8 @@ function SkuVariants({
             })}
           </ul>
         </div>
-        {index === Object.keys(variantOptions).length - 1 &&
+        {variantOptions &&
+          index === Object.keys(variantOptions).length - 1 &&
           displayVariantPriceSection(index, variantKey)}
       </>
     )
@@ -636,7 +702,9 @@ function SkuVariants({
     <>
       {variantOptions && Object.keys(variantOptions).length > 0
         ? displayVariantsSection()
-        : displayVariantPriceSection(0, '', productData?.defaultSkuId)}
+        : productData && Object.keys(productData?.variantOptions).length === 0
+        ? displayVariantPriceSection(0, '', productData?.defaultSkuId)
+        : ''}
     </>
   )
 }
