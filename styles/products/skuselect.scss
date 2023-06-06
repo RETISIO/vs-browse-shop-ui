@@ -332,7 +332,9 @@
 
 
 // }
-
+html {
+    scroll-behavior: smooth;
+}
 .cart-success-msg {
     margin-bottom: 10px;
 }
@@ -375,8 +377,8 @@
         padding: 16px 6px 6px 6px;
         display: block;
         color: #000000;
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
         text-decoration: none;
         cursor: pointer;
     }
@@ -385,10 +387,10 @@
         text-transform: uppercase;
         border: 1px solid #8c8c8c;
         font-weight: 700;
-        padding: 16px 6px 6px 6px;
+        padding: 14px 6px 6px 6px;
         display: block;
         color: #000000;
-        width: 70px;
+        width: 90px;
         height: 90px;
         text-decoration: none;
         cursor: pointer;
@@ -403,8 +405,8 @@
         color: #000000;
         text-decoration: none;
         cursor: pointer;
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
         position: relative;
         box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0.23) 0px 4px 4px;
     }
@@ -414,12 +416,12 @@
         text-transform: uppercase;
         border: 1px solid #f05f5f;
         font-weight: 700;
-        padding: 16px 6px 6px 6px;
+        padding: 15px 6px 6px 6px;
         display: block;
         color: #000000;
         text-decoration: none;
         cursor: pointer;
-        width: 70px;
+        width: 90px;
         height: 90px;
         position: relative;
         box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px, rgba(0, 0, 0, 0.23) 0px 4px 4px;
@@ -437,10 +439,30 @@
     .txttagb {
         display: block;
         text-align: center;
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 600;
-        padding: 8px 0 0 0;
+        padding: 20px 0 0 0;
         margin: 0;
+        line-height: 16px;
+    }
+
+    .txttagb-last {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 25px 0px 0px 0px;
+        margin: -5px;
+        line-height: 16px;
+    }
+
+    .txttagb-last-large {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 19px 0px 0px 0px;
+        margin: -5px;
         line-height: 16px;
     }
 
@@ -461,8 +483,21 @@
         font-size: 9px;
         font-weight: 500;
         padding: 0px;
-        margin: 0;
+        margin: 4px 0px 0px 0px;
         line-height: 12px;
+        color: #000000;
+        text-transform: capitalize;
+        height:24px;
+    } 
+
+    .txttagz-large {
+        display: block;
+        text-align: center;
+        font-size: 9px;
+        font-weight: 500;
+        padding: 0px;
+        margin: 6px 0px 0px 0px;
+        line-height: 10px;
         color: #000000;
         text-transform: capitalize;
         height:24px;
@@ -497,12 +532,14 @@
         font-weight: 700;
         display: block;
         color: #000000;
-        padding: 20px 6px 20px 6px;
-        // padding: 16px 6px 6px 6px;
-        width: 70px;
+        padding: 23px 6px 6px 6px;
+        width: 90px;
         height: 90px;
         text-decoration: none;
         cursor: pointer;
+        position: relative;
+        top: -10px;
+        bottom: 0;
     }
     .Count-selected {
         border: 1px solid #f06c6c;
@@ -547,28 +584,46 @@
     .Countb {
         display: block;
         text-align: center;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 600;
-        margin: 0;
+        margin: -12px 0px -6px 0px;
         text-transform: uppercase;
+    }
+
+    .Countb-large {
+        display: block;
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+        margin: -12px 0px -6px 0px;
+        text-transform: uppercase;
+        max-height: 2.6rem;
+        word-break: break-word;
+        overflow: hidden;
+        line-height: 0.9rem;
     }
 
     .outstock {
         background: #f3f3f3;
+        margin-top: 10px;
     }
 
     .outoftocklab {
         background: #c92c2c;
         padding: 0px;
         position: relative;
-        left: -6px;
-        top: 2px;
+        left: -7px;
+        top: -23px;
         font-size: 9px;
         color: #fff;
         text-align: center;
         font-weight: 400;
         display: block;
-        width: 69px;
+        width: 90px;
+    }
+
+    .m-auto {
+        margin: auto !important;
     }
 
     .notifytxt {
@@ -592,15 +647,13 @@
         padding: 0px 0 30px 0px;
     }
 
+    .itemtxt-mv {
+        visibility: hidden
+    }
+
     .price-section {
         margin-bottom: 10px;
     }
-    // .itemtxt {
-    //     color: #747474;
-    //     font-weight: 600;
-    //     font-size: 14px;
-    //     padding: 0px 0 30px 0px;
-    // }
 
     .prpanel {
         padding: 0 0 30px 0;
@@ -624,7 +677,7 @@
     .pricenred {
         color: #e75d78;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 14px;
         padding: 0px 0 0px 0px;
     }
 
@@ -702,7 +755,24 @@
         float: left;
     }
 
+    .outoftocklabdt {
+        background: #c92c2c;
+        font-size: 11px;
+        color: #fff;
+        text-align: center;
+        font-weight: 400;
+        width: 90px;
+        padding: 6px 8px 6px 8px;
+        margin: 0 10px 0 10px;
+    }
 
-
+    .notifytxtnew {
+        padding: 0;
+        font-size: 12px;
+        color: #000000 !important;
+        text-align: left;
+        font-weight: 700;
+        text-decoration: underline;
+    }
 
 }

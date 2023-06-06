@@ -6,7 +6,7 @@ import React, { useRef, useEffect } from 'react';
 import ProductTile from './ProductTile';
 
 export default function ProductCard({
-  value, isLast, newLimit, index,
+  value, isLast, newLimit, index, singleColumn
 }) {
   /**
    * Select the Card component with useRef
@@ -31,7 +31,7 @@ export default function ProductCard({
 
   return (
     <>
-      <div className="col-md-4 col-sm-6 col-xs-12" ref={cardRef} key={index}>
+      <div className={`col-md-${singleColumn ? 3 : 4} col-sm-6 col-xs-12`} ref={cardRef} key={index}>
         <ProductTile value={value} />
       </div>
     </>

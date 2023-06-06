@@ -13,6 +13,7 @@ import RequestCatalog from './requestCatalog'
 import Article from './article'
 import MiniStaticCarousel from './miniStaticCarousel'
 import CookingGuide from './cookingGuide'
+// import ProductDescription from './pdp/pdpdetails_sort'
 import ProductDescription from './pdp/pdpdetails'
 import CustomBreadcrumb from './custombreadcrumb'
 import ProductAccordions from './productaccordions/ProductAccordions'
@@ -21,12 +22,21 @@ import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
 import ProductRecommondation from './Sliders/ProductRecommondation'
+import Facet from './template/components/facet'
+import ResultList from './template/components/resultList'
+import { ResultCount } from './template/components/resultCount'
+import {
+  CategoryDescription,
+  CategoryLongDescription
+} from './template/components/categoryDescription'
+import CookingGuideFacet from './cookingGuide/staticFacet'
 
 const ComponentMap = {
   nextImage: NextImage,
   login: Login,
   'imageCarousel:default': ImageCarousel,
   'productCarousel:default': ProductCarousel,
+  'defaultProductSelector:custom': ProductCarousel,
   'contactUsForm:custom': ContactUs,
   'catalogRequestForm:custom': RequestCatalog,
   // 'article-detail-prodcutid:custom': Article,
@@ -42,5 +52,12 @@ const ComponentMap = {
   'pdpcookinginstructions:custom': CookingInstructions,
   'pdpyotpoplaceholder:custom': ReviewSection,
   'productRecommendations:custom': ProductRecommondation,
+  'facet:default': Facet,
+  'resultCount:default': ResultCount,
+  'resultList:default': ResultList,
+  'categoryDescription:custom': CategoryDescription,
+  'didyoumean:custom': CategoryDescription,
+  'categoryLongDescription:custom': CategoryLongDescription,
+  'cookingguidefacet:custom': CookingGuideFacet
 }
 export default ComponentMap

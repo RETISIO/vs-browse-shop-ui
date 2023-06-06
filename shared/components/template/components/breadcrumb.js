@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import URLHandler from '../../../helpers/urlHandler';
 import { Loader } from '../../loader';
+import { constructBNSSEOURL } from '../../urlUtils';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function Breadcrumb(props) {
@@ -61,7 +62,7 @@ export function Breadcrumb(props) {
               {pageContentData?.payLoad?.navigationPath?.map((item, _key) => (
                 <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
                   {pageContentData?.payLoad?.navigationPath?.length - 1 !== _key ? (
-                    <Link href={`/category/${item.id}?N=${item.id}`}>{item?.name}</Link>
+                    <Link href={constructBNSSEOURL(item, 'plp')}>{item?.name}</Link>
                   ) : (
                     <span>{item?.name}</span>
                   )}

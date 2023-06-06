@@ -12,17 +12,14 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from 'next/link';
 import Accordion from 'react-bootstrap/Accordion';
-import { usePageDataContext } from "../../../context/pageData-context";
 import URLHandler from '../../../helpers/urlHandler';
+import { searchTermHandler } from "../../../helpers/utils";
 
 function Facet(props) {
-  const { mobileView, closeToggle, pageType } = props;
-  const [pageContentData, setPageContent] = useState(props.data);
-  const { pageData } = usePageDataContext();
+  const { mobileView, closeToggle } = props;
   const [isClick, setIsClicked] = useState(false);
   
   useEffect(() => {
-    setPageContent(props?.data);
     if(isClick && mobileView) {
        closeToggle();
        setIsClicked(false);
@@ -30,7 +27,6 @@ function Facet(props) {
   }, [props]);
 
   const navigate = useRouter();
-  // const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.id?.join("+") || "");
   const [selectedCategories, setSelectedCategories] = useState(navigate?.query?.N?.concat("+") || "");
   const [selectedFacets, setSelectedFacets] = useState(navigate?.query?.t?.concat("+") || "");
   const [searchKey, setSearchKey] = useState(navigate?.query?.['submit-search']?.concat("+") || "");
@@ -39,7 +35,7 @@ function Facet(props) {
 
   const categoryIds = URLHandler('N', navigate.asPath) || "";
   const facetIds = URLHandler('t', navigate.asPath) || "";
-  const searchTerm = URLHandler('submit-search', navigate.asPath) || '';
+  const searchTerm = searchTermHandler('submit-search', navigate.asPath) || '';
 
   useEffect(() => {
     setSelectedCategories(categoryIds);
@@ -54,11 +50,12 @@ function Facet(props) {
   };
 
   return (
-    <>
-      <div className="catalog-filter__top">
-        {(pageContentData?.payLoad?.categoryFacetEnabled && pageContentData?.payLoad?.categories 
-        && pageContentData?.payLoad?.categories?.length > 0
-        && pageType !== "search")
+    <aside className={!mobileView ? "hidden-xs" : ""}>
+      <div className="catalog-aside">
+        <div className="catalog-filter__top">
+          {(props?.payLoad?.categoryFacetEnabled && props?.payLoad?.categories
+        && props?.payLoad?.categories?.length > 0
+        && props?.payLoad?.pageType !== "search")
         ? (
           <div className="panel panel-default">
             <div className="panel-heading">
@@ -69,11 +66,11 @@ function Facet(props) {
             <div className="panel-collapse">
               <div className="panel-body">
                 <ul className="catalog-filter__category-list list-unstyled">
-                  {pageContentData?.payLoad?.categories?.map((item, i) => (
+                  {props?.payLoad?.categories?.map((item, i) => (
                     <li key={i}>
                       <Link
                         href={{
-                          pathname: path,
+                          pathname: `/category/${item.seoData && item.seoData.slug ? item.seoData.slug : item.name.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}`,
                           query: {
                             'submit-search': encodeURI(`${searchKey}`),
                             N: encodeURI(`${selectedCategories !== "" ? `${selectedCategories}+` : ""}${item.id}`),
@@ -96,24 +93,24 @@ function Facet(props) {
             </div>
           </div>
       ) : null}
-        <div className="catalog-filter__clear">
-          <b>Your Selections: </b>
-          {pageType !== "search" && pageContentData?.payLoad?.selectedFacets?.length > 0 && (
-          <Link
-            className="link-underline"
-            href={{
+          <div className="catalog-filter__clear">
+            <b>Your Selections: </b>
+            {props?.payLoad?.pageType !== "search" && props?.payLoad?.selectedFacets?.length > 0 && (
+            <Link
+              className="link-underline"
+              href={{
                 pathname: path,
                 query: {
                   N: encodeURI(`${selectedCategories}`),
                 },
               }}
-            onClick={() => clickFilter()}
-          >
-            Clear All
-          </Link>
+              onClick={() => clickFilter()}
+            >
+              Clear All
+            </Link>
           )}
-          {pageType === "search" && (pageContentData?.payLoad?.categoriesSelected?.length > 0 ||
-          pageContentData?.payLoad?.selectedFacets?.length > 0) && (
+            {props?.payLoad?.pageType === "search" && (props?.payLoad?.categoriesSelected?.length > 0
+          || props?.payLoad?.selectedFacets?.length > 0) && (
           <Link
             className="link-underline"
             href={{
@@ -128,11 +125,11 @@ function Facet(props) {
           </Link>
           )}
           
-        </div>
-        <ul className="catalog-filter__selected list-unstyled">
-          {pageType === "search" && pageContentData?.payLoad?.categoriesSelected?.map((val,i) => (
-            <React.Fragment key={i}>
-              {
+          </div>
+          <ul className="catalog-filter__selected list-unstyled">
+            {props?.payLoad?.pageType === "search" && props?.payLoad?.categoriesSelected?.map((val, i) => (
+              <React.Fragment key={i}>
+                {
                 val.facetValues.map((item, _key) => (
                   <li
                     className="js-detach-row"
@@ -158,11 +155,11 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </React.Fragment>
+              </React.Fragment>
           ))}
-          {pageContentData?.payLoad?.selectedFacets?.map((val,i) => (
-            <React.Fragment key={i}>
-              {
+            {props?.payLoad?.selectedFacets?.map((val, i) => (
+              <React.Fragment key={i}>
+                {
                 val.facetValues.map((item, _key) => (
                   <li
                     className="js-detach-row"
@@ -188,13 +185,13 @@ function Facet(props) {
                   </li>
                   ))
               }
-            </React.Fragment>
+              </React.Fragment>
           ))}
-        </ul>
-      </div>
-      <div className="catalog-filter__block ab-accordion-container">
-        <div className="panel-group">
-          {pageType === "search"
+          </ul>
+        </div>
+        <div className="catalog-filter__block ab-accordion-container">
+          <div className="panel-group">
+            {(props?.payLoad?.pageType === "search") && (props?.payLoad?.categories?.length > 0)
           && (
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
@@ -202,7 +199,7 @@ function Facet(props) {
                 Categories
                 <i className="icon fas fa-chevron-down"></i>
               </Accordion.Header>
-              {pageContentData?.payLoad?.categories?.map((val, index) => (
+              {props?.payLoad?.categories?.map((val, index) => (
                 <React.Fragment key={index}>
                   <Accordion.Body>
                     <Link
@@ -230,18 +227,18 @@ function Facet(props) {
           </Accordion>
           )}
          
-          {pageContentData?.payLoad?.facets?.map((value, _key) => (
-            <React.Fragment key={_key}>
-              <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
-                  <Accordion.Header>
-                    {value.displayName}
-                    <i className="icon fas fa-chevron-down"></i>
-                  </Accordion.Header>
-                  {value?.facetValues?.map((val, index) => (
-                    <Accordion.Body>
-                      <Link
-                        href={{
+            {props?.payLoad?.facets?.map((value, _key) => (
+              <React.Fragment key={_key}>
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>
+                    <Accordion.Header>
+                      {value.displayName}
+                      <i className="icon fas fa-chevron-down"></i>
+                    </Accordion.Header>
+                    {value?.facetValues?.map((val, index) => (
+                      <Accordion.Body>
+                        <Link
+                          href={{
                           pathname: path,
                           query: {
                             'submit-search': encodeURI(`${searchTerm}`),
@@ -249,23 +246,24 @@ function Facet(props) {
                             t: encodeURI(`${selectedFacets !== "" ? `${selectedFacets}+` : ""}${val.facetId}`),
                           },
                         }}
-                        onClick={() => clickFilter()}
-                      >
-                        {val.facetLabel}
-                        {' '}
-                        (
-                        {val.facetValueCount}
-                        )
-                      </Link>
-                    </Accordion.Body>
+                          onClick={() => clickFilter()}
+                        >
+                          {val.facetLabel}
+                          {' '}
+                          (
+                          {val.facetValueCount}
+                          )
+                        </Link>
+                      </Accordion.Body>
                         ))}
-                </Accordion.Item>
-              </Accordion>
-            </React.Fragment>
+                  </Accordion.Item>
+                </Accordion>
+              </React.Fragment>
           ))}
+          </div>
         </div>
       </div>
-    </>
+    </aside>
   );
 }
 

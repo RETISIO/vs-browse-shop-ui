@@ -31,6 +31,7 @@ import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import { getCookie } from '@retisio/sf-api'
 import Alert from 'react-bootstrap/Alert'
+import { useRouter } from 'next/router'
 import NextImage from '../template/components/nextImage'
 import GiftCard from '../giftCard'
 import NewBadge from '../../../public/static/assets/new.png'
@@ -44,7 +45,8 @@ import SkuVariants from './skuVariants'
 import {
   notifyMe,
   AddToCart,
-  AddtoWishhList
+  AddtoWishhList,
+  ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
 
@@ -58,8 +60,10 @@ export default function ProductDescription(props) {
   const [showWidget, setShowWidget] = useState(false)
   const [showSaleWidget, setShowSaleWidget] = useState(false)
   const [errorMsg, setErrorMsg] = useState()
+  const [wishListErrorMsg, setWishListErrorMsg] = useState()
   const [productAdded, setProductAdded] = useState({ added: false })
   const [successMsg, setSuccessMsg] = useState()
+  const [wishListSuccessMsg, setWishListSuccessMsg] = useState()
   const [skuSelected, setSkuSelected] = useState()
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
   const { setShow, isLogged, setNoReload, noReload, state } = useAppContext()
@@ -69,7 +73,8 @@ export default function ProductDescription(props) {
   const [showAlert, setShowAlert] = useState(false)
   const [variantSelected, setVariantSelected] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
-
+  const router = useRouter()
+  const { skuid } = router.query
   // const defaultSkuId =
   //   pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -78,12 +83,18 @@ export default function ProductDescription(props) {
   }
 
   useEffect(() => {
+    setShowAlert('')
+    setMessage('')
+    setErrorMsg('')
+    setSuccessMsg('')
+    setWishListSuccessMsg('')
+    setWishListErrorMsg('')
     setShowWidget(true)
     setTimeout(() => {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
     prepareVarinatsOptions()
-  }, [])
+  }, [props])
 
   useEffect(() => {
     if (productAdded.added) {
@@ -102,21 +113,77 @@ export default function ProductDescription(props) {
   }, [noReload, isLogged])
 
   const damPath = config.IMGPATH
+  useEffect(() => {
+    if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
+      setTimeout(() => {
+        setSuccessMsg('')
+        setErrorMsg('')
+        setWishListSuccessMsg('')
+        setWishListErrorMsg('')
+      }, 3000)
+    }
+  }, [errorMsg, successMsg, wishListErrorMsg, wishListSuccessMsg])
+
   const productData = pdpData && pdpData.products && pdpData.products[0]
-  // productData.productDetails.isGiftItem = true
   const productAdditionDetails = productData?.additionalDetails
 
   // console.log('productData.....', productData)
+
+  const getDefaultSku = variantKey => {
+    let defaultSku = {}
+    if (
+      productData &&
+      productData.variantOptions &&
+      productData.variantOptions[variantKey].length
+    ) {
+      const skuId = skuid || productData?.defaultSkuId
+      // find skuId in associatedSkuds of variantOptions
+      const arrLngth = productData?.variantOptions[variantKey].length
+      for (let i = 0; i < arrLngth; i++) {
+        // options array
+        const associatedSkusIds =
+          productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
+        if (associatedSkusIds.includes(skuId)) {
+          defaultSku = productData?.variantOptions[variantKey][i]
+          break
+        }
+        if (i === arrLngth - 1 && Object.keys(defaultSku).length === 0) {
+          // defaultSkuId is not there or not matching with associatedSkuIds
+          if (productData?.variantOptions[variantKey].length) {
+            defaultSku = productData?.variantOptions[variantKey][0]
+          }
+        }
+      }
+    }
+
+    return defaultSku
+  }
+
+  const sortOptionValuesOfVariantKey = variantKeyArray => {
+    const sortAlphaNum = (a, b) =>
+      a.optionValue.localeCompare(b.optionValue, 'en', { numeric: true })
+    // const testArr = ['12', 'sdads', '12pcs', '8 pcs', 'usda', '14', 'abc']
+    variantKeyArray.sort(sortAlphaNum)
+    return variantKeyArray
+  }
 
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach(variantKey => {
+        // sort optionValues of variantKey array
+        // e.g., variantOptions[variantKey] = [{optionValue: '4pcs', asscoaietDSkuIds:[]}, {optionValue: '2pcs', asscoaietDSkuIds:[]},{}]
+        const sortedVarientKeyArray = sortOptionValuesOfVariantKey(
+          productData.variantOptions[variantKey]
+        )
         variantOptionsObj[variantKey] = {
-          options: productData.variantOptions[variantKey],
-          defaultSelected: productData.variantOptions[variantKey][0],
+          options: sortedVarientKeyArray,
+          // options: productData.variantOptions[variantKey],
+          defaultSelected: getDefaultSku(variantKey),
+          // defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
-          skuId: ''
+          skuId: '',
+          optionsTextForMv: '' // selected options text in mobile view
         }
       })
     }
@@ -130,7 +197,7 @@ export default function ProductDescription(props) {
           <ImageCarousel
             data={productData?.productDetails?.productMedia?.default}
             additionalDetails={productAdditionDetails}
-            onSale={showSaleWidget}
+            onSale={showSaleWidget || false}
           />
         </div>
       </div>
@@ -138,8 +205,10 @@ export default function ProductDescription(props) {
   )
 
   const handleVariantSelected = (index, variantKey, value, variant) => {
+    // user clicked on option e.g., 4pcs or 10oz
     // value = '4pcs' variant = {optionValue: '4pcs' ,asscoaitedSkus:[c98026,..]}
     const variantOptionsObj = { ...variantsOptions }
+
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
     // index===0, set all other options default to empty
@@ -156,10 +225,18 @@ export default function ProductDescription(props) {
   }
 
   const handleSelectedSku = skuData => {
-    // for setting onSale badge and addToWishlist payload
-    if (skuData) {
+    // sku identified - for setting onSale badge and addToWishlist payload
+    if (
+      skuData &&
+      (!skuSelected ? true : skuSelected.skuId !== skuData.skuId)
+    ) {
       setShowSaleWidget(skuData?.skuDetails?.onSale) // set onSale badge based on selected count
       setSkuSelected(skuData)
+      ClickProduct({
+        data: { ...pdpData?.products[0], defaultSkuId: skuData?.skuId },
+        userData: state?.userData,
+        channelData: state?.channelData
+      })
     }
   }
 
@@ -177,9 +254,11 @@ export default function ProductDescription(props) {
       onClick={() => {
         if (errMsg) {
           setErrorMsg('')
+          setWishListErrorMsg('')
         }
         if (sucsMsg) {
           setSuccessMsg('')
+          setWishListSuccessMsg('')
         }
       }}
     >
@@ -187,9 +266,10 @@ export default function ProductDescription(props) {
     </button>
   )
 
+  // add to cart
   const addToBagHandler = (skuData, itemQuantity) => {
     const addToProdData = {
-      variantId: skuData.skuId,
+      variantId: skuData?.skuId,
       productId: productData?.productId,
       quantity: itemQuantity,
       productType: 'product'
@@ -198,7 +278,7 @@ export default function ProductDescription(props) {
       items: []
     }
     pdp.items.push(addToProdData)
-    if (productData.productId) {
+    if (productData?.productId) {
       const result = addToBagDetails(pdp)
       result
         .then(data => {
@@ -212,16 +292,28 @@ export default function ProductDescription(props) {
               userData: state.userData,
               added: true
             })
+            setErrorMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg('')
+            setSuccessMsg(
+              'The item(s) has been successfully added to your cart.'
+            )
+            window.scrollTo(0, 0)
           } else if (data && data.status === 400) {
             const error =
               data.errors && Array.isArray(data.errors)
                 ? data.errors[0].message
                 : ''
+            setSuccessMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg('')
             setErrorMsg(error)
+            window.scrollTo(0, 0)
           }
         })
         .catch(error => {
           setErrorMsg(error.message)
+          window.scrollTo(0, 0)
         })
     }
   }
@@ -229,19 +321,23 @@ export default function ProductDescription(props) {
   const addToWishLisrHandler = skuData => {
     if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
-        skuId: skuData.skuId,
+        skuId: skuData?.skuId,
         productId: productData?.productId,
         quantity: '1'
       })
       result
         .then(data => {
           if (data && data.status === 200) {
-            setSuccessMsg(
+            setSuccessMsg('')
+            setErrorMsg('')
+            setWishListErrorMsg('')
+            setWishListSuccessMsg(
               `The following item have been moved to your wishlist: ${productData?.displayName}`
             )
+            window.scrollTo(0, 0)
             AddtoWishhList({
-              skuId: skuData.skuId,
-              productId: productData.productId,
+              skuId: skuData?.skuId,
+              productId: productData?.productId,
               channelData: state.channelData,
               userData: state.userData,
               wishListId: data.wishListId,
@@ -253,14 +349,23 @@ export default function ProductDescription(props) {
                 Array.isArray(data.errors) &&
                 data.errors[0].message) ||
               ''
-            setErrorMsg(error)
+            setSuccessMsg('')
+            setErrorMsg('')
+            setWishListSuccessMsg('')
+            setWishListErrorMsg(error)
+            window.scrollTo(0, 0)
           }
         })
         .catch(error => {
-          setErrorMsg(error.message)
+          setSuccessMsg('')
+          setErrorMsg('')
+          setWishListSuccessMsg('')
+          setWishListErrorMsg(error.message)
+          window.scrollTo(0, 0)
         })
     } else if (!skuData || (skuData && Object.keys(skuData).length === 0)) {
-      setErrorMsg('skuId must not be empty')
+      setWishListErrorMsg('skuId must not be empty')
+      window.scrollTo(0, 0)
     } else {
       setSkuSelected(skuData)
       setNoReload(true)
@@ -311,24 +416,26 @@ export default function ProductDescription(props) {
         </Alert>
       )}
       <div className='container pdpMainContainer'>
-        {errorMsg && (
+        {(errorMsg || wishListErrorMsg) && (
           <div
             className='alert alert-dismissible hidden-print alert-danger undefined cart-success-msg'
             aria-describedby='loginModalErrors-desc'
             tabIndex='0'
             role='alert'
+            id={`pdp-${errorMsg ? 'errorMsg' : 'wishListErrorMsg'}`}
           >
-            {handleCloseBtn(errorMsg, undefined)}
-            <b id='loginModalErrors-desc'>{errorMsg}</b>
+            {handleCloseBtn(errorMsg || wishListErrorMsg, undefined)}
+            <b id='loginModalErrors-desc'>{errorMsg || wishListErrorMsg}</b>
           </div>
         )}
-        {successMsg && (
+        {(successMsg || wishListSuccessMsg) && (
           <div
             className='alert alert-dismissible hidden-print alert-success undefined header-alert-top cart-success-msg'
             role='alert'
+            id={`pdp-${successMsg ? 'successMsg' : 'wishListSuccessMsg'}`}
           >
-            {handleCloseBtn(undefined, successMsg)}
-            <strong>{successMsg}</strong>
+            {handleCloseBtn(undefined, successMsg || wishListSuccessMsg)}
+            <strong>{successMsg || wishListSuccessMsg}</strong>
           </div>
         )}
         <div className='product-title-wrapper'>

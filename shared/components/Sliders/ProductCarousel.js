@@ -27,23 +27,33 @@ import ProductTile from '../template/components/ProductTile'
 export default function ProductCarousel(props) {
   const Props = props
   const [load, setLoad] = useState(false)
-  const [productsData, setProductsData] = useState({})
+  const [productsData, setProductsData] = useState({});
+  const [ noofRecords, setNoOfRecords ] = useState(100);
   useEffect(() => {
     const configValues = Props.configValue
       ? JSON.parse(Props.configValue)
-      : { noOfRecords: 6 }
-    const noOfRecords = configValues?.defaultProductSelector?.noOfRecords || 4
+      : { noOfRecords: 4 }
+    setNoOfRecords(configValues?.defaultProductSelector?.noOfRecords || 100);
     const settings = {
       dots: false,
-      slidesToShow: noOfRecords,
-      slidesToScroll: noOfRecords,
+      slidesToShow: 4,
+      slidesToScroll: 4,
       infinite: false,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: noOfRecords,
-            slidesToScroll: noOfRecords,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 980,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
             infinite: true,
             dots: true
           }
@@ -90,19 +100,23 @@ export default function ProductCarousel(props) {
     <>
       {load && (
         <>
-          <h1 className='row align-left'>
+          <h1 className='row align-left' style={{ marginLeft: '15px' }}>
             <span>{props.name}</span>
             <small className='ml-10'>{productsData?.configValues.defaultProductSelector.viewAllLink && <a href={productsData?.configValues.defaultProductSelector.viewAllLink}>View All</a>}</small>
           </h1>
           <Slider {...productsData.settings}>
             {productsData?.configValues?.defaultProductSelector?.products.map(
-              (value, index) => (
-                <div key={index}>
-                  <div style={{ margin: '15px' }}>
-                    <ProductTile value={value} />
-                  </div>
-                </div>
-              )
+              (value, index) => {
+                if(index < noofRecords) {
+                  return (
+                    <div key={index}>
+                      <div style={{ margin: '15px' }}>
+                        <ProductTile value={value} />
+                      </div>
+                    </div>
+                  )
+                }
+              }
             )}
           </Slider>
         </>

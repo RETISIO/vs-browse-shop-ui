@@ -34,3 +34,18 @@ export default async function getPersonalization() {
   }
   return data;
 }
+
+export const searchTermHandler = (name, url) => {
+  const navigationPath = decodeURIComponent(url);
+  const finalUrlArr = navigationPath.split('?');
+  if(finalUrlArr.length <= 1) {
+    return null;
+  } else {
+    const queryString = new URLSearchParams(finalUrlArr[1]);
+    for (let pair of queryString.entries()) {
+     if(name == pair[0]){
+      return pair[1]
+     }
+   }
+  }
+};

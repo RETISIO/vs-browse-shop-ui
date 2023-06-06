@@ -6,7 +6,7 @@ import config from '../../helpers/getConfig';
 
 export default function RetisioSDK() {
   return (
-    <Script src="https://storage.googleapis.com/retisio-dm-web-sdk/retisio-sdk.js" 
+    <Script src="https://sdk.lle.retisio.io/retisio-sdk.js" 
     onLoad={() => {
       retisioSDK.init(config.RKEY);
     }}>

@@ -52,6 +52,7 @@ export default function ArticleListing({ props }) {
               href={productsData?.configValues.navigationUrl}
               style={{
                 backgroundImage: `url(${
+                  process.env.NEXT_PUBLIC_IMAGEPATH +
                   product?.skus?.[product?.defaultSkuId]?.media?.largeImg
                 })`
               }}

@@ -1,6 +1,6 @@
 @import '../variables.scss';
 
-section:has(.productRecommendations){
+section:has(.productRecommendations),section:has(.imageCarousel),section:has(.productCarousel){
 	background-color: $colorBackgroundGray;
     margin-top: 25px;
     padding-left: 40px;

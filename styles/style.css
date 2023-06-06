@@ -275,7 +275,7 @@ button,
 select,
 textarea {
   font-family: inherit;
-  font-size: inherit;
+  font-size: 16px;
   line-height: inherit;
 }
 a {
@@ -3741,11 +3741,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     border-radius: 4px;
   }
 }
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .navbar-header {
     float: left;
   }
-}
+} */
 .navbar-collapse {
   max-height: 340px;
   padding-right: 15px;
@@ -5350,6 +5350,7 @@ button.close {
 }
 .modal-open {
   overflow: hidden;
+  padding-right: 0px !important;
 }
 .modal {
   position: fixed;
@@ -8422,4 +8423,8 @@ button.close {
 }
 .remove-token {
   cursor: pointer;
+}
+.facet-active {
+  color: #1e4783;
+  font-weight: 600
 }

@@ -34,7 +34,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-quotes */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function SkuVariants({
   productId,
@@ -51,9 +51,16 @@ function SkuVariants({
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
   const maxQtyAllowed = 999 // max qty user can enter
-  //   console.log('from skuCounts....productData......', productData)
+
+  useEffect(() => {
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
+  }, [productData])
 
   const handleSelectedSkuData = skuData => {
+    // sku identified
     handleSelectedSku(skuData) // for setting onSale badge and addToWishlist payload
   }
 
@@ -95,7 +102,8 @@ function SkuVariants({
   const displayPrice = (listPrice, salePrice) => {
     const listP = (listPrice && parseFloat(listPrice.slice(1))) || 0
     const saleP = (salePrice && parseFloat(salePrice.slice(1))) || 0
-    return Math.ceil(listP - saleP)
+    const res = (listP - saleP).toFixed(2)
+    return res
   }
 
   const getMaxQtyAllowed = skuData => {
@@ -103,12 +111,12 @@ function SkuVariants({
     // test case
     // const availableStock = 6
     // const alwaysInStock = true
-    // const maxQtyAllowedPerOrder = 14
+    // const maxQtyAllowedPerOrder = 14 - order upto 14
     const availableStock =
       parseInt(skuData?.skuDetails?.inventory[0]?.availableStock) || 0
     const alwaysInStock =
       skuData?.skuDetails?.inventory[0]?.alwaysInStock || false
-    const maxQtyAllowedPerOrder = parseInt(skuData.maxQtyAllowedPerOrder) || 0
+    const maxQtyAllowedPerOrder = parseInt(skuData?.maxQtyAllowedPerOrder) || 0
     if (!alwaysInStock) {
       if (maxQtyAllowedPerOrder === 0) {
         maxQty = availableStock
@@ -120,11 +128,9 @@ function SkuVariants({
     } else {
       // always in stock is true
       if (maxQtyAllowedPerOrder === 0) {
-        maxQty = availableStock
-      } else if (maxQtyAllowedPerOrder > availableStock) {
-        maxQty = maxQtyAllowedPerOrder
+        maxQty = maxQtyAllowed
       } else {
-        maxQty = availableStock
+        maxQty = maxQtyAllowedPerOrder
       }
     }
     return maxQty
@@ -137,7 +143,7 @@ function SkuVariants({
       val = maxQtyAllowed
       setItemQuantity(maxQtyAllowed)
     }
-    if (val <= 0 || val === '' || Number.isNaN(val)) {
+    if (val <= 0) {
       setItemQuantity(1)
       return
     }
@@ -151,6 +157,12 @@ function SkuVariants({
     setItemQuantity(val)
     setDisablePlusCounter(false)
     setDisableAddToCart(false)
+  }
+
+  const handleOnBlur = e => {
+    if (e.target.value === '' || Number.isNaN(e.target.value)) {
+      setItemQuantity(1)
+    }
   }
 
   const displayQtyErrorMsg = skuData => {
@@ -171,7 +183,11 @@ function SkuVariants({
   }
 
   const handleSkuSelected = (index, variantKey, value, variant) => {
-    // handle tile selection
+    // handle tile selection - user clicked on tile e.g., 4pcs or 10oz etc.,
+    setItemQuantity(1)
+    setDisableAddToCart(false)
+    setDisableMinusCounter(false)
+    setDisablePlusCounter(false)
     handleVariantSelected(index, variantKey, value, variant)
   }
 
@@ -182,25 +198,73 @@ function SkuVariants({
     return str
   }
 
+  // out of stock for product without options
+  const displayOOSForWoOp = skuId => {
+    if (!skuId) {
+      return
+    }
+
+    let skuData = {}
+    if (variantOptions && Object.keys(variantOptions).length === 0) {
+      skuData = productData && productData.skus && productData.skus[skuId]
+      // skuData.skuDetails.hasStock = false // test data
+    } else {
+      return
+    }
+    if (!skuData?.skuDetails?.hasStock) {
+      // out of stock section
+      return (
+        <>
+          <span className='outoftocklabdt'>Out of Stock</span>
+          {!skuData?.skuDetails?.hasStock && (
+            <span
+              className='notifytxtnew'
+              onClick={() =>
+                handleNotifyMe({
+                  itemCode: skuId
+                })
+              }
+            >
+              <a href='#'>NOTIFY ME</a>
+            </span>
+          )}
+        </>
+      )
+    }
+  }
+
   // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId = skuID || variantOptions[variantKey].skuId || ''
     const skuData = productData && productData?.skus[skuId]
-    // skuData.skuDetails.price.salePrice = '$100.95' //test data
-    handleSelectedSkuData(skuData)
+    // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
+    // skuData.skuDetails.hasStock = false // test data for out of stock
+    const optionsTxtForMv =
+      (variantOptions &&
+        variantOptions[variantKey] &&
+        variantOptions[variantKey]?.optionsTextForMv) ||
+      ''
+    if (variantOptions && variantKey) {
+      handleSelectedSkuData(skuData)
+    }
     return (
       <div className='itempanel'>
         <div className='itemtxt'>
           ITEM CODE: #<span>{skuId || ''}</span>
+          <span className='itemtxt-mv'>{`${
+            optionsTxtForMv ? ` | ${optionsTxtForMv}` : ''
+          }`}</span>
+          {displayOOSForWoOp(skuId)}
         </div>
         <div className='price-section'>
+          {/* sale price */}
           {skuData && skuData?.skuDetails?.price?.salePrice && (
             <span className='priceb'>
               {skuData?.skuDetails?.price?.salePrice?.price}
             </span>
           )}
           {skuData && skuData?.skuDetails?.price?.listPrice && (
-            <span
+            <span // list price
               className={
                 skuData?.skuDetails?.price?.listPrice &&
                 skuData?.skuDetails?.price?.salePrice
@@ -208,7 +272,7 @@ function SkuVariants({
                   : 'priceb'
               }
             >
-              {skuData?.skuDetails?.price?.listPrice.price}
+              {skuData?.skuDetails?.price?.listPrice?.price}
             </span>
           )}
           {skuData?.skuDetails?.price?.salePrice && (
@@ -216,7 +280,7 @@ function SkuVariants({
               {`You save: $${displayPrice(
                 skuData?.skuDetails?.price?.listPrice?.price,
                 skuData?.skuDetails?.price?.salePrice?.price
-              )}.00`}
+              )}`}
             </span>
           )}
         </div>
@@ -241,11 +305,13 @@ function SkuVariants({
                     <i className='fa fa-minus' aria-hidden='true'></i>
                   </button>
                 </span>
+                {/** qty input field */}
                 <input
                   className='sku-item-qty'
                   type='number'
                   value={itemQuantity}
                   onChange={e => handleQtyChange(e, skuData)}
+                  onBlur={e => handleOnBlur(e, skuData)}
                 />
                 <span className='input-group-btn'>
                   {/* plus button */}
@@ -267,6 +333,7 @@ function SkuVariants({
                 </span>
               </div>
             </span>
+            {/** add to cart & add to wishlist */}
             <span
               className={`pdp-buttons ${
                 !skuData?.skuDetails?.hasStock ? 'npbuttons' : ''
@@ -312,6 +379,7 @@ function SkuVariants({
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
     let selectedSku = {}
+    const optionsText = ''
     if (index > 0) {
       const prevVariantKey = Object.keys(variantOptions)[index - 1] // 'count'
       // find out what is selected variant in this section
@@ -319,24 +387,26 @@ function SkuVariants({
         .defaultSelected
         ? variantOptions[prevVariantKey].defaultSelected
         : variantOptions[prevVariantKey].optionSelected
-      const { associatedSkuIds } = skuSelectedInPrevSection
+      const { associatedSkuIds } = skuSelectedInPrevSection || []
 
       // find all associated skus in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
-        const optionSkus =
-          variantOptions[variantKey].options[i].associatedSkuIds
+        const optionSkusIds =
+          variantOptions[variantKey].options[i].associatedSkuIds || []
+        // if (associatedSkuIds) {
         for (let j = 0; j < associatedSkuIds.length; j++) {
-          if (optionSkus.includes(associatedSkuIds[j])) {
+          if (optionSkusIds.includes(associatedSkuIds[j])) {
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
             variantOptions[variantKey].options[i].hasStock =
-              productData.skus[associatedSkuIds[j]].skuDetails.hasStock
+              productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
             variantOptions[variantKey].options[i].thickness =
-              productData.skus[
+              productData?.skus[
                 associatedSkuIds[j]
-              ].skuDetails.additionalDetails.thickness
+              ]?.skuDetails?.additionalDetails?.thickness
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
+        // }
       }
       if (
         !variantOptions[variantKey].defaultSelected &&
@@ -353,12 +423,36 @@ function SkuVariants({
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
+      const associatedSkuIds = selectedSku?.associatedSkuIds || []
+      if (index === Object.keys(variantOptions).length - 1) {
+        // only one variant
+        for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
+          // find out matching selected sku in variant options
+          const optionSkusIds =
+            variantOptions[variantKey]?.options[i]?.associatedSkuIds
+          for (let j = 0; j < associatedSkuIds.length; j++) {
+            if (optionSkusIds.includes(associatedSkuIds[j])) {
+              variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
+              variantOptions[variantKey].options[i].hasStock =
+                productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
+              variantOptions[variantKey].options[i].thickness =
+                productData?.skus[
+                  associatedSkuIds[j]
+                ]?.skuDetails?.additionalDetails?.thickness
+            }
+          }
+        }
+      }
     }
     if (index === Object.keys(variantOptions).length - 1) {
       // sku in last section
       let skuId = ''
       let optionsSelected = []
       const keys = Object.keys(variantOptions)
+      // get all associated skuIds of all selected varianOptions
+      // count - 4pcs - [99581, 99521], weight - 10oz - [86381, 99581, 77645]
+      // get all skuIds - [99581, 99521, 86381, 99581, 77645]
+      // for options selected === count[4pcs] - weight[10oz] == the skuId is 99581
       for (let key = 0; key < keys.length; key++) {
         optionsSelected = optionsSelected.concat(
           variantOptions[keys[key]].defaultSelected
@@ -370,7 +464,7 @@ function SkuVariants({
         for (let i = 0; i < optionsSelected.length; i++) {
           for (let j = i + 1; j < optionsSelected.length; j++) {
             if (optionsSelected[i] === optionsSelected[j]) {
-              skuId = optionsSelected[i]
+              skuId = optionsSelected[i] // skuId identified
               break
             }
           }
@@ -382,11 +476,28 @@ function SkuVariants({
         skuId = optionsSelected[0]
       }
       if (skuId) {
+        // populate sku details info in selected option
         variantOptions[keys[keys.length - 1]].skuId = skuId
         //   variantOptions[keys[keys.length - 1]].hasStock = false //test data
         variantOptions[keys[keys.length - 1]].hasStock =
           productData?.skus[skuId]?.skuDetails?.hasStock
         variantOptions[keys[keys.length - 1]].skuData = productData?.skus[skuId]
+        let optionsTextForMv = ''
+        // prepare options text for mobile view
+        Object.keys(variantOptions).forEach(vKey => {
+          // variant key === count/weight
+          let txt = ''
+          if (variantOptions[vKey].defaultSelected) {
+            txt = variantOptions[vKey].defaultSelected.optionValue
+          } else if (variantOptions[vKey].optionSelected) {
+            txt = variantOptions[vKey].optionSelected.optionValue
+          }
+          optionsTextForMv = optionsTextForMv
+            ? `${optionsTextForMv} | ${txt}`
+            : `${txt}`
+        })
+        variantOptions[keys[keys.length - 1]].optionsTextForMv =
+          optionsTextForMv
       }
     }
 
@@ -403,12 +514,36 @@ function SkuVariants({
                 // out of stock section
                 return (
                   <li className='list-inline-item me-2 mb-2'>
-                    <div className='Count outstock'>
-                      <span className='Countb'>{sku.optionValue}</span>
-                      <span className='txttagz'>
+                    <div
+                      className='Count outstock'
+                      onClick={() =>
+                        handleSkuSelected(
+                          index,
+                          variantKey,
+                          sku.optionValue,
+                          sku
+                        )
+                      }
+                    >
+                      <span className='outoftocklab'>Out of Stock</span>
+                      <span
+                        className={`${
+                          sku.optionValue.length > 16
+                            ? 'Countb-large'
+                            : 'Countb'
+                        }`}
+                      >
+                        {sku.optionValue}
+                      </span>
+                      <span
+                        className={`${
+                          sku.optionValue.length > 16
+                            ? 'txttagz-large'
+                            : 'txttagz'
+                        }`}
+                      >
                         {sku.thickness && formatThickness(sku.thickness)}
                       </span>
-                      <span className='outoftocklab'>Out of stock</span>
                     </div>
                     {!sku.hasStock && (
                       <div
@@ -455,10 +590,28 @@ function SkuVariants({
                     >
                       <i className='icon fas fa-check'></i>
                     </span>
-                    <span className='txttagb'>{sku.optionValue}</span>
-                    <span className='txttagz'>
-                      {sku.thickness && formatThickness(sku.thickness)}
+                    <span
+                      className={`${
+                        index === Object.keys(variantOptions).length - 1
+                          ? sku.optionValue.length > 9
+                            ? 'txttagb-last-large'
+                            : 'txttagb-last'
+                          : 'txttagb'
+                      }`}
+                    >
+                      {sku.optionValue}
                     </span>
+                    {sku.thickness && (
+                      <span
+                        className={`${
+                          sku.optionValue.length > 16
+                            ? 'txttagz-large'
+                            : 'txttagz'
+                        }`}
+                      >
+                        {formatThickness(sku.thickness)}
+                      </span>
+                    )}
                   </div>
                 </li>
               )

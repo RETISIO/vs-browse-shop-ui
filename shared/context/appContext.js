@@ -13,7 +13,10 @@ export function AppWrapper ({ children }) {
   const [isLogged, setisLogged] = useState(false)
   const [openReset, updateOpenReset] = useState(false)
   const [loader, setLoader] = useState(false)
-  const [noReload, setNoReload] = useState(false)
+  const [noReload, setNoReload] = useState(false);
+  const [ loginErrorMsg, setLoginErrorMsg ] = useState("");
+  const [ errorBanner, setErrorBanner ] = useState(false);
+  const [ isInActive, setIsInActive ] = useState(false);
 
   useEffect(() => {
     ;(async () => {
@@ -37,7 +40,10 @@ export function AppWrapper ({ children }) {
         loader,
         setLoader,
         noReload,
-        setNoReload
+        setNoReload,
+        loginErrorMsg, setLoginErrorMsg,
+        errorBanner, setErrorBanner,
+        isInActive, setIsInActive
       }}
     >
       {children}

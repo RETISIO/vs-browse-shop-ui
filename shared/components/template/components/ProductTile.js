@@ -2,7 +2,6 @@
 /* eslint-disable space-before-blocks */
 /* eslint-disable max-len */
 import React from 'react';
-// import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import NextImage from './nextImage';
 import { usePLPDataContext } from '../../../context/plpDatacontext';
@@ -11,27 +10,82 @@ import { useAppContext } from '../../../context/appContext';
 import config from '../../../helpers/getConfig';
 
 export default function ProductTile({ value, recommondationData }) {
-  const {
-    searchResultData,
-  } = usePLPDataContext();
+  const { searchResultData } = usePLPDataContext();
   const { state } = useAppContext();
 
   const router = useRouter();
 
   const navigatePDP = (data, href, e) => {
     e.preventDefault();
-    if(searchResultData){
+    if (searchResultData) {
       ClickProduct({
-        data, searchData: searchResultData.payLoad, userData: state?.userData, channelData: state?.channelData,
+        data,
+        searchData: searchResultData.payLoad,
+        userData: state?.userData,
+        channelData: state?.channelData,
       });
     }
-    if(recommondationData){
+    if (recommondationData) {
       ClickProduct({
-        data, recommendation: { ...recommondationData.recommendationAttributionDetails }, userData: state?.userData, channelData: state?.channelData,
+        data,
+        recommendation: {
+          ...recommondationData.recommendationAttributionDetails,
+        },
+        userData: state?.userData,
+        channelData: state?.channelData,
       });
     }
     router.push(href);
   };
+
+  const calcDisc = (listPrice, salePrice) => {
+    const listP = (listPrice && Math.ceil(parseFloat(listPrice))) || 0;
+    const saleP = (salePrice && Math.ceil(parseFloat(salePrice))) || 0;
+    return Math.ceil(listP - saleP);
+  };
+
+  // const displayPrice = () => {
+  //   // value.productPrice.minSalePrice = 50.9 //test data
+
+  //   if (value && value?.productPrice?.minSalePrice) {
+  //     return (
+  //       <b>
+  //         <span className="priceb">{` $${value?.productPrice?.minSalePrice}`}</span>
+  //         <span className="pricebstik">
+  //           {` $${value?.productPrice?.minListPrice}`}
+  //         </span>
+  //         {/* <span className='pricenred'>
+  //           {`You save: $${calcDisc(
+  //             value?.productPrice?.minListPrice,
+  //             value?.productPrice?.minSalePrice
+  //           )}.00`}
+  //         </span> */}
+  //       </b>
+  //     );
+  //   }
+  //   if (value && value?.productPrice?.minListPrice) {
+  //     if (value?.productPrice?.minSalePrice) {
+  //       return (
+  //         <b>
+  //           <span className="pricebstik">
+  //             {` $${value?.productPrice?.minListPrice}`}
+  //           </span>
+  //           <span className="pricenred">
+  //             {`You save: $${calcDisc(
+  //               value?.productPrice?.minListPrice,
+  //               value?.productPrice?.minSalePrice,
+  //             )}.00`}
+  //           </span>
+  //         </b>
+  //       );
+  //     }
+  //     return (
+  //       <b>
+  //         <span className="priceb">{` $${value?.productPrice?.minListPrice}`}</span>
+  //       </b>
+  //     );
+  //   }
+  // };
 
   return (
     <div className="product-card" data-mh="product-card">
@@ -63,8 +117,14 @@ export default function ProductTile({ value, recommondationData }) {
       ) : null}
       <a
         className="product-image"
-        href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
-        onClick={(e) => navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
+        href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
+        onClick={(e) => navigatePDP(
+          value,
+            `/products/${value?.displayName
+              ?.toLowerCase()
+              ?.replace(/ /g, '-')}/${value?.productId}`,
+            e,
+        )}
       >
         <div className="image-pos">
           <NextImage
@@ -79,44 +139,64 @@ export default function ProductTile({ value, recommondationData }) {
       <div className="product-card-inner">
         <div className="product-card-desc">
           <a
-            href={`/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`}
-            onClick={(e) => navigatePDP(value, `/products/${value?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${value?.productId}`, e)}
+            href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
+            onClick={(e) => navigatePDP(
+              value,
+                `/products/${value?.displayName
+                  ?.toLowerCase()
+                  ?.replace(/ /g, '-')}/${value?.productId}`,
+                e,
+            )}
           >
             {value.displayName}
           </a>
-          {(value?.additionalDetails?.isNewProduct || value?.additionalDetails?.isNeverFrozen)
-            ? (
-              <div
+          {value?.additionalDetails?.isNewProduct
+          || value?.additionalDetails?.isNeverFrozen ? (
+            <div
                 id="cc_img__resize_wrapper-new-badge"
                 className=""
                 style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
               >
                 <NextImage
-                  alt={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? 'fresh' : 'new'}
-                  className="image-badge ccLazyLoaded"
-                  src={((value?.additionalDetails?.isNewProduct && value?.additionalDetails?.isNeverFrozen) || (value?.additionalDetails?.isNeverFrozen)) ? '/static/assets/Fresh.png' : '/static/assets/new.png'}
-                  height={50}
-                  width={23}
-                />
+                alt={
+                    (value?.additionalDetails?.isNewProduct
+                    && value?.additionalDetails?.isNeverFrozen)
+                  || value?.additionalDetails?.isNeverFrozen
+                      ? 'fresh'
+                      : 'new'
+                  }
+                className="image-badge ccLazyLoaded"
+                src={
+                    (value?.additionalDetails?.isNewProduct
+                    && value?.additionalDetails?.isNeverFrozen)
+                  || value?.additionalDetails?.isNeverFrozen
+                      ? '/static/assets/Fresh.png'
+                      : '/static/assets/new.png'
+                  }
+                height={50}
+                width={23}
+              />
               </div>
             ) : null}
         </div>
         <div
           className="yotpo bottomLine yotpo-small"
           data-yotpo-product-id={value?.productId}
-              // data-yotpo-product-id="10660"
           data-currency="USD"
         >
         </div>
         <div className="product-card-price">
-          {(value?.productPrice?.minSalePrice || value?.productPrice?.minListPrice) === 0 ? null
-            : (
+          {(value?.productPrice?.minSalePrice
+            || value?.productPrice?.minListPrice) === 0 ? null : (
               <>
-                <span>Starting At: </span>
+                <span>{`${Object.keys(value?.skus)?.length === 1 ? 'Starting At: ' : 'Starting From: '}`}</span>
                 <b>
                   $
-                  {value?.productPrice?.minSalePrice ? value?.productPrice?.minSalePrice : value?.productPrice?.minListPrice}
+                  {value?.productPrice?.minSalePrice
+                    ? value?.productPrice?.minSalePrice.toFixed(2)
+                    : value?.productPrice?.minListPrice.toFixed(2)}
                 </b>
+                {/* {displayPrice()} */}
               </>
             )}
         </div>
