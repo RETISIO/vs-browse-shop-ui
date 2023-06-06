@@ -28,15 +28,11 @@ export function Index(props) {
   const { asPath } = useRouter();
 
   const getData = async() => {
-    const res = await requestContructor('getPasswordPolicy', '', {}, false);
-    return res;
-  };
-
-  useEffect(() => {
-    getData().then((data) => {
+    const res = await requestContructor('getPasswordPolicy', '', {}, false).then((data) => {
       getPasswordPattern(data);
     });
-  }, []);
+    return res;
+  };
 
   useEffect(() => {
     if (getCookie('lu')) {
@@ -147,6 +143,9 @@ export function Index(props) {
           setShow(false);
         }}
         className="modal-login"
+        onShow={
+          () => getData()
+        }
       >
         <LoginModel
           modelState={setShow}
