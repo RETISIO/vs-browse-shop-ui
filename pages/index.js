@@ -17,6 +17,7 @@ import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
 import ComponentMap from '../shared/components/componentMap';
+import getConfig from 'next/config'
 
 function Home({ data }) {
   // const i18n = useI18n();
@@ -25,6 +26,8 @@ function Home({ data }) {
   const { setShow } = useAppContext();
   const { setPageData } = usePageDataContext();
   const pageContent = data && data.page && data.page.segmentsMap;
+  const { publicRuntimeConfig: config } = getConfig();
+  console.log('config:', JSON.stringify(config));  
   // const getData = async() => {
   //   const res = await requestContructor('getChannelDetails', '', {}, false);
   //   const homePage = await requestContructor('static/home', '', {}, false);
