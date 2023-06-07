@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable linebreak-style */
 /* eslint-disable comma-dangle */
@@ -72,7 +73,7 @@ function Static({ data, origin }) {
     setOffset(0);
     if(data?.payLoad?.productCount === 1) {
       const product = data?.payLoad?.products[0];
-      router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);
+      router.push(`/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`);
     } else if(data?.payLoad?.redirect) {
       router.push(data?.payLoad?.redirectURL);
     }
