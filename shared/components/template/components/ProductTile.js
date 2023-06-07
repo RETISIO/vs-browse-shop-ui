@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable linebreak-style */
 /* eslint-disable space-before-blocks */
 /* eslint-disable max-len */
@@ -120,10 +121,8 @@ export default function ProductTile({ value, recommondationData }) {
         href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
         onClick={(e) => navigatePDP(
           value,
-            `/products/${value?.displayName
-              ?.toLowerCase()
-              ?.replace(/ /g, '-')}/${value?.productId}`,
-            e,
+          `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
+          e,
         )}
       >
         <div className="image-pos">
@@ -142,40 +141,38 @@ export default function ProductTile({ value, recommondationData }) {
             href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
             onClick={(e) => navigatePDP(
               value,
-                `/products/${value?.displayName
-                  ?.toLowerCase()
-                  ?.replace(/ /g, '-')}/${value?.productId}`,
-                e,
+              `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
+              e,
             )}
           >
             {value.displayName}
           </a>
           {value?.additionalDetails?.isNewProduct
           || value?.additionalDetails?.isNeverFrozen ? (
-            <div
+              <div
                 id="cc_img__resize_wrapper-new-badge"
                 className=""
                 style={{ maxWidth: '100%', minHeight: '0px', height: '100%' }}
               >
                 <NextImage
-                alt={
+                  alt={
                     (value?.additionalDetails?.isNewProduct
                     && value?.additionalDetails?.isNeverFrozen)
                   || value?.additionalDetails?.isNeverFrozen
                       ? 'fresh'
                       : 'new'
                   }
-                className="image-badge ccLazyLoaded"
-                src={
+                  className="image-badge ccLazyLoaded"
+                  src={
                     (value?.additionalDetails?.isNewProduct
                     && value?.additionalDetails?.isNeverFrozen)
                   || value?.additionalDetails?.isNeverFrozen
                       ? '/static/assets/Fresh.png'
                       : '/static/assets/new.png'
                   }
-                height={50}
-                width={23}
-              />
+                  height={50}
+                  width={23}
+                />
               </div>
             ) : null}
         </div>

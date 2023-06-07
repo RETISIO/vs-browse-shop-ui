@@ -170,6 +170,24 @@ export default function ProductDescription(props) {
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
     if (productData && productData.variantOptions) {
+      // productData.variantOptions.Material = [
+      //   {
+      //     optionValue: 'Cotton',
+      //     associatedSkuIds: ['98580', '98426', '99121']
+      //   },
+      //   {
+      //     optionValue: 'Silk',
+      //     associatedSkuIds: ['99095', '99295']
+      //   },
+      //   {
+      //     optionValue: 'Ryan',
+      //     associatedSkuIds: ['99130', '98114', '99127']
+      //   },
+      //   {
+      //     optionValue: 'Nylon',
+      //     associatedSkuIds: ['99108', '98586', '99132']
+      //   }
+      // ]
       Object.keys(productData.variantOptions).forEach(variantKey => {
         // sort optionValues of variantKey array
         // e.g., variantOptions[variantKey] = [{optionValue: '4pcs', asscoaietDSkuIds:[]}, {optionValue: '2pcs', asscoaietDSkuIds:[]},{}]
@@ -182,11 +200,14 @@ export default function ProductDescription(props) {
           defaultSelected: getDefaultSku(variantKey),
           // defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
+          skuSelecedInPrevVariantKey: '',
           skuId: '',
           optionsTextForMv: '' // selected options text in mobile view
         }
       })
     }
+    // console.log('variantOptionsObj....', variantOptionsObj)
+    // debugger
     setVariantsOptions({ ...variantOptionsObj })
   }
 
@@ -212,20 +233,21 @@ export default function ProductDescription(props) {
     variantOptionsObj[variantKey].optionSelected = variant
     variantOptionsObj[variantKey].defaultSelected = ''
     // index===0, set all other options default to empty
-    if (index === 0) {
-      Object.keys(variantOptionsObj).forEach((vKey, idx) => {
-        if (idx > 0) {
-          variantOptionsObj[vKey].optionSelected = ''
-          variantOptionsObj[vKey].defaultSelected = ''
-        }
-      })
-    }
+    // if (index === 0) {
+    Object.keys(variantOptionsObj).forEach((vKey, idx) => {
+      if (idx > index) {
+        variantOptionsObj[vKey].optionSelected = ''
+        variantOptionsObj[vKey].defaultSelected = ''
+      }
+    })
+    // }
     setVariantSelected({ variantKey, variant })
     setVariantsOptions({ ...variantOptionsObj })
   }
 
   const handleSelectedSku = skuData => {
     // sku identified - for setting onSale badge and addToWishlist payload
+    // console.log('skuData,skuSelected.....', skuData, skuSelected)
     if (
       skuData &&
       (!skuSelected ? true : skuSelected.skuId !== skuData.skuId)
