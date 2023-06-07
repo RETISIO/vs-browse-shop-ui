@@ -50,7 +50,6 @@ function SkuVariants({
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
-  const [selectedSkus, setSelectedSkus] = useState([])
   const maxQtyAllowed = 999 // max qty user can enter
 
   useEffect(() => {
@@ -391,8 +390,6 @@ function SkuVariants({
   }
 
   const getSkuIdsOfPreviousSelectedOptions = index => {
-    // debugger
-    // console.log('index...', index)
     let allCommonSkus = []
     const skuIdsToDisplay = []
     for (let i = 0; i < index; i++) {
@@ -412,12 +409,7 @@ function SkuVariants({
         skuIdsToDisplay.push(allCommonSkus[i])
       }
     }
-    // console.log(
-    //   'index,skuIdsToDisplay,allCommonSkus..',
-    //   index,
-    //   skuIdsToDisplay,
-    //   allCommonSkus
-    // )
+
     return index > 1 ? skuIdsToDisplay : allCommonSkus
   }
 
@@ -433,21 +425,12 @@ function SkuVariants({
         .defaultSelected
         ? variantOptions[prevVariantKey].defaultSelected
         : variantOptions[prevVariantKey].optionSelected
-      if (!variantOptions[prevVariantKey].skuSelecedInPrevVariantKey) {
-        variantOptions[variantKey].skuSelecedInPrevVariantKey =
-          skuSelectedInPrevSection || {}
-      }
-
       // const { associatedSkuIds } = skuSelectedInPrevSection || []
-
       const associatedSkuIds = getSkuIdsOfPreviousSelectedOptions(index)
-      // debugger
-      // console.log('associatedSkuIds...', associatedSkuIds)
       // find what are all associated skus matches in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
         const optionSkusIds =
           variantOptions[variantKey].options[i].associatedSkuIds || []
-        // if (associatedSkuIds) {
         for (let j = 0; j < associatedSkuIds.length; j++) {
           if (optionSkusIds.includes(associatedSkuIds[j])) {
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
@@ -460,7 +443,6 @@ function SkuVariants({
             optionsToDisplay.push(variantOptions[variantKey].options[i])
           }
         }
-        // }
       }
       if (
         !variantOptions[variantKey].defaultSelected &&
@@ -472,20 +454,11 @@ function SkuVariants({
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
-      // setSelectedSkus([...selectedSkus, selectedSku])
-      // console.log(
-      //   'selectedSku,optionsToDisplay,variantOptions...',
-      //   selectedSku,
-      //   optionsToDisplay,
-      //   variantOptions
-      // )
     } else if (index === 0) {
-      // debugger
       optionsToDisplay = variantOptions[variantKey].options
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
-      // setSelectedSkus([...selectedSkus, selectedSku])
       const associatedSkuIds = selectedSku?.associatedSkuIds || []
       if (index === Object.keys(variantOptions).length - 1) {
         // only one variant
@@ -607,7 +580,9 @@ function SkuVariants({
                             : 'txttagz'
                         }`}
                       >
-                        {sku.thickness && formatThickness(sku.thickness)}
+                        {index === Object.keys(variantOptions).length - 1 &&
+                          sku.thickness &&
+                          formatThickness(sku.thickness)}
                       </span>
                     </div>
                     {!sku.hasStock && (
@@ -666,17 +641,18 @@ function SkuVariants({
                     >
                       {sku.optionValue}
                     </span>
-                    {sku.thickness && (
-                      <span
-                        className={`${
-                          sku.optionValue.length > 16
-                            ? 'txttagz-large'
-                            : 'txttagz'
-                        }`}
-                      >
-                        {formatThickness(sku.thickness)}
-                      </span>
-                    )}
+                    {index === Object.keys(variantOptions).length - 1 &&
+                      sku.thickness && (
+                        <span
+                          className={`${
+                            sku.optionValue.length > 16
+                              ? 'txttagz-large'
+                              : 'txttagz'
+                          }`}
+                        >
+                          {formatThickness(sku.thickness)}
+                        </span>
+                      )}
                   </div>
                 </li>
               )
