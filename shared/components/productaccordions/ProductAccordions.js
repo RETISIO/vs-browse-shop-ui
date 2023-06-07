@@ -11,7 +11,7 @@ function ProductAccordions (props) {
     setConfig(configVal)
     if (configVal?.classification?.product === 'longDescription') {
       setData(props?.payLoad?.products[0]?.longDescription)
-    } else if (configVal?.classification?.product === 'defaultParentCategory') {
+    } else if (configVal?.classification?.product === 'nutritionalInfo') {
       setData(props?.payLoad?.products[0]?.additionalDetails?.nutritionalInfo)
     }
   }, [props])
@@ -56,7 +56,7 @@ function ProductAccordions (props) {
                   </Accordion.Body>
                 </Accordion.Item>
               )}
-              {config?.classification?.product === 'defaultParentCategory' && (
+              {config?.classification?.product === 'nutritionalInfo' && (
                 <Accordion.Item eventKey='0'>
                   <Accordion.Header>
                     <div className='panel panel-default panel-large'>
@@ -78,6 +78,7 @@ function ProductAccordions (props) {
                   </Accordion.Header>
                   <Accordion.Body>
                     <div
+                      id='nutrition-info-body'
                       className='panel-body'
                       data-bind='html: $data'
                       dangerouslySetInnerHTML={{ __html: data }}
