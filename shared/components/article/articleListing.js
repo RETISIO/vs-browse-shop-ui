@@ -37,7 +37,7 @@ export default function ArticleListing({ props }) {
         // setLoad(true)
       }
     })
-  }, [])
+  }, [props])
 
   return (
     <>

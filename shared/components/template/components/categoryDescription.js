@@ -42,6 +42,7 @@ export function CategoryDescription(props) {
                       <span
                         className="auto-suggest-word"
                         onClick={() => navigatePage()}
+                        aria-label="Search Term"
                       >
                         {searchTerm?.toLocaleLowerCase()}
                       </span>
@@ -55,6 +56,8 @@ export function CategoryDescription(props) {
       ) : (
         <>
           <div
+            role="region"
+            aria-live="polite"
             dangerouslySetInnerHTML={{
               __html: payLoad?.categoryData?.[0]?.description,
             }}
@@ -74,6 +77,8 @@ export function CategoryLongDescription(props) {
     <>
       <div
         className="hidden-xs"
+        role="region"
+        aria-live="polite"
         // eslint-disable-next-line max-len
         dangerouslySetInnerHTML={{
           __html: payLoad?.categoryData?.[0]?.longDescription,
