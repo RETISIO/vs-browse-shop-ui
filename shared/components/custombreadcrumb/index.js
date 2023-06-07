@@ -42,7 +42,7 @@ function CustomBreadcrumb(props) {
   return (
     <>
       {loading && <Loader />}
-      <nav className="breadcrumbs-block hidden-print">
+      <nav className="breadcrumbs-block hidden-print" aria-label="Breadcrumb">
         <ol className="breadcrumb">
           <li key={1}>
             <Link href="/">Home</Link>
@@ -52,9 +52,9 @@ function CustomBreadcrumb(props) {
             ? (
               <>
                 {pageContentData?.map((item, _key) => (
-                  <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
+                  <li className={!item?.isRootCategory ? 'active' : ''} key={_key} aria-current={pageContentData?.length - 1 === _key ? 'page' : null}>
                     {pageContentData?.length - 1 !== _key ? (
-                      <Link href={constructBNSSEOURL(item, 'plp')}>
+                      <Link href={constructBNSSEOURL(item, 'plp')} alt={item?.name}>
                         {item?.name}
                       </Link>
                     ) : (
@@ -77,9 +77,9 @@ function CustomBreadcrumb(props) {
           // eslint-disable-next-line react/jsx-no-useless-fragment
                     <>
                       {props?.payLoad?.navigationPath?.map((item, _key) => (
-                        <li className={!item?.isRootCategory ? 'active' : ''} key={_key}>
+                        <li className={!item?.isRootCategory ? 'active' : ''} key={_key} aria-current={props?.payLoad?.navigationPath?.length - 1 === _key ? 'page' : null}>
                           {props?.payLoad?.navigationPath?.length - 1 !== _key ? (
-                            <Link href={constructBNSSEOURL(item, 'plp')}>{item?.name}</Link>
+                            <Link href={constructBNSSEOURL(item, 'plp')} alt={item?.name}>{item?.name}</Link>
                           ) : (
                             <span>{item?.name}</span>
                           )}

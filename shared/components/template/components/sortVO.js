@@ -43,10 +43,22 @@ function SortVO(props) {
     <form className="form-inline sort-by">
       <div className="form-group">
         <label htmlFor="cc-sort">Sort By:</label>
-        <select id="cc-sort" className="form-control" onChange={(e) => handleChange(e)}>
+        <select
+          id="cc-sort"
+          className="form-control"
+          onChange={(e) => handleChange(e)}
+          aria-label="Sort By"
+        >
           {payLoad?.sortVO?.map((item, index) => (
             // eslint-disable-next-line react/no-array-index-key
-            <option value={item.sortValue} key={index} selected={item?.isSelected}>{item?.sortLabel}</option>
+            <option
+              value={item.sortValue}
+              key={index}
+              selected={item?.isSelected}
+              aria-selected={item?.isSelected ? 'true' : 'false'}
+            >
+              {item?.sortLabel}
+            </option>
           ))}
         </select>
         <span className="text-danger" role="alert"></span>
