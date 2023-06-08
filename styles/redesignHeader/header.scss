@@ -523,6 +523,16 @@ a.mini-cart-btn {
   background-color: transparent;
   border-color: transparent;
   padding: 0;
+
+  // &:focus {
+  //   outline: 3px solid $colorWhite;
+  // }
+  // &:hover {
+  //   outline: none;
+  // }
+}
+#header .header-actions-cart .ab-miniCart-Icon:focus {
+  outline: 3px solid $colorWhite;
 }
 
 .home-header-container #header{
