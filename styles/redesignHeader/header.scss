@@ -175,24 +175,24 @@
         }
       }
     }
-    .navbar.redesign-navbar {
-      background-color: $colorDeepBlue;
-      .header-dropdown-menu{
-        background-color: $colorDeepBlue;
-      }
-      .js-dropdown__btn {
-        background-color: $colorDeepBlue;
-      }
-      .js-dropdown__btn:hover {
-        background-color: $colorLightBlue;
-      }
-      .sub-nav:hover .js-dropdown__btn {
-        background-color: $colorLightBlue;
-      }
-      .sub-nav1 {
-        background-color: $colorLightBlue;
-      }
-    }
+    // .navbar.redesign-navbar {
+    //   background-color: $colorDeepBlue;
+    //   // .header-dropdown-menu{
+    //   //   background-color: $colorDeepBlue;
+    //   // }
+    //   // .js-dropdown__btn {
+    //   //   background-color: $colorDeepBlue;
+    //   // }
+    //   // .js-dropdown__btn:hover {
+    //   //   background-color: $colorLightBlue;
+    //   // }
+    //   .sub-nav:hover .js-dropdown__btn {
+    //     background-color: $colorLightBlue;
+    //   }
+    //   // .sub-nav1 {
+    //   //   background-color: $colorLightBlue;
+    //   // }
+    // }
     .header-dropdown-menu {
       background-color: $colorDeepBlue;
     }
@@ -648,14 +648,6 @@ a.mini-cart-btn {
     }
   }
   //AB-1203 ends here
-  //AB-1925 starts here
-  .shopAllInL2Category {
-    text-decoration: underline;
-    font-weight: 600;
-    font-size: 14px;
-    text-underline-offset: 8px;
-  }
-  //AB-1925 ends here
   /* **** DB css for the account and mini cart ****** */
 }
 
