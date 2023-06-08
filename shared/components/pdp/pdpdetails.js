@@ -139,11 +139,12 @@ export default function ProductDescription(props) {
       // find skuId in associatedSkuds of variantOptions
       const arrLngth = productData?.variantOptions[variantKey].length
       for (let i = 0; i < arrLngth; i++) {
-        // options array
+        // options array = [{optionValue: '2pcs', associatedSkuIds:[]},{},{},..]
         const associatedSkusIds =
           productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
         if (associatedSkusIds.includes(skuId)) {
           defaultSku = productData?.variantOptions[variantKey][i]
+          // check if
           break
         }
         if (i === arrLngth - 1 && Object.keys(defaultSku).length === 0) {
