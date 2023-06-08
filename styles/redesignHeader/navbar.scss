@@ -41,8 +41,6 @@
     }
     
     .sub-nav1 {
-        // transform: translate(184px,-456px);
-        // background-color: $colorEclipse;
         padding: 10px;    
         line-height: 2.5;
         margin: 0;
@@ -161,7 +159,6 @@
             width: 100%;
         }
     }
-    // .nav-item.js-dropdown.sub-nav .homeDropdownMenu { display: none;}
     .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { height: 100vh;}
     .firstDropDownMegaMenu {
         height: 100vh;
@@ -201,7 +198,6 @@
         //AB-1925 ends here
     }
     .mobileMenuContainer {
-        // width: 400px;
         padding: 0 10px;
     }
     .categoryL1ListContainer {
@@ -220,21 +216,12 @@
         }
         .navbar.redesign-navbar {
             background-color: $colorDeepBlue;
-            // .header-dropdown-menu{
-            //   background-color: $colorDeepBlue;
-            // }
             .js-dropdown__btn, .categoryL1ListContainer {
               background-color: $colorDeepBlue;
             }
-            // .js-dropdown__btn:hover {
-            //   background-color: $colorLightBlue;
-            // }
             .sub-nav:hover .js-dropdown__btn {
               background-color: $colorLightBlue;
             }
-            // .sub-nav1 {
-            //   background-color: $colorLightBlue;
-            // }
           }
     }
 }
