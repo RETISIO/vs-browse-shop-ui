@@ -678,7 +678,9 @@ function SkuVariants({
     <>
       {variantOptions && Object.keys(variantOptions).length > 0
         ? displayVariantsSection()
-        : productData && Object.keys(productData?.variantOptions).length === 0
+        : productData &&
+          productData?.variantOptions &&
+          Object.keys(productData?.variantOptions).length === 0
         ? displayVariantPriceSection(0, '', productData?.defaultSkuId)
         : ''}
     </>
