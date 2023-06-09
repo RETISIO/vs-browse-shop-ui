@@ -23,7 +23,7 @@ spec:
             -
               containerPort: 3000
           args:
-            -"--env-file=/k8s/envvariable/${ENV}/.env"
+            - "--env-file=/k8s/envvariable/${ENV}/.env"
        #   env:
        #     - name: ENV_FILE
        #       valueFrom:
