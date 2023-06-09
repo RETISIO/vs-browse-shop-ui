@@ -379,6 +379,9 @@
 .home-header-container .nonHomePageHeader #header {
   .navbar.redesign-navbar .header-dropdown-menu {
     background-color: $colorDeepBlue;
+    .js-dropdown__btn {
+      background-color: $colorDeepBlue;
+    }
   }
 }
 
@@ -399,30 +402,6 @@
       @media (min-width: 768px) and (max-width: 1024px) {
         left: -15px;
       }
-    }
-  }
-}
-
-.home-header-container .nonHomePageHeader #header {
-  .navbar.redesign-navbar .header-dropdown-menu {
-    .js-dropdown__btn {  
-      background-color: $colorDeepBlue;
-    }
-  }
-}
-
-.home-header-container .nonHomePageHeader #header {
-  .navbar.redesign-navbar .header-dropdown-menu {
-    .js-dropdown__btn:hover {  
-      background-color: $colorLightBlue;
-    }
-  }
-}
-
-.home-header-container .nonHomePageHeader #header {
-  .navbar.redesign-navbar .header-dropdown-menu {
-    .sub-nav:hover .js-dropdown__btn {
-      background-color: $colorLightBlue;
     }
   }
 }
