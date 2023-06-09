@@ -41,8 +41,6 @@
     }
     
     .sub-nav1 {
-        // transform: translate(184px,-456px);
-        background-color: $colorEclipse;
         padding: 10px;    
         line-height: 2.5;
         margin: 0;
@@ -161,18 +159,51 @@
             width: 100%;
         }
     }
-    .nav-item.js-dropdown.sub-nav .homeDropdownMenu { display: none;}
-    .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { display: block;}
+    .firstDropDownMegaMenu .nav-item.js-dropdown.sub-nav:hover .homeDropdownMenu { height: 100vh;}
     .firstDropDownMegaMenu {
         height: 100vh;
+        .threeColumnLayout {
+            width: 640px;
+        }
+        .twoColumnLayout {
+            width: 440px;
+        }
+        .oneColumnLayout {
+            width: 230px;
+        }
         .homeDropdownMenu {
             top: 0;
             left: 200px;
             padding: 0;
+            background-color: $colorEclipse;
+            .sub-nav1 {
+                min-width: 100px;
+                padding-left: 0;
+                height: auto;
+            }
+            .category-list-item-navbar,
+            .list-heading {
+                margin-left: 0;
+                padding-left: 20px;
+            }
+            .category-list-item-navbar {
+                line-height: 16px;
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
         }
+        //AB-1925 starts here
+        .shopAllInL2Category {
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+            text-underline-offset: 8px;
+        }
+        //AB-1925 ends here
     }
     .mobileMenuContainer {
-        width: 400px;
+        padding: 0 10px;
     }
     .categoryL1ListContainer {
         position: relative;
@@ -180,5 +211,30 @@
             top: 5px;
             display: none;
         }
+    }
+    .navListItems.active .level0Menu {
+        display: block;
+    }
+}
+
+.home-header-container #header {
+    .header-sticky.js-sticky-menu.is_stuck {
+        .homeDropdownMenu, .firstDropDownMegaMenu .nav-item {
+            background-color: $colorLightBlue;
+        }
+        .navbar.redesign-navbar {
+            background-color: $colorDeepBlue;
+            .js-dropdown__btn, .categoryL1ListContainer {
+              background-color: $colorDeepBlue;
+            }
+            .sub-nav:hover .js-dropdown__btn {
+              background-color: $colorLightBlue;
+            }
+          }
+    }
+}
+.home-header-container .nonHomePageHeader {
+    #header .navbar.redesign-navbar .homeDropdownMenu {
+        background-color: $colorLightBlue;
     }
 }
