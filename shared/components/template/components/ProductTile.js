@@ -190,9 +190,8 @@ export default function ProductTile({ value, recommondationData }) {
                 <span>{`${Object.keys(value?.skus)?.length === 1 ? 'Starting At: ' : 'Starting From: '}`}</span>
                 <b>
                   $
-                  {value?.productPrice?.minSalePrice
-                    ? value?.productPrice?.minSalePrice.toFixed(2)
-                    : value?.productPrice?.minListPrice.toFixed(2)}
+                  {value?.productPrice?.onSale && (value?.productPrice?.minListPrice < value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice.toFixed(2) : value?.productPrice?.minSalePrice.toFixed(2))}
+                  {!value?.productPrice?.onSale && value?.productPrice?.minListPrice.toFixed(2)}
                 </b>
                 {/* {displayPrice()} */}
               </>
