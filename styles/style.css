@@ -5348,6 +5348,21 @@ button.close {
   background: transparent;
   border: 0;
 }
+.pdpdetails-close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: 0.2;
+}
+button.pdpdetails-close {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
 .modal-open {
   overflow: hidden;
   padding-right: 0px !important;
@@ -8426,5 +8441,5 @@ button.close {
 }
 .facet-active {
   color: #1e4783;
-  font-weight: 600
+  font-weight: 600;
 }

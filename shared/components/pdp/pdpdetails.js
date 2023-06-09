@@ -242,13 +242,13 @@ export default function ProductDescription(props) {
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
     <button
-      className='close'
+      className='pdpdetails-close'
       type='button'
       aria-label='Close'
       style={{
         opacity: '1.2',
         fontSize: '31px',
-        lineHeight: '0px',
+        lineHeight: '10px',
         marginTop: '10px'
       }}
       onClick={() => {
