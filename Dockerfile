@@ -10,8 +10,7 @@ FROM node:18-alpine AS builder
 WORKDIR /usr/src/app
 COPY . .
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-Run npm run build && npm install --production
-
+Run npm run build
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
 
@@ -19,7 +18,7 @@ WORKDIR /usr/src/app
 ENV NODE_ENV production
 
 # You only need to copy next.config.js if you are NOT using the default configuration
-#COPY --from=builder /usr/src/app/next.config.js ./
+COPY --from=builder /usr/src/app/next.config.js ./
 COPY --from=builder /usr/src/app/public ./public
 #COPY --from=builder --chown=nextjs:nodejs /usr/src/app/.next ./.next
 COPY --from=builder /usr/src/app/.next ./.next
