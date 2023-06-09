@@ -503,15 +503,15 @@ a.mini-cart-btn {
   border-color: transparent;
   padding: 0;
 
-  // &:focus {
-  //   outline: 3px solid $colorWhite;
-  // }
-  // &:hover {
-  //   outline: none;
-  // }
+  &:focus {
+    outline: 1px solid $colorWhite;
+  }
+  &:focus:not(:focus-visible) {
+    outline: 0;
+  }
 }
 #header .header-actions-cart .ab-miniCart-Icon:focus {
-  outline: 3px solid $colorWhite;
+  outline: 1px solid $colorWhite;
 }
 
 .home-header-container #header{
