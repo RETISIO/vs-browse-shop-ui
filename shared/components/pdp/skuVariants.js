@@ -566,16 +566,14 @@ function SkuVariants({
                       <span className='outoftocklab'>Out of Stock</span>
                       <span
                         className={`${
-                          sku.optionValue.length > 16
-                            ? 'Countb-large'
-                            : 'Countb'
+                          sku.optionValue.length > 9 ? 'Countb-large' : 'Countb'
                         }`}
                       >
                         {sku.optionValue}
                       </span>
                       <span
                         className={`${
-                          sku.optionValue.length > 16
+                          sku.optionValue.length > 9
                             ? 'txttagz-large'
                             : 'txttagz'
                         }`}
@@ -634,7 +632,9 @@ function SkuVariants({
                       className={`${
                         index === Object.keys(variantOptions).length - 1
                           ? sku.optionValue.length > 9
-                            ? 'txttagb-last-large'
+                            ? sku.thickness
+                              ? 'txttagb-last-large-with-thick'
+                              : 'txttagb-last-large'
                             : 'txttagb-last'
                           : 'txttagb'
                       }`}
@@ -645,7 +645,7 @@ function SkuVariants({
                       sku.thickness && (
                         <span
                           className={`${
-                            sku.optionValue.length > 16
+                            sku.optionValue.length > 9
                               ? 'txttagz-large'
                               : 'txttagz'
                           }`}
