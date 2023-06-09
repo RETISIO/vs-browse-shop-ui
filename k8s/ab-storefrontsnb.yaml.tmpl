@@ -22,12 +22,14 @@ spec:
           ports:
             -
               containerPort: 3000
-          env:
-            - name: ENV_FILE
-              valueFrom:
-                configMapKeyRef:
-                  name: sfbrowseshop-config
-                  key: ENV_FILE
+          args:
+            -"--env-file=/k8s/envvariable/${ENV}/.env"
+       #   env:
+       #     - name: ENV_FILE
+       #       valueFrom:
+       #        configMapKeyRef:
+       #          name: sfbrowseshop-config
+       #          key: ENV_FILE
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
@@ -50,13 +52,13 @@ spec:
               port: 3000
               path: /api/health
               scheme: HTTP
-      volumes:
-        - name: sfbrowseshop-config
-          configMap:
-            name: sfbrowseshop-config
-            items:
-            - key: "ENV_FILE"
-              path: "ENV_FILE"
+      #volumes:
+      #  - name: sfbrowseshop-config
+      #    configMap:
+      #      name: sfbrowseshop-config
+      #      items:
+      #      - key: "ENV_FILE"
+      #        path: "ENV_FILE"
 ---
 apiVersion: v1
 kind: Service
