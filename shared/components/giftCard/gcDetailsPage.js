@@ -53,6 +53,9 @@ export default function GcDetailsPage (props) {
     const itemPrice =
       item?.skuDetails?.price?.salePrice?.price ||
       item?.skuDetails?.price?.listPrice?.price
+    if (!itemPrice) {
+      return ''
+    }
     return (
       <option key={`key-${i}-${item.skuId}`} value={item.skuId}>
         {itemPrice}
