@@ -31,7 +31,7 @@ RUN apk add --no-cache --upgrade bash
 RUN ["chmod", "+x", "./entrypoint.sh"]
 ENTRYPOINT ["./entrypoint.sh"]
 
-EXPOSE 3000
-ENV PORT 3000
+#EXPOSE 3000
+#ENV PORT 3000
 
 CMD ["node_modules/.bin/next", "start"]
