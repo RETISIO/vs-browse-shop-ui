@@ -112,7 +112,9 @@
         }
     }
 
-    .navbar-nav.nav > li > a:hover, .navbar-nav.nav .open > a {
+    .navbar-nav.nav > li > a,
+    .navbar-nav.nav .open > a,
+    .header-menu {
         color: $colorWhite;
         background-color: transparent;
     }
@@ -128,9 +130,7 @@
 
     .header-menu {
         font-size: 10px;
-        background-color: transparent;
         border: none;
-        color: $colorWhite;
         position: absolute;
         right: 5px;
         top: 18px;
@@ -221,7 +221,6 @@
     .navListItems:hover .categoryL1ListContainer .header-menu {
         display: none;
     }
-
 }
 
 .home-header-container #header {
