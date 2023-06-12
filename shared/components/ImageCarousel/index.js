@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import Slider from 'react-slick'
-import Carousel from 'react-bootstrap/Carousel'
-import Modal from 'react-bootstrap/Modal'
-import NextImage from '../template/components/nextImage'
-import USDABadge from '../../../public/static/assets/usda-badge.png'
-import SaleBadge from '../../../public/static/assets/sale-badge.png'
-import MagnifyImage from '../template/components/magnifyImage'
+import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
+import Carousel from 'react-bootstrap/Carousel';
+import Modal from 'react-bootstrap/Modal';
+import NextImage from '../template/components/nextImage';
+import USDABadge from '../../../public/static/assets/usda-badge.png';
+import SaleBadge from '../../../public/static/assets/sale-badge.png';
+import MagnifyImage from '../template/components/magnifyImage';
+import config from '../../helpers/getConfig';
 
-function ImageCarousel ({ data, additionalDetails, onSale }) {
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const defaultImg = data?.media ? [data?.media] : []
-  const alternateImg = data?.alternateImages ? data.alternateImages : []
-  const [selected, setSelected] = useState(defaultImg[0])
-  const imgData = [...defaultImg, ...alternateImg]
-  const [show, setShow] = useState(false)
-  const [openImg, setOpenImg] = useState()
-  const [width, setWidth] = useState(992)
+function ImageCarousel({ data, additionalDetails, onSale }) {
+  const damPath = config.IMGPATH;
+  const defaultImg = data?.media ? [data?.media] : [];
+  const alternateImg = data?.alternateImages ? data.alternateImages : [];
+  const [selected, setSelected] = useState(defaultImg[0]);
+  const imgData = [...defaultImg, ...alternateImg];
+  const [show, setShow] = useState(false);
+  const [openImg, setOpenImg] = useState();
+  const [width, setWidth] = useState(992);
 
   const settings = {
     slidesToShow: 3,

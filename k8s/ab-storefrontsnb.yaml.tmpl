@@ -22,6 +22,9 @@ spec:
           ports:
             -
               containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: sfbrowseshop-config
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
@@ -44,6 +47,7 @@ spec:
               port: 3000
               path: /api/health
               scheme: HTTP
+
 ---
 apiVersion: v1
 kind: Service

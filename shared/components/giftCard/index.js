@@ -1,30 +1,34 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable comma-dangle */
+/* eslint-disable linebreak-style */
 /* eslint-disable no-nested-ternary */
-import React, { useState, useEffect } from 'react'
-import Breadcrumb from '../template/components/breadcrumb'
-import GcDetailsPage from './gcDetailsPage'
-import ProductRecommondation from '../Sliders/ProductRecommondation'
-import NextImage from '../template/components/nextImage'
+import React, { useState, useEffect } from 'react';
+import Breadcrumb from '../template/components/breadcrumb';
+import GcDetailsPage from './gcDetailsPage';
+import ProductRecommondation from '../Sliders/ProductRecommondation';
+import NextImage from '../template/components/nextImage';
+import config from '../../helpers/getConfig';
 
-export default function GiftCard (props) {
-  const [errorMsg, setErrorMsg] = useState()
-  const [successMsg, setSuccessMsg] = useState()
+export default function GiftCard(props) {
+  const pdpData = props?.pdpData?.payLoad;
+  const damPath = config.IMGPATH;
+  const defaultSkuId = pdpData?.products[0]?.defaultSkuId;
+
+  const [errorMsg, setErrorMsg] = useState();
+  const [successMsg, setSuccessMsg] = useState();
 
   useEffect(() => {
     if (successMsg || errorMsg) {
       setTimeout(() => {
-        setSuccessMsg('')
-        setErrorMsg('')
-      }, 3000)
+        setSuccessMsg('');
+        setErrorMsg('');
+      }, 3000);
     }
-  }, [errorMsg, successMsg])
-
-  const pdpData = props?.pdpData?.payLoad
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH
-  const defaultSkuId = pdpData?.products[0]?.defaultSkuId
+  }, [errorMsg, successMsg]);
 
   const breadcrumbData = {
     ...props?.pdpData
-  }
+  };
   breadcrumbData.payLoad.navigationPath = [
     {
       id: 'assortments',
@@ -32,16 +36,16 @@ export default function GiftCard (props) {
         pdpData?.products[0]?.productType === 'giftcard'
           ? 'Physical Gift Card'
           : pdpData?.products[0]?.productType === 'egiftcard'
-          ? 'Email Gift Card'
-          : '',
+            ? 'Email Gift Card'
+            : '',
       categoryNId: 'gifts_bundles',
       isRootCategory: false,
       hasCategories: true
     }
-  ]
-  const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media
-  const thumbnailHeight = 475
-  const thumbnailWidth = 475
+  ];
+  const mediaObj = pdpData?.products[0]?.skus[defaultSkuId]?.media;
+  const thumbnailHeight = 475;
+  const thumbnailWidth = 475;
 
   const configValue = {
     configValue:
@@ -50,19 +54,19 @@ export default function GiftCard (props) {
       'productRecommendations:custom:fba6a97f-0519-4c11-bbde-0af98c769c1f',
     contentTypeId: 'productRecommendations:custom',
     name: 'More Temptations to Consider'
-  }
+  };
 
   const handleSuccessMsg = msg => {
-    setErrorMsg('')
-    setSuccessMsg('The item(s) has been successfully added to your cart.')
-    window.scrollTo(0, 0)
-  }
+    setErrorMsg('');
+    setSuccessMsg('The item(s) has been successfully added to your cart.');
+    window.scrollTo(0, 0);
+  };
 
   const handleErrorMsg = error => {
-    setSuccessMsg('')
-    setErrorMsg(error)
-    window.scrollTo(0, 0)
-  }
+    setSuccessMsg('');
+    setErrorMsg(error);
+    window.scrollTo(0, 0);
+  };
 
   const handleCloseBtn = (errMsg, sucsMsg) => (
     <button
@@ -77,16 +81,16 @@ export default function GiftCard (props) {
       }}
       onClick={() => {
         if (errMsg) {
-          setErrorMsg('')
+          setErrorMsg('');
         }
         if (sucsMsg) {
-          setSuccessMsg('')
+          setSuccessMsg('');
         }
       }}
     >
       <span aria-hidden='true'>×</span>
     </button>
-  )
+  );
 
   return (
     <>
@@ -151,5 +155,5 @@ export default function GiftCard (props) {
         <ProductRecommondation {...configValue} payLoad={pdpData} />
       </div>
     </>
-  )
+  );
 }

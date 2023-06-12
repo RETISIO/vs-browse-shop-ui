@@ -24,6 +24,7 @@ import React, { useEffect, useState } from 'react'
 import { HtmlContent } from '@retisio/sf-ui'
 import NextImage from '../template/components/nextImage'
 import { requestContructor } from '../../helpers/api'
+import config from '../../helpers/getConfig'
 
 export default function ArticleDetails({ props }) {
   const Props = props
@@ -106,7 +107,7 @@ export default function ArticleDetails({ props }) {
                     <NextImage
                       alt={value?.skus?.[value?.defaultSkuId]?.media?.altText}
                       className='item-thumb img-responsive'
-                      src={`${process.env.NEXT_PUBLIC_IMAGEPATH}${
+                      src={`${config.IMGPATH}${
                         value?.skus?.[value?.defaultSkuId]?.media?.largeImg
                       }`}
                       height={262}

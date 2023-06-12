@@ -17,6 +17,7 @@ import { requestContructor } from '../../helpers/api';
 import ProductTile from '../template/components/ProductTile';
 import { Settings, RecommondationsMap } from './getSettings';
 import { viewEvent } from '../ThirdPartyScripts/Events';
+import config from '../../helpers/getConfig';
 
 export default function ProductRecommondation(props) {
   const [load, setLoad] = useState(false);
@@ -24,7 +25,7 @@ export default function ProductRecommondation(props) {
     settings: { ...Settings },
   });
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const siteId = process.env.NEXT_PUBLIC_SITEID;
+  const siteId = config.SKEY;
   const { state } = useAppContext();
   const configValues = props.configValue ? JSON.parse(props.configValue) : {};
 

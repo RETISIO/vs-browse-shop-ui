@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 import React from 'react';
 import Script from 'next/script';
+import config from '../../helpers/getConfig';
 
 export default function Listract() {
   return (
-    <Script src={`https://cdn.listrakbi.com/scripts/script/script.js?m=${process.env.NEXT_PUBLIC_LISTRACK_MID}&v=1`}></Script>
+    <Script src={`https://cdn.listrakbi.com/scripts/script/script.js?m=${config.LISKEY}&v=1`}></Script>
   );
 }

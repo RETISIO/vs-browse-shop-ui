@@ -4,6 +4,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect } from 'react';
 import Slider from 'react-slick';
+import config from '../../helpers/getConfig';
 import NextImage from '../template/components/nextImage';
 
 export default function ImageCarousel(props) {
@@ -49,7 +50,7 @@ export default function ImageCarousel(props) {
           <div key={i}>
             <div style={{ margin: '7px' }}>
               <a href={item.refinementPageLink}>
-                <NextImage alt={item.name} className="img-responsive category-list__image" src={`${process.env.NEXT_PUBLIC_IMAGEPATH}${item.refinementImageUrl}`} width="184" height="184" />
+                <NextImage alt={item.name} className="img-responsive category-list__image" src={`${config.IMGPATH}${item.refinementImageUrl}`} width="184" height="184" />
                 <div className="category-list__text">
                   <section>
                     <span className="category-list-text col-xs-8 col-md-12">{item.name}</span>
