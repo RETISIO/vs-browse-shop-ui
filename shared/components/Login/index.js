@@ -26,7 +26,6 @@ export function Index(props) {
   const router = useRouter();
   const { page } = router.query;
   const { asPath } = useRouter();
-
   const getData = async() => {
     const res = await requestContructor('getPasswordPolicy', '', {}, false).then((data) => {
       getPasswordPattern(data);
@@ -44,16 +43,27 @@ export function Index(props) {
     const policy = data && data?.passwordPolicies[0]?.rules;
     let regex = [];
     let errors = [];
-    policy.map((policy) => {
-      const reg = policy.regex.replaceAll('/', '');
-      const regPattern = new RegExp(`(?=.*${reg})`);
-      regex.push(regPattern);
-      errors.push(policy.errorMsg);
-    });
-    regex = regex.join('').replaceAll('/', '');
-    regex = new RegExp(regex);
+
+    policy.map(policy => {
+      if(policy.name !== "custom") {
+        let reg = policy.regex.replaceAll('/', "");
+        let regPattern = new RegExp(`(?=.*${reg})`);  
+        regex.push(regPattern);
+        errors.push(policy.errorMsg);
+      }
+      else {
+        regex.push(policy.regex);
+        errors.push(policy.errorMsg);
+      }
+    })
+    if(policy[0].name !== "custom") {
+      regex = regex.join("").replaceAll('/', "");
+      regex = new RegExp(regex);
+      errors = errors.join(". ");
+    } else {
+      regex = new RegExp(regex[0]);
+    }
     setPasswordRegex(regex);
-    errors = errors.join('. ');
     setPasswordErrors(errors);
   };
 
@@ -86,7 +96,12 @@ export function Index(props) {
   const reloadToPath = () => {
     if (!noReload) {
       if (page) {
-        window.location.href = page;
+        const allowURL = ['/account/profile', '/account/account-info', '/account/address-book', '/account/orders', '/account/wishlist'];
+        if (allowURL.indexOf(page) > -1) {
+          window.location = window.location.origin + page;
+        } else {
+          window.location = window.location.origin;
+        }
       } else {
         window.location.href = asPath;
       }
