@@ -17,12 +17,6 @@
         position: relative;
         flex: 0 1 auto;
     }
-    .navListItems .first-dropdown {
-        display: none;
-    }
-    .navListItems .first-dropdown:hover{
-        display: block;
-    }
 
     .js-dropdown__btn {
         color: $colorWhite;
@@ -247,10 +241,10 @@
           }
     }
 }
-.home-header-container .nonHomePageHeader {
-    #header .navbar.redesign-navbar .homeDropdownMenu,
-    #header .navbar.redesign-navbar .sub-nav:hover .js-dropdown__btn,
-    #header .navbar.redesign-navbar .nav-item.sub-nav.active .js-dropdown__btn {
+.home-header-container .nonHomePageHeader #header .navbar.redesign-navbar {
+    .homeDropdownMenu,
+    .sub-nav:hover .js-dropdown__btn,
+    .nav-item.sub-nav.active .js-dropdown__btn {
         background-color: $colorLightBlue;
     }
 }
