@@ -12,7 +12,7 @@ export default function CookingDescription ({ id, data, description }) {
       'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0'
     )
     WinPrint.document.open()
-    WinPrint.document.write(printContent)
+    WinPrint.document.write("<html><head><title>Cooking Instructions</title></head><body>"+printContent+"</body></html>")
     WinPrint.document.close()
     WinPrint.focus()
     WinPrint.print()
