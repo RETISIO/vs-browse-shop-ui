@@ -1,8 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
+
+import config from "../../helpers/getConfig";
+
 /* eslint-disable no-unused-expressions */
-const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_KEY;
+const GA_TRACKING_ID = config.GAKEY;
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 const pageview = (url) => {

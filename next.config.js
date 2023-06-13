@@ -16,11 +16,15 @@ module.exports = {
   reactStrictMode: false,
   generateEtags: false,
   poweredByHeader: false,
-  // lessLoaderOptions: {
-  //   lessOptions: {
-  //     modifyVars: themeVariables,
-  //   },
-  // },
+  publicRuntimeConfig:{
+    APIURL: process.env.APIURL,
+    IMGPATH: process.env.IMAGEPATH,
+    YOTOKEY: process.env.YOTPO_KEY,
+    GAKEY: process.env.GA_KEY,
+    LISKEY: process.env.LISTRACK_MID,
+    RKEY: process.env.RETISIO_ID,
+    SKEY: process.env.SITEID
+  },
   async headers() {
     return [
       {

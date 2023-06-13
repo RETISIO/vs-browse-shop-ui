@@ -1,8 +1,9 @@
 import React from 'react';
+import config from '../../helpers/getConfig';
 
 function ReviewSection(props) {
   const pdpData = props?.payLoad;
-  const damPath = process.env.NEXT_PUBLIC_IMAGEPATH;
+  const damPath = config.IMGPATH;
   return (
     <div className="container" id="reviewsection">
       <div

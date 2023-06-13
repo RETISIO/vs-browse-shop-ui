@@ -17,7 +17,6 @@ import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
 import ComponentMap from '../shared/components/componentMap';
-
 function Home({ data }) {
   // const i18n = useI18n();
   const router = useRouter();
