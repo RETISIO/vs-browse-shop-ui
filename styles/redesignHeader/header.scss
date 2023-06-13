@@ -493,10 +493,25 @@ a.mini-cart-btn {
   border-color: transparent;
   padding: 0;
 }
+/* Css for Focus for ADA starts here */
+.home-header-container #header {
+  .header-actions-cart .ab-miniCart-Icon,
+  #accountDropdown-button,
+  .ab-searchProducts-redesign,
+  a#logo-redesign,
+  .redesign-navbar a,
+  .redesign-navbar button {
+    &:focus {
+      outline: 3px solid $colorWhite;
+    }
+    &:focus:not(:focus-visible) {
+      outline: 0;
+    }
+  }
+}
+/* Css for Focus for ADA ends here */
 
 .home-header-container #header{
-  a:focus, button:focus { outline: 3px solid $colorWhite; }
-  a:focus:not(:focus-visible), button:focus:not(:focus-visible) { outline: 0; }
 @media (min-width: 768px) and (max-width: 991px) {
   .ipadHeaderRightCTASection {
     // css goes here for Ipad
