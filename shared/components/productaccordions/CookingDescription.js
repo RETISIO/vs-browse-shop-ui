@@ -45,10 +45,12 @@ export default function CookingDescription ({ id, data, description }) {
               {'Cooking Instructions: '}
               <span className='text-slim'>{data?.name}</span>
             </h1>
-            <p className='serving-size'>
-              <strong>{'Serving Size: '}</strong>
-              <span className='text-slim'>{data?.servingSize}</span>
-            </p>
+            {data?.servingSize && data?.servingSize !== '' && (
+              <p className='serving-size'>
+                <strong>{'Serving Size: '}</strong>
+                <span className='text-slim'>{data?.servingSize}</span>
+              </p>
+            )}
           </div>
           <br />
           <div className='cooking-description-accordion'>
