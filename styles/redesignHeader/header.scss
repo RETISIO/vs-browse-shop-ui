@@ -494,14 +494,14 @@ a.mini-cart-btn {
   padding: 0;
 
   &:focus {
-    outline: 1px solid $colorWhite;
+    outline: 3px solid $colorWhite;
   }
   &:focus:not(:focus-visible) {
     outline: 0;
   }
 }
 #header .header-actions-cart .ab-miniCart-Icon:focus {
-  outline: 1px solid $colorWhite;
+  outline: 3px solid $colorWhite;
 }
 
 .home-header-container #header{
