@@ -234,16 +234,26 @@
 
 .cooking-instruction-button {
     float: right;
+    display: flex;
     .printbtn, .sharebtn {
         border-radius: 4px;
         border: 1px solid;
     }
     .printbtn {
-        padding: 4px 10px 3px 10px;
+        padding: 2px 10px 3px 10px;
     }
     .sharebtn {
         margin-left: 20px;
+        vertical-align: text-bottom;
         padding: 5px 10px 5px 10px;
+    }
+
+    .cooking-instruction-printbtn {
+        padding: 4px 4px 3px 3px;
+    }
+    .cooking-instruction-sharebtn {
+        margin-top: 4px;
+        padding: 4px 3px 4px 3px;
     }
 }
 

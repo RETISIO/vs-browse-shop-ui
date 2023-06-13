@@ -1,3 +1,4 @@
+/* eslint-disable import/named */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-plusplus */
 /* eslint-disable max-len */
@@ -5,6 +6,7 @@
 import React, { useEffect, useState } from 'react'
 import Accordion from 'react-bootstrap/Accordion'
 import CookingDescription from './CookingDescription'
+import { requestContructor } from '../../helpers/api';
 
 function CookingInstructions (props) {
   const pdpDetails = props?.payLoad?.products[0]
@@ -32,16 +34,13 @@ function CookingInstructions (props) {
 
   async function fetchCookingData (cid) {
     try {
-      const response = await fetch(`/arc/getContentItem/${cid}`)
-      if (response && response.status !== 400) {
-        const jsonData = await response.json()
-        if (jsonData) {
-          const config = JSON.parse(jsonData?.localizedConfigValue?.en_US)
-          const desc = {
-            content: JSON.stringify([config.cookingInstruction])
-          }
-          setData([...data, { id: cid, config, desc }])
+      const response = await requestContructor(`/getContentItem/${cid}`, '');
+      if (response) {
+        const config = JSON.parse(response?.localizedConfigValue?.en_US)
+        const desc = {
+          content: JSON.stringify([config.cookingInstruction])
         }
+        setData([...data, { id: cid, config, desc }])
       }
     } catch (error) {
       console.log(error)

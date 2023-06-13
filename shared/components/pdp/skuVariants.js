@@ -235,7 +235,8 @@ function SkuVariants({
 
   // price section will be printed after all variants sections
   const displayVariantPriceSection = (index, variantKey, skuID) => {
-    const skuId = skuID || variantOptions[variantKey]?.skuId || ''
+    const skuId =
+      skuID || (variantOptions && variantOptions[variantKey]?.skuId) || ''
     const skuData = productData && productData?.skus[skuId]
     // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
     // skuData.skuDetails.hasStock = false // test data for out of stock
@@ -679,8 +680,9 @@ function SkuVariants({
       {variantOptions && Object.keys(variantOptions).length > 0
         ? displayVariantsSection()
         : productData &&
-          productData?.variantOptions &&
-          Object.keys(productData?.variantOptions).length === 0
+          ((productData?.variantOptions &&
+            Object.keys(productData?.variantOptions).length === 0) ||
+            !productData?.variantOptions)
         ? displayVariantPriceSection(0, '', productData?.defaultSkuId)
         : ''}
     </>
