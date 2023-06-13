@@ -164,6 +164,7 @@ export default function ProductDescription(props) {
     const sortAlphaNum = (a, b) =>
       a.optionValue.localeCompare(b.optionValue, 'en', { numeric: true })
     // const testArr = ['12', 'sdads', '12pcs', '8 pcs', 'usda', '14', 'abc']
+    // const testArr = ['1 pcs', '1/2-1 pcs']
     variantKeyArray.sort(sortAlphaNum)
     return variantKeyArray
   }
@@ -269,6 +270,9 @@ export default function ProductDescription(props) {
 
   // add to cart
   const addToBagHandler = (skuData, itemQuantity) => {
+    if (!skuData || !itemQuantity) {
+      return
+    }
     const addToProdData = {
       variantId: skuData?.skuId,
       productId: productData?.productId,
@@ -380,7 +384,7 @@ export default function ProductDescription(props) {
   }
 
   const handleSave = obj => {
-    const merchId = config.LISKEY;
+    const merchId = config.LISKEY
     const successHandler = () => {
       setNotifyPopupShow(false)
       setMessage(

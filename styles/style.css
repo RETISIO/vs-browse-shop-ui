@@ -2091,7 +2091,7 @@ select[multiple].input-lg {
   user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 .btn:focus,
 .btn:active:focus,
@@ -5421,7 +5421,7 @@ button.pdpdetails-close {
 }
 .modal-backdrop.fade {
   filter: alpha(opacity=0);
-  opacity: 0.5;
+  opacity: 0.74;
 }
 .modal-backdrop.in {
   filter: alpha(opacity=50);
