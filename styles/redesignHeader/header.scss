@@ -505,6 +505,7 @@ a.mini-cart-btn {
 }
 
 .home-header-container #header{
+  a:focus, button:focus { outline: 3px solid $colorWhite; }
 @media (min-width: 768px) and (max-width: 991px) {
   .ipadHeaderRightCTASection {
     // css goes here for Ipad
