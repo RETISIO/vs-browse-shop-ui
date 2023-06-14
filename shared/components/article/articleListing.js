@@ -14,6 +14,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react'
 import { requestContructor } from '../../helpers/api'
+import config from '../../helpers/getConfig'
 
 export default function ArticleListing({ props }) {
   // const [load, setLoad] = useState(false)
@@ -52,7 +53,7 @@ export default function ArticleListing({ props }) {
               href={productsData?.configValues.navigationUrl}
               style={{
                 backgroundImage: `url(${
-                  process.env.NEXT_PUBLIC_IMAGEPATH +
+                  config.IMGPATH +
                   product?.skus?.[product?.defaultSkuId]?.media?.largeImg
                 })`
               }}
