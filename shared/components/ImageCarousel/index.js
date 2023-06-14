@@ -106,9 +106,9 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
                   }`}
                   onClick={() => setSelected(img)}
                   key={`${img.smallImg}_${index}`}
-                  onKeyDown={(e) => { if (e.code === 'Enter') setSelected(img); } }
-                  tabIndex="0"
+                  onKeyDown={(e) => { if (e.key === 'Enter') setSelected(img); } }
                   role="button"
+                  aria-label={`Image ${index + 1} of ${imgData.length}`}
                 >
                   {/* <NextImage
                   alt={img.altText}
