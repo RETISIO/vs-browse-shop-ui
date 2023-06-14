@@ -116,9 +116,7 @@ export default function ArticleDetails({ props }) {
                     <Link
                       className='btn btn-primary btn-block btn-buy'
                       id='btnBuyNow'
-                      href={`/products/${value?.displayName
-                        ?.toLowerCase()
-                        ?.replace(/ /g, '-')}/${value?.productId}`}
+                      href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
                     >
                       Buy Now
                     </Link>

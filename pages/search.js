@@ -63,7 +63,8 @@ function Static({ data }) {
         Router.push(`/noresult?submit-search=${res.payLoad.searchTerm}`);
       } else if(res?.payLoad?.productCount === 1) {
         const product = res?.payLoad?.products[0];
-        Router.push(`/products/${product?.displayName?.toLowerCase()?.replace(/ /g, '-')}/${product?.productId}`);
+        // eslint-disable-next-line max-len
+        Router.push(`/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`);
       } else if(res?.payLoad?.redirect) {
         Router.push(res?.payLoad?.redirectURL);
       } else {

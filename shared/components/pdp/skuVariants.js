@@ -237,7 +237,11 @@ function SkuVariants({
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId =
       skuID || (variantOptions && variantOptions[variantKey]?.skuId) || ''
-    const skuData = productData && productData?.skus[skuId]
+    let skuData = productData && productData?.skus[skuId]
+    if (!skuData) {
+      // defaultSkuId is missing in skus. first sku should be considered
+      skuData = productData && productData?.skus[0]
+    }
     // skuData.skuDetails.price.salePrice = { price: '$25.34' } // test data
     // skuData.skuDetails.hasStock = false // test data for out of stock
     const optionsTxtForMv =
@@ -456,32 +460,28 @@ function SkuVariants({
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
     } else if (index === 0) {
-      optionsToDisplay = variantOptions[variantKey].options
+      // handle if there is only one variant key e.g., weight: [{ov:'2pcs',askuIds:[1,2,..]},{},{},...]
+      if (Object.keys(variantOptions).length === 1) {
+        for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
+          const optionSkusIds =
+            variantOptions[variantKey].options[i].associatedSkuIds || []
+          for (let j = 0; j < optionSkusIds.length; j++) {
+            variantOptions[variantKey].options[i].skuId = optionSkusIds[j]
+            variantOptions[variantKey].options[i].hasStock =
+              productData?.skus[optionSkusIds[j]]?.skuDetails?.hasStock
+            variantOptions[variantKey].options[i].thickness =
+              productData?.skus[
+                optionSkusIds[j]
+              ]?.skuDetails?.additionalDetails?.thickness
+            optionsToDisplay.push(variantOptions[variantKey].options[i])
+          }
+        }
+      } else {
+        optionsToDisplay = variantOptions[variantKey].options
+      }
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
-      const associatedSkuIds = selectedSku?.associatedSkuIds || []
-      if (index === Object.keys(variantOptions).length - 1) {
-        // only one variant
-        // Count - [{ optionValue: '2pcs', associatedSkuIds: [99851] }, { 4pcs, ...}, { 8pcs,..}]
-        for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
-          // find out matching selected sku in variant options
-          const optionSkusIds =
-            variantOptions[variantKey]?.options[i]?.associatedSkuIds
-          for (let j = 0; j < associatedSkuIds.length; j++) {
-            // associatedSkuIds of selected sku
-            if (optionSkusIds.includes(associatedSkuIds[j])) {
-              variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
-              variantOptions[variantKey].options[i].hasStock =
-                productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
-              variantOptions[variantKey].options[i].thickness =
-                productData?.skus[
-                  associatedSkuIds[j]
-                ]?.skuDetails?.additionalDetails?.thickness
-            }
-          }
-        }
-      }
     }
     if (index === Object.keys(variantOptions).length - 1) {
       // sku in last section
