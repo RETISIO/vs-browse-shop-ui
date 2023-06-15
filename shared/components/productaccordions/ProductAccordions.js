@@ -1,36 +1,19 @@
+/* eslint-disable prefer-const */
 /* eslint-disable react/jsx-indent */
 import React, { useState, useEffect } from 'react'
-import Accordion from 'react-bootstrap/Accordion'
+import Accordion from 'react-bootstrap/Accordion';
+import { GetAccordianData } from '../../helpers/utils';
 
 function ProductAccordions (props) {
-  const [data, setData] = useState()
+  let initialData = GetAccordianData(props);
+  const [data, setData] = useState(initialData.data);
   // const [config, setConfig] = useState()
-  const [name, setName] = useState()
+  const [name, setName] = useState(initialData.name);
 
   useEffect(() => {
-    const configVal = JSON.parse(props?.configValue)
-    // setConfig(configVal)
-    // if (configVal?.classification?.product === 'longDescription') {
-    //   setData(props?.payLoad?.products[0]?.longDescription)
-    // } else if (configVal?.classification?.product === 'nutritionalInfo') {
-    //   setData(props?.payLoad?.products[0]?.additionalDetails?.nutritionalInfo)
-    // }
-    const travPath = configVal?.classification?.product?.split('.') // additionalDetail.nutritioninfo
-    // ['longDescription']
-    // ['additionalDetail','nutritioninfo']
-    let finalData
-    travPath.map(val => {
-      finalData = !finalData
-        ? props?.payLoad?.products[0]?.[val]
-        : finalData[val]
-    })
-
-    const nm =
-      travPath && travPath.length && travPath.length > 1
-        ? travPath[1]
-        : travPath[0]
-    setName(nm)
-    setData(finalData)
+    let productData = GetAccordianData(props);
+    setName(productData.name)
+    setData(productData.data)
   }, [props])
 
   return (

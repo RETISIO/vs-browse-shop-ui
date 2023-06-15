@@ -34,7 +34,21 @@ export default async function getPersonalization() {
   }
   return data;
 }
-
+export const GetAccordianData =(propsData)=>{
+  const configVal = JSON.parse(propsData?.configValue)
+  const travPath = configVal?.classification?.product?.split('.') // additionalDetail.nutritioninfo
+  let data
+  travPath.map(val => {
+    data = !data
+      ? propsData?.payLoad?.products[0]?.[val]
+      : data[val]
+  })
+  const name =
+  travPath && travPath.length && travPath.length > 1
+    ? travPath[1]
+    : travPath[0]
+  return { name, data}
+}
 export const searchTermHandler = (name, url) => {
   const navigationPath = decodeURIComponent(url);
   const finalUrlArr = navigationPath.split('?');
