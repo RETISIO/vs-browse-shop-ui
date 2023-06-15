@@ -92,7 +92,7 @@
     .icon.icon-search.fa.fa-search {
       padding: 0.7rem;
       color: $colorWhite;
-      @media screen and (max-width: 767px) { //AB-1339
+      @media screen and (max-width: 991px) { //AB-1339
         font-size: 16px;
       }
     }
@@ -388,7 +388,10 @@
 .home-header-container .nonHomePageHeader #header {
   .navbar.redesign-navbar{
     .firstDropDownMegaMenu {
-      left: -7px;
+      left: -15px;
+      @-moz-document url-prefix() {
+        left: -7px;
+      }
       @media (min-width: 768px) and (max-width: 1024px) {
         left: -15px;
       }
@@ -507,6 +510,9 @@ a.mini-cart-btn {
     &:focus:not(:focus-visible) {
       outline: 0;
     }
+  }
+  .headerAccntActionContainer #accountlink:focus {
+    outline: 5px auto -webkit-focus-ring-color;
   }
 }
 /* Css for Focus for ADA ends here */
@@ -642,3 +648,13 @@ a.mini-cart-btn {
   }
 }
 //ABUAT-62 ends here
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scrollbar-width: thin;
+}

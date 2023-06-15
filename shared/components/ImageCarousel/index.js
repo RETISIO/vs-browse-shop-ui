@@ -23,7 +23,16 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
-    infinite: false
+    infinite: false,
+    className: 'pdpThumbnailSlick',
+    onInit() {
+      const querySelEl = document.querySelectorAll('.pdpThumbnailSlick .thumbnail-np, .pdpThumbnailSlick .slick-slide.slick-active');
+      querySelEl?.forEach((el) => {
+        const isThumnailImg = el?.classList?.contains('thumbnail-np');
+        if (isThumnailImg) el?.setAttribute('tabindex', '0');
+        else el?.removeAttribute('tabindex');
+      });
+    }
   }
 
   const handleShow = img => {
@@ -97,6 +106,9 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
                   }`}
                   onClick={() => setSelected(img)}
                   key={`${img.smallImg}_${index}`}
+                  onKeyDown={(e) => { if (e.key === 'Enter') setSelected(img); } }
+                  role="button"
+                  aria-label={`Image ${index + 1} of ${imgData.length}`}
                 >
                   {/* <NextImage
                   alt={img.altText}

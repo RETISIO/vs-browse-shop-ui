@@ -98,6 +98,7 @@ function Facet(props) {
             {props?.payLoad?.pageType !== "search" && props?.payLoad?.selectedFacets?.length > 0 && (
             <Link
               className="link-underline"
+              aria-label="Clear All Filters"
               href={{
                 pathname: path,
                 query: {
@@ -113,6 +114,7 @@ function Facet(props) {
           || props?.payLoad?.selectedFacets?.length > 0) && (
           <Link
             className="link-underline"
+            aria-label="Clear All Filters"
             href={{
                 pathname: path,
                 query: {
@@ -147,6 +149,7 @@ function Facet(props) {
                         },
                       }}
                       title="removeRefinement"
+                      aria-label={`Remove ${item.facetLabel} filter`}
                       onClick={() => clickFilter()}
                     >
                       {item.facetLabel}
@@ -177,6 +180,7 @@ function Facet(props) {
                         },
                       }}
                       title="removeRefinement"
+                      aria-label={`Remove ${item.facetLabel} filter`}
                       onClick={() => clickFilter()}
                     >
                       {item.facetLabel}
