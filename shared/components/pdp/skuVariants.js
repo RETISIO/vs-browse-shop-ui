@@ -554,7 +554,13 @@ function SkuVariants({
                 return (
                   <li className='list-inline-item me-2 mb-2'>
                     <div
-                      className='Count outstock'
+                      // className='Count outstock'
+                      className={
+                        selectedSku &&
+                        selectedSku.optionValue === sku.optionValue
+                          ? 'Count-OOS outstock'
+                          : 'Count outstock'
+                      }
                       onClick={() =>
                         handleSkuSelected(
                           index,

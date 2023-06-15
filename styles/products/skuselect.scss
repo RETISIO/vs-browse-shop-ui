@@ -551,6 +551,22 @@ html {
         top: -10px;
         bottom: 0;
     }
+
+    .Count-OOS {
+        font-size: 0.8rem;
+        border: 1px solid #f06c6c;
+        font-weight: 700;
+        display: block;
+        color: #000000;
+        padding: 23px 6px 6px 6px;
+        width: 90px;
+        height: 90px;
+        text-decoration: none;
+        cursor: pointer;
+        position: relative;
+        top: -10px;
+        bottom: 0;
+    }
     .Count-selected {
         border: 1px solid #f06c6c;
         font-size: 0.8rem;
