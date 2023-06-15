@@ -90,7 +90,10 @@
         }
     }
     .firstDropDownMegaMenu {
-        left: -7px;
+        left: -15px;
+        @-moz-document url-prefix() {
+            left: -7px;
+        }
         @media (min-width: 768px) and (max-width: 1024px) {
             left: -15px;
         }
@@ -218,9 +221,9 @@
             display: block;
         }
     }
-    .navListItems:hover .categoryL1ListContainer .header-menu {
-        display: none;
-    }
+    // .navListItems:hover .categoryL1ListContainer .header-menu {
+    //     display: none;
+    // }
 }
 
 .home-header-container #header {

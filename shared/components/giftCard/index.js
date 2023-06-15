@@ -131,6 +131,7 @@ export default function GiftCard(props) {
                   src={`${damPath}${mediaObj?.thumbnailImg}`}
                   height={thumbnailHeight}
                   width={thumbnailWidth}
+                  tabIndex='0'
                   id='zoom-image'
                 />
               </div>

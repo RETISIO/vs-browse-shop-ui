@@ -21,6 +21,7 @@ function ResultList(props) {
   const { state } = useAppContext();
   const router = useRouter();
   const [searchData, setSearchPageData] = useState();
+  const [finalProducts, setFinalProducts] = useState(props?.payLoad?.products);
 
   const {
     offset,
@@ -31,9 +32,9 @@ function ResultList(props) {
     productCount,
   } = usePLPDataContext();
 
-  // useEffect(() => {
-  //   setPageContent(props?.data);
-  // }, []);
+  useEffect(() => {
+    setFinalProducts(products);
+  }, [products]);
 
   useEffect(() => {
     if (offset === 0) {
@@ -50,13 +51,6 @@ function ResultList(props) {
       });
     }
   }, [searchData, state]);
-
-  // const isServer = typeof window === 'undefined';
-  // const isServer = process.browser;
-  // let productArr = [];
-  // if(!isServer) {
-  //   productArr = props?.data?.payLoad?.products;
-  // }
 
   useEffect(() => {
     if (offset > 0) {
@@ -132,7 +126,7 @@ function ResultList(props) {
      
     <div id="product-grid">
       <div className="row row-gutter-sm-15">
-        {products?.map((value, index) => (
+        {finalProducts?.map((value, index) => (
           <ProductCard
             value={value}
             isLast={index === products.length - 1}
