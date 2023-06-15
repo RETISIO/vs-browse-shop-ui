@@ -399,6 +399,7 @@ function SkuVariants({
     const skuIdsToDisplay = []
     for (let i = 0; i < index; i++) {
       const key = Object.keys(variantOptions)[i]
+      console.log('i,key,variantOptions.....', i, key, variantOptions)
       const skuObj = variantOptions[key].defaultSelected
         ? variantOptions[key].defaultSelected
         : variantOptions[key].optionSelected
@@ -414,8 +415,48 @@ function SkuVariants({
         skuIdsToDisplay.push(allCommonSkus[i])
       }
     }
-
+    console.log(
+      'index,allCommonSkus,skuIdsToDisplay.....',
+      index,
+      allCommonSkus,
+      skuIdsToDisplay
+    )
     return index > 1 ? skuIdsToDisplay : allCommonSkus
+  }
+
+  const selectActiveSku = (selectedSku, optionsToDisplay, selectedSkuIndex) => {
+    // find out the matching skuId in selectedSku associatedSkuIds & optionsToDiplay
+    // selectedSku = {optionValue: '12oz', associatedSkuIds: [98458, 56781,78165]}
+    // optionsToDisplay = [{oV: '4oz', aSIds=[91245,34256]}, {oV: '8oz', aSIds:[98458,12345]},...]
+    const aSkuIds = selectedSku?.associatedSkuIds || []
+    let didGetMatchingSkuId = false
+    let activeSku = {}
+    for (let i = 0; i < optionsToDisplay?.length; i++) {
+      const optionASIds = optionsToDisplay[i]?.associatedSkuIds || []
+      // loop optionsASIds to identify matching aSKUIds of selected sku
+      for (let j = 0; j < optionASIds.length; j++) {
+        if (aSkuIds.includes(optionASIds[j])) {
+          // matching skuId between selected sku and option aSKUIds
+          const skuId = optionASIds[j]
+          if (!selectedSkuIndex) {
+            selectedSkuIndex = i
+          }
+          // check if this is OOS
+          if (productData?.skus[skuId]?.skuDetails?.hasStock) {
+            didGetMatchingSkuId = true
+            activeSku = selectedSku
+          } else {
+            // selected sku is OOS, check for next option in optionsToDisplay []
+            if (i + 1 < optionsToDisplay.length) {
+              const selected = optionsToDisplay[i + 1]
+              selectActiveSku(selected, optionsToDisplay)
+            } else {
+              // reached last option in optionsToDisplay
+            }
+          }
+        }
+      }
+    }
   }
 
   // displays all variants sections
@@ -434,6 +475,7 @@ function SkuVariants({
       const associatedSkuIds = getSkuIdsOfPreviousSelectedOptions(index)
       // find what are all associated skus matches in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
+        // variantKey options
         const optionSkusIds =
           variantOptions[variantKey].options[i].associatedSkuIds || []
         for (let j = 0; j < associatedSkuIds.length; j++) {
@@ -482,6 +524,8 @@ function SkuVariants({
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
+      // if selectedSku is OOS, then select next sku from optionsToDisplay[]
+      selectActiveSku(selectedSku, optionsToDisplay)
     }
     if (index === Object.keys(variantOptions).length - 1) {
       // sku in last section
@@ -506,11 +550,11 @@ function SkuVariants({
               skuId = optionsSelected[i] // skuId identified
               break
             }
-          }
+          } // inner loop
           if (skuId) {
             break
           }
-        }
+        } // outer loop
       } else {
         skuId = optionsSelected[0]
       }

@@ -49,8 +49,10 @@ import {
   ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
+import { testData } from './testData_two_Variants'
 
 export default function ProductDescription(props) {
+  // const pdpData = testData
   const pdpData = props?.payLoad
   const productType =
     pdpData &&
