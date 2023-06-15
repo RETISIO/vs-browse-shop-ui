@@ -1,4 +1,11 @@
+/* eslint-disable no-unused-expressions */
+
+
+
 /* eslint-disable react/jsx-indent */
+
+
+
 /* eslint-disable linebreak-style */
 /* eslint-disable space-before-blocks */
 /* eslint-disable max-len */
@@ -18,7 +25,7 @@ export default function ProductTile({ value, recommondationData }) {
 
   const navigatePDP = (data, href, e) => {
     e.preventDefault();
-    if (searchResultData) {
+    if (searchResultData && state && state?.userData && state?.channelData) {
       ClickProduct({
         data,
         searchData: searchResultData.payLoad,
@@ -26,7 +33,7 @@ export default function ProductTile({ value, recommondationData }) {
         channelData: state?.channelData,
       });
     }
-    if (recommondationData) {
+    if (recommondationData && state && state?.userData && state?.channelData) {
       ClickProduct({
         data,
         recommendation: {
@@ -38,12 +45,20 @@ export default function ProductTile({ value, recommondationData }) {
     }
     router.push(href);
   };
-
-  const calcDisc = (listPrice, salePrice) => {
-    const listP = (listPrice && Math.ceil(parseFloat(listPrice))) || 0;
-    const saleP = (salePrice && Math.ceil(parseFloat(salePrice))) || 0;
-    return Math.ceil(listP - saleP);
+  const calcPrice = (product) => {
+    if(product && product.onSale && value?.productPrice?.minSalePrice && value?.productPrice?.minListPrice){
+      return value?.productPrice?.minListPrice < value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice.toFixed(2) : value?.productPrice?.minSalePrice.toFixed(2);
+    }else if(value?.productPrice && value?.productPrice.minListPrice){
+      return value?.productPrice?.minListPrice.toFixed(2);
+    }else{
+      return ''
+    };
   };
+  // const calcDisc = (listPrice, salePrice) => {
+  //   const listP = (listPrice && Math.ceil(parseFloat(listPrice))) || 0;
+  //   const saleP = (salePrice && Math.ceil(parseFloat(salePrice))) || 0;
+  //   return Math.ceil(listP - saleP);
+  // };
 
   // const displayPrice = () => {
   //   // value.productPrice.minSalePrice = 50.9 //test data
@@ -189,8 +204,9 @@ export default function ProductTile({ value, recommondationData }) {
                 <span>{`${Object.keys(value?.skus)?.length === 1 ? 'Starting At: ' : 'Starting From: '}`}</span>
                 <b>
                   $
-                  {value?.productPrice?.onSale && (value?.productPrice?.minListPrice < value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice.toFixed(2) : value?.productPrice?.minSalePrice.toFixed(2))}
-                  {!value?.productPrice?.onSale && value?.productPrice?.minListPrice.toFixed(2)}
+                  {calcPrice(value)}
+                  {/* {value?.productPrice?.onSale && (value?.productPrice?.minListPrice < value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice.toFixed(2) : value?.productPrice?.minSalePrice.toFixed(2))}
+                  {!value?.productPrice?.onSale && value?.productPrice?.minListPrice.toFixed(2)} */}
                 </b>
                 {/* {displayPrice()} */}
               </>
