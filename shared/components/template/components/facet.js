@@ -18,8 +18,13 @@ import { searchTermHandler } from "../../../helpers/utils";
 function Facet(props) {
   const { mobileView, closeToggle } = props;
   const [isClick, setIsClicked] = useState(false);
+  const [facets, setFacets] = useState();
   
   useEffect(() => {
+    if(props?.payLoad) {
+      setFacets(props?.payLoad);
+    }
+      
     if(isClick && mobileView) {
        closeToggle();
        setIsClicked(false);
@@ -53,9 +58,9 @@ function Facet(props) {
     <aside className={!mobileView ? "hidden-xs" : ""}>
       <div className="catalog-aside">
         <div className="catalog-filter__top">
-          {(props?.payLoad?.categoryFacetEnabled && props?.payLoad?.categories
-        && props?.payLoad?.categories?.length > 0
-        && props?.payLoad?.pageType !== "search")
+          {(facets && facets?.categoryFacetEnabled && facets?.categories
+        && facets?.categories?.length > 0
+        && facets?.pageType !== "search")
         ? (
           <div className="panel panel-default">
             <div className="panel-heading">
@@ -66,7 +71,7 @@ function Facet(props) {
             <div className="panel-collapse">
               <div className="panel-body">
                 <ul className="catalog-filter__category-list list-unstyled">
-                  {props?.payLoad?.categories?.map((item, i) => (
+                  {facets && facets?.categories?.map((item, i) => (
                     <li key={i}>
                       <Link
                         href={{
@@ -95,7 +100,7 @@ function Facet(props) {
       ) : null}
           <div className="catalog-filter__clear">
             <b>Your Selections: </b>
-            {props?.payLoad?.pageType !== "search" && props?.payLoad?.selectedFacets?.length > 0 && (
+            {facets && facets?.pageType !== "search" && facets?.selectedFacets?.length > 0 && (
             <Link
               className="link-underline"
               aria-label="Clear All Filters"
@@ -110,8 +115,8 @@ function Facet(props) {
               Clear All
             </Link>
           )}
-            {props?.payLoad?.pageType === "search" && (props?.payLoad?.categoriesSelected?.length > 0
-          || props?.payLoad?.selectedFacets?.length > 0) && (
+            {facets && facets?.pageType === "search" && (facets?.categoriesSelected?.length > 0
+          || facets?.selectedFacets?.length > 0) && (
           <Link
             className="link-underline"
             aria-label="Clear All Filters"
@@ -129,7 +134,7 @@ function Facet(props) {
           
           </div>
           <ul className="catalog-filter__selected list-unstyled">
-            {props?.payLoad?.pageType === "search" && props?.payLoad?.categoriesSelected?.map((val, i) => (
+            {facets && facets?.pageType === "search" && facets?.categoriesSelected?.map((val, i) => (
               <React.Fragment key={i}>
                 {
                 val.facetValues.map((item, _key) => (
@@ -160,7 +165,7 @@ function Facet(props) {
               }
               </React.Fragment>
           ))}
-            {props?.payLoad?.selectedFacets?.map((val, i) => (
+            {facets && facets?.selectedFacets?.map((val, i) => (
               <React.Fragment key={i}>
                 {
                 val.facetValues.map((item, _key) => (
@@ -195,7 +200,7 @@ function Facet(props) {
         </div>
         <div className="catalog-filter__block ab-accordion-container">
           <div className="panel-group">
-            {(props?.payLoad?.pageType === "search") && (props?.payLoad?.categories?.length > 0)
+            {facets && (facets?.pageType === "search") && (facets?.categories?.length > 0)
           && (
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
@@ -203,7 +208,7 @@ function Facet(props) {
                 Categories
                 <i className="icon fas fa-chevron-down"></i>
               </Accordion.Header>
-              {props?.payLoad?.categories?.map((val, index) => (
+              {facets?.categories?.map((val, index) => (
                 <React.Fragment key={index}>
                   <Accordion.Body>
                     <Link
@@ -231,7 +236,7 @@ function Facet(props) {
           </Accordion>
           )}
          
-            {props?.payLoad?.facets?.map((value, _key) => (
+            {facets && facets?.facets?.map((value, _key) => (
               <React.Fragment key={_key}>
                 <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey={_key < (mobileView ? 2 : 3) ? "0" : "1"}>

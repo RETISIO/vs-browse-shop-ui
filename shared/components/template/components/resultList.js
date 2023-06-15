@@ -44,11 +44,15 @@ function ResultList(props) {
   }, [props]);
 
   useEffect(() => {
-    if(searchData && state.userData && state.channelData) {
-      const autoSuggest = router?.query?.as === 't';
-      Search({
-        ...searchData, userData: state?.userData, channelData: state?.channelData, autoSuggest,
-      });
+    try{
+      if(searchData && state.userData && state.channelData) {
+        const autoSuggest = router?.query?.as === 't';
+        Search({
+          ...searchData, userData: state?.userData, channelData: state?.channelData, autoSuggest,
+        });
+      }
+    }catch(e) {
+      console.log(e);
     }
   }, [searchData, state]);
 
