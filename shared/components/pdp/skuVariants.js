@@ -175,8 +175,10 @@ function SkuVariants({
   }
 
   const displayPricePanel = skuData => {
+    // plus, minus and input text fields section
     const hasStock = (skuData && skuData?.skuDetails?.hasStock) || ''
-    if (!hasStock) {
+    if (!hasStock || !productData?.hasPrice) {
+      // out of stock or hasPrice=false
       return 'hide-panel1'
     }
     return 'panel1'
@@ -365,7 +367,8 @@ function SkuVariants({
                     (skuData && !skuData?.skuDetails?.hasStock) ||
                     (skuData &&
                       itemQuantity &&
-                      itemQuantity > getMaxQtyAllowed(skuData))
+                      itemQuantity > getMaxQtyAllowed(skuData)) ||
+                    !productData?.hasPrice
                       ? 'disabled'
                       : ''
                   }`}
@@ -377,7 +380,9 @@ function SkuVariants({
               </span>
               <span>
                 <button
-                  className='btn btn-primary btn-md add-to-cart'
+                  className={`btn btn-primary btn-md add-to-cart ${
+                    !productData?.hasPrice ? 'disabled' : ''
+                  }`}
                   id='1'
                   onClick={e => handleAddtoWishListOnClick(e, skuData)}
                 >

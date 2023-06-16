@@ -33,9 +33,10 @@ export default function MainLayout({
   if (SEO) {
     seoData = SEO;
   }
+  const ssrRootCategories = data?.megaMenuCategoryData?.categories;
 
   const i18n = useI18n();
-  const [rootCatagories, setRootCatagories] = useState([]);
+  const [rootCatagories, setRootCatagories] = useState(ssrRootCategories);
   const getData = async() => {
     const res = await requestContructor('getCategoryList', '', {}, false);
     setRootCatagories(res?.payLoad?.categories);
@@ -71,7 +72,7 @@ export default function MainLayout({
     })();
   }, []);
   useEffect(() => {
-    getData();
+    if (!ssrRootCategories) getData();
   }, []);
   useEffect(() => {
     async function changeLocale() {
