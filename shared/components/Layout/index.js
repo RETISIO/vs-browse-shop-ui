@@ -1,5 +1,8 @@
 /* eslint-disable spaced-comment */
+
 /* eslint-disable no-shadow */
+
+
 
 /* eslint-disable linebreak-style */
 /* eslint-disable import/named */
@@ -24,7 +27,9 @@ export default function MainLayout({
   data, abUrl = '', SEO, children,
 }) {
   const { state, updateState } = useAppContext();
-  const { show, setShow, loginErrorMsg, setLoginErrorMsg, setErrorBanner, setIsInActive } = useAppContext();
+  const {
+    show, setShow, loginErrorMsg, setLoginErrorMsg, setErrorBanner, setIsInActive,
+  } = useAppContext();
   const { isLogged } = useAppContext();
   const router = useRouter();
   let seoData = data?.page?.seo;
@@ -45,8 +50,8 @@ export default function MainLayout({
 
   useEffect(() => {
     (async() => {
-      let finalChannelData = {}; let
-        userData = {};
+      let finalChannelData; let
+        userData;
       if (!state.channelData) {
         const channelData = await requestContructor(
           'getChannelDetails',
@@ -67,7 +72,14 @@ export default function MainLayout({
           false,
         );
       }
-      updateState({ ...state, channelData: finalChannelData, userData });
+      let finalState = { ...state };
+      if(finalChannelData) {
+        finalState = { ...finalState, channelData: { ...finalChannelData } };
+      }
+      if(userData) {
+        finalState = { ...finalState, userData };
+      }
+      updateState(finalState);
       await getPersonalization();
     })();
   }, []);
@@ -158,9 +170,9 @@ export default function MainLayout({
     return res;
   };
 
-    const showLoginModal = (value) => {
+  const showLoginModal = (value) => {
     if(value) {
-      setLoginErrorMsg("You have been logged out due to inactivity. Please login again.");
+      setLoginErrorMsg('You have been logged out due to inactivity. Please login again.');
       setIsInActive(true);
       setShow(true);
       setErrorBanner(true);
@@ -168,8 +180,8 @@ export default function MainLayout({
       setShow(false);
       setErrorBanner(false);
       setLoginErrorMsg('');
-    } 
-  }
+    }
+  };
   
   return (
     <>
