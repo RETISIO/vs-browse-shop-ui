@@ -388,7 +388,10 @@
 .home-header-container .nonHomePageHeader #header {
   .navbar.redesign-navbar{
     .firstDropDownMegaMenu {
-      left: -7px;
+      left: -15px;
+      @-moz-document url-prefix() {
+        left: -7px;
+      }
       @media (min-width: 768px) and (max-width: 1024px) {
         left: -15px;
       }
@@ -645,3 +648,13 @@ a.mini-cart-btn {
   }
 }
 //ABUAT-62 ends here
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  scrollbar-width: thin;
+}

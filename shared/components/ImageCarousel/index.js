@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-import Carousel from 'react-bootstrap/Carousel';
-import Modal from 'react-bootstrap/Modal';
-import NextImage from '../template/components/nextImage';
-import USDABadge from '../../../public/static/assets/usda-badge.png';
-import SaleBadge from '../../../public/static/assets/sale-badge.png';
-import MagnifyImage from '../template/components/magnifyImage';
-import config from '../../helpers/getConfig';
+import React, { useState, useEffect } from 'react'
+import Slider from 'react-slick'
+import Carousel from 'react-bootstrap/Carousel'
+import Modal from 'react-bootstrap/Modal'
+import NextImage from '../template/components/nextImage'
+import USDABadge from '../../../public/static/assets/usda-badge.png'
+import SaleBadge from '../../../public/static/assets/sale-badge.png'
+import MagnifyImage from '../template/components/magnifyImage'
+import config from '../../helpers/getConfig'
 
-function ImageCarousel({ data, additionalDetails, onSale }) {
-  const damPath = config.IMGPATH;
-  const defaultImg = data?.media ? [data?.media] : [];
-  const alternateImg = data?.alternateImages ? data.alternateImages : [];
-  const [selected, setSelected] = useState(defaultImg[0]);
-  const imgData = [...defaultImg, ...alternateImg];
-  const [show, setShow] = useState(false);
-  const [openImg, setOpenImg] = useState();
-  const [width, setWidth] = useState(992);
+function ImageCarousel ({ data, additionalDetails, onSale }) {
+  const damPath = config.IMGPATH
+  const defaultImg = data?.media ? [data?.media] : []
+  const alternateImg = data?.alternateImages ? data.alternateImages : []
+  const [selected, setSelected] = useState(defaultImg[0])
+  const imgData = [...defaultImg, ...alternateImg]
+  const [show, setShow] = useState(false)
+  const [openImg, setOpenImg] = useState()
+  const [width, setWidth] = useState(992)
 
   const settings = {
     slidesToShow: 3,
@@ -25,13 +25,15 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
     verticalSwiping: true,
     infinite: false,
     className: 'pdpThumbnailSlick',
-    onInit() {
-      const querySelEl = document.querySelectorAll('.pdpThumbnailSlick .thumbnail-np, .pdpThumbnailSlick .slick-slide.slick-active');
-      querySelEl?.forEach((el) => {
-        const isThumnailImg = el?.classList?.contains('thumbnail-np');
-        if (isThumnailImg) el?.setAttribute('tabindex', '0');
-        else el?.removeAttribute('tabindex');
-      });
+    onInit () {
+      const querySelEl = document.querySelectorAll(
+        '.pdpThumbnailSlick .thumbnail-np, .pdpThumbnailSlick .slick-slide.slick-active'
+      )
+      querySelEl?.forEach(el => {
+        const isThumnailImg = el?.classList?.contains('thumbnail-np')
+        if (isThumnailImg) el?.setAttribute('tabindex', '0')
+        else el?.removeAttribute('tabindex')
+      })
     }
   }
 
@@ -94,7 +96,7 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
         </Modal.Body>
       </Modal>
       <div className='image-carousel'>
-        {imgData.length > 1 && (
+        {imgData?.length > 1 && (
           <div className='thumbnail-section'>
             <Slider {...settings}>
               {imgData?.map((img, index) => (
@@ -106,8 +108,10 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
                   }`}
                   onClick={() => setSelected(img)}
                   key={`${img.smallImg}_${index}`}
-                  onKeyDown={(e) => { if (e.key === 'Enter') setSelected(img); } }
-                  role="button"
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') setSelected(img)
+                  }}
+                  role='button'
                   aria-label={`Image ${index + 1} of ${imgData.length}`}
                 >
                   {/* <NextImage
@@ -170,7 +174,7 @@ function ImageCarousel({ data, additionalDetails, onSale }) {
         )}
       </div>
       <div className='image-carousel-mv'>
-        <Carousel interval={null} fade>
+        <Carousel interval={null} fade controls={imgData?.length > 1}>
           {imgData?.map((img, index) => (
             <Carousel.Item
               key={`${img?.smallImg}_${index}`}
