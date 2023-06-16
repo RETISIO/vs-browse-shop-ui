@@ -24,6 +24,7 @@ export default function ProductTile({ value, recommondationData }) {
   const router = useRouter();
 
   const navigatePDP = (data, href, e) => {
+    debugger;
     e.preventDefault();
     if (searchResultData) {
       ClickProduct({
