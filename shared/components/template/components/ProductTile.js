@@ -23,15 +23,14 @@ export default function ProductTile({ value, recommondationData }) {
 
   const router = useRouter();
 
-  const navigatePDP = (data, href, e) => {
-    debugger;
+  const navigatePDP = (data, href, e, finalState) => {
     e.preventDefault();
     if (searchResultData) {
       ClickProduct({
         data,
         searchData: searchResultData.payLoad,
-        userData: state?.userData,
-        channelData: state?.channelData,
+        userData: finalState?.userData,
+        channelData: finalState?.channelData,
       });
     }
     if (recommondationData) {
@@ -40,8 +39,8 @@ export default function ProductTile({ value, recommondationData }) {
         recommendation: {
           ...recommondationData.recommendationAttributionDetails,
         },
-        userData: state?.userData,
-        channelData: state?.channelData,
+        userData: finalState?.userData,
+        channelData: finalState?.channelData,
       });
     }
     router.push(href);
@@ -139,6 +138,7 @@ export default function ProductTile({ value, recommondationData }) {
           value,
           `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
           e,
+          state
         )}
       >
         <div className="image-pos">
@@ -159,6 +159,7 @@ export default function ProductTile({ value, recommondationData }) {
               value,
               `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
               e,
+              state
             )}
           >
             {value.displayName}
