@@ -25,7 +25,7 @@ export default function ProductTile({ value, recommondationData }) {
 
   const navigatePDP = (data, href, e) => {
     e.preventDefault();
-    if (searchResultData && state && state?.userData && state?.channelData) {
+    if (searchResultData) {
       ClickProduct({
         data,
         searchData: searchResultData.payLoad,
@@ -33,7 +33,7 @@ export default function ProductTile({ value, recommondationData }) {
         channelData: state?.channelData,
       });
     }
-    if (recommondationData && state && state?.userData && state?.channelData) {
+    if (recommondationData) {
       ClickProduct({
         data,
         recommendation: {
