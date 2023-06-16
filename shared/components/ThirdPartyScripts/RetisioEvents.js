@@ -12,7 +12,7 @@ import { getCookie } from '@retisio/sf-api';
 import config from '../../helpers/getConfig';
 
 const siteId = config.SKEY;
-const catalogId = '1001';
+const catalogId = '';
 const RviewItem = (itemData) => {
   // console.log('itemData', itemData);
 };
