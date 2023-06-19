@@ -62,6 +62,10 @@ function Home({ data }) {
 Home.getInitialProps = async(context) => {
   const { req, asPath, query, res } = context;
   const cookies = new Cookies(req, res);
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=30, stale-while-revalidate=59'
+  );
 
   let response; 
   const options = { customHeaders: {} };
