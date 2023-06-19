@@ -13,6 +13,7 @@
 // );
 
 module.exports = {
+  largePageDataBytes: 128 * 100000,
   reactStrictMode: false,
   generateEtags: false,
   poweredByHeader: false,
