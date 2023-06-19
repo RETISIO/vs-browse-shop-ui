@@ -114,7 +114,7 @@ ProductDetails.getInitialProps = async context => {
   const data = await getPDPData(context)
   context.res.setHeader(
     'Cache-Control',
-    `public, maxage=${config.STATIC_PAGE_CACHE}`
+    `public, maxage=${config.PDP_PAGE_CACHE}`
   );
   return {
     data,
