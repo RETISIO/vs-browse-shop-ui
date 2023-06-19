@@ -17,6 +17,7 @@ import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
 import ComponentMap from '../shared/components/componentMap';
+import config from '../shared/helpers/getConfig';
 function Home({ data }) {
   // const i18n = useI18n();
   const router = useRouter();
@@ -64,7 +65,7 @@ Home.getInitialProps = async(context) => {
   const cookies = new Cookies(req, res);
   res.setHeader(
     'Cache-Control',
-    'public, s-maxage=30, stale-while-revalidate=59'
+    `public, maxage=${config.HOME_PAGE_CACHE}`
   );
 
   let response; 

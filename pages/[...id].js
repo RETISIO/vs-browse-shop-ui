@@ -25,7 +25,8 @@ import { useAppContext } from '../shared/context/appContext'
 import MainLayout from '../shared/components/Layout'
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../shared/components/componentMap'
-import { Loader } from '../shared/components/loader'
+import { Loader } from '../shared/components/loader';
+import config from '../shared/helpers/getConfig';
 
 function Static({ data }) {
   // const i18n = useI18n();
@@ -78,6 +79,10 @@ Static.getInitialProps = async context => {
     });
     options.customHeaders['x-env-date'] = query.date;
   }
+  res.setHeader(
+    'Cache-Control',
+    `public, maxage=${config.STATIC_PAGE_CACHE}`
+  );
   try {
     if (!query.id.includes('nginx-health')) {
       response = await requestContructor(
