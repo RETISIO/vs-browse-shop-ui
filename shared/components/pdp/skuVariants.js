@@ -50,6 +50,7 @@ function SkuVariants({
   const [disablePlusCounter, setDisablePlusCounter] = useState(false)
   const [disableMinusCounter, setDisableMinusCounter] = useState(false)
   const [disableAddToCart, setDisableAddToCart] = useState(false)
+  const [OOSSKUs, setOOSSKUs] = useState([])
   const maxQtyAllowed = 999 // max qty user can enter
 
   useEffect(() => {
@@ -57,6 +58,15 @@ function SkuVariants({
     setDisableAddToCart(false)
     setDisableMinusCounter(false)
     setDisablePlusCounter(false)
+    if (productData) {
+      const OOS = []
+      for (const key in Object.keys(productData.skus)) {
+        if (key && !productData?.skus[key]?.skuDetails?.hasStock) {
+          OOS.push(key)
+        }
+      }
+      setOOSSKUs([...OOS])
+    }
   }, [productData])
 
   const handleSelectedSkuData = skuData => {
@@ -464,6 +474,28 @@ function SkuVariants({
     }
   }
 
+  const checkForOOSSku = (index, skuId, variantKey, optionsToDisplay) => {
+    console.log(
+      'from checkForOOSSku....index,skuId, variantKey,optionsToDisplay...',
+      index,
+      skuId,
+      variantKey,
+      optionsToDisplay
+    )
+    if (index === Object.keys(variantOptions).length - 1) {
+      if (OOSSKUs.includes(skuId)) {
+        // select next option in optionsToDisplay[]
+        // find the index of skuId in optionsToDisplay[]
+        const itemIdx = optionsToDisplay.findIndex(item => item.skuId === skuId)
+        const optionsArrLength = optionsToDisplay.length
+        for (let i = itemIdx; i < optionsToDisplay.length; i++) {
+          const skuId = optionsToDisplay[i].skuId
+        }
+      }
+    }
+    return false
+  }
+
   // displays all variants sections
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
@@ -488,6 +520,7 @@ function SkuVariants({
             // associatedSkuIds[j] will be there in variantOPtions[variantKey].optionSelected
             // if associatedSkuIds[j] is OOS, then check for non OOS in associatedSkuIds and
             // assign that associatedSkuIds[x] which is not OOS to variantOPtions[variantKey].optionSelected
+            // checkForOOSSku(associatedSkuIds[j], variantKey)
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
             variantOptions[variantKey].options[i].hasStock =
               productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
@@ -503,6 +536,13 @@ function SkuVariants({
         !variantOptions[variantKey].defaultSelected &&
         !variantOptions[variantKey].optionSelected
       ) {
+        // check if optionsToDisplay[0] is OOS
+        checkForOOSSku(
+          index,
+          optionsToDisplay[0].skuId,
+          variantKey,
+          optionsToDisplay
+        )
         variantOptions[variantKey].defaultSelected = optionsToDisplay[0]
         variantOptions[variantKey].optionSelected = ''
       }
