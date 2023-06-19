@@ -22,8 +22,6 @@ import {
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
-import config from '../../shared/helpers/getConfig'
-
 export default function ProductDetails({ data, origin }) {
   const { setPageData } = usePageDataContext()
   const pageContent = data && data.page && data.page.segmentsMap
@@ -112,13 +110,6 @@ export default function ProductDetails({ data, origin }) {
 ProductDetails.getInitialProps = async context => {
   const { origin } = absoluteUrl(context.req)
   const data = await getPDPData(context)
-  if(context.req){
-    const { res } = context;
-    res.setHeader(
-      "Cache-Control",
-      `public, maxage=${config.STATIC_PAGE_CACHE}`
-    );
-  }
  
   return {
     data,
