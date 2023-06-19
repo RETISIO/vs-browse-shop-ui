@@ -485,6 +485,9 @@ function SkuVariants({
           variantOptions[variantKey].options[i].associatedSkuIds || []
         for (let j = 0; j < associatedSkuIds.length; j++) {
           if (optionSkusIds.includes(associatedSkuIds[j])) {
+            // associatedSkuIds[j] will be there in variantOPtions[variantKey].optionSelected
+            // if associatedSkuIds[j] is OOS, then check for non OOS in associatedSkuIds and
+            // assign that associatedSkuIds[x] which is not OOS to variantOPtions[variantKey].optionSelected
             variantOptions[variantKey].options[i].skuId = associatedSkuIds[j]
             variantOptions[variantKey].options[i].hasStock =
               productData?.skus[associatedSkuIds[j]]?.skuDetails?.hasStock
