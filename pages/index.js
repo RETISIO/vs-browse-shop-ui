@@ -66,9 +66,9 @@ Home.getInitialProps = async(context) => {
     req, asPath, query, res,
   } = context;
   const cookies = new Cookies(req, res);
-  if(req && res) {
-    res.setHeader('Cache-Control', 'public, max-age=3600000');
-  }
+  // if(req && res) {
+  //   res.setHeader('Cache-Control', 'public, max-age=3600000');
+  // }
   let response;
   const options = { customHeaders: {} };
   if(query.env) {

@@ -35,17 +35,17 @@ module.exports = {
         source: '/', // automatically handles all locales
         headers: [
           {
-            key: 'max-age',
-            value: '86400',
+            key: 'Cache-Control',
+            value: 'public, max-age=3600000',
           },
         ],
       },
       {
-        source: '/:path*', // automatically handles all locales
+        source: '/products/:path*', // automatically handles all locales
         headers: [
           {
-            key: 'max-age',
-            value: '86400',
+            key: 'Cache-Control',
+            value: 'public, max-age=86400000',
           },
         ],
       },
