@@ -16,8 +16,7 @@ import { Loader } from '../../shared/components/loader'
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
 import {
-  visitPDP,
-  selectPLPItem
+  visitPDP
 } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
@@ -39,7 +38,6 @@ export default function ProductDetails({ data, origin }) {
   useEffect(() => {
     setPageData(data)
     visitPDP(data)
-    selectPLPItem(data)
     router.events.on('routeChangeStart', url => {
       setLoading(true)
     })

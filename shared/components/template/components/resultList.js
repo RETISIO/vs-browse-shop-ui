@@ -14,6 +14,7 @@ import { useAppContext } from '../../../context/appContext';
 import { Search } from '../../ThirdPartyScripts/Events';
 import { EllipseLoader } from '../../loader';
 import { searchTermHandler } from '../../../helpers/utils';
+import { visitPLP } from '../../ThirdPartyScripts/Events';
 
 function ResultList(props) {
   const { singleColumn } = props;
@@ -41,6 +42,8 @@ function ResultList(props) {
       setProducts(props?.payLoad?.products);
       setProductCount(props?.payLoad?.productCount);
     }
+    visitPLP(props);
+
   }, [props]);
 
   useEffect(() => {
