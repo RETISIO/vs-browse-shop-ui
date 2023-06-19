@@ -6,10 +6,11 @@ import config from '../../helpers/getConfig';
 
 export default function RetisioSDK() {
   return (
-    <Script src="https://sdk.lle.retisio.io/retisio-sdk.js" 
-    onLoad={() => {
-      retisioSDK.init(config.RKEY);
-    }}>
+    <Script
+      src={config.DARTMOUTHURL}
+      onLoad={() => {
+        retisioSDK.init(config.RKEY);
+      }}>
     </Script>
   );
 }
