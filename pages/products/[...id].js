@@ -112,10 +112,14 @@ export default function ProductDetails({ data, origin }) {
 ProductDetails.getInitialProps = async context => {
   const { origin } = absoluteUrl(context.req)
   const data = await getPDPData(context)
-  context.res.setHeader(
-    'Cache-Control',
-    `public, maxage=${config.STATIC_PAGE_CACHE}`
-  );
+  if(context.req){
+    const { res } = context;
+    res.setHeader(
+      "Cache-Control",
+      `public, maxage=${config.STATIC_PAGE_CACHE}`
+    );
+  }
+ 
   return {
     data,
     origin
