@@ -36,19 +36,19 @@ module.exports = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=3600000',
+            value: 'public, max-age=3600',
           },
         ],
       },
-      {
-        source: '/products/:path*', // automatically handles all locales
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=86400000',
-          },
-        ],
-      },
+      // {
+      //   source: '/products/:path*', // automatically handles all locales
+      //   headers: [
+      //     {
+      //       key: 'Cache-Control',
+      //       value: 'public, max-age=86400000',
+      //     },
+      //   ],
+      // },
     ]
   },
   images: {
