@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import config from '../helpers/getConfig';
 
 export default function MiniStaticCarousel() {
   const params = {
@@ -14,7 +15,7 @@ export default function MiniStaticCarousel() {
             <img
               alt="img_1"
               className="img1"
-              src="/dam/AB/storefront/general/Expert-selection.svg"
+              src={`${config.IMGPATH}/dam/AB/storefront/general/Expert-selection.svg`}
             />
           </span>
         </div>
@@ -28,7 +29,7 @@ export default function MiniStaticCarousel() {
             <img
               alt="img_1"
               className="img1"
-              src="/dam/AB/storefront/general/The-highest-standard-packaging--and-delivery-experience.svg"
+              src={`${config.IMGPATH}/dam/AB/storefront/general/The-highest-standard-packaging--and-delivery-experience.svg`}
             />
           </span>
         </div>
@@ -42,7 +43,7 @@ export default function MiniStaticCarousel() {
             <img
               alt="img_1"
               className="img1"
-              src="/dam/AB/storefront/general/satisfaction-guaranteed_V2.svg"
+              src={`${config.IMGPATH}/dam/AB/storefront/general/satisfaction-guaranteed_V2.svg`}
             />
           </span>
         </div>
@@ -60,7 +61,7 @@ export default function MiniStaticCarousel() {
             <img
               alt="img_1"
               className="img1"
-              src="/dam/AB/storefront/general/Precision-hand-cutting--and-aging.svg"
+              src={`${config.IMGPATH}/dam/AB/storefront/general/Precision-hand-cutting--and-aging.svg`}
             />
           </span>
         </div>
@@ -72,7 +73,7 @@ export default function MiniStaticCarousel() {
             <img
               alt="img_1"
               className="img1"
-              src="/dam/AB/storefront/general/Exclusive-access-to-new--and-unique-products.svg"
+              src={`${config.IMGPATH}/dam/AB/storefront/general/Exclusive-access-to-new--and-unique-products.svg`}
             />
           </span>
         </div>
