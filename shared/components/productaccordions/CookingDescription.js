@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { HtmlContent } from '@retisio/sf-ui'
 
 export default function CookingDescription ({ id, data, description }) {
+  const { origin } = window.location
   const handlePrint = () => {
     const printContent = document.getElementById(id).innerHTML
     const WinPrint = window.open(
@@ -20,6 +21,7 @@ export default function CookingDescription ({ id, data, description }) {
     WinPrint.print()
     WinPrint.close()
   }
+
   return (
     <div className='panel-body cooking-body'>
       <div className='cooking-instruction-button'>
@@ -37,7 +39,7 @@ export default function CookingDescription ({ id, data, description }) {
           <div className='btn-group'>
             <a
               className='sharebtn btn-primary btn-inverse btn-share dropdown-toggle'
-              href={`mailto:?subject=${data?.name}&body=Check out these cooking instructions from Allen Brothers: https://www.allenbrothers.com/article/${data?.name}/${id}`}
+              href={`mailto:?subject=${data?.name}&body=Check out these cooking instructions from Allen Brothers: ${origin}/article/${data?.name}/${id}`}
             >
               <i className='icon icon-left fas fa-share-square'></i>
               &nbsp; Share

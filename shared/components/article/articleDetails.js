@@ -31,10 +31,12 @@ export default function ArticleDetails({ props }) {
   const [load, setLoad] = useState(false)
   const [productsData, setProductsData] = useState({})
   const [content, setContent] = useState()
+  const [origin, setOrigin] = useState()
 
   useEffect(() => {
     if (props && props.content) {
       setContent(JSON.parse(props.content))
+      setOrigin(window.location.origin)
     }
   }, [props])
 
@@ -116,7 +118,16 @@ export default function ArticleDetails({ props }) {
                     <Link
                       className='btn btn-primary btn-block btn-buy'
                       id='btnBuyNow'
-                      href={`/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`}
+                      href={`/products/${
+                        value.seoData && value.seoData.slug
+                          ? value.seoData.slug
+                          : value.displayName
+                              .replace(
+                                /[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g,
+                                '-'
+                              )
+                              .toLowerCase()
+                      }/${value?.productId}`}
                     >
                       Buy Now
                     </Link>
@@ -131,7 +142,7 @@ export default function ArticleDetails({ props }) {
                     <div className='btn-group'>
                       <a
                         className='btn btn-primary btn-inverse btn-share dropdown-toggle'
-                        href='mailto:?subject=Bacon Wrapped Quail Appetizers&amp;body=Check out these cooking instructions from Allen Brothers: https://www.allenbrothers.com/article/bacon-wrapped-quail-appetizers/9'
+                        href={`mailto:?subject=Bacon Wrapped Quail Appetizers&amp;body=Check out these cooking instructions from Allen Brothers: ${origin}/article/bacon-wrapped-quail-appetizers/9`}
                       >
                         <i className='icon icon-left fas fa-share-square'></i>
                         Share
