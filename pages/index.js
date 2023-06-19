@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
 /* eslint-disable linebreak-style */
 /* eslint-disable import/no-unresolved */
 import { useEffect } from 'react';
@@ -17,6 +18,7 @@ import MainLayout from '../shared/components/Layout';
 import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
 import ComponentMap from '../shared/components/componentMap';
+
 function Home({ data }) {
   // const i18n = useI18n();
   const router = useRouter();
@@ -60,10 +62,14 @@ function Home({ data }) {
 }
 
 Home.getInitialProps = async(context) => {
-  const { req, asPath, query, res } = context;
+  const {
+    req, asPath, query, res,
+  } = context;
   const cookies = new Cookies(req, res);
-
-  let response; 
+  // if(req && res) {
+  //   res.setHeader('Cache-Control', 'public, max-age=3600000');
+  // }
+  let response;
   const options = { customHeaders: {} };
   if(query.env) {
     cookies.set('env', query.env, {

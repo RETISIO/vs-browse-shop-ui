@@ -13,7 +13,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from './nextImage';
 import { usePLPDataContext } from '../../../context/plpDatacontext';
-import { ClickProduct } from '../../ThirdPartyScripts/Events';
+import { ClickProduct, selectPLPItem } from '../../ThirdPartyScripts/Events';
 import { useAppContext } from '../../../context/appContext';
 import config from '../../../helpers/getConfig';
 
@@ -23,26 +23,28 @@ export default function ProductTile({ value, recommondationData }) {
 
   const router = useRouter();
 
-  const navigatePDP = (data, href, e) => {
+  const navigatePDP = (data, href, e, finalState) => {
     e.preventDefault();
-    if (searchResultData && state && state?.userData && state?.channelData) {
+    if (searchResultData) {
       ClickProduct({
         data,
         searchData: searchResultData.payLoad,
-        userData: state?.userData,
-        channelData: state?.channelData,
+        userData: finalState?.userData,
+        channelData: finalState?.channelData,
       });
     }
-    if (recommondationData && state && state?.userData && state?.channelData) {
+    if (recommondationData) {
       ClickProduct({
         data,
         recommendation: {
           ...recommondationData.recommendationAttributionDetails,
         },
-        userData: state?.userData,
-        channelData: state?.channelData,
+        userData: finalState?.userData,
+        channelData: finalState?.channelData,
       });
     }
+    selectPLPItem(data)
+
     router.push(href);
   };
   const calcPrice = (product) => {
@@ -138,6 +140,7 @@ export default function ProductTile({ value, recommondationData }) {
           value,
           `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
           e,
+          state
         )}
       >
         <div className="image-pos">
@@ -158,6 +161,7 @@ export default function ProductTile({ value, recommondationData }) {
               value,
               `/products/${value.seoData && value.seoData.slug ? value.seoData.slug : value.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${value?.productId}`,
               e,
+              state
             )}
           >
             {value.displayName}

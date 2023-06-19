@@ -13,17 +13,21 @@
 // );
 
 module.exports = {
+  experimental:{
+    largePageDataBytes: 128 * 100000
+  },
   reactStrictMode: false,
   generateEtags: false,
   poweredByHeader: false,
-  publicRuntimeConfig:{
+  publicRuntimeConfig: {
     APIURL: process.env.APIURL,
     IMGPATH: process.env.IMAGEPATH,
     YOTOKEY: process.env.YOTPO_KEY,
     GAKEY: process.env.GA_KEY,
     LISKEY: process.env.LISTRACK_MID,
     RKEY: process.env.RETISIO_ID,
-    SKEY: process.env.SITEID
+    SKEY: process.env.SITEID,
+    DARTMOUTHURL: process.env.DARTMOUTH_URL
   },
   async headers() {
     return [
@@ -31,17 +35,17 @@ module.exports = {
         source: '/', // automatically handles all locales
         headers: [
           {
-            key: 'max-age',
-            value: '86400',
+            key: 'Cache-Control',
+            value: 'public, max-age=3600000',
           },
         ],
       },
       {
-        source: '/:path*', // automatically handles all locales
+        source: '/products/:path*', // automatically handles all locales
         headers: [
           {
-            key: 'max-age',
-            value: '86400',
+            key: 'Cache-Control',
+            value: 'public, max-age=86400000',
           },
         ],
       },

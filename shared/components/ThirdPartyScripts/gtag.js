@@ -115,7 +115,7 @@ const viewListItem = (itemData) => {
 };
 
 const selectItem = (itemData) => {
-  const item = itemData?.payLoad?.products?.[0] || {};
+  const item = itemData || {};
   event({
     event: 'select_item',
     ecommerce: {
