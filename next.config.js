@@ -28,6 +28,9 @@ module.exports = {
     RKEY: process.env.RETISIO_ID,
     SKEY: process.env.SITEID,
     DARTMOUTHURL: process.env.DARTMOUTH_URL,
+    HOME_PAGE_CACHE: process.env.HOME_PAGE_CACHE,
+    PDP_PAGE_CACHE: process.env.PDP_PAGE_CACHE,
+    STATIC_PAGE_CACHE: process.env.STATIC_PAGE_CACHE
   },
   async headers() {
     return [
