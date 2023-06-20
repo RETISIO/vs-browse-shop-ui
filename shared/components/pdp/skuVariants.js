@@ -60,7 +60,7 @@ function SkuVariants({
     setDisablePlusCounter(false)
     if (productData) {
       const OOS = []
-      for (const key in Object.keys(productData.skus)) {
+      for (const key of Object.keys(productData.skus)) {
         if (key && !productData?.skus[key]?.skuDetails?.hasStock) {
           OOS.push(key)
         }
@@ -414,7 +414,6 @@ function SkuVariants({
     const skuIdsToDisplay = []
     for (let i = 0; i < index; i++) {
       const key = Object.keys(variantOptions)[i]
-      console.log('i,key,variantOptions.....', i, key, variantOptions)
       const skuObj = variantOptions[key].defaultSelected
         ? variantOptions[key].defaultSelected
         : variantOptions[key].optionSelected
@@ -430,12 +429,6 @@ function SkuVariants({
         skuIdsToDisplay.push(allCommonSkus[i])
       }
     }
-    console.log(
-      'index,allCommonSkus,skuIdsToDisplay.....',
-      index,
-      allCommonSkus,
-      skuIdsToDisplay
-    )
     return index > 1 ? skuIdsToDisplay : allCommonSkus
   }
 
@@ -475,25 +468,34 @@ function SkuVariants({
   }
 
   const checkForOOSSku = (index, skuId, variantKey, optionsToDisplay) => {
-    console.log(
-      'from checkForOOSSku....index,skuId, variantKey,optionsToDisplay...',
-      index,
-      skuId,
-      variantKey,
-      optionsToDisplay
-    )
     if (index === Object.keys(variantOptions).length - 1) {
       if (OOSSKUs.includes(skuId)) {
         // select next option in optionsToDisplay[]
         // find the index of skuId in optionsToDisplay[]
         const itemIdx = optionsToDisplay.findIndex(item => item.skuId === skuId)
         const optionsArrLength = optionsToDisplay.length
-        for (let i = itemIdx; i < optionsToDisplay.length; i++) {
-          const skuId = optionsToDisplay[i].skuId
+        if (itemIdx < optionsArrLength - 1) {
+          let activeSku = false
+          for (let i = itemIdx + 1; i < optionsToDisplay.length; i++) {
+            const skId = optionsToDisplay[i].skuId
+            if (productData?.skus[skId]?.skuDetails?.hasStock) {
+              variantOptions[variantKey].defaultSelected = optionsToDisplay[i]
+              variantOptions[variantKey].optionSelected = ''
+              activeSku = true
+              break
+            }
+          }
+          if (activeSku) {
+            return
+          }
         }
+        variantOptions[variantKey].defaultSelected = optionsToDisplay[itemIdx]
+        variantOptions[variantKey].optionSelected = ''
+        return
       }
     }
-    return false
+    variantOptions[variantKey].defaultSelected = optionsToDisplay[0]
+    variantOptions[variantKey].optionSelected = ''
   }
 
   // displays all variants sections
@@ -543,8 +545,8 @@ function SkuVariants({
           variantKey,
           optionsToDisplay
         )
-        variantOptions[variantKey].defaultSelected = optionsToDisplay[0]
-        variantOptions[variantKey].optionSelected = ''
+        // variantOptions[variantKey].defaultSelected = optionsToDisplay[0]
+        // variantOptions[variantKey].optionSelected = ''
       }
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
