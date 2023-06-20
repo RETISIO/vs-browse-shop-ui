@@ -5,12 +5,14 @@ import config from '../../helpers/getConfig';
 
 export default function Listract() {
   useEffect(()=>{
-    const script = document.createElement("script");
+    setTimeout(()=>{
+      const script = document.createElement("script");
 
-    script.src = `https://cdn.listrakbi.com/scripts/script/script.js?m=${config.LISKEY}&v=1`;
-    script.defer = true;
-
-    document.body.appendChild(script);
+      script.src = `https://cdn.listrakbi.com/scripts/script/script.js?m=${config.LISKEY}&v=1`;
+      script.defer = true;
+  
+      document.body.appendChild(script);
+    },[500])
   },[]);
   return (
     <>
