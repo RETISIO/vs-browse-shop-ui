@@ -53,6 +53,7 @@ function SkuVariants({
   const [OOSSKUs, setOOSSKUs] = useState([])
   const maxQtyAllowed = 999 // max qty user can enter
 
+  console.log('variantOptions.....', variantOptions)
   useEffect(() => {
     setItemQuantity(1)
     setDisableAddToCart(false)
@@ -433,6 +434,12 @@ function SkuVariants({
   }
 
   const selectActiveSku = (selectedSku, optionsToDisplay, selectedSkuIndex) => {
+    console.log(
+      'selectActiveSku..selectedSku, optionsToDisplay, selectedSkuIndex....',
+      selectedSku,
+      optionsToDisplay,
+      selectedSkuIndex
+    )
     // find out the matching skuId in selectedSku associatedSkuIds & optionsToDiplay
     // selectedSku = {optionValue: '12oz', associatedSkuIds: [98458, 56781,78165]}
     // optionsToDisplay = [{oV: '4oz', aSIds=[91245,34256]}, {oV: '8oz', aSIds:[98458,12345]},...]
@@ -506,12 +513,13 @@ function SkuVariants({
     if (index > 0) {
       const prevVariantKey = Object.keys(variantOptions)[index - 1] // 'count'
       // find out what is selected variant in this section
-      const skuSelectedInPrevSection = variantOptions[prevVariantKey]
-        .defaultSelected
-        ? variantOptions[prevVariantKey].defaultSelected
-        : variantOptions[prevVariantKey].optionSelected
+      // const skuSelectedInPrevSection = variantOptions[prevVariantKey]
+      //   .defaultSelected
+      //   ? variantOptions[prevVariantKey].defaultSelected
+      //   : variantOptions[prevVariantKey].optionSelected
       // const { associatedSkuIds } = skuSelectedInPrevSection || []
       const associatedSkuIds = getSkuIdsOfPreviousSelectedOptions(index)
+      console.log('prev...associatedSkuIds....', associatedSkuIds)
       // find what are all associated skus matches in current section based on option selected in prev section
       for (let i = 0; i < variantOptions[variantKey].options.length; i++) {
         // variantKey options
@@ -530,7 +538,16 @@ function SkuVariants({
               productData?.skus[
                 associatedSkuIds[j]
               ]?.skuDetails?.additionalDetails?.thickness
-            optionsToDisplay.push(variantOptions[variantKey].options[i])
+            const idx = optionsToDisplay.findIndex(
+              option =>
+                option?.optionValue ===
+                variantOptions[variantKey]?.options[i]?.optionValue
+            )
+            if (idx < 0) {
+              // filter duplicate options
+              optionsToDisplay.push(variantOptions[variantKey].options[i])
+            }
+            console.log('idx,optionsToDisplay....', idx, optionsToDisplay)
           }
         }
       }
@@ -575,7 +592,7 @@ function SkuVariants({
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
       // if selectedSku is OOS, then select next sku from optionsToDisplay[]
-      selectActiveSku(selectedSku, optionsToDisplay)
+      // selectActiveSku(selectedSku, optionsToDisplay)
     }
     if (index === Object.keys(variantOptions).length - 1) {
       // sku in last section
@@ -593,11 +610,22 @@ function SkuVariants({
             : variantOptions[keys[key]].optionSelected.associatedSkuIds
         )
       }
+      console.log('optionsSelected....', optionsSelected)
       if (optionsSelected.length > 1) {
+        const selSkuIds = selectedSku?.associatedSkuIds
         for (let i = 0; i < optionsSelected.length; i++) {
           for (let j = i + 1; j < optionsSelected.length; j++) {
-            if (optionsSelected[i] === optionsSelected[j]) {
+            if (
+              optionsSelected[i] === optionsSelected[j] &&
+              selSkuIds.includes(optionsSelected[i])
+            ) {
               skuId = optionsSelected[i] // skuId identified
+              console.log(
+                'skuId,selectedSku,optionsToDisplay..',
+                skuId,
+                selectedSku,
+                optionsToDisplay
+              )
               break
             }
           } // inner loop
@@ -610,10 +638,10 @@ function SkuVariants({
       }
       if (skuId) {
         // populate sku details info in selected option
-        variantOptions[keys[keys.length - 1]].skuId = skuId
+        variantOptions[keys[keys.length - 1]].skuId = skuId // to print '#item code'
         //   variantOptions[keys[keys.length - 1]].hasStock = false //test data
-        variantOptions[keys[keys.length - 1]].hasStock =
-          productData?.skus[skuId]?.skuDetails?.hasStock
+        // variantOptions[keys[keys.length - 1]].hasStock =
+        //   productData?.skus[skuId]?.skuDetails?.hasStock
         variantOptions[keys[keys.length - 1]].skuData = productData?.skus[skuId]
         let optionsTextForMv = ''
         // prepare options text for mobile view

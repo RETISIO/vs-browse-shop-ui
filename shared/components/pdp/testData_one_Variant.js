@@ -79,7 +79,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            hasStock: true,
+            hasStock: false,
+            // hasStock: true,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',
@@ -146,7 +147,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            hasStock: true,
+            hasStock: false,
+            // hasStock: true,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',
@@ -203,7 +205,8 @@ const testData = {
             optionValue: '9 lbs',
             associatedSkuIds: ['99971'],
             skuId: '99971',
-            hasStock: true,
+            hasStock: false,
+            // hasStock: true,
             thickness: '\\| 6-layer'
           }
         ]
@@ -235,7 +238,7 @@ const testData = {
         hasPrice: true,
         canAllowPurchaseInqry: false
       },
-      defaultSkuId: '999691',
+      defaultSkuId: '99969',
       hasStock: true,
       hasPrice: true,
       isAccessory: false,

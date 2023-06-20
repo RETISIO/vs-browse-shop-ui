@@ -15,16 +15,15 @@ import { Loader } from '../../shared/components/loader'
 
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
-import {
-  visitPDP
-} from '../../shared/components/ThirdPartyScripts/Events'
+import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
+
 export default function ProductDetails({ data, origin }) {
   const { setPageData } = usePageDataContext()
   const pageContent = data && data.page && data.page.segmentsMap
-  const pageType = 'PDP';
+  const pageType = 'PDP'
   const { payLoad } = data
   const [loading, setLoading] = useState(false)
 
@@ -72,7 +71,7 @@ export default function ProductDetails({ data, origin }) {
     data.payLoad.products[0] &&
     data.payLoad.products[0].seoData
   ) {
-    seoData = data.payLoad.products[0].seoData;
+    seoData = data.payLoad.products[0].seoData
   }
   const renderProductDescriptionPage = () => {
     const productType = payLoad?.products && payLoad?.products[0]?.productType
@@ -108,7 +107,7 @@ export default function ProductDetails({ data, origin }) {
 ProductDetails.getInitialProps = async context => {
   const { origin } = absoluteUrl(context.req)
   const data = await getPDPData(context)
- 
+  console.log('context,data...'.context, data)
   return {
     data,
     origin

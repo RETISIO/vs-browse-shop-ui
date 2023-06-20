@@ -222,7 +222,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            hasStock: true,
+            // hasStock: true,
+            hasStock: false,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',
@@ -381,7 +382,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            hasStock: true,
+            hasStock: false,
+            // hasStock: true,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',
@@ -540,8 +542,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            hasStock: false,
-            // hasStock: true,
+            // hasStock: false,
+            hasStock: true,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',
@@ -942,8 +944,8 @@ const testData = {
           },
           skuOptions: null,
           skuDetails: {
-            // hasStock: false,
-            hasStock: true,
+            hasStock: false,
+            // hasStock: true,
             hasPrice: true,
             onSale: false,
             inventoryStatusLabel: 'In Stock',

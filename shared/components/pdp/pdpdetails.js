@@ -49,7 +49,9 @@ import {
   ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
-import { testData } from './pdp-test-data-2v'
+// import { testData } from './pdp-test-data-2v'
+// import { testData } from './pdp-test-data-3v'
+import { testData } from './testData_one_Variant'
 // import { testData } from './testData_two_Variants'
 
 export default function ProductDescription(props) {
@@ -132,21 +134,109 @@ export default function ProductDescription(props) {
 
   // console.log('productData.....', productData)
 
-  const getActiveSkuId = associatedSkusIds => {
+  const getActiveSkuId = (
+    associatedSkusIds,
+    variantKey,
+    index,
+    variantOptionsObj
+  ) => {
     // get active sku from skus[]
     let activeSkuId = ''
-    if (associatedSkusIds?.length) {
-      for (let i = 0; i < associatedSkusIds.length; i++) {
-        if (productData?.skus[associatedSkusIds[i]]?.skuDetails?.hasStock) {
-          activeSkuId = associatedSkusIds[i]
+    const getActiveId = IdsArr => {
+      for (let i = 0; i < IdsArr.length; i++) {
+        if (productData?.skus[IdsArr[i]]?.skuDetails?.hasStock) {
+          activeSkuId = IdsArr[i]
           break
+        }
+      }
+    }
+    if (
+      associatedSkusIds?.length > 1 &&
+      Object.keys(productData?.variantOptions).length <= 2
+    ) {
+      getActiveId(associatedSkusIds)
+    } else if (
+      associatedSkusIds?.length === 1 &&
+      Object.keys(productData?.variantOptions).length === 1
+    ) {
+      // only one variantKey key e.g., 'count' = [{ov:'2pcs', as:[99812]},{ov:'4pcs', as:[22345]},..]
+      // debugger
+      const optionsArr = productData?.variantOptions[variantKey]
+      let idx = index === optionsArr.length - 1 ? 0 : index
+      let len = optionsArr.length
+      for (let i = idx + 1; i < len; i++) {
+        const aSkuIds = optionsArr[i].associatedSkuIds
+        getActiveId(aSkuIds)
+        if (activeSkuId) {
+          break
+        }
+        if (i === len && idx > 0) {
+          len = idx
+          idx = -1
+        }
+      }
+    } else if (Object.keys(productData?.variantOptions).length > 2) {
+      // get all previous variantKeys defaultSelected skusIds
+      let defSkuOptionsArr = []
+      const skuIdsToDisplay = []
+      const getDuplicateIds = () => {
+        // find duplicate skuIds
+        for (let i = 0; i < defSkuOptionsArr.length; i++) {
+          const restOfIds = defSkuOptionsArr.slice(i + 1)
+          if (
+            restOfIds.includes(defSkuOptionsArr[i]) &&
+            !skuIdsToDisplay.includes(defSkuOptionsArr[i])
+          ) {
+            skuIdsToDisplay.push(defSkuOptionsArr[i])
+          }
+        }
+        defSkuOptionsArr = skuIdsToDisplay
+      }
+      const defSkuId =
+        productData?.defaultSkuId ||
+        (productData?.skus?.length && productData?.skus[0]?.skuId)
+
+      // get all optionValues where and all defaultSkuId is there
+      for (const key of Object.keys(productData?.variantOptions)) {
+        for (let i = 0; i < productData?.variantOptions[key]?.length; i++) {
+          if (
+            productData?.variantOptions[key][i].associatedSkuIds.includes(
+              defSkuId
+            )
+          ) {
+            defSkuOptionsArr = defSkuOptionsArr.concat(
+              productData?.variantOptions[key][i]?.associatedSkuIds
+            )
+            if (i > 0) {
+              getDuplicateIds()
+            }
+          }
+        }
+      }
+
+      // let activeSku = false
+      const idx = defSkuOptionsArr.findIndex(id => id === defSkuId)
+      // find active skuId
+      if (idx > -1) {
+        let itemIdx = idx + 1 < defSkuOptionsArr.length ? idx + 1 : 0
+        for (let i = itemIdx; i < defSkuOptionsArr.length; i++) {
+          const skuId = defSkuOptionsArr[i]
+          if (productData?.skus[skuId]?.skuDetails?.hasStock) {
+            activeSkuId = skuId
+            // activeSku = true
+            break
+          }
+          if (itemIdx > 0 && i === defSkuOptionsArr.length - 1) {
+            i = 0
+            itemIdx = 0
+          }
         }
       }
     }
     return activeSkuId
   }
 
-  const getDefaultSku = (variantKey, sortedVarientKeyArray, index) => {
+  const getDefaultSku = (variantKey, index, variantOptionsObj) => {
     let defaultSku = {}
     if (
       productData &&
@@ -168,9 +258,23 @@ export default function ProductDescription(props) {
           // check if defaultSkuId hasStock,then check for next skuId in associatedSkuIds
           if (!productData?.skus[skuId]?.skuDetails?.hasStock && index === 0) {
             if (!productData?.defaultActiveSkuId) {
-              productData.defaultActiveSkuId = getActiveSkuId(associatedSkusIds)
+              productData.defaultActiveSkuId = getActiveSkuId(
+                associatedSkusIds,
+                variantKey,
+                i,
+                variantOptionsObj
+              )
             }
             skuId = productData?.defaultActiveSkuId
+              ? productData?.defaultActiveSkuId
+              : productData?.defaultSkuId
+          } else if (productData.variantOptions[variantKey].length > 2) {
+            const id = getActiveSkuId(
+              associatedSkusIds,
+              variantKey,
+              i,
+              variantOptionsObj
+            )
           }
           defaultSku = productData?.variantOptions[variantKey][i]
           break
@@ -198,6 +302,7 @@ export default function ProductDescription(props) {
 
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
+    console.log('productData.variantOptions...', productData.variantOptions)
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach((variantKey, index) => {
         // sort optionValues of variantKey array
@@ -208,11 +313,7 @@ export default function ProductDescription(props) {
         variantOptionsObj[variantKey] = {
           options: sortedVarientKeyArray,
           // options: productData.variantOptions[variantKey],
-          defaultSelected: getDefaultSku(
-            variantKey,
-            sortedVarientKeyArray,
-            index
-          ),
+          defaultSelected: getDefaultSku(variantKey, index, variantOptionsObj),
           // defaultSelected: productData.variantOptions[variantKey][0],
           optionSelected: '',
           skuId: '',
@@ -220,6 +321,7 @@ export default function ProductDescription(props) {
         }
       })
     }
+    console.log('variantOptionsObj....', variantOptionsObj)
     setVariantsOptions({ ...variantOptionsObj })
   }
 
@@ -251,6 +353,13 @@ export default function ProductDescription(props) {
         variantOptionsObj[vKey].defaultSelected = ''
       }
     })
+    console.log(
+      'from handleVariantSelected...',
+      index,
+      variantKey,
+      value,
+      variant
+    )
     setVariantSelected({ variantKey, variant })
     setVariantsOptions({ ...variantOptionsObj })
   }
