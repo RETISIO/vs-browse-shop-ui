@@ -49,14 +49,9 @@ import {
   ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
-// import { testData } from './pdp-test-data-2v'
-// import { testData } from './pdp-test-data-3v'
-import { testData } from './testData_one_Variant'
-// import { testData } from './testData_two_Variants'
 
 export default function ProductDescription(props) {
-  const pdpData = testData
-  // const pdpData = props?.payLoad
+  const pdpData = props?.payLoad
   const productType =
     pdpData &&
     pdpData.products &&
@@ -134,12 +129,8 @@ export default function ProductDescription(props) {
 
   // console.log('productData.....', productData)
 
-  const getActiveSkuId = (
-    associatedSkusIds,
-    variantKey,
-    index,
-    variantOptionsObj
-  ) => {
+  const getActiveSkuId = (associatedSkusIds, variantKey, index) => {
+    debugger
     // get active sku from skus[]
     let activeSkuId = ''
     const getActiveId = IdsArr => {
@@ -160,7 +151,6 @@ export default function ProductDescription(props) {
       Object.keys(productData?.variantOptions).length === 1
     ) {
       // only one variantKey key e.g., 'count' = [{ov:'2pcs', as:[99812]},{ov:'4pcs', as:[22345]},..]
-      // debugger
       const optionsArr = productData?.variantOptions[variantKey]
       let idx = index === optionsArr.length - 1 ? 0 : index
       let len = optionsArr.length
@@ -190,7 +180,9 @@ export default function ProductDescription(props) {
             skuIdsToDisplay.push(defSkuOptionsArr[i])
           }
         }
-        defSkuOptionsArr = skuIdsToDisplay
+        defSkuOptionsArr = skuIdsToDisplay.length
+          ? skuIdsToDisplay
+          : defSkuOptionsArr
       }
       const defSkuId =
         productData?.defaultSkuId ||
@@ -207,14 +199,11 @@ export default function ProductDescription(props) {
             defSkuOptionsArr = defSkuOptionsArr.concat(
               productData?.variantOptions[key][i]?.associatedSkuIds
             )
-            if (i > 0) {
-              getDuplicateIds()
-            }
+            getDuplicateIds()
           }
         }
       }
 
-      // let activeSku = false
       const idx = defSkuOptionsArr.findIndex(id => id === defSkuId)
       // find active skuId
       if (idx > -1) {
@@ -223,7 +212,6 @@ export default function ProductDescription(props) {
           const skuId = defSkuOptionsArr[i]
           if (productData?.skus[skuId]?.skuDetails?.hasStock) {
             activeSkuId = skuId
-            // activeSku = true
             break
           }
           if (itemIdx > 0 && i === defSkuOptionsArr.length - 1) {
@@ -276,6 +264,7 @@ export default function ProductDescription(props) {
               variantOptionsObj
             )
           }
+
           defaultSku = productData?.variantOptions[variantKey][i]
           break
         }
@@ -302,7 +291,6 @@ export default function ProductDescription(props) {
 
   function prepareVarinatsOptions() {
     const variantOptionsObj = {}
-    console.log('productData.variantOptions...', productData.variantOptions)
     if (productData && productData.variantOptions) {
       Object.keys(productData.variantOptions).forEach((variantKey, index) => {
         // sort optionValues of variantKey array
@@ -321,7 +309,6 @@ export default function ProductDescription(props) {
         }
       })
     }
-    console.log('variantOptionsObj....', variantOptionsObj)
     setVariantsOptions({ ...variantOptionsObj })
   }
 
@@ -353,13 +340,6 @@ export default function ProductDescription(props) {
         variantOptionsObj[vKey].defaultSelected = ''
       }
     })
-    console.log(
-      'from handleVariantSelected...',
-      index,
-      variantKey,
-      value,
-      variant
-    )
     setVariantSelected({ variantKey, variant })
     setVariantsOptions({ ...variantOptionsObj })
   }
