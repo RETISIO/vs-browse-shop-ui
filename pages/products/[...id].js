@@ -27,11 +27,6 @@ export default function ProductDetails({ data, origin }) {
   const { payLoad } = data
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   setPageData(data)
-  //   visitPDP(data)
-  //   selectPLPItem(data)
-  // }, [])
   const router = useRouter()
 
   useEffect(() => {
@@ -107,7 +102,6 @@ export default function ProductDetails({ data, origin }) {
 ProductDetails.getInitialProps = async context => {
   const { origin } = absoluteUrl(context.req)
   const data = await getPDPData(context)
-  console.log('context,data...'.context, data)
   return {
     data,
     origin
