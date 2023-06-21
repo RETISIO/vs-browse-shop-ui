@@ -16,6 +16,7 @@ module.exports = {
   experimental:{
     largePageDataBytes: 128 * 100000
   },
+  swcMinify: true,
   reactStrictMode: false,
   generateEtags: false,
   poweredByHeader: false,
