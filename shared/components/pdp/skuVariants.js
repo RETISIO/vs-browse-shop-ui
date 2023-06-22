@@ -466,6 +466,8 @@ function SkuVariants({
   // displays all variants sections
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
+    const allOptionsToDisplay = variantOptions[variantKey]?.options
+    console.log('allOptionsToDisplay...', allOptionsToDisplay)
     let selectedSku = {}
     const optionsText = ''
     if (index > 0) {
@@ -533,6 +535,9 @@ function SkuVariants({
       } else {
         optionsToDisplay = variantOptions[variantKey].options
       }
+      // for (const option of optionsToDisplay) {
+      //   option.optionToDisplay = true
+      // }
       selectedSku = variantOptions[variantKey].defaultSelected
         ? variantOptions[variantKey].defaultSelected
         : variantOptions[variantKey].optionSelected
@@ -595,13 +600,16 @@ function SkuVariants({
           optionsTextForMv
       }
     }
-
+    for (const option of optionsToDisplay) {
+      option.optionToDisplay = true
+    }
+    console.log('allOptions...', allOptionsToDisplay)
     return (
       <>
         <div className='sukhead'>{`Select ${variantKey}`}:</div>
         <div>
           <ul className='list-inline'>
-            {optionsToDisplay.map(sku => {
+            {allOptionsToDisplay.map(sku => {
               if (
                 index === Object.keys(variantOptions).length - 1 &&
                 !sku.hasStock
@@ -673,7 +681,11 @@ function SkuVariants({
                           }`
                         : `${
                             index === Object.keys(variantOptions).length - 1
-                              ? 'tag-wg'
+                              ? !sku.optionToDisplay
+                                ? 'tag-wg disable-sku'
+                                : 'tag-wg'
+                              : !sku.optionToDisplay
+                              ? 'tag disable-sku'
                               : 'tag'
                           }`
                     }
@@ -702,7 +714,7 @@ function SkuVariants({
                           : 'txttagb'
                       }`}
                     >
-                      {sku.optionValue}
+                      {sku.optionValue} {/** optiona value on tile */}
                     </span>
                     {index === Object.keys(variantOptions).length - 1 &&
                       sku.thickness && (
