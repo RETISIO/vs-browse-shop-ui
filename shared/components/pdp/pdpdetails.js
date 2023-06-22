@@ -130,7 +130,6 @@ export default function ProductDescription(props) {
   // console.log('productData.....', productData)
 
   const getActiveSkuId = (associatedSkusIds, variantKey, index) => {
-    debugger
     // get active sku from skus[]
     let activeSkuId = ''
     const getActiveId = IdsArr => {
