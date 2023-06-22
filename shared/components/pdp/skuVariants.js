@@ -467,7 +467,9 @@ function SkuVariants({
   const displayVariants = (index, variantKey) => {
     let optionsToDisplay = []
     const allOptionsToDisplay = variantOptions[variantKey]?.options
-    console.log('allOptionsToDisplay...', allOptionsToDisplay)
+    for (const option of allOptionsToDisplay) {
+      option.optionToDisplay = ''
+    }
     let selectedSku = {}
     const optionsText = ''
     if (index > 0) {
@@ -603,7 +605,6 @@ function SkuVariants({
     for (const option of optionsToDisplay) {
       option.optionToDisplay = true
     }
-    console.log('allOptions...', allOptionsToDisplay)
     return (
       <>
         <div className='sukhead'>{`Select ${variantKey}`}:</div>
