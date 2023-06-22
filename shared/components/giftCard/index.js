@@ -128,7 +128,7 @@ export default function GiftCard(props) {
               <div className='product-gallery__main'>
                 <NextImage
                   alt={mediaObj?.altText}
-                  src={`${damPath}${mediaObj?.thumbnailImg}`}
+                  src={`${damPath}${mediaObj?.largeImg}`}
                   height={thumbnailHeight}
                   width={thumbnailWidth}
                   tabIndex='0'
