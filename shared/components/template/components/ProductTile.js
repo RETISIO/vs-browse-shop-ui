@@ -206,7 +206,7 @@ export default function ProductTile({ value, recommondationData }) {
             || value?.productPrice?.minListPrice) === 0 ? null : (
               <>
                 <span>{`${Object.keys(value?.skus)?.length === 1 ? 'Starting At: ' : 'Starting From: '}`}</span>
-                <b>
+                <b className="priceb">
                   $
                   {calcPrice(value)}
                   {/* {value?.productPrice?.onSale && (value?.productPrice?.minListPrice < value?.productPrice?.minSalePrice ? value?.productPrice?.minListPrice.toFixed(2) : value?.productPrice?.minSalePrice.toFixed(2))}
