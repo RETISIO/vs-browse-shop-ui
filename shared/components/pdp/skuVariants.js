@@ -614,7 +614,8 @@ function SkuVariants({
             {allOptionsToDisplay.map(sku => {
               if (
                 index === Object.keys(variantOptions).length - 1 &&
-                !sku.hasStock
+                !sku.hasStock &&
+                sku.optionToDisplay
               ) {
                 // out of stock section
                 return (
