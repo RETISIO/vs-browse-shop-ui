@@ -566,7 +566,8 @@ function SkuVariants({
           for (let j = i + 1; j < optionsSelected.length; j++) {
             if (
               optionsSelected[i] === optionsSelected[j] &&
-              selSkuIds.includes(optionsSelected[i])
+              selSkuIds.includes(optionsSelected[i]) &&
+              selectedSku.skuId === optionsSelected[i]
             ) {
               skuId = optionsSelected[i] // skuId identified
               break
