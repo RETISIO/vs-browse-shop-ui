@@ -115,12 +115,13 @@ export default function ProductDescription(props) {
   const damPath = config.IMGPATH
   useEffect(() => {
     if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
-      setTimeout(() => {
-        setSuccessMsg('')
-        setErrorMsg('')
-        setWishListSuccessMsg('')
-        setWishListErrorMsg('')
-      }, 3000)
+      // hide notification bar - turned off
+      // setTimeout(() => {
+      //   setSuccessMsg('')
+      //   setErrorMsg('')
+      //   setWishListSuccessMsg('')
+      //   setWishListErrorMsg('')
+      // }, 3000)
     }
   }, [errorMsg, successMsg, wishListErrorMsg, wishListSuccessMsg])
 
@@ -368,7 +369,7 @@ export default function ProductDescription(props) {
         opacity: '1.2',
         fontSize: '31px',
         lineHeight: '10px',
-        marginTop: '10px'
+        marginTop: '5px'
       }}
       onClick={() => {
         if (errMsg) {
@@ -447,6 +448,7 @@ export default function ProductDescription(props) {
         productId: productData?.productId,
         quantity: '1'
       })
+
       result
         .then(data => {
           if (data && data.status === 200) {

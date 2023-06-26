@@ -495,3 +495,11 @@
         }
     }
 }
+
+@media screen and (min-width: 300px) and (max-width: 480px) {
+    .pdpMainContainer {
+        .header-alert-top {
+            padding: 10px 5px;
+        }
+    }
+}
