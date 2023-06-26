@@ -20,7 +20,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-useless-fragment */
 import Link from 'next/link'
-import Head from 'next/head';
+// import Head from 'next/head';
 import React, { useEffect, useState } from 'react'
 import { HtmlContent } from '@retisio/sf-ui'
 import { useRouter } from 'next/router';
@@ -85,30 +85,30 @@ export default function ArticleDetails({ props }) {
     printBtn.addEventListener('click', handlePrint)
   }
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    author: 'Allen Brothers',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Allen Brothers',
-      logo: '/dam/AB/storefront/general/Allen-Brothers-Logo-white-528x72.png'
-    },
-    headline: contentData.name,
-    // url: undefined,
-    description: contentData.description || undefined,
-    keywords: contentData.keywords || undefined
-  }
+  // const schema = {
+  //   '@context': 'https://schema.org',
+  //   '@type': 'Article',
+  //   author: 'Allen Brothers',
+  //   publisher: {
+  //     '@type': 'Organization',
+  //     name: 'Allen Brothers',
+  //     logo: '/dam/AB/storefront/general/Allen-Brothers-Logo-white-528x72.png'
+  //   },
+  //   headline: contentData.name,
+  //   // url: undefined,
+  //   description: contentData.description || undefined,
+  //   keywords: contentData.keywords || undefined
+  // }
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <script
           id="CC-schema-org-server"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
-      </Head>
+      </Head> */}
       {content && (
         <div className='cooking-instruction' id='11'>
           <div className='cooking-instruction-caption'>
