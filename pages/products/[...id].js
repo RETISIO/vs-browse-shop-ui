@@ -19,6 +19,7 @@ import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
+import SchemaOrg from '../../shared/helpers/schemaOrg'
 
 export default function ProductDetails({ data, origin }) {
   const { setPageData } = usePageDataContext()
@@ -89,6 +90,7 @@ export default function ProductDetails({ data, origin }) {
   return (
     <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
       {/* <Yotpo /> */}
+      <SchemaOrg abUrl={abUrl} productData={payLoad?.products?.[0]} />
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader />}
