@@ -92,7 +92,7 @@ export default function ArticleDetails({ props }) {
     publisher: {
       '@type': 'Organization',
       name: 'Allen Brothers',
-      // logo: ''
+      logo: '/dam/AB/storefront/general/Allen-Brothers-Logo-white-528x72.png'
     },
     headline: contentData.name,
     // url: undefined,
