@@ -20,8 +20,10 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-useless-fragment */
 import Link from 'next/link'
+import Head from 'next/head';
 import React, { useEffect, useState } from 'react'
 import { HtmlContent } from '@retisio/sf-ui'
+import { useRouter } from 'next/router';
 import NextImage from '../template/components/nextImage'
 import { requestContructor } from '../../helpers/api'
 import config from '../../helpers/getConfig'
@@ -32,6 +34,7 @@ export default function ArticleDetails({ props }) {
   const [productsData, setProductsData] = useState({})
   const [content, setContent] = useState()
   const [origin, setOrigin] = useState()
+  const router = useRouter();
 
   useEffect(() => {
     if (props && props.content) {
@@ -82,8 +85,30 @@ export default function ArticleDetails({ props }) {
     printBtn.addEventListener('click', handlePrint)
   }
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    author: 'Allen Brothers',
+    publisher: {
+      '@type': 'Organization',
+      name: 'Allen Brothers',
+      // logo: ''
+    },
+    headline: contentData.name,
+    // url: undefined,
+    description: contentData.description || undefined,
+    keywords: contentData.keywords || undefined
+  }
+
   return (
     <>
+      <Head>
+        <script
+          id="CC-schema-org-server"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      </Head>
       {content && (
         <div className='cooking-instruction' id='11'>
           <div className='cooking-instruction-caption'>
