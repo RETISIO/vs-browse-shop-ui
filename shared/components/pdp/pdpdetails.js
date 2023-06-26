@@ -441,7 +441,7 @@ export default function ProductDescription(props) {
     }
   }
 
-  const addToWishLisrHandler = skuData => {
+  const addToWishLisrHandler = (skuData, skuOptionsSel) => {
     if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
         skuId: skuData?.skuId,
@@ -456,7 +456,11 @@ export default function ProductDescription(props) {
             setErrorMsg('')
             setWishListErrorMsg('')
             setWishListSuccessMsg(
-              `The following item have been moved to your wishlist: ${productData?.displayName}`
+              `${
+                skuOptionsSel
+                  ? `The following item have been moved to your wishlist: ${productData?.displayName} | ${skuOptionsSel}`
+                  : `The following item have been moved to your wishlist: ${productData?.displayName}`
+              }`
             )
             window.scrollTo(0, 0)
             AddtoWishhList({

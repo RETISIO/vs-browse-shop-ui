@@ -105,8 +105,9 @@ function SkuVariants({
     handleAddtoCart(skuData, itemQuantity)
   }
 
-  const handleAddtoWishListOnClick = (event, skuData) => {
-    handleAddtoWishList(skuData)
+  const handleAddtoWishListOnClick = (event, skuData, variantKey) => {
+    const skuOptionsSel = variantOptions[variantKey]?.optionsTextForMv || ''
+    handleAddtoWishList(skuData, skuOptionsSel)
   }
 
   const displayPrice = (listPrice, salePrice) => {
@@ -394,7 +395,9 @@ function SkuVariants({
                     !productData?.hasPrice ? 'disabled' : ''
                   }`}
                   id='1'
-                  onClick={e => handleAddtoWishListOnClick(e, skuData)}
+                  onClick={e =>
+                    handleAddtoWishListOnClick(e, skuData, variantKey)
+                  }
                 >
                   ADD TO WISHLIST
                 </button>
