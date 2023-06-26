@@ -14,19 +14,21 @@ export default function SchemaOrg(props) {
       
     Object.keys(productData?.skus).forEach((key) => {
       const item = {};
-      item['@type'] = 'Offer';
-      item.itemCondition = 'http://schema.org/NewCondition';
-      item.name = productData?.skus?.[key]?.displayName;
-      item.price = productData?.skus?.[key]?.skuDetails?.price?.listPrice?.price;
-        
-      item.sku = key;
       item.priceCurrency = 'USD';
-        
+      item.itemOffered = {
+        productID: key,
+        '@type': 'IndividualProduct',
+      };
+      item['@type'] = 'Offer';
+      item.price = productData?.skus?.[key]?.skuDetails?.price?.listPrice?.price?.replace('$', '');
+      
+      item.name = productData?.skus?.[key]?.displayName;
       if (productData?.skus?.[key]?.skuDetails?.hasStock) {
         item.availability = 'http://schema.org/InStock';
       } else {
         item.availability = 'http://schema.org/OutOfStock';
       }
+      item.itemCondition = 'http://schema.org/NewCondition';
         
       childSkuArr.push(item);
     });
@@ -34,25 +36,14 @@ export default function SchemaOrg(props) {
   };
       
   const schema = {
-    '@context': 'https://schema.org',
+    offers: Object?.keys(productData?.skus)?.length > 0 ? getSKUData() : [],
+    image: `${config.IMGPATH}${productData?.productDetails?.productMedia?.default?.media?.largeImg}`,
     '@type': 'Product',
-    description: productData?.description,
-    image: [`${config.IMGPATH}${productData?.productDetails?.productMedia?.default?.media?.largeImg}`],
     name: productData?.displayName,
-    url: abUrl,
-    offers: {
-      '@type': 'AggregateOffer',
-      highPrice: productData?.productPrice?.maxListPrice,
-      lowPrice: productData?.productPrice?.minListPrice,
-      offerCount: Object?.keys(productData?.skus)?.length,
-      priceCurrency: 'USD',
-      offers: Object?.keys(productData?.skus)?.length > 0 ? getSKUData() : [],
-    },
-    sku: productData?.defaultSkuId,
-    brand: {
-      '@type': 'Thing',
-      name: 'Allen Brothers',
-    },
+    description: productData?.description,
+    '@id': abUrl,
+    '@context': 'https://schema.org',
+    brand: 'Allen Brothers',
   };
   return (
     <Head>
