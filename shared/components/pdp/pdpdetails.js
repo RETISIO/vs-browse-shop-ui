@@ -49,6 +49,7 @@ import {
   ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
+import { requestContructor } from '../../helpers/api'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
@@ -387,9 +388,12 @@ export default function ProductDescription(props) {
   )
 
   // add to cart
-  const addToBagHandler = (skuData, itemQuantity) => {
+  const addToBagHandler = async (skuData, itemQuantity) => {
     if (!skuData || !itemQuantity) {
       return
+    }
+    if (!isLogged && !getCookie('x-anyms-id')) {
+      await requestContructor('getUUID')
     }
     const addToProdData = {
       variantId: skuData?.skuId,
