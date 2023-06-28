@@ -74,7 +74,7 @@ export default function ProductDescription(props) {
   const [variantSelected, setVariantSelected] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
   const router = useRouter()
-  const { skuid } = router.query
+  const { skuid } = router.query // user navigates from view cart page
   // const defaultSkuId =
   //   pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -93,6 +93,7 @@ export default function ProductDescription(props) {
     setTimeout(() => {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
+
     prepareVarinatsOptions()
   }, [props])
 
@@ -115,7 +116,7 @@ export default function ProductDescription(props) {
   const damPath = config.IMGPATH
   useEffect(() => {
     if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
-      // hide notification bar - turned off
+      // hide notification bar after 3 secs - turned off
       // setTimeout(() => {
       //   setSuccessMsg('')
       //   setErrorMsg('')
@@ -232,17 +233,17 @@ export default function ProductDescription(props) {
       productData.variantOptions[variantKey].length
     ) {
       let skuId =
-        skuid || productData?.defaultActiveSkuId
+        skuid ||
+        (productData?.defaultActiveSkuId
           ? productData?.defaultActiveSkuId
-          : productData?.defaultSkuId
-
+          : productData?.defaultSkuId)
       // find skuId in associatedSkuds of variantOptions
       const optionsArrLngth = productData?.variantOptions[variantKey].length
       for (let i = 0; i < optionsArrLngth; i++) {
         // options array = [{optionValue: '2pcs', associatedSkuIds:[]},{},{},..]
         const associatedSkusIds =
           productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
-        if (associatedSkusIds.includes(skuId)) {
+        if (skuId && associatedSkusIds.includes(skuId)) {
           // check if defaultSkuId hasStock,then check for next skuId in associatedSkuIds
           if (!productData?.skus[skuId]?.skuDetails?.hasStock && index === 0) {
             if (!productData?.defaultActiveSkuId) {
@@ -276,7 +277,6 @@ export default function ProductDescription(props) {
         }
       }
     }
-
     return defaultSku
   }
 

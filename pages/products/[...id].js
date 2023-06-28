@@ -29,11 +29,12 @@ export default function ProductDetails({ data, origin }) {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
+  const { skuid } = router?.query
 
   useEffect(() => {
     setPageData(data)
     visitPDP(data)
-    router.events.on('routeChangeStart', url => {
+    router?.events?.on('routeChangeStart', url => {
       setLoading(true)
     })
     Router.events.on('routeChangeComplete', url => {
@@ -51,12 +52,24 @@ export default function ProductDetails({ data, origin }) {
     if (data?.page === undefined || !data?.payLoad?.products) {
       router?.push('/404')
     }
+    if (
+      skuid &&
+      data &&
+      data.payLoad &&
+      data.payLoad.products &&
+      data.payLoad.products[0] &&
+      data.payLoad.products[0].skus &&
+      !data.payLoad.products[0].skus[skuid]
+    ) {
+      // skuid in query param is not existing. redirect to 404 page
+      router?.push('/404')
+    }
   }, [])
 
   let abUrl = ''
   let seoData = ''
   if (origin) {
-    abUrl = origin + router.asPath
+    abUrl = origin + router?.asPath
   } else {
     abUrl = window.location.href
   }
