@@ -69,6 +69,13 @@ function Static({ data, origin }) {
   const categoryData = data?.categories;
   const pageType = 'PLP';
 
+  // remove SEO for 404 redirect
+  if(data?.payLoad?.page === undefined || !data?.payLoad?.products) {
+    seoData = {
+      canonicalUrl: ' '
+    };
+  }
+
   useEffect(() => {
     setOffset(0);
     if(data?.payLoad?.productCount === 1) {
