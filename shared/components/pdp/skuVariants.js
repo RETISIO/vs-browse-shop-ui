@@ -105,8 +105,9 @@ function SkuVariants({
     handleAddtoCart(skuData, itemQuantity)
   }
 
-  const handleAddtoWishListOnClick = (event, skuData) => {
-    handleAddtoWishList(skuData)
+  const handleAddtoWishListOnClick = (event, skuData, variantKey) => {
+    const skuOptionsSel = variantOptions[variantKey]?.optionsTextForMv || ''
+    handleAddtoWishList(skuData, skuOptionsSel)
   }
 
   const displayPrice = (listPrice, salePrice) => {
@@ -249,6 +250,9 @@ function SkuVariants({
   const displayVariantPriceSection = (index, variantKey, skuID) => {
     const skuId =
       skuID || (variantOptions && variantOptions[variantKey]?.skuId) || ''
+    if (!skuId) {
+      return
+    }
     let skuData = productData && productData?.skus[skuId]
     if (!skuData) {
       // defaultSkuId is missing in skus. first sku should be considered
@@ -394,7 +398,9 @@ function SkuVariants({
                     !productData?.hasPrice ? 'disabled' : ''
                   }`}
                   id='1'
-                  onClick={e => handleAddtoWishListOnClick(e, skuData)}
+                  onClick={e =>
+                    handleAddtoWishListOnClick(e, skuData, variantKey)
+                  }
                 >
                   ADD TO WISHLIST
                 </button>
@@ -606,6 +612,7 @@ function SkuVariants({
     for (const option of optionsToDisplay) {
       option.optionToDisplay = true
     }
+
     return (
       <>
         <div className='sukhead'>{`Select ${variantKey}`}:</div>
@@ -676,9 +683,12 @@ function SkuVariants({
                 <li className='list-inline-item me-2 mb-2'>
                   <div
                     className={
-                      selectedSku && selectedSku.optionValue === sku.optionValue
+                      selectedSku &&
+                      selectedSku.optionValue === sku.optionValue &&
+                      sku.optionToDisplay
                         ? `${
-                            index === Object.keys(variantOptions).length - 1
+                            index === Object.keys(variantOptions).length - 1 &&
+                            sku.optionToDisplay
                               ? 'tag-selected-wg'
                               : 'tag-selected'
                           }`
@@ -699,7 +709,8 @@ function SkuVariants({
                     <span
                       className={`${
                         selectedSku &&
-                        selectedSku.optionValue === sku.optionValue
+                        selectedSku.optionValue === sku.optionValue &&
+                        sku.optionToDisplay
                           ? 'sku-selected'
                           : 'sku-not-selected'
                       }`}

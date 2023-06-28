@@ -242,6 +242,7 @@
         margin-left: 20px;
         vertical-align: text-bottom;
         padding: 5px 10px 5px 10px;
+        text-decoration: none;
     }
 
     .cooking-instruction-printbtn {
@@ -288,9 +289,13 @@
         }
         #pdp-errorMsg {
             display: block;
+            padding-left: 15px;
+            padding-right: 5px;
         }
         #pdp-successMsg {
             display: block;
+            padding-left: 15px;
+            padding-right: 5px;
         }
     }
 }
@@ -491,6 +496,14 @@
         .sukproduct {
             // AB-1706
             // margin: 0px 0px 0px 110px;
+        }
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 480px) {
+    .pdpMainContainer {
+        .header-alert-top {
+            padding: 10px 5px;
         }
     }
 }

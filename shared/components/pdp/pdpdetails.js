@@ -49,6 +49,7 @@ import {
   ClickProduct
 } from '../ThirdPartyScripts/Events'
 import config from '../../helpers/getConfig'
+import { requestContructor } from '../../helpers/api'
 
 export default function ProductDescription(props) {
   const pdpData = props?.payLoad
@@ -74,7 +75,7 @@ export default function ProductDescription(props) {
   const [variantSelected, setVariantSelected] = useState()
   const [variantsOptions, setVariantsOptions] = useState()
   const router = useRouter()
-  const { skuid } = router.query
+  const { skuid } = router.query // user navigates from view cart page
   // const defaultSkuId =
   //   pdpData?.products[0]?.skus[pdpData?.products[0]?.defaultSkuId]
 
@@ -93,6 +94,7 @@ export default function ProductDescription(props) {
     setTimeout(() => {
       window.yotpo && window.yotpo.refreshWidgets()
     }, 10)
+
     prepareVarinatsOptions()
   }, [props])
 
@@ -115,12 +117,13 @@ export default function ProductDescription(props) {
   const damPath = config.IMGPATH
   useEffect(() => {
     if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
-      setTimeout(() => {
-        setSuccessMsg('')
-        setErrorMsg('')
-        setWishListSuccessMsg('')
-        setWishListErrorMsg('')
-      }, 3000)
+      // hide notification bar after 3 secs - turned off
+      // setTimeout(() => {
+      //   setSuccessMsg('')
+      //   setErrorMsg('')
+      //   setWishListSuccessMsg('')
+      //   setWishListErrorMsg('')
+      // }, 3000)
     }
   }, [errorMsg, successMsg, wishListErrorMsg, wishListSuccessMsg])
 
@@ -231,17 +234,17 @@ export default function ProductDescription(props) {
       productData.variantOptions[variantKey].length
     ) {
       let skuId =
-        skuid || productData?.defaultActiveSkuId
+        skuid ||
+        (productData?.defaultActiveSkuId
           ? productData?.defaultActiveSkuId
-          : productData?.defaultSkuId
-
+          : productData?.defaultSkuId)
       // find skuId in associatedSkuds of variantOptions
       const optionsArrLngth = productData?.variantOptions[variantKey].length
       for (let i = 0; i < optionsArrLngth; i++) {
         // options array = [{optionValue: '2pcs', associatedSkuIds:[]},{},{},..]
         const associatedSkusIds =
           productData?.variantOptions[variantKey][i]?.associatedSkuIds || []
-        if (associatedSkusIds.includes(skuId)) {
+        if (skuId && associatedSkusIds.includes(skuId)) {
           // check if defaultSkuId hasStock,then check for next skuId in associatedSkuIds
           if (!productData?.skus[skuId]?.skuDetails?.hasStock && index === 0) {
             if (!productData?.defaultActiveSkuId) {
@@ -275,7 +278,6 @@ export default function ProductDescription(props) {
         }
       }
     }
-
     return defaultSku
   }
 
@@ -368,7 +370,7 @@ export default function ProductDescription(props) {
         opacity: '1.2',
         fontSize: '31px',
         lineHeight: '10px',
-        marginTop: '10px'
+        marginTop: '5px'
       }}
       onClick={() => {
         if (errMsg) {
@@ -386,9 +388,12 @@ export default function ProductDescription(props) {
   )
 
   // add to cart
-  const addToBagHandler = (skuData, itemQuantity) => {
+  const addToBagHandler = async (skuData, itemQuantity) => {
     if (!skuData || !itemQuantity) {
       return
+    }
+    if (!isLogged && !getCookie('x-anyms-id')) {
+      await requestContructor('getUUID')
     }
     const addToProdData = {
       variantId: skuData?.skuId,
@@ -440,13 +445,14 @@ export default function ProductDescription(props) {
     }
   }
 
-  const addToWishLisrHandler = skuData => {
+  const addToWishLisrHandler = (skuData, skuOptionsSel) => {
     if (getCookie('lu') && skuData && Object.keys(skuData).length) {
       const result = addToWishList({
         skuId: skuData?.skuId,
         productId: productData?.productId,
         quantity: '1'
       })
+
       result
         .then(data => {
           if (data && data.status === 200) {
@@ -454,7 +460,11 @@ export default function ProductDescription(props) {
             setErrorMsg('')
             setWishListErrorMsg('')
             setWishListSuccessMsg(
-              `The following item have been moved to your wishlist: ${productData?.displayName}`
+              `${
+                skuOptionsSel
+                  ? `The following item have been moved to your wishlist: ${productData?.displayName} | ${skuOptionsSel}`
+                  : `The following item have been moved to your wishlist: ${productData?.displayName}`
+              }`
             )
             window.scrollTo(0, 0)
             AddtoWishhList({

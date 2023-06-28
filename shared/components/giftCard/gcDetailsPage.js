@@ -4,11 +4,16 @@
 import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import { validator } from '@retisio/sf-ui'
+import { getCookie } from '@retisio/sf-api'
 import { addToBagDetails } from '../../helpers/getPDPData'
 import { useMiniCartDataContext } from '../../context/miniCartcontext'
+import { requestContructor } from '../../helpers/api'
+import { useAppContext } from '../../context/appContext'
 
 export default function GcDetailsPage (props) {
   const { miniCartDetails, setMiniCartDetails } = useMiniCartDataContext()
+  const { isLogged } = useAppContext()
+
   const giftCartData = props?.pdpData?.payLoad
 
   const gcSkus =
@@ -106,7 +111,10 @@ export default function GcDetailsPage (props) {
       validate({ ...values })
     }
   }
-  const submitGCData = () => {
+  const submitGCData = async () => {
+    if (!isLogged && !getCookie('x-anyms-id')) {
+      await requestContructor('getUUID')
+    }
     const skuId = document.getElementById('gc-select-box')?.value
     let productType = 'giftcard'
     const gcData = {

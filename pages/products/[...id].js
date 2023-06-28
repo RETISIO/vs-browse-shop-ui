@@ -19,6 +19,7 @@ import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
 import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
+import SchemaOrg from '../../shared/helpers/schemaOrg'
 
 export default function ProductDetails({ data, origin }) {
   const { setPageData } = usePageDataContext()
@@ -28,11 +29,12 @@ export default function ProductDetails({ data, origin }) {
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
+  const { skuid } = router?.query
 
   useEffect(() => {
     setPageData(data)
     visitPDP(data)
-    router.events.on('routeChangeStart', url => {
+    router?.events?.on('routeChangeStart', url => {
       setLoading(true)
     })
     Router.events.on('routeChangeComplete', url => {
@@ -50,12 +52,24 @@ export default function ProductDetails({ data, origin }) {
     if (data?.page === undefined || !data?.payLoad?.products) {
       router?.push('/404')
     }
+    if (
+      skuid &&
+      data &&
+      data.payLoad &&
+      data.payLoad.products &&
+      data.payLoad.products[0] &&
+      data.payLoad.products[0].skus &&
+      !data.payLoad.products[0].skus[skuid]
+    ) {
+      // skuid in query param is not existing. redirect to 404 page
+      router?.push('/404')
+    }
   }, [])
 
   let abUrl = ''
   let seoData = ''
   if (origin) {
-    abUrl = origin + router.asPath
+    abUrl = origin + router?.asPath
   } else {
     abUrl = window.location.href
   }
@@ -89,6 +103,7 @@ export default function ProductDetails({ data, origin }) {
   return (
     <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
       {/* <Yotpo /> */}
+      <SchemaOrg abUrl={abUrl} productData={payLoad?.products?.[0]} />
       <main>
         {/* {i18n.t('title')} */}
         {loading && <Loader />}

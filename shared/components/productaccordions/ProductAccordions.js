@@ -1,17 +1,17 @@
 /* eslint-disable prefer-const */
 /* eslint-disable react/jsx-indent */
 import React, { useState, useEffect } from 'react'
-import Accordion from 'react-bootstrap/Accordion';
-import { GetAccordianData } from '../../helpers/utils';
+import Accordion from 'react-bootstrap/Accordion'
+import { GetAccordianData } from '../../helpers/utils'
 
 function ProductAccordions (props) {
-  let initialData = GetAccordianData(props);
-  const [data, setData] = useState(initialData.data);
+  let initialData = GetAccordianData(props)
+  const [data, setData] = useState(initialData.data)
   // const [config, setConfig] = useState()
-  const [name, setName] = useState(initialData.name);
+  const [name, setName] = useState(initialData.name)
 
   useEffect(() => {
-    let productData = GetAccordianData(props);
+    let productData = GetAccordianData(props)
     setName(productData.name)
     setData(productData.data)
   }, [props])
@@ -38,7 +38,7 @@ function ProductAccordions (props) {
                             className='collapse'
                             role='button'
                             data-toggle='collapse'
-                            href='#productInfoPanel'
+                            // href='#productInfoPanel'
                           >
                             Product Info
                             <i className='icon fas fa-chevron-down'></i>
@@ -66,7 +66,7 @@ function ProductAccordions (props) {
                             className='collapse'
                             role='button'
                             data-toggle='collapse'
-                            href='#nutritionalInfoPanel'
+                            // href='#nutritionalInfoPanel'
                           >
                             Nutrition Info
                             <i className='icon fas fa-chevron-down'></i>
