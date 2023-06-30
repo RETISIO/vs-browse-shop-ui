@@ -36,10 +36,12 @@ export function ResultCount(props) {
         pathname: path,
         query: {
           'submit-search': encodeURI(
-            `${searchKey
-              .split(' ')
-              .filter((ele) => ele !== val)
-              .join('+')}`,
+            `${props?.payLoad?.altSuggestedSearchTerms
+              ? props?.payLoad?.altSuggestedSearchTerms
+                .filter((ele) => ele !== val)
+                .join('+') : searchKey.split(' ')
+                .filter((ele) => ele !== val)
+                .join('+')}`,
           ),
         },
       });
@@ -48,10 +50,14 @@ export function ResultCount(props) {
         pathname: path,
         query: {
           'submit-search': encodeURI(
-            `${searchKey
-              .split('+')
-              .filter((ele) => ele !== val)
-              .join('+')}`,
+            `${props?.payLoad?.altSuggestedSearchTerms
+              ? props?.payLoad?.altSuggestedSearchTerms
+                ?.filter((ele) => ele !== val)
+                ?.join('+')
+              : searchKey
+                ?.split('+')
+                ?.filter((ele) => ele !== val)
+                ?.join('+')}`,
           ),
         },
       });
