@@ -21,7 +21,7 @@ export default function Document() {
             style={{display:"none",visibility:"hidden"}}
           >
           </iframe>
-
+          <link rel="icon" href="/favicon.ico" sizes="any" />
         </noscript>
       </Head>
       <body>
