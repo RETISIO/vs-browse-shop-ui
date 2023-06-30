@@ -30,16 +30,18 @@ export function ResultCount(props) {
     // const checkTextforSpace = /^[A-Za-z\s]*$/.test(searchKey)
     // AB-1833
     const checkTextforSpace = (/\s/).test(searchKey);
-
+    // AB-2103
     if (checkTextforSpace) {
       router.push({
         pathname: path,
         query: {
           'submit-search': encodeURI(
-            `${searchKey
-              .split(' ')
-              .filter((ele) => ele !== val)
-              .join('+')}`,
+            `${props?.payLoad?.altSuggestedSearchTerms
+              ? props?.payLoad?.altSuggestedSearchTerms
+                .filter((ele) => ele !== val)
+                .join('+') : searchKey.split(' ')
+                .filter((ele) => ele !== val)
+                .join('+')}`,
           ),
         },
       });
@@ -48,10 +50,14 @@ export function ResultCount(props) {
         pathname: path,
         query: {
           'submit-search': encodeURI(
-            `${searchKey
-              .split('+')
-              .filter((ele) => ele !== val)
-              .join('+')}`,
+            `${props?.payLoad?.altSuggestedSearchTerms
+              ? props?.payLoad?.altSuggestedSearchTerms
+                ?.filter((ele) => ele !== val)
+                ?.join('+')
+              : searchKey
+                ?.split('+')
+                ?.filter((ele) => ele !== val)
+                ?.join('+')}`,
           ),
         },
       });
