@@ -30,7 +30,7 @@ export function ResultCount(props) {
     // const checkTextforSpace = /^[A-Za-z\s]*$/.test(searchKey)
     // AB-1833
     const checkTextforSpace = (/\s/).test(searchKey);
-
+    // AB-2102
     if (checkTextforSpace) {
       router.push({
         pathname: path,
