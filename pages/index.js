@@ -50,7 +50,7 @@ function Home({ data }) {
     }
   }, []);
   return (
-    <MainLayout data={data}>
+    <MainLayout data={data} robotsFollow="index;follow">
       <main>
         {/* {i18n.t('title')} */}
         <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />

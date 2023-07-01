@@ -87,7 +87,7 @@ function Static({ data, origin }) {
   }, [router.asPath]);
 
   return (
-    <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
+    <MainLayout data={data} abUrl={abUrl} SEO={seoData} robotsFollow="index;follow">
       <main>
         <div id="main" className="container">
           <div className="row">

@@ -130,7 +130,10 @@ window.lstImplement = {
   },
 
   captureCartItems: (cartData) => {
-    if (!cartData)  {
+    if(window._ltk || (!cartData.items || (cartData.items && cartData.items.length === 0))){
+      return '';
+    }
+    if (!cartData){
       _ltk.SCA.ClearCart();
     }
 

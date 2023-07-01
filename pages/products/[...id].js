@@ -101,7 +101,7 @@ export default function ProductDetails({ data, origin }) {
   }
 
   return (
-    <MainLayout data={data} abUrl={abUrl} SEO={seoData}>
+    <MainLayout data={data} abUrl={abUrl} SEO={seoData} robotsFollow="index;follow">
       {/* <Yotpo /> */}
       <SchemaOrg abUrl={abUrl} productData={payLoad?.products?.[0]} />
       <main>

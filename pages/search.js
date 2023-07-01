@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/named
 import Router, { useRouter } from 'next/router';
 // eslint-disable-next-line import/named
-import Head from 'next/head';
 import { PageBuilder } from '@retisio/sf-ui';
 import { usePLPDataContext } from '../shared/context/plpDatacontext';
 import MainLayout from '../shared/components/Layout';
@@ -83,10 +82,7 @@ function Static({ data }) {
   }, [router.asPath]);
 
   return (
-    <MainLayout data={data}>
-      <Head>
-        <meta name="robots" content="noindex, nofollow" />
-      </Head>
+    <MainLayout data={data} robotsFollow="noindex, nofollow">
       <main>
         <div id="main" className="container">
           <div className="row">

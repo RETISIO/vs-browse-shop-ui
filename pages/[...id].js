@@ -47,7 +47,7 @@ function Static({ data }) {
     <>
       {loader && <Loader />}
       {data ? (
-        <MainLayout data={data}>
+        <MainLayout data={data} robotsFollow="index;follow">
           {/* {i18n.t('title')} */}
           <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />
         </MainLayout>

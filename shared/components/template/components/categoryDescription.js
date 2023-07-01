@@ -76,7 +76,7 @@ export function CategoryLongDescription(props) {
   return (
     <>
       <div
-        className="hidden-xs"
+        // className="hidden-xs"
         role="region"
         aria-live="polite"
         // eslint-disable-next-line max-len

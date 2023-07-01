@@ -24,7 +24,7 @@ import getPersonalization from '../../helpers/utils';
 import config from '../../helpers/getConfig';
 
 export default function MainLayout({
-  data, abUrl = '', SEO, children,
+  data, abUrl = '', SEO, children, robotsFollow = '',
 }) {
   const { state, updateState } = useAppContext();
   const {
@@ -210,6 +210,7 @@ export default function MainLayout({
           <link rel="canonical" href={abUrl} />
         )}
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        {robotsFollow && <meta name="robots" content={robotsFollow} />}
       </Head>
       <Layout
         data={data}
