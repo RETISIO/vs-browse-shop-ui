@@ -10,8 +10,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="preconnect" href="https://staticw2.yotpo.com" />
-        <link rel="preconnect" href="//www.google-analytics.com" />
+        {/* <link rel="preconnect" href="https://staticw2.yotpo.com" />
+        <link rel="preconnect" href="//www.google-analytics.com" /> */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
         <noscript>
           <iframe
