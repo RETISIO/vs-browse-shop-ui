@@ -14,6 +14,7 @@ import { useRouter, Router } from 'next/router';
 import absoluteUrl from 'next-absolute-url';
 // eslint-disable-next-line import/named
 import { PageBuilder } from '@retisio/sf-ui';
+import Head from 'next/head';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import { usePLPDataContext } from '../../shared/context/plpDatacontext';
 import MainLayout from '../../shared/components/Layout';
@@ -88,6 +89,9 @@ function Static({ data, origin }) {
 
   return (
     <MainLayout data={data} abUrl={abUrl} SEO={seoData} robotsFollow="index;follow">
+      <Head>
+        <meta httpEquiv="Pragma" content="no-cache" />
+      </Head>
       <main>
         <div id="main" className="container">
           <div className="row">
@@ -127,11 +131,11 @@ Static.getInitialProps = async (context) => {
       const product = data?.payLoad?.products[0];
       const targetURL = data?.payLoad?.redirect || `/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`;
       if (context.res) {
-        context.res.writeHead(307, { Location: targetURL })
+        context.res.writeHead(307, { Location: targetURL });
         context.res.end();
       }else{
         window.location = targetURL;
-        await new Promise((resolve) => {})
+        await new Promise((resolve) => {});
       }
     } else{
       return {
