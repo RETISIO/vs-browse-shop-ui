@@ -244,24 +244,32 @@ export default function GcDetailsPage (props) {
               ''
             )}
           </div>
-          <div className='form-group'>
-            <textarea
-              className='form-control formControl-input noresize'
-              rows='4'
-              type='text'
-              maxLength='250'
-              spellCheck='true'
-              placeholder='Message'
-              id='message'
-              name='message'
-              value={values.message}
-              onChange={handleChange}
-            ></textarea>
-            <label className='formGroup-label' htmlFor='message'>
-              Message
-            </label>
-            <span className='text-danger hidden' role='alert'></span>
-          </div>
+          <Form.Group>
+            <div className='form-group'>
+              <Form.Control
+                as="textarea"
+                className='form-control formControl-input noresize'
+                rows='4'
+                maxLength='250'
+                spellCheck='true'
+                placeholder='Message'
+                id='message'
+                name='message'
+                value={values.message}
+                onChange={handleChange}
+              />
+              <Form.Label className='formGroup-label' htmlFor='message'>
+                Message
+              </Form.Label>
+              <Form.Control.Feedback
+                className='text-danger'
+                type='invalid'
+                role='alert'
+              >
+                {formerrors.message}
+              </Form.Control.Feedback>
+            </div>
+          </Form.Group>
         </div>
         <button
           className='btn btn-secondary btn-md btn-action'
