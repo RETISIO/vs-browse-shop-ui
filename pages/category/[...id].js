@@ -14,7 +14,6 @@ import { useRouter, Router } from 'next/router';
 import absoluteUrl from 'next-absolute-url';
 // eslint-disable-next-line import/named
 import { PageBuilder } from '@retisio/sf-ui';
-import Head from 'next/head';
 import { usePageDataContext } from '../../shared/context/pageData-context';
 import { usePLPDataContext } from '../../shared/context/plpDatacontext';
 import MainLayout from '../../shared/components/Layout';
@@ -42,6 +41,7 @@ function Static({ data, origin }) {
   }
 
   useEffect(() => {
+    
     setPageData(data);
     router.events.on('routeChangeStart', (url) => {
       setLoading(true);
@@ -55,6 +55,16 @@ function Static({ data, origin }) {
     Router.events.on('routeChangeError', (url) => {
       setLoading(false);
     });
+    const handleBeforeUnload = () => {
+      // Clear the cache when the user navigates away from the page
+      setLoading(false);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   useEffect(() => {
@@ -89,9 +99,6 @@ function Static({ data, origin }) {
 
   return (
     <MainLayout data={data} abUrl={abUrl} SEO={seoData} robotsFollow="index;follow">
-      <Head>
-        <meta httpEquiv="Pragma" content="no-cache" />
-      </Head>
       <main>
         <div id="main" className="container">
           <div className="row">
