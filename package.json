@@ -11,7 +11,7 @@
   "dependencies": {
     "@next/font": "13.1.1",
     "@retisio/sf-api": "^0.0.183",
-    "@retisio/sf-ui": "0.1.26",
+    "@retisio/sf-ui": "0.1.27",
     "cookies": "^0.8.0",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
