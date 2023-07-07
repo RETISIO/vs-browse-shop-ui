@@ -28,21 +28,21 @@ import { FormDataContextWrapper } from '../shared/context/formDataContext';
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   // const { setPageData } = usePageDataContext();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  // useEffect(() => {
     // setPageData(data);
-    router.events.on('routeChangeStart', (url) => {
-      setLoading(true);
-    });
-    router.events.on('routeChangeComplete', (url) => {
-      setLoading(false);
-      pageViewEvent(url);
-    });
-    router.events.on('routeChangeError', (err, url) => {
-      setLoading(false);
-    });
-  }, [router]);
+    // router.events.on('routeChangeStart', (url) => {
+    //   setLoading(true);
+    // });
+    // router.events.on('routeChangeComplete', (url) => {
+    //   setLoading(false);
+    //   pageViewEvent(url);
+    // });
+    // router.events.on('routeChangeError', (err, url) => {
+    //   setLoading(false);
+    // });
+  // }, [router]);
 
   const { lngDict } = pageProps;
   return (

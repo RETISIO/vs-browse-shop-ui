@@ -525,6 +525,21 @@ export default function ProductDescription(props) {
     notifyMe({ ...obj, successHandler, errorHandler }, merchId)
   }
 
+  const handleReadMore = (event) => {
+    event.preventDefault();
+    const width = window?.innerWidth || document?.documentElement.clientWidth;
+    const headerEl = (width < 992) ? '.navbar.mobile-header' : '.header-content-redesign';
+    const headerHeight = document?.querySelector(headerEl)?.getBoundingClientRect()?.height;
+    const navBarHeight = document?.querySelector('.redesign-navbar')?.getBoundingClientRect()?.height;
+    const productInfoOffset = document?.querySelector('#productInfoSelector')?.closest('.classification')?.offsetTop;
+    const stickyHeight = document.querySelector('.js-sticky-menu')?.classList?.contains('is_stuck') ? 0 : 70;
+    const scrollPosition = productInfoOffset - headerHeight - navBarHeight - stickyHeight;
+    scrollPosition && window?.scrollTo({
+      top: scrollPosition,
+      behavior: 'smooth',
+    });
+  }
+
   return (
     <section>
       {notifyPopupShow && (
@@ -612,7 +627,7 @@ export default function ProductDescription(props) {
                 </div>
               )}
           </h1>
-          <p className='page-short-description'>{productData?.description}</p>
+          <p className='page-short-description'>{productData?.description} <a href="#" class="readMoreLink" onClick={(e) => handleReadMore(e)}>Read More</a></p>
         </div>
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}
