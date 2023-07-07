@@ -525,17 +525,6 @@ export default function ProductDescription(props) {
     notifyMe({ ...obj, successHandler, errorHandler }, merchId)
   }
 
-  const handleReadMore = (event) => {
-    event.preventDefault();
-    const breadCrumbsHeight = document?.querySelector('.breadcrumbs-block').getBoundingClientRect().height;
-    const pdpMainContainerHeight = document?.querySelector('.pdpMainContainer').getBoundingClientRect().height;
-    const scrollPosition = pdpMainContainerHeight + breadCrumbsHeight + 40;
-    scrollPosition && window?.scrollTo({
-      top: scrollPosition,
-      behavior: 'smooth',
-    });
-  }
-
   return (
     <section>
       {notifyPopupShow && (
@@ -623,7 +612,7 @@ export default function ProductDescription(props) {
                 </div>
               )}
           </h1>
-          <p className='page-short-description'>{productData?.description} <a href="#" class="readMoreLink" onClick={(e) => handleReadMore(e)}>Read More</a></p>
+          <p className='page-short-description'>{productData?.description}</p>
         </div>
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}
