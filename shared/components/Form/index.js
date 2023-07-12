@@ -153,6 +153,8 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     isInvalid={!!formerrors.firstName}
                     maxLength='40'
                     onBlur={handleBlur}
+                    tabIndex={0}
+                    aria-describedby='InvalidFirstNameError-desc'
                   />
                   <Form.Label className='formGroup-label'>
                     <Trans>
@@ -166,6 +168,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     className='text-danger'
                     type='invalid'
                     role='alert'
+                    id='InvalidFirstNameError-desc'
                   >
                     {formerrors.firstName}
                   </Form.Control.Feedback>
@@ -187,6 +190,8 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     isInvalid={!!formerrors.lastName}
                     maxLength='40'
                     onBlur={handleBlur}
+                    tabIndex={0}
+                    aria-describedby='InvalidLastNameError-desc'
                   />
                   <Form.Label className='formGroup-label'>
                     <Trans>
@@ -197,6 +202,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     className='text-danger'
                     type='invalid'
                     role='alert'
+                    id='InvalidLastNameError-desc'
                   >
                     {formerrors.lastName}
                   </Form.Control.Feedback>
@@ -216,6 +222,8 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     onChange={handleChange}
                     isInvalid={!!formerrors.email}
                     onBlur={handleBlur}
+                    tabIndex={0}
+                    aria-describedby='InvalidEmailError-desc'
                   />
                   <Form.Label className='formGroup-label'>
                     <Trans>Email Address *</Trans>
@@ -224,6 +232,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     className='text-danger'
                     type='invalid'
                     role='alert'
+                    id='InvalidEmailError-desc'
                   >
                     {formerrors.email}
                   </Form.Control.Feedback>
@@ -313,6 +322,9 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       id={formData?.firstName}
                       required
                       type='text'
+                      tabIndex={0}
+                      aria-describedby="FirstNameError"
+                      autocomplete="given-name"
                       placeholder={`First Name ${
                         formType !== 'accountInfoForm' ? '*' : ''
                       }`}
@@ -336,6 +348,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       className='text-danger'
                       type='invalid'
                       role='alert'
+                      id='FirstNameError'
                     >
                       {formerrors.firstName}
                     </Form.Control.Feedback>
@@ -347,6 +360,9 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       id={formData?.lastName}
                       required
                       type='text'
+                      tabIndex={0}
+                      aria-describedby="LastNameError"
+                      autocomplete="family-name"
                       placeholder={`Last Name ${
                         formType !== 'accountInfoForm' ? '*' : ''
                       }`}
@@ -367,6 +383,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       className='text-danger'
                       type='invalid'
                       role='alert'
+                      id='LastNameError'
                     >
                       {formerrors.lastName}
                     </Form.Control.Feedback>
@@ -380,6 +397,9 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       id={formData?.email}
                       className='formControl-input'
                       type='email'
+                      tabIndex={0}
+                      aria-describedby="EmailError"
+                      autocomplete="email"
                       maxLength='128'
                       placeholder='Email Address'
                       name='email'
@@ -395,6 +415,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       className='text-danger'
                       type='invalid'
                       role='alert'
+                      id='EmailError'
                     >
                       {formerrors.email}
                     </Form.Control.Feedback>
@@ -407,6 +428,9 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                     <Form.Control
                       id={formData?.phone}
                       type='text'
+                      tabIndex={0}
+                      aria-describedby="PhoneNumberError"
+                      autocomplete="tel"
                       placeholder='Phone'
                       className='formControl-input'
                       name='phone'
@@ -422,6 +446,7 @@ function ABForm({ formData, formType, data, submitData, handleClose }) {
                       className='text-danger'
                       type='invalid'
                       role='alert'
+                      id='PhoneNumberError'
                     >
                       {formerrors.phone}
                     </Form.Control.Feedback>
