@@ -175,17 +175,21 @@ body {
 		z-index: -1;
 	}
 
+	/*AB2012*/
 	.checkbox__visual {
 		display: flex;
 		position: absolute;
 		width: 22px;
 		height: 22px;
-		border: 1px solid rgba(0, 0, 0, 0.15);
+		//border: 1px solid rgba(0, 0, 0, 0.15);
 		left: 0;
 		top: 0;
-		background: linear-gradient(0deg, #F2F4F7 0%, #FFFFFF 100%);
+		//background: linear-gradient(0deg, #F2F4F7 0%, #FFFFFF 100%);
 		border-radius: 2px;
 		cursor: pointer;
+		border-color: #5E5E5E;
+		border: 1px solid rgba(0, 0, 0, 0.5);
+		background: linear-gradient(0deg, #d9d9d9 0%, #FFFFFF 100%);
 	}
 
 	.checkbox__visual:after {
@@ -196,14 +200,18 @@ body {
 		left: 5px;
 		height: 14px;
 		width: 10px;
-		border-color: $colorPrimary;
+		//border-color: $colorPrimary;
 		border-style: solid;
 		border-width: 0 2px 2px 0;
 		transform: rotate(45deg);
 		opacity: 0;
 		visibility: hidden;
 		transition: opacity 250ms;
+		border-color: #5E5E5E;
+	    border: 1px solid rgba(0, 0, 0, 0.5);
+		background: linear-gradient(0deg, #d9d9d9 0%, #FFFFFF 100%);
 	}
+    /*AB2012*/
 
 	.checkbox__text {
 		display: inline-block;

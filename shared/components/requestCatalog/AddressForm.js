@@ -47,6 +47,8 @@ function AddressForm({
               id={formData?.address1}
               required
               type='text'
+              tabIndex={0}
+              aria-describedby="AddressError"
               placeholder='Address*'
               className='formControl-input'
               name='address1'
@@ -62,6 +64,7 @@ function AddressForm({
               className='text-danger'
               type='invalid'
               role='alert'
+              id='AddressError'
             >
               {formerrors?.address1}
             </Form.Control.Feedback>
@@ -109,6 +112,8 @@ function AddressForm({
               placeholder='City*'
               className='formControl-input'
               name='city'
+              tabIndex={0}
+              aria-describedby="CityError"
               value={values?.city}
               onChange={handleChange}
               isInvalid={!!formerrors?.city}
@@ -121,6 +126,7 @@ function AddressForm({
               className='text-danger'
               type='invalid'
               role='alert'
+              id='CityError'
             >
               {formerrors?.city}
             </Form.Control.Feedback>
@@ -133,6 +139,8 @@ function AddressForm({
               id={formData?.state}
               required
               type='text'
+              tabIndex={0}
+              aria-describedby="StateError"
               placeholder='State*'
               name='state'
               value={values?.state}
@@ -157,6 +165,7 @@ function AddressForm({
               className='text-danger'
               type='invalid'
               role='alert'
+              id='StateError'
             >
               {formerrors?.state}
             </Form.Control.Feedback>
@@ -169,6 +178,8 @@ function AddressForm({
               id={formData?.postalCode}
               required
               type='text'
+              tabIndex={0}
+              aria-describedby="PostalCodeError"
               placeholder='Zip Code*'
               className='formControl-input'
               name='postalCode'
@@ -184,6 +195,7 @@ function AddressForm({
               className='text-danger'
               type='invalid'
               role='alert'
+              id='PostalCodeError'
             >
               {formerrors?.postalCode}
             </Form.Control.Feedback>
@@ -197,6 +209,7 @@ function AddressForm({
             <Form.Control
               id={formData?.country}
               type='text'
+              tabIndex={0}
               disabled
               placeholder='Country'
               className='formControl-input'
