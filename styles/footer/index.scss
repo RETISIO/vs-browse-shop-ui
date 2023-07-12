@@ -260,11 +260,16 @@
         padding-top: 10px;
     }
 
+    /* AB2021 */
     .text-danger {
-        color: #EE0B0B !important;
+        //color: #EE0B0B !important;
+        color: #C80909 !important;
+        font-weight: 600;
         display: block;
         margin-top: 10px;
     }
+    /* AB2021 */
+
 
     .btnBg {
         background: #ffa500 !important;
