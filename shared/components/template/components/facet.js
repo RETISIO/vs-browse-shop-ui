@@ -65,7 +65,7 @@ function Facet(props) {
           <div className="panel panel-default">
             <div className="panel-heading">
               <div className="panel-title">
-                <a>Categories</a>
+              <a>Categories</a>
               </div>
             </div>
             <div className="panel-collapse">
@@ -99,7 +99,7 @@ function Facet(props) {
           </div>
       ) : null}
           <div className="catalog-filter__clear">
-            <b>Your Selections: </b>
+            <h2>Your Selections: </h2>
             {facets && facets?.pageType !== "search" && facets?.selectedFacets?.length > 0 && (
             <Link
               className="link-underline"
