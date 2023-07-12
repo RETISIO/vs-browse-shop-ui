@@ -957,9 +957,10 @@ a.mini-cart-btn {
     }
   }
 
+ /*AB2010*/
   &-primary {
-    background-color: $coloYellow;
-    border-color: $coloYellow;
+    background-color: #B36200;
+    border-color: #B36200;
     color: $colorWhite;
     font-weight: bold;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
@@ -967,11 +968,12 @@ a.mini-cart-btn {
     &:active,
     &:focus,
     &:hover {
-      background-color: darken($coloYellow, 5%);
-      border-color: darken($coloYellow, 5%);
+      background-color: darken(#B36200, 5%);
+      border-color: darken(#B36200, 5%);
       color: $colorWhite;
     }
   }
+  /*AB2010*/
 
   // Size
   &-md {
