@@ -56,7 +56,7 @@ function Facet(props) {
 
   return (
     <aside className={!mobileView ? "hidden-xs" : ""}>
-      <div className="catalog-aside" role="region" aria-label="Filters">
+      <div className="catalog-aside">
         <div className="catalog-filter__top">
           {(facets && facets?.categoryFacetEnabled && facets?.categories
         && facets?.categories?.length > 0
