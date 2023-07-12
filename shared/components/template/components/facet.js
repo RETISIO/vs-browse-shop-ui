@@ -66,7 +66,6 @@ function Facet(props) {
             <div className="panel-heading">
               <div className="panel-title">
               <a>Categories</a>
-                {/* <h2 className="category-heading">Categories</h2> */}
               </div>
             </div>
             <div className="panel-collapse">
