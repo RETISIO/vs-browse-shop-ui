@@ -133,7 +133,7 @@ export default function ProductDescription(props) {
   // console.log('productData.....', productData)
 
   const getActiveSkuId = (associatedSkusIds, variantKey, index) => {
-    // get active sku from skus[]
+    // get active sku from skus{}
     let activeSkuId = ''
     const getActiveId = IdsArr => {
       for (let i = 0; i < IdsArr.length; i++) {
@@ -226,6 +226,30 @@ export default function ProductDescription(props) {
     return activeSkuId
   }
 
+  const getOnSaleSkuId = () => {
+    // find out if onSale=true sku is available in skus
+    let onSaleSkuId = ''
+    if (
+      productData &&
+      productData.skus &&
+      Object.keys(productData.skus).length
+    ) {
+      for (const key in productData.skus) {
+        if (
+          productData.skus[key]?.skuDetails?.onSale &&
+          productData.skus[key]?.skuDetails?.hasStock
+        ) {
+          onSaleSkuId = productData?.skus[key]?.skuId
+          break
+        }
+      }
+      if (!onSaleSkuId) {
+        onSaleSkuId = productData?.defaultSkuId
+      }
+    }
+    return onSaleSkuId
+  }
+
   const getDefaultSku = (variantKey, index, variantOptionsObj) => {
     let defaultSku = {}
     if (
@@ -237,7 +261,7 @@ export default function ProductDescription(props) {
         skuid ||
         (productData?.defaultActiveSkuId
           ? productData?.defaultActiveSkuId
-          : productData?.defaultSkuId)
+          : getOnSaleSkuId())
       // find skuId in associatedSkuds of variantOptions
       const optionsArrLngth = productData?.variantOptions[variantKey].length
       for (let i = 0; i < optionsArrLngth; i++) {
@@ -525,6 +549,34 @@ export default function ProductDescription(props) {
     notifyMe({ ...obj, successHandler, errorHandler }, merchId)
   }
 
+  const handleReadMore = event => {
+    event.preventDefault()
+    const width = window?.innerWidth || document?.documentElement.clientWidth
+    const headerEl =
+      width < 992 ? '.navbar.mobile-header' : '.header-content-redesign'
+    const headerHeight = document
+      ?.querySelector(headerEl)
+      ?.getBoundingClientRect()?.height
+    const navBarHeight = document
+      ?.querySelector('.redesign-navbar')
+      ?.getBoundingClientRect()?.height
+    const productInfoOffset = document
+      ?.querySelector('#productInfoSelector')
+      ?.closest('.classification')?.offsetTop
+    const stickyHeight = document
+      .querySelector('.js-sticky-menu')
+      ?.classList?.contains('is_stuck')
+      ? 0
+      : 70
+    const scrollPosition =
+      productInfoOffset - headerHeight - navBarHeight - stickyHeight
+    scrollPosition &&
+      window?.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      })
+  }
+
   return (
     <section>
       {notifyPopupShow && (
@@ -612,7 +664,16 @@ export default function ProductDescription(props) {
                 </div>
               )}
           </h1>
-          <p className='page-short-description'>{productData?.description}</p>
+          <p className='page-short-description'>
+            {productData?.description}{' '}
+            <a
+              href='#'
+              className='readMoreLink'
+              onClick={e => handleReadMore(e)}
+            >
+              Read More
+            </a>
+          </p>
         </div>
         <div className='row product-gallery-wrapper'>
           {renderGalleryImage()}

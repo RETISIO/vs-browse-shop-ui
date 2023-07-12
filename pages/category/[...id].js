@@ -41,6 +41,7 @@ function Static({ data, origin }) {
   }
 
   useEffect(() => {
+    
     setPageData(data);
     router.events.on('routeChangeStart', (url) => {
       setLoading(true);
@@ -54,6 +55,16 @@ function Static({ data, origin }) {
     Router.events.on('routeChangeError', (url) => {
       setLoading(false);
     });
+    const handleBeforeUnload = () => {
+      // Clear the cache when the user navigates away from the page
+      setLoading(false);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   useEffect(() => {
@@ -78,12 +89,12 @@ function Static({ data, origin }) {
 
   useEffect(() => {
     setOffset(0);
-    if(data?.payLoad?.productCount === 1) {
-      const product = data?.payLoad?.products[0];
-      router.push(`/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`);
-    } else if(data?.payLoad?.redirect) {
-      router.push(data?.payLoad?.redirectURL);
-    }
+    // if(data?.payLoad?.productCount === 1) {
+    //   const product = data?.payLoad?.products[0];
+    //   router.push(`/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`);
+    // } else if(data?.payLoad?.redirect) {
+    //   router.push(data?.payLoad?.redirectURL);
+    // }
   }, [router.asPath]);
 
   return (
@@ -123,10 +134,22 @@ Static.getInitialProps = async (context) => {
   const { origin } = absoluteUrl(context.req);
   try {
     const data = await getPLPData(context);
-    return {
-      data,
-      origin
-    };
+    if(data?.payLoad?.productCount === 1 || data?.payLoad?.redirect) {
+      const product = data?.payLoad?.products[0];
+      const targetURL = data?.payLoad?.redirect || `/products/${product.seoData && product.seoData.slug ? product.seoData.slug : product.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${product?.productId}`;
+      if (context.res) {
+        context.res.writeHead(307, { Location: targetURL });
+        context.res.end();
+      }else{
+        window.location = targetURL;
+        await new Promise((resolve) => {});
+      }
+    } else{
+      return {
+        data,
+        origin
+      };
+    }
   }catch(e) {
     return {
       data: {},

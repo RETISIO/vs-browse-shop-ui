@@ -85,7 +85,7 @@ export function Index(props) {
   const handleErrorMessage = (errorData) => {
     errorData?.map((item) => {
       if (item?.code === 'ERR_ACC_06') {
-        setLoginErrorMsg('Your password has expired. Please reset the password using the Forgot password link.');
+        setLoginErrorMsg('Your password has expired. Please reset the password using the below Reset Password link.');
       } else {
         // eslint-disable-next-line max-len
         setLoginErrorMsg("We're sorry, we do not recognize the email and/or password you have entered. Please revise and try again.");

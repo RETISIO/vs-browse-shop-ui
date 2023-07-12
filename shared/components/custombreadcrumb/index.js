@@ -37,6 +37,16 @@ function CustomBreadcrumb(props) {
     router.events.on('routeChangeError', (url) => {
       setLoading(false);
     });
+    const handleBeforeUnload = () => {
+      // Clear the cache when the user navigates away from the page
+      setLoading(false);
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, []);
 
   return (

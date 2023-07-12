@@ -257,6 +257,7 @@ export default function GcDetailsPage (props) {
                 name='message'
                 value={values.message}
                 onChange={handleChange}
+                onBlur={handleBlur}
               />
               <Form.Label className='formGroup-label' htmlFor='message'>
                 Message
