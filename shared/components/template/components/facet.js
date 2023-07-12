@@ -56,7 +56,7 @@ function Facet(props) {
 
   return (
     <aside className={!mobileView ? "hidden-xs" : ""}>
-      <div className="catalog-aside">
+      <div className="catalog-aside" role="region" aria-label="Filters">
         <div className="catalog-filter__top">
           {(facets && facets?.categoryFacetEnabled && facets?.categories
         && facets?.categories?.length > 0
@@ -65,7 +65,8 @@ function Facet(props) {
           <div className="panel panel-default">
             <div className="panel-heading">
               <div className="panel-title">
-                <a>Categories</a>
+              <a>Categories</a>
+                {/* <h2 className="category-heading">Categories</h2> */}
               </div>
             </div>
             <div className="panel-collapse">
@@ -99,7 +100,7 @@ function Facet(props) {
           </div>
       ) : null}
           <div className="catalog-filter__clear">
-            <b>Your Selections: </b>
+            <h2>Your Selections: </h2>
             {facets && facets?.pageType !== "search" && facets?.selectedFacets?.length > 0 && (
             <Link
               className="link-underline"
