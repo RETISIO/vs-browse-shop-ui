@@ -75,7 +75,6 @@ export default function GcDetailsPage (props) {
       <div className='row'>
         <div className='col-sm-3'>
           <div className='form-group'>
-          <label for="gc-select-box" className='GiftCrdAmt'></label>
             <select
               className='form-control formControl-select'
               id='gc-select-box'
