@@ -340,7 +340,7 @@ export default function ProductDescription(props) {
   const renderGalleryImage = () => (
     <aside className='col-md-5 prdimgs'>
       <div className='product-gallery app-figure' id='zoom-fig'>
-        <div className='product-gallery__main'>
+        <div className='product-gallery__main' role='region' aria-label='Product image carousel'>
           <ImageCarousel
             data={productData?.productDetails?.productMedia?.default}
             additionalDetails={productAdditionDetails}
