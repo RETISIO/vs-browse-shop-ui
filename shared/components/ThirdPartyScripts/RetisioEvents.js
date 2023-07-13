@@ -112,7 +112,9 @@ const PrepareClickData = (obj) => {
 };
 
 const ProductClick = (obj) => {
-  window.retisioSDK.event('integration', 'clickProduct', '1.0', PrepareClickData(obj));
+  setTimeout(()=>{
+    window.retisioSDK.event('integration', 'clickProduct', '1.0', PrepareClickData(obj));
+  },500);
 };
 
 const AddItem = (obj) => {

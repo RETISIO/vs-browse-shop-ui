@@ -64,6 +64,13 @@ const AddToCart = data => {
   } catch (e) {
     console.log(e)
   }
+  try {
+    if (window && window.lstImplement) {
+      window.lstImplement.addToCart(data);
+    }
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const cartItems = data => {

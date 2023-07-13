@@ -128,9 +128,12 @@ window.lstImplement = {
     _ltk.SCA.Update('email', data);
     _ltk.SCA.Submit();
   },
-
+  addToCart: (obj)=>{
+    _ltk.Activity.AddProductAddedToCart(obj?.addToProdData?.variantId);
+		_ltk.Activity.Submit();
+  },
   captureCartItems: (cartData) => {
-    if(window._ltk || (!cartData.items || (cartData.items && cartData.items.length === 0))){
+    if(!window._ltk || (!cartData.items || (cartData.items && cartData.items.length === 0))){
       return '';
     }
     if (!cartData){
