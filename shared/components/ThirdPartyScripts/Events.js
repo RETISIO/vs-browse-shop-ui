@@ -2,38 +2,38 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
-import {
-  viewItem,
-  GAddToCart,
-  GAddToWishlist,
-  viewListItem,
-  selectItem
-} from './gtag'
-import {
-  RviewItem,
-  SearchProd,
-  ProductClick,
-  AddItem,
-  RaddtoWishhList,
-  RViewEvent
-} from './RetisioEvents'
+// import {
+//   viewItem,
+//   GAddToCart,
+//   GAddToWishlist,
+//   viewListItem,
+//   selectItem
+// } from './gtag'
+// import {
+//   RviewItem,
+//   SearchProd,
+//   ProductClick,
+//   AddItem,
+//   RaddtoWishhList,
+//   RViewEvent
+// } from './RetisioEvents'
 
 const visitPDP = itemData => {
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.browsedProduct(itemData)
-    }
-    viewItem(itemData)
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.browsedProduct(itemData)
+    // }
+    // viewItem(itemData)
   } catch (e) {
     console.log(e)
   }
 
-  RviewItem(itemData)
+  // RviewItem(itemData)
 }
 
 const Search = obj => {
   try {
-    SearchProd(obj)
+    // SearchProd(obj)
   } catch (e) {
     console.log(e)
   }
@@ -41,7 +41,7 @@ const Search = obj => {
 
 const ClickProduct = obj => {
   try {
-    ProductClick(obj)
+    // ProductClick(obj)
   } catch (e) {
     console.log(e)
   }
@@ -49,9 +49,9 @@ const ClickProduct = obj => {
 
 const login = data => {
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.captureEmail(data)
-    }
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.captureEmail(data)
+    // }
   } catch (e) {
     console.log(e)
   }
@@ -59,15 +59,15 @@ const login = data => {
 
 const AddToCart = data => {
   try {
-    AddItem(data)
-    GAddToCart(data)
+    // AddItem(data)
+    // GAddToCart(data)
   } catch (e) {
     console.log(e)
   }
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.addToCart(data);
-    }
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.addToCart(data);
+    // }
   } catch (e) {
     console.log(e)
   }
@@ -75,24 +75,24 @@ const AddToCart = data => {
 
 const cartItems = data => {
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.captureCartItems(data)
-    }
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.captureCartItems(data)
+    // }
   } catch (e) {
     console.log(e)
   }
 }
 
 const AddtoWishhList = obj => {
-  RaddtoWishhList(obj)
-  GAddToWishlist(obj)
+  // RaddtoWishhList(obj)
+  // GAddToWishlist(obj)
 }
 
 const notifyMe = (data, merchId) => {
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.notifyMe(data, merchId)
-    }
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.notifyMe(data, merchId)
+    // }
   } catch (e) {
     console.log(e)
   }
@@ -100,9 +100,9 @@ const notifyMe = (data, merchId) => {
 
 const pageViewEvent = data => {
   try {
-    if (window && window.lstImplement) {
-      window.lstImplement.pageEvent(data)
-    }
+    // if (window && window.lstImplement) {
+    //   window.lstImplement.pageEvent(data)
+    // }
   } catch (e) {
     console.log(e)
   }
@@ -110,7 +110,7 @@ const pageViewEvent = data => {
 
 const visitPLP = itemData => {
   try {
-    viewListItem(itemData)
+    // viewListItem(itemData)
   } catch (e) {
     console.log(e)
   }
@@ -118,7 +118,7 @@ const visitPLP = itemData => {
 
 const viewEvent = obj => {
   try {
-    RViewEvent(obj)
+    // RViewEvent(obj)
   } catch (e) {
     console.log(e)
   }
@@ -126,7 +126,7 @@ const viewEvent = obj => {
 
 const selectPLPItem = itemData => {
   try {
-    selectItem(itemData)
+    // selectItem(itemData)
   } catch (e) {
     console.log(e)
   }
