@@ -8,16 +8,15 @@ import NextImage from './template/components/nextImage'
 import Login from './Login'
 import ImageCarousel from './Sliders/ImageCarousel'
 import ProductCarousel from './Sliders/ProductCarousel'
-import ContactUs from './contactUs'
-import RequestCatalog from './requestCatalog'
-import Article from './article'
-import MiniStaticCarousel from './miniStaticCarousel'
-import CookingGuide from './cookingGuide'
+// import ContactUs from './contactUs'
+// import RequestCatalog from './requestCatalog'
+// import Article from './article'
+// import CookingGuide from './cookingGuide'
 // import ProductDescription from './pdp/pdpdetails_sort'
 import ProductDescription from './pdp/pdpdetails'
 import CustomBreadcrumb from './custombreadcrumb'
 import ProductAccordions from './productaccordions/ProductAccordions'
-import ArticleTitle from './article/articleTitle'
+// import ArticleTitle from './article/articleTitle'
 import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
@@ -29,7 +28,7 @@ import {
   CategoryDescription,
   CategoryLongDescription
 } from './template/components/categoryDescription'
-import CookingGuideFacet from './cookingGuide/staticFacet'
+// import CookingGuideFacet from './cookingGuide/staticFacet'
 
 const ComponentMap = {
   nextImage: NextImage,
@@ -37,14 +36,13 @@ const ComponentMap = {
   'imageCarousel:default': ImageCarousel,
   'productCarousel:default': ProductCarousel,
   'defaultProductSelector:custom': ProductCarousel,
-  'contactUsForm:custom': ContactUs,
-  'catalogRequestForm:custom': RequestCatalog,
+  // 'contactUsForm:custom': ContactUs,
+  // 'catalogRequestForm:custom': RequestCatalog,
   // 'article-detail-prodcutid:custom': Article,
-  'miniStaticCarousel:custom': MiniStaticCarousel,
-  'imagelist:custom': CookingGuide,
-  'article:custom': Article,
+  // 'imagelist:custom': CookingGuide,
+  // 'article:custom': Article,
   'pdpproductblock:custom': ProductDescription,
-  'articletile:custom': ArticleTitle,
+  // 'articletile:custom': ArticleTitle,
   // 'article-detail-prodcutid:custom': Article,
   'breadcrumb:default': CustomBreadcrumb,
   'classification:custom': ProductAccordions,
@@ -58,6 +56,6 @@ const ComponentMap = {
   'categoryDescription:custom': CategoryDescription,
   'didyoumean:custom': CategoryDescription,
   'categoryLongDescription:custom': CategoryLongDescription,
-  'cookingguidefacet:custom': CookingGuideFacet
+  // 'cookingguidefacet:custom': CookingGuideFacet
 }
 export default ComponentMap
