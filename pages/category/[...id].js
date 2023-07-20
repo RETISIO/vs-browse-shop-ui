@@ -19,7 +19,7 @@ import { usePLPDataContext } from '../../shared/context/plpDatacontext';
 import MainLayout from '../../shared/components/Layout';
 import { Loader } from '../../shared/components/loader';
 import getPLPData from '../../shared/helpers/getPLPData';
-import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
+// import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo';
 import ComponentMap from '../../shared/components/componentMap';
 
 function Static({ data, origin }) {
@@ -48,9 +48,9 @@ function Static({ data, origin }) {
     });
     Router.events.on('routeChangeComplete', (url) => {
       setLoading(false);
-      if(window && window.yotpo) {
-        window.yotpo.refreshWidgets();
-      }
+      // if(window && window.yotpo) {
+      //   window.yotpo.refreshWidgets();
+      // }
     });
     Router.events.on('routeChangeError', (url) => {
       setLoading(false);
@@ -125,7 +125,7 @@ function Static({ data, origin }) {
           </div>
         </div>
       </main>
-      <Yotpo />
+      {/* <Yotpo /> */}
     </MainLayout>
   );
 }

@@ -23,7 +23,7 @@ import { requestContructor } from '../shared/helpers/api'
 import { usePageDataContext } from '../shared/context/pageData-context'
 import { useAppContext } from '../shared/context/appContext'
 import MainLayout from '../shared/components/Layout'
-import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
+// import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../shared/components/componentMap'
 import { Loader } from '../shared/components/loader';
 
@@ -54,7 +54,7 @@ function Static({ data }) {
       ) : (
         <DefaultErrorPage statusCode={404} />
       )}
-      <Yotpo />
+      {/* <Yotpo /> */}
     </>
   )
 }

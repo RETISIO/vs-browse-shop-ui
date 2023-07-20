@@ -15,7 +15,7 @@ import { usePLPDataContext } from '../shared/context/plpDatacontext';
 import MainLayout from '../shared/components/Layout';
 import { Loader } from '../shared/components/loader';
 import getSearchData from '../shared/helpers/getSearchData';
-import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
+// import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // eslint-disable-next-line import/named
 import { requestContructor } from '../shared/helpers/api';
 import { Search } from '../shared/components/ThirdPartyScripts/Events';
@@ -74,9 +74,9 @@ function Static({ data }) {
         res.payLoad.searchTerm = searchTerm;
         setSearchPageData(res);
         setLoading(false);
-        if(window && window.yotpo) {
-          window.yotpo.refreshWidgets();
-        }
+        // if(window && window.yotpo) {
+        //   window.yotpo.refreshWidgets();
+        // }
       }
     })();
   }, [router.asPath]);
@@ -111,7 +111,7 @@ function Static({ data }) {
           </div>
         </div>
       </main>
-      <Yotpo />
+      {/* <Yotpo /> */}
     </MainLayout>
   );
 }

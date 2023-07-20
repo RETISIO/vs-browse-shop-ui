@@ -16,7 +16,7 @@ import { Loader } from '../../shared/components/loader'
 // import ProductDescription from '../../shared/components/pdp/pdpdetails'
 // import { viewItem } from '../../shared/components/ThirdPartyScripts/gtag'
 import { visitPDP } from '../../shared/components/ThirdPartyScripts/Events'
-import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
+// import Yotpo from '../../shared/components/ThirdPartyScripts/Yotpo'
 import ComponentMap from '../../shared/components/componentMap'
 import GiftCard from '../../shared/components/giftCard'
 import SchemaOrg from '../../shared/helpers/schemaOrg'
@@ -39,9 +39,9 @@ export default function ProductDetails({ data, origin }) {
     })
     Router.events.on('routeChangeComplete', url => {
       setLoading(false)
-      if (window && window.yotpo) {
-        window.yotpo.refreshWidgets()
-      }
+      // if (window && window.yotpo) {
+      //   window.yotpo.refreshWidgets()
+      // }
     })
     Router.events.on('routeChangeError', url => {
       setLoading(false)
@@ -109,7 +109,7 @@ export default function ProductDetails({ data, origin }) {
         {loading && <Loader />}
         {renderProductDescriptionPage()}
       </main>
-      <Yotpo />
+      {/* <Yotpo /> */}
     </MainLayout>
   )
 }

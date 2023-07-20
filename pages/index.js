@@ -15,7 +15,7 @@ import { usePageDataContext } from '../shared/context/pageData-context';
 import { useAppContext } from '../shared/context/appContext';
 
 import MainLayout from '../shared/components/Layout';
-import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
+// import Yotpo from '../shared/components/ThirdPartyScripts/Yotpo';
 // import ImageCarousel from '../shared/components/Sliders/ImageCarousel';
 import ComponentMap from '../shared/components/componentMap';
 
@@ -42,9 +42,9 @@ function Home({ data }) {
   useEffect(() => {
     setPageData(data);
     // getData();
-    if(window && window.yotpo) {
-      window.yotpo.refreshWidgets();
-    }
+    // if(window && window.yotpo) {
+    //   window.yotpo.refreshWidgets();
+    // }
     if(loggedInPopUp) {
       setShow(true);
     }
@@ -56,7 +56,7 @@ function Home({ data }) {
         <PageBuilder pageContent={pageContent} ComponentMap={ComponentMap} isNextJs={true} />
         {/* <ImageCarousel /> */}
       </main>
-      <Yotpo />
+      {/* <Yotpo /> */}
     </MainLayout>
   );
 }
