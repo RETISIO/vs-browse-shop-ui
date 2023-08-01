@@ -3,28 +3,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ab-storefrontsnb
-  name: ab-storefrontsnb
+    app: sf-browsenshop
+  name: sf-browsenshop
 spec:
   replicas: ${RETISIOFRONTREPLICA}
   selector:
     matchLabels:
-      app: ab-storefrontsnb
+      app: sf-browsenshop
   template:
     metadata:
       labels:
-        app: ab-storefrontsnb
+        app: sf-browsenshop
     spec:
       containers:
         -
           image: "${IMAGE}:${IMAGETAG}"
-          name: ab-be
+          name: sfbrowsenshop
           ports:
             -
               containerPort: 3000
           envFrom:
             - configMapRef:
-                name: sfbrowseshop-config
+                name: sfbrowsenshop-config
           resources:
             limits:
               memory: ${LIMITS_MEMORY}
@@ -55,12 +55,12 @@ metadata:
   annotations:
     cloud.google.com/neg: '{"ingress": true}'
   labels:
-  name: ab-storefrontsnb
+  name: sf-browsenshop
 spec:
   ports:
   - port: 80
     targetPort: 3000
-    name: ab-be
+    name: sfbrowsenshop
   selector:
-    app: ab-storefrontsnb
+    app: sf-browsenshop
   type: NodePort
