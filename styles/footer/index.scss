@@ -1,3 +1,6 @@
+.htmlContent {
+    background-color: #303030;
+}
 .footerContainer {
     .row_full_adj {
         margin-left: -52vw;
@@ -31,64 +34,61 @@
     @media screen and (min-width: 1201px) and (max-width: 1366px) {
         .btn-action-primary {
             background-color: black;
-            border-color: #195d8d;
+            border-color: #ec8c23;
         }
     }
 
     @media screen and (min-width: 768px) and (max-width: 991px) {
         .btn-action-primary:hover {
-            border-color: #195d8d;
-            ;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     @media screen and (min-width: 992px) and (max-width: 1200px) {
         .btn-action-primary:hover {
-            border-color: #195d8d;
-            ;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     @media screen and (min-width: 1201px) and (max-width: 1366px) {
         .btn-action-primary:hover {
-            border-color: #195d8d;
-            ;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     .btn-action-primary:hover {
-        border-color: #195d8d;
-        ;
+        border-color: #ec8c23;
         color: #fff;
+        background-color: #ec8c23;
     }
 
     @media screen and (min-width: 768px) and (max-width: 991px) {
         .btn-action-primary:focus {
-            border-color: #195d8d;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     @media screen and (min-width: 992px) and (max-width: 1200px) {
         .btn-action-primary:focus {
-            border-color: #195d8d;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     @media screen and (min-width: 768px) and (max-width: 991px) {
         .btn-action-primary:focus {
-            border-color: #195d8d;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
 
     @media screen and (min-width: 1201px) and (max-width: 1366px) {
         .btn-action-primary:focus {
-            border-color: #195d8d;
+            border-color: #ec8c23;
             color: #fff;
         }
     }
@@ -162,7 +162,7 @@
         width: 0px;
         height: 0;
         border-top: 75px solid transparent;
-        border-left: 100px solid #00466a;
+        border-left: 100px solid #ec8c23;
         border-bottom: 75px solid transparent;
     }
 
@@ -283,7 +283,7 @@
 
     .footer-social {
         .icon {
-            color: black;
+            color: $colorWhite;
         }
     }
 
@@ -313,10 +313,11 @@
 
     .ab-fa-textSSL {
         width: 118px;
+        color: $colorWhite;
     }
 
     .footer-copyright-container {
-        border-top: 1px solid black;
+        border-top: 1px solid #454545;
         padding: 18px 0;
     }
 
