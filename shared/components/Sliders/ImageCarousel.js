@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
@@ -47,15 +48,20 @@ export default function ImageCarousel(props) {
       <h2 className="row category-container__title">{props.name}</h2>
       <Slider {...settings}>
         {content.map((item, i) => (
-          <div key={i}>
-            <div style={{ margin: '7px' }}>
-              <a href={item.refinementPageLink}>
+          <div key={i} >
+            <div id='SkipToMain' tabIndex={-1} style={{ margin: '7px' }}>
+              <a href={item.refinementPageLink} className="imageCarousel-container">
                 <NextImage alt={item.name} className="img-responsive category-list__image" src={`${config.IMGPATH}${item.refinementImageUrl}`} width="184" height="184" />
                 <div className="category-list__text">
                   <section>
                     <span className="category-list-text col-xs-8 col-md-12">{item.name}</span>
                   </section>
                 </div>
+               {item.badgeImageUrl && (
+                  <span className="saleImage">
+                    <NextImage alt="sale" src={`${config.IMGPATH}${item.badgeImageUrl}`} width="50" height="50"></NextImage>
+                  </span>
+                )}
               </a>
             </div>
           </div>

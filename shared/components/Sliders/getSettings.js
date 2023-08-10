@@ -41,6 +41,10 @@ const Settings = {
 
 const RecommondationsMap = {
   'Product-Similar SKUs': 'similar_sku',
+  'Content-Top Trending Products' : 'trending_products',
+  'Product-Bought Bought' : 'bought_bought',
+  'Product-Frequently Bought' : 'frequently_bought_together',
+  'Product-View View' : 'view_view'
 };
 
 export { Settings, RecommondationsMap };

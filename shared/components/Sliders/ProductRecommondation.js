@@ -1,17 +1,16 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable camelcase */
+/* eslint-disable default-case */
 /* eslint-disable react/no-array-index-key */
-
 /* eslint-disable import/named */
-
 /* eslint-disable react/jsx-no-useless-fragment */
-
 /* eslint-disable max-len */
-
 /* eslint-disable react/destructuring-assignment */
-
 /* eslint-disable linebreak-style */
 
 import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
+import { getCookie } from '@retisio/sf-api';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
 import ProductTile from '../template/components/ProductTile';
@@ -30,6 +29,9 @@ export default function ProductRecommondation(props) {
   const configValues = props.configValue ? JSON.parse(props.configValue) : {};
 
   useEffect(() => {
+    setTimeout(() => {
+      window && window.yotpo && window.yotpo.refreshWidgets();
+    }, 10);
     let productData;
     if (
       configValues?.productRecommendation?.association
@@ -42,29 +44,75 @@ export default function ProductRecommondation(props) {
       ];
       setSelectedProducts(productData);
     } else if (
-      state.channelData
+      getCookie('lu')
+      && state.channelData
       && state?.channelData?.defaultCatalogId
       && configValues.productRecommendation.recommendationType === 'AI_DRIVEN'
+      && configValues.productRecommendation.recommendation === 'Content-Affinity to Recently Viewed'
     ) {
       requestContructor(
-        `rxc/${
-          RecommondationsMap[configValues.productRecommendation.recommendation]
-        }?siteId=${siteId}&catalogId=${
-          state?.channelData?.defaultCatalogId
-        }&seed=${props?.payLoad?.products[0].defaultSkuId}&max=30`,
+        'getRecentlyViewedProducts',
         '',
         {
           method: 'GET',
         },
       ).then((res) => {
-        if (res.recommended) {
-          setSelectedProducts(res.recommended);
+        if (res?.recentlyViewedSkuIds) {
+          const skuIds = res?.recentlyViewedSkuIds?.toString();
+          requestContructor(
+              `rxc/affinity_to_recently_viewed?siteId=${siteId}&catalogId=${
+                state?.channelData?.defaultCatalogId
+              }&max=15&seed=${skuIds}`,
+              '',
+              {
+                method: 'GET',
+              },
+          ).then((res) => {
+            if (res.arvRecommendation) {
+              setSelectedProducts(Object.values(res.arvRecommendation));
+            } else {
+              setSelectedProducts([]);
+            }
+          });
+        }
+      });
+    } else if (
+      getCookie('lu')
+      && state.channelData
+      && state?.channelData?.defaultCatalogId
+      && configValues.productRecommendation.recommendationType === 'AI_DRIVEN'
+      && configValues.productRecommendation.recommendation === 'Content-Recently Viewed'
+    ) {
+      requestContructor(
+        'getRecentlyViewedProducts',
+        '',
+        {
+          method: 'GET',
+        },
+      ).then((res) => {
+        if (res?.recentlyViewedSkuIds) {
+          setSelectedProducts(res?.recentlyViewedSkuIds?.slice(0, 15));
         } else {
           setSelectedProducts([]);
         }
       });
     } else {
-      setSelectedProducts([]);
+      const recommendation_type = RecommondationsMap[configValues.productRecommendation.recommendation];
+      if(recommendation_type) {
+        requestContructor(
+          `rxc/${recommendation_type}?${payload(recommendation_type)}`,
+          '',
+          {
+            method: 'GET',
+          },
+        ).then((res) => {
+          if (res?.recommended?.length > 1) {
+            setSelectedProducts(res.recommended);
+          } else {
+            setSelectedProducts([]);
+          }
+        });
+      }
     }
     setProductsData({ ...productsData });
   }, [state.channelData, props]);
@@ -76,6 +124,7 @@ export default function ProductRecommondation(props) {
       && selectedProducts
       && selectedProducts.length > 0
       && !configValues.productRecommendation.association
+      && props?.payLoad?.products
     ) {
       viewEvent({
         channelData: state.channelData,
@@ -93,18 +142,16 @@ export default function ProductRecommondation(props) {
   useEffect(() => {
     if (selectedProducts && selectedProducts.length > 0) {
       let payload = {
-        // productIds: selectedProducts ,
-        requestFilters: [
-          {
-            filterName: 'productVariants.skuId',
-            filterValues: selectedProducts,
-            filterType: 'or',
-          },
-        ],
+        productIds: selectedProducts,
       };
-      if(configValues?.productRecommendation?.association) {
+      if(configValues?.productRecommendation?.recommendation === 'Product-Similar SKUs') {
         payload = {
-          productIds: selectedProducts,
+          requestFilters: [
+            {
+              filterName: 'productVariants.skuId',
+              filterValues: selectedProducts,
+              filterType: 'or',
+            }],
         };
       }
       requestContructor('getV3ProductsData', '', {
@@ -129,6 +176,21 @@ export default function ProductRecommondation(props) {
       setLoad(true);
     }
   }, [selectedProducts]);
+
+  const payload = (type) => {
+    switch (type) {
+    case 'similar_sku':
+      return `siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0]?.defaultSkuId}&max=30`;
+    case 'trending_products':
+      return `siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&max=15`;
+    case 'bought_bought':
+      return `siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0]?.productId}&max=15`;
+    case 'frequently_bought_together':
+      return `siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0]?.productId}&max=15`;
+    case 'view_view':
+      return `siteId=${siteId}&catalogId=${state?.channelData?.defaultCatalogId}&seed=${props?.payLoad?.products[0]?.productId}&max=15`;
+    }
+  };
 
   const displayProducts = () => {
     if (productsData?.configValues?.products?.length) {

@@ -27,18 +27,22 @@ import { ResultCount } from './template/components/resultCount'
 import {
   CategoryDescription,
   CategoryLongDescription
-} from './template/components/categoryDescription'
+} from './template/components/categoryDescription';
+import HeroBanner from './Sliders/HeroBanner'
+import Featureproducts from './customComponents/Featureproducts'
 // import CookingGuideFacet from './cookingGuide/staticFacet'
 
 const ComponentMap = {
   nextImage: NextImage,
   login: Login,
   'imageCarousel:default': ImageCarousel,
+  'customimagecarousel:custom': ImageCarousel,
   'productCarousel:default': ProductCarousel,
   'defaultProductSelector:custom': ProductCarousel,
   // 'contactUsForm:custom': ContactUs,
   // 'catalogRequestForm:custom': RequestCatalog,
   // 'article-detail-prodcutid:custom': Article,
+  // 'miniStaticCarousel:custom': MiniStaticCarousel,
   // 'imagelist:custom': CookingGuide,
   // 'article:custom': Article,
   'pdpproductblock:custom': ProductDescription,
@@ -56,6 +60,8 @@ const ComponentMap = {
   'categoryDescription:custom': CategoryDescription,
   'didyoumean:custom': CategoryDescription,
   'categoryLongDescription:custom': CategoryLongDescription,
-  // 'cookingguidefacet:custom': CookingGuideFacet
+  // 'cookingguidefacet:custom': CookingGuideFacet,
+  'customherobanner:custom': HeroBanner,
+  'featuredproducts:custom': Featureproducts
 }
 export default ComponentMap
