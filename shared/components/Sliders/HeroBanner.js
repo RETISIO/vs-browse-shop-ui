@@ -21,13 +21,13 @@ export default function HeroBanner(props) {
         autoplaySpeed: parseInt(configValues.heroBanner.autoPlaySpeed) || 1000,
         cssEase: "linear"
       };
-      console.log('content',configValues);
+    //   console.log('content',content);
   return (
     <Slider {...settings}>
         { configValues.heroBanner && configValues.heroBanner.slides && configValues.heroBanner.slides.map((slide)=>{
             return (<div  id="allenmainherobanner">
             <div className="allenmainherobanner">
-                <div id="banner_main" style={{backgroundImage: `url(${config.IMGPATH + slide.relativeUrl+'/'+slide.displayName});`}}
+                <div id="banner_main" style={{backgroundImage: `url(${config.IMGPATH + slide.relativeUrl+'/'+slide.name});`}}
                     >
                     <div id="overlay" className="row-full"></div>
                     <div className="">
@@ -37,7 +37,7 @@ export default function HeroBanner(props) {
                                {content?.heroBanner && content?.heroBanner['slides'][slide.id] &&  (<><span className="col-md-12 col-sm-8 banner-title">{content?.heroBanner['slides'][slide.id]?.primaryText}</span><span className="col-md-12 col-sm-8 banner-title">{content?.heroBanner['slides'][slide.id]?.secondaryText}</span></>)}
                             </h2>
                             <div className="banner-actions col-md-12 col-sm-8">
-                                {content?.heroBanner && content?.heroBanner['slides'][slide.id] && <a id="banner-button" href="/category/filet-mignon?N=filet-mignon" tabindex="-1"  className="btn btn-secondary btn-lg link-text" title="SHOP FILETS">
+                                {content?.heroBanner && content?.heroBanner['slides'][slide.id] && <a id="banner-button" href={content?.heroBanner['slides'][slide.id]?.buttonUrl} tabindex="-1"  className="btn btn-secondary btn-lg link-text" title={content?.heroBanner && content?.heroBanner['slides'][slide.id]?.buttonCaption}>
                                 {content?.heroBanner && content?.heroBanner['slides'][slide.id]?.buttonCaption}
                                 </a>}
                             </div>
