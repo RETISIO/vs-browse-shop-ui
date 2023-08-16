@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ReactImageZoom from 'react-image-zoom'
-import NoImage from '../../../../public/static/assets/no-image.png'
+import NoImage from '../../../public/static/assets/no-image.png'
 
 function MagnifyImage (props) {
   const [data, setData] = useState(props)
