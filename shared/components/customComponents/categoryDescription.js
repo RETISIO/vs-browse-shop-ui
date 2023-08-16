@@ -3,7 +3,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import Router, { useRouter } from 'next/router';
-import { searchTermHandler } from '../../../helpers/utils';
+import { searchTermHandler } from '../../helpers/utils';
 
 export function CategoryDescription(props) {
   const { payLoad } = props;

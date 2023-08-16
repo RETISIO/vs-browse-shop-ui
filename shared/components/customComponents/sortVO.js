@@ -2,8 +2,8 @@
 /* eslint-disable linebreak-style */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import URLHandler from '../../../helpers/urlHandler';
-import { searchTermHandler } from '../../../helpers/utils';
+import URLHandler from '../../helpers/urlHandler';
+import { searchTermHandler } from '../../helpers/utils';
 
 function SortVO(props) {
   const router = useRouter();

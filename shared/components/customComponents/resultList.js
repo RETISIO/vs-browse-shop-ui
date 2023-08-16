@@ -5,16 +5,16 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { usePLPDataContext } from '../../../context/plpDatacontext';
+import { usePLPDataContext } from '../../context/plpDatacontext';
 import ProductCard from './productCard';
-import URLHandler from '../../../helpers/urlHandler';
+import URLHandler from '../../helpers/urlHandler';
 // eslint-disable-next-line import/named
-import { requestContructor } from '../../../helpers/api';
-import { useAppContext } from '../../../context/appContext';
-import { Search } from '../../ThirdPartyScripts/Events';
-import { EllipseLoader } from '../../loader';
-import { searchTermHandler } from '../../../helpers/utils';
-import { visitPLP } from '../../ThirdPartyScripts/Events';
+import { requestContructor } from '../../helpers/api';
+import { useAppContext } from '../../context/appContext';
+import { Search } from '../ThirdPartyScripts/Events';
+import { EllipseLoader } from '../loader';
+import { searchTermHandler } from '../../helpers/utils';
+import { visitPLP } from '../ThirdPartyScripts/Events';
 
 function ResultList(props) {
   const { singleColumn } = props;

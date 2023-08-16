@@ -4,7 +4,7 @@
 /* eslint-disable comma-dangle */
 /* eslint-disable linebreak-style */
 // eslint-disable-next-line import/no-named-as-default
-import NextImage from './template/components/nextImage'
+import NextImage from './customComponents/nextImage'
 import Login from './Login'
 import ImageCarousel from './Sliders/ImageCarousel'
 import ProductCarousel from './Sliders/ProductCarousel'
@@ -21,13 +21,13 @@ import ReviewSection from './reviewsection'
 import ShippingInfoAccordion from './productaccordions/ShippingInfoAccordion'
 import CookingInstructions from './productaccordions/CookingInstructions'
 import ProductRecommondation from './Sliders/ProductRecommondation'
-import Facet from './template/components/facet'
-import ResultList from './template/components/resultList'
-import { ResultCount } from './template/components/resultCount'
+import Facet from './customComponents/facet'
+import ResultList from './customComponents/resultList'
+import { ResultCount } from './customComponents/resultCount'
 import {
   CategoryDescription,
   CategoryLongDescription
-} from './template/components/categoryDescription';
+} from './customComponents/categoryDescription';
 import HeroBanner from './Sliders/HeroBanner'
 import Featureproducts from './customComponents/Featureproducts'
 // import CookingGuideFacet from './cookingGuide/staticFacet'

@@ -13,7 +13,7 @@ import Slider from 'react-slick';
 import { getCookie } from '@retisio/sf-api';
 import { useAppContext } from '../../context/appContext';
 import { requestContructor } from '../../helpers/api';
-import ProductTile from '../template/components/ProductTile';
+import ProductTile from '../customComponents/ProductTile';
 import { Settings, RecommondationsMap } from './getSettings';
 import { viewEvent } from '../ThirdPartyScripts/Events';
 import config from '../../helpers/getConfig';

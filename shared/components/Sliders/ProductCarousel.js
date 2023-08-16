@@ -20,9 +20,9 @@
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
-import NextImage from '../template/components/nextImage'
+import NextImage from '../customComponents/nextImage'
 import { requestContructor } from '../../helpers/api'
-import ProductTile from '../template/components/ProductTile'
+import ProductTile from '../customComponents/ProductTile'
 
 export default function ProductCarousel(props) {
   const Props = props
