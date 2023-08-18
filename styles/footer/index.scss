@@ -1,6 +1,6 @@
-.footer.htmlContent  {
+.htmlContent:has(.footerContainer) {
     background-color: #303030;
-}
+} 
 .footerContainer {
     .row_full_adj {
         margin-left: -52vw;
