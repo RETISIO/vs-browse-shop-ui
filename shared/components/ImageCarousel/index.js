@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Slider from 'react-slick'
 import Carousel from 'react-bootstrap/Carousel'
 import Modal from 'react-bootstrap/Modal'
-import NextImage from '../template/components/nextImage'
+import NextImage from '../customComponents/nextImage'
 import USDABadge from '../../../public/static/assets/usda-badge.png'
 import SaleBadge from '../../../public/static/assets/sale-badge.png'
-import MagnifyImage from '../template/components/magnifyImage'
+import MagnifyImage from '../customComponents/magnifyImage'
 import config from '../../helpers/getConfig'
 
 function ImageCarousel ({ data, additionalDetails, onSale }) {

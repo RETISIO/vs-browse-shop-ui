@@ -81,7 +81,7 @@ export default function Featureproducts(props) {
             <span className="promotion-price" style={{ color: 'black', fontWeight: '600' }}>${calcPrice(data.productDetails)}</span>
           </div>)}
         </div>
-        <a href={`/products/${data.productDetails.seoData && data.productDetails.seoData.slug ? data.productDetails.seoData.slug : data.productDetails.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${data.productDetails?.productId}`} className="btn btn-secondary btn-md">SHOP</a>
+        <a href={`/products/${data.productDetails.seoData && data.productDetails.seoData.slug ? data.productDetails.seoData.slug : data.productDetails.displayName.replace(/[\s~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]+/g, '-').toLowerCase()}/${data.productDetails?.productId}`} className="btn btn-secondary btn-md">{data.buttonCaption}</a>
       </div>
     </div>
   )};

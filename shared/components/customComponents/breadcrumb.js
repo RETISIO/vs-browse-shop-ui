@@ -5,9 +5,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import URLHandler from '../../../helpers/urlHandler';
-import { Loader } from '../../loader';
-import { constructBNSSEOURL } from '../../urlUtils';
+import URLHandler from '../../helpers/urlHandler';
+import { Loader } from '../loader';
+import { constructBNSSEOURL } from '../urlUtils';
 // import { usePageDataContext } from '../../context/pageData-context';
 
 export function Breadcrumb(props) {

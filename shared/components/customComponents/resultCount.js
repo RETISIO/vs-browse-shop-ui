@@ -7,7 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import SortVO from './sortVO';
 import FacetsMobile from './facetsMobile';
-import { searchTermHandler } from '../../../helpers/utils';
+import { searchTermHandler } from '../../helpers/utils';
 
 export function ResultCount(props) {
   const { singleColumn } = props;

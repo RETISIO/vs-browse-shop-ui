@@ -12,10 +12,10 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import NextImage from './nextImage';
-import { usePLPDataContext } from '../../../context/plpDatacontext';
-import { ClickProduct, selectPLPItem } from '../../ThirdPartyScripts/Events';
-import { useAppContext } from '../../../context/appContext';
-import config from '../../../helpers/getConfig';
+import { usePLPDataContext } from '../../context/plpDatacontext';
+import { ClickProduct, selectPLPItem } from '../ThirdPartyScripts/Events';
+import { useAppContext } from '../../context/appContext';
+import config from '../../helpers/getConfig';
 
 export default function ProductTile({ value, recommondationData }) {
   const { searchResultData } = usePLPDataContext();

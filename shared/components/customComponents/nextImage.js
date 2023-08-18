@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import NoImage from '../../../../public/static/assets/no-image.png'
+import NoImage from '../../../public/static/assets/no-image.png'
 
 function NextImage (props) {
   const { src, alt, className } = props

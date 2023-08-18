@@ -3,10 +3,10 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react'
-import Breadcrumb from '../template/components/breadcrumb'
+import Breadcrumb from '../customComponents/breadcrumb'
 import GcDetailsPage from './gcDetailsPage'
 import ProductRecommondation from '../Sliders/ProductRecommondation'
-import NextImage from '../template/components/nextImage'
+import NextImage from '../customComponents/nextImage'
 import config from '../../helpers/getConfig'
 
 export default function GiftCard (props) {

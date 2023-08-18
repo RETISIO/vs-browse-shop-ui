@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import config from '../../helpers/getConfig';
-import NextImage from '../template/components/nextImage';
+import NextImage from '../customComponents/nextImage';
 
 export default function ImageCarousel(props) {
   const configValues = props.configValue ? JSON.parse(props.configValue).imageCarousel : { noOfRecords: 6 };
