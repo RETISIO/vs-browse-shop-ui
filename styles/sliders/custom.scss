@@ -47,7 +47,7 @@ section:has(.productRecommendations),section:has(.imageCarousel),section:has(.pr
     padding: 0px;
     .slick-prev{
         z-index: 999;
-        left: 6px;
+        left: 18px;
         background-color: black;
         border-radius: 20px;
         height: 27px;
@@ -61,6 +61,9 @@ section:has(.productRecommendations),section:has(.imageCarousel),section:has(.pr
         height: 27px;
         width: 27px;
     }
+    .slick-dots {
+        bottom: 0;
+    }
     .slick-prev:before{
         content: "\e079" !important;
         color: #fff;
@@ -70,7 +73,7 @@ section:has(.productRecommendations),section:has(.imageCarousel),section:has(.pr
         color: #fff;
     }
     .slick-dots li button:before{
-        background-color: black;
+        background-color: #fff;
         height: 10px;
         width: 10px;
         line-height: 10px;

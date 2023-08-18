@@ -398,6 +398,21 @@
   }
 }
 
+.allenmainherobanner {
+  &.mainHeroBanner{
+    .text-right {
+      .banner-actions {
+        text-align: right !important;
+      }
+    }
+    .text-left {
+      .banner-actions {
+        text-align: left !important;
+      }
+    }
+  }
+}
+
 .home-header-container .nonHomePageHeader #header {
   .sub-nav1 {
     background-color: $colorLightBlue;
@@ -420,11 +435,6 @@
   }
 }
 
-@media screen and (min-width: 768px) {
-  main.page-row.page-row-expanded.nonHomePageHeader {
-    margin-bottom: 0px;
-  }
-}
 @media screen and (min-width: 992px) {
   main.page-row.page-row-expanded.nonHomePageHeader {
     margin-bottom: 75px;
