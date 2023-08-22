@@ -26,11 +26,12 @@
         background-color: $colorGray;
         text-align: left;
     }
-
+ 
+   
     .sub-nav:hover .js-dropdown__btn,
     .nav-item.sub-nav.active .js-dropdown__btn {
-        background-color: $colorEclipse;
-        border-left: 7px solid $colorBrandRed;
+        // background-color: $colorEclipse;
+        //border-left: 7px solid $colorBrandRed;
         font-size: 16px;
         margin-left: 0;
     }
@@ -43,7 +44,7 @@
 
     .category-list-item-navbar { 
         margin-left: 20px;
-        margin-top: 6px;
+        // margin-top: 6px;
     }
     .category-list-item-navbar a { 
         color: $colorWhite;
@@ -91,6 +92,7 @@
     }
     .firstDropDownMegaMenu {
         left: -15px;
+        padding: 0;
         @-moz-document url-prefix() {
             left: -7px;
         }
@@ -134,9 +136,9 @@
     .header-menu {
         font-size: 10px;
         border: none;
-        position: absolute;
-        right: 5px;
-        top: 18px;
+        // position: absolute;
+        // right: 5px;
+        // top: 18px;
     }
 
     .header-dropdown-menu .category-heading {
@@ -186,9 +188,8 @@
                 padding-left: 20px;
             }
             .category-list-item-navbar {
-                line-height: 16px;
-                padding-top: 7px;
-                padding-bottom: 7px;
+                // line-height: 16px;
+                padding: 7px 0;
             }
         }
         //AB-1925 starts here
@@ -206,9 +207,21 @@
     }
     .categoryL1ListContainer {
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .header-menu {
             top: 5px;
             // display: none;
+        }
+    }
+    .sub-nav:hover {
+        .categoryL1ListContainer {
+            background-color: $colorEclipse;
+            border-left: 7px solid $colorBrandRed;
+            .js-dropdown__btn {
+                background-color: $colorEclipse;
+            }
         }
     }
     .navListItems.active .level0Menu {
@@ -221,32 +234,35 @@
             display: block;
         }
     }
-    // .navListItems:hover .categoryL1ListContainer .header-menu {
-    //     display: none;
-    // }
 }
 
 .home-header-container #header {
     .header-sticky.js-sticky-menu.is_stuck {
-        .homeDropdownMenu, .firstDropDownMegaMenu .nav-item {
+        .homeDropdownMenu
+        {
             background-color: $colorLightBlue;
         }
+        .sub-nav:hover {
+            .categoryL1ListContainer {
+                background-color: $colorLightBlue;
+                border-left: 7px solid $colorBrandRed;
+                .js-dropdown__btn {
+                    background-color: $colorLightBlue;
+                }
+            }
+        }
         .navbar.redesign-navbar {
-            background-color: $colorDeepBlue;
-            .js-dropdown__btn, .categoryL1ListContainer {
-              background-color: $colorDeepBlue;
+            .js-dropdown__btn {
+                background-color: $colorDeepBlue;
+        
             }
-            .sub-nav:hover .js-dropdown__btn,
-            .nav-item.sub-nav.active .js-dropdown__btn {
-              background-color: $colorLightBlue;
-            }
-          }
+        }
     }
 }
 .home-header-container .nonHomePageHeader #header .navbar.redesign-navbar {
-    .homeDropdownMenu,
-    .sub-nav:hover .js-dropdown__btn,
-    .nav-item.sub-nav.active .js-dropdown__btn {
+    .homeDropdownMenu {
         background-color: $colorLightBlue;
     }
 }
+
+

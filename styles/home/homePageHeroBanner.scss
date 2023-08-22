@@ -227,7 +227,6 @@
   
   @media (min-width: 768px) and (max-width: 897px){
   .banner-title {
-  margin-left: 40px;
       color: #fff;
       font-size: 40px;
       font-weight: 500;
@@ -277,7 +276,7 @@
   
   @media screen and (min-width: 1201px) and (max-width: 1366px) {
     .banner-title {
-      margin-left: 48px;
+      // margin-left: 48px;
       color: #ffffff;
       font-size: 40px;
       font-weight: 500;
@@ -290,7 +289,7 @@
   }
   @media (min-width: 992px) {
     .banner-title {
-      margin-left: 48px;
+      // margin-left: 48px;
       color: #ffffff;
       font-size: 40px;
       font-weight: 500;
@@ -414,17 +413,23 @@
   //     margin-top: 16px;
   // }
   @media screen and (min-width: 1201px) and (max-width: 1366px) {
+    .banner-content {
+      margin: 0 0 0 70px;
+    }
     .banner-actions {
     text-align: left;
-    margin-left: 70px;
+    // margin-left: 70px;
     }
   }
   
   //21-10 start
   @media (min-width: 768px) and (max-width: 991px) {
+    .banner-content {
+      margin: 0 0 0 100px;
+    }
       .banner-actions {
         text-align: left;
-        margin-left: 100px;
+        // margin-left: 100px;
         font-size: 0;
           margin-top: 36px;
       }
@@ -439,9 +444,12 @@
   //21-10 end
   
   @media (min-width: 992px) {
+    .banner-content {
+      margin: 0 0 0 70px;
+    }
     .banner-actions {
       text-align: left;
-      margin-left: 70px;
+      // margin-left: 70px;
       font-size: 0;
       }
   }
