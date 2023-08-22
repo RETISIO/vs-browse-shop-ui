@@ -20,3 +20,13 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+#componentMap.js is a component where we map the component present in the codebase and pass it to UI Materials,
+so that it can be accessed it in UI materials repo.
+
+#The custom components are categorized and kept under shared\components\customComponents folder.
+
+#The thirdParty scripts (Analytics code) are kept under the shared\components\ThirdPartyScripts folder.
+The main file responsible for all the event tracking is Event.js
+
+
+
