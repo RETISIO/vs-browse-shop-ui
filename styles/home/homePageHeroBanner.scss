@@ -129,13 +129,6 @@
   }
   //21-10 end
   
-  @media (min-width: 768px) and (max-width: 991px) {
-  .mobile-banner{
-    float: left;
-    width: 80%;
-  }
-  }
-  
   //21-10 end
   @media screen and (min-width: 992px) {
       #banner_main {
@@ -429,7 +422,6 @@
     }
       .banner-actions {
         text-align: left;
-        // margin-left: 100px;
         font-size: 0;
           margin-top: 36px;
       }

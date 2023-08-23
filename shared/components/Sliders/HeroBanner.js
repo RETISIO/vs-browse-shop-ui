@@ -37,13 +37,13 @@ export default function HeroBanner(props) {
                   <h2 className="mobile-banner">
                     {content?.heroBanner && content?.heroBanner.slides[slide.id] && (
                       <>
-                        <span className="col-md-12 col-sm-8 banner-title">{content?.heroBanner.slides[slide.id]?.primaryText}</span>
-                        <span className="col-md-12 col-sm-8 banner-title">{content?.heroBanner.slides[slide.id]?.secondaryText}</span>
+                        <span className="col-md-12 col-sm-12 banner-title">{content?.heroBanner.slides[slide.id]?.primaryText}</span>
+                        <span className="col-md-12 col-sm-12 banner-title">{content?.heroBanner.slides[slide.id]?.secondaryText}</span>
                       </>
                     )}
                   </h2>
                   {content?.heroBanner && content?.heroBanner.slides[slide.id] && content?.heroBanner.slides[slide.id]?.buttonCaption && (
-                    <div className="banner-actions col-md-12 col-sm-8">
+                    <div className="banner-actions col-md-12 col-sm-12">
                       <a
                         id="banner-button"
                         href={content?.heroBanner.slides[slide.id]?.buttonUrl}
