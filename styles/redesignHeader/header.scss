@@ -406,12 +406,12 @@
 .allenmainherobanner {
   &.mainHeroBanner{
     .text-right {
-      .banner-actions {
+      .banner-actions,.mobile-banner,.banner-title {
         text-align: right !important;
       }
     }
     .text-left {
-      .banner-actions {
+      .banner-actions,.mobile-banner,.banner-title {
         text-align: left !important;
       }
     }
