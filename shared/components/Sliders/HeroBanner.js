@@ -21,10 +21,10 @@ export default function HeroBanner(props) {
     autoplaySpeed: parseInt(configValues.heroBanner.autoPlaySpeed) || 1000,
     cssEase: 'linear',
   };
-    //   console.log('content',content);
+  //   console.log('content',content);
   return (
     <Slider {...settings}>
-      { configValues.heroBanner && configValues.heroBanner.slides && configValues.heroBanner.slides.map((slide) => (
+      {configValues.heroBanner && configValues.heroBanner.slides && configValues.heroBanner.slides.map((slide) => (
         <div id="allenmainherobanner">
           <div className="allenmainherobanner mainHeroBanner">
             <div
@@ -33,7 +33,7 @@ export default function HeroBanner(props) {
             >
               <div id="overlay" className="row-full"></div>
               <div>
-                <div className={slide.informationPosition == 'right' ? 'text-right banner-content' : 'text-left banner-content'}>
+                <div className={slide.informationPosition.toLowerCase() == 'right' ? 'text-right banner-content' : 'text-left banner-content'}>
                   <h2 className="mobile-banner">
                     {content?.heroBanner && content?.heroBanner.slides[slide.id] && (
                       <>
@@ -42,13 +42,19 @@ export default function HeroBanner(props) {
                       </>
                     )}
                   </h2>
-                  <div className="banner-actions col-md-12 col-sm-8">
-                    {content?.heroBanner && content?.heroBanner.slides[slide.id] && (
-                      <a id="banner-button" href={content?.heroBanner.slides[slide.id]?.buttonUrl} tabIndex="-1" className="btn btn-secondary btn-lg link-text" title={content?.heroBanner && content?.heroBanner.slides[slide.id]?.buttonCaption}>
-                        {content?.heroBanner && content?.heroBanner.slides[slide.id]?.buttonCaption}
+                  {content?.heroBanner && content?.heroBanner.slides[slide.id] && content?.heroBanner.slides[slide.id]?.buttonCaption && (
+                    <div className="banner-actions col-md-12 col-sm-8">
+                      <a
+                        id="banner-button"
+                        href={content?.heroBanner.slides[slide.id]?.buttonUrl}
+                        tabIndex="-1"
+                        className="btn btn-secondary btn-lg link-text"
+                        title={content?.heroBanner && content?.heroBanner.slides[slide.id]?.buttonCaption}
+                      >
+                        {content?.heroBanner?.slides[slide?.id]?.buttonCaption}
                       </a>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

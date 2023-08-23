@@ -188,8 +188,7 @@
                 padding-left: 20px;
             }
             .category-list-item-navbar {
-                // line-height: 16px;
-                padding: 7px 0;
+                padding: 7px 0 7px 20px;
             }
         }
         //AB-1925 starts here
@@ -242,6 +241,7 @@
         {
             background-color: $colorLightBlue;
         }
+        
         .sub-nav:hover {
             .categoryL1ListContainer {
                 background-color: $colorLightBlue;
@@ -252,6 +252,7 @@
             }
         }
         .navbar.redesign-navbar {
+            background-color: $colorDeepBlue;
             .js-dropdown__btn {
                 background-color: $colorDeepBlue;
         

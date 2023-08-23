@@ -367,9 +367,11 @@
 
 .home-header-container .nonHomePageHeader #header {
   .navbar.redesign-navbar .header-dropdown-menu {
-    .sub-nav:hover .js-dropdown__btn {
-      background-color: $colorLightBlue;
-    }
+    .sub-nav:hover {
+      .categoryL1ListContainer, .js-dropdown__btn {
+        background-color: $colorLightBlue;
+      }
+    } 
     background-color: $colorDeepBlue;
     .js-dropdown__btn {
       background-color: $colorDeepBlue;
