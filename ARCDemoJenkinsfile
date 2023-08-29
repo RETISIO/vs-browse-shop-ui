@@ -1,0 +1,13 @@
+/*
+Pipeline: Storefront CI/CD Pipeline
+Author: Girija Shankar Patra <gpatra@aienterprise.com>
+Description: A simple pipeline that provides info to build, publish and deploy to Kubernetes Clusters
+*/
+
+@Library('arc-demo') _
+
+sfDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/browse-shop-ui.git',
+                         bitbucketCredentialsId: 'cicdadminaie',
+                         appName: 'sf-browsenshop', dockerDirectory: env.WORKSPACE,
+                         dockerImage: 'gcr.io/retisio-tools/sf-browsenshop',
+                         dockerCredentialsId: 'retisio-tools' )
