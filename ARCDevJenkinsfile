@@ -6,7 +6,7 @@ Description: A simple pipeline that provides info to build, publish and deploy t
 
 @Library('arc-dev') _
 
-sfDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/browse-shop-ui.git',
+sfDeliveryPipeline(branch: env.BRANCH_NAME, scmUrl: 'git@github.com:RETISIO/vs-browse-shop-ui.git',
                          bitbucketCredentialsId: 'cicdadminaie',
                          appName: 'sf-browsenshop', dockerDirectory: env.WORKSPACE,
                          dockerImage: 'gcr.io/retisio-tools/sf-browsenshop',
