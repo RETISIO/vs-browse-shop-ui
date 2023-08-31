@@ -1,8 +1,9 @@
 # Install dependencies only when needed
 FROM node:18-alpine AS deps
+ARG NPM_TOKEN
 WORKDIR /usr/src/app
 COPY package.json ./
-COPY .npmrc ./
+RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN \n @retisio:registry=https://npm.pkg.github.com \n always-auth=true" > .npmrc
 Run npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
