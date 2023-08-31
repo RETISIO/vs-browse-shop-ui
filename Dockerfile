@@ -3,7 +3,11 @@ FROM node:18-alpine AS deps
 ARG NPM_TOKEN
 WORKDIR /usr/src/app
 COPY package.json ./
-RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN \n @retisio:registry=https://npm.pkg.github.com \n always-auth=true" > .npmrc
+RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN \n"\ 
+        "@retisio:registry=https://npm.pkg.github.com \n"\ 
+        "always-auth=true"\
+        >> .npmrc
+COPY .npmrc ./
 Run npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
