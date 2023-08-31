@@ -7,7 +7,7 @@ RUN echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN \n"\
         "@retisio:registry=https://npm.pkg.github.com \n"\ 
         "always-auth=true"\
         >> .npmrc
-COPY .npmrc ./
+# COPY .npmrc ./
 Run npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
