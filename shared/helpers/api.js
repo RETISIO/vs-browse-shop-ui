@@ -25,13 +25,13 @@ const requestContructor = async (
       req.headers.host.indexOf('localhost') < 0 &&
       req.headers['x-forwarded-proto']
         ? `${req.headers['x-forwarded-proto']}://${req.headers.host}`
-        : 'https://dev-arctronics.retisio.io'
+        : 'https://vs-qa-web.lle.ops.retisio.io'
     relativeurl = pathname
   } else if (window) {
     finalOriginURl =
       window && window.location.origin.indexOf('localhost') < 0
         ? window.location.origin
-        : 'https://dev-arctronics.retisio.io'
+        : 'https://vs-qa-web.lle.ops.retisio.io'
     relativeurl = window.location.pathname
   }
   let finalHeaders = { originurl: finalOriginURl, relativeurl }
