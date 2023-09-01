@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 # RUN echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN \n@retisio:registry=https://npm.pkg.github.com \nalways-auth=true \n" >> .npmrc
 # RUN echo "$(<.npmrc )"
-COPY .npmrc ./
+#COPY .npmrc ./
 Run npm install --frozen-lockfile
 
 # Rebuild the source code only when needed
