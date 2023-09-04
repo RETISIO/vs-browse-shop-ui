@@ -281,7 +281,7 @@
 
 @media screen and (min-width: 768px) {
   .home-header-container #header {
-    .header-sticky.js-sticky-menu.is_stuck {
+    .header-sticky.js-sticky-menu.is_stuck, .header-sticky.js-sticky-menu {
       .header-content-redesign {
         .header-content-inner-redesign {
           #logo-redesign {
@@ -293,7 +293,7 @@
           }
         }
       }
-    }
+    } 
   }
 }
 

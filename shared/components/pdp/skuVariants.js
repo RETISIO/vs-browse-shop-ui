@@ -124,9 +124,9 @@ function SkuVariants({
     // const alwaysInStock = true
     // const maxQtyAllowedPerOrder = 14 - order upto 14
     const availableStock =
-      parseInt(skuData?.skuDetails?.inventory[0]?.availableStock) || 0
+      parseInt(skuData?.skuDetails?.inventory?.[0]?.availableStock) || 0
     const alwaysInStock =
-      skuData?.skuDetails?.inventory[0]?.alwaysInStock || false
+      skuData?.skuDetails?.inventory?.[0]?.alwaysInStock || false
     const maxQtyAllowedPerOrder = parseInt(skuData?.maxQtyAllowedPerOrder) || 0
     if (!alwaysInStock) {
       if (maxQtyAllowedPerOrder === 0) {

@@ -192,12 +192,12 @@ export default function MainLayout({
         {seoData?.title ? (
           <title>{seoData?.title}</title>
         ) : (
-          <title>Allen Brothers</title>
+          <title>Vantashala</title>
         )}
         {seoData?.description ? (
           <meta name="description" content={seoData?.description} />
         ) : (
-          <meta name="description" content="Allen Brothers" />
+          <meta name="description" content="Vantashala" />
         )}
         {seoData?.keywords ? (
           <meta name="keywords" content={seoData?.keywords} />
