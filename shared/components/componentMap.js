@@ -62,6 +62,7 @@ const ComponentMap = {
   'categoryLongDescription:custom': CategoryLongDescription,
   // 'cookingguidefacet:custom': CookingGuideFacet,
   'customherobanner:custom': HeroBanner,
+  'herobanner:custom': HeroBanner,
   'featuredproducts:custom': Featureproducts
 }
 export default ComponentMap
