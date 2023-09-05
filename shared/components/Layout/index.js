@@ -61,7 +61,7 @@ export default function MainLayout({
         );
         const channelURL = window && window.location.origin.indexOf('localhost') < 0
           ? window.location.origin
-          : 'https://us.ab-dev.retisio.com';
+          : 'https://vs-qa-web.lle.ops.retisio.io';
         finalChannelData = channelData[channelURL];
       }
       if (getCookie('lu')) {

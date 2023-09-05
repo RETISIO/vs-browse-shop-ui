@@ -95,15 +95,16 @@ export default function ProductCarousel(props) {
         setLoad(true)
       }
     })
-  }, [])
+  }, []);
+
   return (
     <>
       {load && (
         <>
-          <h1 className='row align-left' style={{ marginLeft: '15px' }}>
-            <span>{props.name}</span>
+         <h2 tabIndex={0} className='row align-left' style={{ marginLeft: '15px', fontSize: '24px', lineHeight: '32px', flexWrap: 'wrap', alignItems: 'center', display: 'flex' }} aria-label='Highlighted Products, list with 4 products.'>
+            {props.displayNameOnStoreFront ? <span>{JSON.parse(props?.content)?.defaultProductSelector?.title}</span> : <></>}
             <small className='ml-10'>{productsData?.configValues.defaultProductSelector.viewAllLink && <a href={productsData?.configValues.defaultProductSelector.viewAllLink}>View All</a>}</small>
-          </h1>
+          </h2>
           <Slider {...productsData.settings}>
             {productsData?.configValues?.defaultProductSelector?.products.map(
               (value, index) => {

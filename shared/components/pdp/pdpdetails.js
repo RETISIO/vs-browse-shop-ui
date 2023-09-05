@@ -114,6 +114,18 @@ export default function ProductDescription(props) {
     }
   }, [noReload, isLogged])
 
+  useEffect(() => {
+    if (getCookie('lu')) {
+    requestContructor(
+      '/addRecentlyViewedProducts',
+      '',
+      {
+        method: 'POST', data: { skuIds: [productData?.productId] }
+      },
+    )
+    }
+  }, [])
+  
   const damPath = config.IMGPATH
   useEffect(() => {
     if (successMsg || errorMsg || wishListErrorMsg || wishListSuccessMsg) {
