@@ -182,6 +182,7 @@ export default function MainLayout({
       setLoginErrorMsg('');
     }
   };
+  const iconPath = '/dam/Vantashala/storefront';
   
   return (
     <>
@@ -230,6 +231,7 @@ export default function MainLayout({
         setMiniCartDetails={setMiniCartDetails}
         loginErrorMsg={loginErrorMsg}
         showLoginModal={showLoginModal}
+        iconPath={iconPath}
       >
         {children}
       </Layout>
