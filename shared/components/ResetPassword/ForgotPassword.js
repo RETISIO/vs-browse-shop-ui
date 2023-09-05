@@ -19,7 +19,7 @@ function ForgotPassword(props) {
 				<div className="modal-body">
 					<div className="modal-inner">
 						<p>A new secure reset password link has been sent.  Please be sure to check your email &apos;Spam&apos;/&apos;Junk&apos; folder as well.</p>
-						<p>If you do not receive it, please contact Customer Service at info@allenbrothers.com or 1.800.548.7777</p>
+						<p>If you do not receive it, please contact Customer Service at admin@retisio.com or 1.800.528.7977</p>
 					</div>
 				</div>
 				<div className="modal-footer">
