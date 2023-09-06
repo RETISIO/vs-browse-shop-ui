@@ -338,7 +338,7 @@
 
 .home-header-container .nonHomePageHeader #header {
   .navbar.redesign-navbar {
-    background-color: $colorDeepBlue;
+    background-color: $colorDeeppurple;
     width: 100%;
     position: absolute;
   }
@@ -349,7 +349,7 @@
     .header-sticky.is_stuck {
       .navbar {
         &-nav {
-          background-color: $colorDeepBlue;
+          background-color: $colorDeeppurple;
         }
       }
     }
@@ -357,7 +357,7 @@
       .navbar-nav {
         .nav-redesign {
           .category-list-item:hover {
-            background-color: $colorLightBlue;
+            background-color: $colorDeeppurple;
           }
         }
       }
@@ -369,7 +369,7 @@
   .navbar.redesign-navbar .header-dropdown-menu {
     .sub-nav:hover {
       .categoryL1ListContainer, .js-dropdown__btn {
-        background-color: $colorLightBlue;
+        background-color: $colorDeeppurple;
       }
     } 
     background-color: $colorDeepBlue;
