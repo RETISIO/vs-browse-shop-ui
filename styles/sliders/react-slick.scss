@@ -78,6 +78,11 @@
 		display: block;
 		height: 176px;
 	}
+	.saleImage{
+		img{
+			height: auto;
+		}
+	}
 }
 [dir=rtl] {
 	.slick-slide {
