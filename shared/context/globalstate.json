@@ -2,5 +2,10 @@
     "userData":{
         "loggedIn":false
     },
-    "loginModelOpen":false
+    "loginModelOpen":false,
+    "channelData":{
+        "additionalSettings":{
+            "appLogoAlt":"vantashala"
+        }
+    }
 }
