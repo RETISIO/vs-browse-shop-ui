@@ -52,7 +52,7 @@ export default function MainLayout({
     (async() => {
       let finalChannelData; let
         userData;
-      if (!state.channelData) {
+      if (!state.channelData.channelId) {
         const channelData = await requestContructor(
           'getChannelDetails',
           '',
